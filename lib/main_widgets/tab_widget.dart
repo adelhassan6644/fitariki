@@ -9,35 +9,47 @@ class TabWidget extends StatelessWidget {
     required this.isSelected,
     required this.onTab,
     this.iconSize,
+    this.iconColor,
+    this.height,
+    this.backGroundColor,
+    this.innerVPadding,
+    this.innerHPadding,
+    this.svgIcon,
     Key? key,
-    this.icon,
   }) : super(key: key);
   final String title;
   final bool isSelected;
   final Function() onTab;
-  final String? icon;
+  final String? svgIcon;
   final double? iconSize;
+  final Color? iconColor;
+  final double? height;
+  final Color? backGroundColor;
+  final double? innerVPadding,innerHPadding;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTab,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 5),
+        height: height,
+        padding: EdgeInsets.symmetric(horizontal:innerHPadding?? 24.w, vertical: innerVPadding??5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color: isSelected ? ColorResources.SECOUND_PRIMARY_COLOR : null),
+            color: isSelected
+                ? backGroundColor ?? ColorResources.SECOUND_PRIMARY_COLOR
+                : null),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null)
+            if (svgIcon != null)
               customImageIconSVG(
-                  imageName: icon ?? "",
+                  imageName: svgIcon!,
                   color: isSelected
                       ? ColorResources.WHITE_COLOR
-                      : ColorResources.SECOUND_PRIMARY_COLOR,
+                      : iconColor??ColorResources.SECOUND_PRIMARY_COLOR,
                   height: iconSize?.h,
                   width: iconSize?.w),
-            if (icon != null) SizedBox(width: 4.w),
+            if (svgIcon != null) SizedBox(width: 4.w),
             Expanded(
               child: Text(
                 title,

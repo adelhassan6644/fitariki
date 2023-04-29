@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/main_widgets/tab_widget.dart';
 import 'package:flutter/material.dart';
+import '../../../app/core/utils/color_resources.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/offer_card.dart';
@@ -30,11 +31,11 @@ class _HomeState extends State<Home> {
           child: Container(
               height: 32,
               decoration: BoxDecoration(
-                  color: const Color(0xFFF3F3F3),
+                  color:ColorResources.CONTAINER_BACKGROUND_COLOR,
                   borderRadius: BorderRadius.circular(6)),
               child: Row(
                 children: List.generate(
-                    2,
+                    titles.length,
                     (index) => Expanded(
                           child: TabWidget(
                               title: getTranslated(titles[index], context),

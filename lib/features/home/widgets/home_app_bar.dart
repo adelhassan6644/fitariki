@@ -7,6 +7,8 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/main_widgets/custom_images.dart';
 
+import '../../../main_widgets/marquee_widget.dart';
+
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
@@ -39,14 +41,19 @@ class HomeAppBar extends StatelessWidget {
                         children: [
                           Text(getTranslated("current_location", context),
                               style: AppTextStyles.w600.copyWith(fontSize: 13)),
-                          Text("طريق بدون اسم، مطار الملك خالد الدولـ...",
-                              maxLines: 1,
-                              style: AppTextStyles.w400.copyWith(
-                                overflow: TextOverflow.ellipsis,
-                                  fontSize: 11,
-                                  color: ColorResources.HINT_COLOR)),
+                          MarqueeWidget(
+                            child: Text("طريق بدون اسم، مطار الملك خالد الدولـي ز مدينة الرياض في المملكة العربية السعودية",
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                  overflow: TextOverflow.ellipsis,
+                                    fontSize: 11,
+                                    color: ColorResources.HINT_COLOR)),
+                          ),
                         ],
                       ),
+                    ),
+                    const SizedBox(
+                      width: 16,
                     ),
                   ],
                 ),

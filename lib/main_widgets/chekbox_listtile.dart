@@ -23,16 +23,14 @@ class CheckBoxListTile extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 20.w,
-            height: 20.h,
+            width: 18.w,
+            height: 18.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: check
-                  ? ColorResources.PRIMARY_COLOR
-                  : ColorResources.WHITE_COLOR,
+              borderRadius: BorderRadius.circular(2),
+              color: ColorResources.WHITE_COLOR,
               border: Border.all(
                 color: check
-                    ? ColorResources.PRIMARY_COLOR
+                    ? ColorResources.SECOUND_PRIMARY_COLOR
                     : ColorResources.DISABLED,
                 width: 1
               )
@@ -40,8 +38,8 @@ class CheckBoxListTile extends StatelessWidget {
             child: check
                 ? const Icon(
                     Icons.check,
-                    color: Colors.white,
-                    size: 15,
+                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    size: 14,
                   )
                 : null,
           ),
@@ -49,19 +47,19 @@ class CheckBoxListTile extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: AppTextStyles.w400.copyWith(
-                  fontSize: 14,
+              style: AppTextStyles.w700.copyWith(
+                  fontSize: 10,
                   color: check
-                      ? ColorResources.PRIMARY_COLOR
+                      ? ColorResources.SECOUND_PRIMARY_COLOR
                       : ColorResources.SUBTITLE),
             ),
           ),
           if(description != null)  Text(
             description!,
-            style: AppTextStyles.w400.copyWith(
-                fontSize: 14,
+            style: AppTextStyles.w700.copyWith(
+                fontSize: 10,
                 color: check
-                    ? ColorResources.PRIMARY_COLOR
+                    ? ColorResources.SECOUND_PRIMARY_COLOR
                     : ColorResources.SUBTITLE),
           )
         ],

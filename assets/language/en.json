@@ -13,7 +13,7 @@
   "submit": "submit",
   "confirm": "confirm",
   "proceed_to_check_out": "proceed to check out",
-  "required": "Required",
+  "required": "This field is Required",
   "please_enter_valid_number": "please,enter valid number",
   "please_enter_valid_code": "please,enter valid code",
   "please_enter_your_name": "please,enter your name",
@@ -56,13 +56,39 @@
   "connected": "connected",
   "skip": "skip",
   "continue": "continue",
+  "follow": "follow",
   "my_trips": "My Trips",
   "current_location": "current location",
   "passenger": "passenger",
   "captain": "captain",
   "cancel": "cancel",
   "filter": "filter",
-  "reset": "reset"
+  "reset": "reset",
+  "users_type": "users type",
+  "gender": "gender",
+  "male": "male",
+  "female": "female",
+  "residence_district": "residence district",
+  "work_place": "Place of work/study",
+  "delivery_offer": "Delivery offer",
+  "start_point": "Start point :",
+  "final_destination": "final destination :",
+  "the_captains_starting_point_is_further_away_from_you": "The captain's starting point is further away from you",
+  "car_details": "Car details",
+  "offer": "Offer",
+  "display_stats": "Display stats",
+  "people_benefited_from_this_offer": "people benefited from this offer",
+  "view_all": "view all",
+  "login": "login",
+  "enter_your_mobile_number": "Enter your mobile number",
+  "terms_and_conditions": "Terms and Conditions",
+  "accept": "Accept"
+
+
+
+
+
+
 
 
 }

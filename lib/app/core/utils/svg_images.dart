@@ -19,6 +19,8 @@ class SvgImages {
   static const String emptyStar = 'assets/svgs/empty_star.svg';
   static const String fillStar = 'assets/svgs/fill_star.svg';
   static const String arrowRightAlt = 'assets/svgs/arrow_right_alt.svg';
+  static const String maleIcon = 'assets/svgs/male.svg';
+  static const String femaleIcon = 'assets/svgs/female.svg';
 
   static const String phoneIcon = 'assets/svgs/phone.svg';
   static const String arrowRightIcon = 'assets/svgs/arrow_right.svg';

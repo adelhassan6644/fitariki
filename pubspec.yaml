@@ -49,6 +49,7 @@ dependencies:
   firebase_analytics: ^10.2.1
   flutter_native_splash: ^2.2.0+1
   syncfusion_flutter_charts: ^21.1.41
+  google_maps_flutter: ^2.2.5
 
 dev_dependencies:
   flutter_test:

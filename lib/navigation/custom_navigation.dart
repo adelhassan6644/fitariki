@@ -1,3 +1,4 @@
+import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/splash/page/splash.dart';
@@ -23,6 +24,8 @@ abstract class CustomNavigator {
         return _pageRoute(const OnBoarding());
       case Routes.DASHBOARD:
         return _pageRoute(const DashBoard());
+      case Routes.OFFER_DETAILS:
+        return _pageRoute(const OfferDetails());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

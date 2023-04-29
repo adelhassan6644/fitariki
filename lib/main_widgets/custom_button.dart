@@ -43,10 +43,10 @@ class CustomButton extends StatelessWidget {
       },
       child: AnimatedContainer(
         width: isLoading ? 90.w :width?? context.width,
-        height: height??46.h,
+        height: height??50.h,
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         duration: const Duration(
           milliseconds: 600,

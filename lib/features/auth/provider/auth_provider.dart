@@ -29,6 +29,9 @@ class AuthProvider extends ChangeNotifier {
   bool _isRememberMe = false;
   bool isLoginBefore = false;
   bool get isRememberMe => _isRememberMe;
+   int _userType = 0;
+  int get userType => _userType;
+  List<String> usersTypes = ["passenger", "captain"];
   bool _isAgree = true;
   bool get isAgree => _isAgree;
 
@@ -39,6 +42,11 @@ class AuthProvider extends ChangeNotifier {
 
   void onAgree(bool value) {
     _isAgree = value;
+    notifyListeners();
+  }
+
+  void selectedUserType(int value) {
+    _userType = value;
     notifyListeners();
   }
 

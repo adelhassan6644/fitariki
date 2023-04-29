@@ -15,9 +15,11 @@ class Validations {
   static String? phone(String? value) {
     if (value!.isEmpty) {
       return getTranslated ("required", CustomNavigator.navigatorState.currentContext!);
-    } else if (value.length < 8) {
-      return  getTranslated ("please_enter_valid_number",CustomNavigator.navigatorState.currentContext!);
-    } else {
+    }
+    // else if (value.length < 8) {
+    //   return  getTranslated ("please_enter_valid_number",CustomNavigator.navigatorState.currentContext!);
+    // }
+    else {
       return null;
     }
   }
