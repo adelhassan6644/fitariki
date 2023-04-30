@@ -13,6 +13,8 @@ import 'package:flutter/services.dart';
 import 'app/core/utils/app_strings.dart';
 import 'navigation/custom_navigation.dart';
 import 'navigation/routes.dart';
+import 'package:fitariki/data/config/di.dart' as di;
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,7 @@ Future<void> main() async {
   // );
 
   // FirebaseNotifications.init();
- await ProviderList.init();
+  await di.init();
   runApp(MultiProvider(providers: ProviderList.providers,child: const MyApp()));
 }
 

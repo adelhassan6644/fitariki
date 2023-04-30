@@ -11,10 +11,6 @@ import '../../features/splash/provider/splash_provider.dart';
 
 abstract class ProviderList {
 
-  static init() async {
-    await di.init();
-  }
-
   static List<SingleChildWidget> providers = [
     ChangeNotifierProvider(create: (_) => di.sl<ThemeProvider>(),),
     ChangeNotifierProvider(create: (_) => di.sl<LocalizationProvider>()),
