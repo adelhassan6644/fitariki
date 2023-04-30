@@ -4,6 +4,8 @@ class EndPoints {
   static const String topic = 'fitariki';
   static const String logIn = 'login';
   static const String verifyPhone = 'verify_phone';
+  static const String editProfile = 'edit_profile';
+  static const String profile = 'profile';
 
 
 }
