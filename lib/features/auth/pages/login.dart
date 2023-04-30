@@ -1,17 +1,23 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:fitariki/features/auth/provider/auth_provider.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/chekbox_listtile.dart';
 import '../../../main_widgets/custom_button.dart';
+import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/custom_text_form_field.dart';
 import '../../../main_widgets/tab_widget.dart';
+import '../../../navigation/routes.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -105,6 +111,7 @@ class Login extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
+                          flex: 2,
                           child: CustomTextFormField(
                             controller: provider.phoneTEC,
                             hint: "5xxxxxxxx",
@@ -115,14 +122,185 @@ class Login extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () {
+                                showCountryPicker(
+                                  context: context,
+                                  showPhoneCode: true,
+                                  showSearch: false,
+                                  countryFilter: [
+                                    "SA",
+                                    "EG",
+                                    "AF",
+                                    "IN",
+                                    "PK",
+                                    "UA",
+                                    "BH",
+                                    "QA",
+                                    "UAE",
+                                    "USA",
+                                    "RA",
+                                  ],
+                                  onSelect: (Country value) =>
+                                      provider.onSelectCountry(
+                                          code: value.countryCode,
+                                          phone: value.phoneCode),
+                                  countryListTheme: CountryListThemeData(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                    bottomSheetHeight: 360.h,
+                                    textStyle: AppTextStyles.w500
+                                        .copyWith(fontSize: 14),
+                                    flagSize: 20,
+                                    inputDecoration: InputDecoration(
+                                      hintText: 'Start typing to search',
+                                      border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources
+                                                .LIGHT_BORDER_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources
+                                                .SECOUND_PRIMARY_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      disabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources
+                                                .LIGHT_BORDER_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources
+                                                .LIGHT_BORDER_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      errorBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources.FAILED_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      focusedErrorBorder:
+                                          const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            Dimensions.RADIUS_DEFAULT,
+                                          ),
+                                        ),
+                                        borderSide: BorderSide(
+                                            color: ColorResources.FAILED_COLOR,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                      ),
+                                      prefixIcon: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 15.w,
+                                        ),
+                                        child: customImageIconSVG(
+                                            imageName: SvgImages.search,
+                                            height: 16,
+                                            width: 16,
+                                            color: ColorResources.DISABLED),
+                                      ),
+                                      prefixIconConstraints:
+                                          BoxConstraints(maxHeight: 25.h),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 10.h, horizontal: 8.w),
+                                      hintStyle: AppTextStyles.w400.copyWith(
+                                          fontSize: 11,
+                                          color: ColorResources.DISABLED),
+                                    ),
+                                    searchTextStyle: const TextStyle(
+                                      color:
+                                          ColorResources.SECOUND_PRIMARY_COLOR,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color:
+                                            ColorResources.LIGHT_BORDER_COLOR,
+                                        width: 1),
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.RADIUS_DEFAULT)),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 8),
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                        child: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      size: 18,
+                                      color: ColorResources.PRIMARY_COLOR,
+                                    )),
+                                    Expanded(
+                                      child: Text(
+                                        provider.countryPhoneCode,
+                                        style: AppTextStyles.w400.copyWith(
+                                            fontSize: 14,
+                                            overflow: TextOverflow.ellipsis),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Flag.fromString(
+                                        provider.countryCode,
+                                        width: 16,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ))
                       ],
                     ),
                     const SizedBox(
                       height: 8,
                     ),
                     CheckBoxListTile(
-                      title:getTranslated("agree_to_the_terms_and_conditions", context),
-                      onChange:provider.onAgree ,
+                      title: getTranslated(
+                          "agree_to_the_terms_and_conditions", context),
+                      onChange: provider.onAgree,
                       check: provider.isAgree,
                     ),
                   ],
@@ -133,7 +311,10 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 24),
               child: CustomButton(
-                  text: getTranslated("follow", context), onTap: () {}),
+                  text: getTranslated("follow", context), onTap: (){
+                    CustomNavigator.pop();
+                    CustomNavigator.push(Routes.VERIFICATION);
+              }),
             )
           ],
         ),

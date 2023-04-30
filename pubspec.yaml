@@ -50,6 +50,9 @@ dependencies:
   flutter_native_splash: ^2.2.0+1
   syncfusion_flutter_charts: ^21.1.41
   google_maps_flutter: ^2.2.5
+  country_picker: ^2.0.20
+  flag:
+
 
 dev_dependencies:
   flutter_test:

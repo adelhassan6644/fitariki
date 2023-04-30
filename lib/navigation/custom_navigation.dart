@@ -1,6 +1,8 @@
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
+import '../features/auth/pages/verification.dart';
+import '../features/edit_profile/page/edit_profile.dart';
 import '../features/splash/page/splash.dart';
 import '../main.dart';
 import '../main_page/dashboard.dart';
@@ -22,6 +24,10 @@ abstract class CustomNavigator {
         return _pageRoute(const Splash());
       case Routes.ON_BOARDING:
         return _pageRoute(const OnBoarding());
+      case Routes.VERIFICATION:
+        return _pageRoute(const Verification());
+      case Routes.EDIT_PROFILE:
+        return _pageRoute(EditProfile(fromLogin: settings.arguments as bool,));
       case Routes.DASHBOARD:
         return _pageRoute(const DashBoard());
       case Routes.OFFER_DETAILS:

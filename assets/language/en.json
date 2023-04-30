@@ -24,9 +24,9 @@
   "delivery_to": "Delivery to",
   "sections": "Sections",
   "our_dining_table": "Our dining table",
-  "resend_code": "Resend code",
+  "resend_code": "Resend the activation code?",
   "code_expires_in": "code expires in: ",
-  "please_verify_your_mobile_number_and_enter_the_4_digit_verification_code": "Please verify your mobile number and enter the 4-digit verification code",
+  "enter_the_6_digit_code_sent_to": "Enter the 6-digit code sent to",
   "edit": "edit",
   "next": "Next",
   "attachment": "attachment",
@@ -82,7 +82,9 @@
   "login": "login",
   "enter_your_mobile_number": "Enter your mobile number",
   "terms_and_conditions": "Terms and Conditions",
-  "accept": "Accept"
+  "accept": "Accept",
+  "complete_the_registration_information": "Complete the registration information",
+  "modification_of_personal_data": "Modification of personal data"
 
 
 
