@@ -11,7 +11,7 @@
   "as_a_guest": "كضيف",
   "submit": "إرسال",
   "confirm": "تأكيد",
-  "verify_the_phone": "تحقق من الرقم",
+  "verify_the_phone": "التحقق من الرقم",
   "proceed_to_check_out": "انتقل الي الدفع",
   "required": "هذا الحقل مطلوب",
   "please_enter_valid_number": "من فضلك ادخل رقم صحيح",
@@ -25,9 +25,9 @@
   "delivery_to": "تسليم إلي",
   "sections": "الأقسام",
   "our_dining_table": "سفرتنا",
-  "resend_code": " أعد إرسال الرمز",
+  "resend_code": " إعادة ارسال رمز التفعيل؟",
   "code_expires_in": "تنتهي صلاحية الرمز في: ",
-  "please_verify_your_mobile_number_and_enter_the_4_digit_verification_code": "يرجى التحقق من رقم هاتفك المحمول و إدخال رمز التحقق المكون من 4 أرقام",
+  "enter_the_6_digit_code_sent_to": "ادخل الكود المكون من 6 ارقام المرسل إلى",
   "edit": "تعديل",
   "next": "التالي",
   "attachment": "ارفاق",
@@ -82,5 +82,7 @@
   "enter_your_mobile_number": "ادخل رقم جوالك",
   "terms_and_conditions": "الشروط والأحكام",
   "accept": "قبول",
-  "follow": "متابعة"
+  "follow": "متابعة",
+  "complete_the_registration_information": "اكمل بيانات التسجيل",
+  "modification_of_personal_data": "تعديل البيانات الشخصية"
 }

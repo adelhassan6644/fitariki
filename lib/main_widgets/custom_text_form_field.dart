@@ -82,7 +82,7 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLine,
       minLines: minLine??1,
       keyboardType: inputType,
-      inputFormatters: inputType == TextInputType.phone ? <TextInputFormatter>[
+      inputFormatters: inputType == TextInputType.phone ? [
         FilteringTextInputFormatter.allow(RegExp('[0-9]'))
       ] : formatter,
       onSaved: (onSave),

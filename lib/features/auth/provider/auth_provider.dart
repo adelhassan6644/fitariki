@@ -21,19 +21,16 @@ class AuthProvider extends ChangeNotifier {
   late final TextEditingController _phoneTEC;
   TextEditingController get phoneTEC => _phoneTEC;
 
-  String _verificationCode = "";
   String _token = "";
-  String get verificationCode => _verificationCode;
   String get token => _token;
 
-  bool _isRememberMe = false;
-  bool isLoginBefore = false;
-  bool get isRememberMe => _isRememberMe;
    int _userType = 0;
   int get userType => _userType;
   List<String> usersTypes = ["passenger", "captain"];
   bool _isAgree = true;
   bool get isAgree => _isAgree;
+  String countryPhoneCode ="+966";
+  String countryCode = "SA";
 
   void onRememberMe(bool value) {
     _isRememberMe = value;
@@ -45,6 +42,12 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void onSelectCountry({required String code ,required String phone}) {
+    countryPhoneCode = "$phone+";
+    countryCode = code;
+    notifyListeners();
+  }
+
   void selectedUserType(int value) {
     _userType = value;
     notifyListeners();
@@ -52,16 +55,18 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool _isSubmit = false;
-  bool isError = false;
-  bool isErrorOnSubmit = false;
   bool get isLoading => _isLoading;
   bool get isSubmit => _isSubmit;
+
+
+  bool _isRememberMe = false;
+  bool isLoginBefore = false;
+  bool get isRememberMe => _isRememberMe;
 
   bool get isLogin => authRepo.isLoggedIn();
 
   logIn() async {
     try {
-        isError = false;
         _isLoading = true;
         notifyListeners();
         Either<ServerFailure, Response> response = await authRepo.logIn(phone: "966${_phoneTEC.text.trim()}",);
@@ -72,7 +77,6 @@ class AuthProvider extends ChangeNotifier {
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
-          isError = true;
           notifyListeners();
         }, (success) {
           if(_isRememberMe){
@@ -96,59 +100,53 @@ class AuthProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
 
-      isError = true;
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  verifyPhone() async {
-    try {
-      isErrorOnSubmit = false;
-      _isSubmit = true;
-      notifyListeners();
-      Either<ServerFailure, Response> response = await authRepo.verifyPhone(
-        phone: "966${_phoneTEC.text.trim()}",
-        code: _verificationCode,
-      );
-      response.fold((fail) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: fail.error,
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        isErrorOnSubmit = true;
-        notifyListeners();
-      }, (success) {
-        authRepo.saveUserToken(token:_token);
-        authRepo.setLoggedIn();
-        _verificationCode = "";
-        if(isLoginBefore){
-          CustomNavigator.push(Routes.DASHBOARD, replace: true);
-        }else{
+  verifyPhone({required String code}) async {
 
-        }
-      });
-      _isSubmit = false;
-      notifyListeners();
-    } catch (e) {
-      isErrorOnSubmit = true;
-      _isSubmit = false;
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      notifyListeners();
-    }
+CustomNavigator.push(Routes.EDIT_PROFILE,replace: true,arguments: true);
+    //
+    // try {
+    //   _isSubmit = true;
+    //   notifyListeners();
+    //   Either<ServerFailure, Response> response = await authRepo.verifyPhone(
+    //     phone: "+966${_phoneTEC.text.trim()}",
+    //     code: code,
+    //   );
+    //   response.fold((fail) {
+    //     CustomSnackBar.showSnackBar(
+    //         notification: AppNotification(
+    //             message: fail.error,
+    //             isFloating: true,
+    //             backgroundColor: ColorResources.IN_ACTIVE,
+    //             borderColor: Colors.transparent));
+    //     notifyListeners();
+    //   }, (success) {
+    //     authRepo.saveUserToken(token:_token);
+    //     authRepo.setLoggedIn();
+    //     if(isLoginBefore){
+    //       CustomNavigator.push(Routes.DASHBOARD, replace: true);
+    //     }else{
+    //
+    //     }
+    //   });
+    //   _isSubmit = false;
+    //   notifyListeners();
+    // } catch (e) {
+    //   _isSubmit = false;
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: e.toString(),
+    //           isFloating: true,
+    //           backgroundColor: ColorResources.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   notifyListeners();
+    // }
   }
 
-  void updateVerificationCode(String code) {
-    _verificationCode = code;
-    notifyListeners();
-  }
 
   logOut() async {
     // CustomNavigator.push(Routes.LOGIN, clean: true);
