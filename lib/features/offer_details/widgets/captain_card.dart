@@ -104,12 +104,14 @@ class CaptainCard extends StatelessWidget {
                           children: [
                             customImageIconSVG(imageName: SvgImages.roadLine),
                             const SizedBox(height: 4),
-                            Text(
-                              "20-12 يوم",
-                              maxLines: 1,
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  overflow: TextOverflow.ellipsis),
+                            MarqueeWidget(
+                              child: Text(
+                                "20-12 يوم",
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
                           ],
                         ),
@@ -156,12 +158,14 @@ class CaptainCard extends StatelessWidget {
                           children: [
                             customImageIconSVG(imageName: SvgImages.alarm),
                             const SizedBox(height: 4),
-                            Text(
-                              "9 صباحاً - 5 مساءً",
-                              maxLines: 1,
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  overflow: TextOverflow.ellipsis),
+                            MarqueeWidget(
+                              child: Text(
+                                "9 صباحاً - 5 مساءً",
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
                           ],
                         ),
@@ -181,12 +185,14 @@ class CaptainCard extends StatelessWidget {
                           children: [
                             customImageIconSVG(imageName: SvgImages.wallet),
                             const SizedBox(height: 4),
-                            Text(
-                              "400 - 600",
-                              maxLines: 1,
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  overflow: TextOverflow.ellipsis),
+                            MarqueeWidget(
+                              child: Text(
+                                "400 - 600",
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
                           ],
                         ),

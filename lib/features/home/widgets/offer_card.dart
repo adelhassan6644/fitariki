@@ -7,6 +7,7 @@ import 'package:fitariki/main_widgets/custom_network_image.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/rate_stars.dart';
 import '../../../navigation/routes.dart';
 import 'acceptable_analytics_widget.dart';
@@ -98,10 +99,12 @@ class OfferCard extends StatelessWidget {
                               customImageIconSVG(imageName: SvgImages.roadLine),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(
-                                  "20-12 يوم",
-                                  textAlign: TextAlign.start,
-                                  style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "20-12 يوم",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -123,10 +126,12 @@ class OfferCard extends StatelessWidget {
                               customImageIconSVG(imageName: SvgImages.calendar),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(
-                                  "3 ايام بالإسبوع",
-                                  textAlign: TextAlign.start,
-                                  style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "3 ايام بالإسبوع",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                  ),
                                 ),
                               ),
                             ],
@@ -146,10 +151,12 @@ class OfferCard extends StatelessWidget {
                               customImageIconSVG(imageName: SvgImages.alarm),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(
-                                  "9 صباحاً - 5 مساءً",
-                                  textAlign: TextAlign.start,
-                                  style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "9 صباحاً - 5 مساءً",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -171,10 +178,12 @@ class OfferCard extends StatelessWidget {
                               customImageIconSVG(imageName: SvgImages.wallet),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(
-                                  "400 - 600 ريال",
-                                  textAlign: TextAlign.start,
-                                  style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "400 - 600 ريال",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                  ),
                                 ),
                               ),
                             ],

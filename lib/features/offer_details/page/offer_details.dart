@@ -6,6 +6,7 @@ import 'package:fitariki/main_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
+import '../../../main_widgets/marquee_widget.dart';
 import '../../auth/pages/login.dart';
 import '../widgets/captain_card.dart';
 import '../widgets/car_details.dart';
@@ -50,13 +51,15 @@ class OfferDetails extends StatelessWidget {
                                     fontSize: 10,
                                     overflow: TextOverflow.ellipsis),
                               ),
-                              Text(
-                                "Al Munsiyah، طريق الامير محمد بن سلمـ...",
-                                maxLines: 1,
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                    color: ColorResources.HINT_COLOR,
-                                    overflow: TextOverflow.ellipsis),
+                              MarqueeWidget(
+                                child: Text(
+                                  "Al Munsiyah، طريق الامير محمد بن سلمـ...",
+                                  maxLines: 1,
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                      color: ColorResources.HINT_COLOR,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               )
                             ],
                           ),
@@ -73,13 +76,15 @@ class OfferDetails extends StatelessWidget {
                                     fontSize: 10,
                                     overflow: TextOverflow.ellipsis),
                               ),
-                              Text(
-                                "Al Munsiyah، طريق الامير محمد بن سلمـ...",
-                                maxLines: 1,
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                    color: ColorResources.HINT_COLOR,
-                                    overflow: TextOverflow.ellipsis),
+                              MarqueeWidget(
+                                child: Text(
+                                  "Al Munsiyah، طريق الامير محمد بن سلمـ...",
+                                  maxLines: 1,
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                      color: ColorResources.HINT_COLOR,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               )
                             ],
                           ),
