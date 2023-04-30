@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
+import '../../features/edit_profile/provider/edit_profile_provider.dart';
+import '../../features/edit_profile/repo/profile_repo.dart';
 import '../api/end_points.dart';
 import '../network/netwok_info.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
@@ -31,6 +33,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(),));
   sl.registerLazySingleton(() => AuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => EditProfileRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -39,6 +42,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
   sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
+  sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

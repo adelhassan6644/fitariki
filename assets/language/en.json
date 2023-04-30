@@ -1,6 +1,6 @@
 {
-  "welcome" : "Welcome! 👋",
-  "sign_in_description": "Please, Enter the data to enjoy our services",
+  "welcome" : "Welcome!",
+  "edit_profile_description": "Complete your data so that the percentages of your trip are compatible\nDaily with Min Captains!",
   "user_name": "user name",
   "phone_number": "phone number",
   "remember_me": "Remember me",
