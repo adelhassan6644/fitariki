@@ -42,56 +42,60 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorResources.BACKGROUND_COLOR,
-      bottomNavigationBar: Container(
-          height: 60,
-          width: context.width,
-          decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
-              border: Border(
-                  top: BorderSide(
-            color: const Color(0xFF3C3C43).withOpacity(0.36),
-            width: 0.5,
-          ))),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: BottomNavBarItem(
-                    svgIcon: SvgImages.navLogoIcon,
-                    isSelected: _selectedIndex == 0,
-                    onTap: () => _setPage(0),
-                    name: "في طريقي",
+      bottomNavigationBar: SafeArea(
+        bottom: true,
+        top: false,
+        child: Container(
+            height: 60,
+            width: context.width,
+            decoration: BoxDecoration(
+              color: ColorResources.WHITE_COLOR,
+                border: Border(
+                    top: BorderSide(
+              color: const Color(0xFF3C3C43).withOpacity(0.36),
+              width: 0.5,
+            ))),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: BottomNavBarItem(
+                      svgIcon: SvgImages.navLogoIcon,
+                      isSelected: _selectedIndex == 0,
+                      onTap: () => _setPage(0),
+                      name: "في طريقي",
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: BottomNavBarItem(
-                    svgIcon: SvgImages.car,
-                    isSelected: _selectedIndex == 1,
-                    onTap: () => _setPage(1),
-                    name: getTranslated("my_trips", context),
+                  Expanded(
+                    child: BottomNavBarItem(
+                      svgIcon: SvgImages.car,
+                      isSelected: _selectedIndex == 1,
+                      onTap: () => _setPage(1),
+                      name: getTranslated("my_trips", context),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: BottomNavBarItem(
-                    svgIcon: SvgImages.search,
-                    isSelected: _selectedIndex == 2,
-                    onTap: () => _setPage(2),
-                    name: getTranslated("search", context),
+                  Expanded(
+                    child: BottomNavBarItem(
+                      svgIcon: SvgImages.search,
+                      isSelected: _selectedIndex == 2,
+                      onTap: () => _setPage(2),
+                      name: getTranslated("search", context),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: BottomNavBarItem(
-                    svgIcon: SvgImages.profileIcon,
-                    isSelected: _selectedIndex == 3,
-                    onTap: () => _setPage(3),
-                    height: 18,
-                    width: 18,
-                    name: getTranslated("profile", context),
+                  Expanded(
+                    child: BottomNavBarItem(
+                      svgIcon: SvgImages.profileIcon,
+                      isSelected: _selectedIndex == 3,
+                      onTap: () => _setPage(3),
+                      height: 18,
+                      width: 18,
+                      name: getTranslated("profile", context),
+                    ),
                   ),
-                ),
-              ])),
+                ])),
+      ),
       body: Column(
         children: [
           Expanded(
