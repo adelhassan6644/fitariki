@@ -92,7 +92,7 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.roadLine),
@@ -140,6 +140,7 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
+                          flex: 3,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.alarm),
@@ -164,6 +165,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
+                          flex: 5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.wallet),
