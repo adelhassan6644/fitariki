@@ -100,5 +100,17 @@
   "second_name": "الاسم الثاني",
   "age": "العمر",
   "nationality": "الجنسية",
-  "save": "حفظ"
+  "save": "حفظ",
+  "make_an_offer_to_captain": "تقديم عرض لكابتن",
+  "send": "ارسال",
+  "duration": "المدة",
+  "price": "السعر",
+  "start_of_duration": "بداية المدة",
+  "end_of_duration": "نهاية المدة",
+  "followers": "التابعين",
+  "add_follow": "اضافة تابع",
+  "add_a_note":"اضافة ملاحظة (اختياري)",
+  "sar": "ريال"
+
+
 }

@@ -100,13 +100,16 @@
   "second_name": "Second Name",
   "age": "Age",
   "nationality": "Nationality",
-  "save": "save"
-
-
-
-
-
-
-
+  "save": "save",
+  "make_an_offer_to_captain": "Make an offer to Captain",
+  "send": "send",
+  "duration": "duration",
+  "price": "price",
+  "start_of_duration": "start of duration",
+  "end_of_duration": "end of duration",
+  "followers": "followers",
+  "add_follow": "add follow",
+  "add_a_note":"Add a note (optional)",
+  "sar": "sar"
 
 }

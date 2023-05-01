@@ -10,7 +10,7 @@ extension StringExtension on String {
 
 
 extension DateExtention on DateTime {
-  String dateFormat({required String format }) {return DateFormat(format, 'ar_SA').format(this);}
+  String dateFormat({required String format }) {return DateFormat(format, 'en_US').format(this);}
 }
 
 
