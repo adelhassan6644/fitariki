@@ -48,7 +48,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           return DropdownMenuItem(
             value: item,
             child: Text(
-              item.name,
+              item,
               style: AppTextStyles.w500
                   .copyWith(color: ColorResources.TITLE, fontSize: 13),
             ),
@@ -68,15 +68,14 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               color: ColorResources.HINT_COLOR,
             ),
         iconSize: widget.iconSize,
-        borderRadius:
-            const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
+        borderRadius: const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
         decoration: InputDecoration(
           hintStyle: AppTextStyles.w400
-              .copyWith(color: ColorResources.HINT_COLOR, fontSize: 11),
+              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
           hintText: widget.name,
           prefixIcon: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 15.w,
+              horizontal: 8.w,
             ),
             child: widget.pAssetIcon != null
                 ? Image.asset(
@@ -95,73 +94,67 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           ),
           fillColor: ColorResources.FILL_COLOR,
           filled: true,
-          focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  Dimensions.PADDING_SIZE_DEFAULT,
-                ),
-              ),
-              borderSide: BorderSide(
-                  color: ColorResources.LIGHT_GREY_BORDER,
-                  width: 1,
-                  style: BorderStyle.solid)),
-          enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  Dimensions.RADIUS_DEFAULT,
-                ),
-              ),
-              borderSide: BorderSide(
-                  color: ColorResources.LIGHT_GREY_BORDER,
-                  width: 1,
-                  style: BorderStyle.solid)),
-          disabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  Dimensions.RADIUS_DEFAULT,
-                ),
-              ),
-              borderSide: BorderSide(
-                  color: ColorResources.LIGHT_GREY_BORDER,
-                  width: 1,
-                  style: BorderStyle.solid)),
-          focusedErrorBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  Dimensions.RADIUS_DEFAULT,
-                ),
-              ),
-              borderSide: BorderSide(
-                  color: ColorResources.FAILED_COLOR,
-                  width: 0.5,
-                  style: BorderStyle.solid)),
-          errorBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  Dimensions.RADIUS_DEFAULT,
-                ),
-              ),
-              borderSide: BorderSide(
-                  color: ColorResources.FAILED_COLOR,
-                  width: 0.5,
-                  style: BorderStyle.solid)),
-          contentPadding: EdgeInsets.symmetric(vertical: 15.w, horizontal: 5.h),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(
-                Dimensions.RADIUS_DEFAULT,
-              ),
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_GREY_BORDER,
-                width: 1,
-                style: BorderStyle.solid),
-          ),
+                color: ColorResources.LIGHT_BORDER_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
+            ),
+            borderSide: BorderSide(
+                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          disabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
+            ),
+            borderSide: BorderSide(
+                color: ColorResources.LIGHT_BORDER_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
+            ),
+            borderSide: BorderSide(
+                color: ColorResources.LIGHT_BORDER_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          errorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
+            ),
+            borderSide: BorderSide(
+                color: ColorResources.FAILED_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimensions.RADIUS_DEFAULT,),
+            ),
+            borderSide: BorderSide(
+                color: ColorResources.FAILED_COLOR,
+                width: 1 ,
+                style: BorderStyle.solid
+            ),),
+          contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal:8.w),
+          prefixIconConstraints: BoxConstraints(maxHeight: 25.h, ),
           labelText: widget.label,
           errorStyle: AppTextStyles.w500
               .copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
-          labelStyle: AppTextStyles.w500
-              .copyWith(color: ColorResources.HINT_COLOR, fontSize: 11),
+          labelStyle: AppTextStyles.w400
+              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
         ),
         style: AppTextStyles.w500
             .copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),

@@ -7,6 +7,7 @@ import 'custom_images.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hint;
+  final String? initialValue;
   final Widget? sufWidget;
   final Widget? prefixWidget;
   final bool label;
@@ -40,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.prefixWidget,
+    this.initialValue,
     this.isValidat = true,
     this.maxLine = 1,
     this.minLine = 1,
@@ -76,6 +78,7 @@ class CustomTextFormField extends StatelessWidget {
       onTap: onTap,
       validator: valid,
       controller: controller,
+      initialValue: initialValue,
       maxLength: maxLength,
       focusNode: focus,
       readOnly: read == true ? true : false,
@@ -97,7 +100,7 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         counterText: "",
         prefixIcon:  Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w,),
+          padding: EdgeInsets.symmetric(horizontal: 8.w,),
           child: prefixWidget ?? (pAssetIcon != null ? Image.asset(
             pAssetIcon!,
             height: 22.h,

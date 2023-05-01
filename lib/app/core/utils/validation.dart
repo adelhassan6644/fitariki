@@ -5,7 +5,7 @@ class Validations {
 
   static String? name(String? value) {
     if (value!.isEmpty) {
-      return getTranslated("please_enter_your_name", CustomNavigator.navigatorState.currentContext!);
+      return getTranslated("required", CustomNavigator.navigatorState.currentContext!);
     } else {
       return null;
     }

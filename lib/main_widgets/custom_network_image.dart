@@ -104,29 +104,29 @@ class CustomNetworkImage {
       errorWidget: (a, c, b) => Container(
         height: radius! * 2,
         width: radius * 2,
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
             border: color != null ? Border.all(color: color, width: 1) : null,
             shape: BoxShape.circle),
         child: CircleAvatar(
           radius: radius,
           backgroundColor: backGroundColor ?? Colors.white,
-          backgroundImage:
-              Image.asset("assets/logo.png", fit: BoxFit.contain)
-                  .image,
+          child: Image.asset(Images.logo),
         ),
       ),
       fadeInDuration: const Duration(seconds: 1),
       fadeOutDuration: const Duration(seconds: 2),
-      placeholder: (context, url) => Container(
+      placeholder: (context, url) =>Container(
         height: radius! * 2,
         width: radius * 2,
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
             border: color != null ? Border.all(color: color, width: 1) : null,
             shape: BoxShape.circle),
         child: CircleAvatar(
           radius: radius,
           backgroundColor: backGroundColor ?? Colors.white,
-          // child: Image.asset("assets/images/logo.png"),
+          child: Image.asset(Images.logo),
         ),
       ),
       imageBuilder: (context, provider) {

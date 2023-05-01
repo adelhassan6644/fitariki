@@ -21,6 +21,8 @@ class SvgImages {
   static const String arrowRightAlt = 'assets/svgs/arrow_right_alt.svg';
   static const String maleIcon = 'assets/svgs/male.svg';
   static const String femaleIcon = 'assets/svgs/female.svg';
+  static const String editor = 'assets/svgs/editor.svg';
+  static const String map = 'assets/svgs/map.svg';
 
   static const String phoneIcon = 'assets/svgs/phone.svg';
   static const String arrowRightIcon = 'assets/svgs/arrow_right.svg';

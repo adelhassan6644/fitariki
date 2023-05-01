@@ -9,12 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/chekbox_listtile.dart';
 import '../../../main_widgets/custom_button.dart';
-import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/custom_text_form_field.dart';
 import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/routes.dart';
@@ -154,97 +152,6 @@ class Login extends StatelessWidget {
                                   textStyle: AppTextStyles.w500
                                       .copyWith(fontSize: 14),
                                   flagSize: 20,
-                                  inputDecoration: InputDecoration(
-                                    hintText: 'Start typing to search',
-                                    border: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources
-                                              .LIGHT_BORDER_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources
-                                              .SECOUND_PRIMARY_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    disabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources
-                                              .LIGHT_BORDER_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources
-                                              .LIGHT_BORDER_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    errorBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources.FAILED_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    focusedErrorBorder:
-                                        const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          Dimensions.RADIUS_DEFAULT,
-                                        ),
-                                      ),
-                                      borderSide: BorderSide(
-                                          color: ColorResources.FAILED_COLOR,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    prefixIcon: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 15.w,
-                                      ),
-                                      child: customImageIconSVG(
-                                          imageName: SvgImages.search,
-                                          height: 16,
-                                          width: 16,
-                                          color: ColorResources.DISABLED),
-                                    ),
-                                    prefixIconConstraints:
-                                        BoxConstraints(maxHeight: 25.h),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 10.h, horizontal: 8.w),
-                                    hintStyle: AppTextStyles.w400.copyWith(
-                                        fontSize: 11,
-                                        color: ColorResources.DISABLED),
-                                  ),
                                   searchTextStyle: const TextStyle(
                                     color:
                                         ColorResources.SECOUND_PRIMARY_COLOR,

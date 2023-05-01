@@ -84,7 +84,23 @@
   "terms_and_conditions": "Terms and Conditions",
   "accept": "Accept",
   "complete_the_registration_information": "Complete the registration information",
-  "modification_of_personal_data": "Modification of personal data"
+  "modification_of_personal_data": "Modification of personal data",
+  "choose_your_image": "Choose your image",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "your_personal_information": "your personal information",
+  "other_information": "other information",
+  "days": "الايام",
+  "time": "الوقت",
+  "start": "start",
+  "end": "end",
+  "morning": "morning",
+  "night": "night",
+  "first_name": "First Name",
+  "second_name": "Second Name",
+  "age": "Age",
+  "nationality": "Nationality",
+  "save": "save"
 
 
 

@@ -84,5 +84,21 @@
   "accept": "قبول",
   "follow": "متابعة",
   "complete_the_registration_information": "اكمل بيانات التسجيل",
-  "modification_of_personal_data": "تعديل البيانات الشخصية"
+  "modification_of_personal_data": "تعديل البيانات الشخصية",
+  "choose_your_image": "اختر صورة لك",
+  "camera": "الكاميرا",
+  "gallery": "الاستوديو",
+  "your_personal_information": "بياناتك الشخصية",
+  "other_information": "بيانات دوامك/دراستك/الوجهة النهائية",
+  "days": "الايام",
+  "time": "الوقت",
+  "start": "البداية",
+  "end": "النهاية",
+  "morning": "صباح",
+  "night": "مساء",
+  "first_name": "الاسم الاول",
+  "second_name": "الاسم الثاني",
+  "age": "العمر",
+  "nationality": "الجنسية",
+  "save": "حفظ"
 }

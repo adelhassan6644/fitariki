@@ -47,6 +47,7 @@ class Verification extends StatelessWidget {
                         PinCodeTextField(
                           length: 6,
                           hintCharacter: "*",
+                          autoFocus: true,
                           hintStyle: AppTextStyles.w500.copyWith(color: ColorResources.DISABLED),
                           appContext: context,
                           keyboardType: TextInputType.phone,
