@@ -43,7 +43,7 @@ class CustomNetworkImage {
           image: DecorationImage(
             fit: fit ?? BoxFit.cover,
             image: Image.asset(
-              defaultImage ?? Images.splash,
+              defaultImage ?? Images.logo,
               fit: fit ?? BoxFit.cover,
             ).image,
           ),
@@ -62,7 +62,7 @@ class CustomNetworkImage {
                   image: DecorationImage(
                     fit: fit ?? BoxFit.cover,
                     image: Image.asset(
-                      defaultImage ?? Images.splash,
+                      defaultImage ?? Images.logo,
                       fit: fit??BoxFit.cover,
                     ).image,
                   ),
