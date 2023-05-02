@@ -11,6 +11,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
+import '../../../main_widgets/loading_dialog.dart';
 import '../repo/firebase_auth_repo.dart';
 
 class FirebaseAuthProvider extends ChangeNotifier {
@@ -44,7 +45,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
   String countryPhoneCode = "+966";
   String countryCode = "SA";
   void onSelectCountry({required String code, required String phone}) {
-    countryPhoneCode = "$phone+";
+    countryPhoneCode = "+$phone";
     countryCode = code;
     notifyListeners();
   }
@@ -65,12 +66,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
   bool get isSubmit => _isSubmit;
 
   bool get isLogin => firebaseAuthRepo.isLoggedIn();
-  String smsCode = "";
-
-  void updateVerificationCode(String code) {
-    smsCode = code;
-    notifyListeners();
-  }
 
   signInWithMobileNo() async {
     try {
@@ -78,11 +73,10 @@ class FirebaseAuthProvider extends ChangeNotifier {
       notifyListeners();
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
-        timeout: const Duration(seconds: 60),
+        timeout: const Duration(seconds: 120),
         verificationCompleted: (authCredential) =>
             phoneVerificationCompleted(authCredential),
-        verificationFailed: (authException) =>
-            phoneVerificationFailed(authException),
+        verificationFailed: (authException) => phoneVerificationFailed(authException),
         codeSent: (verificationId, code) =>
             phoneCodeSent(verificationId: verificationId, code: code ?? 0),
         codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout,
@@ -118,6 +112,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     }
+    log("======>Fail when Auth with Firebase : ${authException.message}");
+
     _isLoading = false;
     notifyListeners();
   }
@@ -125,6 +121,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
   phoneCodeAutoRetrievalTimeout(String verificationCode) {
     log("====>phoneCodeAutoRetrievalTimeout is $firebaseVerificationId");
     firebaseVerificationId = verificationCode;
+    _isSubmit = true;
     notifyListeners();
   }
 
@@ -137,6 +134,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
   }
 
   sendOTP({required String code}) async {
+    spinKitDialog();
     _isSubmit = true;
     notifyListeners();
     try {
@@ -148,35 +146,39 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance
             .signInWithCredential(phoneAuthCredential)
             .then((value) async {
+              CustomNavigator.pop();
           ///  to send Device token
           await userLogin();
-
           _isSubmit = false;
           notifyListeners();
         }).catchError((error) {
-          _isSubmit = false;
           log(error.toString());
+          CustomNavigator.pop();
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: "الكود غير صحيح",
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
+          _isSubmit = false;
           notifyListeners();
         });
-      } else {
+      }
+      else {
         log("====>has error in firebaseVerificationId $firebaseVerificationId");
+        CustomNavigator.pop();
+        _isSubmit = false;
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "has error in firebaseVerificationId",
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
+        notifyListeners();
       }
-      _isSubmit = false;
-      notifyListeners();
     } catch (e) {
       log("====>$e");
+      CustomNavigator.pop();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),
@@ -191,7 +193,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
   userLogin() async {
     try {
       Either<ServerFailure, Response> res =
-          await firebaseAuthRepo.sendDeviceToken(phone: "+966${_phoneTEC.text.trim()}", role: role[_userType]);
+          await firebaseAuthRepo.sendDeviceToken(phone: "$countryPhoneCode${_phoneTEC.text.trim()}", role: role[_userType]);
       res.fold((fail) {
         log(ApiErrorHandler.getMessage(fail));
         CustomSnackBar.showSnackBar(

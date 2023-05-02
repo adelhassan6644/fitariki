@@ -45,10 +45,12 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
             Image.asset(
               Images.logo,
               width: 200,
-            ).animate()
-                .scale(duration: 1000.ms)
-                .then(delay: 500.ms) // baseline=800ms
-                .slide().scaleXY(duration: 1000.ms)  .then(delay: 200.ms).shimmer(duration: 1000.ms),
+            )
+                .animate()
+                // .scale(duration: 1000.ms)
+                // .then(delay: 500.ms) // baseline=800ms
+                // .slide().scaleXY(duration: 1000.ms)
+                .then(delay: 200.ms).shimmer(duration: 1000.ms),
           ],
         ));
   }

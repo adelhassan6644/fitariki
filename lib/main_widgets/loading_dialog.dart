@@ -1,15 +1,17 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/dimensions.dart';
 import '../../app/core/utils/images.dart';
 
-loadingDialog(BuildContext context)
-{
+loadingDialog() {
   return showAnimatedDialog(
-    context: context,
-    barrierDismissible: true,
+    context: CustomNavigator.navigatorState.currentContext!,
+    barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
         shape: OutlineInputBorder(
@@ -21,10 +23,10 @@ loadingDialog(BuildContext context)
             height: MediaQuery.of(context).size.width * .3,
             width: MediaQuery.of(context).size.width * .3,
           ),
-             Padding(
+          Padding(
             padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
             child: Text(
-             "please_wait",
+              "please wait",
               style: AppTextStyles.w700.copyWith(
                 fontSize: 18.0,
                 color: ColorResources.DISABLED,
@@ -38,4 +40,24 @@ loadingDialog(BuildContext context)
     curve: Curves.easeInOutBack,
     duration: const Duration(milliseconds: 700),
   );
+}
+
+spinKitDialog() {
+  showDialog(
+      barrierDismissible: false,
+      context: CustomNavigator.navigatorState.currentContext!,
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: context.height,
+          width: context.width,
+          child: const Center(
+            child: Center(
+              child: SpinKitFadingCircle(
+                color: ColorResources.WHITE_COLOR,
+                size: 50,
+              ),
+            ),
+          ),
+        );
+      });
 }

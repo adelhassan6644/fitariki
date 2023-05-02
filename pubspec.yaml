@@ -53,6 +53,7 @@ dependencies:
   google_maps_flutter: ^2.2.5
   country_picker: ^2.0.20
   flag:
+  flutter_spinkit:
 
 
 dev_dependencies:
