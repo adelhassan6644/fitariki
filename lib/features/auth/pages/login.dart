@@ -224,7 +224,7 @@ class Login extends StatelessWidget {
                       child: CustomButton(
                           text: getTranslated("follow", context),
                           onTap: () {
-                            // provider.signInWithMobileNo();
+                            provider.signInWithMobileNo();
                           },
                           isLoading: provider.isLoading),
                     ),
