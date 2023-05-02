@@ -11,12 +11,10 @@ import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-
 class FirebaseAuthRepo {
   late final SharedPreferences sharedPreferences;
   final DioClient dioClient;
-  FirebaseAuthRepo({required this.sharedPreferences,required this.dioClient});
-
+  FirebaseAuthRepo({required this.sharedPreferences, required this.dioClient});
 
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
@@ -27,8 +25,10 @@ class FirebaseAuthRepo {
   }
 
   getPhone() {
-    if( sharedPreferences.containsKey(AppStorageKey.phone,)) {
+    if (sharedPreferences.containsKey(AppStorageKey.phone,)) {
       return sharedPreferences.getString(AppStorageKey.phone,);
+    }else{
+      return null;
     }
   }
 
@@ -42,9 +42,9 @@ class FirebaseAuthRepo {
 
   Future<String?> getFcmToken() async {
     String? _deviceToken;
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
-    }else {
+    } else {
       _deviceToken = await FirebaseMessaging.instance.getToken();
     }
 
@@ -54,38 +54,35 @@ class FirebaseAuthRepo {
     return _deviceToken;
   }
 
-
-  Future<Either<ServerFailure, Response>> sendDeviceToken({required String phone}) async {
+  Future<Either<ServerFailure, Response>> sendDeviceToken(
+      {required String phone, required String role}) async {
     try {
       Response res = await dioClient.post(
-        data: {"fcm_token": await getFcmToken(),"phone":phone},
-        uri: EndPoints.logIn,);
-      if(res.statusCode ==200){
-        saveUserToken(token: res.data['data']["api_token"]);
+        // data: {"fcm_token": await getFcmToken(), "phone": phone},
+        data: { "phone": phone},
+        uri: "$role/${EndPoints.logIn}",);
+      if (res.statusCode == 200) {
         return Right(res);
       } else {
-    return left(ServerFailure(res.data['message']));
-    }
+        return left(ServerFailure(res.data['message']));
+      }
     } catch (error) {
-    return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
 
   Future<void> saveUserToken({required String token}) async {
     try {
-      dioClient.updateHeader(token: token);
+      // dioClient.updateHeader(token: token);
       await sharedPreferences.setString(AppStorageKey.token, token);
     } catch (e) {
       rethrow;
     }
   }
 
-
   Future<bool> clearSharedData() async {
     await sharedPreferences.remove(AppStorageKey.token);
     await sharedPreferences.remove(AppStorageKey.isLogin);
     return true;
   }
-
-
 }

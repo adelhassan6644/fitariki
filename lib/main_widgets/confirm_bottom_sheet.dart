@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../navigation/custom_navigation.dart';
 import '../app/localization/localization/language_constant.dart';
@@ -8,13 +9,18 @@ import 'custom_button.dart';
 abstract class CustomBottomSheet {
   static show(
       {Function? onConfirm,
-      @required String? label,
-      @required Widget? list,
+      required String? label,
+      required Widget? list,
       double? height,
       BuildContext? context}) {
-    showModalBottomSheet(
-      context: context ?? CustomNavigator.navigatorState.currentContext!,
+    showMaterialModalBottomSheet(
+      enableDrag: true,
+      clipBehavior: Clip.antiAlias,
       backgroundColor: Colors.transparent,
+      context: CustomNavigator.navigatorState.currentContext!,
+      expand: false,
+      useRootNavigator: true,
+      isDismissible: true,
       builder: (_) {
         return Material(
           type: MaterialType.transparency,
@@ -33,17 +39,18 @@ abstract class CustomBottomSheet {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
+                        padding:
+                            const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
-                             SizedBox(height: 24.h),
+                            SizedBox(height: 24.h),
                             Text(
                               label!,
                               style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w600),
                             ),
-                             SizedBox(height: 16.h),
+                            SizedBox(height: 16.h),
                             Expanded(child: list!)
                           ],
                         ),
@@ -52,12 +59,14 @@ abstract class CustomBottomSheet {
                     Visibility(
                       visible: onConfirm != null,
                       child: CustomButton(
-                          text: getTranslated('submit', CustomNavigator.navigatorState.currentContext!),
-                          onTap: () {
-                            onConfirm!();
-                          },
+                        text: getTranslated('confirm',
+                            CustomNavigator.navigatorState.currentContext!),
+                        onTap: () {
+                          onConfirm!();
+                        },
                         backgroundColor: ColorResources.PRIMARY_COLOR,
-                        textColor: ColorResources.WHITE_COLOR,),
+                        textColor: ColorResources.WHITE_COLOR,
+                      ),
                     )
                   ],
                 ),

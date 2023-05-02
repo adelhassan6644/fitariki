@@ -27,6 +27,7 @@ class EditProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
+              withBack:fromLogin == true?false:true ,
                 title: fromLogin == true
                     ? getTranslated(
                         "complete_the_registration_information", context)

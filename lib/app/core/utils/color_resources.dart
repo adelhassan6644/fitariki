@@ -21,7 +21,7 @@ abstract class ColorResources {
   static const Color WHITE_COLOR = Color(0xFFFFFFFF);
   static const Color OFFER_COLOR = Color(0xff22BB55);
   static const Color LOGOUT_COLOR = Color(0xffDF4759);
-  static const Color LIGHT_GREEN = Color(0xffEEF5F7);
+  static const Color GREEN = Color(0xff34C759);
   static const Color LIGHT_GREY_BORDER = Color(0xffF3F3F3);
   static const Color LIGHT_BORDER_COLOR = Color(0xffE8ECF4);
   static const Color ALERT_COLOR = Color(0xffDBAB02);

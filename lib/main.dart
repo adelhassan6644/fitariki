@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fitariki/firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'app/core/utils/app_storage_keys.dart';
@@ -19,9 +21,9 @@ import 'package:fitariki/data/config/di.dart' as di;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // FirebaseNotifications.init();
   await di.init();
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: Unfocus(child: child!)),
+          child: UnFocus(child: child!)),
       initialRoute: Routes.SPLASH,
       navigatorKey: CustomNavigator.navigatorState,
       onGenerateRoute: CustomNavigator.onCreateRoute,

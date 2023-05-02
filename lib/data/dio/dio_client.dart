@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../app/core/utils/app_storage_keys.dart';
+import '../api/end_points.dart';
 import 'api_clinet.dart';
 import 'logging_interceptor.dart';
 
@@ -13,12 +14,11 @@ class DioClient extends ApiClient {
 
   final Dio dio;
 
-
   DioClient(
     this.baseUrl, {
     required this.dio,
     required this.loggingInterceptor,
-     required this.sharedPreferences,
+    required this.sharedPreferences,
   }) {
     dio
       ..options.baseUrl = baseUrl
@@ -26,22 +26,20 @@ class DioClient extends ApiClient {
       ..options.receiveTimeout = const Duration(seconds: 60)
       ..httpClientAdapter
       ..options.headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
         "Accept": " application/json",
-        'Authorization': 'Bearer ${sharedPreferences.getString(AppStorageKey.token)}',
+        'X-Api-Key': EndPoints.apiKey
       };
-    dio.interceptors.add(loggingInterceptor);
+    dio.interceptors.add(PrettyDioLogger());
   }
 
-
-  void updateHeader({required String token}) {
-    dio.options.headers = {
-      'Content-Type': 'application/json',
-      "Accept": " application/json",
-      'Authorization': 'Bearer $token',
-    };
-  }
-
+  // void updateHeader({required String token}) {
+  //   dio.options.headers = {
+  //     'Content-Type': 'application/json; charset=UTF-8',
+  //     "Accept": " application/json",
+  //     'X-Authorization': EndPoints.apiKey
+  //   };
+  // }
 
   @override
   Future<Response> get({

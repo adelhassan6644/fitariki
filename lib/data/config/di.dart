@@ -1,4 +1,3 @@
-import 'package:fitariki/features/auth/provider/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,7 +42,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LanguageProvider());
   sl.registerLazySingleton(() => ThemeProvider(sharedPreferences: sl()));
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
-  sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
+  // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
   sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl()));
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));

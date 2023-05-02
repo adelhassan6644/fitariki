@@ -9,7 +9,7 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/count_down.dart';
-import '../provider/auth_provider.dart';
+import '../provider/firebase_auth_provider.dart';
 
 class Verification extends StatelessWidget {
   const Verification({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class Verification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<AuthProvider>(builder: (child, provider, _) {
+      body: Consumer<FirebaseAuthProvider>(builder: (child, provider, _) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,9 +54,7 @@ class Verification extends StatelessWidget {
                           animationType: AnimationType.slide,
                           obscureText: true,
                           obscuringCharacter: "*",
-                          onCompleted: (v){
-                              provider.verifyPhone(code: v);
-                          },
+                          onCompleted:(v)=>provider.sendOTP(code: v),
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           cursorColor: ColorResources.PRIMARY_COLOR,
                           errorTextSpace: 30.h,
@@ -82,7 +80,7 @@ class Verification extends StatelessWidget {
                           onChanged: (v) {},
                         ),
                         CountDown(
-                          onCount: provider.logIn,
+                          onCount: provider.signInWithMobileNo,
                         ),
                       ],
                     ),

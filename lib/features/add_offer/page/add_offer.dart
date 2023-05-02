@@ -1,11 +1,13 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../helpers/date_time_picker.dart';
 import '../provider/add_offer_provider.dart';
 
 class AddOffer extends StatelessWidget {
@@ -14,7 +16,7 @@ class AddOffer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 380.h,
+      height: context.height*0.9,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -121,19 +123,26 @@ class AddOffer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 12),
-                              decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
-                                      .withOpacity(0.06),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(
-                                  DateTime.now()
-                                      .dateFormat(format: "yyyy MMM d"),
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 13,
-                                  )),
+                            GestureDetector(
+                              onTap: ()async => DateTimePicker(
+                                label:
+                                    getTranslated("start_of_duration", context),
+                                valueChanged: provider.onSelectStartDate,
+                                format: "yyyy MMM d",
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 12),
+                                decoration: BoxDecoration(
+                                    color: ColorResources.PRIMARY_COLOR
+                                        .withOpacity(0.06),
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: Text(
+                                    provider.startDate.dateFormat(format: "yyyy MMM d"),
+                                    style: AppTextStyles.w400.copyWith(
+                                      fontSize: 13,
+                                    )),
+                              ),
                             )
                           ],
                         ),
@@ -159,19 +168,28 @@ class AddOffer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 12),
-                              decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
-                                      .withOpacity(0.06),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(
-                                  DateTime.now()
-                                      .dateFormat(format: "yyyy MMM d"),
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 13,
-                                  )),
+                            GestureDetector(
+                              onTap: ()async {
+                              DateTimePicker(
+                                  label: getTranslated("end_of_duration", context),
+                                  valueChanged: provider.onSelectEndDate,
+                                  format: "yyyy MMM d",
+                                startDateTime:  provider.endDate,
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 12),
+                                decoration: BoxDecoration(
+                                    color: ColorResources.PRIMARY_COLOR
+                                        .withOpacity(0.06),
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: Text(
+                                    provider.endDate.dateFormat(format: "yyyy MMM d"),
+                                    style: AppTextStyles.w400.copyWith(
+                                      fontSize: 13,
+                                    )),
+                              ),
                             )
                           ],
                         ),
@@ -204,51 +222,51 @@ class AddOffer extends StatelessWidget {
                                   color: ColorResources.PRIMARY_COLOR
                                       .withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
-                              child:Row(
+                              child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: (){},
-                                    child:  const Icon(
+                                    onTap: () {},
+                                    child: const Icon(
                                       Icons.add,
-                                      color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                      color:
+                                          ColorResources.SECOUND_PRIMARY_COLOR,
                                       size: 15,
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 6.0.w),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 6.0.w),
                                     child: Container(
                                       width: 28.w,
                                       height: 28.h,
                                       decoration: BoxDecoration(
                                           color: ColorResources.DISABLED,
                                           border: Border.all(
-                                              color:Colors.transparent,
+                                              color: Colors.transparent,
                                               width: 0.5.h),
                                           borderRadius:
-                                          BorderRadius.circular(4)),
+                                              BorderRadius.circular(4)),
                                       alignment: Alignment.center,
                                       child: Center(
                                         child: Text(
                                           "5",
                                           textAlign: TextAlign.center,
-                                          style:
-                                          AppTextStyles.w500.copyWith(
+                                          style: AppTextStyles.w500.copyWith(
                                             fontSize: 13,
-                                            color: ColorResources
-                                                .WHITE_COLOR,
+                                            color: ColorResources.WHITE_COLOR,
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){},
-                                    child:  const Icon(
+                                    onTap: () {},
+                                    child: const Icon(
                                       Icons.remove,
-                                      color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                      color:
+                                          ColorResources.SECOUND_PRIMARY_COLOR,
                                       size: 15,
                                     ),
                                   ),
@@ -302,18 +320,60 @@ class AddOffer extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Container(
-                            height: 1,
-                            width: context.width,
-                            color: ColorResources.BORDER_COLOR,
-                            child: const SizedBox(),
-                          ),
-                        ),
                       ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(children: [
+                    Text(getTranslated("followers", context),style:  AppTextStyles.w600.copyWith(
+                      fontSize: 14,
+                    ),),
+                    const Spacer(),
+                    CupertinoSwitch(
+                      activeColor: ColorResources.GREEN,
+                      value: provider.addFollowers,
+                      onChanged: provider.onChange,
+                    )
+                  ],),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                        BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
+                        color: ColorResources.WHITE_COLOR,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 5.0,
+                              spreadRadius: -1,
+                              offset: const Offset(0, 6))
+                        ]),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            getTranslated("add_follower", context),
+                            style: AppTextStyles.w400.copyWith(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.add,
+                            size: 18,
+                          )
+                        )
+                      ],
+                    ),
+                  ),
+
                 ],
               ),
             );
