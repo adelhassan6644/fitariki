@@ -105,7 +105,7 @@ class OfferDetails extends StatelessWidget {
               child: CustomButton(
                 text: getTranslated("offer", context),
                 onTap: () => customShowModelBottomSheet(
-                  body: const Login(),
+                  body: const AddOffer(),
                 ),
               ),
             )

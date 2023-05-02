@@ -24,4 +24,15 @@ class AddOfferProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  List<String> followers = ["محمد احمد","لؤي احمد","محمد الفيصل"];
+  List<String> selectedFollowers = ["محمد احمد","لؤي احمد","محمد الفيصل"];
+  onSelectFollow(v,index){
+    if(v){
+      selectedFollowers.add(followers[index]);
+    }else{
+      selectedFollowers.removeAt(index);
+    }
+    notifyListeners();
+  }
+
 }

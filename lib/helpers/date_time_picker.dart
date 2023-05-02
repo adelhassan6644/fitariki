@@ -1,7 +1,10 @@
+import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import '../../navigation/custom_navigation.dart';
-import '../main_widgets/confirm_bottom_sheet.dart';
+import '../app/core/utils/color_resources.dart';
+import '../app/localization/localization/language_constant.dart';
+import '../main_widgets/custom_button.dart';
 
 
 class DateTimePicker extends StatefulWidget {
@@ -42,31 +45,86 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomBottomSheet.show(
-        label: widget.label,
-        height: 360,
-        onConfirm: () {
-          if (date != null) {
-            setState(() =>
-            _date = DateFormat(widget.format??"dd,MMM,yyyy").format(date!));
-            widget.valueChanged!(date!);
-            CustomNavigator.pop();
-          } else {
-            setState(() => _date =
-                DateFormat(widget.format??"dd,MMM,yyyy").format(DateTime.now()));
-            widget.valueChanged!(DateTime.now());
-            CustomNavigator.pop();
-          }
-        },
-        list: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            onDateTimeChanged: (value) => date = value,
-            initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
-            minimumDate: widget.startDateTime != null ? DateTime(
-                widget.startDateTime!.year,
-                widget.startDateTime!.month,
-                widget.startDateTime!.day)
-                : DateTime(1900),
-            maximumDate: DateTime(2100)));
+    return Container(
+      height:360.h,
+      decoration: const BoxDecoration(
+          color: ColorResources.WHITE_COLOR,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20))),
+      child: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Container(
+                height: 5.h,
+                width: 36.w,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF3C3C43).withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(100)),
+                child: const SizedBox(),
+              ),
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            widget.label,
+            style: const TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+          Expanded(
+            child: Padding(
+              padding:
+              const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+
+                  SizedBox(height: 16.h),
+                  Expanded(child:  CupertinoDatePicker(
+                      mode: CupertinoDatePickerMode.date,
+                      onDateTimeChanged: (value) => date = value,
+                      initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
+                      minimumDate: widget.startDateTime != null ? DateTime(
+                          widget.startDateTime!.year,
+                          widget.startDateTime!.month,
+                          widget.startDateTime!.day)
+                          : DateTime(1900),
+                      maximumDate: DateTime(2100)))
+                ],
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_DEFAULT,),
+              child: CustomButton(
+                text: getTranslated('confirm',
+                    CustomNavigator.navigatorState.currentContext!),
+                onTap: () {
+                    if (date != null) {
+                      setState(() =>
+                      _date = DateFormat(widget.format??"dd,MMM,yyyy").format(date!));
+                      widget.valueChanged!(date!);
+                      CustomNavigator.pop();
+                    } else {
+                      setState(() => _date =
+                          DateFormat(widget.format??"dd,MMM,yyyy").format(DateTime.now()));
+                      widget.valueChanged!(DateTime.now());
+                      CustomNavigator.pop();
+                    }
+                  },
+                backgroundColor: ColorResources.PRIMARY_COLOR,
+                textColor: ColorResources.WHITE_COLOR,
+              ),
+            ),
+          ),
+          SizedBox(height: 16.h),
+        ],
+      ),
+    );
+
   }
 }
