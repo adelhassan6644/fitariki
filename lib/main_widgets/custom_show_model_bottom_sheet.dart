@@ -4,7 +4,7 @@ import '../../navigation/custom_navigation.dart';
 
 
 Future<T?> customShowModelBottomSheet<T>(
-    { required Widget? body}) {
+    { required Widget? body,bool? isDismissible}) {
   return showMaterialModalBottomSheet(
       enableDrag: true,
       clipBehavior: Clip.antiAlias,
@@ -12,7 +12,7 @@ Future<T?> customShowModelBottomSheet<T>(
       context: CustomNavigator.navigatorState.currentContext!,
       expand: false,
       useRootNavigator: true,
-      isDismissible: true,
+      isDismissible: isDismissible??true,
       builder: (_) {
         return Padding(
           padding: MediaQuery.of(CustomNavigator.navigatorState.currentContext!).viewInsets,

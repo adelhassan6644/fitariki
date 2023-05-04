@@ -73,16 +73,14 @@ class FirebaseAuthProvider extends ChangeNotifier {
       notifyListeners();
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
-        timeout: const Duration(seconds: 120),
-        verificationCompleted: (authCredential) =>
-            phoneVerificationCompleted(authCredential),
-        verificationFailed: (authException) =>
-            phoneVerificationFailed(authException),
+        timeout: const Duration(seconds: 60),
+        verificationCompleted: (authCredential) => phoneVerificationCompleted(authCredential),
+        verificationFailed: (authException) => phoneVerificationFailed(authException),
         codeSent: (verificationId, code) => phoneCodeSent(
             verificationId: verificationId,
             code: code ?? 0,
             fromVerification: fromVerification ?? false),
-        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout
+        codeAutoRetrievalTimeout:phoneCodeAutoRetrievalTimeout
       );
     } catch (e) {
       _isLoading = false;
@@ -100,18 +98,17 @@ class FirebaseAuthProvider extends ChangeNotifier {
   }
 
   phoneVerificationFailed(FirebaseException authException) {
+    CustomNavigator.pop();
     if (authException.code == 'invalid-phone-number') {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "رقم الهاتف غير صحيح",
-              isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     } else {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: authException.message.toString(),
-              isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     }
@@ -125,7 +122,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
     firebaseVerificationId = verificationCode;
     _isSubmit =false;
     _isLoading = false;
-      CustomNavigator.pop();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "انتهي الوقت ,حاول اعادة التسجيل",
