@@ -76,12 +76,10 @@ class Verification extends StatelessWidget {
                               fieldOuterPadding: EdgeInsets.zero,
                               borderRadius: BorderRadius.circular(
                                   Dimensions.RADIUS_DEFAULT),
-                              selectedColor:
-                              ColorResources.SECOUND_PRIMARY_COLOR,
+                              selectedColor: ColorResources.SECOUND_PRIMARY_COLOR,
                               selectedFillColor: ColorResources.FILL_COLOR,
                               inactiveFillColor: ColorResources.FILL_COLOR,
-                              inactiveColor:
-                              ColorResources.SECOUND_PRIMARY_COLOR,
+                              inactiveColor: ColorResources.SECOUND_PRIMARY_COLOR,
                               activeColor:
                               ColorResources.SECOUND_PRIMARY_COLOR,
                               activeFillColor: ColorResources.FILL_COLOR,

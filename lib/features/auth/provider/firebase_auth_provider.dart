@@ -73,7 +73,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
       notifyListeners();
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
-        timeout: const Duration(seconds: 60),
+        timeout: const Duration(seconds: 120),
         verificationCompleted: (authCredential) =>
             phoneVerificationCompleted(authCredential),
         verificationFailed: (authException) =>
@@ -82,8 +82,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
             verificationId: verificationId,
             code: code ?? 0,
             fromVerification: fromVerification ?? false),
-        codeAutoRetrievalTimeout: (v) => phoneCodeAutoRetrievalTimeout(
-            verificationCode: v, fromVerification: fromVerification ?? false),
+        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout
       );
     } catch (e) {
       _isLoading = false;
@@ -121,27 +120,18 @@ class FirebaseAuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  phoneCodeAutoRetrievalTimeout(
-      {required String verificationCode, required bool fromVerification}) {
+  phoneCodeAutoRetrievalTimeout(String verificationCode) {
     log("====>phoneCodeAutoRetrievalTimeout is $firebaseVerificationId");
     firebaseVerificationId = verificationCode;
     _isSubmit =false;
     _isLoading = false;
-    if (fromVerification == false) {
       CustomNavigator.pop();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "انتهي الوقت ,حاول اعادة التسجيل",
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-    }
-    else {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "انتهي الوقت ,اعد طلب ارسال الكود",
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-    }
+    FocusScope.of(CustomNavigator.navigatorState.currentContext!).requestFocus(FocusNode());
     notifyListeners();
   }
 
