@@ -67,19 +67,23 @@ class FirebaseAuthProvider extends ChangeNotifier {
 
   bool get isLogin => firebaseAuthRepo.isLoggedIn();
 
-  signInWithMobileNo() async {
+  signInWithMobileNo({bool? fromVerification}) async {
     try {
       _isLoading = true;
       notifyListeners();
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
-        timeout: const Duration(seconds: 120),
+        timeout: const Duration(seconds: 60),
         verificationCompleted: (authCredential) =>
             phoneVerificationCompleted(authCredential),
-        verificationFailed: (authException) => phoneVerificationFailed(authException),
-        codeSent: (verificationId, code) =>
-            phoneCodeSent(verificationId: verificationId, code: code ?? 0),
-        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout,
+        verificationFailed: (authException) =>
+            phoneVerificationFailed(authException),
+        codeSent: (verificationId, code) => phoneCodeSent(
+            verificationId: verificationId,
+            code: code ?? 0,
+            fromVerification: fromVerification ?? false),
+        codeAutoRetrievalTimeout: (v) => phoneCodeAutoRetrievalTimeout(
+            verificationCode: v, fromVerification: fromVerification ?? false),
       );
     } catch (e) {
       _isLoading = false;
@@ -113,23 +117,46 @@ class FirebaseAuthProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
     }
     log("======>Fail when Auth with Firebase : ${authException.message}");
-
     _isLoading = false;
     notifyListeners();
   }
 
-  phoneCodeAutoRetrievalTimeout(String verificationCode) {
+  phoneCodeAutoRetrievalTimeout(
+      {required String verificationCode, required bool fromVerification}) {
     log("====>phoneCodeAutoRetrievalTimeout is $firebaseVerificationId");
     firebaseVerificationId = verificationCode;
-    _isSubmit = true;
+    _isSubmit =false;
+    _isLoading = false;
+    if (fromVerification == false) {
+      CustomNavigator.pop();
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "انتهي الوقت ,حاول اعادة التسجيل",
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+    }
+    else {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "انتهي الوقت ,اعد طلب ارسال الكود",
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+    }
     notifyListeners();
   }
 
-  phoneCodeSent({required String verificationId, required int code,}) async {
+  phoneCodeSent(
+      {required String verificationId,
+      required int code,
+      required bool fromVerification}) async {
     _isLoading = false;
     firebaseVerificationId = verificationId;
-    CustomNavigator.pop();
-    CustomNavigator.push(Routes.VERIFICATION,);
+    if (fromVerification == false) {
+      CustomNavigator.pop();
+      CustomNavigator.push(
+        Routes.VERIFICATION,
+      );
+    }
     notifyListeners();
   }
 
@@ -146,7 +173,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance
             .signInWithCredential(phoneAuthCredential)
             .then((value) async {
-              CustomNavigator.pop();
+          CustomNavigator.pop();
+
           ///  to send Device token
           await userLogin();
           _isSubmit = false;
@@ -163,8 +191,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
           _isSubmit = false;
           notifyListeners();
         });
-      }
-      else {
+      } else {
         log("====>has error in firebaseVerificationId $firebaseVerificationId");
         CustomNavigator.pop();
         _isSubmit = false;
@@ -193,7 +220,9 @@ class FirebaseAuthProvider extends ChangeNotifier {
   userLogin() async {
     try {
       Either<ServerFailure, Response> res =
-          await firebaseAuthRepo.sendDeviceToken(phone: "$countryPhoneCode${_phoneTEC.text.trim()}", role: role[_userType]);
+          await firebaseAuthRepo.sendDeviceToken(
+              phone: "$countryPhoneCode${_phoneTEC.text.trim()}",
+              role: role[_userType]);
       res.fold((fail) {
         log(ApiErrorHandler.getMessage(fail));
         CustomSnackBar.showSnackBar(
@@ -204,10 +233,13 @@ class FirebaseAuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       }, (success) {
         firebaseAuthRepo.setLoggedIn();
-        firebaseAuthRepo.saveUserToken(token: success.data['data'][role[_userType]]["id"].toString());
+        firebaseAuthRepo.saveUserRole(
+            type: role[_userType],
+            id: success.data['data'][role[_userType]]["id"].toString());
         firebaseAuthRepo.remember(phone: "+966${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
-          CustomNavigator.push(Routes.EDIT_PROFILE, replace: true, arguments: true);
+          CustomNavigator.push(Routes.EDIT_PROFILE,
+              replace: true, arguments: true);
         } else {
           CustomNavigator.pop();
         }

@@ -30,4 +30,20 @@ abstract class ColorResources {
   static const Color SUBTITLE = Color(0xff373737);
   static const Color DETAILS_COLOR = Color(0xff737373);
   static const Color HINT_COLOR = Color(0xffA5B7B8);
+
+
+ static tripStatus(status){
+    if(status == "waiting"){
+      return DISABLED;
+    }
+    else if(status == "pay"){
+      return PRIMARY_COLOR;
+    }
+    else if(status == "replay"){
+      return PRIMARY_COLOR;
+    }
+    else{
+      return WHITE_COLOR;
+    }
+  }
 }

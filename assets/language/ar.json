@@ -14,6 +14,9 @@
   "verify_the_phone": "التحقق من الرقم",
   "proceed_to_check_out": "انتقل الي الدفع",
   "required": "هذا الحقل مطلوب",
+  "waiting": "انتظار",
+  "current": "حالية",
+  "previous": "سابقة",
   "please_enter_valid_number": "من فضلك ادخل رقم صحيح",
   "please_enter_valid_code": "من فضلك ادخل رمز صحيح",
   "please_enter_your_name": "من فضلك ادخل اسمك",
@@ -106,11 +109,14 @@
   "duration": "المدة",
   "price": "السعر",
   "start_of_duration": "بداية المدة",
+  "start_date": "تاريخ البداية:",
   "end_of_duration": "نهاية المدة",
   "followers": "التابعين",
   "add_follower": "اضافة تابع",
   "add_a_note":"اضافة ملاحظة (اختياري)",
-  "sar": "ريال"
+  "sar": "ريال",
+  "replay": "اعادة",
+  "pay": "دفع"
 
 
 }

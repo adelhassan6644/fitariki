@@ -23,6 +23,8 @@ class SvgImages {
   static const String femaleIcon = 'assets/svgs/female.svg';
   static const String editor = 'assets/svgs/editor.svg';
   static const String map = 'assets/svgs/map.svg';
+  static const String down = 'assets/svgs/down.svg';
+  static const String userNumber = 'assets/svgs/user_number.svg';
 
   static const String phoneIcon = 'assets/svgs/phone.svg';
   static const String arrowRightIcon = 'assets/svgs/arrow_right.svg';

@@ -12,7 +12,10 @@ import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import 'filter_Bottom_sheet.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar({this.hint,this.withFilter=true,Key? key}) : super(key: key);
+
+  final bool withFilter;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class SearchBar extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                getTranslated("search_for_delivery_offers", context),
+        hint??   getTranslated("search_for_delivery_offers", context),
                 style: AppTextStyles.w400.copyWith(
                     color: ColorResources.DISABLED,
                     fontSize: 14,

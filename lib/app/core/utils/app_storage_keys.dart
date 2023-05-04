@@ -1,6 +1,7 @@
 import '../../localization/provider/language_provider.dart';
 class AppStorageKey {
-  static const String token = "token";
+  static const String userId = "user_id";
+  static const String type = "type";
   static const String isFirstTime = "is_first_time";
   static const String isLogin = "is_login";
   static const String phone = "phone";

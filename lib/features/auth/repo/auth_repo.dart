@@ -113,7 +113,7 @@ class AuthRepo {
   Future<bool> clearSharedData() async {
     await sharedPreferences.remove(AppStorageKey.cityId);
     await sharedPreferences.remove(AppStorageKey.cityName);
-    await sharedPreferences.remove(AppStorageKey.token);
+    await sharedPreferences.remove(AppStorageKey.userId);
     await sharedPreferences.remove(AppStorageKey.isLogin);
     return true;
   }

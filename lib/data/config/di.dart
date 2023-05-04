@@ -8,6 +8,8 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/edit_profile/provider/edit_profile_provider.dart';
 import '../../features/edit_profile/repo/profile_repo.dart';
+import '../../features/my_trips/provider/my_trips_provider.dart';
+import '../../features/my_trips/repo/my_trips_repo.dart';
 import '../api/end_points.dart';
 import '../network/netwok_info.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
@@ -36,6 +38,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => EditProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -46,6 +49,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
   sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl()));
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
+  sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

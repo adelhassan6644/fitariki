@@ -54,8 +54,7 @@ class FirebaseAuthRepo {
     return _deviceToken;
   }
 
-  Future<Either<ServerFailure, Response>> sendDeviceToken(
-      {required String phone, required String role}) async {
+  Future<Either<ServerFailure, Response>> sendDeviceToken({required String phone, required String role}) async {
     try {
       Response res = await dioClient.post(
         // data: {"fcm_token": await getFcmToken(), "phone": phone},
@@ -71,17 +70,14 @@ class FirebaseAuthRepo {
     }
   }
 
-  Future<void> saveUserToken({required String token}) async {
-    try {
-      // dioClient.updateHeader(token: token);
-      await sharedPreferences.setString(AppStorageKey.token, token);
-    } catch (e) {
-      rethrow;
-    }
-  }
+ saveUserRole({required String id,required String type})  {
+     sharedPreferences.setString(AppStorageKey.userId, id);
+     sharedPreferences.setString(AppStorageKey.type, type);
+ }
 
   Future<bool> clearSharedData() async {
-    await sharedPreferences.remove(AppStorageKey.token);
+    await sharedPreferences.remove(AppStorageKey.userId);
+    await sharedPreferences.remove(AppStorageKey.type);
     await sharedPreferences.remove(AppStorageKey.isLogin);
     return true;
   }

@@ -110,6 +110,11 @@
   "followers": "followers",
   "add_follower": "add follower",
   "add_a_note":"Add a note (optional)",
-  "sar": "sar"
-
+  "sar": "sar",
+  "waiting": "Waiting",
+  "current": "Current",
+  "previous": "Previous",
+  "start_date": "start date:",
+  "replay": "replay",
+  "pay": "pay"
 }
