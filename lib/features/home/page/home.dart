@@ -29,31 +29,36 @@ class _HomeState extends State<Home> {
         const AcceptableWidget(),
          Consumer<FirebaseAuthProvider>(
                 builder: (context, provider, child) {
-                  return provider.isLogin? const SizedBox(): Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT),
-                    child: Container(
-                        height: 32,
-                        decoration: BoxDecoration(
-                            color: ColorResources.CONTAINER_BACKGROUND_COLOR,
-                            borderRadius: BorderRadius.circular(6)),
-                        child: Row(
-                          children: List.generate(
-                              titles.length,
-                              (index) => Expanded(
-                                    child: TabWidget(
-                                        title: getTranslated(
-                                            titles[index], context),
-                                        isSelected: index == currentIndex,
-                                        onTab: () => setState(
-                                            () => currentIndex = index)),
-                                  )),
-                        )),
+                  return provider.isLogin? const SizedBox(): Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+                        child: Container(
+                            height: 32,
+                            decoration: BoxDecoration(
+                                color: ColorResources.CONTAINER_BACKGROUND_COLOR,
+                                borderRadius: BorderRadius.circular(6)),
+                            child: Row(
+                              children: List.generate(
+                                  titles.length,
+                                  (index) => Expanded(
+                                        child: TabWidget(
+                                            title: getTranslated(
+                                                titles[index], context),
+                                            isSelected: index == currentIndex,
+                                            onTab: () => setState(
+                                                () => currentIndex = index)),
+                                      )),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                    ],
                   );
                 },),
-        const SizedBox(
-          height: 14,
-        ),
+
         const SearchBar(),
         Expanded(
             child: ListView(
