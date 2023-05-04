@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/marquee_widget.dart';
-import '../../add_offer/page/add_offer.dart';
 import '../../auth/pages/login.dart';
 import '../widgets/captain_card.dart';
 import '../widgets/car_details.dart';
