@@ -29,25 +29,32 @@ class MyTrips extends StatelessWidget {
             TabBerWidget(
               provider: provider,
             ),
-            !Provider.of<FirebaseAuthProvider>(context, listen: false).isLogin
-                ?  const Expanded(child: GuestMode(),)
-                : Expanded(
-                    child: ListView(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT,
-                        vertical: 8),
-                    physics: const BouncingScrollPhysics(),
-                    children: const [
-                      MyTripCard(
-                        status: "waiting",
-                      ),
-                      MyTripCard(isCurrent: true, total: "20", userNumber: "2"),
-                      MyTripCard(
-                        status: "pay",
-                      ),
-                    ],
-                  ))
+            Consumer<FirebaseAuthProvider>(
+              builder: (context, provider, child) {
+                return provider.isLogin
+                    ? Expanded(
+                        child: ListView(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+                            vertical: 8),
+                        physics: const BouncingScrollPhysics(),
+                        children: const [
+                          MyTripCard(
+                            status: "waiting",
+                          ),
+                          MyTripCard(
+                              isCurrent: true, total: "20", userNumber: "2"),
+                          MyTripCard(
+                            status: "pay",
+                          ),
+                        ],
+                      ))
+                    : const Expanded(
+                        child: GuestMode(),
+                      );
+              },
+            ),
           ],
         );
       },
