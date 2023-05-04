@@ -16,6 +16,18 @@
 		<string>fitariki</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
+			<key>CFBundleURLTypes</key>
+        	<array>
+        		<dict>
+        			<key>CFBundleTypeRole</key>
+        			<string>Editor</string>
+        			<key>CFBundleURLSchemes</key>
+        			<array>
+        				<string>com.googleusercontent.apps.105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4</string>
+        			</array>
+        		</dict>
+
+        	</array>
 		<key>CFBundleShortVersionString</key>
 		<string>$(FLUTTER_BUILD_NAME)</string>
 		<key>CFBundleSignature</key>
