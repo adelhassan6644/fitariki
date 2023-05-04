@@ -3,6 +3,8 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import '../../auth/provider/firebase_auth_provider.dart';
+import '../../guest/guest_mode.dart';
 import '../provider/my_trips_provider.dart';
 import '../widgets/my_trip_card.dart';
 import '../widgets/tab_bar_widget.dart';
@@ -12,8 +14,8 @@ class MyTrips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer< MyTripsProvider>(
-      builder: (_,provider ,child) {
+    return Consumer<MyTripsProvider>(
+      builder: (_, provider, child) {
         return Column(
           children: [
             CustomAppBar(
@@ -21,19 +23,31 @@ class MyTrips extends StatelessWidget {
               withBorder: true,
               withBack: false,
             ),
-            SizedBox(height: 8.h,),
-            TabBerWidget(provider: provider,),
-            Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal:Dimensions.PADDING_SIZE_DEFAULT,vertical: 8),
-                  physics: const BouncingScrollPhysics(),
-                  children: const [
-                    MyTripCard(status: "waiting",),
-                    MyTripCard(isCurrent: true,total: "20",userNumber: "2"),
-                    MyTripCard(status: "pay",),
-                  ],
-                ))
+            SizedBox(
+              height: 8.h,
+            ),
+            TabBerWidget(
+              provider: provider,
+            ),
+            !Provider.of<FirebaseAuthProvider>(context, listen: false).isLogin
+                ?  const Expanded(child: GuestMode(),)
+                : Expanded(
+                    child: ListView(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+                        vertical: 8),
+                    physics: const BouncingScrollPhysics(),
+                    children: const [
+                      MyTripCard(
+                        status: "waiting",
+                      ),
+                      MyTripCard(isCurrent: true, total: "20", userNumber: "2"),
+                      MyTripCard(
+                        status: "pay",
+                      ),
+                    ],
+                  ))
           ],
         );
       },

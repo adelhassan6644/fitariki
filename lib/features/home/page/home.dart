@@ -3,7 +3,9 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/main_widgets/tab_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../auth/provider/firebase_auth_provider.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/offer_card.dart';
@@ -25,26 +27,30 @@ class _HomeState extends State<Home> {
       children: [
         const HomeAppBar(),
         const AcceptableWidget(),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Dimensions.PADDING_SIZE_DEFAULT),
-          child: Container(
-              height: 32,
-              decoration: BoxDecoration(
-                  color:ColorResources.CONTAINER_BACKGROUND_COLOR,
-                  borderRadius: BorderRadius.circular(6)),
-              child: Row(
-                children: List.generate(
-                    titles.length,
-                    (index) => Expanded(
-                          child: TabWidget(
-                              title: getTranslated(titles[index], context),
-                              isSelected: index == currentIndex,
-                              onTab: () =>
-                                  setState(() => currentIndex = index)),
+         Consumer<FirebaseAuthProvider>(
+                builder: (context, provider, child) {
+                  return provider.isLogin? const SizedBox(): Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+                    child: Container(
+                        height: 32,
+                        decoration: BoxDecoration(
+                            color: ColorResources.CONTAINER_BACKGROUND_COLOR,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Row(
+                          children: List.generate(
+                              titles.length,
+                              (index) => Expanded(
+                                    child: TabWidget(
+                                        title: getTranslated(
+                                            titles[index], context),
+                                        isSelected: index == currentIndex,
+                                        onTab: () => setState(
+                                            () => currentIndex = index)),
+                                  )),
                         )),
-              )),
-        ),
+                  );
+                },),
         const SizedBox(
           height: 14,
         ),
@@ -55,7 +61,6 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(0),
           physics: const BouncingScrollPhysics(),
           children: const [
-
             SizedBox(
               height: 6,
             ),
