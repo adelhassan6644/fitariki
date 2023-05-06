@@ -72,16 +72,17 @@ class FirebaseAuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
-        timeout: const Duration(seconds: 60),
-        verificationCompleted: (authCredential) => phoneVerificationCompleted(authCredential),
-        verificationFailed: (authException) => phoneVerificationFailed(authException),
-        codeSent: (verificationId, code) => phoneCodeSent(
-            verificationId: verificationId,
-            code: code ?? 0,
-            fromVerification: fromVerification ?? false),
-        codeAutoRetrievalTimeout:phoneCodeAutoRetrievalTimeout
-      );
+          phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
+          timeout: const Duration(seconds: 60),
+          verificationCompleted: (authCredential) =>
+              phoneVerificationCompleted(authCredential),
+          verificationFailed: (authException) =>
+              phoneVerificationFailed(authException),
+          codeSent: (verificationId, code) => phoneCodeSent(
+              verificationId: verificationId,
+              code: code ?? 0,
+              fromVerification: fromVerification ?? false),
+          codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
     } catch (e) {
       _isLoading = false;
       CustomSnackBar.showSnackBar(
@@ -114,19 +115,20 @@ class FirebaseAuthProvider extends ChangeNotifier {
     }
     log("======>Fail when Auth with Firebase : ${authException.message}");
     _isLoading = false;
+    _isSubmit = false;
     notifyListeners();
   }
 
   phoneCodeAutoRetrievalTimeout(String verificationCode) {
     log("====>phoneCodeAutoRetrievalTimeout is $firebaseVerificationId");
     firebaseVerificationId = verificationCode;
-    _isSubmit =false;
+    _isSubmit = false;
     _isLoading = false;
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "انتهي الوقت ,حاول اعادة التسجيل",
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    CustomSnackBar.showSnackBar(
+        notification: AppNotification(
+            message: "انتهي الوقت ,حاول اعادة التسجيل",
+            backgroundColor: ColorResources.IN_ACTIVE,
+            borderColor: Colors.transparent));
     FocusScope.of(CustomNavigator.navigatorState.currentContext!).requestFocus(FocusNode());
     notifyListeners();
   }

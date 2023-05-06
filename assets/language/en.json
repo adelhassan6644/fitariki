@@ -118,5 +118,15 @@
   "replay": "replay",
   "pay": "pay",
   "register_with_us": "Register with us!",
-  "and_enjoy_all_the_features_available_in_the_application": "And enjoy all the features available in the application"
+  "and_enjoy_all_the_features_available_in_the_application": "And enjoy all the features available in the application",
+  "delivery_requests": "Delivery requests",
+  "my_completed_travels": "My completed travels",
+  "personal_information": "Personal information",
+  "archives": "Archives",
+  "alerts": "Alerts",
+  "bank_data": "Bank data",
+  "captain_evaluation": "Captain evaluation"
+
+
+
 }

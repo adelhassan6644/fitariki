@@ -8,6 +8,7 @@ abstract class ColorResources {
   static const Color BACKGROUND_COLOR = Color(0xffffffff);
   static const Color CONTAINER_BACKGROUND_COLOR = Color(0xffF3F3F3);
   static const Color BLUE_COLOR = Color(0xff3A5ACD);
+  static const Color SYSTEM_COLOR = Color(0xff007AFF);
   static const Color RATE_COLOR = Color(0xffFFC600);
   static const Color NAV_BAR_BACKGROUND_COLOR = Color(0xFFFFFFFF);
   static const Color ACCENT_PRIMARY_COLOR = Color(0xffF7F1FC);

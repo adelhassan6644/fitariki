@@ -58,7 +58,6 @@ class _HomeState extends State<Home> {
                     ],
                   );
                 },),
-
         const SearchBar(),
         Expanded(
             child: ListView(

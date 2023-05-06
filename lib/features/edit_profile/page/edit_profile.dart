@@ -13,7 +13,7 @@ import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 
 class EditProfile extends StatelessWidget {
-  const EditProfile({this.fromLogin = false, Key? key}) : super(key: key);
+  const EditProfile({required this.fromLogin, Key? key}) : super(key: key);
   final bool fromLogin;
 
   @override

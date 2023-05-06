@@ -32,6 +32,8 @@
   "code_expires_in": "تنتهي صلاحية الرمز في: ",
   "enter_the_6_digit_code_sent_to": "ادخل الكود المكون من 6 ارقام المرسل إلى",
   "edit": "تعديل",
+  "delivery_requests": "طلبات التوصيل",
+  "my_completed_travels": "رحلاتي المكتملة",
   "next": "التالي",
   "attachment": "ارفاق",
   "home": "الرئيسية",
@@ -118,6 +120,13 @@
   "replay": "اعادة",
   "pay": "دفع",
   "register_with_us": "سجل معنا!",
-  "and_enjoy_all_the_features_available_in_the_application": "و استمتع بجميع الخصائص المتوفره بالتطبيق"
+  "and_enjoy_all_the_features_available_in_the_application": "و استمتع بجميع الخصائص المتوفره بالتطبيق",
+  "personal_information": "بياناتي الشخصية",
+  "archives": "المحفوظات",
+  "alerts": "التنبيهات",
+  "bank_data": "البيانات البنكية",
+  "captain_evaluation": "تقييم الكباتن لي"
+
+
 
 }
