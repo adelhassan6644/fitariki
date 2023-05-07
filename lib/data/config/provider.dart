@@ -1,3 +1,4 @@
+import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:fitariki/data/config/di.dart' as di;
@@ -21,5 +22,6 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<EditProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddOfferProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
   ];
 }

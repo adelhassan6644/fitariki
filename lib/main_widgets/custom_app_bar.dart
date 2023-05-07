@@ -7,7 +7,7 @@ import '../../app/core/utils/svg_images.dart';
 import '../../navigation/custom_navigation.dart';
 import 'custom_images.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Widget? actionChild;
   final bool withCart;
@@ -86,4 +86,7 @@ class CustomAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => Size(15005,  50);
 }

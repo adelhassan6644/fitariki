@@ -44,9 +44,15 @@ class DioClient extends ApiClient {
   @override
   Future<Response> get({
     required String uri,
+    bool useGoogleUri=false,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
+      if(useGoogleUri) {
+        dio.options.baseUrl=EndPoints.googleMapsBaseUrl;
+      }else{
+        dio.options.baseUrl = baseUrl;
+      }
       var response = await dio.get(uri, queryParameters: queryParameters);
       log(response.toString());
 

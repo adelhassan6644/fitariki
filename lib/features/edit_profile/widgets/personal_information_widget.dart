@@ -12,6 +12,8 @@ import '../../../helpers/image_picker_helper.dart';
 import '../../../main_widgets/custom_image_picker_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 import '../provider/edit_profile_provider.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
@@ -170,6 +172,9 @@ class PersonalInformationWidget extends StatelessWidget {
           ],
         ),
         GestureDetector(
+          onTap: (){
+            CustomNavigator.push(Routes.Pick_Location,arguments: false);
+          },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(

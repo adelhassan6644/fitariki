@@ -1,5 +1,8 @@
 class AppStrings {
   static const String appName = 'fitariki';
+  static const String googleApiKey = 'AIzaSyB_l2x6zgnLTF4MKxX3S4Df9urLN6vLNP0';
+  static const String defaultLat = '24.774265';
+  static const String defaultLong = '46.738586';
   static const String fontFamily = 'Cairo';
   static const String noRouteFound = 'No Route Found';
   static const String cachedRandomQuote = 'CACHED_RANDOM_QUOTE';

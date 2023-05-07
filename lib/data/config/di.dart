@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
@@ -8,6 +9,7 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/edit_profile/provider/edit_profile_provider.dart';
 import '../../features/edit_profile/repo/edit_profile_repo.dart';
+import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
 import '../api/end_points.dart';
@@ -39,6 +41,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EditProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -50,6 +53,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl()));
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
+  sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

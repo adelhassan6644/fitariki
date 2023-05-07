@@ -6,5 +6,6 @@ class Routes {
   static const OFFER_DETAILS = "OFFER_DETAILS";
   static const EDIT_PROFILE = "EDIT_PROFILE";
   static const VERIFICATION = "VERIFICATION_CODE";
+  static const Pick_Location = "Pick_Location";
 }
 
