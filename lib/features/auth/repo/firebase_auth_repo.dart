@@ -24,34 +24,34 @@ class FirebaseAuthRepo {
     sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
-  getPhone() {
-    if (sharedPreferences.containsKey(AppStorageKey.phone,)) {
-      return sharedPreferences.getString(AppStorageKey.phone,);
-    }else{
-      return null;
-    }
-  }
-
-  remember({required String phone}) {
-    sharedPreferences.setString(AppStorageKey.phone, phone);
-  }
+  // getPhone() {
+  //   if (sharedPreferences.containsKey(AppStorageKey.phone,)) {
+  //     return sharedPreferences.getString(AppStorageKey.phone,);
+  //   }else{
+  //     return null;
+  //   }
+  // }
+  //
+  // remember({required String phone}) {
+  //   sharedPreferences.setString(AppStorageKey.phone, phone);
+  // }
 
   forget() {
     sharedPreferences.remove(AppStorageKey.phone);
   }
 
   Future<String?> getFcmToken() async {
-    String? _deviceToken;
+    String? deviceToken;
     if (Platform.isIOS) {
-      _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
+      deviceToken = await FirebaseMessaging.instance.getAPNSToken();
     } else {
-      _deviceToken = await FirebaseMessaging.instance.getToken();
+      deviceToken = await FirebaseMessaging.instance.getToken();
     }
 
-    if (_deviceToken != null) {
-      log('--------Device Token---------- $_deviceToken');
+    if (deviceToken != null) {
+      log('--------Device Token---------- $deviceToken');
     }
-    return _deviceToken;
+    return deviceToken;
   }
 
   Future<Either<ServerFailure, Response>> sendDeviceToken({required String phone, required String role}) async {
@@ -72,12 +72,12 @@ class FirebaseAuthRepo {
 
  saveUserRole({required String id,required String type})  {
      sharedPreferences.setString(AppStorageKey.userId, id);
-     sharedPreferences.setString(AppStorageKey.type, type);
+     sharedPreferences.setString(AppStorageKey.role, type);
  }
 
   Future<bool> clearSharedData() async {
     await sharedPreferences.remove(AppStorageKey.userId);
-    await sharedPreferences.remove(AppStorageKey.type);
+    await sharedPreferences.remove(AppStorageKey.role);
     await sharedPreferences.remove(AppStorageKey.isLogin);
     return true;
   }

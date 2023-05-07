@@ -14,11 +14,10 @@ class EditProfileRepo {
 
   EditProfileRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> updateProfile(
-      {required dynamic body}) async {
+  Future<Either<ServerFailure, Response>> updateProfile({required dynamic body}) async {
     try {
       Response response = await dioClient.post(
-          uri: "${sharedPreferences.getString(AppStorageKey.type)}/${EndPoints.updateProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+          uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.updateProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
           data: body);
 
       if (response.statusCode == 200) {
@@ -34,7 +33,7 @@ class EditProfileRepo {
   Future<Either<ServerFailure, Response>> getProfile() async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.type)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -47,8 +46,8 @@ class EditProfileRepo {
   }
 
   getRoleType() {
-    if (sharedPreferences.containsKey(AppStorageKey.type)) {
-      return sharedPreferences.getString(AppStorageKey.type);
+    if (sharedPreferences.containsKey(AppStorageKey.role)) {
+      return sharedPreferences.getString(AppStorageKey.role);
     } else {
       return null;
     }

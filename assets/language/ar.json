@@ -33,6 +33,7 @@
   "enter_the_6_digit_code_sent_to": "ادخل الكود المكون من 6 ارقام المرسل إلى",
   "edit": "تعديل",
   "delivery_requests": "طلبات التوصيل",
+  "delivery_offers": "عروض التوصيل",
   "my_completed_travels": "رحلاتي المكتملة",
   "next": "التالي",
   "attachment": "ارفاق",
@@ -129,6 +130,7 @@
   "bank_name": "اسم البنك",
   "account_number_image": "صورة رقم الحساب (موضح بها الايبان)",
   "captain_evaluation": "تقييم الكباتن لي",
+  "clients_evaluation": "تقييم الركاب لي",
   "car_data": "بيانات السيارة",
   "name": "الاسم",
   "model": "الموديل",
@@ -142,5 +144,9 @@
   "identity_number": "رقم الهوية",
   "identity_image": "صورة الهوية",
   "email": "الايميل",
-  "please_enter_valid_email": " يرجى إدخال البريد الإلكتروني الصحيح"
+  "please_enter_valid_email": " يرجى إدخال البريد الإلكتروني الصحيح",
+  "pending": "معلق",
+  "wallet_available": "متاح بالمحفظة",
+  "address": "العنوان",
+  "confirm_location": "تأكيد الموقع"
 }

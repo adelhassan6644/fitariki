@@ -10,7 +10,6 @@ import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_widgets/loading_dialog.dart';
@@ -22,7 +21,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
     required this.firebaseAuthRepo,
   }) {
     _phoneTEC = TextEditingController(
-        text: kDebugMode ? "555666777" : firebaseAuthRepo.getPhone());
+        text: kDebugMode ? "555666777" : null);
   }
 
   late final TextEditingController _phoneTEC;
@@ -30,12 +29,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
 
   String? firebaseVerificationId;
 
-  bool _isRememberMe = false;
-  bool get isRememberMe => _isRememberMe;
-  void onRememberMe(bool value) {
-    _isRememberMe = value;
-    notifyListeners();
-  }
 
   bool _isAgree = true;
   bool get isAgree => _isAgree;
@@ -221,7 +214,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
         Provider.of<EditProfileProvider>(CustomNavigator.navigatorState.currentContext!,listen: false).getRoleType();
-        firebaseAuthRepo.remember(phone: "+966${_phoneTEC.text.trim()}");
+        // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,
               replace: true, arguments: true);
@@ -252,13 +245,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance.signOut();
         await firebaseAuthRepo.clearSharedData();
       });
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: getTranslated("your_logged_out_successfully",
-                  CustomNavigator.navigatorState.currentContext!),
-              isFloating: true,
-              backgroundColor: ColorResources.ACTIVE,
-              borderColor: Colors.transparent));
+      CustomNavigator.push(Routes.SPLASH,clean: true);
       notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(

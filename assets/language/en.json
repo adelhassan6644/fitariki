@@ -120,6 +120,7 @@
   "register_with_us": "Register with us!",
   "and_enjoy_all_the_features_available_in_the_application": "And enjoy all the features available in the application",
   "delivery_requests": "Delivery requests",
+  "delivery_offers": "Delivery offers",
   "my_completed_travels": "My completed travels",
   "personal_information": "Personal information",
   "archives": "Archives",
@@ -129,6 +130,7 @@
   "account_number_image": "The Image of account number (indicating the IBAN)",
   "quadruple_name": "Quadruple name",
   "captain_evaluation": "Captain evaluation",
+  "clients_evaluation": "Clients evaluation",
   "car_data": "Car data",
   "name": "Name",
   "model": "Model",
@@ -142,5 +144,9 @@
   "identity_number": "Identity Number",
   "identity_image": "Identity Image",
   "email": "email",
-  "please_enter_valid_email": "Please enter a valid Email"
+  "please_enter_valid_email": "Please enter a valid Email",
+  "pending": "pending",
+  "wallet_available": "Wallet available",
+  "address": "Address",
+  "confirm_location": "Confirm Location"
 }
