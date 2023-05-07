@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/app/core/utils/app_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -14,12 +13,11 @@ import '../models/address_model.dart';
 import '../models/prediction_model.dart';
 import '../repo/maps_repo.dart';
 import 'package:geolocator/geolocator.dart';
+
+
 class LocationProvider extends ChangeNotifier{
   final MapsRepo locationRepo;
   LocationProvider({required this.locationRepo,});
-
-
-
 
 
   List<PredictionModel> _predictionList = [];

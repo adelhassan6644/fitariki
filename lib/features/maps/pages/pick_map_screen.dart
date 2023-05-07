@@ -12,9 +12,7 @@ import '../../../main_widgets/custom_button.dart';
 import '../provider/location_provider.dart';
 
 class PickMapScreen extends StatefulWidget {
-  const PickMapScreen({
-    super.key,
-  });
+  const PickMapScreen({Key? key}) : super(key: key);
 
   @override
   State<PickMapScreen> createState() => _PickMapScreenState();
@@ -112,11 +110,12 @@ class _PickMapScreenState extends State<PickMapScreen> {
                                 offset: const Offset(0, 6))
                           ]),
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             SizedBox(
+                            SizedBox(
                               height: 5.h,
                             ),
                             Center(
@@ -146,7 +145,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 24.h),
                               child: CustomButton(
-                                text:   getTranslated("confirm_location", context),
+                                text:
+                                    getTranslated("confirm_location", context),
                                 onTap: () {
                                   Navigator.pop(context);
                                 },
