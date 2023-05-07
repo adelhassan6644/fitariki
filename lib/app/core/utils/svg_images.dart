@@ -33,6 +33,7 @@ class SvgImages {
   static const String rate= 'assets/svgs/rate.svg';
   static const String call= 'assets/svgs/call.svg';
   static const String logout = 'assets/svgs/logout.svg';
+  static const String pic = 'assets/svgs/pic.svg';
 
   static const String phoneIcon = 'assets/svgs/phone.svg';
   static const String arrowRightIcon = 'assets/svgs/arrow_right.svg';

@@ -8,6 +8,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../../main_widgets/custom_button.dart';
 import '../provider/edit_profile_provider.dart';
+import '../widgets/bank_data_widget.dart';
+import '../widgets/car_data_widget.dart';
 import '../widgets/other_information_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
@@ -27,8 +29,16 @@ class EditProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-              withBack:fromLogin == true?false:true ,
-                title: fromLogin == true
+                withBack: !fromLogin,
+                actionChild: fromLogin
+                    ? null
+                    : GestureDetector(
+                        child: Text(getTranslated("save", context),
+                            style: AppTextStyles.w400.copyWith(
+                                fontSize: 10,
+                                color: ColorResources.SYSTEM_COLOR)),
+                      ),
+                title: fromLogin
                     ? getTranslated(
                         "complete_the_registration_information", context)
                     : getTranslated("modification_of_personal_data", context),
@@ -44,58 +54,80 @@ class EditProfile extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Center(
-                          child: Text(getTranslated("welcome", context),
-                              style: AppTextStyles.w600.copyWith(
-                                  fontSize: 32,
-                                  color: ColorResources.PRIMARY_COLOR)),
-                        ),
-                        Center(
-                          child: Text(
-                              getTranslated(
-                                  "edit_profile_description", context),
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.w500.copyWith(
-                                fontSize: 16,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        if (fromLogin)
+                          Column(
+                            children: [
+                              Center(
+                                child: Text(getTranslated("welcome", context),
+                                    style: AppTextStyles.w600.copyWith(
+                                        fontSize: 32,
+                                        color: ColorResources.PRIMARY_COLOR)),
+                              ),
+                              Center(
+                                child: Text(
+                                    getTranslated(
+                                        "edit_profile_description", context),
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.w500.copyWith(
+                                      fontSize: 16,
+                                    )),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          ),
                         ProfileImageWidget(
                           provider: provider,
+                          fromLogin: fromLogin,
                         ),
-                        const SizedBox(
-                          height: 16,
+                        SizedBox(
+                          height: 16.h,
                         ),
                         PersonalInformationWidget(
                           provider: provider,
                         ),
-                        const SizedBox(
-                          height: 16,
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        if (provider.role == "driver")
+                          CarDataWidget(
+                            provider: provider,
+                          ),
+                        SizedBox(
+                          height: 16.h,
                         ),
                         OtherInformationWidget(
                           provider: provider,
                         ),
+                        if (provider.role == "driver")
+                          BankDataWidget(
+                            provider: provider,
+                          )
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+            if (fromLogin)
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+                    ),
+                    child: CustomButton(
+                        text: getTranslated("save", context),
+                        onTap: () {
+                          CustomNavigator.pop();
+                        }),
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                ],
               ),
-              child: CustomButton(
-                  text: getTranslated("save", context),
-                  onTap: () {
-                    CustomNavigator.pop();
-                  }),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
           ],
         ),
       );

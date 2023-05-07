@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitariki/features/edit_profile/provider/edit_profile_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
@@ -124,12 +126,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
     firebaseVerificationId = verificationCode;
     _isSubmit = false;
     _isLoading = false;
-    CustomSnackBar.showSnackBar(
-        notification: AppNotification(
-            message: "انتهي الوقت ,حاول اعادة التسجيل",
-            backgroundColor: ColorResources.IN_ACTIVE,
-            borderColor: Colors.transparent));
-    FocusScope.of(CustomNavigator.navigatorState.currentContext!).requestFocus(FocusNode());
     notifyListeners();
   }
 
@@ -224,6 +220,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
+        Provider.of<EditProfileProvider>(CustomNavigator.navigatorState.currentContext!,listen: false).getRoleType();
         firebaseAuthRepo.remember(phone: "+966${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,

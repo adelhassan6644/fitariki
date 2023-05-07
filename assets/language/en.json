@@ -125,8 +125,22 @@
   "archives": "Archives",
   "alerts": "Alerts",
   "bank_data": "Bank data",
-  "captain_evaluation": "Captain evaluation"
-
-
-
+  "bank_name": "Bank name",
+  "account_number_image": "The Image of account number (indicating the IBAN)",
+  "quadruple_name": "Quadruple name",
+  "captain_evaluation": "Captain evaluation",
+  "car_data": "Car data",
+  "name": "Name",
+  "model": "Model",
+  "plate": "Plate",
+  "car_image": "Car image",
+  "licence_image": "Licence image",
+  "form_image": "Form image",
+  "insurance_image": "Insurance image",
+  "capacity": "Capacity",
+  "full_name": "Your full name (*)",
+  "identity_number": "Identity Number",
+  "identity_image": "Identity Image",
+  "email": "email",
+  "please_enter_valid_email": "Please enter a valid Email"
 }

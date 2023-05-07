@@ -125,8 +125,22 @@
   "archives": "المحفوظات",
   "alerts": "التنبيهات",
   "bank_data": "البيانات البنكية",
-  "captain_evaluation": "تقييم الكباتن لي"
-
-
-
+  "quadruple_name": "الاسم رباعي",
+  "bank_name": "اسم البنك",
+  "account_number_image": "صورة رقم الحساب (موضح بها الايبان)",
+  "captain_evaluation": "تقييم الكباتن لي",
+  "car_data": "بيانات السيارة",
+  "name": "الاسم",
+  "model": "الموديل",
+  "plate": "اللوحة",
+  "car_image": "صورة السيارة",
+  "licence_image": "صورة الرخصة",
+  "form_image": "صورة الاستمارة",
+  "insurance_image": "صورة التأمين",
+  "capacity": "السعة",
+  "full_name": "اسمك الثلاثي (*)",
+  "identity_number": "رقم الهوية",
+  "identity_image": "صورة الهوية",
+  "email": "الايميل",
+  "please_enter_valid_email": " يرجى إدخال البريد الإلكتروني الصحيح"
 }

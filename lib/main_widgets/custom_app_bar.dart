@@ -47,6 +47,7 @@ class CustomAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+
               withSave
                   ? GestureDetector(
                       onTap: () {
@@ -55,7 +56,7 @@ class CustomAppBar extends StatelessWidget {
                           imageName: SvgImages.bookMark,
                           color: Colors.black,
                           width: 18))
-                  : const SizedBox(
+                  :  actionChild??const SizedBox(
                       width: 18,
                     ),
               const Expanded(child: SizedBox()),
