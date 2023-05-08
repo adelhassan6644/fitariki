@@ -36,7 +36,9 @@ abstract class CustomNavigator {
       case Routes.OFFER_DETAILS:
         return _pageRoute(const OfferDetails());
       case Routes.Pick_Location:
-        return _pageRoute(const PickMapScreen());
+        return _pageRoute(PickMapScreen(
+          valueChanged: settings.arguments as ValueChanged,
+        ));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

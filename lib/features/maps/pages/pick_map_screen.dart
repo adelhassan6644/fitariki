@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,10 +10,12 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../../main_widgets/custom_button.dart';
+import '../models/address_model.dart';
 import '../provider/location_provider.dart';
 
 class PickMapScreen extends StatefulWidget {
-  const PickMapScreen({Key? key}) : super(key: key);
+  const PickMapScreen({required this.valueChanged, Key? key}) : super(key: key);
+  final ValueChanged<AddressModel> valueChanged;
 
   @override
   State<PickMapScreen> createState() => _PickMapScreenState();
@@ -148,7 +151,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
                                 text:
                                     getTranslated("confirm_location", context),
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  widget.valueChanged( locationController.addressModel!);
+                                  CustomNavigator.pop();
                                 },
                               ),
                             ),

@@ -148,5 +148,16 @@
   "pending": "معلق",
   "wallet_available": "متاح بالمحفظة",
   "address": "العنوان",
-  "confirm_location": "تأكيد الموقع"
+  "confirm_location": "تأكيد الموقع",
+  "add_a_delivery_request": "اضافة طلب توصيل",
+  "add_a_delivery_offer": "اضافة عرض توصيل",
+  "preview": "معاينة",
+  "post": "نشر",
+  "your_residence_housing_location": "موقع اقامتك/سكنك",
+  "select_your_residence_housing_location": "حدد موقع اقامتك/سكنك",
+  "start_time": "بداية الوقت",
+  "end_time":"نهاية الوقت",
+  "minimum_price": "حد ادنى للسعر",
+  "maximum_price": "حد اقصي للسعر"
+
 }

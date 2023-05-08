@@ -148,5 +148,15 @@
   "pending": "pending",
   "wallet_available": "Wallet available",
   "address": "Address",
-  "confirm_location": "Confirm Location"
+  "confirm_location": "Confirm Location",
+  "add_a_delivery_request": "Add a delivery request",
+  "add_a_delivery_offer": "Add a delivery offer",
+  "preview": "preview",
+  "post": "post",
+  "your_residence_housing_location": "Your residence/housing location",
+  "select_your_residence_housing_location": "Select your residence/housing location",
+  "start_time": "start time",
+  "end_time":"end time",
+  "minimum_price": "Minimum price",
+  "maximum_price": "Maximum price"
 }

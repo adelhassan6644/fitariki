@@ -1,10 +1,80 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../maps/models/address_model.dart';
 import '../repo/add_offer_repo.dart';
 
-class AddOfferProvider extends ChangeNotifier{
+class AddOfferProvider extends ChangeNotifier {
   AddOfferRepo addOfferRepo;
   AddOfferProvider({required this.addOfferRepo});
+
+
+  AddressModel? startLocation;
+  onSelectStartLocation(v){
+    startLocation = v;
+    notifyListeners();
+  }
+
+  AddressModel? endLocation;
+  onSelectEndLocation(v){
+    endLocation = v;
+    notifyListeners();
+  }
+
+  String? minPrice,maxPrice;
+
+  List<String> days = [
+    "السبت",
+    "الاحد",
+    "الاثنين",
+    "الثلاثاء",
+    "الاربعاء",
+    "الخميس",
+    "الجمعة",
+  ];
+  List<String> selectedDays = [];
+
+  onSelectDay(String value) {
+    if (selectedDays.contains(value)) {
+      selectedDays.remove(value);
+    } else {
+      selectedDays.add(value);
+    }
+    notifyListeners();
+  }
+
+  checkSelectDay(String value) {
+    if (selectedDays.contains(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<String> timeZones = ["morning", "night"];
+  String startTimeZone = "morning";
+  String endTimeZone = "morning";
+  void selectedStartTimeZone(String value) {
+    startTimeZone = value;
+    notifyListeners();
+  }
+
+  void selectedEndTimeZone(String value) {
+    endTimeZone = value;
+    notifyListeners();
+  }
+
+  DateTime startTime =DateTime.now();
+  onSelectStartTime(v){
+    startTime = v;
+    notifyListeners();
+  }
+
+  DateTime endTime =DateTime.now();
+  onSelectEndTime(v){
+    endTime = v;
+    notifyListeners();
+  }
+
 
   DateTime startDate =DateTime.now();
   onSelectStartDate(v){

@@ -1,11 +1,9 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import '../../navigation/custom_navigation.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../main_widgets/custom_button.dart';
-
 
 class DateTimePicker extends StatefulWidget {
   final String? initialString;
@@ -14,15 +12,17 @@ class DateTimePicker extends StatefulWidget {
   final DateTime? startDateTime;
   final ValueChanged<DateTime>? valueChanged;
   final String label;
+  final CupertinoDatePickerMode? mode;
 
   const DateTimePicker(
       {Key? key,
-        this.initialString,
-        this.format,
-        required this.valueChanged,
-        this.isNotEmptyValue = false,
-        this.startDateTime,
-        required this.label})
+      this.mode,
+      this.initialString,
+      this.format,
+      required this.valueChanged,
+      this.isNotEmptyValue = false,
+      this.startDateTime,
+      required this.label})
       : super(key: key);
 
   @override
@@ -30,12 +30,10 @@ class DateTimePicker extends StatefulWidget {
 }
 
 class _DateTimePickerState extends State<DateTimePicker> {
-  String _date = "";
   DateTime? date;
 
   @override
   void initState() {
-    _date = widget.initialString ?? widget.label;
     if (widget.isNotEmptyValue!) {
       date = DateTime.parse(widget.initialString!);
     }
@@ -46,12 +44,11 @@ class _DateTimePickerState extends State<DateTimePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:360.h,
+      height: 360.h,
       decoration: const BoxDecoration(
           color: ColorResources.WHITE_COLOR,
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20),
-              topLeft: Radius.circular(20))),
+              topRight: Radius.circular(20), topLeft: Radius.circular(20))),
       child: Column(
         children: [
           Center(
@@ -70,28 +67,24 @@ class _DateTimePickerState extends State<DateTimePicker> {
           SizedBox(height: 10.h),
           Text(
             widget.label,
-            style: const TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           Expanded(
             child: Padding(
-              padding:
-              const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-
                   SizedBox(height: 16.h),
-                  Expanded(child:  CupertinoDatePicker(
-                      mode: CupertinoDatePickerMode.date,
-                      onDateTimeChanged: (value) => date = value,
-                      initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
-                      minimumDate: widget.startDateTime != null ? DateTime(
-                          widget.startDateTime!.year,
-                          widget.startDateTime!.month,
-                          widget.startDateTime!.day)
-                          : DateTime(1900),
-                      maximumDate: DateTime(2100)))
+                  Expanded(child: CupertinoDatePicker(
+                          mode: widget.mode ?? CupertinoDatePickerMode.date,
+                          onDateTimeChanged: (value) => date = value,
+                          initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
+                          minimumDate: widget.startDateTime != null ? DateTime(
+                                  widget.startDateTime!.year,
+                                  widget.startDateTime!.month,
+                                  widget.startDateTime!.day) : DateTime(1900),
+                          maximumDate: DateTime(2100)))
                 ],
               ),
             ),
@@ -99,23 +92,19 @@ class _DateTimePickerState extends State<DateTimePicker> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Dimensions.PADDING_SIZE_DEFAULT,),
+                horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+              ),
               child: CustomButton(
-                text: getTranslated('confirm',
-                    CustomNavigator.navigatorState.currentContext!),
+                text: getTranslated('confirm', context),
                 onTap: () {
-                    if (date != null) {
-                      setState(() =>
-                      _date = DateFormat(widget.format??"dd,MMM,yyyy").format(date!));
-                      widget.valueChanged!(date!);
-                      CustomNavigator.pop();
-                    } else {
-                      setState(() => _date =
-                          DateFormat(widget.format??"dd,MMM,yyyy").format(DateTime.now()));
-                      widget.valueChanged!(DateTime.now());
-                      CustomNavigator.pop();
-                    }
-                  },
+                  if (date != null) {
+                    widget.valueChanged!(date!);
+                    CustomNavigator.pop();
+                  } else {
+                    widget.valueChanged!(DateTime.now());
+                    CustomNavigator.pop();
+                  }
+                },
                 backgroundColor: ColorResources.PRIMARY_COLOR,
                 textColor: ColorResources.WHITE_COLOR,
               ),
@@ -125,6 +114,5 @@ class _DateTimePickerState extends State<DateTimePicker> {
         ],
       ),
     );
-
   }
 }

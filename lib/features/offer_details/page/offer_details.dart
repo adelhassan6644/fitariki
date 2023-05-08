@@ -11,6 +11,7 @@ import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../add_offer/page/add_offer.dart';
 import '../../auth/pages/login.dart';
+import '../../replay_offer/page/replay_offer.dart';
 import '../widgets/captain_card.dart';
 import '../widgets/car_details.dart';
 import '../widgets/map_widget.dart';
@@ -111,7 +112,7 @@ class OfferDetails extends StatelessWidget {
                     text: getTranslated("offer", context),
                     onTap: () =>
                         customShowModelBottomSheet(
-                          body:provider.isLogin? const AddOffer(): const Login(),
+                          body:provider.isLogin? const ReplayOffer(): const Login(),
                         ),
                   ),
                 );

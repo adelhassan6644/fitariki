@@ -9,6 +9,7 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/edit_profile/provider/edit_profile_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
+import '../../features/replay_offer/provider/replay_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 
 abstract class ProviderList {
@@ -20,6 +21,7 @@ abstract class ProviderList {
     // ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<EditProfileProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<ReplayOfferProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddOfferProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
