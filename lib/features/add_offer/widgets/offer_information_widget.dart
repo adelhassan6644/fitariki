@@ -264,7 +264,7 @@ class OfferInformationWidget extends StatelessWidget {
             GestureDetector(
               onTap: () => customShowModelBottomSheet(
                 body: DateTimePicker(
-                  startDateTime: provider.endDate,
+                  startDateTime: provider.startDate,
                   valueChanged: provider.onSelectEndDate,
                   label: getTranslated("end_of_duration", context),
                 ),
@@ -434,7 +434,6 @@ class OfferInformationWidget extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }

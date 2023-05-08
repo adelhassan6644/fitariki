@@ -142,16 +142,21 @@ class _PickMapScreenState extends State<PickMapScreen> {
                             ),
                             Text(
                               locationController.pickAddress,
-                              style: AppTextStyles.w400
-                                  .copyWith(color: Colors.black, fontSize: 13),
+                              maxLines: 2,
+                              style: AppTextStyles.w400.copyWith(
+                                  color: Colors.black,
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 13),
                             ),
+                            const Expanded(child: SizedBox()),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 24.h),
                               child: CustomButton(
                                 text:
                                     getTranslated("confirm_location", context),
                                 onTap: () {
-                                  widget.valueChanged( locationController.addressModel!);
+                                  widget.valueChanged(
+                                      locationController.addressModel!);
                                   CustomNavigator.pop();
                                 },
                               ),
