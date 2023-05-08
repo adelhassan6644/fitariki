@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
+import '../../maps/models/address_model.dart';
 import '../repo/edit_profile_repo.dart';
 
 class EditProfileProvider extends ChangeNotifier {
@@ -123,6 +124,18 @@ class EditProfileProvider extends ChangeNotifier {
   File? identityImage;
   onSelectIdentityImage(File? file) {
     identityImage = file;
+    notifyListeners();
+  }
+
+  AddressModel? startLocation;
+  onSelectStartLocation(v){
+    startLocation = v;
+    notifyListeners();
+  }
+
+  AddressModel? endLocation;
+  onSelectEndLocation(v){
+    endLocation = v;
     notifyListeners();
   }
 

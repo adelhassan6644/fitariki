@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/image_picker_helper.dart';
 import '../../../main_widgets/custom_image_picker_widget.dart';
+import '../../../main_widgets/expansion_tile_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/custom_navigation.dart';
@@ -22,31 +23,19 @@ class PersonalInformationWidget extends StatelessWidget {
   final EditProfileProvider provider;
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(
-        getTranslated("your_personal_information", context),
-        style: AppTextStyles.w600.copyWith(fontSize: 14),
-      ),
-      tilePadding: const EdgeInsets.all(0),
-      childrenPadding: const EdgeInsets.all(0),
-      collapsedIconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      collapsedTextColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      initiallyExpanded: true,
-      iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      textColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      shape: Border.all(
-          color: Colors.transparent, width: 0, style: BorderStyle.none),
-      collapsedShape: Border.all(
-          color: Colors.transparent, width: 0, style: BorderStyle.none),
+    return ExpansionTileWidget(
+      title: getTranslated("your_personal_information", context),
       children: [
-        provider.role == "driver" ? CustomTextFormField(
+        provider.role == "driver"
+            ? CustomTextFormField(
                 valid: Validations.name,
                 initialValue: provider.fullName,
                 hint: getTranslated("full_name", context),
                 onChanged: (v) {
                   provider.fullName = v;
                 },
-              ) : Row(
+              )
+            : Row(
                 children: [
                   Expanded(
                       child: CustomTextFormField(
@@ -134,46 +123,49 @@ class PersonalInformationWidget extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        if(provider.role == "driver" )Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                    child: CustomTextFormField(
-                      valid: Validations.name,
-                      initialValue: provider.identityNumber,
-                      hint: getTranslated("identity_number", context),
-                      onChanged: (v) {
-                        provider.identityNumber = v;
-                      },
-                    )),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                    child:CustomButtonImagePicker(
-                      title:  getTranslated("identity_image", context),
-                      onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectIdentityImage),
-                      imageFile: provider.identityImage,
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            CustomTextFormField(
-              valid: Validations.mail,
-              initialValue: provider.email,
-              hint: getTranslated("email", context),
-              onChanged: (v) {
-                provider.email = v;
-              },
-            )
-          ],
-        ),
+        if (provider.role == "driver")
+          Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                      child: CustomTextFormField(
+                    valid: Validations.name,
+                    initialValue: provider.identityNumber,
+                    hint: getTranslated("identity_number", context),
+                    onChanged: (v) {
+                      provider.identityNumber = v;
+                    },
+                  )),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      child: CustomButtonImagePicker(
+                    title: getTranslated("identity_image", context),
+                    onTap: () => ImagePickerHelper.showOptionSheet(
+                        onGet: provider.onSelectIdentityImage),
+                    imageFile: provider.identityImage,
+                  )),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              CustomTextFormField(
+                valid: Validations.mail,
+                initialValue: provider.email,
+                hint: getTranslated("email", context),
+                onChanged: (v) {
+                  provider.email = v;
+                },
+              )
+            ],
+          ),
         GestureDetector(
-          onTap: (){
-            CustomNavigator.push(Routes.Pick_Location,arguments: false);
+          onTap: () {
+            CustomNavigator.push(Routes.Pick_Location,
+                arguments: provider.onSelectStartLocation);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -186,9 +178,16 @@ class PersonalInformationWidget extends StatelessWidget {
                 Expanded(
                   child: MarqueeWidget(
                     child: Text(
-                      "طريق بدون اسم، مطار الملك خالد الدولـي في مدينة الرياض داخل المملكة العربية السعودية.",
+                      provider.startLocation?.address ??
+                          getTranslated(
+                              "select_your_residence_housing_location",
+                              context),
                       style: AppTextStyles.w400.copyWith(
-                          fontSize: 14, overflow: TextOverflow.ellipsis),
+                          color: provider.startLocation?.address == null
+                              ? ColorResources.DISABLED
+                              : ColorResources.SECOUND_PRIMARY_COLOR,
+                          fontSize: 14,
+                          overflow: TextOverflow.ellipsis),
                     ),
                   ),
                 ),

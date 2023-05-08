@@ -7,6 +7,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 import '../provider/edit_profile_provider.dart';
 
 class OtherInformationWidget extends StatelessWidget {
@@ -108,7 +110,7 @@ class OtherInformationWidget extends StatelessWidget {
             GestureDetector(
               child: Container(
                 padding:
-                const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
@@ -200,24 +202,35 @@ class OtherInformationWidget extends StatelessWidget {
           height: 8,
         ),
         GestureDetector(
+          onTap: () {
+            CustomNavigator.push(Routes.Pick_Location,
+                arguments: provider.onSelectEndLocation);
+          },
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
-                border: Border.all(color:ColorResources.LIGHT_BORDER_COLOR,width: 1 ),
-                borderRadius: BorderRadius.circular(8)
-            ),
+                border: Border.all(
+                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                borderRadius: BorderRadius.circular(8)),
             child: Row(
               children: [
                 Expanded(
                   child: MarqueeWidget(
-                    child: Text("حدد مكان دوامك/دراستك بالخريطه",style: AppTextStyles.w400.copyWith(
-                        fontSize: 14,
-                        color: ColorResources.DISABLED,
-                        overflow: TextOverflow.ellipsis
-                    ),),
+                    child: Text(
+                      provider.endLocation?.address ??
+                          "حدد مكان دوامك/دراستك بالخريطه",
+                      style: AppTextStyles.w400.copyWith(
+                          fontSize: 14,
+                          color: provider.endLocation?.address == null
+                              ? ColorResources.DISABLED
+                              : ColorResources.SECOUND_PRIMARY_COLOR,
+                          overflow: TextOverflow.ellipsis),
+                    ),
                   ),
                 ),
-                const SizedBox(width: 15,),
+                const SizedBox(
+                  width: 15,
+                ),
                 customImageIconSVG(imageName: SvgImages.map)
               ],
             ),
