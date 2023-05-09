@@ -1,6 +1,5 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:fitariki/main_widgets/custom_drop_down_button.dart';
 import 'package:fitariki/main_widgets/custom_text_form_field.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/image_picker_helper.dart';
 import '../../../main_widgets/custom_image_picker_widget.dart';
+import '../../../main_widgets/expansion_tile_widget.dart';
 import '../provider/edit_profile_provider.dart';
 
 class CarDataWidget extends StatelessWidget {
@@ -16,22 +16,8 @@ class CarDataWidget extends StatelessWidget {
   final EditProfileProvider provider;
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(
-        getTranslated("car_data", context),
-        style: AppTextStyles.w600.copyWith(fontSize: 14),
-      ),
-      tilePadding: const EdgeInsets.all(0),
-      childrenPadding: EdgeInsets.only(bottom: 24.h),
-      collapsedIconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      collapsedTextColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      initiallyExpanded: true,
-      iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      textColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      shape: Border.all(
-          color: Colors.transparent, width: 0, style: BorderStyle.none),
-      collapsedShape: Border.all(
-          color: Colors.transparent, width: 0, style: BorderStyle.none),
+    return ExpansionTileWidget(
+      title: getTranslated("car_data", context),
       children: [
         Row(
           children: [

@@ -9,13 +9,14 @@ class PriceTextFormField extends StatelessWidget {
   final String? initialValue;
   final TextInputType? inputType;
   final void Function(String)? onChanged;
-
+  final String? Function(String?)? validation;
   final List<TextInputFormatter>? formatter;
 
 
   const PriceTextFormField({
     super.key,
     this.initialValue,
+    this.validation,
     this.hint,
     this.onChanged,
     this.inputType,
@@ -26,7 +27,9 @@ class PriceTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: initialValue,
+      textAlign: TextAlign.center,
       minLines:1,
+      validator: validation,
       keyboardType: inputType,
       inputFormatters: inputType == TextInputType.phone ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))] : formatter,
       style: AppTextStyles.w400.copyWith(
@@ -34,7 +37,7 @@ class PriceTextFormField extends StatelessWidget {
       cursorColor: ColorResources.SECOUND_PRIMARY_COLOR,
       onChanged: onChanged,
       decoration: InputDecoration(
-        suffixIconConstraints:  BoxConstraints(maxHeight: 22),
+        suffixIconConstraints:  const BoxConstraints(maxHeight: 22),
         suffixIcon:  Padding(
          padding: const EdgeInsets.only(top: 4,bottom: 4,left: 10),
           child: Text(

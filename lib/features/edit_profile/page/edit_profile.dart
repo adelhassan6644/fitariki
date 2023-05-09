@@ -10,7 +10,7 @@ import '../../../main_widgets/custom_button.dart';
 import '../provider/edit_profile_provider.dart';
 import '../widgets/bank_data_widget.dart';
 import '../widgets/car_data_widget.dart';
-import '../widgets/other_information_widget.dart';
+import '../widgets/work_information_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 
@@ -81,14 +81,11 @@ class EditProfile extends StatelessWidget {
                           provider: provider,
                           fromLogin: fromLogin,
                         ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        PersonalInformationWidget(
-                          provider: provider,
-                        ),
-                        SizedBox(
-                          height: 16.h,
+                        Padding(
+                          padding:  EdgeInsets.symmetric(vertical: 16.h),
+                          child: PersonalInformationWidget(
+                            provider: provider,
+                          ),
                         ),
                         if (provider.role == "driver")
                           CarDataWidget(
@@ -97,7 +94,7 @@ class EditProfile extends StatelessWidget {
                         SizedBox(
                           height: 16.h,
                         ),
-                        OtherInformationWidget(
+                        WorkInformationWidget(
                           provider: provider,
                         ),
                         if (provider.role == "driver")

@@ -1,18 +1,22 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../helpers/date_time_picker.dart';
 import '../../../main_widgets/custom_images.dart';
+import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/edit_profile_provider.dart';
 
-class OtherInformationWidget extends StatelessWidget {
-  const OtherInformationWidget({required this.provider, Key? key})
+class WorkInformationWidget extends StatelessWidget {
+  const WorkInformationWidget({required this.provider, Key? key})
       : super(key: key);
   final EditProfileProvider provider;
   @override
@@ -108,13 +112,21 @@ class OtherInformationWidget extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onTap: () => customShowModelBottomSheet(
+                body: DateTimePicker(
+                  mode: CupertinoDatePickerMode.time,
+                  startDateTime: provider.startTime,
+                  valueChanged: provider.onSelectStartTime,
+                  label: getTranslated("end_time", context),
+                ),
+              ),
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text("12:00",
+                child: Text(provider.startTime.dateFormat(format: "mm : hh"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),
@@ -159,13 +171,21 @@ class OtherInformationWidget extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onTap: () => customShowModelBottomSheet(
+                body: DateTimePicker(
+                  mode: CupertinoDatePickerMode.time,
+                  startDateTime: provider.endTime,
+                  valueChanged: provider.onSelectEndTime,
+                  label: getTranslated("end_time", context),
+                ),
+              ),
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text("12:00",
+                child: Text(provider.endTime.dateFormat(format: "mm : hh"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),

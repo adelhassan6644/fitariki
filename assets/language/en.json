@@ -158,5 +158,7 @@
   "start_time": "start time",
   "end_time":"end time",
   "minimum_price": "Minimum price",
-  "maximum_price": "Maximum price"
+  "maximum_price": "Maximum price",
+  "max_price_must_be_more_than_min_price": "Max price must be more than min price"
+
 }

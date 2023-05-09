@@ -158,6 +158,7 @@
   "start_time": "بداية الوقت",
   "end_time":"نهاية الوقت",
   "minimum_price": "حد ادنى للسعر",
-  "maximum_price": "حد اقصي للسعر"
+  "maximum_price": "حد اقصي للسعر",
+  "max_price_must_be_more_than_min_price": "الحد الاقصي للسعر يجيب ان يكون اعلب من الحد الادني للسعر"
 
 }

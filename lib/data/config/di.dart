@@ -46,15 +46,11 @@ Future<void> init() async {
       () => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => EditProfileRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
 
-  sl.registerLazySingleton(
-      () => ReplayOfferRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ReplayOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));

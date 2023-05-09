@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -346,7 +347,11 @@ class OfferInformationWidget extends StatelessWidget {
             SizedBox(
               width: 100,
               child: PriceTextFormField(
+                formatter: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                ],
                 initialValue: provider.minPrice,
+                inputType: TextInputType.number,
                 hint: "00000",
                 onChanged: (v) {
                   provider.minPrice = v;
@@ -379,10 +384,21 @@ class OfferInformationWidget extends StatelessWidget {
             SizedBox(
               width: 100,
               child: PriceTextFormField(
+                formatter: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                ],
+                inputType: TextInputType.number,
                 initialValue: provider.maxPrice,
                 hint: "00000",
                 onChanged: (v) {
                   provider.maxPrice = v;
+                },
+                validation: (v) {
+                  if (double.parse(v??"0") > double.parse(provider.minPrice??"0")) {
+                    return getTranslated("max_price_must_be_more_than_min_price", context);
+                  } else {
+                    return null;
+                  }
                 },
               ),
             ),

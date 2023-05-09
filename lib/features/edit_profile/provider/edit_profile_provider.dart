@@ -34,14 +34,30 @@ class EditProfileProvider extends ChangeNotifier {
   }
 
   String? carModel;
-  List<String> models = ["2022", "2023", "2024"];
+  List<String> models = [
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024"
+  ];
   void selectedModel(value) {
     carModel = value;
     notifyListeners();
   }
 
   String? carCapacity;
-  List<String> capacities = ["2", "4", "6"];
+  List<String> capacities = ["2", "3", "4", "5", "6", "6", "8"];
   void selectedCapacity(value) {
     carCapacity = value;
     notifyListeners();
@@ -128,18 +144,33 @@ class EditProfileProvider extends ChangeNotifier {
   }
 
   AddressModel? startLocation;
-  onSelectStartLocation(v){
+  onSelectStartLocation(v) {
     startLocation = v;
     notifyListeners();
   }
 
   AddressModel? endLocation;
-  onSelectEndLocation(v){
+  onSelectEndLocation(v) {
     endLocation = v;
     notifyListeners();
   }
 
   ///Other Data
+
+
+  DateTime startTime =DateTime.now();
+  onSelectStartTime(v){
+    startTime = v;
+    notifyListeners();
+  }
+
+  DateTime endTime =DateTime.now();
+  onSelectEndTime(v){
+    endTime = v;
+    notifyListeners();
+  }
+
+
   List<String> days = [
     "السبت",
     "الاحد",
@@ -491,20 +522,27 @@ class EditProfileProvider extends ChangeNotifier {
         "end_road": endRoad,
       };
 
-
-      final values = {...personalData,...carData,...bankData,...otherData};
+      final values = {...personalData, ...carData, ...bankData, ...otherData};
       Map<String, dynamic> params = Map.from(values);
 
       FormData formData = FormData.fromMap(params);
       formData.files.addAll([
-       if(profileImage != null) MapEntry("image", await MultipartFile.fromFile(profileImage!.path)),
-        if(identityImage != null)  MapEntry("identity_image", await MultipartFile.fromFile(identityImage!.path)),
-        if(carImage != null) MapEntry("car_image", await MultipartFile.fromFile(carImage!.path)),
-        if(licenceImage != null)  MapEntry("license_image", await MultipartFile.fromFile(licenceImage!.path)),
-        if(formImage != null) MapEntry("form_image", await MultipartFile.fromFile(formImage!.path)),
-        if(insuranceImage != null) MapEntry("insurance_image", await MultipartFile.fromFile(insuranceImage!.path)),
+        if (profileImage != null)
+          MapEntry("image", await MultipartFile.fromFile(profileImage!.path)),
+        if (identityImage != null)
+          MapEntry("identity_image",
+              await MultipartFile.fromFile(identityImage!.path)),
+        if (carImage != null)
+          MapEntry("car_image", await MultipartFile.fromFile(carImage!.path)),
+        if (licenceImage != null)
+          MapEntry("license_image",
+              await MultipartFile.fromFile(licenceImage!.path)),
+        if (formImage != null)
+          MapEntry("form_image", await MultipartFile.fromFile(formImage!.path)),
+        if (insuranceImage != null)
+          MapEntry("insurance_image",
+              await MultipartFile.fromFile(insuranceImage!.path)),
       ]);
-
     } catch (e) {}
   }
 }

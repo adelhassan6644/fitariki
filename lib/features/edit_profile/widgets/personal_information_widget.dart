@@ -6,6 +6,7 @@ import 'package:fitariki/main_widgets/custom_drop_down_button.dart';
 import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:fitariki/main_widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/image_picker_helper.dart';
@@ -66,16 +67,27 @@ class PersonalInformationWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-                child: CustomDropDownButton(
-              items: const ["15", "20", "25"],
-              name: getTranslated("age", context),
-              onChange: provider.selectedAge,
-              value: provider.age,
-              icon: const Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: ColorResources.SECOUND_PRIMARY_COLOR,
-              ),
+                child: CustomTextFormField(
+              valid: Validations.name,
+              formatter: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
+              inputType: TextInputType.number,
+              initialValue: provider.age,
+              hint: getTranslated("age", context),
+              onChanged: (v) {
+                provider.age = v;
+              },
             )),
+            // Expanded(
+            //     child: CustomDropDownButton(
+            //   items: const ["15", "20", "25"],
+            //   name: getTranslated("age", context),
+            //   onChange: provider.selectedAge,
+            //   value: provider.age,
+            //   icon: const Icon(
+            //     Icons.keyboard_arrow_down_rounded,
+            //     color: ColorResources.SECOUND_PRIMARY_COLOR,
+            //   ),
+            // )),
             const SizedBox(
               width: 8,
             ),
@@ -162,6 +174,9 @@ class PersonalInformationWidget extends StatelessWidget {
               )
             ],
           ),
+        const SizedBox(
+          height: 8,
+        ),
         GestureDetector(
           onTap: () {
             CustomNavigator.push(Routes.Pick_Location,
