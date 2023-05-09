@@ -1,14 +1,4 @@
-// To parse this JSON data, do
-//
-//     final profileModel = profileModelFromJson(jsonString);
-
-import 'dart:convert';
-
 import '../../../main_models/weak_model.dart';
-
-ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.decode(str));
-
-String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
   Driver? driver;
@@ -25,35 +15,30 @@ class ProfileModel {
       );
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-    driver: json["driver"] == null ? null : Driver.fromJson(json["driver"]),
-  );
+        driver: json["driver"] == null ? null : Driver.fromJson(json["driver"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "driver": driver?.toJson(),
-  };
+        "driver": driver?.toJson(),
+      };
 }
 
 class Driver {
-  int? id;
+  String? id;
   String? firstName;
-  dynamic lastName;
-  dynamic email;
-  dynamic emailVerifiedAt;
-  DateTime? phoneVerifiedAt;
-  dynamic image;
-  dynamic password;
-  dynamic nickname;
-  dynamic gender;
-  dynamic age;
-  dynamic national;
-  dynamic city;
+  String? lastName;
+  String? email;
+  String? image;
+  String? nickname;
+  int? gender;
+  String? age;
+  String? national;
+  String? city;
   dynamic countryId;
   String? phone;
   dynamic status;
   dynamic rate;
-  int? wallet;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  double? wallet;
   dynamic lat;
   dynamic long;
   dynamic pickLocation;
@@ -65,10 +50,7 @@ class Driver {
     this.firstName,
     this.lastName,
     this.email,
-    this.emailVerifiedAt,
-    this.phoneVerifiedAt,
     this.image,
-    this.password,
     this.nickname,
     this.gender,
     this.age,
@@ -79,8 +61,6 @@ class Driver {
     this.status,
     this.rate,
     this.wallet,
-    this.createdAt,
-    this.updatedAt,
     this.lat,
     this.long,
     this.pickLocation,
@@ -89,7 +69,7 @@ class Driver {
   });
 
   Driver copyWith({
-    int? id,
+    String? id,
     String? firstName,
     dynamic lastName,
     dynamic email,
@@ -106,7 +86,7 @@ class Driver {
     String? phone,
     dynamic status,
     dynamic rate,
-    int? wallet,
+    double? wallet,
     DateTime? createdAt,
     DateTime? updatedAt,
     dynamic lat,
@@ -120,10 +100,7 @@ class Driver {
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
-        emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
-        phoneVerifiedAt: phoneVerifiedAt ?? this.phoneVerifiedAt,
         image: image ?? this.image,
-        password: password ?? this.password,
         nickname: nickname ?? this.nickname,
         gender: gender ?? this.gender,
         age: age ?? this.age,
@@ -134,8 +111,6 @@ class Driver {
         status: status ?? this.status,
         rate: rate ?? this.rate,
         wallet: wallet ?? this.wallet,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
         lat: lat ?? this.lat,
         long: long ?? this.long,
         pickLocation: pickLocation ?? this.pickLocation,
@@ -144,59 +119,53 @@ class Driver {
       );
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
-    id: json["id"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    email: json["email"],
-    emailVerifiedAt: json["email_verified_at"],
-    phoneVerifiedAt: json["phone_verified_at"] == null ? null : DateTime.parse(json["phone_verified_at"]),
-    image: json["image"],
-    password: json["password"],
-    nickname: json["nickname"],
-    gender: json["gender"],
-    age: json["age"],
-    national: json["national"],
-    city: json["city"],
-    countryId: json["country_id"],
-    phone: json["phone"],
-    status: json["status"],
-    rate: json["rate"],
-    wallet: json["wallet"],
-    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    lat: json["lat"],
-    long: json["long"],
-    pickLocation: json["pick_location"],
-    endLocation: json["end_location"],
-    driverDays: json["driver_days"] == null ? [] : List<WeekModel>.from(json["driver_days"]!.map((x) => WeekModel.fromJson(x))),
-  );
+        id: json["id"].toString(),
+        firstName: json["first_name"].toString(),
+        lastName: json["last_name"].toString(),
+        email: json["email"].toString(),
+        image: json["image"],
+        nickname: json["nickname"],
+        gender: int.parse(json["gender"] ?? "0"),
+        age: json["age"].toString(),
+        national: json["national"],
+        city: json["city"],
+        countryId: json["country_id"],
+        phone: json["phone"],
+        status: json["status"],
+        rate: json["rate"],
+        wallet: double.parse(json["wallet"].toString() ),
+        lat: json["lat"],
+        long: json["long"],
+        pickLocation: json["pick_location"],
+        endLocation: json["end_location"],
+        driverDays: json["driver_days"] == null
+            ? []
+            : List<WeekModel>.from(
+                json["driver_days"]!.map((x) => WeekModel.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "email": email,
-    "email_verified_at": emailVerifiedAt,
-    "phone_verified_at": phoneVerifiedAt?.toIso8601String(),
-    "image": image,
-    "password": password,
-    "nickname": nickname,
-    "gender": gender,
-    "age": age,
-    "national": national,
-    "city": city,
-    "country_id": countryId,
-    "phone": phone,
-    "status": status,
-    "rate": rate,
-    "wallet": wallet,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
-    "lat": lat,
-    "long": long,
-    "pick_location": pickLocation,
-    "end_location": endLocation,
-    "driver_days": driverDays == null ? [] : List<dynamic>.from(driverDays!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "image": image,
+        "nickname": nickname,
+        "gender": gender,
+        "age": age,
+        "national": national,
+        "city": city,
+        "country_id": countryId,
+        "phone": phone,
+        "status": status,
+        "rate": rate,
+        "wallet": wallet,
+        "lat": lat,
+        "long": long,
+        "pick_location": pickLocation,
+        "end_location": endLocation,
+        "driver_days": driverDays == null
+            ? []
+            : List<dynamic>.from(driverDays!.map((x) => x.toJson())),
+      };
 }
-

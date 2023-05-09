@@ -24,16 +24,7 @@ class AddOfferProvider extends ChangeNotifier {
 
 
 
-  List<WeekModel> selectedDays = [
-    WeekModel(
-      id: 1,
-      dayName: "السبت",
-    ),
-    WeekModel(
-      id: 2,
-      dayName: "الاحد",
-    ),
-  ];
+  List<WeekModel> selectedDays = [];
 
   onSelectDay(WeekModel value) {
     if (selectedDays.contains(value)) {
@@ -45,18 +36,9 @@ class AddOfferProvider extends ChangeNotifier {
   }
 
   checkSelectDay(WeekModel value) {
-
-  selectedDays.map((e) {
-      print("ddd" );
-      print( e.id==value.id);
-    } );
-  return selectedDays.indexWhere((element) =>element.id == value.id )==-1?false:true;
-
-  if (selectedDays.contains(value)) {
-      return true;
-    } else {
-      return false;
-    }
+    return selectedDays.indexWhere((element) => element.id == value.id) == -1
+        ? false
+        : true;
   }
 
   List<String> timeZones = ["morning", "night"];

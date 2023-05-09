@@ -27,41 +27,41 @@ class PersonalInformationWidget extends StatelessWidget {
     return ExpansionTileWidget(
       title: getTranslated("your_personal_information", context),
       children: [
-       if( provider.role == "driver")
-            CustomTextFormField(
-                valid: Validations.name,
-                initialValue: provider.fullName,
-                hint: getTranslated("full_name", context),
-                onChanged: (v) {
-                  provider.fullName = v;
-                },
-              ),
-        if( provider.role != "driver")
+        if (provider.role == "driver")
+          CustomTextFormField(
+            valid: Validations.name,
+            initialValue: provider.fullName,
+            hint: getTranslated("full_name", context),
+            onChanged: (v) {
+              provider.fullName = v;
+            },
+          ),
+        if (provider.role != "driver")
           Row(
-                children: [
-                  Expanded(
-                      child: CustomTextFormField(
-                    valid: Validations.name,
-                    initialValue: provider.firstName,
-                    hint: getTranslated("first_name", context),
-                    onChanged: (v) {
-                      provider.firstName = v;
-                    },
-                  )),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                      child: CustomTextFormField(
-                    valid: Validations.name,
-                    initialValue: provider.secondName,
-                    hint: getTranslated("second_name", context),
-                    onChanged: (v) {
-                      provider.secondName = v;
-                    },
-                  )),
-                ],
+            children: [
+              Expanded(
+                  child: CustomTextFormField(
+                valid: Validations.name,
+                initialValue: provider.firstName,
+                hint: getTranslated("first_name", context),
+                onChanged: (v) {
+                  provider.firstName = v;
+                },
+              )),
+              const SizedBox(
+                width: 8,
               ),
+              Expanded(
+                  child: CustomTextFormField(
+                valid: Validations.name,
+                initialValue: provider.secondName,
+                hint: getTranslated("second_name", context),
+                onChanged: (v) {
+                  provider.secondName = v;
+                },
+              )),
+            ],
+          ),
         const SizedBox(
           height: 8,
         ),

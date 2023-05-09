@@ -542,6 +542,7 @@ class ProfileProvider extends ChangeNotifier {
     } catch (e) {}
   }
 
+  ///Update Profile
   bool isLoading = false;
   ProfileModel? profileModel;
   getProfile() async {
@@ -549,7 +550,6 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
     Either<ServerFailure, Response> response =
         await editProfileRepo.getProfile();
-
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
       initDriverData();
@@ -560,10 +560,9 @@ class ProfileProvider extends ChangeNotifier {
 
   initDriverData() {
     selectedDays = profileModel?.driver?.driverDays ?? [];
-    firstName = profileModel?.driver?.firstName ?? "";
-    secondName = profileModel?.driver?.lastName ?? "";
+    addOfferProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
+    fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
     age = profileModel?.driver?.age ?? "";
     email = profileModel?.driver?.email ?? "";
-    fullName = profileModel?.driver?.firstName ?? "";
   }
 }

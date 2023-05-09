@@ -13,7 +13,6 @@ import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/expansion_tile_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/price_text_field.dart';
-import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/add_offer_provider.dart';
@@ -45,8 +44,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                   return Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: GestureDetector(
-                      onTap: () =>
-                          widget.provider.onSelectDay(AppStrings.days[index]),
+                      onTap: () => widget.provider.onSelectDay(AppStrings.days[index]),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 6, horizontal: 12),
@@ -101,7 +99,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                   mode: CupertinoDatePickerMode.time,
                   startDateTime: widget.provider.startTime,
                   valueChanged: widget.provider.onSelectStartTime,
-                  label: getTranslated("end_time", context),
+                  label: getTranslated("start_time", context),
                 ),
               ),
               child: Container(
@@ -111,38 +109,38 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
                 child: Text(
-                    widget.provider.startTime.dateFormat(format: "mm : hh"),
+                    widget.provider.startTime.dateFormat(format: "mm : hh aa"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),
               ),
             ),
-            const SizedBox(
-              width: 4,
-            ),
-            Container(
-              width: 160,
-              decoration: BoxDecoration(
-                  color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                  borderRadius: BorderRadius.circular(6)),
-              padding: const EdgeInsets.all(2),
-              child: Row(
-                children: List.generate(
-                    widget.provider.timeZones.length,
-                    (index) => Expanded(
-                          child: TabWidget(
-                              backGroundColor: ColorResources.PRIMARY_COLOR,
-                              innerVPadding: 2,
-                              title: getTranslated(
-                                  widget.provider.timeZones[index], context),
-                              isSelected: widget.provider.timeZones[index] ==
-                                  widget.provider.startTimeZone,
-                              onTab: () => widget.provider
-                                  .selectedStartTimeZone(
-                                      widget.provider.timeZones[index])),
-                        )),
-              ),
-            )
+            // const SizedBox(
+            //   width: 4,
+            // ),
+            // Container(
+            //   width: 160,
+            //   decoration: BoxDecoration(
+            //       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+            //       borderRadius: BorderRadius.circular(6)),
+            //   padding: const EdgeInsets.all(2),
+            //   child: Row(
+            //     children: List.generate(
+            //         widget.provider.timeZones.length,
+            //         (index) => Expanded(
+            //               child: TabWidget(
+            //                   backGroundColor: ColorResources.PRIMARY_COLOR,
+            //                   innerVPadding: 2,
+            //                   title: getTranslated(
+            //                       widget.provider.timeZones[index], context),
+            //                   isSelected: widget.provider.timeZones[index] ==
+            //                       widget.provider.startTimeZone,
+            //                   onTab: () => widget.provider
+            //                       .selectedStartTimeZone(
+            //                           widget.provider.timeZones[index])),
+            //             )),
+            //   ),
+            // )
           ],
         ),
         Padding(
@@ -180,37 +178,37 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
                 child:
-                    Text(widget.provider.endTime.dateFormat(format: "mm : hh"),
+                    Text(widget.provider.endTime.dateFormat(format: "mm : hh aa"),
                         style: AppTextStyles.w500.copyWith(
                           fontSize: 13,
                         )),
               ),
             ),
-            const SizedBox(
-              width: 4,
-            ),
-            Container(
-              width: 160,
-              decoration: BoxDecoration(
-                  color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                  borderRadius: BorderRadius.circular(6)),
-              padding: const EdgeInsets.all(2),
-              child: Row(
-                children: List.generate(
-                    widget.provider.timeZones.length,
-                    (index) => Expanded(
-                          child: TabWidget(
-                              backGroundColor: ColorResources.PRIMARY_COLOR,
-                              innerVPadding: 2,
-                              title: getTranslated(
-                                  widget.provider.timeZones[index], context),
-                              isSelected: widget.provider.timeZones[index] ==
-                                  widget.provider.endTimeZone,
-                              onTab: () => widget.provider.selectedEndTimeZone(
-                                  widget.provider.timeZones[index])),
-                        )),
-              ),
-            )
+            // const SizedBox(
+            //   width: 4,
+            // ),
+            // Container(
+            //   width: 160,
+            //   decoration: BoxDecoration(
+            //       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+            //       borderRadius: BorderRadius.circular(6)),
+            //   padding: const EdgeInsets.all(2),
+            //   child: Row(
+            //     children: List.generate(
+            //         widget.provider.timeZones.length,
+            //         (index) => Expanded(
+            //               child: TabWidget(
+            //                   backGroundColor: ColorResources.PRIMARY_COLOR,
+            //                   innerVPadding: 2,
+            //                   title: getTranslated(
+            //                       widget.provider.timeZones[index], context),
+            //                   isSelected: widget.provider.timeZones[index] ==
+            //                       widget.provider.endTimeZone,
+            //                   onTab: () => widget.provider.selectedEndTimeZone(
+            //                       widget.provider.timeZones[index])),
+            //             )),
+            //   ),
+            // )
           ],
         ),
         Padding(
