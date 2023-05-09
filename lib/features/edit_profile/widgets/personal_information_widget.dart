@@ -27,16 +27,17 @@ class PersonalInformationWidget extends StatelessWidget {
     return ExpansionTileWidget(
       title: getTranslated("your_personal_information", context),
       children: [
-        provider.role == "driver"
-            ? CustomTextFormField(
+       if( provider.role == "driver")
+            CustomTextFormField(
                 valid: Validations.name,
                 initialValue: provider.fullName,
                 hint: getTranslated("full_name", context),
                 onChanged: (v) {
                   provider.fullName = v;
                 },
-              )
-            : Row(
+              ),
+        if( provider.role != "driver")
+          Row(
                 children: [
                   Expanded(
                       child: CustomTextFormField(

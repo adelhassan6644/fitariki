@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import '../../../app/core/utils/app_strings.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -17,10 +18,16 @@ import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/add_offer_provider.dart';
 
-class OfferInformationWidget extends StatelessWidget {
+class OfferInformationWidget extends StatefulWidget {
   const OfferInformationWidget({required this.provider, Key? key})
       : super(key: key);
   final AddOfferProvider provider;
+
+  @override
+  State<OfferInformationWidget> createState() => _OfferInformationWidgetState();
+}
+
+class _OfferInformationWidgetState extends State<OfferInformationWidget> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileWidget(
@@ -33,32 +40,41 @@ class OfferInformationWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ...List.generate(
-                provider.days.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
-                  child: GestureDetector(
-                    onTap: () => provider.onSelectDay(provider.days[index]),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 12),
-                      decoration: BoxDecoration(
-                          color: provider.checkSelectDay(provider.days[index])
-                              ? ColorResources.PRIMARY_COLOR
-                              : ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                          borderRadius: BorderRadius.circular(4)),
-                      child: Text(
-                        provider.days[index].value??"",
-                        style: AppTextStyles.w400.copyWith(
-                          fontSize: 13,
-                          height: 1.25,
-                          color: provider.checkSelectDay(provider.days[index])
-                              ? ColorResources.WHITE_COLOR
-                              : ColorResources.SECOUND_PRIMARY_COLOR,
+                AppStrings.days.length,
+                (index)
+                {
+
+
+                 return Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: GestureDetector(
+                      onTap: () => widget.provider
+                          .onSelectDay(AppStrings.days[index]),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6, horizontal: 12),
+                        decoration: BoxDecoration(
+                            color: widget.provider
+                                    .checkSelectDay(AppStrings.days[index])
+                                ? ColorResources.PRIMARY_COLOR
+                                : ColorResources.PRIMARY_COLOR
+                                    .withOpacity(0.06),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Text(
+                          AppStrings.days[index].dayName ?? "",
+                          style: AppTextStyles.w400.copyWith(
+                            fontSize: 13,
+                            height: 1.25,
+                            color: widget.provider
+                                    .checkSelectDay(AppStrings.days[index])
+                                ? ColorResources.WHITE_COLOR
+                                : ColorResources.SECOUND_PRIMARY_COLOR,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               )
             ],
           ),
@@ -86,8 +102,8 @@ class OfferInformationWidget extends StatelessWidget {
               onTap: () => customShowModelBottomSheet(
                 body: DateTimePicker(
                   mode: CupertinoDatePickerMode.time,
-                  startDateTime: provider.startTime,
-                  valueChanged: provider.onSelectStartTime,
+                  startDateTime: widget.provider.startTime,
+                  valueChanged: widget.provider.onSelectStartTime,
                   label: getTranslated("end_time", context),
                 ),
               ),
@@ -97,7 +113,7 @@ class OfferInformationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(provider.startTime.dateFormat(format: "mm : hh"),
+                child: Text(widget.provider.startTime.dateFormat(format: "mm : hh"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),
@@ -114,17 +130,17 @@ class OfferInformationWidget extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               child: Row(
                 children: List.generate(
-                    provider.timeZones.length,
+                    widget.provider.timeZones.length,
                     (index) => Expanded(
                           child: TabWidget(
                               backGroundColor: ColorResources.PRIMARY_COLOR,
                               innerVPadding: 2,
                               title: getTranslated(
-                                  provider.timeZones[index], context),
-                              isSelected: provider.timeZones[index] ==
-                                  provider.startTimeZone,
-                              onTab: () => provider.selectedStartTimeZone(
-                                  provider.timeZones[index])),
+                                  widget.provider.timeZones[index], context),
+                              isSelected: widget.provider.timeZones[index] ==
+                                  widget.provider.startTimeZone,
+                              onTab: () => widget.provider.selectedStartTimeZone(
+                                  widget.provider.timeZones[index])),
                         )),
               ),
             )
@@ -153,8 +169,8 @@ class OfferInformationWidget extends StatelessWidget {
               onTap: () => customShowModelBottomSheet(
                 body: DateTimePicker(
                   mode: CupertinoDatePickerMode.time,
-                  startDateTime: provider.endTime,
-                  valueChanged: provider.onSelectEndTime,
+                  startDateTime: widget.provider.endTime,
+                  valueChanged: widget.provider.onSelectEndTime,
                   label: getTranslated("end_time", context),
                 ),
               ),
@@ -164,7 +180,7 @@ class OfferInformationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(provider.endTime.dateFormat(format: "mm : hh"),
+                child: Text(widget.provider.endTime.dateFormat(format: "mm : hh"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),
@@ -181,17 +197,17 @@ class OfferInformationWidget extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               child: Row(
                 children: List.generate(
-                    provider.timeZones.length,
+                    widget.provider.timeZones.length,
                     (index) => Expanded(
                           child: TabWidget(
                               backGroundColor: ColorResources.PRIMARY_COLOR,
                               innerVPadding: 2,
                               title: getTranslated(
-                                  provider.timeZones[index], context),
-                              isSelected: provider.timeZones[index] ==
-                                  provider.endTimeZone,
-                              onTab: () => provider.selectedEndTimeZone(
-                                  provider.timeZones[index])),
+                                  widget.provider.timeZones[index], context),
+                              isSelected: widget.provider.timeZones[index] ==
+                                  widget.provider.endTimeZone,
+                              onTab: () => widget.provider.selectedEndTimeZone(
+                                  widget.provider.timeZones[index])),
                         )),
               ),
             )
@@ -221,8 +237,8 @@ class OfferInformationWidget extends StatelessWidget {
             GestureDetector(
               onTap: () => customShowModelBottomSheet(
                 body: DateTimePicker(
-                  startDateTime: provider.startDate,
-                  valueChanged: provider.onSelectStartDate,
+                  startDateTime: widget.provider.startDate,
+                  valueChanged: widget.provider.onSelectStartDate,
                   label: getTranslated("start_of_duration", context),
                 ),
               ),
@@ -232,7 +248,7 @@ class OfferInformationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(provider.startDate.dateFormat(format: "yyyy MMM d"),
+                child: Text(widget.provider.startDate.dateFormat(format: "yyyy MMM d"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
@@ -265,8 +281,8 @@ class OfferInformationWidget extends StatelessWidget {
             GestureDetector(
               onTap: () => customShowModelBottomSheet(
                 body: DateTimePicker(
-                  startDateTime: provider.startDate,
-                  valueChanged: provider.onSelectEndDate,
+                  startDateTime: widget.provider.startDate,
+                  valueChanged: widget.provider.onSelectEndDate,
                   label: getTranslated("end_of_duration", context),
                 ),
               ),
@@ -276,7 +292,7 @@ class OfferInformationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(provider.endDate.dateFormat(format: "yyyy MMM d"),
+                child: Text(widget.provider.endDate.dateFormat(format: "yyyy MMM d"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
@@ -313,7 +329,7 @@ class OfferInformationWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: Center(
                 child: Text(
-                  "${Methods.diffBtw2Dates(startDate: provider.startDate, endDate: provider.endDate)} ${getTranslated("days", context).replaceAll("ال", "")}",
+                  "${Methods.diffBtw2Dates(startDate: widget.provider.startDate, endDate: widget.provider.endDate)} ${getTranslated("days", context).replaceAll("ال", "")}",
                   textAlign: TextAlign.center,
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 13,
@@ -350,11 +366,11 @@ class OfferInformationWidget extends StatelessWidget {
                 formatter: [
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
-                initialValue: provider.minPrice,
+                initialValue: widget.provider.minPrice,
                 inputType: TextInputType.number,
                 hint: "00000",
                 onChanged: (v) {
-                  provider.minPrice = v;
+                  widget.provider.minPrice = v;
                 },
               ),
             ),
@@ -388,13 +404,13 @@ class OfferInformationWidget extends StatelessWidget {
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
                 inputType: TextInputType.number,
-                initialValue: provider.maxPrice,
+                initialValue: widget.provider.maxPrice,
                 hint: "00000",
                 onChanged: (v) {
-                  provider.maxPrice = v;
+                  widget.provider.maxPrice = v;
                 },
                 validation: (v) {
-                  if (double.parse(v??"0") > double.parse(provider.minPrice??"0")) {
+                  if (double.parse(v??"0") > double.parse(widget.provider.minPrice??"0")) {
                     return getTranslated("max_price_must_be_more_than_min_price", context);
                   } else {
                     return null;
@@ -418,7 +434,7 @@ class OfferInformationWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             CustomNavigator.push(Routes.Pick_Location,
-                arguments: provider.onSelectEndLocation);
+                arguments: widget.provider.onSelectEndLocation);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -431,11 +447,11 @@ class OfferInformationWidget extends StatelessWidget {
                 Expanded(
                   child: MarqueeWidget(
                     child: Text(
-                      provider.endLocation?.address ??
+                      widget.provider.endLocation?.address ??
                           "حدد مكان دوامك/دراستك بالخريطه",
                       style: AppTextStyles.w400.copyWith(
                           fontSize: 14,
-                          color: provider.endLocation?.address == null
+                          color: widget.provider.endLocation?.address == null
                               ? ColorResources.DISABLED
                               : ColorResources.SECOUND_PRIMARY_COLOR,
                           overflow: TextOverflow.ellipsis),

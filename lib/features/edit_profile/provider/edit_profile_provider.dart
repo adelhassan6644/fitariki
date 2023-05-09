@@ -1,19 +1,23 @@
 import 'dart:io';
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
-import '../../../main_models/custom_model.dart';
+import '../../../data/error/failures.dart';
+import '../../../main_models/weak_model.dart';
 import '../../add_offer/provider/add_offer_provider.dart';
 import '../../maps/models/address_model.dart';
+import '../model/profile_model.dart';
 import '../repo/edit_profile_repo.dart';
 
 class EditProfileProvider extends ChangeNotifier {
   final EditProfileRepo editProfileRepo;
   final AddOfferProvider addOfferProvider;
   EditProfileProvider({
-    required this.editProfileRepo,required this.addOfferProvider,
+    required this.editProfileRepo,
+    required this.addOfferProvider,
   }) {
     getRoleType();
   }
@@ -160,48 +164,35 @@ class EditProfileProvider extends ChangeNotifier {
 
   ///Other Data
 
-
-  DateTime startTime =DateTime.now();
-  onSelectStartTime(v){
+  DateTime startTime = DateTime.now();
+  onSelectStartTime(v) {
     startTime = v;
     notifyListeners();
   }
 
-  DateTime endTime =DateTime.now();
-  onSelectEndTime(v){
+  DateTime endTime = DateTime.now();
+  onSelectEndTime(v) {
     endTime = v;
     notifyListeners();
   }
 
+  List<WeekModel> selectedDays = [];
 
-  List<CustomModel> days = [
-    CustomModel(id: 1,value: "السبت",),
-    CustomModel(id: 2,value: "الاحد",),
-    CustomModel(id: 3,value: "الاثنين",),
-    CustomModel(id: 4,value: "الثلاثاء",),
-    CustomModel(id: 5,value: "الاربعاء",),
-    CustomModel(id: 6,value: "الخميس",),
-    CustomModel(id: 7,value:  "الجمعة",),
-  ];
-  List<CustomModel> selectedDays = [];
-
-  onSelectDay(CustomModel value) {
-    if (selectedDays.contains(value)) {
-      selectedDays.remove(value);
+  onSelectDay(WeekModel value) {
+    if (checkSelectDay(value)) {
+      selectedDays.removeAt(
+          selectedDays.indexWhere((element) => element.id == value.id));
     } else {
       selectedDays.add(value);
     }
     addOfferProvider.onSelectDay(value);
-
     notifyListeners();
   }
 
-  checkSelectDay(CustomModel value) {
-    if (selectedDays.contains(value)) {
-      return true;
-    } else {
-      return false;
-    }
+  checkSelectDay(WeekModel value) {
+    return selectedDays.indexWhere((element) => element.id == value.id) == -1
+        ? false
+        : true;
   }
 
   List<String> timeZones = ["morning", "night"];
@@ -549,5 +540,30 @@ class EditProfileProvider extends ChangeNotifier {
               await MultipartFile.fromFile(insuranceImage!.path)),
       ]);
     } catch (e) {}
+  }
+
+  bool isLoading = false;
+  ProfileModel? profileModel;
+  getProfile() async {
+    isLoading = true;
+    notifyListeners();
+    Either<ServerFailure, Response> response =
+        await editProfileRepo.getProfile();
+
+    response.fold((l) => null, (response) {
+      profileModel = ProfileModel.fromJson(response.data['data']);
+      initDriverData();
+      isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  initDriverData() {
+    selectedDays = profileModel?.driver?.driverDays ?? [];
+    firstName = profileModel?.driver?.firstName ?? "";
+    secondName = profileModel?.driver?.lastName ?? "";
+    age = profileModel?.driver?.age ?? "";
+    email = profileModel?.driver?.email ?? "";
+    fullName = profileModel?.driver?.firstName ?? "";
   }
 }

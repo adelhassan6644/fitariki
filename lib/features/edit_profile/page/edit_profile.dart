@@ -14,14 +14,28 @@ import '../widgets/work_information_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({required this.fromLogin, Key? key}) : super(key: key);
   final bool fromLogin;
 
   @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  @override
+  void initState() {
+   Future.delayed(Duration.zero,(){
+     Provider.of<EditProfileProvider>(context,listen: false).getProfile();
+   });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-        body: Consumer<EditProfileProvider>(builder: (_, provider, child) {
+        body: Consumer<EditProfileProvider>
+          (builder: (_, provider, child) {
       return SafeArea(
         bottom: true,
         top: false,
@@ -29,8 +43,8 @@ class EditProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-                withBack: !fromLogin,
-                actionChild: fromLogin
+                withBack: !widget.fromLogin,
+                actionChild: widget.fromLogin
                     ? null
                     : GestureDetector(
                         child: Text(getTranslated("save", context),
@@ -38,11 +52,12 @@ class EditProfile extends StatelessWidget {
                                 fontSize: 10,
                                 color: ColorResources.SYSTEM_COLOR)),
                       ),
-                title: fromLogin
+                title: widget.fromLogin
                     ? getTranslated(
                         "complete_the_registration_information", context)
                     : getTranslated("modification_of_personal_data", context),
                 withBorder: true),
+            if(!provider.isLoading)
             Expanded(
               child: ListView(
                 physics: const BouncingScrollPhysics(),
@@ -54,7 +69,7 @@ class EditProfile extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (fromLogin)
+                        if (widget.fromLogin)
                           Column(
                             children: [
                               Center(
@@ -79,7 +94,7 @@ class EditProfile extends StatelessWidget {
                           ),
                         ProfileImageWidget(
                           provider: provider,
-                          fromLogin: fromLogin,
+                          fromLogin: widget.fromLogin,
                         ),
                         Padding(
                           padding:  EdgeInsets.symmetric(vertical: 16.h),
@@ -107,7 +122,7 @@ class EditProfile extends StatelessWidget {
                 ],
               ),
             ),
-            if (fromLogin)
+            if (widget.fromLogin)
               Column(
                 children: [
                   Padding(

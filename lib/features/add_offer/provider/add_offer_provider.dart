@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../main_models/custom_model.dart';
+import '../../../main_models/weak_model.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/add_offer_repo.dart';
 
@@ -22,40 +22,20 @@ class AddOfferProvider extends ChangeNotifier {
 
   String? minPrice, maxPrice;
 
-  List<CustomModel> days = [
-    CustomModel(
+
+
+  List<WeekModel> selectedDays = [
+    WeekModel(
       id: 1,
-      value: "السبت",
+      dayName: "السبت",
     ),
-    CustomModel(
+    WeekModel(
       id: 2,
-      value: "الاحد",
-    ),
-    CustomModel(
-      id: 3,
-      value: "الاثنين",
-    ),
-    CustomModel(
-      id: 4,
-      value: "الثلاثاء",
-    ),
-    CustomModel(
-      id: 5,
-      value: "الاربعاء",
-    ),
-    CustomModel(
-      id: 6,
-      value: "الخميس",
-    ),
-    CustomModel(
-      id: 7,
-      value: "الجمعة",
+      dayName: "الاحد",
     ),
   ];
 
-  List<CustomModel> selectedDays = [];
-
-  onSelectDay(CustomModel value) {
+  onSelectDay(WeekModel value) {
     if (selectedDays.contains(value)) {
       selectedDays.remove(value);
     } else {
@@ -64,8 +44,15 @@ class AddOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  checkSelectDay(CustomModel value) {
-    if (selectedDays.contains(value)) {
+  checkSelectDay(WeekModel value) {
+
+  selectedDays.map((e) {
+      print("ddd" );
+      print( e.id==value.id);
+    } );
+  return selectedDays.indexWhere((element) =>element.id == value.id )==-1?false:true;
+
+  if (selectedDays.contains(value)) {
       return true;
     } else {
       return false;

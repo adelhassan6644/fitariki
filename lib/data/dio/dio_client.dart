@@ -54,7 +54,6 @@ class DioClient extends ApiClient {
         dio.options.baseUrl = baseUrl;
       }
       var response = await dio.get(uri, queryParameters: queryParameters);
-      log(response.toString());
 
       return response;
     } on SocketException catch (e) {
@@ -72,12 +71,12 @@ class DioClient extends ApiClient {
       Map<String, dynamic>? queryParameters,
       data}) async {
     try {
+      dio.options.baseUrl = baseUrl;
       var response = await dio.post(
         uri,
         data: data,
         queryParameters: queryParameters,
       );
-      log(uri);
       return response;
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
@@ -92,12 +91,12 @@ class DioClient extends ApiClient {
       Map<String, dynamic>? queryParameters,
       data}) async {
     try {
+      dio.options.baseUrl = baseUrl;
       var response = await dio.put(
         uri,
         data: data,
         queryParameters: queryParameters,
       );
-      log(uri);
       return response;
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
@@ -112,6 +111,7 @@ class DioClient extends ApiClient {
       Map<String, dynamic>? queryParameters,
       data}) async {
     try {
+      dio.options.baseUrl = baseUrl;
       var response = await dio.delete(
         uri,
         data: data,

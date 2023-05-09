@@ -33,8 +33,10 @@ class EditProfileRepo {
   Future<Either<ServerFailure, Response>> getProfile() async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/1"
+            // "${sharedPreferences.getString(AppStorageKey.userId)}",
       );
+      //{{base}}api/v1/driver/profile/1
       if (response.statusCode == 200) {
         return Right(response);
       } else {
