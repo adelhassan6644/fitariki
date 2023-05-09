@@ -47,7 +47,7 @@ class OfferInformationWidget extends StatelessWidget {
                               : ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                           borderRadius: BorderRadius.circular(4)),
                       child: Text(
-                        provider.days[index],
+                        provider.days[index].value??"",
                         style: AppTextStyles.w400.copyWith(
                           fontSize: 13,
                           height: 1.25,

@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
+import '../../../main_models/custom_model.dart';
+import '../../add_offer/provider/add_offer_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/edit_profile_repo.dart';
 
 class EditProfileProvider extends ChangeNotifier {
   final EditProfileRepo editProfileRepo;
+  final AddOfferProvider addOfferProvider;
   EditProfileProvider({
-    required this.editProfileRepo,
+    required this.editProfileRepo,required this.addOfferProvider,
   }) {
     getRoleType();
   }
@@ -171,27 +174,29 @@ class EditProfileProvider extends ChangeNotifier {
   }
 
 
-  List<String> days = [
-    "السبت",
-    "الاحد",
-    "الاثنين",
-    "الثلاثاء",
-    "الاربعاء",
-    "الخميس",
-    "الجمعة",
+  List<CustomModel> days = [
+    CustomModel(id: 1,value: "السبت",),
+    CustomModel(id: 2,value: "الاحد",),
+    CustomModel(id: 3,value: "الاثنين",),
+    CustomModel(id: 4,value: "الثلاثاء",),
+    CustomModel(id: 5,value: "الاربعاء",),
+    CustomModel(id: 6,value: "الخميس",),
+    CustomModel(id: 7,value:  "الجمعة",),
   ];
-  List<String> selectedDays = [];
+  List<CustomModel> selectedDays = [];
 
-  onSelectDay(String value) {
+  onSelectDay(CustomModel value) {
     if (selectedDays.contains(value)) {
       selectedDays.remove(value);
     } else {
       selectedDays.add(value);
     }
+    addOfferProvider.onSelectDay(value);
+
     notifyListeners();
   }
 
-  checkSelectDay(String value) {
+  checkSelectDay(CustomModel value) {
     if (selectedDays.contains(value)) {
       return true;
     } else {

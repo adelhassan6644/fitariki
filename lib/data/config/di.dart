@@ -59,8 +59,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
   // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
-  sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl()));
-  sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
+  sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl(),addOfferProvider: sl()));
+  sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl(),));
   sl.registerLazySingleton(() => ReplayOfferProvider(replayOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
