@@ -8,11 +8,11 @@ import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-class EditProfileRepo {
+class ProfileRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  EditProfileRepo({required this.dioClient, required this.sharedPreferences});
+  ProfileRepo({required this.dioClient, required this.sharedPreferences});
 
   Future<Either<ServerFailure, Response>> updateProfile({required dynamic body}) async {
     try {

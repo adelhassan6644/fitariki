@@ -1,7 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
-import 'package:fitariki/features/edit_profile/provider/edit_profile_provider.dart';
-import 'package:fitariki/features/profile/widgets/profile_button.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +8,11 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../profile/provider/profile_provider.dart';
+import 'more_button.dart';
 
-class ProfileOptions extends StatelessWidget {
-  const ProfileOptions({Key? key}) : super(key: key);
+class MoreOptions extends StatelessWidget {
+  const MoreOptions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class ProfileOptions extends StatelessWidget {
                   offset: const Offset(0, 6))
             ]),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: Consumer<EditProfileProvider>(
+        child: Consumer<ProfileProvider>(
           builder: (_, provider, child) {
             return Column(
               children: [
-                ProfileButton(
+                MoreButton(
                   title: getTranslated("personal_information", context),
                   icon: SvgImages.file,
                   onTap: () =>
@@ -42,35 +42,35 @@ class ProfileOptions extends StatelessWidget {
                           arguments: false),
                 ),
                 if (provider.role != "driver")
-                  ProfileButton(
+                  MoreButton(
                     title: getTranslated("followers", context),
                     icon: SvgImages.addFollower,
                   ),
-                ProfileButton(
+                MoreButton(
                   title: getTranslated("archives", context),
                   icon: SvgImages.bookMark,
                 ),
-                ProfileButton(
+                MoreButton(
                   title: getTranslated("alerts", context),
                   icon: SvgImages.alert,
                 ),
-                ProfileButton(
+                MoreButton(
                   title: getTranslated("bank_data", context),
                   icon: SvgImages.card,
                 ),
-                ProfileButton(
+                MoreButton(
                   title: provider.role == "driver"
                       ? getTranslated("clients_evaluation", context)
                       : getTranslated("captain_evaluation", context),
                   icon: SvgImages.rate,
                 ),
-                ProfileButton(
+                MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {
-                    return ProfileButton(
+                    return MoreButton(
                       title: getTranslated("log_out", context),
                       icon: SvgImages.logout,
                       withBorder: false,

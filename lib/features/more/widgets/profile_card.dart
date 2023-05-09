@@ -12,14 +12,14 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/rate_stars.dart';
 import '../../../navigation/routes.dart';
-import '../../edit_profile/provider/edit_profile_provider.dart';
+import '../../profile/provider/profile_provider.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EditProfileProvider>(
+    return Consumer<ProfileProvider>(
       builder: (BuildContext _, provider, child) {
         return Container(
           color: ColorResources.APP_BAR_BACKGROUND_COLOR,

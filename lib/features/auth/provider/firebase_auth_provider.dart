@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitariki/features/edit_profile/provider/edit_profile_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +12,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_widgets/loading_dialog.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../repo/firebase_auth_repo.dart';
 
 class FirebaseAuthProvider extends ChangeNotifier {
@@ -213,7 +213,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        Provider.of<EditProfileProvider>(CustomNavigator.navigatorState.currentContext!,listen: false).getRoleType();
+        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!,listen: false).getRoleType();
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,

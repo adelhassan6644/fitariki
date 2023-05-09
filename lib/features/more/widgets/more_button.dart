@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/text_styles.dart';
 
-class ProfileButton extends StatelessWidget {
-  const ProfileButton(
+class MoreButton extends StatelessWidget {
+  const MoreButton(
       {required this.title,
       required this.icon,
       this.onTap,

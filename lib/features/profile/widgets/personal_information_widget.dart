@@ -16,12 +16,12 @@ import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../provider/edit_profile_provider.dart';
+import '../provider/profile_provider.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
   const PersonalInformationWidget({required this.provider, Key? key})
       : super(key: key);
-  final EditProfileProvider provider;
+  final ProfileProvider provider;
   @override
   Widget build(BuildContext context) {
     return ExpansionTileWidget(

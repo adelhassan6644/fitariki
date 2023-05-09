@@ -8,13 +8,13 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/image_picker_helper.dart';
 import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/custom_network_image.dart';
-import '../provider/edit_profile_provider.dart';
+import '../provider/profile_provider.dart';
 
 class ProfileImageWidget extends StatelessWidget {
   const ProfileImageWidget(
       {required this.provider, required this.fromLogin, Key? key})
       : super(key: key);
-  final EditProfileProvider provider;
+  final ProfileProvider provider;
   final bool fromLogin;
   @override
   Widget build(BuildContext context) {

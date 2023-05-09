@@ -15,12 +15,12 @@ import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/tab_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../provider/edit_profile_provider.dart';
+import '../provider/profile_provider.dart';
 
 class WorkInformationWidget extends StatefulWidget {
   const WorkInformationWidget({required this.provider, Key? key})
       : super(key: key);
-  final EditProfileProvider provider;
+  final ProfileProvider provider;
 
   @override
   State<WorkInformationWidget> createState() => _WorkInformationWidgetState();
@@ -29,7 +29,7 @@ class WorkInformationWidget extends StatefulWidget {
 class _WorkInformationWidgetState extends State<WorkInformationWidget> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<EditProfileProvider>(builder: (context, provider, _) {
+    return Consumer<ProfileProvider>(builder: (context, provider, _) {
       print(provider.selectedDays.map((e) => print(e.toString())));
 
       return ExpansionTile(

@@ -10,12 +10,12 @@ import '../../../main_models/weak_model.dart';
 import '../../add_offer/provider/add_offer_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../model/profile_model.dart';
-import '../repo/edit_profile_repo.dart';
+import '../repo/profile_repo.dart';
 
-class EditProfileProvider extends ChangeNotifier {
-  final EditProfileRepo editProfileRepo;
+class ProfileProvider extends ChangeNotifier {
+  final ProfileRepo editProfileRepo;
   final AddOfferProvider addOfferProvider;
-  EditProfileProvider({
+  ProfileProvider({
     required this.editProfileRepo,
     required this.addOfferProvider,
   }) {

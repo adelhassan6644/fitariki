@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/image_picker_helper.dart';
 import '../../../main_widgets/custom_image_picker_widget.dart';
-import '../provider/edit_profile_provider.dart';
+import '../provider/profile_provider.dart';
 
 class BankDataWidget extends StatelessWidget {
   const BankDataWidget({required this.provider, Key? key}) : super(key: key);
-  final EditProfileProvider provider;
+  final ProfileProvider provider;
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(

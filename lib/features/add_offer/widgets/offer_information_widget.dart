@@ -41,15 +41,12 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
             children: [
               ...List.generate(
                 AppStrings.days.length,
-                (index)
-                {
-
-
-                 return Padding(
+                (index) {
+                  return Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: GestureDetector(
-                      onTap: () => widget.provider
-                          .onSelectDay(AppStrings.days[index]),
+                      onTap: () =>
+                          widget.provider.onSelectDay(AppStrings.days[index]),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 6, horizontal: 12),
@@ -113,7 +110,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(widget.provider.startTime.dateFormat(format: "mm : hh"),
+                child: Text(
+                    widget.provider.startTime.dateFormat(format: "mm : hh"),
                     style: AppTextStyles.w500.copyWith(
                       fontSize: 13,
                     )),
@@ -139,8 +137,9 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   widget.provider.timeZones[index], context),
                               isSelected: widget.provider.timeZones[index] ==
                                   widget.provider.startTimeZone,
-                              onTab: () => widget.provider.selectedStartTimeZone(
-                                  widget.provider.timeZones[index])),
+                              onTab: () => widget.provider
+                                  .selectedStartTimeZone(
+                                      widget.provider.timeZones[index])),
                         )),
               ),
             )
@@ -180,10 +179,11 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(widget.provider.endTime.dateFormat(format: "mm : hh"),
-                    style: AppTextStyles.w500.copyWith(
-                      fontSize: 13,
-                    )),
+                child:
+                    Text(widget.provider.endTime.dateFormat(format: "mm : hh"),
+                        style: AppTextStyles.w500.copyWith(
+                          fontSize: 13,
+                        )),
               ),
             ),
             const SizedBox(
@@ -248,7 +248,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(widget.provider.startDate.dateFormat(format: "yyyy MMM d"),
+                child: Text(
+                    widget.provider.startDate.dateFormat(format: "yyyy MMM d"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
@@ -292,7 +293,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(widget.provider.endDate.dateFormat(format: "yyyy MMM d"),
+                child: Text(
+                    widget.provider.endDate.dateFormat(format: "yyyy MMM d"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
@@ -410,8 +412,10 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                   widget.provider.maxPrice = v;
                 },
                 validation: (v) {
-                  if (double.parse(v??"0") > double.parse(widget.provider.minPrice??"0")) {
-                    return getTranslated("max_price_must_be_more_than_min_price", context);
+                  if (double.parse(v ?? "0") >
+                      double.parse(widget.provider.minPrice ?? "0")) {
+                    return getTranslated(
+                        "max_price_must_be_more_than_min_price", context);
                   } else {
                     return null;
                   }

@@ -7,26 +7,26 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../../main_widgets/custom_button.dart';
-import '../provider/edit_profile_provider.dart';
+import '../provider/profile_provider.dart';
 import '../widgets/bank_data_widget.dart';
 import '../widgets/car_data_widget.dart';
 import '../widgets/work_information_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 
-class EditProfile extends StatefulWidget {
-  const EditProfile({required this.fromLogin, Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({required this.fromLogin, Key? key}) : super(key: key);
   final bool fromLogin;
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
    Future.delayed(Duration.zero,(){
-     Provider.of<EditProfileProvider>(context,listen: false).getProfile();
+     Provider.of<ProfileProvider>(context,listen: false).getProfile();
    });
     super.initState();
   }
@@ -34,7 +34,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        body: Consumer<EditProfileProvider>
+        body: Consumer<ProfileProvider>
           (builder: (_, provider, child) {
       return SafeArea(
         bottom: true,

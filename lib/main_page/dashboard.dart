@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/my_trips/page/my_trips.dart';
-import 'package:fitariki/features/profile/page/profile.dart';
 import 'package:fitariki/features/search/page/search.dart';
 import 'package:fitariki/main_page/widget/nav_bar_bar.dart';
 import '../../app/core/utils/color_resources.dart';
@@ -9,6 +8,7 @@ import '../../app/core/utils/svg_images.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../data/network/netwok_info.dart';
 import '../features/home/page/home.dart';
+import '../features/more/page/more.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({this.index, Key? key}) : super(key: key);
@@ -102,7 +102,7 @@ class _DashBoardState extends State<DashBoard> {
             child: PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [Home(), MyTrips(), Search(), Profile()]),
+                children: const [Home(), MyTrips(), Search(), More()]),
           ),
         ],
       ),

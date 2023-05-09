@@ -7,11 +7,11 @@ import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
-import '../../features/edit_profile/provider/edit_profile_provider.dart';
-import '../../features/edit_profile/repo/edit_profile_repo.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
+import '../../features/profile/provider/profile_provider.dart';
+import '../../features/profile/repo/profile_repo.dart';
 import '../../features/replay_offer/provider/replay_offer_provider.dart';
 import '../../features/replay_offer/repo/replay_offer_repo.dart';
 import '../api/end_points.dart';
@@ -45,7 +45,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => EditProfileRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(() => ReplayOfferRepo(sharedPreferences: sl(), dioClient: sl()));
@@ -59,7 +59,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
   // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
-  sl.registerLazySingleton(() => EditProfileProvider(editProfileRepo: sl(),addOfferProvider: sl()));
+  sl.registerLazySingleton(() => ProfileProvider(editProfileRepo: sl(),addOfferProvider: sl()));
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl(),));
   sl.registerLazySingleton(() => ReplayOfferProvider(replayOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));

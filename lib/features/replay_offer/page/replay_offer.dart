@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/bottom_sheet_app_bar.dart';
-import '../../edit_profile/provider/edit_profile_provider.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../provider/replay_offer_provider.dart';
 import '../widgets/duration_widget.dart';
 import '../widgets/followers_widget.dart';
@@ -47,7 +47,7 @@ class ReplayOffer extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  Consumer<EditProfileProvider>(
+                  Consumer<ProfileProvider>(
                     builder: (_, editProfileProvider, child) {
                       return editProfileProvider.role == "driver"
                           ? const SizedBox()

@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/custom_app_bar.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
-import '../../edit_profile/provider/edit_profile_provider.dart';
 import '../../guest/guest_mode.dart';
+import '../../profile/provider/profile_provider.dart';
+import '../widgets/more_options.dart';
 import '../widgets/profile_card.dart';
-import '../widgets/profile_options.dart';
 import '../widgets/wallet_card.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class More extends StatelessWidget {
+  const More({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Profile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 children: [
                   const ProfileCard(),
-                  Consumer<EditProfileProvider>(
+                  Consumer<ProfileProvider>(
                     builder: (_, provider, child) {
                       return provider.role == "driver"
                           ? Column(
@@ -38,7 +38,7 @@ class Profile extends StatelessWidget {
                           : const SizedBox();
                     },
                   ),
-                  const ProfileOptions(),
+                  const MoreOptions(),
                 ],
               )
             : Column(
