@@ -11,7 +11,7 @@ class SplashProvider extends ChangeNotifier{
   startTheApp(){
     Future.delayed(const Duration(milliseconds: 4500), () {
       if (splashRepo.notFirstTime()) {
-        CustomNavigator.push(Routes.DASHBOARD,replace: true);
+        CustomNavigator.push(Routes.DASHBOARD,replace: true,arguments: 0);
       }else{
         CustomNavigator.push(Routes.ON_BOARDING,replace: true);
       }

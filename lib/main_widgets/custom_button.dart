@@ -18,6 +18,7 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final bool isLoading;
   final bool isError;
+  final bool withBorderColor;
 
   const CustomButton(
       {Key? key,
@@ -30,6 +31,7 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.iconColor ,
         this.textSize,
+        this.withBorderColor=false,
       required this.text,
        this.backgroundColor=ColorResources.PRIMARY_COLOR,  this.isError=false})
       : super(key: key);
@@ -46,6 +48,7 @@ class CustomButton extends StatelessWidget {
         height: height??50.h,
         decoration: BoxDecoration(
           color: backgroundColor,
+          border: Border.all(color: withBorderColor?ColorResources.PRIMARY_COLOR: Colors.transparent ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         duration: const Duration(

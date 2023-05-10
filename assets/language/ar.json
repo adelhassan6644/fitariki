@@ -78,7 +78,8 @@
   "delivery_offer": "عرض توصيل",
   "start_point": "نقطة البداية :",
   "final_destination": "الوجهة النهائية :",
-  "the_captains_starting_point_is_further_away_from_you": "نقطة بداية الكابتن تبعد عنك",
+  "the_captain_starting_point_is_further_away_from_you": "نقطة بداية الكابتن تبعد عنك",
+  "the_client_starting_point_is_further_away_from_you": "نقطة بداية الراكب تبعد عنك",
   "car_details": "تفاصيل السيارة",
   "offer": "تقديم عرض",
   "display_stats": "احصائيات العرض",
@@ -108,6 +109,7 @@
   "nationality": "الجنسية",
   "save": "حفظ",
   "make_an_offer_to_captain": "تقديم عرض لكابتن",
+  "make_an_offer_to_client": "تقديم عرض لراكب",
   "send": "ارسال",
   "duration": "المدة",
   "price": "السعر",
@@ -159,6 +161,11 @@
   "end_time":"نهاية الوقت",
   "minimum_price": "حد ادنى للسعر",
   "maximum_price": "حد اقصي للسعر",
-  "max_price_must_be_more_than_min_price": "الحد الاقصي للسعر يجيب ان يكون اعلب من الحد الادني للسعر"
+  "max_price_must_be_more_than_min_price": "الحد الاقصي للسعر يجيب ان يكون اعلب من الحد الادني للسعر",
+  "congratulations": "تهانينا!",
+  "sent_request_successfully": "تم الإرسال بنجاح!\nسيتم تنبيه جميع الكباتن القريبين منك \nلرفع فرصة اتمام الطلب...",
+  "sent_offer_successfully": "تم الإرسال بنجاح!\nسيتم تنبيه جميع الركاب القريبين منك \nلرفع فرصة اتمام العرض...",
+  "close": "اغلاق"
+
 
 }

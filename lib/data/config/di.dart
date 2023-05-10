@@ -5,15 +5,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
-import '../../features/add_offer/provider/add_offer_provider.dart';
-import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
+import '../../features/post_offer/provider/post_offer_provider.dart';
+import '../../features/post_offer/repo/post_offer_repo.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
-import '../../features/replay_offer/provider/replay_offer_provider.dart';
-import '../../features/replay_offer/repo/replay_offer_repo.dart';
+import '../../features/add_offer/provider/add_offer_provider.dart';
+import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../main_providers/followers_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';
@@ -48,11 +48,15 @@ Future<void> init() async {
       () => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl()));
 
-  sl.registerLazySingleton(() => ReplayOfferRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -61,11 +65,15 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
   // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
-  sl.registerLazySingleton(() => ProfileProvider(editProfileRepo: sl(),addOfferProvider: sl(),scheduleProvider: sl()));
+  sl.registerLazySingleton(() => ProfileProvider(
+      editProfileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
   sl.registerLazySingleton(() => FollowersProvider());
-  sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl(), scheduleProvider: sl(),));
-  sl.registerLazySingleton(() => ReplayOfferProvider(replayOfferRepo: sl()));
+  sl.registerLazySingleton(() => PostOfferProvider(
+        postOfferRepo: sl(),
+        scheduleProvider: sl(),
+      ));
+  sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
 

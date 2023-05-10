@@ -2,9 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/dio/dio_client.dart';
 
-class ReplayOfferRepo{
+class PostOfferRepo{
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  ReplayOfferRepo({required this.dioClient,required this.sharedPreferences});
+  PostOfferRepo({required this.dioClient,required this.sharedPreferences});
 }

@@ -7,18 +7,18 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
-import '../../add_offer/provider/add_offer_provider.dart';
+import '../../post_offer/provider/post_offer_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
 
-class ProfileProvider extends ChangeNotifier  {
+class ProfileProvider extends ChangeNotifier {
   final ProfileRepo editProfileRepo;
-  final AddOfferProvider addOfferProvider;
+  final PostOfferProvider postOfferProvider;
   final ScheduleProvider scheduleProvider;
   ProfileProvider({
     required this.editProfileRepo,
-    required this.addOfferProvider,
+    required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
     getRoleType();
@@ -177,8 +177,6 @@ class ProfileProvider extends ChangeNotifier  {
     endTime = v;
     notifyListeners();
   }
-
-
 
   List<String> timeZones = ["morning", "night"];
   String startTimeZone = "morning";
@@ -544,8 +542,9 @@ class ProfileProvider extends ChangeNotifier  {
   }
 
   initDriverData() {
-    scheduleProvider. selectedDays = profileModel?.driver?.driverDays ?? [];
-    fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
+    scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
+    fullName =
+        "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
     age = profileModel?.driver?.age ?? "";
     email = profileModel?.driver?.email ?? "";
   }

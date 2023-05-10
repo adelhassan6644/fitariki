@@ -104,8 +104,8 @@ class _OnBoardingState extends State<OnBoarding> {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: pageController2,
                       onPageChanged: ((index) => setState(() {
-                        currentIndex = index;
-                      })),
+                            currentIndex = index;
+                          })),
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -173,7 +173,8 @@ class _OnBoardingState extends State<OnBoarding> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: ()=>CustomNavigator.push(Routes.DASHBOARD,replace: true),
+                        onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                            replace: true),
                         child: Text(
                           getTranslated("skip", context),
                           style: AppTextStyles.w500.copyWith(
@@ -183,13 +184,14 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
-                          if(currentIndex ==0) {
+                        onTap: () {
+                          if (currentIndex == 0) {
                             setState(() {
                               nextPage();
                             });
-                          }else{
-                            CustomNavigator.push(Routes.DASHBOARD,replace: true);
+                          } else {
+                            CustomNavigator.push(Routes.DASHBOARD,
+                                clean: true, arguments: 0);
                           }
                         },
                         child: Row(
@@ -205,11 +207,12 @@ class _OnBoardingState extends State<OnBoarding> {
                               ),
                             ),
                             RotatedBox(
-                                quarterTurns:
-                                    Provider.of<LocalizationProvider>(context,listen:false)
-                                            .isLtr
-                                        ? 0
-                                        : 2,
+                                quarterTurns: Provider.of<LocalizationProvider>(
+                                            context,
+                                            listen: false)
+                                        .isLtr
+                                    ? 0
+                                    : 2,
                                 child: customImageIconSVG(
                                     imageName: SvgImages.arrowRightAlt))
                           ],

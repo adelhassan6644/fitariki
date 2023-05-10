@@ -10,7 +10,7 @@ class LocalizationProvider extends ChangeNotifier {
     _loadCurrentLanguage();
   }
 
-  Locale _locale =   const Locale('en', 'US');
+  Locale _locale =   const Locale('ar', 'SA');
   bool _isLtr = false;
   Locale get locale => _locale;
   bool get isLtr => _isLtr;

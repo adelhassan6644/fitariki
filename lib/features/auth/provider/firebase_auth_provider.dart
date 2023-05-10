@@ -20,15 +20,13 @@ class FirebaseAuthProvider extends ChangeNotifier {
   FirebaseAuthProvider({
     required this.firebaseAuthRepo,
   }) {
-    _phoneTEC = TextEditingController(
-        text: kDebugMode ? "555666777" : null);
+    _phoneTEC = TextEditingController(text: kDebugMode ? "555666777" : null);
   }
 
   late final TextEditingController _phoneTEC;
   TextEditingController get phoneTEC => _phoneTEC;
 
   String? firebaseVerificationId;
-
 
   bool _isAgree = true;
   bool get isAgree => _isAgree;
@@ -213,7 +211,10 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!,listen: false).getRoleType();
+        Provider.of<ProfileProvider>(
+                CustomNavigator.navigatorState.currentContext!,
+                listen: false)
+            .getRoleType();
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,
@@ -244,8 +245,13 @@ class FirebaseAuthProvider extends ChangeNotifier {
       Future.delayed(Duration.zero, () async {
         await FirebaseAuth.instance.signOut();
         await firebaseAuthRepo.clearSharedData();
+        Provider.of<ProfileProvider>(
+                CustomNavigator.navigatorState.currentContext!,
+                listen: false)
+            .getRoleType();
       });
-      CustomNavigator.push(Routes.SPLASH,clean: true);
+
+      CustomNavigator.push(Routes.SPLASH, clean: true);
       notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(

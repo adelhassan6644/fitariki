@@ -180,7 +180,7 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           ),
           GestureDetector(
             onTap: () {
-              CustomNavigator.push(Routes.Pick_Location,
+              CustomNavigator.push(Routes.PICK_LOCATION,
                   arguments: provider.onSelectEndLocation);
             },
             child: Container(

@@ -5,11 +5,11 @@ import 'package:fitariki/data/config/di.dart' as di;
 
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
-import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
+import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
-import '../../features/replay_offer/provider/replay_offer_provider.dart';
+import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../main_providers/followers_provider.dart';
 import '../../main_providers/schedule_provider.dart';
@@ -24,8 +24,8 @@ abstract class ProviderList {
     // ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<ReplayOfferProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddOfferProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<PostOfferProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ScheduleProvider>()),

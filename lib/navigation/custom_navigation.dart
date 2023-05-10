@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
 import '../features/maps/pages/pick_map_screen.dart';
+import '../features/post_offer/page/success_post.dart';
 import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
 import '../main.dart';
@@ -32,10 +33,17 @@ abstract class CustomNavigator {
           fromLogin: settings.arguments as bool,
         ));
       case Routes.DASHBOARD:
-        return _pageRoute(const DashBoard());
+        return _pageRoute(DashBoard(
+          index: settings.arguments as int,
+        ));
+
       case Routes.OFFER_DETAILS:
         return _pageRoute(const OfferDetails());
-      case Routes.Pick_Location:
+
+      case Routes.SUCCESS_POST:
+        return _pageRoute(const SuccessPost());
+
+      case Routes.PICK_LOCATION:
         return _pageRoute(PickMapScreen(
           valueChanged: settings.arguments as ValueChanged,
         ));

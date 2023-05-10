@@ -16,12 +16,12 @@ import '../../../main_widgets/price_text_field.dart';
 import '../../../main_widgets/schedule/scchedule_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../provider/add_offer_provider.dart';
+import '../provider/post_offer_provider.dart';
 
 class OfferInformationWidget extends StatefulWidget {
   const OfferInformationWidget({required this.provider, Key? key})
       : super(key: key);
-  final AddOfferProvider provider;
+  final PostOfferProvider provider;
 
   @override
   State<OfferInformationWidget> createState() => _OfferInformationWidgetState();
@@ -235,7 +235,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.startDate
-                                      .dateFormat(format: "yyyy MMM d"),
+                                      .dateFormat(format: "d MMM yyyy"),
                                   style: AppTextStyles.w400.copyWith(
                                     fontSize: 13,
                                   )),
@@ -283,7 +283,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.endDate
-                                      .dateFormat(format: "yyyy MMM d"),
+                                      .dateFormat(format: "d MMM yyyy"),
                                   style: AppTextStyles.w400.copyWith(
                                     fontSize: 13,
                                   )),
@@ -432,7 +432,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                       ///end of location
                       GestureDetector(
                         onTap: () {
-                          CustomNavigator.push(Routes.Pick_Location,
+                          CustomNavigator.push(Routes.PICK_LOCATION,
                               arguments: widget.provider.onSelectEndLocation);
                         },
                         child: Container(

@@ -73,7 +73,8 @@
   "delivery_offer": "Delivery offer",
   "start_point": "Start point :",
   "final_destination": "final destination :",
-  "the_captains_starting_point_is_further_away_from_you": "The captain's starting point is further away from you",
+  "the_captain_starting_point_is_further_away_from_you": "The captain's starting point is further away from you",
+  "the_client_starting_point_is_further_away_from_you": "The client's starting point is further away from you",
   "car_details": "Car details",
   "offer": "Offer",
   "display_stats": "Display stats",
@@ -102,6 +103,7 @@
   "nationality": "Nationality",
   "save": "save",
   "make_an_offer_to_captain": "Make an offer to Captain",
+  "make_an_offer_to_client": "Make an offer to Client",
   "send": "send",
   "duration": "duration",
   "price": "price",
@@ -159,6 +161,11 @@
   "end_time":"end time",
   "minimum_price": "Minimum price",
   "maximum_price": "Maximum price",
-  "max_price_must_be_more_than_min_price": "Max price must be more than min price"
+  "max_price_must_be_more_than_min_price": "Max price must be more than min price",
+  "congratulations": "Congratulations!",
+  "sent_request_successfully": "sent successfully!\nAll captains near you will be alerted\nTo increase the chance of completing an order...",
+  "sent_offer_successfully": "sent successfully!\nAll passengers near you will be alerted\nTo increase the chance of completing an offer..",
+  "close": "close"
+
 
 }

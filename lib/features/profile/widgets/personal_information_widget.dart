@@ -180,7 +180,7 @@ class PersonalInformationWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            CustomNavigator.push(Routes.Pick_Location,
+            CustomNavigator.push(Routes.PICK_LOCATION,
                 arguments: provider.onSelectStartLocation);
           },
           child: Container(

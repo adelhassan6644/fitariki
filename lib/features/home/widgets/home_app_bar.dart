@@ -6,10 +6,13 @@ import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/main_widgets/custom_images.dart';
+import 'package:provider/provider.dart';
 
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/marquee_widget.dart';
-import '../../add_offer/page/add_offer.dart';
+import '../../auth/pages/login.dart';
+import '../../auth/provider/firebase_auth_provider.dart';
+import '../../post_offer/page/add_offer.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -62,14 +65,18 @@ class HomeAppBar extends StatelessWidget {
                   ],
                 ),
               ),
-              InkWell(
-                onTap: () => customShowModelBottomSheet(
-                  body: const AddOffer(),
-                ),
-                child: const Icon(
-                  Icons.add,
-                  size: 24,
-                ),
+              Consumer<FirebaseAuthProvider>(
+                builder: (_, provider, child) {
+                  return InkWell(
+                    child: const Icon(
+                      Icons.add,
+                      size: 24,
+                    ),
+                    onTap: () => customShowModelBottomSheet(
+                      body: provider.isLogin ? const PostOffer() : const Login(),
+                    ),
+                  );
+                },
               )
             ],
           ),

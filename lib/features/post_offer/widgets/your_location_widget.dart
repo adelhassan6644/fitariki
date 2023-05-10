@@ -9,12 +9,12 @@ import '../../../main_widgets/expansion_tile_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../provider/add_offer_provider.dart';
+import '../provider/post_offer_provider.dart';
 
 class YourLocationWidget extends StatelessWidget {
   const YourLocationWidget({required this.provider, Key? key})
       : super(key: key);
-  final AddOfferProvider provider;
+  final PostOfferProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class YourLocationWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            CustomNavigator.push(Routes.Pick_Location,
+            CustomNavigator.push(Routes.PICK_LOCATION,
                 arguments: provider.onSelectStartLocation);
           },
           child: Container(

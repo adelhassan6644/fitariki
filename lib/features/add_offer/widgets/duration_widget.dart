@@ -1,39 +1,40 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/dimensions.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/date_time_picker.dart';
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
-import '../provider/replay_offer_provider.dart';
+import '../../../main_widgets/price_text_field.dart';
+import '../provider/add_offer_provider.dart';
 
 class DurationWidget extends StatelessWidget {
   const DurationWidget({required this.provider, Key? key}) : super(key: key);
-  final ReplayOfferProvider provider;
+  final AddOfferProvider provider;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-          color: ColorResources.WHITE_COLOR,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.08),
-                blurRadius: 5.0,
-                spreadRadius: -1,
-                offset: const Offset(0, 6))
-          ]),
+        color: ColorResources.WHITE_COLOR,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4.0,
+              spreadRadius: 0,
+              offset: const Offset(0, 3))
+        ],
+      ),
       child: Column(
         children: [
+          ///start of duration
           Row(
             children: [
-              const SizedBox(
-                width: 18,
-              ),
               Expanded(
                 child: Text(
                   getTranslated("start_of_duration", context),
@@ -45,6 +46,7 @@ class DurationWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => customShowModelBottomSheet(
                   body: DateTimePicker(
+                    startDateTime: provider.startDate,
                     valueChanged: provider.onSelectStartDate,
                     label: getTranslated("start_of_duration", context),
                   ),
@@ -55,17 +57,18 @@ class DurationWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
-                  child:
-                      Text(provider.startDate.dateFormat(format: "yyyy MMM d"),
-                          style: AppTextStyles.w400.copyWith(
-                            fontSize: 13,
-                          )),
+                  child: Text(
+                      provider.startDate
+                          .dateFormat(format: "d MMM yyyy", lang: "ar-SA"),
+                      style: AppTextStyles.w400.copyWith(
+                        fontSize: 13,
+                      )),
                 ),
               )
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Container(
               height: 1,
               width: context.width,
@@ -73,11 +76,11 @@ class DurationWidget extends StatelessWidget {
               child: const SizedBox(),
             ),
           ),
+
+          ///end of duration
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                width: 18,
-              ),
               Expanded(
                 child: Text(
                   getTranslated("end_of_duration", context),
@@ -89,6 +92,7 @@ class DurationWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => customShowModelBottomSheet(
                   body: DateTimePicker(
+                    startDateTime: provider.startDate,
                     valueChanged: provider.onSelectEndDate,
                     label: getTranslated("end_of_duration", context),
                   ),
@@ -99,7 +103,9 @@ class DurationWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
-                  child: Text(provider.endDate.dateFormat(format: "yyyy MMM d"),
+                  child: Text(
+                      provider.endDate
+                          .dateFormat(format: "d MMM yyyy", lang: "ar-SA"),
                       style: AppTextStyles.w400.copyWith(
                         fontSize: 13,
                       )),
@@ -108,7 +114,7 @@ class DurationWidget extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Container(
               height: 1,
               width: context.width,
@@ -116,11 +122,10 @@ class DurationWidget extends StatelessWidget {
               child: const SizedBox(),
             ),
           ),
+
+          ///duration
           Row(
             children: [
-              const SizedBox(
-                width: 18,
-              ),
               Expanded(
                 child: Text(
                   getTranslated("duration", context),
@@ -135,55 +140,21 @@ class DurationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.add,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR,
-                        size: 15,
-                      ),
+                alignment: Alignment.center,
+                child: Center(
+                  child: Text(
+                    "${Methods.diffBtw2Dates(startDate: provider.startDate, endDate: provider.endDate)} ${getTranslated("days", context).replaceAll("ال", "").convertDigits()}",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.w400.copyWith(
+                      fontSize: 13,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 6.0.w),
-                      child: Container(
-                        width: 28.w,
-                        height: 28.h,
-                        decoration: BoxDecoration(
-                            color: ColorResources.DISABLED,
-                            border: Border.all(
-                                color: Colors.transparent, width: 0.5.h),
-                            borderRadius: BorderRadius.circular(4)),
-                        alignment: Alignment.center,
-                        child: Center(
-                          child: Text(
-                            "5",
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.w500.copyWith(
-                              fontSize: 13,
-                              color: ColorResources.WHITE_COLOR,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.remove,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR,
-                        size: 15,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Container(
               height: 1,
               width: context.width,
@@ -191,37 +162,31 @@ class DurationWidget extends StatelessWidget {
               child: const SizedBox(),
             ),
           ),
+
+          ///Minimum price
           Row(
             children: [
-              const SizedBox(
-                width: 18,
-              ),
               Expanded(
                 child: Text(
-                  getTranslated("price", context),
+                  getTranslated("minimum_price", context),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
                 ),
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                decoration: BoxDecoration(
-                    color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                    borderRadius: BorderRadius.circular(4)),
-                child: Text("200",
-                    style: AppTextStyles.w400.copyWith(
-                      fontSize: 13,
-                    )),
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              Text(
-                getTranslated("sar", context),
-                style: AppTextStyles.w400.copyWith(
-                  fontSize: 14,
+              SizedBox(
+                width: 100,
+                child: PriceTextFormField(
+                  formatter: [
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d+\.?\d{0,2}')),
+                  ],
+                  initialValue: provider.minPrice,
+                  inputType: TextInputType.number,
+                  hint: "00000",
+                  onChanged: (v) {
+                    provider.minPrice = v;
+                  },
                 ),
               ),
             ],
