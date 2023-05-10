@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
+import '../../../app/core/utils/color_resources.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/post_offer_repo.dart';
 
 class PostOfferProvider extends ChangeNotifier {
+
   PostOfferRepo postOfferRepo;
   final ScheduleProvider scheduleProvider;
-  PostOfferProvider({
-    required this.postOfferRepo,
-    required this.scheduleProvider,
-  });
+  PostOfferProvider({required this.postOfferRepo, required this.scheduleProvider,});
 
   AddressModel? startLocation;
   onSelectStartLocation(v) {
@@ -78,4 +79,90 @@ class PostOfferProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  checkData() {
+      if (startLocation == null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار الصورةالشخصية!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (scheduleProvider.selectedDays.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار الايام!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (startTime == null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال الاسم الثلاثي!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (endTime != startTime) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار العمر!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (startDate != null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار العمر!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (endDate != startDate) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار العمر!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (minPrice != null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار العمر!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (maxPrice != null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار العمر!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (endLocation == null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار الحنسية!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      return true;
+  }
+
 }

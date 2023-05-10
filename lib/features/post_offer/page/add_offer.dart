@@ -26,25 +26,30 @@ class PostOffer extends StatelessWidget {
         ),
         color: Colors.white,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Consumer<ProfileProvider>(
-            builder: (_, editProfileProvider, child) {
-              return BottomSheetAppBar(
-                title: editProfileProvider.role == "driver"
-                    ? getTranslated("add_a_delivery_offer", context)
-                    : getTranslated("add_a_delivery_request", context),
-                textBtn: getTranslated("preview", context),
-                onTap: () => customShowModelBottomSheet(
-                  body: const PreviewOffer(),
-                ),
-              );
-            },
-          ),
-          Consumer<PostOfferProvider>(builder: (_, provider, child) {
-            return Expanded(
+      child:  Consumer<PostOfferProvider>(builder: (_, provider, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Consumer<ProfileProvider>(
+              builder: (_, editProfileProvider, child) {
+                return BottomSheetAppBar(
+                    title: editProfileProvider.role == "driver"
+                        ? getTranslated("add_a_delivery_offer", context)
+                        : getTranslated("add_a_delivery_request", context),
+                    textBtn: getTranslated("preview", context),
+                    onTap: () {
+                      if(provider.checkData() == true) {
+                        customShowModelBottomSheet(
+                          body: const PreviewOffer(),
+                        );
+                      }
+                    }
+                );
+              },
+            ),
+
+            Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(
                     horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 12),
@@ -66,10 +71,10 @@ class PostOffer extends StatelessWidget {
                   )
                 ],
               ),
-            );
-          }),
-        ],
-      ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
