@@ -6,7 +6,6 @@ import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../data/error/failures.dart';
-import '../../../main_models/weak_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../add_offer/provider/add_offer_provider.dart';
 import '../../maps/models/address_model.dart';
@@ -546,7 +545,6 @@ class ProfileProvider extends ChangeNotifier  {
 
   initDriverData() {
     scheduleProvider. selectedDays = profileModel?.driver?.driverDays ?? [];
-    addOfferProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
     fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
     age = profileModel?.driver?.age ?? "";
     email = profileModel?.driver?.email ?? "";

@@ -38,7 +38,6 @@ class AddOffer extends StatelessWidget {
             },
           ),
           Consumer<AddOfferProvider>(builder: (_, provider, child) {
-            print(provider.selectedDays.length);
             return Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 12),

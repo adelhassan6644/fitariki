@@ -1,12 +1,10 @@
 import 'package:fitariki/app/core/utils/app_strings.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
-import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import '../../main_providers/schedule_provider.dart';
-
 
 class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({Key? key}) : super(key: key);

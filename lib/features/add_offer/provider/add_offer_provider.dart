@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../../main_models/weak_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/add_offer_repo.dart';
@@ -8,7 +6,10 @@ import '../repo/add_offer_repo.dart';
 class AddOfferProvider extends ChangeNotifier {
   AddOfferRepo addOfferRepo;
   final ScheduleProvider scheduleProvider;
-  AddOfferProvider( {required this.addOfferRepo,required this.scheduleProvider,});
+  AddOfferProvider({
+    required this.addOfferRepo,
+    required this.scheduleProvider,
+  });
 
   AddressModel? startLocation;
   onSelectStartLocation(v) {
@@ -24,26 +25,18 @@ class AddOfferProvider extends ChangeNotifier {
 
   String? minPrice, maxPrice;
 
-
-
-  List<WeekModel> selectedDays = [];
-
-
-
-
-
-  List<String> timeZones = ["morning", "night"];
-  String startTimeZone = "morning";
-  String endTimeZone = "morning";
-  void selectedStartTimeZone(String value) {
-    startTimeZone = value;
-    notifyListeners();
-  }
-
-  void selectedEndTimeZone(String value) {
-    endTimeZone = value;
-    notifyListeners();
-  }
+  // List<String> timeZones = ["morning", "night"];
+  // String startTimeZone = "morning";
+  // String endTimeZone = "morning";
+  // void selectedStartTimeZone(String value) {
+  //   startTimeZone = value;
+  //   notifyListeners();
+  // }
+  //
+  // void selectedEndTimeZone(String value) {
+  //   endTimeZone = value;
+  //   notifyListeners();
+  // }
 
   DateTime startTime = DateTime.now();
   onSelectStartTime(v) {
