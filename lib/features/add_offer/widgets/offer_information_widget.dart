@@ -44,7 +44,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                   return Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: GestureDetector(
-                      onTap: () => widget.provider.onSelectDay(AppStrings.days[index]),
+                      onTap: () =>
+                          widget.provider.onSelectDay(AppStrings.days[index]),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 6, horizontal: 12),
@@ -177,11 +178,11 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                 decoration: BoxDecoration(
                     color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child:
-                    Text(widget.provider.endTime.dateFormat(format: "mm : hh aa"),
-                        style: AppTextStyles.w500.copyWith(
-                          fontSize: 13,
-                        )),
+                child: Text(
+                    widget.provider.endTime.dateFormat(format: "mm : hh aa"),
+                    style: AppTextStyles.w500.copyWith(
+                      fontSize: 13,
+                    )),
               ),
             ),
             // const SizedBox(
