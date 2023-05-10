@@ -14,6 +14,7 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
 import '../../features/replay_offer/provider/replay_offer_provider.dart';
 import '../../features/replay_offer/repo/replay_offer_repo.dart';
+import '../../main_providers/followers_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';
 import '../network/netwok_info.dart';
@@ -62,6 +63,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
   sl.registerLazySingleton(() => ProfileProvider(editProfileRepo: sl(),addOfferProvider: sl(),scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
+  sl.registerLazySingleton(() => FollowersProvider());
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl(), scheduleProvider: sl(),));
   sl.registerLazySingleton(() => ReplayOfferProvider(replayOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));

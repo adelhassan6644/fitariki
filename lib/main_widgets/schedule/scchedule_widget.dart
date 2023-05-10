@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
 class ScheduleWidget extends StatelessWidget {
-  const ScheduleWidget({Key? key}) : super(key: key);
+  const ScheduleWidget({this.startPadding, Key? key}) : super(key: key);
+  final double? startPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class ScheduleWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+             SizedBox(width: startPadding??0,),
             ...List.generate(
               AppStrings.days.length,
               (index) {

@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/main_widgets/follower_widget/followers_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -50,15 +51,13 @@ class AddOffer extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  // Consumer<EditProfileProvider>(
-                  //   builder: (_, editProfileProvider, child) {
-                  //     return editProfileProvider.role == "driver"
-                  //         ? const SizedBox()
-                  //         : FollowersWidget(
-                  //             provider: provider,
-                  //           );
-                  //   },
-                  // )
+                  Consumer<ProfileProvider>(
+                    builder: (_, profileProvider, child) {
+                      return profileProvider.role == "driver"
+                          ? const SizedBox()
+                          : const FollowersWidget();
+                    },
+                  )
                 ],
               ),
             );

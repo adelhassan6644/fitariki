@@ -5,10 +5,11 @@ import '../app/core/utils/text_styles.dart';
 
 class ExpansionTileWidget extends StatelessWidget {
   const ExpansionTileWidget(
-      {required this.title, required this.children, Key? key})
+      {required this.title, required this.children, this.childrenPadding, Key? key})
       : super(key: key);
   final String title;
   final List<Widget> children;
+  final double? childrenPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ExpansionTileWidget extends StatelessWidget {
             fontSize: 14, color: ColorResources.SECOUND_PRIMARY_COLOR),
       ),
       tilePadding: const EdgeInsets.all(0),
-      childrenPadding: const EdgeInsets.all(0),
+      childrenPadding:  EdgeInsets.all(childrenPadding??0),
       collapsedIconColor: ColorResources.SECOUND_PRIMARY_COLOR,
       initiallyExpanded: true,
       iconColor: ColorResources.SYSTEM_COLOR,

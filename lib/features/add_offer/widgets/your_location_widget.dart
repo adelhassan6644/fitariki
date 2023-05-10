@@ -20,6 +20,7 @@ class YourLocationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTileWidget(
       title: getTranslated("your_residence_housing_location", context),
+      childrenPadding: 4,
       children: [
         GestureDetector(
           onTap: () {
@@ -29,9 +30,16 @@ class YourLocationWidget extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
-                border: Border.all(
-                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
-                borderRadius: BorderRadius.circular(8)),
+              color: ColorResources.WHITE_COLOR,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4.0,
+                    spreadRadius: -1,
+                    offset: const Offset(0, 2))
+              ],
+            ),
             child: Row(
               children: [
                 Expanded(

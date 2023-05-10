@@ -47,11 +47,11 @@ class CheckBoxListTile extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: AppTextStyles.w700.copyWith(
-                  fontSize: 10,
+              style: AppTextStyles.w500.copyWith(
+                  fontSize: 14,
                   color: check
                       ? ColorResources.SECOUND_PRIMARY_COLOR
-                      : ColorResources.SUBTITLE),
+                      : ColorResources.DISABLED),
             ),
           ),
           if(description != null)  Text(

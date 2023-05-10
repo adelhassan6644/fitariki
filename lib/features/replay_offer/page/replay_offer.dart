@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/bottom_sheet_app_bar.dart';
+import '../../../main_widgets/follower_widget/followers_widget.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/replay_offer_provider.dart';
 import '../widgets/duration_widget.dart';
-import '../widgets/followers_widget.dart';
 
 class ReplayOffer extends StatelessWidget {
   const ReplayOffer({Key? key}) : super(key: key);
@@ -51,9 +51,7 @@ class ReplayOffer extends StatelessWidget {
                     builder: (_, editProfileProvider, child) {
                       return editProfileProvider.role == "driver"
                           ? const SizedBox()
-                          : FollowersWidget(
-                              provider: provider,
-                            );
+                          : const FollowersWidget();
                     },
                   )
                 ],
