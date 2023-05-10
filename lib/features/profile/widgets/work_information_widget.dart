@@ -11,6 +11,7 @@ import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/expansion_tile_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
+import '../../../main_widgets/schedule/scchedule_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/profile_provider.dart';
@@ -43,54 +44,7 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           const SizedBox(
             height: 8,
           ),
-          SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 30,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: AppStrings.days.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 4.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              provider.onSelectDay(AppStrings.days[index]);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 6, horizontal: 12),
-                              decoration: BoxDecoration(
-                                  color: provider.checkSelectDay(
-                                          AppStrings.days[index])
-                                      ? ColorResources.PRIMARY_COLOR
-                                      : ColorResources.PRIMARY_COLOR
-                                          .withOpacity(0.06),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(
-                                AppStrings.days[index].dayName ?? "",
-                                style: AppTextStyles.w400.copyWith(
-                                  fontSize: 13,
-                                  height: 1.3,
-                                  color: provider.checkSelectDay(
-                                          AppStrings.days[index])
-                                      ? ColorResources.WHITE_COLOR
-                                      : ColorResources.SECOUND_PRIMARY_COLOR,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                ),
-              ],
-            ),
-          ),
+          const ScheduleWidget(),
           const SizedBox(
             height: 8,
           ),

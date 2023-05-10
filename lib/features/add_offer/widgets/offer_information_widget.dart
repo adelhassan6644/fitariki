@@ -3,16 +3,19 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_strings.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../helpers/date_time_picker.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/custom_images.dart';
 import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/expansion_tile_widget.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../../main_widgets/price_text_field.dart';
+import '../../../main_widgets/schedule/scchedule_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/add_offer_provider.dart';
@@ -32,49 +35,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
     return ExpansionTileWidget(
       title: getTranslated("other_information", context),
       children: [
-        SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ...List.generate(
-                AppStrings.days.length,
-                (index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: GestureDetector(
-                      onTap: () =>
-                          widget.provider.onSelectDay(AppStrings.days[index]),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 6, horizontal: 12),
-                        decoration: BoxDecoration(
-                            color: widget.provider
-                                    .checkSelectDay(AppStrings.days[index])
-                                ? ColorResources.PRIMARY_COLOR
-                                : ColorResources.PRIMARY_COLOR
-                                    .withOpacity(0.06),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Text(
-                          AppStrings.days[index].dayName ?? "",
-                          style: AppTextStyles.w400.copyWith(
-                            fontSize: 13,
-                            height: 1.25,
-                            color: widget.provider
-                                    .checkSelectDay(AppStrings.days[index])
-                                ? ColorResources.WHITE_COLOR
-                                : ColorResources.SECOUND_PRIMARY_COLOR,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
+        const ScheduleWidget(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Container(

@@ -7,17 +7,20 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_models/weak_model.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../add_offer/provider/add_offer_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
 
-class ProfileProvider extends ChangeNotifier {
+class ProfileProvider extends ChangeNotifier  {
   final ProfileRepo editProfileRepo;
   final AddOfferProvider addOfferProvider;
+  final ScheduleProvider scheduleProvider;
   ProfileProvider({
     required this.editProfileRepo,
     required this.addOfferProvider,
+    required this.scheduleProvider,
   }) {
     getRoleType();
   }
@@ -176,24 +179,7 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<WeekModel> selectedDays = [];
 
-  onSelectDay(WeekModel value) {
-    if (checkSelectDay(value)) {
-      selectedDays.removeAt(
-          selectedDays.indexWhere((element) => element.id == value.id));
-    } else {
-      selectedDays.add(value);
-    }
-    addOfferProvider.onSelectDay(value);
-    notifyListeners();
-  }
-
-  checkSelectDay(WeekModel value) {
-    return selectedDays.indexWhere((element) => element.id == value.id) == -1
-        ? false
-        : true;
-  }
 
   List<String> timeZones = ["morning", "night"];
   String startTimeZone = "morning";
@@ -399,7 +385,7 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (selectedDays.isEmpty) {
+      if (scheduleProvider.selectedDays.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "برجاء اختيار الايام!",
@@ -472,7 +458,7 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (selectedDays.isEmpty) {
+      if (scheduleProvider.selectedDays.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "برجاء اختيار الايام!",
@@ -511,7 +497,7 @@ class ProfileProvider extends ChangeNotifier {
       };
 
       final otherData = {
-        "days": selectedDays.toString(),
+        "days": scheduleProvider.selectedDays.toString(),
         "start_data": startTimeZone,
         "end_data": endTimeZone,
         "start_road": startRoad,
@@ -559,7 +545,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   initDriverData() {
-    selectedDays = profileModel?.driver?.driverDays ?? [];
+    scheduleProvider. selectedDays = profileModel?.driver?.driverDays ?? [];
     addOfferProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
     fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
     age = profileModel?.driver?.age ?? "";

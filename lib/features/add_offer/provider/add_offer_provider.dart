@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../main_models/weak_model.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/add_offer_repo.dart';
 
 class AddOfferProvider extends ChangeNotifier {
   AddOfferRepo addOfferRepo;
-  AddOfferProvider({required this.addOfferRepo});
+  final ScheduleProvider scheduleProvider;
+  AddOfferProvider( {required this.addOfferRepo,required this.scheduleProvider,});
 
   AddressModel? startLocation;
   onSelectStartLocation(v) {
@@ -26,20 +28,9 @@ class AddOfferProvider extends ChangeNotifier {
 
   List<WeekModel> selectedDays = [];
 
-  onSelectDay(WeekModel value) {
-    if (selectedDays.contains(value)) {
-      selectedDays.remove(value);
-    } else {
-      selectedDays.add(value);
-    }
-    notifyListeners();
-  }
 
-  checkSelectDay(WeekModel value) {
-    return selectedDays.indexWhere((element) => element.id == value.id) == -1
-        ? false
-        : true;
-  }
+
+
 
   List<String> timeZones = ["morning", "night"];
   String startTimeZone = "morning";
