@@ -165,6 +165,9 @@
   "congratulations": "تهانينا!",
   "sent_request_successfully": "تم الإرسال بنجاح!\nسيتم تنبيه جميع الكباتن القريبين منك \nلرفع فرصة اتمام الطلب...",
   "sent_offer_successfully": "تم الإرسال بنجاح!\nسيتم تنبيه جميع الركاب القريبين منك \nلرفع فرصة اتمام العرض...",
+  "sent_offer_to_captain": "تم ارسال عرضك على الكابتن ",
+  "sent_offer_to_client": "تم ارسال عرضك على الراكب ",
+  "do_alerts_to_receive_an_alert_when_accepted": "فعل التنبيهات ليصلك تنبيه عند قبوله!",
   "close": "اغلاق"
 
 

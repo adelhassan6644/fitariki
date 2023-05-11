@@ -48,15 +48,83 @@ class SuccessPost extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16.0.h),
                   child: Consumer<ProfileProvider>(
                     builder: (context, provider, child) {
-                      return Text(
-                        provider.role == "driver"
-                            ? getTranslated("sent_offer_successfully", context)
-                            : getTranslated(
-                                "sent_request_successfully", context),
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 16,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          if (name == "" && provider.role == "driver")
+                            Text(
+                              getTranslated("sent_offer_successfully", context),
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 16,
+                                  color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            ),
+                          if (name == "" && provider.role != "driver")
+                            Text(
+                              getTranslated(
+                                  "sent_request_successfully", context),
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 16,
+                                  color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            ),
+                          if (name != "" && provider.role == "driver")
+                            RichText(
+                              text: TextSpan(
+                                text: getTranslated(
+                                    "sent_offer_to_client", context),
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 16,
+                                    color:
+                                        ColorResources.SECOUND_PRIMARY_COLOR),
+                                children: [
+                                  TextSpan(
+                                    text: name,
+                                    style: AppTextStyles.w700.copyWith(
+                                        fontSize: 16,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        "\n${getTranslated("do_alerts_to_receive_an_alert_when_accepted", context)}",
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 16,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          if (name != "" && provider.role != "driver")
+                            RichText(
+                              text: TextSpan(
+                                text: getTranslated(
+                                    "sent_offer_to_captain", context),
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 16,
+                                    color:
+                                        ColorResources.SECOUND_PRIMARY_COLOR),
+                                children: [
+                                  TextSpan(
+                                    text: name,
+                                    style: AppTextStyles.w700.copyWith(
+                                        fontSize: 16,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        "\n${getTranslated("do_alerts_to_receive_an_alert_when_accepted", context)}",
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 16,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR),
+                                  ),
+                                ],
+                              ),
+                            )
+                        ],
                       );
                     },
                   ),
@@ -72,9 +140,9 @@ class SuccessPost extends StatelessWidget {
               ),
               CustomButton(
                 onTap: () {
-                  if(name != ""){
+                  if (name != "") {
                     CustomNavigator.pop();
-                  }else {
+                  } else {
                     CustomNavigator.push(Routes.DASHBOARD,
                         clean: true, arguments: 0);
                   }

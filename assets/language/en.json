@@ -165,6 +165,9 @@
   "congratulations": "Congratulations!",
   "sent_request_successfully": "sent successfully!\nAll captains near you will be alerted\nTo increase the chance of completing an order...",
   "sent_offer_successfully": "sent successfully!\nAll passengers near you will be alerted\nTo increase the chance of completing an offer..",
+  "sent_offer_to_captain": "Your offer has been sent to captain ",
+  "sent_offer_to_client": "Your offer has been sent to the passenger ",
+  "do_alerts_to_receive_an_alert_when_accepted": "Do alerts to receive an alert when accepted!",
   "close": "close"
 
 
