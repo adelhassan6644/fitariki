@@ -37,7 +37,7 @@ class PreviewOffer extends StatelessWidget {
                     : getTranslated("add_a_delivery_request", context),
                 textBtn: getTranslated("post", context),
                 onTap: () {
-                  CustomNavigator.push(Routes.SUCCESS_POST, clean: true);
+                  CustomNavigator.push(Routes.SUCCESS_POST, clean: true,arguments: "");
                 },
               );
             },

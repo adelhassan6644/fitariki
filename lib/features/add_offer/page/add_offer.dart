@@ -38,7 +38,7 @@ class ReplayOffer extends StatelessWidget {
                     : getTranslated("make_an_offer_to_captain", context),
                 textBtn: getTranslated("send", context),
                 onTap: (){
-                  CustomNavigator.push(Routes.SUCCESS_POST, clean: true);
+                  CustomNavigator.push(Routes.SUCCESS_POST, replace: true,arguments: "محمد");
                 },
               );
             },

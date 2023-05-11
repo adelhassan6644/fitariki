@@ -41,7 +41,7 @@ abstract class CustomNavigator {
         return _pageRoute(const OfferDetails());
 
       case Routes.SUCCESS_POST:
-        return _pageRoute(const SuccessPost());
+        return _pageRoute( SuccessPost(name: settings.arguments as String,));
 
       case Routes.PICK_LOCATION:
         return _pageRoute(PickMapScreen(

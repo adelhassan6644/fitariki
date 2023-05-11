@@ -13,7 +13,8 @@ import '../../app/core/utils/images.dart';
 import '../../navigation/routes.dart';
 
 class SuccessPost extends StatelessWidget {
-  const SuccessPost({Key? key}) : super(key: key);
+  const SuccessPost({required this.name, Key? key}) : super(key: key);
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +71,14 @@ class SuccessPost extends StatelessWidget {
                 height: 8.h,
               ),
               CustomButton(
-                onTap: () => CustomNavigator.push(Routes.DASHBOARD,
-                    clean: true, arguments: 0),
+                onTap: () {
+                  if(name != ""){
+                    CustomNavigator.pop();
+                  }else {
+                    CustomNavigator.push(Routes.DASHBOARD,
+                        clean: true, arguments: 0);
+                  }
+                },
                 text: getTranslated("close", context),
                 backgroundColor: ColorResources.WHITE_COLOR,
                 withBorderColor: true,
