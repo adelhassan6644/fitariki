@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../main_widgets/bottom_sheet_app_bar.dart';
 import '../../../main_widgets/follower_widget/followers_widget.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/add_offer_provider.dart';
 import '../widgets/duration_widget.dart';
@@ -35,6 +37,9 @@ class ReplayOffer extends StatelessWidget {
                     ? getTranslated("make_an_offer_to_client", context)
                     : getTranslated("make_an_offer_to_captain", context),
                 textBtn: getTranslated("send", context),
+                onTap: (){
+                  CustomNavigator.push(Routes.SUCCESS_POST, clean: true);
+                },
               );
             },
           ),
