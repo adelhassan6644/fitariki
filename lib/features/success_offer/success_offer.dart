@@ -9,8 +9,8 @@ import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/core/utils/images.dart';
-import '../../../navigation/routes.dart';
+import '../../app/core/utils/images.dart';
+import '../../navigation/routes.dart';
 
 class SuccessPost extends StatelessWidget {
   const SuccessPost({Key? key}) : super(key: key);

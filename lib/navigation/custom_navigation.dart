@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
 import '../features/maps/pages/pick_map_screen.dart';
-import '../features/post_offer/page/success_post.dart';
+import '../features/success_offer/success_offer.dart';
 import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
 import '../main.dart';
