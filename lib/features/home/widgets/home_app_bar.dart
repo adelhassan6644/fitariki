@@ -12,7 +12,7 @@ import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/marquee_widget.dart';
 import '../../auth/pages/login.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
-import '../../post_offer/page/add_offer.dart';
+import '../../post_offer/page/post_offer.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);

@@ -13,7 +13,7 @@ import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/offer_widget/captain_card.dart';
 import '../../auth/pages/login.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../../add_offer/page/replay_offer.dart';
+import '../../add_offer/page/add_offer.dart';
 import '../widgets/car_details.dart';
 import '../../../main_widgets/map_widget/map_widget.dart';
 import '../widgets/reviews_widget.dart';
