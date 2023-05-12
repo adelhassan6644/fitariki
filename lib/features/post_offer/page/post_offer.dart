@@ -26,15 +26,15 @@ class PostOffer extends StatelessWidget {
         ),
         color: Colors.white,
       ),
-      child:  Consumer<PostOfferProvider>(builder: (_, provider, child) {
+      child: Consumer<PostOfferProvider>(builder: (_, provider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Consumer<ProfileProvider>(
-              builder: (_, editProfileProvider, child) {
+              builder: (_, profileProvider, child) {
                 return BottomSheetAppBar(
-                    title: editProfileProvider.role == "driver"
+                    title: profileProvider.role == "driver"
                         ? getTranslated("add_a_delivery_offer", context)
                         : getTranslated("add_a_delivery_request", context),
                     textBtn: getTranslated("preview", context),
@@ -45,11 +45,9 @@ class PostOffer extends StatelessWidget {
                           body: const PreviewOffer(),
                         );
                       }
-                    }
-                );
+                    });
               },
             ),
-
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(

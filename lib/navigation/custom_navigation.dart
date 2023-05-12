@@ -2,6 +2,8 @@ import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
+import '../features/followers/follower_details/page/follower_details.dart';
+import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
 import '../features/success_offer/success_offer.dart';
 import '../features/profile/page/profile_page.dart';
@@ -41,11 +43,20 @@ abstract class CustomNavigator {
         return _pageRoute(const OfferDetails());
 
       case Routes.SUCCESS_POST:
-        return _pageRoute( SuccessPost(name: settings.arguments as String,));
+        return _pageRoute(SuccessPost(
+          name: settings.arguments as String,
+        ));
 
       case Routes.PICK_LOCATION:
         return _pageRoute(PickMapScreen(
           valueChanged: settings.arguments as ValueChanged,
+        ));
+      case Routes.FOLLOWERS:
+        return _pageRoute(const Followers());
+
+      case Routes.FOLLOWER_DETAILS:
+        return _pageRoute(FollowerDetails(
+          name: settings.arguments as String,
         ));
 
       default:

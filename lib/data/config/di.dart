@@ -5,6 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
+import '../../features/followers/add_follower/provider/add_follower_provider.dart';
+import '../../features/followers/add_follower/repo/add_follower_repo.dart';
+import '../../features/followers/follower_details/provider/follower_details_provider.dart';
+import '../../features/followers/follower_details/repo/follower_details_repo.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
@@ -57,6 +61,10 @@ Future<void> init() async {
       () => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => AddFollowersRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -76,6 +84,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
+  sl.registerLazySingleton(() => FollowerDetailsProvider(
+        followerDetailsRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => AddFollowerProvider(
+        addFollowersRepo: sl(),
+      ));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

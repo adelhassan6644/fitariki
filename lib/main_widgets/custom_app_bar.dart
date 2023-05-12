@@ -14,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withBack;
   final bool withSave;
   final bool withBorder;
+  final  double? actionWidth;
 
   const CustomAppBar(
       {Key? key,
@@ -22,7 +23,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.withSave = false,
       this.withBorder = false,
       this.withBack = true,
-      this.actionChild})
+        this.actionWidth,
+        this.actionChild})
       : super(key: key);
 
   @override
@@ -71,13 +73,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       onTap: () {
                         CustomNavigator.pop();
                       },
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 18,
-                        color: Colors.black,
+                      child: SizedBox(
+                        width: actionWidth?? 18,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 18,
+                              color: Colors.black,
+                            ),
+                          ],
+                        ),
                       ))
-                  : const SizedBox(
-                      width: 24,
+                  :  SizedBox(
+                      width:actionWidth?? 18,
                     ),
             ],
           ),

@@ -7,9 +7,14 @@ import '../../../app/core/utils/text_styles.dart';
 
 class BottomSheetAppBar extends StatelessWidget {
   const BottomSheetAppBar(
-      {required this.title, required this.textBtn, this.onTap, Key? key})
+      {required this.title,
+      required this.textBtn,
+      this.onTap,
+      this.action,
+      Key? key})
       : super(key: key);
   final String title, textBtn;
+  final Widget? action;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -35,9 +40,10 @@ class BottomSheetAppBar extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const SizedBox(
-                width: 40,
-              ),
+              action ??
+                  const SizedBox(
+                    width: 40,
+                  ),
               const Expanded(child: SizedBox()),
               Text(
                 title,
@@ -52,6 +58,7 @@ class BottomSheetAppBar extends StatelessWidget {
                   width: 40,
                   child: Text(
                     textBtn,
+                    textAlign: TextAlign.end,
                     style: AppTextStyles.w400.copyWith(
                         fontSize: 14, color: ColorResources.PRIMARY_COLOR),
                   ),

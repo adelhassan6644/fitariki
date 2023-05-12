@@ -118,6 +118,7 @@
   "end_of_duration": "نهاية المدة",
   "followers": "التابعين",
   "add_follower": "اضافة تابع",
+  "add": "اضافة",
   "add_a_note":"اضافة ملاحظة (اختياري)",
   "sar": "ريال",
   "replay": "اعادة",
@@ -143,6 +144,7 @@
   "insurance_image": "صورة التأمين",
   "capacity": "السعة",
   "full_name": "اسمك الثلاثي (*)",
+  "follower_full_name": "اسم التابع الثلاثي (*)",
   "identity_number": "رقم الهوية",
   "identity_image": "صورة الهوية",
   "email": "الايميل",
@@ -168,7 +170,13 @@
   "sent_offer_to_captain": "تم ارسال عرضك على الكابتن ",
   "sent_offer_to_client": "تم ارسال عرضك على الراكب ",
   "do_alerts_to_receive_an_alert_when_accepted": "فعل التنبيهات ليصلك تنبيه عند قبوله!",
-  "close": "اغلاق"
+  "close": "اغلاق",
+  "the_follower_has_the_same_location_as_my_home": "التابع يملك نفس موقع منزلي",
+  "the_follower_has_the_same_location_as_my_final_destination": "التابع يملك نفس موقع وجهتي النهائية",
+  "locate_your_work_study_location_on_the_map": "حدد مكان دوامك/دراستك بالخريطه",
+  "delete_the_follower": "حذف التابع"
+
+
 
 
 }

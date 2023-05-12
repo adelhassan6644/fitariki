@@ -10,7 +10,6 @@ import '../../../main_widgets/custom_button.dart';
 import '../provider/profile_provider.dart';
 import '../widgets/bank_data_widget.dart';
 import '../widgets/car_data_widget.dart';
-import '../../../main_widgets/schedule/scchedule_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 import '../widgets/work_information_widget.dart';

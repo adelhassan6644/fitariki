@@ -455,7 +455,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                 child: MarqueeWidget(
                                   child: Text(
                                     widget.provider.endLocation?.address ??
-                                        "حدد مكان دوامك/دراستك بالخريطه",
+                                        getTranslated("locate_your_work_study_location_on_the_map", context),
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 14,
                                         color: widget.provider.endLocation

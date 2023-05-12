@@ -45,6 +45,7 @@ class MoreOptions extends StatelessWidget {
                   MoreButton(
                     title: getTranslated("followers", context),
                     icon: SvgImages.addFollower,
+                    onTap: ()=>CustomNavigator.push(Routes.FOLLOWERS),
                   ),
                 MoreButton(
                   title: getTranslated("archives", context),

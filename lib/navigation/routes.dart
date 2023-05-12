@@ -8,4 +8,6 @@ class Routes {
   static const VERIFICATION = "VERIFICATION_CODE";
   static const PICK_LOCATION = "PICK_LOCATION";
   static const SUCCESS_POST = "SUCCESS_POST";
+  static const FOLLOWERS = "FOLLOWERS";
+  static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
 }
