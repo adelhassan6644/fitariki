@@ -58,8 +58,8 @@ class PostOffer extends StatelessWidget {
                   OfferInformationWidget(
                     provider: provider,
                   ),
-                  const SizedBox(
-                    height: 8,
+                   SizedBox(
+                    height: 8.h,
                   ),
                   Consumer<ProfileProvider>(
                     builder: (_, profileProvider, child) {
@@ -67,7 +67,10 @@ class PostOffer extends StatelessWidget {
                           ? const SizedBox()
                           : const FollowersWidget();
                     },
-                  )
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                 ],
               ),
             ),

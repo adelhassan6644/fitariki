@@ -2,6 +2,7 @@ import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
+import '../features/contatct_with_us/page/contatct_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
@@ -58,6 +59,8 @@ abstract class CustomNavigator {
         return _pageRoute(FollowerDetails(
           name: settings.arguments as String,
         ));
+        case Routes.CONTACT_WITH_US:
+        return _pageRoute(const ContactWithUs());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

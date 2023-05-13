@@ -10,4 +10,5 @@ class Routes {
   static const SUCCESS_POST = "SUCCESS_POST";
   static const FOLLOWERS = "FOLLOWERS";
   static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
+  static const CONTACT_WITH_US = "CONTACT_WITH_US";
 }

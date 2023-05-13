@@ -24,7 +24,7 @@ class AddFollower extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 410,
+        height: 450,
         width: context.width,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(

@@ -68,6 +68,7 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
+                  onTap: ()=>CustomNavigator.push(Routes.CONTACT_WITH_US),
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {
