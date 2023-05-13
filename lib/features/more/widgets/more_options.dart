@@ -49,6 +49,7 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("archives", context),
                   icon: SvgImages.bookMark,
+                  onTap: () => CustomNavigator.push(Routes.WISHLIST),
                 ),
                 MoreButton(
                   title: getTranslated("alerts", context),

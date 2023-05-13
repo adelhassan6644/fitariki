@@ -1,4 +1,5 @@
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
+import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
@@ -65,7 +66,10 @@ abstract class CustomNavigator {
           title: settings.arguments as String,
         ));
 
-      case Routes.CONTACT_WITH_US:
+      case Routes.WISHLIST:
+        return _pageRoute(const Wishlist());
+
+        case Routes.CONTACT_WITH_US:
         return _pageRoute(const ContactWithUs());
 
       default:
