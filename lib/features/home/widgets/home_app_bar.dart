@@ -21,8 +21,8 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(color: Color(0xFFFFF9F9)),
-      padding: const EdgeInsets.symmetric(
-          horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+      padding:
+          EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: Column(
         children: [
           SizedBox(
@@ -73,12 +73,16 @@ class HomeAppBar extends StatelessWidget {
                       size: 24,
                     ),
                     onTap: () => customShowModelBottomSheet(
-                      body: provider.isLogin ? const PostOffer() : const Login(),
+                      body:
+                          provider.isLogin ? const PostOffer() : const Login(),
                     ),
                   );
                 },
               )
             ],
+          ),
+          SizedBox(
+            height: 24.h,
           ),
         ],
       ),

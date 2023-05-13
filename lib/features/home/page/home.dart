@@ -27,9 +27,11 @@ class _HomeState extends State<Home> {
       children: [
         const HomeAppBar(),
         const AcceptableWidget(),
-         Consumer<FirebaseAuthProvider>(
-                builder: (context, provider, child) {
-                  return provider.isLogin? const SizedBox(): Column(
+        Consumer<FirebaseAuthProvider>(
+          builder: (context, provider, child) {
+            return provider.isLogin
+                ? const SizedBox()
+                : Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -37,7 +39,8 @@ class _HomeState extends State<Home> {
                         child: Container(
                             height: 32,
                             decoration: BoxDecoration(
-                                color: ColorResources.CONTAINER_BACKGROUND_COLOR,
+                                color:
+                                    ColorResources.CONTAINER_BACKGROUND_COLOR,
                                 borderRadius: BorderRadius.circular(6)),
                             child: Row(
                               children: List.generate(
@@ -57,7 +60,8 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   );
-                },),
+          },
+        ),
         const SearchBar(),
         Expanded(
             child: ListView(
