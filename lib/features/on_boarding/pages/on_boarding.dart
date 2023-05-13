@@ -173,8 +173,8 @@ class _OnBoardingState extends State<OnBoarding> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () => CustomNavigator.push(Routes.DASHBOARD,
-                            replace: true),
+                        onTap: () =>  CustomNavigator.push(Routes.DASHBOARD,
+                            clean: true, arguments: 0),
                         child: Text(
                           getTranslated("skip", context),
                           style: AppTextStyles.w500.copyWith(

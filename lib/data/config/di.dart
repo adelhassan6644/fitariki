@@ -18,6 +18,8 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
+import '../../features/wishlist/provider/wishlist_provider.dart';
+import '../../features/wishlist/repo/wishlist_repo.dart';
 import '../../main_providers/followers_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';
@@ -65,6 +67,8 @@ Future<void> init() async {
       () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => AddFollowersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => WishlistRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -89,6 +93,9 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(() => AddFollowerProvider(
         addFollowersRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => WishlistProvider(
+        wishlistRepo: sl(),
       ));
 
   // External

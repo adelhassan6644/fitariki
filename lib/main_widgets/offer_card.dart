@@ -13,7 +13,8 @@ import '../navigation/routes.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 
 class OfferCard extends StatelessWidget {
-  const OfferCard({Key? key}) : super(key: key);
+  const OfferCard({this.isSaved = false, Key? key}) : super(key: key);
+  final bool isSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -53,39 +54,47 @@ class OfferCard extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 50,
-                                  child: Text(
-                                    "محمد م..",
-                                    textAlign: TextAlign.start,
-                                    maxLines: 1,
-                                    style: AppTextStyles.w600.copyWith(
-                                        fontSize: 14,
-                                        height: 1.25,
-                                        overflow: TextOverflow.ellipsis),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      "محمد م..",
+                                      textAlign: TextAlign.start,
+                                      maxLines: 1,
+                                      style: AppTextStyles.w600.copyWith(
+                                          fontSize: 14,
+                                          height: 1.25,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                customImageIconSVG(
-                                    imageName: SvgImages.maleIcon,
-                                    color: ColorResources.BLUE_COLOR,
-                                    width: 11,
-                                    height: 11)
-                              ],
-                            ),
-                            const RateStars(
-                              rate: 3,
-                            )
-                          ],
-                        )
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  customImageIconSVG(
+                                      imageName: SvgImages.maleIcon,
+                                      color: ColorResources.BLUE_COLOR,
+                                      width: 11,
+                                      height: 11)
+                                ],
+                              ),
+                              const RateStars(
+                                rate: 3,
+                              )
+                            ],
+                          ),
+                        ),
+                        if (isSaved == true)
+                          InkWell(
+                            onTap: () {},
+                            child:
+                                customImageIconSVG(imageName: SvgImages.saved),
+                          )
                       ],
                     ),
                     const SizedBox(
@@ -94,7 +103,7 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.roadLine),
@@ -124,7 +133,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: 8,
+                          flex: 5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -205,22 +214,23 @@ class OfferCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "4 ايام",
-                    style: AppTextStyles.w400.copyWith(fontSize: 10),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const AcceptableAnalytics(
-                    value: 50,
-                    color: ColorResources.PRIMARY_COLOR,
-                  ),
-                ],
-              )
+              if (isSaved != true)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "4 ايام",
+                      style: AppTextStyles.w400.copyWith(fontSize: 10),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const AcceptableAnalytics(
+                      value: 50,
+                      color: ColorResources.PRIMARY_COLOR,
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
