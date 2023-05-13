@@ -18,23 +18,23 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>CustomNavigator.push(Routes.OFFER_DETAILS),
+      onTap: () => CustomNavigator.push(Routes.OFFER_DETAILS),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           decoration: BoxDecoration(
-              color: ColorResources.WHITE_COLOR,
-              borderRadius: BorderRadius.circular(8),
-             boxShadow: [
-               BoxShadow(
-                   color: Colors.black54.withOpacity(0.2),
-                   blurRadius: 7.0,
-                   spreadRadius: -1,
-                   offset: const Offset(0,2)
-               )
-             ],),
+            color: ColorResources.WHITE_COLOR,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black54.withOpacity(0.2),
+                  blurRadius: 7.0,
+                  spreadRadius: -1,
+                  offset: const Offset(0, 2))
+            ],
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +46,8 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
-                            image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                            image:
+                                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -103,12 +104,15 @@ class OfferCard extends StatelessWidget {
                                   child: Text(
                                     "20-12 يوم",
                                     textAlign: TextAlign.start,
-                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
                                   color: ColorResources.HINT_COLOR,
                                   height: 10,
@@ -120,7 +124,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex:8,
+                          flex: 8,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -130,7 +134,9 @@ class OfferCard extends StatelessWidget {
                                   child: Text(
                                     "3 ايام بالإسبوع",
                                     textAlign: TextAlign.start,
-                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                               ),
@@ -155,12 +161,15 @@ class OfferCard extends StatelessWidget {
                                   child: Text(
                                     "9 صباحاً - 5 مساءً",
                                     textAlign: TextAlign.start,
-                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
                                   color: ColorResources.HINT_COLOR,
                                   height: 10,
@@ -182,7 +191,9 @@ class OfferCard extends StatelessWidget {
                                   child: Text(
                                     "400 - 600 ريال",
                                     textAlign: TextAlign.start,
-                                    style: AppTextStyles.w400.copyWith(fontSize: 10,overflow: TextOverflow.ellipsis),
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                               ),
@@ -197,11 +208,16 @@ class OfferCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("4 ايام",style: AppTextStyles.w400.copyWith(fontSize: 10),),
-                  const SizedBox(height: 10,),
+                  Text(
+                    "4 ايام",
+                    style: AppTextStyles.w400.copyWith(fontSize: 10),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const AcceptableAnalytics(
-                      value:  50,
-                      color: ColorResources.PRIMARY_COLOR,
+                    value: 50,
+                    color: ColorResources.PRIMARY_COLOR,
                   ),
                 ],
               )
