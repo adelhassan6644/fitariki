@@ -37,15 +37,14 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("personal_information", context),
                   icon: SvgImages.file,
-                  onTap: () =>
-                      CustomNavigator.push(Routes.EDIT_PROFILE,
-                          arguments: false),
+                  onTap: () => CustomNavigator.push(Routes.EDIT_PROFILE,
+                      arguments: false),
                 ),
                 if (provider.role != "driver")
                   MoreButton(
                     title: getTranslated("followers", context),
                     icon: SvgImages.addFollower,
-                    onTap: ()=>CustomNavigator.push(Routes.FOLLOWERS),
+                    onTap: () => CustomNavigator.push(Routes.FOLLOWERS),
                   ),
                 MoreButton(
                   title: getTranslated("archives", context),
@@ -64,11 +63,17 @@ class MoreOptions extends StatelessWidget {
                       ? getTranslated("clients_evaluation", context)
                       : getTranslated("captain_evaluation", context),
                   icon: SvgImages.rate,
+                  onTap: () => CustomNavigator.push(
+                    Routes.RATTING,
+                    arguments: provider.role == "driver"
+                        ? getTranslated("clients_evaluation", context)
+                        : getTranslated("captain_evaluation", context),
+                  ),
                 ),
                 MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
-                  onTap: ()=>CustomNavigator.push(Routes.CONTACT_WITH_US),
+                  onTap: () => CustomNavigator.push(Routes.CONTACT_WITH_US),
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {
@@ -77,7 +82,7 @@ class MoreOptions extends StatelessWidget {
                       icon: SvgImages.logout,
                       withBorder: false,
                       isLogout: true,
-                      onTap:authProvider.logOut,
+                      onTap: authProvider.logOut,
                     );
                   },
                 ),

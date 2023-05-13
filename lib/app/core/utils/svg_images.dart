@@ -35,6 +35,8 @@ class SvgImages {
   static const String call= 'assets/svgs/call.svg';
   static const String logout = 'assets/svgs/logout.svg';
   static const String pic = 'assets/svgs/pic.svg';
+  static const String seen = 'assets/svgs/seen.svg';
+  static const String notSeen = 'assets/svgs/not_seen.svg';
 
   static const String phoneIcon = 'assets/svgs/phone.svg';
   static const String arrowRightIcon = 'assets/svgs/arrow_right.svg';

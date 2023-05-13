@@ -6,6 +6,7 @@ import '../features/contatct_with_us/page/contatct_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
+import '../features/ratting/page/ratting_page.dart';
 import '../features/success_offer/success_offer.dart';
 import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
@@ -59,7 +60,12 @@ abstract class CustomNavigator {
         return _pageRoute(FollowerDetails(
           name: settings.arguments as String,
         ));
-        case Routes.CONTACT_WITH_US:
+      case Routes.RATTING:
+        return _pageRoute(Ratting(
+          title: settings.arguments as String,
+        ));
+
+      case Routes.CONTACT_WITH_US:
         return _pageRoute(const ContactWithUs());
 
       default:
