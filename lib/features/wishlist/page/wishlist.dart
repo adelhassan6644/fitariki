@@ -42,7 +42,8 @@ class Wishlist extends StatelessWidget {
                             provider.tabs.length,
                             (index) => Expanded(
                                 child: TabWidget(
-                              title: getTranslated(provider.tabs[index], context),
+                              title:
+                                  getTranslated(provider.tabs[index], context),
                               isSelected: index == provider.currentTab,
                               onTab: () => provider.selectedTab(index),
                             )),

@@ -133,7 +133,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: 5,
+                          flex:isSaved?7 : 5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -190,7 +190,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: 5,
+                          flex: isSaved?7 :5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.wallet),
