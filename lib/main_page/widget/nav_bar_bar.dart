@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
-import '../../main_widgets/custom_images.dart';
+import '../../components/custom_images.dart';
 
 class BottomNavBarItem extends StatelessWidget {
 final String? imageIcon;
