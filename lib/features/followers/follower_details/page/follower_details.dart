@@ -1,7 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/followers/follower_details/provider/follower_details_provider.dart';
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,12 +9,13 @@ import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
 import '../../../../app/core/utils/text_styles.dart';
 import '../../../../app/core/utils/validation.dart';
-import '../../../../main_widgets/chekbox_listtile.dart';
-import '../../../../main_widgets/custom_button.dart';
-import '../../../../main_widgets/custom_images.dart';
-import '../../../../main_widgets/custom_text_form_field.dart';
-import '../../../../main_widgets/marquee_widget.dart';
-import '../../../../main_widgets/tab_widget.dart';
+import '../../../../components/chekbox_listtile.dart';
+import '../../../../components/custom_app_bar.dart';
+import '../../../../components/custom_button.dart';
+import '../../../../components/custom_images.dart';
+import '../../../../components/custom_text_form_field.dart';
+import '../../../../components/marquee_widget.dart';
+import '../../../../components/tab_widget.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 

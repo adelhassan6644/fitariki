@@ -6,8 +6,8 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/rate_stars.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/rate_stars.dart';
 
 class ReviewsWidget extends StatelessWidget {
   const ReviewsWidget({Key? key}) : super(key: key);

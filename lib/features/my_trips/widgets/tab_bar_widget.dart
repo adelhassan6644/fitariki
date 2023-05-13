@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/tab_widget.dart';
+import '../../../components/tab_widget.dart';
 import '../provider/my_trips_provider.dart';
 
 class TabBerWidget extends StatelessWidget {

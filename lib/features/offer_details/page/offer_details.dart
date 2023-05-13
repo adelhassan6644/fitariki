@@ -3,19 +3,19 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
-import 'package:fitariki/main_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/svg_images.dart';
-import '../../../main_widgets/custom_app_bar.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
-import '../../../main_widgets/offer_widget/captain_card.dart';
+import '../../../components/custom_app_bar.dart';
+import '../../../components/custom_button.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../main_widgets/captain_card.dart';
+import '../../../main_widgets/map_widget.dart';
 import '../../auth/pages/login.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../add_offer/page/add_offer.dart';
 import '../widgets/car_details.dart';
-import '../../../main_widgets/map_widget/map_widget.dart';
 import '../widgets/reviews_widget.dart';
 
 class OfferDetails extends StatelessWidget {

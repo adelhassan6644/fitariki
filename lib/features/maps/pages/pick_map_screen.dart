@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_strings.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
-import '../../../main_widgets/custom_app_bar.dart';
-import '../../../main_widgets/custom_button.dart';
+import '../../../components/custom_app_bar.dart';
+import '../../../components/custom_button.dart';
 import '../models/address_model.dart';
 import '../provider/location_provider.dart';
 

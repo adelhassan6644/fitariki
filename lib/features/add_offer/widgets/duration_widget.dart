@@ -6,9 +6,9 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../components/price_text_field.dart';
 import '../../../helpers/date_time_picker.dart';
-import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
-import '../../../main_widgets/price_text_field.dart';
 import '../provider/add_offer_provider.dart';
 
 class DurationWidget extends StatelessWidget {

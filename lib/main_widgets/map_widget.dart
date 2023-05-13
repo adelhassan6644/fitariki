@@ -4,11 +4,11 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/maps/models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../app/core/utils/color_resources.dart';
-import '../../app/core/utils/dimensions.dart';
-import '../../app/core/utils/text_styles.dart';
-import '../../app/localization/localization/language_constant.dart';
-import '../marquee_widget.dart';
+import '../app/core/utils/color_resources.dart';
+import '../app/core/utils/dimensions.dart';
+import '../app/core/utils/text_styles.dart';
+import '../app/localization/localization/language_constant.dart';
+import '../components/marquee_widget.dart';
 
 class MapWidget extends StatefulWidget {
   const MapWidget({this.startPoint, this.endPoint, Key? key}) : super(key: key);

@@ -5,11 +5,10 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:provider/provider.dart';
-
-import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
-import '../../../main_widgets/marquee_widget.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../components/marquee_widget.dart';
 import '../../auth/pages/login.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
 import '../../post_offer/page/post_offer.dart';

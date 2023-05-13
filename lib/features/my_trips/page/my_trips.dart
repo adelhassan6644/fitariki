@@ -1,8 +1,8 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import '../../../components/custom_app_bar.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
 import '../../guest/guest_mode.dart';
 import '../provider/my_trips_provider.dart';

@@ -1,8 +1,9 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
-import 'package:fitariki/main_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../../components/custom_app_bar.dart';
+import '../../../components/custom_button.dart';
 
 class ContactWithUs extends StatelessWidget {
   const ContactWithUs({Key? key}) : super(key: key);

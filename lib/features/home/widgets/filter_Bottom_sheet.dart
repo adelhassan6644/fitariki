@@ -7,7 +7,8 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../main_widgets/tab_widget.dart';
+import '../../../components/tab_widget.dart';
+
 
 class FilterBottomSheet extends StatefulWidget {
   const FilterBottomSheet({Key? key}) : super(key: key);

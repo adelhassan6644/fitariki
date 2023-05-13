@@ -2,12 +2,12 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
-import 'package:fitariki/main_widgets/custom_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../../main_widgets/marquee_widget.dart';
-import '../../../main_widgets/rate_stars.dart';
-import '../../features/home/widgets/acceptable_analytics_widget.dart';
+import '../components/custom_images.dart';
+import '../components/custom_network_image.dart';
+import '../components/marquee_widget.dart';
+import '../components/rate_stars.dart';
+import '../features/home/widgets/acceptable_analytics_widget.dart';
 
 class CaptainCard extends StatelessWidget {
   const CaptainCard(

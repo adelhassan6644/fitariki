@@ -4,9 +4,10 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/expansion_tile_widget.dart';
-import '../../../main_widgets/marquee_widget.dart';
+
+import '../../../components/custom_images.dart';
+import '../../../components/expansion_tile_widget.dart';
+import '../../../components/marquee_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/post_offer_provider.dart';

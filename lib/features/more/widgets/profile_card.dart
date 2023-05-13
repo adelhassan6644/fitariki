@@ -2,15 +2,15 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
-import 'package:fitariki/main_widgets/custom_network_image.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/rate_stars.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_network_image.dart';
+import '../../../components/rate_stars.dart';
 import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
 

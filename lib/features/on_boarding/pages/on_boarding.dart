@@ -7,11 +7,11 @@ import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/app/localization/provider/localization_provider.dart';
 import 'package:fitariki/features/on_boarding/widgets/step_widget.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import '../../../app/core/utils/images.dart';
 import '../../../app/core/utils/text_styles.dart';
+import '../../../components/custom_images.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);

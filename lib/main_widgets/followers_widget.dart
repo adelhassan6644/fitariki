@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/text_styles.dart';
-import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/chekbox_listtile.dart';
+import '../../app/core/utils/color_resources.dart';
+import '../../app/core/utils/text_styles.dart';
+import '../../app/localization/localization/language_constant.dart';
+import '../components/chekbox_listtile.dart';
 
 class FollowersWidget extends StatelessWidget {
   const FollowersWidget({Key? key}) : super(key: key);

@@ -1,4 +1,3 @@
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,8 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/count_down.dart';
+import '../../../components/count_down.dart';
+import '../../../components/custom_app_bar.dart';
 import '../provider/firebase_auth_provider.dart';
 
 class Verification extends StatelessWidget {

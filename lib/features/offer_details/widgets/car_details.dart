@@ -1,11 +1,11 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_images.dart';
 
 class CarDetails extends StatelessWidget {
   const CarDetails({Key? key}) : super(key: key);

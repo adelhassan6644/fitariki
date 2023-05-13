@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/custom_app_bar.dart';
+import '../../../components/custom_app_bar.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
 import '../../guest/guest_mode.dart';
 import '../../profile/provider/profile_provider.dart';

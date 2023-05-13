@@ -1,11 +1,11 @@
 import 'package:fitariki/app/core/utils/svg_images.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
-import '../../../main_widgets/custom_network_image.dart';
-import '../../../main_widgets/rate_stars.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_network_image.dart';
+import '../../../components/rate_stars.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({Key? key}) : super(key: key);

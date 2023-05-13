@@ -2,13 +2,13 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
-import 'package:fitariki/main_widgets/custom_drop_down_button.dart';
-import 'package:fitariki/main_widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_drop_down_button.dart';
+import '../../../components/custom_image_picker_widget.dart';
+import '../../../components/custom_text_form_field.dart';
 import '../../../helpers/image_picker_helper.dart';
-import '../../../main_widgets/custom_image_picker_widget.dart';
 import '../provider/profile_provider.dart';
 
 class BankDataWidget extends StatelessWidget {

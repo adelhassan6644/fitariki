@@ -1,12 +1,12 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/post_offer/page/preview_offer.dart';
-import 'package:fitariki/main_widgets/follower_widget/followers_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/bottom_sheet_app_bar.dart';
-import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
+import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../main_widgets/followers_widget.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';
 import '../widgets/offer_information_widget.dart';

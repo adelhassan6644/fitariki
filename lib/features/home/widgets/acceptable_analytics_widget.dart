@@ -1,8 +1,7 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:flutter/material.dart';
-
 import '../../../app/core/utils/text_styles.dart';
-import '../../../main_widgets/half_circle_analytics_chart.dart';
+import '../../../components/half_circle_analytics_chart.dart';
 
 class AcceptableAnalytics extends StatelessWidget {
   const AcceptableAnalytics({

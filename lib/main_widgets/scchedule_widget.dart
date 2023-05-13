@@ -4,7 +4,7 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import '../../main_providers/schedule_provider.dart';
+import '../main_providers/schedule_provider.dart';
 
 class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({this.startPadding, Key? key}) : super(key: key);

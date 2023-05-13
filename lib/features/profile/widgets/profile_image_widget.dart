@@ -5,9 +5,9 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_network_image.dart';
 import '../../../helpers/image_picker_helper.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/custom_network_image.dart';
 import '../provider/profile_provider.dart';
 
 class ProfileImageWidget extends StatelessWidget {

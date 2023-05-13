@@ -9,9 +9,9 @@ import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../components/loading_dialog.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
-import '../../../main_widgets/loading_dialog.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../repo/firebase_auth_repo.dart';
 

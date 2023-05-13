@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
+import '../../../components/custom_images.dart';
 
 class AcceptableWidget extends StatelessWidget {
   const AcceptableWidget({Key? key}) : super(key: key);

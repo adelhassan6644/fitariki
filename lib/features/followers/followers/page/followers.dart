@@ -1,13 +1,13 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/followers/add_follower/page/add_follower.dart';
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/text_styles.dart';
-import '../../../../main_widgets/custom_show_model_bottom_sheet.dart';
+import '../../../../components/custom_app_bar.dart';
+import '../../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../../navigation/routes.dart';
 import '../widgets/follower_button.dart';
 

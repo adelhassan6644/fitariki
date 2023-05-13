@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../components/custom_text_form_field.dart';
-import '../../../components/follower_widget/followers_widget.dart';
+import '../../../main_widgets/followers_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';

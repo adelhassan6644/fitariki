@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/main_widgets/tab_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../components/tab_widget.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
-import '../widgets/offer_card.dart';
+import '../../../main_widgets/offer_card.dart';
 import '../widgets/search_bar.dart';
 
 class Home extends StatefulWidget {

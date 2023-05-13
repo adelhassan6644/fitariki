@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/custom_network_image.dart';
-import '../../../main_widgets/rate_stars.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_network_image.dart';
+import '../../../components/rate_stars.dart';
 
 class RattingCard extends StatelessWidget {
   const RattingCard({this.isSeen = true, Key? key}) : super(key: key);

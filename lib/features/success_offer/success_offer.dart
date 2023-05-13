@@ -3,13 +3,13 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
-import 'package:fitariki/main_widgets/custom_button.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app/core/utils/images.dart';
+import '../../components/custom_button.dart';
+import '../../components/custom_images.dart';
 import '../../navigation/routes.dart';
 
 class SuccessPost extends StatelessWidget {

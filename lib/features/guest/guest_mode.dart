@@ -4,8 +4,8 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/core/utils/dimensions.dart';
-import '../../main_widgets/custom_button.dart';
-import '../../main_widgets/custom_show_model_bottom_sheet.dart';
+import '../../components/custom_button.dart';
+import '../../components/custom_show_model_bottom_sheet.dart';
 import '../auth/pages/login.dart';
 
 class GuestMode extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/main_widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import '../../../components/custom_app_bar.dart';
 import '../widegts/ratting_card.dart';
 
 class Ratting extends StatelessWidget {

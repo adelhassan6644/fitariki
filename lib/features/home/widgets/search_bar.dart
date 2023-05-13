@@ -5,10 +5,9 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/main_widgets/custom_images.dart';
-
 import '../../../app/localization/provider/localization_provider.dart';
-import '../../../main_widgets/custom_show_model_bottom_sheet.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
 import 'filter_Bottom_sheet.dart';
 
 class SearchBar extends StatelessWidget {
@@ -69,7 +68,7 @@ class SearchBar extends StatelessWidget {
                 )),
                 child: GestureDetector(
                     onTap: () => customShowModelBottomSheet(
-                      body: FilterBottomSheet(),),
+                      body: const FilterBottomSheet(),),
                     child: customImageIconSVG(imageName: SvgImages.filter)))
           ],
         ),

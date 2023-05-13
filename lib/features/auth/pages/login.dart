@@ -9,10 +9,10 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../main_widgets/chekbox_listtile.dart';
-import '../../../main_widgets/custom_button.dart';
-import '../../../main_widgets/custom_text_form_field.dart';
-import '../../../main_widgets/tab_widget.dart';
+import '../../../components/chekbox_listtile.dart';
+import '../../../components/custom_button.dart';
+import '../../../components/custom_text_form_field.dart';
+import '../../../components/tab_widget.dart';
 import '../provider/firebase_auth_provider.dart';
 
 class Login extends StatelessWidget {

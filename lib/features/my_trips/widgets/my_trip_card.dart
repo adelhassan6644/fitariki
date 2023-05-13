@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
-import '../../../main_widgets/custom_images.dart';
-import '../../../main_widgets/custom_network_image.dart';
-import '../../../main_widgets/marquee_widget.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/custom_network_image.dart';
+import '../../../components/marquee_widget.dart';
 
 class MyTripCard extends StatelessWidget {
   const MyTripCard(
