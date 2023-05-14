@@ -306,7 +306,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         children: [
                           Expanded(
                             child: Text(
-                              getTranslated("duration", context),
+                              getTranslated("delivery_days", context),
                               style: AppTextStyles.w400.copyWith(
                                 fontSize: 14,
                               ),
@@ -322,7 +322,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             alignment: Alignment.center,
                             child: Center(
                               child: Text(
-                                "${widget.provider.counts?.count}",
+                                "${widget.provider.counts?.count??0}",
                                 textAlign: TextAlign.center,
                                 style: AppTextStyles.w400.copyWith(
                                   fontSize: 13,

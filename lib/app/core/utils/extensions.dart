@@ -17,6 +17,7 @@ extension DateExtention on DateTime {
   }
 }
 
+
 String localeCode =  Provider.of<LocalizationProvider>(
     CustomNavigator.navigatorState.currentContext!,
     listen: false)

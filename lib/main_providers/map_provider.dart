@@ -2,16 +2,13 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../app/core/utils/app_strings.dart';
-import '../app/core/utils/images.dart';
 import '../features/maps/models/address_model.dart';
 
 class MapProvider extends ChangeNotifier {
   CameraPosition mapCameraPosition = const CameraPosition(target: LatLng(24.280888, 37.987794),zoom: 1);
   GoogleMapController? googleMapController;
-  EdgeInsets googleMapPadding = EdgeInsets.all(10);
-  // this will hold the generated polylines
+  EdgeInsets googleMapPadding = const EdgeInsets.all(10);
   Set<Polyline> gMapPolylines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
@@ -52,11 +49,11 @@ class MapProvider extends ChangeNotifier {
     gMapMarkers = {};
     gMapMarkers.add(
       Marker(
-        markerId: MarkerId('sourcePin'),
+        markerId: const MarkerId('sourcePin'),
         position: LatLng(double.parse(pickupLocation!.latitude!),
             double.parse(pickupLocation!.longitude!)),
         icon: sourceIcon!,
-        anchor: Offset(0.5, 0.5),
+        anchor: const Offset(0.5, 0.5),
       ),
     );
     // destination pin

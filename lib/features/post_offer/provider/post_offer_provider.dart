@@ -214,7 +214,6 @@ class PostOfferProvider extends ChangeNotifier {
 
       // duration:
     );
-
       isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);
