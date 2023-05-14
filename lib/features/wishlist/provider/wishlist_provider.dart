@@ -8,7 +8,16 @@ class WishlistProvider extends ChangeNotifier {
     required this.wishlistRepo,
   });
 
-  List<String> tabs = ["delivery_offers", "captains"];
+  List<String> driverTabs = [
+    "delivery_offers",
+     "passengers"
+  ];
+
+  List<String> clientTabs = [
+    "delivery_offers",
+     "captains"
+  ];
+
   int currentTab = 0;
   selectedTab(int value) {
     currentTab = value;

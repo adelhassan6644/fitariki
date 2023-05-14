@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/maps/models/address_model.dart';
 import 'package:fitariki/main_providers/map_provider.dart';
@@ -109,7 +108,7 @@ Future.delayed(Duration.zero,(){
                     onMapCreated: vm.onMapCreated,
                     padding: vm.googleMapPadding,
                     zoomGesturesEnabled: true,
-                    zoomControlsEnabled: true,
+                    zoomControlsEnabled: false,
                     myLocationButtonEnabled: false,
                     myLocationEnabled: false,
                     markers: vm.gMapMarkers,

@@ -6,4 +6,5 @@ class WishlistRepo {
   final SharedPreferences sharedPreferences;
 
   WishlistRepo({required this.dioClient, required this.sharedPreferences});
+
 }

@@ -6,6 +6,7 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/tab_widget.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../provider/wishlist_provider.dart';
 import '../widgets/captains_widget.dart';
 import '../widgets/delievery_orders_widget.dart';
@@ -39,14 +40,20 @@ class Wishlist extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6)),
                           child: Row(
                               children: List.generate(
-                            provider.tabs.length,
-                            (index) => Expanded(
-                                child: TabWidget(
-                              title:
-                                  getTranslated(provider.tabs[index], context),
-                              isSelected: index == provider.currentTab,
-                              onTab: () => provider.selectedTab(index),
-                            )),
+                            provider.clientTabs.length,
+                            (index) => Consumer<ProfileProvider>(
+                                builder: (_, profileProvider, child) {
+                              return Expanded(
+                                  child: TabWidget(
+                                title: profileProvider.role == "driver"
+                                    ? getTranslated(
+                                        provider.driverTabs[index], context)
+                                    : getTranslated(
+                                        provider.clientTabs[index], context),
+                                isSelected: index == provider.currentTab,
+                                onTab: () => provider.selectedTab(index),
+                              ));
+                            }),
                           )),
                         )),
                     if (provider.currentTab == 0) const DeliveryOrdersWidgets(),

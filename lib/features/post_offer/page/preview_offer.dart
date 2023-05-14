@@ -34,8 +34,8 @@ class PreviewOffer extends StatelessWidget {
                     : getTranslated("add_a_delivery_request", context),
                 textBtn: getTranslated("post", context),
                 onTap: () {
-                  Provider.of<PostOfferProvider>(context, listen: false)
-                      .postOffer();
+                  Provider.of<PostOfferProvider>(context,listen: false).postOffer();
+
                 },
               );
             },
@@ -48,15 +48,10 @@ class PreviewOffer extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   CaptainCard(
-                    days: provider.scheduleProvider.selectedDays
-                        .map((e) => e.dayName)
-                        .toList()
-                        .join("،"),
-                    daysNumInWeek: provider.scheduleProvider.selectedDays.length
-                        .toString(),
+                    days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
+                    daysNumInWeek: provider.scheduleProvider.selectedDays.length.toString(),
                     daysNum: provider.counts!.count.toString(),
-                    priceRange:
-                        "${provider.minPrice}- ${provider.maxPrice} SAR",
+                    priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
                     timeRange:
                         "${provider.startTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}",
                     withAnalytics: false,
