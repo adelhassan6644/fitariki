@@ -322,7 +322,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             alignment: Alignment.center,
                             child: Center(
                               child: Text(
-                                "${Methods.diffBtw2Dates(startDate: widget.provider.startDate, endDate: widget.provider.endDate)} ${getTranslated("days", context).replaceAll("ال", "")}",
+                                "${widget.provider.counts?.count}",
                                 textAlign: TextAlign.center,
                                 style: AppTextStyles.w400.copyWith(
                                   fontSize: 13,
@@ -455,7 +455,9 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                 child: MarqueeWidget(
                                   child: Text(
                                     widget.provider.endLocation?.address ??
-                                        getTranslated("locate_your_work_study_location_on_the_map", context),
+                                        getTranslated(
+                                            "locate_your_work_study_location_on_the_map",
+                                            context),
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 14,
                                         color: widget.provider.endLocation

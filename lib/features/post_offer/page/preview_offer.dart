@@ -37,7 +37,8 @@ class PreviewOffer extends StatelessWidget {
                     : getTranslated("add_a_delivery_request", context),
                 textBtn: getTranslated("post", context),
                 onTap: () {
-                  CustomNavigator.push(Routes.SUCCESS_POST, clean: true,arguments: "");
+                  Provider.of<PostOfferProvider>(context,listen: false).postOffer();
+
                 },
               );
             },
@@ -56,10 +57,8 @@ class PreviewOffer extends StatelessWidget {
                         .join("،"),
                     daysNumInWeek: provider.scheduleProvider.selectedDays.length
                         .toString(),
-                    daysNum: Methods.diffBtw2Dates(
-                        startDate: provider.startDate,
-                        endDate: provider.endDate),
-                    priceRange: "${provider.minPrice}- ${provider.maxPrice}",
+                    daysNum: provider.counts!.count.toString(),
+                    priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
                     timeRange:
                         "${provider.startTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}",
                     withAnalytics: false,

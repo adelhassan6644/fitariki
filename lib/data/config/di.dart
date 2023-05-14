@@ -21,6 +21,7 @@ import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../features/wishlist/repo/wishlist_repo.dart';
 import '../../main_providers/followers_provider.dart';
+import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';
 import '../network/netwok_info.dart';
@@ -84,6 +85,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => PostOfferProvider(
         postOfferRepo: sl(),
         scheduleProvider: sl(),
+      ));
+  sl.registerLazySingleton(() => MapProvider(
+
       ));
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));

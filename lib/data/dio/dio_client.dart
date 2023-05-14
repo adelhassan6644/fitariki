@@ -30,7 +30,10 @@ class DioClient extends ApiClient {
         "Accept": " application/json",
         'X-Api-Key': EndPoints.apiKey
       };
-    dio.interceptors.add(PrettyDioLogger());
+    dio.interceptors.add(PrettyDioLogger(
+      request: true,
+      responseBody: true,requestBody: true,requestHeader: true
+    ));
   }
 
   // void updateHeader({required String token}) {

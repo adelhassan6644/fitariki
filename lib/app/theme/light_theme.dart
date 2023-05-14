@@ -6,9 +6,10 @@ import '../core/utils/dimensions.dart';
 
 ThemeData light = ThemeData(
   fontFamily: AppStrings.fontFamily,
+  useMaterial3: true,
   primaryColor:ColorResources.PRIMARY_COLOR,
   brightness: Brightness.light,
-  accentColor: Colors.white,
+  // accentColor: Colors.white,
   scaffoldBackgroundColor: ColorResources.BACKGROUND_COLOR,
   focusColor: const Color(0xFFADC4C8),
   hintColor: ColorResources.HINT_COLOR,

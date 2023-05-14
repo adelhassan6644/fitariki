@@ -15,7 +15,7 @@ import '../provider/location_provider.dart';
 
 class PickMapScreen extends StatefulWidget {
   const PickMapScreen({required this.valueChanged, Key? key}) : super(key: key);
-  final ValueChanged<AddressModel> valueChanged;
+  final ValueChanged<LocationModel> valueChanged;
 
   @override
   State<PickMapScreen> createState() => _PickMapScreenState();

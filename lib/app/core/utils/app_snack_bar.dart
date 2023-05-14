@@ -23,7 +23,9 @@ class CustomSnackBar{
   static showSnackBar({required AppNotification notification}) {
     Timer(Duration.zero, () {
       CustomNavigator.scaffoldState.currentState!.showSnackBar(
+
         SnackBar(
+
           padding: const EdgeInsets.all(0),
           duration: const Duration(seconds: 2),
           behavior: notification.isFloating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,

@@ -1,14 +1,14 @@
-class AddressModel {
+class LocationModel {
   int? id;
   String? latitude;
   String? longitude;
   String? address;
   String? cityName;
 
-  AddressModel(
+  LocationModel(
       {this.id, this.address, this.latitude, this.longitude, this.cityName});
 
-  AddressModel.fromJson(Map<String, dynamic> json) {
+  LocationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     address = json['address'];
     latitude = json['latitude'];

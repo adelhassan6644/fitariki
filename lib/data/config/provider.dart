@@ -15,6 +15,7 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../main_providers/followers_provider.dart';
+import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
 abstract class ProviderList {
@@ -30,6 +31,8 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<AddOfferProvider>()),
     ChangeNotifierProvider(
       create: (_) => di.sl<PostOfferProvider>(),
+    ),   ChangeNotifierProvider(
+      create: (_) => di.sl<MapProvider>(),
     ),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),

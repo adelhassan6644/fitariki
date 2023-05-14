@@ -2,7 +2,7 @@ import '../../../main_models/weak_model.dart';
 
 class AppStrings {
   static const String appName = 'fitariki';
-  static const String googleApiKey = 'AIzaSyB_l2x6zgnLTF4MKxX3S4Df9urLN6vLNP0';
+  static const String googleApiKey = 'AIzaSyBxi2NcKA8JE90J07U9M2D90tHgaSg3Xjg';
   static const String defaultLat = '24.774265';
   static const String defaultLong = '46.738586';
   static const String fontFamily = 'Cairo';
@@ -17,33 +17,34 @@ class AppStrings {
   static const String arabicCode = 'ar';
   static const String locale = 'locale';
   static List<WeekModel> days = [
+
     WeekModel(
       id: 1,
-      dayName: "السبت",
-    ),
-    WeekModel(
-      id: 2,
-      dayName: "الاحد",
-    ),
-    WeekModel(
-      id: 3,
       dayName: "الاثنين",
     ),
     WeekModel(
-      id: 4,
+      id: 2,
       dayName: "الثلاثاء",
     ),
     WeekModel(
-      id: 5,
+      id: 3,
       dayName: "الاربعاء",
     ),
     WeekModel(
-      id: 6,
+      id: 4,
       dayName: "الخميس",
     ),
     WeekModel(
-      id: 7,
+      id: 5,
       dayName: "الجمعة",
+    ),
+    WeekModel(
+      id: 6,
+      dayName: "السبت",
+    ),
+    WeekModel(
+      id: 7,
+      dayName: "الاحد",
     ),
   ];
 }

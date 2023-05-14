@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
+import '../../../main_models/offer_model.dart';
 import '../../../main_providers/schedule_provider.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 import '../../maps/models/address_model.dart';
 import '../repo/post_offer_repo.dart';
 
@@ -14,15 +18,18 @@ class PostOfferProvider extends ChangeNotifier {
     required this.scheduleProvider,
   });
 
-  AddressModel? startLocation;
+  LocationModel? startLocation;
   onSelectStartLocation(v) {
     startLocation = v;
+
     notifyListeners();
   }
 
-  AddressModel? endLocation;
+  OfferModel? offerModel;
+  LocationModel? endLocation;
   onSelectEndLocation(v) {
     endLocation = v;
+
     notifyListeners();
   }
 
@@ -42,26 +49,40 @@ class PostOfferProvider extends ChangeNotifier {
   // }
 
   DateTime startTime = DateTime.now();
+
   onSelectStartTime(v) {
     startTime = v;
     notifyListeners();
   }
 
   DateTime endTime = DateTime.now();
+
   onSelectEndTime(v) {
     endTime = v;
     notifyListeners();
   }
 
   DateTime startDate = DateTime.now();
+
   onSelectStartDate(v) {
     startDate = v;
     notifyListeners();
   }
 
   DateTime endDate = DateTime.now();
+  WeekdayCount? counts;
   onSelectEndDate(v) {
     endDate = v;
+
+    /// get days count
+    List<int> days = [];
+    scheduleProvider.selectedDays.forEach((element) {
+      element.startTime=startTime;
+      element.endTime=endTime;
+      days.add(element.id!);
+    });
+    counts = Methods.getWeekdayCount(
+        startDate: startDate, endDate: endDate, weekdays: days);
     notifyListeners();
   }
 
@@ -177,5 +198,43 @@ class PostOfferProvider extends ChangeNotifier {
       return;
     }
     return true;
+  }
+
+  bool isLoading = false;
+  postOffer() async {
+    offerModel = OfferModel(
+      dropOff: endLocation,
+      dropOn: startLocation,
+      startDate: startDate,
+      endDate: endDate,
+      minPrice: double.tryParse(minPrice!),
+      maxPrice: double.tryParse(maxPrice!),
+      offerDays: scheduleProvider.selectedDays,
+      duration: counts!.count,
+
+      // duration:
+    );
+
+      isLoading = true;
+    notifyListeners();
+    final response = await postOfferRepo.postOffer(offerModel: offerModel!);
+    response.fold((fail) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: fail.error,
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+    }, (response) {
+      CustomNavigator.push(Routes.SUCCESS_POST, clean: true,arguments: "");
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "Success",
+              isFloating: true,
+              backgroundColor: ColorResources.ACTIVE,
+              borderColor: Colors.transparent));
+    });
+    isLoading = false;
+    notifyListeners();
   }
 }

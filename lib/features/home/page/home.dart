@@ -9,7 +9,7 @@ import '../../auth/provider/firebase_auth_provider.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
 import '../../../main_widgets/offer_card.dart';
-import '../widgets/search_bar.dart';
+import 'package:fitariki/features/home/widgets/search_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                   );
           },
         ),
-        const SearchBar(),
+        const SearchBarWidget(),
         Expanded(
             child: ListView(
           shrinkWrap: true,

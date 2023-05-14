@@ -10,8 +10,8 @@ import '../../../components/custom_images.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import 'filter_Bottom_sheet.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({this.hint,this.withFilter=true,Key? key}) : super(key: key);
+class SearchBarWidget extends StatelessWidget {
+  const SearchBarWidget({this.hint,this.withFilter=true,Key? key}) : super(key: key);
 
   final bool withFilter;
   final String? hint;

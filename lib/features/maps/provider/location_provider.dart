@@ -24,7 +24,7 @@ class LocationProvider extends ChangeNotifier {
   List<PredictionModel> _predictionList = [];
   bool isLoading = false;
   String pickAddress = '';
-  AddressModel? addressModel;
+  LocationModel? addressModel;
   Position? _myPosition;
   Position position = Position(
       longitude: 0,
@@ -118,7 +118,7 @@ class LocationProvider extends ChangeNotifier {
     response.fold((l) => null, (response) {
       pickAddress = response.data['results'][0]['formatted_address'].toString();
 
-      addressModel = AddressModel(
+      addressModel = LocationModel(
         latitude: latitude.toString(),
         longitude: longitude.toString(),
         cityName: response.data['results'][0]['formatted_address'].toString(),

@@ -24,13 +24,13 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  AddressModel? startLocation;
+  LocationModel? startLocation;
   onSelectStartLocation(v) {
     startLocation = v;
     notifyListeners();
   }
 
-  AddressModel? endLocation;
+  LocationModel? endLocation;
   onSelectEndLocation(v) {
     endLocation = v;
     notifyListeners();

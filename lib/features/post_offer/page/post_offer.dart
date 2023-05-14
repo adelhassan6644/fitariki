@@ -41,6 +41,7 @@ class PostOffer extends StatelessWidget {
                     onTap: () {
                       // if(provider.checkData() == true)
                       {
+
                         customShowModelBottomSheet(
                           body: const PreviewOffer(),
                         );
