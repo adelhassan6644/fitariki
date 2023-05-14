@@ -4,27 +4,27 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../app/core/utils/app_strings.dart';
-import '../app/core/utils/images.dart';
 import '../features/maps/models/address_model.dart';
 
 class MapProvider extends ChangeNotifier {
-  CameraPosition mapCameraPosition = const CameraPosition(target: LatLng(24.280888, 37.987794),zoom: 1);
+  CameraPosition mapCameraPosition =
+      const CameraPosition(target: LatLng(24.280888, 37.987794), zoom: 1);
   GoogleMapController? googleMapController;
-  EdgeInsets googleMapPadding = EdgeInsets.all(10);
+  EdgeInsets googleMapPadding = const EdgeInsets.all(10);
   // this will hold the generated polylines
   Set<Polyline> gMapPolylines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
   Set<Marker> gMapMarkers = {};
   PolylinePoints polylinePoints = PolylinePoints();
-  BitmapDescriptor? sourceIcon=BitmapDescriptor.defaultMarker;
-  BitmapDescriptor? destinationIcon=BitmapDescriptor.defaultMarker;
+  BitmapDescriptor? sourceIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor? destinationIcon = BitmapDescriptor.defaultMarker;
   LocationModel? pickupLocation;
   LocationModel? dropOffLocation;
 
   setLocation({required LocationModel pickup, required LocationModel dropOff}) {
- polylineCoordinates = [];
-   gMapMarkers = {};
+    polylineCoordinates = [];
+    gMapMarkers = {};
     pickupLocation = pickup;
     dropOffLocation = dropOff;
     drawTripPolyLines();
@@ -41,9 +41,9 @@ class MapProvider extends ChangeNotifier {
   }
 
   void setSourceAndDestinationIcons() async {
-    sourceIcon =  BitmapDescriptor.defaultMarker;
+    sourceIcon = BitmapDescriptor.defaultMarker;
     //
-    destinationIcon =  BitmapDescriptor.defaultMarker;
+    destinationIcon = BitmapDescriptor.defaultMarker;
     //
   }
 
