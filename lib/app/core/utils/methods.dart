@@ -26,7 +26,7 @@ abstract class Methods{
           count += 1;
           days += 1;
         }
-        currentDate = currentDate.add(Duration(days: 7));
+        currentDate = currentDate.add(const Duration(days: 7));
       }
     }
 
@@ -44,7 +44,6 @@ class WeekdayCount {
   WeekdayCount(this.count, this.days);
   @override
   String toString() {
-    // TODO: implement toString
     return "cont: $count -- days:$days  ";
   }
 }

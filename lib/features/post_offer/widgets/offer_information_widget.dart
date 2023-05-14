@@ -4,7 +4,6 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
@@ -322,7 +321,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             alignment: Alignment.center,
                             child: Center(
                               child: Text(
-                                "${widget.provider.counts?.count??0}",
+                                "${widget.provider.counts?.count ?? 0}",
                                 textAlign: TextAlign.center,
                                 style: AppTextStyles.w400.copyWith(
                                   fontSize: 13,

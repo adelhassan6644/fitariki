@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -62,12 +61,15 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   DateTime startDate = DateTime.now();
+
 
   onSelectStartDate(v) {
     startDate = v;
     notifyListeners();
   }
+
 
   DateTime endDate = DateTime.now();
   WeekdayCount? counts;
@@ -76,21 +78,23 @@ class PostOfferProvider extends ChangeNotifier {
 
     /// get days count
     List<int> days = [];
-    scheduleProvider.selectedDays.forEach((element) {
-      element.startTime=startTime;
-      element.endTime=endTime;
+    for (var element in scheduleProvider.selectedDays) {
+      element.startTime = startTime;
+      element.endTime = endTime;
       days.add(element.id!);
-    });
+    }
     counts = Methods.getWeekdayCount(
         startDate: startDate, endDate: endDate, weekdays: days);
     notifyListeners();
   }
+
 
   bool addFollowers = true;
   onChange(v) {
     addFollowers = v;
     notifyListeners();
   }
+
 
   List<String> followers = ["محمد احمد", "لؤي احمد", "محمد الفيصل"];
   List<String> selectedFollowers = [];
@@ -103,17 +107,20 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   reset() {
     startLocation = null;
     endLocation = null;
+    minPrice = null;
+    maxPrice = null;
     startTime = DateTime.now();
     endTime = DateTime.now();
     startDate = DateTime.now();
-    endDate = DateTime.now();
-    minPrice = null;
-    maxPrice = null;
     selectedFollowers.clear();
+    scheduleProvider.selectedDays.clear();
+    onSelectEndDate(DateTime.now());
   }
+
 
   checkData() {
     if (startLocation == null) {
@@ -200,6 +207,7 @@ class PostOfferProvider extends ChangeNotifier {
     return true;
   }
 
+
   bool isLoading = false;
   postOffer() async {
     offerModel = OfferModel(
@@ -214,7 +222,7 @@ class PostOfferProvider extends ChangeNotifier {
 
       // duration:
     );
-      isLoading = true;
+    isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);
     response.fold((fail) {
@@ -225,7 +233,7 @@ class PostOfferProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     }, (response) {
-      CustomNavigator.push(Routes.SUCCESS_POST, clean: true,arguments: "");
+      CustomNavigator.push(Routes.SUCCESS_POST, clean: true, arguments: "");
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "Success",
