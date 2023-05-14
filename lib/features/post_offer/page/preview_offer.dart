@@ -1,13 +1,10 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/methods.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../main_widgets/captain_card.dart';
 import '../../../main_widgets/map_widget.dart';
-import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';
 
@@ -37,8 +34,8 @@ class PreviewOffer extends StatelessWidget {
                     : getTranslated("add_a_delivery_request", context),
                 textBtn: getTranslated("post", context),
                 onTap: () {
-                  Provider.of<PostOfferProvider>(context,listen: false).postOffer();
-
+                  Provider.of<PostOfferProvider>(context, listen: false)
+                      .postOffer();
                 },
               );
             },
@@ -58,7 +55,8 @@ class PreviewOffer extends StatelessWidget {
                     daysNumInWeek: provider.scheduleProvider.selectedDays.length
                         .toString(),
                     daysNum: provider.counts!.count.toString(),
-                    priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
+                    priceRange:
+                        "${provider.minPrice}- ${provider.maxPrice} SAR",
                     timeRange:
                         "${provider.startTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh,mm aa", lang: "ar-SA")}",
                     withAnalytics: false,

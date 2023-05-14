@@ -1,3 +1,4 @@
+import 'package:fitariki/features/post_offer/provider/post_offer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -72,8 +73,8 @@ class HomeAppBar extends StatelessWidget {
                       size: 24,
                     ),
                     onTap: () => customShowModelBottomSheet(
-                      body:
-                          provider.isLogin ? const PostOffer() : const Login(),
+                      onClose: Provider.of<PostOfferProvider>(context, listen: false).reset,
+                      body: provider.isLogin ? const PostOffer() : const Login(),
                     ),
                   );
                 },

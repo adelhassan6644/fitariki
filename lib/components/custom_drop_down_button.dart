@@ -62,16 +62,13 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
         isExpanded: true,
         dropdownColor: ColorResources.FILL_COLOR,
         itemHeight: 50,
-        icon: widget.icon ??
-            const Icon(
+        icon: widget.icon ?? const Icon(
               Icons.arrow_drop_down,
               color: ColorResources.HINT_COLOR,
             ),
         iconSize: widget.iconSize,
         borderRadius: const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
-        decoration: InputDecoration(
-          hintStyle: AppTextStyles.w400
-              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        decoration: InputDecoration(hintStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
           hintText: widget.name,
           prefixIcon: Padding(
             padding: EdgeInsets.symmetric(
@@ -151,13 +148,10 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal:8.w),
           prefixIconConstraints: BoxConstraints(maxHeight: 25.h, ),
           labelText: widget.label,
-          errorStyle: AppTextStyles.w500
-              .copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
-          labelStyle: AppTextStyles.w400
-              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+          errorStyle: AppTextStyles.w500.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
+          labelStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
         ),
-        style: AppTextStyles.w500
-            .copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
+        style: AppTextStyles.w500.copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
         name: widget.name,
         elevation: 1,
       ),
