@@ -12,6 +12,8 @@ import '../../features/followers/follower_details/repo/follower_details_repo.dar
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
+import '../../features/notifictions/provider/notifications_provider.dart';
+import '../../features/notifictions/repo/notifications_repo.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/post_offer/repo/post_offer_repo.dart';
 import '../../features/profile/provider/profile_provider.dart';
@@ -71,6 +73,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => WishlistRepo(sharedPreferences: sl(), dioClient: sl()));
 
+  sl.registerLazySingleton(
+      () => NotificationsRepo(sharedPreferences: sl(), dioClient: sl()));
+
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
   sl.registerLazySingleton(() => LanguageProvider());
@@ -98,9 +103,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddFollowerProvider(
         addFollowersRepo: sl(),
       ));
-  sl.registerLazySingleton(() => WishlistProvider(
-        wishlistRepo: sl(),
-      ));
+  sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
+  sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

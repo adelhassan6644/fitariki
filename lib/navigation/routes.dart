@@ -13,4 +13,5 @@ class Routes {
   static const WISHLIST = "WISHLIST";
   static const RATTING = "RATTING";
   static const CONTACT_WITH_US = "CONTACT_WITH_US";
+  static const NOTIFICATIONS = "NOTIFICATIONS";
 }

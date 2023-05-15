@@ -28,7 +28,7 @@ class SvgImages {
   static const String delivered = 'assets/svgs/delivered.svg';
   static const String completed = 'assets/svgs/completed.svg';
   static const String medal = 'assets/svgs/medal.svg';
-  static const String alert= 'assets/svgs/alert.svg';
+  static const String notifications= 'assets/svgs/alert.svg';
   static const String addFollower= 'assets/svgs/add_follower.svg';
   static const String card= 'assets/svgs/card.svg';
   static const String rate= 'assets/svgs/rate.svg';
