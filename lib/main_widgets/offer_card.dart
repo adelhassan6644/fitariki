@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/main_models/offer_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,10 @@ import '../navigation/routes.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 
 class OfferCard extends StatelessWidget {
-  const OfferCard({this.isSaved = false, Key? key}) : super(key: key);
+
+  const OfferCard({this.isSaved = false, Key? key, required this.offerModel}) : super(key: key);
   final bool isSaved;
+  final OfferModel offerModel;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,7 @@ class OfferCard extends StatelessWidget {
                                   SizedBox(
                                     width: 50,
                                     child: Text(
-                                      "محمد م..",
+                                      offerModel.name??"",
                                       textAlign: TextAlign.start,
                                       maxLines: 1,
                                       style: AppTextStyles.w600.copyWith(
@@ -111,7 +114,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "20-12 يوم",
+                                    "${offerModel.duration} يوم",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -141,7 +144,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "3 ايام بالإسبوع",
+                                    "${offerModel.offerDays!.length} ايام بالإسبوع",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -168,7 +171,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "9 صباحاً - 5 مساءً",
+                                    "${offerModel.offerDays!.first.startTime}"+ "${offerModel.offerDays!.first.endTime}ً",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -198,7 +201,8 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "400 - 600 ريال",
+                                    "${offerModel.minPrice} - ${offerModel.maxPrice} ريال",
+                                    // "400 - 600 ريال",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
