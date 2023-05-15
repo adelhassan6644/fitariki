@@ -7,4 +7,5 @@ class NotificationsRepo {
 
   NotificationsRepo({required this.dioClient, required this.sharedPreferences});
 
+  getNotification() {}
 }

@@ -7,4 +7,5 @@ class WishlistRepo {
 
   WishlistRepo({required this.dioClient, required this.sharedPreferences});
 
+  getWishlist() {}
 }
