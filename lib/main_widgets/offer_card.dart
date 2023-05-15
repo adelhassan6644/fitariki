@@ -14,8 +14,8 @@ import '../navigation/routes.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 
 class OfferCard extends StatelessWidget {
-
-  const OfferCard({this.isSaved = false, Key? key, required this.offerModel}) : super(key: key);
+  const OfferCard({this.isSaved = false, Key? key, required this.offerModel})
+      : super(key: key);
   final bool isSaved;
   final OfferModel offerModel;
 
@@ -67,7 +67,7 @@ class OfferCard extends StatelessWidget {
                                   SizedBox(
                                     width: 50,
                                     child: Text(
-                                      offerModel.name??"",
+                                      offerModel.name ?? "",
                                       textAlign: TextAlign.start,
                                       maxLines: 1,
                                       style: AppTextStyles.w600.copyWith(
@@ -106,7 +106,7 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 4,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.roadLine),
@@ -136,7 +136,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex:isSaved?7 : 5,
+                          flex: 9,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -171,7 +171,8 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${offerModel.offerDays!.first.startTime}"+ "${offerModel.offerDays!.first.endTime}ً",
+                                    "${offerModel.offerDays!.first.startTime}" +
+                                        "${offerModel.offerDays!.first.endTime}ً",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -193,7 +194,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: isSaved?7 :5,
+                          flex: isSaved ? 7 : 5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.wallet),

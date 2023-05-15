@@ -1,15 +1,13 @@
 import 'package:fitariki/features/home/provider/home_provider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fitariki/main_widgets/shimmer_widgets/shimmer_offer_card.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../components/animated_widget.dart';
 import '../../../components/tab_widget.dart';
-import '../../../main_models/offer_model.dart';
-import '../../../main_models/weak_model.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
-import '../../maps/models/address_model.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
 import '../../../main_widgets/offer_card.dart';
@@ -27,11 +25,12 @@ class _HomeState extends State<Home> {
   List<String> titles = ["passenger", "captain"];
   @override
   void initState() {
-   Future.delayed(Duration.zero,(){
-     Provider.of<HomeProvider>(context,listen: false).getOffers();
-   });
+    Future.delayed(Duration.zero, () {
+      Provider.of<HomeProvider>(context, listen: false).getOffers();
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,41 +73,24 @@ class _HomeState extends State<Home> {
           },
         ),
         const SearchBarWidget(),
-        Expanded(
-            child: Consumer<HomeProvider>(
-              builder: (context,homeProvider,_) {
-                if(homeProvider.isLoading) {
-                  return SizedBox();
-                } else {
-                  return ListView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(0),
-          itemCount: 1,
-          physics: const BouncingScrollPhysics(), itemBuilder: (BuildContext context, int index) {
-
-                return OfferCard(offerModel:homeProvider.offer![index]
-               /* OfferModel(name: "ll",duration: 6,dropOff: LocationModel(latitude: "",longitude: "",address: "aa"),
-                    dropOn: LocationModel(latitude: "",longitude: "",address: "aa"),
-                    startDate: DateTime.now(),
-                    endDate: DateTime.now(),
-                    maxPrice: 600,
-                    minPrice: 400,
-                    driverId: 1,offerType: 1,offerDays: [ WeekModel(
-                      id: 6,
-                      dayName: "السبت",
-                      startTime: DateTime.now(),
-                      endTime: DateTime.now(),
-                    ),]
-
-
-                )*/
-                );
-                },
-
-        );
-                }
-              }
-            ))
+        Consumer<HomeProvider>(builder: (context, homeProvider, _) {
+          return Expanded(
+            child: RefreshIndicator(
+              color: ColorResources.PRIMARY_COLOR,
+              onRefresh: () async {
+                await homeProvider.getOffers();
+              },
+              child: ListAnimator(
+                data: homeProvider.isLoading
+                    ? List.generate(7, (index) => const ShimmerOfferCard())
+                    : List.generate(
+                        homeProvider.offer!.length,
+                        (index) =>
+                            OfferCard(offerModel: homeProvider.offer![index])),
+              ),
+            ),
+          );
+        })
       ],
     );
   }
