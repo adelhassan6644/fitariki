@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fitariki/features/home/repo/home_repo.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ import '../../features/followers/add_follower/provider/add_follower_provider.dar
 import '../../features/followers/add_follower/repo/add_follower_repo.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
 import '../../features/followers/follower_details/repo/follower_details_repo.dart';
+import '../../features/home/provider/home_provider.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
@@ -58,7 +60,8 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl())); sl.registerLazySingleton(
+      () => HomeRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
       () => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
@@ -104,6 +107,7 @@ Future<void> init() async {
         addFollowersRepo: sl(),
       ));
   sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
+  sl.registerLazySingleton(() => HomeProvider(homeRepo: sl(),));
   sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
 
   // External

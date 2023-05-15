@@ -8,6 +8,7 @@ import '../../app/theme/theme_provider/theme_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
+import '../../features/home/provider/home_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/notifictions/provider/notifications_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
@@ -43,6 +44,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<FollowerDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddFollowerProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<WishlistProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<HomeProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<NotificationsProvider>()),
   ];
 }
