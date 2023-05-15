@@ -97,14 +97,16 @@ class LocationProvider extends ChangeNotifier {
     } else {
       pickPosition = _myPosition!;
     }
+
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(_myPosition!.latitude, _myPosition!.longitude),
           zoom: 17),
     ));
+
     await decodeLatLong(
       latitude: _myPosition!.latitude,
-      longitude:_myPosition!.longitude,
+      longitude: _myPosition!.longitude,
     );
 
     isLoading = false;
@@ -117,7 +119,6 @@ class LocationProvider extends ChangeNotifier {
 
     response.fold((l) => null, (response) {
       pickAddress = response.data['results'][0]['formatted_address'].toString();
-
       addressModel = LocationModel(
         latitude: latitude.toString(),
         longitude: longitude.toString(),

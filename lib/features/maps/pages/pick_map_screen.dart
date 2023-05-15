@@ -39,8 +39,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-          withBack: true, title: "تحديد مكان دوامك/دراستك", withBorder: true),
+      appBar: const CustomAppBar(title: "تحديد مكان دوامك/دراستك", withBorder: true),
       body: SafeArea(child: Center(child:
           Consumer<LocationProvider>(builder: (c, locationController, _) {
         return Stack(children: [
@@ -62,9 +61,6 @@ class _PickMapScreenState extends State<PickMapScreen> {
             onCameraMove: (CameraPosition cameraPosition) {
               _cameraPosition = cameraPosition;
             },
-            onCameraMoveStarted: () {
-              // locationController.disableButton();
-            },
             onCameraIdle: () {
               locationController.updatePosition(
                 _cameraPosition,
@@ -79,6 +75,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                       color: ColorResources.PRIMARY_COLOR,
                     )
                   : const CupertinoActivityIndicator()),
+
           ////  prediction section
 
           /*   Positioned(
