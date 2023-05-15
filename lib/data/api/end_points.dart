@@ -10,6 +10,9 @@ class EndPoints {
   static const String updateProfile = 'update';
   static const String postOffer = 'postOffer';
   static const String listOffers = 'listOffers';
+  static const String followers = '';
+  static const String addFollower = '';
+  static const String updateFollowerDetails = '';
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';

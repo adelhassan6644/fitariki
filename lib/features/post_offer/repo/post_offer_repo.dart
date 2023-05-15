@@ -17,8 +17,6 @@ class PostOfferRepo {
   Future<Either<ServerFailure, Response>> postOffer(
       {required OfferModel offerModel}) async {
     try {
-      offerModel.driverId =
-          int.parse(sharedPreferences.getString(AppStorageKey.userId)!);
       Response response = await dioClient.post(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postOffer}",

@@ -10,6 +10,8 @@ import '../../features/followers/add_follower/provider/add_follower_provider.dar
 import '../../features/followers/add_follower/repo/add_follower_repo.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
 import '../../features/followers/follower_details/repo/follower_details_repo.dart';
+import '../../features/followers/followers/provider/followers_provider.dart';
+import '../../features/followers/followers/repo/followers_repo.dart';
 import '../../features/home/provider/home_provider.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
@@ -60,7 +62,8 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl())); sl.registerLazySingleton(
+      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
       () => HomeRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
@@ -70,14 +73,17 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
       () => AddFollowersRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => WishlistRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
       () => NotificationsRepo(sharedPreferences: sl(), dioClient: sl()));
+
+  sl.registerLazySingleton(
+      () => FollowersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -94,21 +100,27 @@ Future<void> init() async {
         postOfferRepo: sl(),
         scheduleProvider: sl(),
       ));
-  sl.registerLazySingleton(() => MapProvider(
-
-      ));
+  sl.registerLazySingleton(() => MapProvider());
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
   sl.registerLazySingleton(() => FollowerDetailsProvider(
         followerDetailsRepo: sl(),
       ));
-  sl.registerLazySingleton(() => AddFollowerProvider(
-        addFollowersRepo: sl(),
+  sl.registerLazySingleton(() =>
+      AddFollowerProvider(addFollowersRepo: sl(), followerProvider: sl()));
+  sl.registerLazySingleton(() => WishlistProvider(
+        wishlistRepo: sl(),
       ));
-  sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
-  sl.registerLazySingleton(() => HomeProvider(homeRepo: sl(),));
-  sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
+  sl.registerLazySingleton(() => HomeProvider(
+        homeRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => NotificationsProvider(
+        notificationsRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => FollowerProvider(
+        followersRepo: sl(),
+      ));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

@@ -8,7 +8,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
   FollowerDetailsRepo followerDetailsRepo;
   FollowerDetailsProvider({required this.followerDetailsRepo});
 
-  String? age,followerFullName;
+  String? age, followerFullName;
   List<String> genders = ["male", "female"];
   List<String> genderIcons = [SvgImages.maleIcon, SvgImages.femaleIcon];
   int _gender = 0;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
+import '../../../main_models/offer_details_model.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
@@ -210,18 +211,19 @@ class PostOfferProvider extends ChangeNotifier {
 
   bool isLoading = false;
   postOffer() async {
-    offerModel = OfferModel(
-      dropOff: endLocation,
-      dropOn: startLocation,
-      startDate: startDate,
-      endDate: endDate,
-      minPrice: double.tryParse(minPrice!),
-      maxPrice: double.tryParse(maxPrice!),
-      offerDays: scheduleProvider.selectedDays,
-      duration: counts!.count,
-
-      // duration:
-    );
+    // offerModel = OfferDetailsModel(
+    //
+    //   pickLocation: endLocation,
+    //   endLocation: startLocation,
+    //   startDate: startDate,
+    //   endDate: endDate,
+    //   minPrice: double.tryParse(minPrice!),
+    //   maxPrice: double.tryParse(maxPrice!),
+    //   offerDays: scheduleProvider.selectedDays,
+    //   duration: counts!.count,
+    //
+    //   // duration:
+    // );
     isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);
