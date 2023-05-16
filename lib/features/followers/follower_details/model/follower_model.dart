@@ -40,11 +40,9 @@ class FollowerModel {
         age: json["age"],
         gender: json["gender"],
         pickLocation: json["pick_location"] == null
-            ? null
-            : LocationModel.fromJson(json["pick_location"]),
+            ? null : LocationModel.fromJson(json["pick_location"]),
         endLocation: json["end_location"] == null
-            ? null
-            : LocationModel.fromJson(json["end_location"]),
+            ? null : LocationModel.fromJson(json["end_location"]),
       );
 
   Map<String, dynamic> toJson() => {

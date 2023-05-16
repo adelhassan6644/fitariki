@@ -10,7 +10,6 @@ import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
 import '../../../../data/error/api_error_handler.dart';
 import '../../../../data/error/failures.dart';
-import '../../../maps/models/address_model.dart';
 import '../../follower_details/model/follower_model.dart';
 import '../../followers/provider/followers_provider.dart';
 import '../repo/add_follower_repo.dart';
@@ -60,9 +59,15 @@ class AddFollowerProvider extends ChangeNotifier {
   }
 
   reset() {
-    followerModel.copyWith(fullName: null,age: null,gender: 0,);
-    followerFullName = null;
-    age = null;
+    followerModel.copyWith(
+        fullName: null,
+        age: null,
+        gender: 0,
+        endLocation: null,
+        pickLocation: null);
+
+    // followerFullName = null;
+    // age = null;
     _gender = 0;
     // startLocation = null;
     // endLocation = null;
