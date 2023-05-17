@@ -61,7 +61,7 @@ class ProfileImageWidget extends StatelessWidget {
                       )
                     : CustomNetworkImage.circleNewWorkImage(
                         color: ColorResources.PRIMARY_COLOR,
-                        image: "",
+                        image: provider.image,
                         radius: 57.5),
                 if(fromLogin)  Container(
                         height: 115,

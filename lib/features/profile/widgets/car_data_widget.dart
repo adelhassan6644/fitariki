@@ -24,7 +24,7 @@ class CarDataWidget extends StatelessWidget {
             Expanded(
               child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.carName,
+                initialValue: provider.profileModel?.driver?.carInfo?.name,
                 hint: getTranslated("name", context),
                 onChanged: (v) {
                   provider.carName = v;
@@ -56,7 +56,7 @@ class CarDataWidget extends StatelessWidget {
             Expanded(
               child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.carPlate,
+                initialValue: provider.profileModel?.driver?.carInfo?.palletNumber,
                 hint: getTranslated("plate", context),
                 onChanged: (v) {
                   provider.carPlate = v;
@@ -68,6 +68,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child:  CustomButtonImagePicker(
+                imageUrl: provider.profileModel?.driver?.carInfo?.carImage,
                 title:  getTranslated("car_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectCarImage),
                 imageFile: provider.carImage,
@@ -97,6 +98,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child:  CustomButtonImagePicker(
+                imageUrl: provider.profileModel?.driver?.carInfo?.licenceImage,
                 title:  getTranslated("licence_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectLicenceImage),
                 imageFile: provider.licenceImage,
@@ -111,6 +113,7 @@ class CarDataWidget extends StatelessWidget {
           children: [
             Expanded(
               child:  CustomButtonImagePicker(
+                imageUrl: provider.profileModel?.driver?.carInfo?.formImage,
                 title:  getTranslated("form_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectFormImage),
                 imageFile: provider.formImage,
@@ -121,6 +124,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child:  CustomButtonImagePicker(
+                imageUrl: provider.profileModel?.driver?.carInfo?.insuranceImage,
                 title:  getTranslated("insurance_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectInsuranceImage),
                 imageFile: provider.insuranceImage,

@@ -113,6 +113,7 @@ class ProfileProvider extends ChangeNotifier {
 
   ///Personal Data
 
+  String? image;
   String? firstName;
   String? secondName;
   String? fullName;
@@ -178,7 +179,7 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> timeZones = ["morning", "night"];
+/*  List<String> timeZones = ["morning", "night"];
   String startTimeZone = "morning";
   String endTimeZone = "morning";
   void selectedStartTimeZone(String value) {
@@ -189,7 +190,7 @@ class ProfileProvider extends ChangeNotifier {
   void selectedEndTimeZone(String value) {
     endTimeZone = value;
     notifyListeners();
-  }
+  }*/
 
   checkData() {
     if (role == "driver") {
@@ -470,35 +471,42 @@ class ProfileProvider extends ChangeNotifier {
   ///Update Profile
   updateProfile() async {
     try {
-      checkData();
+      // checkData();
+      final carData = {
+        "name": carName,
+        "model": carModel,
+        "pallet_number": carPlate,
+        "seats_count": carCapacity,
+      };
+
+      final bankData = {
+        "full_name": quadrupleName,
+        "bank": bankName,
+        "account_number": bankAccount,
+      };
+
+
       final personalData = {
-        "first_name": firstName,
-        "second_name": secondName,
+        if(role == "driver")"full_name": fullName,
+        if(role == "client")"first_name": firstName,
+        if(role == "client")"second_name": secondName,
         "email": email,
         "gender": gender,
         "identity_number": identityNumber,
         "age": age,
+        "car_info":carData,
+        "bank_info":bankData
       };
 
-      final carData = {
-        "car_name": carName,
-        "car_model": carModel,
-        "car_plate": carPlate,
-        "car_capacity": carCapacity,
-      };
 
-      final bankData = {
-        "quadruple_name": quadrupleName,
-        "bank_name": bankName,
-        "bank_account": bankAccount,
-      };
 
       final otherData = {
-        "days": scheduleProvider.selectedDays.toString(),
-        "start_data": startTimeZone,
-        "end_data": endTimeZone,
-        "start_road": startRoad,
-        "end_road": endRoad,
+        if(role == "driver")
+        "driver_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x)),
+        if(role == "client")
+          "client_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x)),
+        "drop_off_location": endLocation!.toJson(),
+        "pickup_location": startLocation!.toJson(),
       };
 
       final values = {...personalData, ...carData, ...bankData, ...otherData};
@@ -514,14 +522,28 @@ class ProfileProvider extends ChangeNotifier {
         if (carImage != null)
           MapEntry("car_image", await MultipartFile.fromFile(carImage!.path)),
         if (licenceImage != null)
-          MapEntry("license_image",
+          MapEntry("licence_image",
               await MultipartFile.fromFile(licenceImage!.path)),
         if (formImage != null)
           MapEntry("form_image", await MultipartFile.fromFile(formImage!.path)),
         if (insuranceImage != null)
           MapEntry("insurance_image",
               await MultipartFile.fromFile(insuranceImage!.path)),
+        if (bankAccountImage != null)
+          MapEntry("account_image",
+              await MultipartFile.fromFile(bankAccountImage!.path)),
       ]);
+
+      Either<ServerFailure, Response> response =
+      await editProfileRepo.updateProfile(body:formData );
+      response.fold((l) => null, (response) {
+        profileModel = ProfileModel.fromJson(response.data['data']);
+        initDriverData();
+        initClientData();
+        isLoading = false;
+        notifyListeners();
+      });
+
     } catch (e) {}
   }
 
@@ -541,11 +563,38 @@ class ProfileProvider extends ChangeNotifier {
     });
   }
 
+  initClientData() {
+    scheduleProvider.selectedDays = profileModel?.client?.clientDays ?? [];
+    startTime = profileModel?.client?.clientDays?[0].startTime??DateTime.now();
+    endTime = profileModel?.client?.clientDays?[0].endTime??DateTime.now() ;
+
+    image=profileModel?.client?.image;
+    firstName=profileModel?.client?.firstName;
+    secondName=profileModel?.client?.lastName;
+    age = profileModel?.client?.age ;
+    nationality = profileModel?.client?.national ;
+    _gender = profileModel?.client?.gender ?? 0;
+
+    startLocation=profileModel?.client?.pickupLocation;
+    endLocation=profileModel?.client?.dropOffLocation;
+
+  }
+
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
-    fullName =
-        "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
-    age = profileModel?.driver?.age ?? "";
-    email = profileModel?.driver?.email ?? "";
+    startTime = profileModel?.driver?.driverDays?[0].startTime??DateTime.now();
+    endTime = profileModel?.driver?.driverDays?[0].endTime??DateTime.now() ;
+
+    startLocation=profileModel?.driver?.pickupLocation;
+    endLocation=profileModel?.driver?.dropOffLocation;
+
+    image=profileModel?.driver?.image;
+    fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
+    nationality = profileModel?.driver?.national ;
+    _gender = profileModel?.driver?.gender ?? 0;
+    age = profileModel?.driver?.age;
+    bankName= profileModel?.driver?.bankInfo?.bank;
+    carModel= profileModel?.driver?.carInfo?.model.toString() ;
+    carCapacity= profileModel?.driver?.carInfo?.seatsCount.toString();
   }
 }

@@ -47,6 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 actionChild: widget.fromLogin
                     ? null
                     : GestureDetector(
+                  onTap: ()=>provider.updateProfile(),
                         child: Text(getTranslated("save", context),
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,

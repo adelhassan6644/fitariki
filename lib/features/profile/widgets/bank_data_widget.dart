@@ -35,7 +35,7 @@ class BankDataWidget extends StatelessWidget {
       children: [
         CustomTextFormField(
           valid: Validations.name,
-          initialValue: provider.quadrupleName,
+          initialValue: provider.profileModel?.driver?.bankInfo?.fullName,
           hint: getTranslated("quadruple_name", context),
           onChanged: (v) {
             provider.quadrupleName = v;
@@ -59,7 +59,7 @@ class BankDataWidget extends StatelessWidget {
         ),
         CustomTextFormField(
           valid: Validations.phone,
-          initialValue: provider.bankAccount,
+          initialValue: provider.profileModel?.driver?.bankInfo?.accountNumber,
           hint: "SA 00000 0000 0000 0000 0000",
           onChanged: (v) {
             provider.bankAccount = v;
@@ -70,6 +70,7 @@ class BankDataWidget extends StatelessWidget {
           height: 8.h,
         ),
         CustomButtonImagePicker(
+          imageUrl: provider.profileModel?.driver?.bankInfo?.accountImage,
           title:  getTranslated("account_number_image", context),
           onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectBankAccountImage),
           imageFile: provider.bankAccountImage,

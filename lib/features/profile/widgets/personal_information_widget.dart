@@ -78,17 +78,6 @@ class PersonalInformationWidget extends StatelessWidget {
                 provider.age = v;
               },
             )),
-            // Expanded(
-            //     child: CustomDropDownButton(
-            //   items: const ["15", "20", "25"],
-            //   name: getTranslated("age", context),
-            //   onChange: provider.selectedAge,
-            //   value: provider.age,
-            //   icon: const Icon(
-            //     Icons.keyboard_arrow_down_rounded,
-            //     color: ColorResources.SECOUND_PRIMARY_COLOR,
-            //   ),
-            // )),
             const SizedBox(
               width: 8,
             ),
@@ -144,7 +133,7 @@ class PersonalInformationWidget extends StatelessWidget {
                   Expanded(
                       child: CustomTextFormField(
                     valid: Validations.name,
-                    initialValue: provider.identityNumber,
+                    initialValue: provider.profileModel?.driver?.identityNumber,
                     hint: getTranslated("identity_number", context),
                     onChanged: (v) {
                       provider.identityNumber = v;
@@ -155,6 +144,7 @@ class PersonalInformationWidget extends StatelessWidget {
                   ),
                   Expanded(
                       child: CustomButtonImagePicker(
+                    imageUrl: provider.profileModel?.driver?.identityImage,
                     title: getTranslated("identity_image", context),
                     onTap: () => ImagePickerHelper.showOptionSheet(
                         onGet: provider.onSelectIdentityImage),
@@ -167,7 +157,7 @@ class PersonalInformationWidget extends StatelessWidget {
               ),
               CustomTextFormField(
                 valid: Validations.mail,
-                initialValue: provider.email,
+                initialValue: provider.profileModel?.driver?.email,
                 hint: getTranslated("email", context),
                 onChanged: (v) {
                   provider.email = v;
