@@ -57,6 +57,20 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
+		<key>NSCameraUsageDescription</key>
+        	<string>We need access to your camera for profile photo update.</string>
+        	<key>NSContactsUsageDescription</key>
+        	<string>This app requires contacts access to select parcel order contact info.</string>
+        	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        	<string>We need access to your location to show nearby vendors.</string>
+        	<key>NSLocationAlwaysUsageDescription</key>
+        	<string>We need access to your location to show nearby vendors.</string>
+        	<key>NSLocationWhenInUseUsageDescription</key>
+        	<string>We need access to your location to show nearby vendors.</string>
+        	<key>NSMicrophoneUsageDescription</key>
+        	<string>We does not access to microphone </string>
+        	<key>NSPhotoLibraryUsageDescription</key>
+        	<string>We need access to your gallery for profile photo.</string>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>

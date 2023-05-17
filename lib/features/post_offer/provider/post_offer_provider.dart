@@ -25,7 +25,7 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  OfferModel? offerModel;
+  OfferDetailsModel? offerModel;
   LocationModel? endLocation;
   onSelectEndLocation(v) {
     endLocation = v;
@@ -211,19 +211,19 @@ class PostOfferProvider extends ChangeNotifier {
 
   bool isLoading = false;
   postOffer() async {
-    // offerModel = OfferDetailsModel(
-    //
-    //   pickLocation: endLocation,
-    //   endLocation: startLocation,
-    //   startDate: startDate,
-    //   endDate: endDate,
-    //   minPrice: double.tryParse(minPrice!),
-    //   maxPrice: double.tryParse(maxPrice!),
-    //   offerDays: scheduleProvider.selectedDays,
-    //   duration: counts!.count,
-    //
-    //   // duration:
-    // );
+    offerModel = OfferDetailsModel(
+
+      pickLocation: endLocation,
+      endLocation: startLocation,
+      startDate: startDate,
+      endDate: endDate,
+      minPrice: double.tryParse(minPrice!),
+      maxPrice: double.tryParse(maxPrice!),
+      offerDays: scheduleProvider.selectedDays,
+      duration: counts!.count,
+
+      // duration:
+    );
     isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);

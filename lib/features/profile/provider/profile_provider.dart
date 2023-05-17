@@ -468,82 +468,86 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
+  updateTimes() {
+    for (var element in scheduleProvider.selectedDays) {
+      element.startTime = startTime;
+      element.endTime = endTime;
+    }
+  }
+
   ///Update Profile
   updateProfile() async {
     try {
+      updateTimes();
       // checkData();
       final carData = {
         "name": carName,
         "model": carModel,
         "pallet_number": carPlate,
         "seats_count": carCapacity,
+        if (carImage != null) "car_image": "cbvb",
+        // await MultipartFile.fromFile(carImage!.path),
+        if (formImage != null) "form_image": "cbvb",
+        // await MultipartFile.fromFile(formImage!.path),
+        if (insuranceImage != null) "insurance_image": "cb",
+        // await MultipartFile.fromFile(insuranceImage!.path),
+        if (licenceImage != null) "licence_image": "cb",
+        // await MultipartFile.fromFile(licenceImage!.path),
       };
 
       final bankData = {
         "full_name": quadrupleName,
         "bank": bankName,
+        "iban": "null",
+        "swift": "null",
         "account_number": bankAccount,
+        if (bankAccountImage != null) "account_image": "dsdsds",
+        // await MultipartFile.fromFile(bankAccountImage!.path),
       };
-
 
       final personalData = {
-        if(role == "driver")"full_name": fullName,
-        if(role == "client")"first_name": firstName,
-        if(role == "client")"second_name": secondName,
-        "email": email,
-        "gender": gender,
-        "identity_number": identityNumber,
-        "age": age,
-        "car_info":carData,
-        "bank_info":bankData
+        "driver": {
+          "first_name": fullName,
+          "last_name": fullName,
+          "email": email,
+          "gender": gender,
+          "identity_number": identityNumber,
+          "age": age,
+          if (profileImage != null)
+            "image": "cbb",
+          // await MultipartFile.fromFile(profileImage!.path),
+          if (role == "driver")
+            "driver_days": List<dynamic>.from(
+                scheduleProvider.selectedDays.map((x) => x.toJson())),
+          if (role == "client")
+            "client_days": List<dynamic>.from(
+                scheduleProvider.selectedDays.map((x) => x.toJson())),
+          "drop_off_location": endLocation!.toJson(),
+          "pickup_location": startLocation!.toJson(),
+
+          "car_info": carData,
+          "bank_info": bankData
+        }
       };
 
-
-
-      final otherData = {
-        if(role == "driver")
-        "driver_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x)),
-        if(role == "client")
-          "client_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x)),
-        "drop_off_location": endLocation!.toJson(),
-        "pickup_location": startLocation!.toJson(),
-      };
-
-      final values = {...personalData, ...carData, ...bankData, ...otherData};
-      Map<String, dynamic> params = Map.from(values);
-
-      FormData formData = FormData.fromMap(params);
-      formData.files.addAll([
-        if (profileImage != null)
-          MapEntry("image", await MultipartFile.fromFile(profileImage!.path)),
-        if (identityImage != null)
-          MapEntry("identity_image",
-              await MultipartFile.fromFile(identityImage!.path)),
-        if (carImage != null)
-          MapEntry("car_image", await MultipartFile.fromFile(carImage!.path)),
-        if (licenceImage != null)
-          MapEntry("licence_image",
-              await MultipartFile.fromFile(licenceImage!.path)),
-        if (formImage != null)
-          MapEntry("form_image", await MultipartFile.fromFile(formImage!.path)),
-        if (insuranceImage != null)
-          MapEntry("insurance_image",
-              await MultipartFile.fromFile(insuranceImage!.path)),
-        if (bankAccountImage != null)
-          MapEntry("account_image",
-              await MultipartFile.fromFile(bankAccountImage!.path)),
-      ]);
-
+      print(personalData);
+      FormData formData = FormData.fromMap(personalData);
       Either<ServerFailure, Response> response =
-      await editProfileRepo.updateProfile(body:formData );
-      response.fold((l) => null, (response) {
+          await editProfileRepo.updateProfile(body: personalData);
+      response.fold((fail) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: fail.error,
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (response) {
         profileModel = ProfileModel.fromJson(response.data['data']);
         initDriverData();
         initClientData();
         isLoading = false;
         notifyListeners();
       });
-
     } catch (e) {}
   }
 
@@ -565,36 +569,38 @@ class ProfileProvider extends ChangeNotifier {
 
   initClientData() {
     scheduleProvider.selectedDays = profileModel?.client?.clientDays ?? [];
-    startTime = profileModel?.client?.clientDays?[0].startTime??DateTime.now();
-    endTime = profileModel?.client?.clientDays?[0].endTime??DateTime.now() ;
+    startTime =
+        profileModel?.client?.clientDays?[0].startTime ?? DateTime.now();
+    endTime = profileModel?.client?.clientDays?[0].endTime ?? DateTime.now();
 
-    image=profileModel?.client?.image;
-    firstName=profileModel?.client?.firstName;
-    secondName=profileModel?.client?.lastName;
-    age = profileModel?.client?.age ;
-    nationality = profileModel?.client?.national ;
+    image = profileModel?.client?.image;
+    firstName = profileModel?.client?.firstName;
+    secondName = profileModel?.client?.lastName;
+    age = profileModel?.client?.age;
+    nationality = profileModel?.client?.national;
     _gender = profileModel?.client?.gender ?? 0;
 
-    startLocation=profileModel?.client?.pickupLocation;
-    endLocation=profileModel?.client?.dropOffLocation;
-
+    startLocation = profileModel?.client?.pickupLocation;
+    endLocation = profileModel?.client?.dropOffLocation;
   }
 
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
-    startTime = profileModel?.driver?.driverDays?[0].startTime??DateTime.now();
-    endTime = profileModel?.driver?.driverDays?[0].endTime??DateTime.now() ;
+    startTime =
+        profileModel?.driver?.driverDays?[0].startTime ?? DateTime.now();
+    endTime = profileModel?.driver?.driverDays?[0].endTime ?? DateTime.now();
 
-    startLocation=profileModel?.driver?.pickupLocation;
-    endLocation=profileModel?.driver?.dropOffLocation;
+    startLocation = profileModel?.driver?.pickupLocation;
+    endLocation = profileModel?.driver?.dropOffLocation;
 
-    image=profileModel?.driver?.image;
-    fullName = "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
-    nationality = profileModel?.driver?.national ;
+    image = profileModel?.driver?.image;
+    fullName =
+        "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
+    nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
     age = profileModel?.driver?.age;
-    bankName= profileModel?.driver?.bankInfo?.bank;
-    carModel= profileModel?.driver?.carInfo?.model.toString() ;
-    carCapacity= profileModel?.driver?.carInfo?.seatsCount.toString();
+    bankName = profileModel?.driver?.bankInfo?.bank;
+    carModel = profileModel?.driver?.carInfo?.model.toString();
+    carCapacity = profileModel?.driver?.carInfo?.seatsCount.toString();
   }
 }

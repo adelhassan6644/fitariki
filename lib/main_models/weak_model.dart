@@ -15,14 +15,14 @@ class WeekModel {
   Map<String, dynamic> toJson() => {
         "day_id": id,
         "day": dayName,
-        "start_time": startTime,
-        "end_time": endTime,
+        "start_time": startTime.toString(),
+        "end_time": endTime.toString(),
       };
-  @override
-  String toString() {
-
-    return "$id -- $dayName  ";
-  }
+  // @override
+  // String toString() {
+  //
+  //   return "$id -- $dayName  ";
+  // }
 }
 
 

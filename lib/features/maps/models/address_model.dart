@@ -11,16 +11,16 @@ class LocationModel {
   LocationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     address = json['address'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+    latitude = json['lat'];
+    longitude = json['long'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+
     data['address'] = address;
-    data['latitude'] = latitude;
-    data['longitude'] = longitude;
+    data['lat'] = latitude;
+    data['long'] = longitude;
 
     return data;
   }

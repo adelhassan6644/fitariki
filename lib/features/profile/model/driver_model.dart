@@ -106,7 +106,7 @@ class DriverModel {
         email: json["email"],
         image: json["image"],
         nickname: json["nickname"],
-        gender: json["gender"],
+        gender: int.parse(json["gender"].toString()),
         age: json["age"],
         national: json["national"],
         city: json["city"],
@@ -196,7 +196,7 @@ class CarInfo {
 
   factory CarInfo.fromJson(Map<String, dynamic> json) => CarInfo(
         name: json["name"],
-        model: json["model"],
+        model: int.parse(json["model"]),
         palletNumber: json["pallet_number"],
         seatsCount: json["seats_count"],
         carImage: json["car_image"],

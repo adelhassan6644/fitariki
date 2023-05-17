@@ -7,7 +7,7 @@ import '../../../data/api/end_points.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
-import '../../../main_models/offer_model.dart';
+import '../../../main_models/offer_details_model.dart';
 
 class PostOfferRepo {
   final DioClient dioClient;
@@ -15,12 +15,12 @@ class PostOfferRepo {
 
   PostOfferRepo({required this.dioClient, required this.sharedPreferences});
   Future<Either<ServerFailure, Response>> postOffer(
-      {required OfferModel offerModel}) async {
+      {required OfferDetailsModel offerModel}) async {
     try {
       Response response = await dioClient.post(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postOffer}",
-          data: offerModel.toJson());
+          data: offerModel.toPostJson());
       if (response.statusCode == 200) {
         return Right(response);
       } else {

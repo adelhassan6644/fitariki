@@ -18,6 +18,8 @@ class OfferDetailsModel {
   LocationModel? pickLocation;
   LocationModel? endLocation;
   CarModel? carData;
+  DateTime? startDate;
+  DateTime? endDate;
 
   OfferDetailsModel(
       {this.id,
@@ -34,6 +36,8 @@ class OfferDetailsModel {
       this.pickLocation,
       this.endLocation,
       this.startLength,
+      this.endDate,
+      this.startDate,
       this.carData});
 
   OfferDetailsModel copyWith(
@@ -98,23 +102,16 @@ class OfferDetailsModel {
             : CarModel.fromJson(json["car_data"]),
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "image": image,
-        "name": name,
-        "nationality": nationality,
-        "rate": rate,
+  Map<String, dynamic> toPostJson() => {
+        "start_date": startDate.toString(),
+        "end_date": endDate.toString(),
         "duration": duration,
-        "start_length": startLength,
         "min_price": minPrice,
         "max_price": maxPrice,
-        "compatible_ratio": compatibleRatio,
-        "created_at": createdAt?.toIso8601String(),
         "offer_days": offerDays == null
             ? []
             : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
         "pick_location": pickLocation?.toJson(),
-        "end_location": endLocation?.toJson(),
-        "car_data": carData?.toJson()
+        "end_location": endLocation?.toJson()
       };
 }
