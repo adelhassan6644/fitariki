@@ -4,12 +4,12 @@ class EndPoints {
   static const String imageUrl = 'https://fitariki.app/';
   static const String apiKey = 'eGvviZ/npgc2Blb4/PSymh1tyb/UIt3aq82W6f+Wn4=';
   static const String topic = 'fitariki';
-  static const String logIn = 'login';
-  static const String verifyPhone = 'verify_phone';
-  static const String getProfile = 'profile';
-  static const String updateProfile = 'update';
-  static const String postOffer = 'postOffer';
-  static const String listOffers = 'listOffers';
+  static const String logIn = 'auth/login';
+  static const String verifyPhone = 'auth/verify_phone';
+  static const String getProfile = 'profile/profile';
+  static const String updateProfile = 'profile/update';
+  static const String postOffer = 'offer/postOffer';
+  static const String listOffers = 'offer/listOffers';
   static const String followers = '';
   static const String addFollower = '';
   static const String updateFollowerDetails = '';

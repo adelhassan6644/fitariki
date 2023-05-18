@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                 data: homeProvider.isLoading
                     ? List.generate(7, (index) => const ShimmerOfferCard())
                     : List.generate(
-                        homeProvider.offer!.length,
+                        homeProvider.offer?.length??0,
                         (index) =>
                             OfferCard(offerModel: homeProvider.offer![index])),
               ),

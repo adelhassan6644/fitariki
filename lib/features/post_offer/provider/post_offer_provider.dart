@@ -80,8 +80,8 @@ class PostOfferProvider extends ChangeNotifier {
     /// get days count
     List<int> days = [];
     for (var element in scheduleProvider.selectedDays) {
-      element.startTime = startTime.dateFormat(format: "mm : hh aa");
-      element.endTime = endTime.dateFormat(format: "mm : hh aa");
+      element.startTime = startTime.dateFormat(format: "kk:mm");
+      element.endTime = endTime.dateFormat(format: "kk:mm");
       days.add(element.id!);
     }
     counts = Methods.getWeekdayCount(

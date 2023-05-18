@@ -171,8 +171,8 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${offerModel.offerDays!.first.startTime}" +
-                                        "${offerModel.offerDays!.first.endTime}ً",
+                                    "${offerModel.offerDays?.first.startTime}" +
+                                        "${offerModel.offerDays?.first.endTime}ً",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
