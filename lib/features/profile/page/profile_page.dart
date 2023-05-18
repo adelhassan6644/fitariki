@@ -14,28 +14,14 @@ import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
 import '../widgets/work_information_widget.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({required this.fromLogin, Key? key}) : super(key: key);
   final bool fromLogin;
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  void initState() {
-   Future.delayed(Duration.zero,(){
-     Provider.of<ProfileProvider>(context,listen: false).getProfile();
-   });
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        body: Consumer<ProfileProvider>
-          (builder: (_, provider, child) {
+        body: Consumer<ProfileProvider>(builder: (_, provider, child) {
       return SafeArea(
         bottom: true,
         top: false,
@@ -43,22 +29,22 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-                withBack: !widget.fromLogin,
-                actionChild: widget.fromLogin
+                withBack: !fromLogin,
+                actionChild: fromLogin
                     ? null
                     : GestureDetector(
-                  onTap: ()=>provider.updateProfile(),
+                        onTap: () => provider.updateProfile(),
                         child: Text(getTranslated("save", context),
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
                                 color: ColorResources.SYSTEM_COLOR)),
                       ),
-                title: widget.fromLogin
+                title: fromLogin
                     ? getTranslated(
                         "complete_the_registration_information", context)
                     : getTranslated("modification_of_personal_data", context),
                 withBorder: true),
-            if(!provider.isLoading)
+            // if(!provider.isLoading)
             Expanded(
               child: ListView(
                 physics: const BouncingScrollPhysics(),
@@ -70,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (widget.fromLogin)
+                        if (fromLogin)
                           Column(
                             children: [
                               Center(
@@ -95,10 +81,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ProfileImageWidget(
                           provider: provider,
-                          fromLogin: widget.fromLogin,
+                          fromLogin: fromLogin,
                         ),
                         Padding(
-                          padding:  EdgeInsets.symmetric(vertical: 16.h),
+                          padding: EdgeInsets.symmetric(vertical: 16.h),
                           child: PersonalInformationWidget(
                             provider: provider,
                           ),
@@ -113,7 +99,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         WorkInformationWidget(
                           provider: provider,
                         ),
-
                         if (provider.role == "driver")
                           BankDataWidget(
                             provider: provider,
@@ -124,7 +109,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            if (widget.fromLogin)
+
+            if (fromLogin)
               Column(
                 children: [
                   Padding(

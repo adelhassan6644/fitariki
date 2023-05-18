@@ -24,11 +24,8 @@ class CarDataWidget extends StatelessWidget {
             Expanded(
               child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.profileModel?.driver?.carInfo?.name,
+               controller: provider.carName,
                 hint: getTranslated("name", context),
-                onChanged: (v) {
-                  provider.carName = v;
-                },
               ),
             ),
             SizedBox(
@@ -56,11 +53,8 @@ class CarDataWidget extends StatelessWidget {
             Expanded(
               child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.profileModel?.driver?.carInfo?.palletNumber,
                 hint: getTranslated("plate", context),
-                onChanged: (v) {
-                  provider.carPlate = v;
-                },
+                controller: provider.carPlate,
               ),
             ),
             SizedBox(

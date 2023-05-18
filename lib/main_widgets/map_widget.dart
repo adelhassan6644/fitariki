@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/features/maps/models/address_model.dart';
+import 'package:fitariki/features/maps/models/location_model.dart';
 import 'package:fitariki/main_providers/map_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

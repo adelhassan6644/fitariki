@@ -1,5 +1,5 @@
 import '../../../main_models/weak_model.dart';
-import '../../maps/models/address_model.dart';
+import '../../maps/models/location_model.dart';
 
 class DriverModel {
   int? id;
@@ -24,31 +24,34 @@ class DriverModel {
   List<WeekModel>? driverDays;
   CarInfo? carInfo;
   BankInfo? bankInfo;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  DriverModel({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.image,
-    this.nickname,
-    this.identityNumber,
-    this.identityImage,
-    this.gender,
-    this.age,
-    this.national,
-    this.city,
-    this.countryId,
-    this.phone,
-    this.status,
-    this.rate,
-    this.wallet,
-    this.dropOffLocation,
-    this.pickupLocation,
-    this.driverDays,
-    this.carInfo,
-    this.bankInfo,
-  });
+  DriverModel(
+      {this.id,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.image,
+      this.nickname,
+      this.identityNumber,
+      this.identityImage,
+      this.gender,
+      this.age,
+      this.national,
+      this.city,
+      this.countryId,
+      this.phone,
+      this.status,
+      this.rate,
+      this.wallet,
+      this.dropOffLocation,
+      this.pickupLocation,
+      this.driverDays,
+      this.carInfo,
+      this.bankInfo,
+      this.createdAt,
+      this.updatedAt});
 
   DriverModel copyWith({
     int? id,
@@ -106,7 +109,7 @@ class DriverModel {
         email: json["email"],
         image: json["image"],
         nickname: json["nickname"],
-        gender: int.parse(json["gender"].toString()),
+        gender: int.parse(json["gender"] ?? "0"),
         age: json["age"],
         national: json["national"],
         city: json["city"],
@@ -116,16 +119,29 @@ class DriverModel {
         phone: json["phone"],
         status: json["status"],
         rate: json["rate"],
-        wallet:double.tryParse( json["wallet"].toString()),
+        wallet: double.tryParse(json["wallet"].toString()),
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),
         pickupLocation: json["pickup_location"] == null
             ? null
             : LocationModel.fromJson(json["pickup_location"]),
-        driverDays: json["driver_days"] == null ? null : List<WeekModel>.from(json["driver_days"]!.map((x) => WeekModel.fromJson(x))),
-        carInfo: json["car_info"] == null ? null : CarInfo.fromJson(json["car_info"]),
-        bankInfo: json["bank_info"] == null ? null : BankInfo.fromJson(json["bank_info"]),
+        driverDays: json["driver_days"] == null || json["driver_days"] == []
+            ? null
+            : List<WeekModel>.from(
+                json["driver_days"]!.map((x) => WeekModel.fromJson(x))),
+        carInfo: json["car_info"] == null
+            ? null
+            : CarInfo.fromJson(json["car_info"]),
+        bankInfo: json["bank_info"] == null
+            ? null
+            : BankInfo.fromJson(json["bank_info"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -144,9 +160,13 @@ class DriverModel {
         "status": status,
         "rate": rate,
         "wallet": wallet,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
         "drop_off_location": dropOffLocation?.toJson(),
         "pickup_location": pickupLocation?.toJson(),
-        "driver_days": driverDays == null ? [] : List<dynamic>.from(driverDays!.map((x) => x)),
+        "driver_days": driverDays == null
+            ? []
+            : List<dynamic>.from(driverDays!.map((x) => x)),
         "car_info": carInfo?.toJson(),
         "bank_info": bankInfo?.toJson(),
       };
@@ -154,9 +174,9 @@ class DriverModel {
 
 class CarInfo {
   String? name;
-  int? model;
+  String? model;
   String? palletNumber;
-  int? seatsCount;
+  String? seatsCount;
   String? carImage;
   String? licenceImage;
   String? insuranceImage;
@@ -175,9 +195,9 @@ class CarInfo {
 
   CarInfo copyWith({
     String? name,
-    int? model,
+    String? model,
     String? palletNumber,
-    int? seatsCount,
+    String? seatsCount,
     String? carImage,
     String? licenceImage,
     String? insuranceImage,
@@ -196,7 +216,7 @@ class CarInfo {
 
   factory CarInfo.fromJson(Map<String, dynamic> json) => CarInfo(
         name: json["name"],
-        model: int.parse(json["model"]),
+        model: json["model"].toString(),
         palletNumber: json["pallet_number"],
         seatsCount: json["seats_count"],
         carImage: json["car_image"],
@@ -252,7 +272,7 @@ class BankInfo {
       );
 
   factory BankInfo.fromJson(Map<String, dynamic> json) => BankInfo(
-        fullName: json["full_name"],
+        fullName: json["name"],
         bank: json["bank"],
         iban: json["iban"],
         swift: json["swift"],
@@ -261,7 +281,7 @@ class BankInfo {
       );
 
   Map<String, dynamic> toJson() => {
-        "full_name": fullName,
+        "name": fullName,
         "bank": bank,
         "iban": iban,
         "swift": swift,

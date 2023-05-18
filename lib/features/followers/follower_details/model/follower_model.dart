@@ -1,4 +1,4 @@
-import '../../../maps/models/address_model.dart';
+import '../../../maps/models/location_model.dart';
 
 class FollowerModel {
   int? id;

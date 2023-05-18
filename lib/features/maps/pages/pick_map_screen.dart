@@ -10,7 +10,7 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
-import '../models/address_model.dart';
+import '../models/location_model.dart';
 import '../provider/location_provider.dart';
 
 class PickMapScreen extends StatefulWidget {

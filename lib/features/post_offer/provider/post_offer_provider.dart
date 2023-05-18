@@ -1,13 +1,13 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../main_models/offer_details_model.dart';
-import '../../../main_models/offer_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../maps/models/address_model.dart';
+import '../../maps/models/location_model.dart';
 import '../repo/post_offer_repo.dart';
 
 class PostOfferProvider extends ChangeNotifier {
@@ -80,8 +80,8 @@ class PostOfferProvider extends ChangeNotifier {
     /// get days count
     List<int> days = [];
     for (var element in scheduleProvider.selectedDays) {
-      element.startTime = startTime;
-      element.endTime = endTime;
+      element.startTime = startTime.dateFormat(format: "mm : hh aa");
+      element.endTime = endTime.dateFormat(format: "mm : hh aa");
       days.add(element.id!);
     }
     counts = Methods.getWeekdayCount(

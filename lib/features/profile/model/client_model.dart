@@ -1,5 +1,5 @@
 import '../../../main_models/weak_model.dart';
-import '../../maps/models/address_model.dart';
+import '../../maps/models/location_model.dart';
 
 class ClientModel {
   int? id;
@@ -20,27 +20,30 @@ class ClientModel {
   LocationModel? dropOffLocation;
   LocationModel? pickupLocation;
   List<WeekModel>? clientDays;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  ClientModel({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.image,
-    this.nickname,
-    this.gender,
-    this.age,
-    this.national,
-    this.city,
-    this.countryId,
-    this.phone,
-    this.status,
-    this.rate,
-    this.wallet,
-    this.dropOffLocation,
-    this.pickupLocation,
-    this.clientDays,
-  });
+  ClientModel(
+      {this.id,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.image,
+      this.nickname,
+      this.gender,
+      this.age,
+      this.national,
+      this.city,
+      this.countryId,
+      this.phone,
+      this.status,
+      this.rate,
+      this.wallet,
+      this.dropOffLocation,
+      this.pickupLocation,
+      this.clientDays,
+      this.createdAt,
+      this.updatedAt});
 
   ClientModel copyWith({
     int? id,
@@ -98,7 +101,13 @@ class ClientModel {
         phone: json["phone"],
         status: json["status"],
         rate: json["rate"],
-        wallet: json["wallet"],
+        wallet: double.tryParse(json["wallet"].toString()),
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),
@@ -127,6 +136,8 @@ class ClientModel {
         "status": status,
         "rate": rate,
         "wallet": wallet,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
         "drop_off_location": dropOffLocation?.toJson(),
         "pickup_location": pickupLocation?.toJson(),
         "client_days": clientDays == null

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../../app/core/utils/svg_images.dart';
-import '../../../maps/models/address_model.dart';
+import '../../../maps/models/location_model.dart';
 import '../repo/follower_details_repo.dart';
 
 class FollowerDetailsProvider extends ChangeNotifier {

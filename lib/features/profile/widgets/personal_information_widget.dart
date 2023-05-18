@@ -30,11 +30,8 @@ class PersonalInformationWidget extends StatelessWidget {
         if (provider.role == "driver")
           CustomTextFormField(
             valid: Validations.name,
-            initialValue: provider.fullName,
+            controller: provider.firstName,
             hint: getTranslated("full_name", context),
-            onChanged: (v) {
-              provider.fullName = v;
-            },
           ),
         if (provider.role != "driver")
           Row(
@@ -42,11 +39,8 @@ class PersonalInformationWidget extends StatelessWidget {
               Expanded(
                   child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.firstName,
+                controller: provider.firstName,
                 hint: getTranslated("first_name", context),
-                onChanged: (v) {
-                  provider.firstName = v;
-                },
               )),
               const SizedBox(
                 width: 8,
@@ -54,11 +48,8 @@ class PersonalInformationWidget extends StatelessWidget {
               Expanded(
                   child: CustomTextFormField(
                 valid: Validations.name,
-                initialValue: provider.secondName,
+                controller: provider.lastName,
                 hint: getTranslated("second_name", context),
-                onChanged: (v) {
-                  provider.secondName = v;
-                },
               )),
             ],
           ),
@@ -72,11 +63,8 @@ class PersonalInformationWidget extends StatelessWidget {
               valid: Validations.name,
               formatter: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
               inputType: TextInputType.number,
-              initialValue: provider.age,
+              controller: provider.age,
               hint: getTranslated("age", context),
-              onChanged: (v) {
-                provider.age = v;
-              },
             )),
             const SizedBox(
               width: 8,
@@ -133,11 +121,8 @@ class PersonalInformationWidget extends StatelessWidget {
                   Expanded(
                       child: CustomTextFormField(
                     valid: Validations.name,
-                    initialValue: provider.profileModel?.driver?.identityNumber,
                     hint: getTranslated("identity_number", context),
-                    onChanged: (v) {
-                      provider.identityNumber = v;
-                    },
+                    controller: provider.identityNumber,
                   )),
                   const SizedBox(
                     width: 8,
@@ -157,12 +142,17 @@ class PersonalInformationWidget extends StatelessWidget {
               ),
               CustomTextFormField(
                 valid: Validations.mail,
-                initialValue: provider.profileModel?.driver?.email,
+                controller: provider.email,
                 hint: getTranslated("email", context),
-                onChanged: (v) {
-                  provider.email = v;
-                },
-              )
+              ),
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              // CustomTextFormField(
+              //   valid: Validations.phone,
+              //   controller: provider.phone,
+              //   hint: getTranslated("phone", context),
+              // )
             ],
           ),
         const SizedBox(

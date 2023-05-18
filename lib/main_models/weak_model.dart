@@ -1,22 +1,22 @@
 class WeekModel {
   int? id;
   String? dayName;
-  DateTime? startTime;
-  DateTime? endTime;
+  String? startTime;
+  String? endTime;
   WeekModel({this.id, this.dayName, this.endTime, this.startTime});
 
   factory WeekModel.fromJson(Map<String, dynamic> json) => WeekModel(
         dayName: json["day"],
         id: json["day_id"],
-        startTime: DateTime.tryParse(json["start_time"]),
-        endTime: DateTime.tryParse(json["end_time"]),
+        startTime: json["start_time"],
+        endTime: json["end_time"],
       );
 
   Map<String, dynamic> toJson() => {
         "day_id": id,
         "day": dayName,
-        "start_time": startTime.toString(),
-        "end_time": endTime.toString(),
+        "start_time": startTime,
+        "end_time": endTime,
       };
   // @override
   // String toString() {
@@ -24,5 +24,3 @@ class WeekModel {
   //   return "$id -- $dayName  ";
   // }
 }
-
-

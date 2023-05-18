@@ -1,5 +1,5 @@
 import 'package:fitariki/main_models/weak_model.dart';
-import '../features/maps/models/address_model.dart';
+import '../features/maps/models/location_model.dart';
 import 'car_model.dart';
 
 class OfferDetailsModel {

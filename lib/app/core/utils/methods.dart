@@ -1,12 +1,18 @@
-abstract class Methods{
-  static diffBtw2Dates({required DateTime startDate,required DateTime endDate, }) {
+import 'package:flutter/material.dart';
 
+abstract class Methods {
+  static diffBtw2Dates({
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
     var dur = endDate.toLocal().difference(startDate);
     return dur.inDays.toString();
-
   }
+
   static WeekdayCount getWeekdayCount(
-      {required DateTime startDate, required DateTime endDate, required List<int> weekdays}) {
+      {required DateTime startDate,
+      required DateTime endDate,
+      required List<int> weekdays}) {
     int count = 0;
     int days = 0;
 
@@ -33,10 +39,50 @@ abstract class Methods{
     return WeekdayCount(count, days);
   }
 
+  static convertStringToTime(timeString) {
+    List<String> parts = timeString.split(':');
+    TimeOfDay timeOfDay =
+        TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+    DateTime now = DateTime.now();
+    DateTime dateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      timeOfDay.hour,
+      timeOfDay.minute,
+    );
 
+    return dateTime;
+  }
 
+  static getDayCount({
+    required DateTime date,
+  }) {
+    int weeks = 0;
+    int days = 0;
+    int hour = 0;
 
+    if (DateTime.now().isBefore(date)) {
+      weeks = DateTime.now().weekday - date.weekday;
+      if (weeks == 0) {
+        days = DateTime.now().day - date.day;
+        return "$days اسبوع";
+      } else {
+        return "$weeks اسبوع";
+      }
+    } else {
+      hour = DateTime.now().hour - date.hour;
+      if (hour <= 1) {
+        return "ساعة";
+      } else if (hour <= 2) {
+        return "ساعتين";
+      } else {
+        return "$hour ساعات";
+      }
+    }
+  }
 }
+
 class WeekdayCount {
   final int count;
   final int days;

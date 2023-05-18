@@ -9,7 +9,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 
 class WalletCard extends StatelessWidget {
-  const WalletCard({Key? key}) : super(key: key);
+  const WalletCard({this.availableBalance,Key? key}) : super(key: key);
+  final double? availableBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,7 @@ class WalletCard extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      text: '200',
+                      text: "$availableBalance",
                       style: AppTextStyles.w700.copyWith(
                           fontSize: 12,
                           height: 1,

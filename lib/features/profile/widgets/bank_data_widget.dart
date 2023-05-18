@@ -35,11 +35,8 @@ class BankDataWidget extends StatelessWidget {
       children: [
         CustomTextFormField(
           valid: Validations.name,
-          initialValue: provider.profileModel?.driver?.bankInfo?.fullName,
+          controller: provider.fullName,
           hint: getTranslated("quadruple_name", context),
-          onChanged: (v) {
-            provider.quadrupleName = v;
-          },
         ),
         SizedBox(
           height: 8.h,
@@ -59,11 +56,8 @@ class BankDataWidget extends StatelessWidget {
         ),
         CustomTextFormField(
           valid: Validations.phone,
-          initialValue: provider.profileModel?.driver?.bankInfo?.accountNumber,
           hint: "SA 00000 0000 0000 0000 0000",
-          onChanged: (v) {
-            provider.bankAccount = v;
-          },
+          controller: provider.bankAccount,
           inputType: TextInputType.phone,
         ),
         SizedBox(
@@ -71,8 +65,9 @@ class BankDataWidget extends StatelessWidget {
         ),
         CustomButtonImagePicker(
           imageUrl: provider.profileModel?.driver?.bankInfo?.accountImage,
-          title:  getTranslated("account_number_image", context),
-          onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectBankAccountImage),
+          title: getTranslated("account_number_image", context),
+          onTap: () => ImagePickerHelper.showOptionSheet(
+              onGet: provider.onSelectBankAccountImage),
           imageFile: provider.bankAccountImage,
         ),
       ],

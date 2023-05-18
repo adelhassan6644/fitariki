@@ -10,7 +10,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
-import '../models/address_model.dart';
+import '../models/location_model.dart';
 import '../models/prediction_model.dart';
 import '../repo/maps_repo.dart';
 import 'package:geolocator/geolocator.dart';
@@ -122,7 +122,6 @@ class LocationProvider extends ChangeNotifier {
       addressModel = LocationModel(
         latitude: latitude.toString(),
         longitude: longitude.toString(),
-        cityName: response.data['results'][0]['formatted_address'].toString(),
         address: response.data['results'][0]['formatted_address'].toString(),
       );
       notifyListeners();

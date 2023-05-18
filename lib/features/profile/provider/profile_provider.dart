@@ -1,14 +1,18 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
+import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
+import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
-import '../../maps/models/address_model.dart';
 import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
 
@@ -33,8 +37,8 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   ///Car Data
-  String? carName;
-  String? carPlate;
+  TextEditingController carName = TextEditingController();
+  TextEditingController carPlate = TextEditingController();
 
   File? carImage;
   onSelectCarImage(File? file) {
@@ -91,8 +95,9 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   ///Bank Data
-  String? quadrupleName;
-  String? bankAccount;
+
+  TextEditingController fullName = TextEditingController();
+  TextEditingController bankAccount = TextEditingController();
 
   String? bankName;
   List<String> banks = ["بنك الاهلي المصري", "بنك الرياض", "بنك QNB"];
@@ -107,18 +112,19 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///Road
-  String? startRoad;
-  String? endRoad;
-
   ///Personal Data
 
+  double rate = 0.0;
+  double wallet = 0.0;
+  String? lastUpdate;
+
   String? image;
-  String? firstName;
-  String? secondName;
-  String? fullName;
-  String? email;
-  String? identityNumber;
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController age = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController identityNumber = TextEditingController();
 
   File? profileImage;
   onSelectImage(File? file) {
@@ -132,12 +138,6 @@ class ProfileProvider extends ChangeNotifier {
   int get gender => _gender;
   selectedGender(int value) {
     _gender = value;
-    notifyListeners();
-  }
-
-  String? age;
-  selectedAge(value) {
-    age = value;
     notifyListeners();
   }
 
@@ -191,287 +191,286 @@ class ProfileProvider extends ChangeNotifier {
     endTimeZone = value;
     notifyListeners();
   }*/
-
-  checkData() {
-    if (role == "driver") {
-      if (profileImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الصورةالشخصية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (fullName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الاسم الثلاثي!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (age == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار العمر!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (nationality == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الحنسية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (identityNumber == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادحال رقم الهوية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (identityImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الهوية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (email == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الايميل!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (startRoad == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال بداية الطريق!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (endRoad == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال نهاية الطريق!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (carName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال اسم السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (carModel == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال موديل السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (carPlate == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال لوحة السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (carImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (carCapacity == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال سعة السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (licenceImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الرخصة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (formImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الاستمارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (insuranceImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة التأمين!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (quadrupleName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الاسم الرباعي!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (bankName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار اسم البنك!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (bankAccount == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال رقم الحساب!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (bankAccountImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة رقم الحساب!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (scheduleProvider.selectedDays.isEmpty) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الايام!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-    } else {
-      if (profileImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الصورةالشخصية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (firstName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الاسم الاول!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (secondName == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الاسم الثاني!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (age == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار العمر!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (nationality == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الحنسية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (startRoad == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال بداية الطريق!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (endRoad == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال نهاية الطريق!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (scheduleProvider.selectedDays.isEmpty) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الايام!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-    }
-  }
+  // checkData() {
+  //   if (role == "driver") {
+  //     if (profileImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الصورةالشخصية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (fullName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال الاسم الثلاثي!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (age == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار العمر!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (nationality == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الحنسية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (identityNumber == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادحال رقم الهوية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (identityImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة الهوية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (email == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال الايميل!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (startRoad == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال بداية الطريق!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (endRoad == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال نهاية الطريق!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (carName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال اسم السيارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (carModel == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال موديل السيارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (carPlate == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال لوحة السيارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (carImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة السيارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (carCapacity == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال سعة السيارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (licenceImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة الرخصة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (formImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة الاستمارة!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (insuranceImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة التأمين!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (quadrupleName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال الاسم الرباعي!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (bankName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار اسم البنك!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (bankAccount == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال رقم الحساب!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (bankAccountImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار صورة رقم الحساب!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (scheduleProvider.selectedDays.isEmpty) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الايام!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //   } else {
+  //     if (profileImage == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الصورةالشخصية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (firstName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال الاسم الاول!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (lastName == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال الاسم الثاني!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (age == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار العمر!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (nationality == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الحنسية!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (startRoad == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال بداية الطريق!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (endRoad == null) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء ادخال نهاية الطريق!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //     if (scheduleProvider.selectedDays.isEmpty) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: "برجاء اختيار الايام!",
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       return;
+  //     }
+  //   }
+  // }
 
   updateTimes() {
     for (var element in scheduleProvider.selectedDays) {
-      element.startTime = startTime;
-      element.endTime = endTime;
+      element.startTime = startTime.toString();
+      element.endTime = endTime.toString();
     }
   }
 
@@ -479,11 +478,15 @@ class ProfileProvider extends ChangeNotifier {
   updateProfile() async {
     try {
       updateTimes();
+      spinKitDialog();
+      isLoading = true;
+      notifyListeners();
+
       // checkData();
       final carData = {
-        "name": carName,
+        "name": carName.text.trim(),
         "model": carModel,
-        "pallet_number": carPlate,
+        "pallet_number": carPlate.text.trim(),
         "seats_count": carCapacity,
         if (carImage != null) "car_image": "cbvb",
         // await MultipartFile.fromFile(carImage!.path),
@@ -496,26 +499,28 @@ class ProfileProvider extends ChangeNotifier {
       };
 
       final bankData = {
-        "full_name": quadrupleName,
+        "name": fullName.text.trim(),
         "bank": bankName,
         "iban": "null",
         "swift": "null",
-        "account_number": bankAccount,
+        "account_number": bankAccount.text.trim(),
         if (bankAccountImage != null) "account_image": "dsdsds",
         // await MultipartFile.fromFile(bankAccountImage!.path),
       };
 
       final personalData = {
         "driver": {
-          "first_name": fullName,
-          "last_name": fullName,
-          "email": email,
-          "gender": gender,
-          "identity_number": identityNumber,
-          "age": age,
-          if (profileImage != null)
-            "image": "cbb",
+          if (profileImage != null) "image": "cbb",
           // await MultipartFile.fromFile(profileImage!.path),
+          "first_name": firstName.text.trim(),
+          "last_name": lastName.text.trim(),
+          "email": email.text.trim(),
+          "gender": gender,
+          "age": age.text.trim(),
+          "national": nationality,
+          // "identity_number": identityNumber.text.trim(),
+          "identity_image": "cbb",
+          // await MultipartFile.fromFile(identityImage!.path),
           if (role == "driver")
             "driver_days": List<dynamic>.from(
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
@@ -524,31 +529,47 @@ class ProfileProvider extends ChangeNotifier {
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
           "drop_off_location": endLocation!.toJson(),
           "pickup_location": startLocation!.toJson(),
-
           "car_info": carData,
           "bank_info": bankData
         }
       };
 
-      print(personalData);
-      FormData formData = FormData.fromMap(personalData);
+      log(personalData.toString());
       Either<ServerFailure, Response> response =
           await editProfileRepo.updateProfile(body: personalData);
       response.fold((fail) {
+        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
+
+        isLoading = false;
+        notifyListeners();
       }, (response) {
-        profileModel = ProfileModel.fromJson(response.data['data']);
-        initDriverData();
-        initClientData();
+        CustomNavigator.pop();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "تم تحديث بياناتك بنجاح !",
+                isFloating: true,
+                backgroundColor: ColorResources.ACTIVE,
+                borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
       });
-    } catch (e) {}
+    } catch (e) {
+      CustomNavigator.pop();
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isLoading = false;
+      notifyListeners();
+    }
   }
 
   ///Update Profile
@@ -569,38 +590,69 @@ class ProfileProvider extends ChangeNotifier {
 
   initClientData() {
     scheduleProvider.selectedDays = profileModel?.client?.clientDays ?? [];
-    startTime =
-        profileModel?.client?.clientDays?[0].startTime ?? DateTime.now();
-    endTime = profileModel?.client?.clientDays?[0].endTime ?? DateTime.now();
 
-    image = profileModel?.client?.image;
-    firstName = profileModel?.client?.firstName;
-    secondName = profileModel?.client?.lastName;
-    age = profileModel?.client?.age;
-    nationality = profileModel?.client?.national;
-    _gender = profileModel?.client?.gender ?? 0;
+    if (profileModel?.client?.clientDays != null) {
+      startTime = Methods.convertStringToTime(
+              profileModel?.client?.clientDays?[0].startTime) ??
+          DateTime.now();
+      endTime = Methods.convertStringToTime(
+              profileModel?.client?.clientDays?[0].endTime) ??
+          DateTime.now();
+    }
 
     startLocation = profileModel?.client?.pickupLocation;
     endLocation = profileModel?.client?.dropOffLocation;
+
+    image = profileModel?.client?.image;
+    firstName.text = profileModel?.client?.firstName ?? "";
+    lastName.text = profileModel?.client?.lastName ?? "25";
+    age.text = profileModel?.client?.age ?? "";
+    email.text = profileModel?.client?.email ?? "";
+    phone.text = profileModel?.client?.phone ?? "";
+    _gender = profileModel?.client?.gender ?? 0;
+    rate = profileModel?.client?.rate ?? 0.0;
+    wallet = profileModel?.client?.wallet ?? 0.0;
+    lastUpdate = Methods.getDayCount(
+      date: profileModel!.client!.updatedAt!,
+    ).toString();
   }
 
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
-    startTime =
-        profileModel?.driver?.driverDays?[0].startTime ?? DateTime.now();
-    endTime = profileModel?.driver?.driverDays?[0].endTime ?? DateTime.now();
+
+    if (scheduleProvider.selectedDays.isNotEmpty) {
+      startTime = Methods.convertStringToTime(
+              profileModel?.driver?.driverDays?[0].startTime) ??
+          DateTime.now();
+      endTime = Methods.convertStringToTime(
+              profileModel?.driver?.driverDays?[0].endTime) ??
+          DateTime.now();
+    }
 
     startLocation = profileModel?.driver?.pickupLocation;
     endLocation = profileModel?.driver?.dropOffLocation;
 
     image = profileModel?.driver?.image;
-    fullName =
-        "${profileModel?.driver?.firstName} ${profileModel?.driver?.lastName}";
+    firstName.text = profileModel?.driver?.firstName ?? "";
+    age.text = profileModel?.driver?.age ?? "25";
+    email.text = profileModel?.driver?.email ?? "";
+    phone.text = profileModel?.driver?.phone ?? "";
+    identityNumber.text = profileModel?.driver?.identityNumber ?? "";
     nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
-    age = profileModel?.driver?.age;
+    rate = profileModel?.driver?.rate ?? 0.0;
+
+    lastUpdate = Methods.getDayCount(
+      date: profileModel!.driver!.updatedAt!,
+    ).toString();
+
+    carName.text = profileModel?.driver?.carInfo?.name ?? "";
+    carPlate.text = profileModel?.driver?.carInfo?.palletNumber ?? "";
+    carModel = profileModel?.driver?.carInfo?.model;
+    carCapacity = profileModel?.driver?.carInfo?.seatsCount;
+
+    fullName.text = profileModel?.driver?.bankInfo?.fullName ?? "";
+    bankAccount.text = profileModel?.driver?.bankInfo?.accountNumber ?? "";
     bankName = profileModel?.driver?.bankInfo?.bank;
-    carModel = profileModel?.driver?.carInfo?.model.toString();
-    carCapacity = profileModel?.driver?.carInfo?.seatsCount.toString();
   }
 }
