@@ -26,7 +26,6 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../features/wishlist/repo/wishlist_repo.dart';
-import '../../main_providers/followers_provider.dart';
 import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';

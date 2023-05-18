@@ -66,7 +66,7 @@ abstract class Methods {
       weeks = DateTime.now().weekday - date.weekday;
       if (weeks == 0) {
         days = DateTime.now().day - date.day;
-        return "$days اسبوع";
+        return "$days يوم";
       } else {
         return "$weeks اسبوع";
       }
@@ -76,8 +76,10 @@ abstract class Methods {
         return "ساعة";
       } else if (hour <= 2) {
         return "ساعتين";
-      } else {
+      } else if (3 <= hour && hour <= 10) {
         return "$hour ساعات";
+      } else if (hour > 10) {
+        return "$hour ساعة";
       }
     }
   }

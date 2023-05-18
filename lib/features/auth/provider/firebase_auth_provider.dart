@@ -211,10 +211,9 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        Provider.of<ProfileProvider>(
-                CustomNavigator.navigatorState.currentContext!,
-                listen: false)
-            .getRoleType();
+        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getRoleType();
+        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getProfile();
+
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,
