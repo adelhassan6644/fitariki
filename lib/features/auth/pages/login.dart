@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../components/chekbox_listtile.dart';
+import '../../../components/checkbox_list_tile.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/tab_widget.dart';

@@ -9,7 +9,7 @@ import '../../../../app/core/utils/svg_images.dart';
 import '../../../../app/core/utils/text_styles.dart';
 import '../../../../app/core/utils/validation.dart';
 import '../../../../components/bottom_sheet_app_bar.dart';
-import '../../../../components/chekbox_listtile.dart';
+import '../../../../components/checkbox_list_tile.dart';
 import '../../../../components/custom_images.dart';
 import '../../../../components/custom_text_form_field.dart';
 import '../../../../components/marquee_widget.dart';
@@ -57,9 +57,7 @@ class AddFollower extends StatelessWidget {
                     ),
                     title: getTranslated("add_follower", context),
                     textBtn: getTranslated("save", context),
-                    onTap: () {
-                      print("=====>"+provider.followerModel.toJson().toString());
-                    }),
+                    onTap: () {}),
                 Expanded(
                     child: ListView(
                   padding: EdgeInsets.symmetric(
@@ -69,13 +67,8 @@ class AddFollower extends StatelessWidget {
                   children: [
                     CustomTextFormField(
                       valid: Validations.name,
-                      initialValue: provider.followerModel.fullName,
                       hint: getTranslated("follower_full_name", context),
-                      onChanged: (v) {
-                        provider.followerModel.copyWith(fullName: v);
-                        print("=====>${provider.followerModel.fullName}");
-                        // provider.followerFullName = v;
-                      },
+                      controller: provider.followerFullName,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -90,12 +83,8 @@ class AddFollower extends StatelessWidget {
                               FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                             ],
                             inputType: TextInputType.number,
-                            initialValue: provider.followerModel.age,
                             hint: getTranslated("age", context),
-                            onChanged: (v) {
-                              provider.followerModel.copyWith(age: v);
-                              // provider.age = v;
-                            },
+                            controller: provider.age,
                           )),
                           SizedBox(
                             width: 8.w,
@@ -129,8 +118,6 @@ class AddFollower extends StatelessWidget {
                                                 onTab: () {
                                                   provider
                                                       .selectedGender(index);
-                                                  provider.followerModel
-                                                      .copyWith(gender: index);
                                                 }),
                                           )),
                                 )),
@@ -168,14 +155,12 @@ class AddFollower extends StatelessWidget {
                             Expanded(
                               child: MarqueeWidget(
                                 child: Text(
-                                  provider.followerModel.pickLocation
-                                          ?.address ??
+                                  provider.startLocation?.address ??
                                       getTranslated(
                                           "select_your_residence_housing_location",
                                           context),
                                   style: AppTextStyles.w400.copyWith(
-                                      color: provider.followerModel.pickLocation
-                                                  ?.address ==
+                                      color: provider.startLocation?.address ==
                                               null
                                           ? ColorResources.DISABLED
                                           : ColorResources
@@ -224,13 +209,13 @@ class AddFollower extends StatelessWidget {
                             Expanded(
                               child: MarqueeWidget(
                                 child: Text(
-                                  provider.followerModel.endLocation?.address ??
+                                  provider.endLocation?.address ??
                                       getTranslated(
                                           "locate_your_work_study_location_on_the_map",
                                           context),
                                   style: AppTextStyles.w400.copyWith(
                                       color:
-                                      provider.followerModel.endLocation?.address == null
+                                          provider.endLocation?.address == null
                                               ? ColorResources.DISABLED
                                               : ColorResources
                                                   .SECOUND_PRIMARY_COLOR,

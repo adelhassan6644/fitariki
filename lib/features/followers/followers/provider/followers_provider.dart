@@ -8,14 +8,30 @@ import '../../../../app/core/utils/app_snack_bar.dart';
 import '../../../../app/core/utils/color_resources.dart';
 import '../../../../data/error/api_error_handler.dart';
 import '../../../../data/error/failures.dart';
+import '../../follower_details/model/follower_model.dart';
 
-class FollowerProvider extends ChangeNotifier {
+class FollowersProvider extends ChangeNotifier {
   FollowersRepo followersRepo;
-  FollowerProvider({required this.followersRepo});
+  FollowersProvider({required this.followersRepo});
+
+  bool addFollowers = true;
+  onChange(v) {
+    addFollowers = v;
+    notifyListeners();
+  }
 
   bool isLoading = false;
+  FollowersModel? model;
 
-  FollowersModel? data;
+  List<FollowerModel> selectedFollowers = [];
+  onSelectFollow(v, index) {
+    if (v) {
+      selectedFollowers.add(model!.data![index]);
+    } else {
+      selectedFollowers.remove(model!.data![index]);
+    }
+    notifyListeners();
+  }
 
   getFollowers() async {
     try {
@@ -33,7 +49,7 @@ class FollowerProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) {
-        data = FollowersModel.fromJson(response.data);
+        model = FollowersModel.fromJson(response.data);
         isLoading = false;
         notifyListeners();
       });

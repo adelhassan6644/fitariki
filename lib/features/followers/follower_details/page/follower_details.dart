@@ -9,7 +9,7 @@ import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
 import '../../../../app/core/utils/text_styles.dart';
 import '../../../../app/core/utils/validation.dart';
-import '../../../../components/chekbox_listtile.dart';
+import '../../../../components/checkbox_list_tile.dart';
 import '../../../../components/custom_app_bar.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_images.dart';
@@ -56,11 +56,8 @@ class FollowerDetails extends StatelessWidget {
                 children: [
                   CustomTextFormField(
                     valid: Validations.name,
-                    initialValue: provider.followerFullName,
                     hint: getTranslated("follower_full_name", context),
-                    onChanged: (v) {
-                      provider.followerFullName = v;
-                    },
+                    controller: provider.followerFullName,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -75,11 +72,8 @@ class FollowerDetails extends StatelessWidget {
                             FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                           ],
                           inputType: TextInputType.number,
-                          initialValue: provider.age,
                           hint: getTranslated("age", context),
-                          onChanged: (v) {
-                            provider.age = v;
-                          },
+                          controller: provider.age,
                         )),
                         SizedBox(
                           width: 8.w,

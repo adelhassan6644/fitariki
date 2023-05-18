@@ -1,5 +1,5 @@
-import 'dart:developer';
 
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
@@ -8,21 +8,21 @@ import 'package:flutter/material.dart';
 import '../../../../app/core/utils/app_snack_bar.dart';
 import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
-import '../../../../data/error/api_error_handler.dart';
+import '../../../../components/loading_dialog.dart';
 import '../../../../data/error/failures.dart';
-import '../../follower_details/model/follower_model.dart';
+import '../../../maps/models/location_model.dart';
 import '../../followers/provider/followers_provider.dart';
 import '../repo/add_follower_repo.dart';
 
 class AddFollowerProvider extends ChangeNotifier {
   AddFollowersRepo addFollowersRepo;
-  FollowerProvider followerProvider;
+  FollowersProvider followerProvider;
   AddFollowerProvider(
       {required this.addFollowersRepo, required this.followerProvider});
 
-  FollowerModel followerModel = FollowerModel();
+  TextEditingController followerFullName = TextEditingController();
+  TextEditingController age = TextEditingController();
 
-  String? age, followerFullName;
   List<String> genders = ["male", "female"];
   List<String> genderIcons = [SvgImages.maleIcon, SvgImages.femaleIcon];
   int _gender = 0;
@@ -38,17 +38,15 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // LocationModel? startLocation;
+  LocationModel? startLocation;
   onSelectStartLocation(v) {
-    // startLocation = v;
-    followerModel.copyWith(pickLocation: v);
+    startLocation = v;
     notifyListeners();
   }
 
-  // LocationModel? endLocation;
+  LocationModel? endLocation;
   onSelectEndLocation(v) {
-    // endLocation = v;
-    followerModel.copyWith(endLocation: v);
+    endLocation = v;
     notifyListeners();
   }
 
@@ -58,46 +56,51 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  reset() {
-    followerModel.copyWith(
-        fullName: null,
-        age: null,
-        gender: 0,
-        endLocation: null,
-        pickLocation: null);
 
-    // followerFullName = null;
-    // age = null;
-    _gender = 0;
-    // startLocation = null;
-    // endLocation = null;
-    sameDestination = true;
-    sameHomeLocation = true;
+  reset() {
+    followerFullName.clear();
+    age.clear();
+    _gender=0;
+    startLocation=null;
+    endLocation = null;
+    notifyListeners();
   }
 
   bool isLoading = false;
-  addFollower() async {
+  updateFollowerDetails() async {
     try {
+      spinKitDialog();
       isLoading = true;
       notifyListeners();
-      Either<ServerFailure, Response> res =
-          await addFollowersRepo.addFollower();
-      res.fold((fail) {
+
+      final data = {
+        "data": {
+          "name": followerFullName.text.trim(),
+          "gender": gender,
+          "age": age.text.trim(),
+          "drop_off_location": endLocation!.toJson(),
+          "pickup_location": startLocation!.toJson(),
+        }
+      };
+
+      log(data.toString());
+      Either<ServerFailure, Response> response =
+      await addFollowersRepo.addFollower(body: data);
+      response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: ApiErrorHandler.getMessage(fail),
+                message: fail.error,
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
-      }, (success) {
-        followerProvider.getFollowers();
+      }, (response) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: success.data["data"].toString(),
+                message: "تم تحديث بياناتك بنجاح !",
                 isFloating: true,
                 backgroundColor: ColorResources.ACTIVE,
                 borderColor: Colors.transparent));
@@ -105,13 +108,15 @@ class AddFollowerProvider extends ChangeNotifier {
         notifyListeners();
       });
     } catch (e) {
-      log(e.toString());
+      CustomNavigator.pop();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
+      isLoading = false;
+      notifyListeners();
     }
   }
 }

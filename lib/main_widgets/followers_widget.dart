@@ -1,4 +1,3 @@
-import 'package:fitariki/main_providers/followers_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +5,8 @@ import 'package:provider/provider.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/text_styles.dart';
 import '../../app/localization/localization/language_constant.dart';
-import '../components/chekbox_listtile.dart';
+import '../components/checkbox_list_tile.dart';
+import '../features/followers/followers/provider/followers_provider.dart';
 
 class FollowersWidget extends StatelessWidget {
   const FollowersWidget({Key? key}) : super(key: key);
@@ -41,14 +41,14 @@ class FollowersWidget extends StatelessWidget {
               child: Column(
                 children: [
                   ...List.generate(
-                    provider.followers.length,
+                    provider.model?.data?.length ?? 0,
                     (index) => CheckBoxListTile(
-                      title: provider.followers[index],
+                      title: provider.model?.data?[index].fullName ?? "",
                       onChange: (v) {
                         provider.onSelectFollow(v, index);
                       },
                       check: provider.selectedFollowers
-                          .contains(provider.followers[index]),
+                          .contains(provider.model?.data?[index]),
                     ),
                   ),
                   const SizedBox(

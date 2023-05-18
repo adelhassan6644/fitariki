@@ -17,7 +17,6 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
-import '../../main_providers/followers_provider.dart';
 import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
@@ -41,12 +40,11 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ScheduleProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<FollowersProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FollowerDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddFollowerProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<WishlistProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<HomeProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<NotificationsProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<FollowerProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<FollowersProvider>()),
   ];
 }

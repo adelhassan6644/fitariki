@@ -95,7 +95,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProfileProvider(
       editProfileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
-  sl.registerLazySingleton(() => FollowersProvider());
   sl.registerLazySingleton(() => PostOfferProvider(
         postOfferRepo: sl(),
         scheduleProvider: sl(),
@@ -118,7 +117,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => NotificationsProvider(
         notificationsRepo: sl(),
       ));
-  sl.registerLazySingleton(() => FollowerProvider(
+  sl.registerLazySingleton(() => FollowersProvider(
         followersRepo: sl(),
       ));
 
