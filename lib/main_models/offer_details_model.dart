@@ -103,15 +103,21 @@ class OfferDetailsModel {
       );
 
   Map<String, dynamic> toPostJson() => {
-        "start_date": startDate.toString(),
-        "end_date": endDate.toString(),
-        "duration": duration,
-        "min_price": minPrice,
-        "max_price": maxPrice,
-        "offer_days": offerDays == null
-            ? []
-            : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
-        "pick_location": pickLocation?.toJson(),
-        "end_location": endLocation?.toJson()
+
+    "offer": {
+      "driver_id": id,
+
+      "start_date": startDate.toString(),
+          "end_date": endDate.toString(),
+          "duration": duration,
+          "min_price": minPrice,
+          "max_price": maxPrice,
+      "offer_type": 1,
+          "offer_days": offerDays == null
+              ? []
+              : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
+          "pickup_location": pickLocation?.toJson(),
+          "drop_off_location": endLocation?.toJson()
+        }
       };
 }
