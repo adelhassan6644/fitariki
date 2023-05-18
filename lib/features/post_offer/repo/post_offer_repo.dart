@@ -21,7 +21,7 @@ class PostOfferRepo {
       Response response = await dioClient.post(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postOffer}",
-          data: offerModel.toPostJson());
+          data:sharedPreferences.getString(AppStorageKey.role)=="driver"? offerModel.toPostDriverJson():offerModel.toPostClientJson());
       if (response.statusCode == 200) {
         return Right(response);
       } else {

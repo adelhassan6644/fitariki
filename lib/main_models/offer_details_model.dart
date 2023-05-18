@@ -102,10 +102,28 @@ class OfferDetailsModel {
             : CarModel.fromJson(json["car_data"]),
       );
 
-  Map<String, dynamic> toPostJson() => {
+  Map<String, dynamic> toPostDriverJson() => {
 
     "offer": {
       "driver_id": id,
+
+      "start_date": startDate.toString(),
+          "end_date": endDate.toString(),
+          "duration": duration,
+          "min_price": minPrice,
+          "max_price": maxPrice,
+      "offer_type": 1,
+          "offer_days": offerDays == null
+              ? []
+              : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
+          "pickup_location": pickLocation?.toJson(),
+          "drop_off_location": endLocation?.toJson()
+        }
+      };
+  Map<String, dynamic> toPostClientJson() => {
+
+    "offer": {
+      "client_id": id,
 
       "start_date": startDate.toString(),
           "end_date": endDate.toString(),
