@@ -8,6 +8,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../main_models/base_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../provider/post_offer_provider.dart';
@@ -26,7 +27,7 @@ class YourLocationWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             CustomNavigator.push(Routes.PICK_LOCATION,
-                arguments: provider.onSelectStartLocation);
+                arguments:  BaseModel(valueChanged: provider.onSelectStartLocation,object: provider.startLocation));
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),

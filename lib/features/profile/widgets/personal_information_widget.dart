@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
+import 'package:fitariki/main_models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -161,7 +162,7 @@ class PersonalInformationWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             CustomNavigator.push(Routes.PICK_LOCATION,
-                arguments: provider.onSelectStartLocation);
+                arguments: BaseModel(valueChanged: provider.onSelectStartLocation,object: provider.startLocation));
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),

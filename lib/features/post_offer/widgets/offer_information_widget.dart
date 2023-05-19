@@ -12,6 +12,7 @@ import '../../../components/expansion_tile_widget.dart';
 import '../../../components/marquee_widget.dart';
 import '../../../components/price_text_field.dart';
 import '../../../helpers/date_time_picker.dart';
+import '../../../main_models/base_model.dart';
 import '../../../main_widgets/scchedule_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -432,7 +433,10 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                       GestureDetector(
                         onTap: () {
                           CustomNavigator.push(Routes.PICK_LOCATION,
-                              arguments: widget.provider.onSelectEndLocation);
+                              arguments: BaseModel(
+                                  valueChanged:
+                                      widget.provider.onSelectEndLocation,
+                                  object: widget.provider.endLocation));
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

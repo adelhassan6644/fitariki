@@ -60,7 +60,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = {
-        "data": {
+        "follower": {
           "name": followerFullName.text.trim(),
           "gender": gender,
           "age": age.text.trim(),

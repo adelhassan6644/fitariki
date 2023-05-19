@@ -68,7 +68,7 @@ class LocationProvider extends ChangeNotifier {
 
   getCurrentLocation(bool fromAddress,
       {required GoogleMapController mapController,
-      LatLng? defaultLatLng,
+      required LatLng defaultLatLng,
       bool notify = true}) async {
     isLoading = true;
 
@@ -78,12 +78,8 @@ class LocationProvider extends ChangeNotifier {
       _myPosition = newLocalData;
     } catch (e) {
       _myPosition = Position(
-        latitude: defaultLatLng != null
-            ? defaultLatLng.latitude
-            : double.parse(AppStrings.defaultLat),
-        longitude: defaultLatLng != null
-            ? defaultLatLng.longitude
-            : double.parse(AppStrings.defaultLong),
+        latitude: defaultLatLng.latitude,
+        longitude: defaultLatLng.longitude,
         timestamp: DateTime.now(),
         accuracy: 1,
         altitude: 1,
@@ -101,7 +97,7 @@ class LocationProvider extends ChangeNotifier {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(_myPosition!.latitude, _myPosition!.longitude),
-          zoom: 17),
+          zoom: 16),
     ));
 
     await decodeLatLong(

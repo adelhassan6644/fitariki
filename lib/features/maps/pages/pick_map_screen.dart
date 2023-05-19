@@ -10,12 +10,12 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
-import '../models/location_model.dart';
+import '../../../main_models/base_model.dart';
 import '../provider/location_provider.dart';
 
 class PickMapScreen extends StatefulWidget {
-  const PickMapScreen({required this.valueChanged, Key? key}) : super(key: key);
-  final ValueChanged<LocationModel> valueChanged;
+  const PickMapScreen({required this.baseModel, Key? key}) : super(key: key);
+  final BaseModel baseModel;
 
   @override
   State<PickMapScreen> createState() => _PickMapScreenState();
@@ -28,33 +28,55 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   @override
   void initState() {
-    super.initState();
+    Provider.of<LocationProvider>(context, listen: false).pickAddress =
+        widget.baseModel.object.address;
 
-    _initialPosition = LatLng(
-      double.parse(AppStrings.defaultLat),
-      double.parse(AppStrings.defaultLong),
-    );
+    Future.delayed(const Duration(milliseconds: 100), () {
+      getInitialPosition();
+    });
+    super.initState();
+  }
+
+  getInitialPosition() {
+    if (widget.baseModel.object != null) {
+      _initialPosition = LatLng(double.parse(widget.baseModel.object.latitude),
+          double.parse(widget.baseModel.object.longitude));
+    } else {
+      _initialPosition = LatLng(
+        double.parse(AppStrings.defaultLat),
+        double.parse(AppStrings.defaultLong),
+      );
+    }
+
+    _mapController!.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(target: _initialPosition, zoom: 30),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "تحديد مكان دوامك/دراستك", withBorder: true),
+      appBar: const CustomAppBar(
+          title: "تحديد مكان دوامك/دراستك", withBorder: true),
       body: SafeArea(child: Center(child:
           Consumer<LocationProvider>(builder: (c, locationController, _) {
         return Stack(children: [
           GoogleMap(
             initialCameraPosition: CameraPosition(
-              target: _initialPosition,
-              zoom: 16,
+              bearing: 192,
+              target: LatLng(
+                double.parse(AppStrings.defaultLat),
+                double.parse(AppStrings.defaultLong),
+              ),
+              zoom: 60,
             ),
-            minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
+            minMaxZoomPreference: const MinMaxZoomPreference(0, 20),
             myLocationButtonEnabled: false,
             onMapCreated: (GoogleMapController mapController) {
               _mapController = mapController;
-
               locationController.getCurrentLocation(false,
-                  mapController: mapController);
+                  defaultLatLng: _initialPosition,
+                  mapController: _mapController!);
             },
             scrollGesturesEnabled: true,
             zoomControlsEnabled: false,
@@ -152,7 +174,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                                 text:
                                     getTranslated("confirm_location", context),
                                 onTap: () {
-                                  widget.valueChanged(
+                                  widget.baseModel.valueChanged!(
                                       locationController.addressModel!);
                                   CustomNavigator.pop();
                                 },

@@ -10,6 +10,7 @@ import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/marquee_widget.dart';
 import '../../../helpers/date_time_picker.dart';
+import '../../../main_models/base_model.dart';
 import '../../../main_widgets/scchedule_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -132,7 +133,7 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           GestureDetector(
             onTap: () {
               CustomNavigator.push(Routes.PICK_LOCATION,
-                  arguments: provider.onSelectEndLocation);
+                  arguments: BaseModel(valueChanged: provider.onSelectEndLocation,object: provider.endLocation));
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
