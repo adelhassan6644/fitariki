@@ -28,8 +28,13 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   @override
   void initState() {
-    Provider.of<LocationProvider>(context, listen: false).pickAddress =
-        widget.baseModel.object.address;
+    if (widget.baseModel.object != null) {
+      Provider.of<LocationProvider>(context, listen: false).pickAddress =
+          widget.baseModel.object.address;
+    } else {
+      Provider.of<LocationProvider>(context, listen: false).pickAddress =
+          AppStrings.defaultAddress;
+    }
 
     Future.delayed(const Duration(milliseconds: 100), () {
       getInitialPosition();
