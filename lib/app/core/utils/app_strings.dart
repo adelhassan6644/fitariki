@@ -3,6 +3,7 @@ import '../../../main_models/weak_model.dart';
 class AppStrings {
   static const String appName = 'fitariki';
   static const String googleApiKey = 'AIzaSyBxi2NcKA8JE90J07U9M2D90tHgaSg3Xjg';
+  static const String defaultAddress = 'الرياض';
   static const String defaultLat = '24.774265';
   static const String defaultLong = '46.738586';
   static const String fontFamily = 'Cairo';

@@ -62,15 +62,12 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   DateTime startDate = DateTime.now();
-
 
   onSelectStartDate(v) {
     startDate = v;
     notifyListeners();
   }
-
 
   DateTime endDate = DateTime.now();
   WeekdayCount? counts;
@@ -89,13 +86,11 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   bool addFollowers = true;
   onChange(v) {
     addFollowers = v;
     notifyListeners();
   }
-
 
   List<String> followers = ["محمد احمد", "لؤي احمد", "محمد الفيصل"];
   List<String> selectedFollowers = [];
@@ -107,7 +102,6 @@ class PostOfferProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
 
   reset() {
     startLocation = null;
@@ -121,7 +115,6 @@ class PostOfferProvider extends ChangeNotifier {
     scheduleProvider.selectedDays.clear();
     onSelectEndDate(DateTime.now());
   }
-
 
   checkData() {
     if (startLocation == null) {
@@ -208,11 +201,9 @@ class PostOfferProvider extends ChangeNotifier {
     return true;
   }
 
-
   bool isLoading = false;
   postOffer() async {
     offerModel = OfferDetailsModel(
-
       pickLocation: endLocation,
       endLocation: startLocation,
       startDate: startDate,

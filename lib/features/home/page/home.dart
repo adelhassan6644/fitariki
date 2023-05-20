@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../components/animated_widget.dart';
+import '../../../components/empty_widget.dart';
 import '../../../components/tab_widget.dart';
 import '../../auth/provider/firebase_auth_provider.dart';
 import '../widgets/acceptable_widget.dart';
@@ -83,7 +84,14 @@ class _HomeState extends State<Home> {
               child: ListAnimator(
                 data: homeProvider.isLoading
                     ? List.generate(7, (index) => const ShimmerOfferCard())
-                    : List.generate(
+                    : homeProvider.offer == null || homeProvider.offer!.isEmpty
+                    ? [
+                  const EmptyState(
+                    txt: "لا يوجود عروض توصيل",
+                  )
+                ]
+
+                  : List.generate(
                         homeProvider.offer?.length??0,
                         (index) =>
                             OfferCard(offerModel: homeProvider.offer![index])),

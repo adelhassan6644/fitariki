@@ -1,9 +1,11 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
+import '../app/core/utils/images.dart';
+import '../app/core/utils/svg_images.dart';
 import 'custom_images.dart';
 
-class EmptyWidget extends StatelessWidget {
+class EmptyState extends StatelessWidget {
   final String? img;
   final double? imgHeight;
   final double? emptyHeight;
@@ -13,48 +15,50 @@ class EmptyWidget extends StatelessWidget {
   final String? txt;
   final String? subText;
 
-  const EmptyWidget(
-      {Key? key,
-      this.emptyHeight,
-      this.spaceBtw,
-      this.isSvg = false,
-      this.img,
-      this.imgHeight,
-      this.imgWidth,
-      this.txt,
-      this.subText,
-    })
-      : super(key: key);
+  const EmptyState({
+    Key? key,
+    this.emptyHeight,
+    this.spaceBtw,
+    this.isSvg = true,
+    this.img,
+    this.imgHeight,
+    this.imgWidth,
+    this.txt,
+    this.subText,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: emptyHeight, // MediaQueryHelper.height - remain!,
+      height: emptyHeight ?? 500,
       child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              !isSvg
-                  ? customImageIcon(
-                      imageName: img ?? "",
-                      width: imgWidth,
-                      height:imgHeight) //width: MediaQueryHelper.width*.8,),
-                  : customImageIconSVG(imageName: img ??""),
-              SizedBox(height: spaceBtw ?? 35.h),
-              Text(txt ?? "نعتذر , لا يوجد اسر الان !",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w600)),
-               SizedBox(height: 8.h),
-              Text(subText ?? "",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      color: ColorResources.DETAILS_COLOR,
-                      fontWeight: FontWeight.w400))
-            ],
-          ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 100,
+            ),
+            !isSvg
+                ? customImageIcon(
+                    imageName: img ?? Images.logo,
+                    width: imgWidth ?? 200,
+                    height:
+                        imgHeight ?? 150) //width: MediaQueryHelper.width*.8,),
+                : customImageIconSVG(
+                    imageName: img ?? SvgImages.navLogoIcon,
+                    width: imgWidth ?? 200,
+                    height: imgHeight ?? 150),
+            SizedBox(height: spaceBtw ?? 35.h),
+            Text(txt ?? "لا يوجد بيانات !",
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            SizedBox(height: 8.h),
+            Text(subText ?? "",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 14,
+                    color: ColorResources.DETAILS_COLOR,
+                    fontWeight: FontWeight.w400))
+          ],
         ),
       ),
     );

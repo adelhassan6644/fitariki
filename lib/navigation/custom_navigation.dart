@@ -1,5 +1,7 @@
+import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
+import 'package:fitariki/main_models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../features/auth/pages/verification.dart';
@@ -53,14 +55,14 @@ abstract class CustomNavigator {
 
       case Routes.PICK_LOCATION:
         return _pageRoute(PickMapScreen(
-          valueChanged: settings.arguments as ValueChanged,
+          baseModel: settings.arguments as BaseModel,
         ));
       case Routes.FOLLOWERS:
         return _pageRoute(const Followers());
 
       case Routes.FOLLOWER_DETAILS:
         return _pageRoute(FollowerDetails(
-          name: settings.arguments as String,
+          followerModel: settings.arguments as FollowerModel,
         ));
       case Routes.RATTING:
         return _pageRoute(Ratting(
@@ -70,10 +72,10 @@ abstract class CustomNavigator {
       case Routes.WISHLIST:
         return _pageRoute(const Wishlist());
 
-        case Routes.CONTACT_WITH_US:
+      case Routes.CONTACT_WITH_US:
         return _pageRoute(const ContactWithUs());
 
-        case Routes.NOTIFICATIONS:
+      case Routes.NOTIFICATIONS:
         return _pageRoute(const Notifications());
 
       default:

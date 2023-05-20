@@ -52,26 +52,26 @@ class FollowerDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  updateFollowerDetails()async {
+  bool isLoading = false;
+  updateFollowerDetails() async {
     try {
       spinKitDialog();
       isLoading = true;
       notifyListeners();
 
       final data = {
-        "data": {
+        "follower": {
           "name": followerFullName.text.trim(),
           "gender": gender,
           "age": age.text.trim(),
-          "drop_off_location": endLocation!.toJson(),
-          "pickup_location": startLocation!.toJson(),
+          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
+          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
         }
       };
 
       log(data.toString());
       Either<ServerFailure, Response> response =
-      await followerDetailsRepo.updateFollowerDetails(body: data);
+          await followerDetailsRepo.updateFollowerDetails(body: data);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -106,17 +106,59 @@ class FollowerDetailsProvider extends ChangeNotifier {
     }
   }
 
+  // ///Get Follower Details
 
-  ///Get Follower Details
-  bool isLoading = false;
-  FollowerModel? followerModel;
-  getFollowerDetails() async {
+  // FollowerModel? followerModel;
+  // getFollowerDetails() async {
+  //   try {
+  //     isLoading = true;
+  //     notifyListeners();
+  //     Either<ServerFailure, Response> response =
+  //         await followerDetailsRepo.getFollowerDetails();
+  //     response.fold((l) {
+  //       CustomSnackBar.showSnackBar(
+  //           notification: AppNotification(
+  //               message: l.toString(),
+  //               isFloating: true,
+  //               backgroundColor: ColorResources.IN_ACTIVE,
+  //               borderColor: Colors.transparent));
+  //       isLoading = false;
+  //       notifyListeners();
+  //     }, (response) {
+  //       followerModel = FollowerModel.fromJson(response.data['data']);
+  //       initFollowerData();
+  //       isLoading = false;
+  //       notifyListeners();
+  //     });
+  //   } catch (e) {
+  //     CustomSnackBar.showSnackBar(
+  //         notification: AppNotification(
+  //             message: e.toString(),
+  //             isFloating: true,
+  //             backgroundColor: ColorResources.IN_ACTIVE,
+  //             borderColor: Colors.transparent));
+  //     isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
+
+  // initFollowerData() {
+  //   startLocation = followerModel?.pickupLocation;
+  //   endLocation = followerModel?.dropOffLocation;
+  //   followerFullName.text = followerModel?.fullName ?? "";
+  //   age.text = followerModel?.age ?? "";
+  //   _gender = followerModel?.gender ?? 0;
+  // }
+
+  ///delete follower
+
+  deleteFollower({required int id}) async {
     try {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
-      await followerDetailsRepo.getFollowerDetails();
-      response.fold((l){
+          await followerDetailsRepo.deleteFollower(id: id);
+      response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: l.toString(),
@@ -126,12 +168,16 @@ class FollowerDetailsProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) {
-        followerModel = FollowerModel.fromJson(response.data['data']);
-        initFollowerData();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: response.data["data"]["message"],
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
       });
-    }catch (e){
+    } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),
@@ -140,15 +186,6 @@ class FollowerDetailsProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();
-
     }
-  }
-
-  initFollowerData() {
-    startLocation = followerModel?.pickupLocation;
-    endLocation = followerModel?.dropOffLocation;
-    followerFullName.text = followerModel?.fullName ?? "";
-    age.text = followerModel?.age ?? "";
-    _gender = followerModel?.gender ?? 0;
   }
 }

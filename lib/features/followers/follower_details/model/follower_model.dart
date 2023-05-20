@@ -2,7 +2,7 @@ import '../../../maps/models/location_model.dart';
 
 class FollowerModel {
   int? id;
-  String? fullName;
+  String? name;
   String? age;
   int? gender;
   LocationModel? dropOffLocation;
@@ -10,7 +10,7 @@ class FollowerModel {
 
   FollowerModel({
     this.id,
-    this.fullName,
+    this.name,
     this.age,
     this.gender,
     this.pickupLocation,
@@ -19,7 +19,7 @@ class FollowerModel {
 
   factory FollowerModel.fromJson(Map<String, dynamic> json) => FollowerModel(
         id: json["id"],
-        fullName: json["full_name"],
+        name: json["name"],
         age: json["age"],
         gender: json["gender"],
         dropOffLocation: json["drop_off_location"] == null
@@ -32,10 +32,14 @@ class FollowerModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "full_name": fullName,
+        "name": name,
         "age": age,
         "gender": gender,
         "drop_off_location": dropOffLocation?.toJson(),
         "pickup_location": pickupLocation?.toJson(),
+      };
+
+  Map<String, dynamic> toPostJson() => {
+        "follower_id": id,
       };
 }

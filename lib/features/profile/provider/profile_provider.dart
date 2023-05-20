@@ -582,7 +582,11 @@ class ProfileProvider extends ChangeNotifier {
         await editProfileRepo.getProfile();
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
-      initDriverData();
+      if (role == "driver") {
+        initDriverData();
+      } else {
+        initClientData();
+      }
       isLoading = false;
       notifyListeners();
     });

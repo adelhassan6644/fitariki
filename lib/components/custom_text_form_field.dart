@@ -194,15 +194,13 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         alignLabelWithHint: true,
         hintText: hint,
-        hintStyle: AppTextStyles.w400
-            .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        labelStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        hintStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
         labelText: label ? hint : null,
         fillColor: ColorResources.FILL_COLOR,
-        floatingLabelStyle: AppTextStyles.w400.copyWith(
-            color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 11),
+        floatingLabelStyle: AppTextStyles.w400.copyWith(color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 11),
         filled: true,
-        errorStyle: AppTextStyles.w400
-            .copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
+        errorStyle: AppTextStyles.w400.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
         prefixIconConstraints: BoxConstraints(maxHeight: 25.h),
       ),
     );

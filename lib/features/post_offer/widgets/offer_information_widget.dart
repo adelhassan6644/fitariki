@@ -4,17 +4,13 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../components/custom_images.dart';
+import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
-import '../../../components/marquee_widget.dart';
 import '../../../components/price_text_field.dart';
 import '../../../helpers/date_time_picker.dart';
 import '../../../main_widgets/scchedule_widget.dart';
-import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
 import '../provider/post_offer_provider.dart';
 
 class OfferInformationWidget extends StatefulWidget {
@@ -428,55 +424,13 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         ),
                       ),
 
-                      ///end of location
-                      GestureDetector(
-                        onTap: () {
-                          CustomNavigator.push(Routes.PICK_LOCATION,
-                              arguments: widget.provider.onSelectEndLocation);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 10),
-                          // decoration: BoxDecoration(
-                          //   color: ColorResources.WHITE_COLOR,
-                          //   borderRadius: BorderRadius.circular(12),
-                          //   boxShadow: [
-                          //     BoxShadow(
-                          //         color: Colors.black.withOpacity(0.1),
-                          //         blurRadius: 4.0,
-                          //         spreadRadius: -1,
-                          //         offset: const Offset(0, 2))
-                          //   ],
-                          // ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: MarqueeWidget(
-                                  child: Text(
-                                    widget.provider.endLocation?.address ??
-                                        getTranslated(
-                                            "locate_your_work_study_location_on_the_map",
-                                            context),
-                                    style: AppTextStyles.w400.copyWith(
-                                        fontSize: 14,
-                                        color: widget.provider.endLocation
-                                                    ?.address ==
-                                                null
-                                            ? ColorResources.DISABLED
-                                            : ColorResources
-                                                .SECOUND_PRIMARY_COLOR,
-                                        overflow: TextOverflow.ellipsis),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              customImageIconSVG(imageName: SvgImages.map)
-                            ],
-                          ),
-                        ),
-                      ),
+                      CustomAddressPicker(
+                        hint: getTranslated(
+                            "locate_your_work_study_location_on_the_map",
+                            context),
+                        onPicked: widget.provider.onSelectEndLocation,
+                        location: widget.provider.endLocation,
+                      )
                     ],
                   ),
                 )

@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 abstract class Methods {
@@ -39,7 +40,7 @@ abstract class Methods {
     return WeekdayCount(count, days);
   }
 
-  static convertStringToTime(timeString) {
+  static convertStringToTime(timeString, {bool withFormat = false}) {
     List<String> parts = timeString.split(':');
     TimeOfDay timeOfDay =
         TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
@@ -50,9 +51,16 @@ abstract class Methods {
       now.day,
       timeOfDay.hour,
       timeOfDay.minute,
+      now.second,
     );
-
-    return dateTime;
+    if (withFormat) {
+      return dateTime
+          .dateFormat(format: "mm : hh aa")
+          .replaceAll("AM", "صباحاً")
+          .replaceAll("PM", "مساءً");
+    } else {
+      return dateTime;
+    }
   }
 
   static getDayCount({

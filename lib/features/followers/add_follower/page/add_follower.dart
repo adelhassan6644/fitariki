@@ -14,6 +14,7 @@ import '../../../../components/custom_images.dart';
 import '../../../../components/custom_text_form_field.dart';
 import '../../../../components/marquee_widget.dart';
 import '../../../../components/tab_widget.dart';
+import '../../../../main_models/base_model.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 import '../provider/add_follower_provider.dart';
@@ -140,7 +141,7 @@ class AddFollower extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         CustomNavigator.push(Routes.PICK_LOCATION,
-                            arguments: provider.onSelectStartLocation);
+                            arguments:  BaseModel(valueChanged: provider.onSelectStartLocation,object: provider.startLocation));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -195,7 +196,7 @@ class AddFollower extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => CustomNavigator.push(Routes.PICK_LOCATION,
-                          arguments: provider.onSelectEndLocation),
+                          arguments:  BaseModel(valueChanged: provider.onSelectEndLocation,object: provider.endLocation)),
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 8.w, vertical: 10.h),

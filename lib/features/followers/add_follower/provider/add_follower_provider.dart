@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -56,12 +55,11 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   reset() {
     followerFullName.clear();
     age.clear();
-    _gender=0;
-    startLocation=null;
+    _gender = 0;
+    startLocation = null;
     endLocation = null;
     notifyListeners();
   }
@@ -74,18 +72,18 @@ class AddFollowerProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = {
-        "data": {
+        "follower": {
           "name": followerFullName.text.trim(),
           "gender": gender,
           "age": age.text.trim(),
-          "drop_off_location": endLocation!.toJson(),
-          "pickup_location": startLocation!.toJson(),
+          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
+          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
         }
       };
 
       log(data.toString());
       Either<ServerFailure, Response> response =
-      await addFollowersRepo.addFollower(body: data);
+          await addFollowersRepo.addFollower(body: data);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(

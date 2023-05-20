@@ -43,7 +43,7 @@ class FollowersWidget extends StatelessWidget {
                   ...List.generate(
                     provider.model?.data?.length ?? 0,
                     (index) => CheckBoxListTile(
-                      title: provider.model?.data?[index].fullName ?? "",
+                      title: provider.model?.data?[index].name ?? "",
                       onChange: (v) {
                         provider.onSelectFollow(v, index);
                       },

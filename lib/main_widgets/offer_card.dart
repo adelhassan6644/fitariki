@@ -6,6 +6,7 @@ import 'package:fitariki/main_models/offer_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
+import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
@@ -51,7 +52,7 @@ class OfferCard extends StatelessWidget {
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
                             image:
-                                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                            "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -171,8 +172,8 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${offerModel.offerDays?.first.startTime}" +
-                                        "${offerModel.offerDays?.first.endTime}ً",
+                                    "${Methods.convertStringToTime(offerModel.offerDays?[0].startTime, withFormat: true)}"
+                                    " - ${Methods.convertStringToTime(offerModel.offerDays?[0].endTime, withFormat: true)}ً",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
