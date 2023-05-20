@@ -56,45 +56,36 @@ class FilterBottomSheet extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        homeProvider.reset();
-                        CustomNavigator.pop();
-                      },
-                      child: SizedBox(
-                        width: 80,
-                        child: Text(
-                          getTranslated("cancel", context),
-                          style: AppTextStyles.w400.copyWith(
-                              fontSize: 14,
-                              color: ColorResources.PRIMARY_COLOR),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      getTranslated("filter", context),
-                      style: AppTextStyles.w600.copyWith(
-                        fontSize: 14,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
                         homeProvider.getOffers();
                         CustomNavigator.pop();
                       },
-                      child: SizedBox(
-                        width: 80,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              getTranslated("reset", context),
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 14,
-                                  color: ColorResources.PRIMARY_COLOR),
-                            ),
-                          ],
-                        ),
+                      child: Text(
+                        getTranslated("filter", context),
+                        style: AppTextStyles.w400.copyWith(
+                            fontSize: 14,
+                            color: ColorResources.PRIMARY_COLOR),
                       ),
-                    )
+                    ),
+
+                    // Text(
+                    //   getTranslated("filter", context),
+                    //   style: AppTextStyles.w600.copyWith(
+                    //     fontSize: 14,
+                    //   ),
+                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        homeProvider.reset();
+                        CustomNavigator.pop();
+                      },
+                      child: Text(
+                        getTranslated("reset", context),
+                        style: AppTextStyles.w400.copyWith(
+                            fontSize: 14,
+                            color: ColorResources.PRIMARY_COLOR),
+                      ),
+                    ),
+
                   ],
                 ),
               ),
