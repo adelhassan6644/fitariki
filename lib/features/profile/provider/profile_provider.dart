@@ -582,7 +582,11 @@ class ProfileProvider extends ChangeNotifier {
         await editProfileRepo.getProfile();
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
-      initDriverData();
+      if (role == "driver") {
+        initDriverData();
+      } else {
+        initClientData();
+      }
       isLoading = false;
       notifyListeners();
     });
@@ -605,7 +609,7 @@ class ProfileProvider extends ChangeNotifier {
 
     image = profileModel?.client?.image;
     firstName.text = profileModel?.client?.firstName ?? "";
-    lastName.text = profileModel?.client?.lastName ?? "25";
+    lastName.text = profileModel?.client?.lastName ?? "";
     age.text = profileModel?.client?.age ?? "";
     email.text = profileModel?.client?.email ?? "";
     phone.text = profileModel?.client?.phone ?? "";
@@ -634,7 +638,7 @@ class ProfileProvider extends ChangeNotifier {
 
     image = profileModel?.driver?.image;
     firstName.text = profileModel?.driver?.firstName ?? "";
-    age.text = profileModel?.driver?.age ?? "25";
+    age.text = profileModel?.driver?.age ?? "";
     email.text = profileModel?.driver?.email ?? "";
     phone.text = profileModel?.driver?.phone ?? "";
     identityNumber.text = profileModel?.driver?.identityNumber ?? "";

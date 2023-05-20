@@ -12,6 +12,7 @@ class OfferModel {
   DateTime? createdAt;
   List<WeekModel>? offerDays;
 
+
   OfferModel({
     this.id,
     this.image,

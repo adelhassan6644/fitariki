@@ -3,7 +3,9 @@ import '../../follower_details/model/follower_model.dart';
 class FollowersModel {
   List<FollowerModel>? data;
 
-  FollowersModel({this.data,});
+  FollowersModel({
+    this.data,
+  });
 
   FollowersModel copyWith({
     List<FollowerModel>? data,
@@ -13,7 +15,7 @@ class FollowersModel {
       );
 
   factory FollowersModel.fromJson(Map<String, dynamic> json) => FollowersModel(
-        data: json["data"] == null
+        data: json["data"]["client"] == null
             ? []
             : List<FollowerModel>.from(
                 json["data"]!.map((x) => FollowerModel.fromJson(x))),

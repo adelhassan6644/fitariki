@@ -1,14 +1,17 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/core/utils/text_styles.dart';
+import '../../../../navigation/routes.dart';
 
 class FollowerButton extends StatelessWidget {
-  const FollowerButton({required this.title, this.onTap, Key? key})
+  const FollowerButton({required this.followerModel, Key? key})
       : super(key: key);
-  final String title;
-  final void Function()? onTap;
+  final FollowerModel followerModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,14 +24,15 @@ class FollowerButton extends StatelessWidget {
         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
       ),
       child: InkWell(
-        onTap: onTap,
+        onTap: () => CustomNavigator.push(Routes.FOLLOWER_DETAILS,
+            arguments: followerModel),
         child: Row(
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(title,
+                    child: Text(followerModel.name??"",
                         style: AppTextStyles.w600.copyWith(
                             fontSize: 14,
                             color: ColorResources.SECOUND_PRIMARY_COLOR)),

@@ -3,12 +3,18 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/my_trips/page/my_trips.dart';
 import 'package:fitariki/features/search/page/search.dart';
 import 'package:fitariki/main_page/widget/nav_bar_bar.dart';
+import 'package:provider/provider.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/svg_images.dart';
 import '../app/localization/localization/language_constant.dart';
+import '../components/custom_show_model_bottom_sheet.dart';
 import '../data/network/netwok_info.dart';
+import '../features/auth/pages/login.dart';
+import '../features/auth/provider/firebase_auth_provider.dart';
 import '../features/home/page/home.dart';
 import '../features/more/page/more.dart';
+import '../features/post_offer/page/post_offer.dart';
+import '../features/post_offer/provider/post_offer_provider.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({this.index, Key? key}) : super(key: key);
@@ -49,12 +55,12 @@ class _DashBoardState extends State<DashBoard> {
             height: 60,
             width: context.width,
             decoration: BoxDecoration(
-              color: ColorResources.WHITE_COLOR,
+                color: ColorResources.WHITE_COLOR,
                 border: Border(
                     top: BorderSide(
-              color: const Color(0xFF3C3C43).withOpacity(0.36),
-              width: 0.5,
-            ))),
+                  color: const Color(0xFF3C3C43).withOpacity(0.36),
+                  width: 0.5,
+                ))),
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,6 +102,26 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ])),
       ),
+      floatingActionButton:
+         Consumer<FirebaseAuthProvider>(builder: (_, provider, child) {
+        return  _selectedIndex ==0? FloatingActionButton(
+          onPressed: () => customShowModelBottomSheet(
+            onClose:
+                Provider.of<PostOfferProvider>(context, listen: false).reset,
+            body: provider.isLogin ? const PostOffer() : const Login(),
+          ),
+          backgroundColor: ColorResources.PRIMARY_COLOR,
+          shape: RoundedRectangleBorder(
+              side: const BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(100)),
+          child: const Icon(
+            Icons.add,
+            size: 24,
+            color: ColorResources.WHITE_COLOR,
+          ),
+        ) : const SizedBox();
+      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
         children: [
           Expanded(

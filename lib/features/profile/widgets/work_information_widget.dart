@@ -83,14 +83,16 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
                   decoration: BoxDecoration(
                       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
-                  child:
-                      Text(provider.startTime.dateFormat(format: "mm : hh aa"),
-                          style: AppTextStyles.w500.copyWith(
-                            fontSize: 13,
-                          )),
+                  child: Text(
+                      provider.startTime
+                          .dateFormat(format: "mm : hh aa")
+                          .replaceAll("AM", "صباحاً")
+                          .replaceAll("PM", "مساءً"),
+                      style: AppTextStyles.w500.copyWith(
+                        fontSize: 13,
+                      )),
                 ),
               ),
-
             ],
           ),
           const SizedBox(
@@ -119,7 +121,11 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
                   decoration: BoxDecoration(
                       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
-                  child: Text(provider.endTime.dateFormat(format: "mm : hh aa"),
+                  child: Text(
+                      provider.endTime
+                          .dateFormat(format: "mm : hh aa")
+                          .replaceAll("AM", "صباحاً")
+                          .replaceAll("PM", "مساءً"),
                       style: AppTextStyles.w500.copyWith(
                         fontSize: 13,
                       )),
@@ -133,7 +139,9 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           GestureDetector(
             onTap: () {
               CustomNavigator.push(Routes.PICK_LOCATION,
-                  arguments: BaseModel(valueChanged: provider.onSelectEndLocation,object: provider.endLocation));
+                  arguments: BaseModel(
+                      valueChanged: provider.onSelectEndLocation,
+                      object: provider.endLocation));
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),

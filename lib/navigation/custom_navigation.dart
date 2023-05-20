@@ -1,3 +1,4 @@
+import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
@@ -61,7 +62,7 @@ abstract class CustomNavigator {
 
       case Routes.FOLLOWER_DETAILS:
         return _pageRoute(FollowerDetails(
-          name: settings.arguments as String,
+          followerModel: settings.arguments as FollowerModel,
         ));
       case Routes.RATTING:
         return _pageRoute(Ratting(

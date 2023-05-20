@@ -8,25 +8,25 @@ import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../repo/home_repo.dart';
 
-
-class HomeProvider extends ChangeNotifier{
+class HomeProvider extends ChangeNotifier {
   HomeRepo homeRepo;
   HomeProvider({required this.homeRepo});
 
   bool isLoading = false;
   List<OfferModel>? offer;
   getOffers() async {
-    try{
+    try {
       offer = [];
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await homeRepo.getOffer();
       response.fold((l) => null, (response) {
-        offer = List<OfferModel>.from(response.data["data"]["offers"]!.map((x) => OfferModel.fromJson(x)));
+        offer = List<OfferModel>.from(response.data["data"]["offers"]!
+            .map((x) => OfferModel.fromJson(x)));
         isLoading = false;
         notifyListeners();
       });
-    }catch (e) {
+    } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),

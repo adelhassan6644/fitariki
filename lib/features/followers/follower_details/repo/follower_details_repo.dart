@@ -32,11 +32,27 @@ class FollowerDetailsRepo {
     }
   }
 
-  Future<Either<ServerFailure, Response>> getFollowerDetails() async {
+  // Future<Either<ServerFailure, Response>> getFollowerDetails() async {
+  //   try {
+  //     Response response = await dioClient.get(
+  //       uri:
+  //       "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+  //     );
+  //     if (response.statusCode == 200) {
+  //       return Right(response);
+  //     } else {
+  //       return left(ServerFailure(response.data['message']));
+  //     }
+  //   } catch (error) {
+  //     return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+  //   }
+  // }
+
+  Future<Either<ServerFailure, Response>> deleteFollower({required int id}) async {
     try {
-      Response response = await dioClient.get(
+      Response response = await dioClient.post(
         uri:
-        "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteFollower}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -47,4 +63,5 @@ class FollowerDetailsRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
 }

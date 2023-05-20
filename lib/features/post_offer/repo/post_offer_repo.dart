@@ -17,11 +17,14 @@ class PostOfferRepo {
   Future<Either<ServerFailure, Response>> postOffer(
       {required OfferDetailsModel offerModel}) async {
     try {
-      offerModel.id=int.parse(sharedPreferences.getString(AppStorageKey.userId)!);
+      offerModel.id =
+          int.parse(sharedPreferences.getString(AppStorageKey.userId)!);
       Response response = await dioClient.post(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postOffer}",
-          data: offerModel.toPostJson());
+          data: sharedPreferences.getString(AppStorageKey.role) == "driver"
+              ? offerModel.toPostDriverJson()
+              : offerModel.toPostClientJson());
       if (response.statusCode == 200) {
         return Right(response);
       } else {

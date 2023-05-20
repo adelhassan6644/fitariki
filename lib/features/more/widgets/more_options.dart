@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
+import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,10 @@ class MoreOptions extends StatelessWidget {
                   MoreButton(
                     title: getTranslated("followers", context),
                     icon: SvgImages.addFollower,
-                    onTap: () => CustomNavigator.push(Routes.FOLLOWERS),
+                    onTap: () {
+                      Provider.of<FollowersProvider>(context,listen: false).getFollowers();
+                      CustomNavigator.push(Routes.FOLLOWERS);
+                    },
                   ),
                 MoreButton(
                   title: getTranslated("archives", context),

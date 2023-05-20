@@ -1,4 +1,5 @@
 import 'package:fitariki/main_models/weak_model.dart';
+import '../features/followers/follower_details/model/follower_model.dart';
 import '../features/maps/models/location_model.dart';
 import 'car_model.dart';
 
@@ -20,6 +21,7 @@ class OfferDetailsModel {
   CarModel? carData;
   DateTime? startDate;
   DateTime? endDate;
+  List<FollowerModel>? followers;
 
   OfferDetailsModel(
       {this.id,
@@ -102,22 +104,40 @@ class OfferDetailsModel {
             : CarModel.fromJson(json["car_data"]),
       );
 
-  Map<String, dynamic> toPostJson() => {
-
-    "offer": {
-      "driver_id": id,
-
-      "start_date": startDate.toString(),
+  Map<String, dynamic> toPostDriverJson() => {
+        "offer": {
+          "driver_id": id,
+          "start_date": startDate.toString(),
           "end_date": endDate.toString(),
           "duration": duration,
           "min_price": minPrice,
           "max_price": maxPrice,
-      "offer_type": 1,
+          "offer_type": 1,
           "offer_days": offerDays == null
               ? []
               : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
           "pickup_location": pickLocation?.toJson(),
           "drop_off_location": endLocation?.toJson()
+        }
+      };
+
+  Map<String, dynamic> toPostClientJson() => {
+        "offer": {
+          "client_id": id,
+          "start_date": startDate.toString(),
+          "end_date": endDate.toString(),
+          "duration": duration,
+          "min_price": minPrice,
+          "max_price": maxPrice,
+          "offer_type": 1,
+          "offer_days": offerDays == null
+              ? []
+              : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
+          "pickup_location": pickLocation?.toJson(),
+          "drop_off_location": endLocation?.toJson(),
+          "offer_followers": followers == null
+              ? []
+              : List<dynamic>.from(followers!.map((x) => x.toPostJson())),
         }
       };
 }
