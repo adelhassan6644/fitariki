@@ -13,13 +13,13 @@ class HomeRepo{
   final SharedPreferences sharedPreferences;
 
   HomeRepo({required this.dioClient,required this.sharedPreferences});
-  Future<Either<ServerFailure, Response>> getOffer(
-      ) async {
+  Future<Either<ServerFailure, Response>> getOffer(body) async {
     try {
 
       Response response = await dioClient.get(
           uri:
           "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.listOffers}/1",
+         queryParameters: body
          //${sharedPreferences.getString(AppStorageKey.userId)}
          );
       if (response.statusCode == 200) {

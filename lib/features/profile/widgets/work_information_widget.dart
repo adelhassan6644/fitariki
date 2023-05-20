@@ -3,17 +3,12 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../components/custom_images.dart';
+import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
-import '../../../components/marquee_widget.dart';
 import '../../../helpers/date_time_picker.dart';
-import '../../../main_models/base_model.dart';
 import '../../../main_widgets/scchedule_widget.dart';
-import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
 import '../provider/profile_provider.dart';
 
 class WorkInformationWidget extends StatefulWidget {
@@ -136,42 +131,15 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           const SizedBox(
             height: 8,
           ),
-          GestureDetector(
-            onTap: () {
-              CustomNavigator.push(Routes.PICK_LOCATION,
-                  arguments: BaseModel(
-                      valueChanged: provider.onSelectEndLocation,
-                      object: provider.endLocation));
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: MarqueeWidget(
-                      child: Text(
-                        provider.endLocation?.address ??
-                            "حدد مكان دوامك/دراستك بالخريطه",
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 14,
-                            color: provider.endLocation?.address == null
-                                ? ColorResources.DISABLED
-                                : ColorResources.SECOUND_PRIMARY_COLOR,
-                            overflow: TextOverflow.ellipsis),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  customImageIconSVG(imageName: SvgImages.map)
-                ],
-              ),
-            ),
+          CustomAddressPicker(
+            hint: getTranslated(
+                "locate_your_work_study_location_on_the_map", context),
+            onPicked: provider.onSelectEndLocation,
+            location: provider.endLocation,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                borderRadius: BorderRadius.circular(8)),
           ),
           const SizedBox(
             height: 16,

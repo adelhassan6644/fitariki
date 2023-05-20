@@ -1,22 +1,16 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
-import 'package:fitariki/app/core/utils/svg_images.dart';
-import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
-import 'package:fitariki/main_models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_drop_down_button.dart';
 import '../../../components/custom_image_picker_widget.dart';
-import '../../../components/custom_images.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/expansion_tile_widget.dart';
-import '../../../components/marquee_widget.dart';
 import '../../../components/tab_widget.dart';
 import '../../../helpers/image_picker_helper.dart';
-import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
 import '../provider/profile_provider.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
@@ -159,43 +153,18 @@ class PersonalInformationWidget extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        GestureDetector(
-          onTap: () {
-            CustomNavigator.push(Routes.PICK_LOCATION,
-                arguments: BaseModel(valueChanged: provider.onSelectStartLocation,object: provider.startLocation));
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-            decoration: BoxDecoration(
-                border: Border.all(
-                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
-                borderRadius: BorderRadius.circular(8)),
-            child: Row(
-              children: [
-                Expanded(
-                  child: MarqueeWidget(
-                    child: Text(
-                      provider.startLocation?.address ??
-                          getTranslated(
-                              "select_your_residence_housing_location",
-                              context),
-                      style: AppTextStyles.w400.copyWith(
-                          color: provider.startLocation?.address == null
-                              ? ColorResources.DISABLED
-                              : ColorResources.SECOUND_PRIMARY_COLOR,
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                customImageIconSVG(imageName: SvgImages.map)
-              ],
-            ),
-          ),
-        ),
+        CustomAddressPicker(
+          hint: getTranslated(
+              "select_your_residence_housing_location",
+              context),
+          onPicked: provider.onSelectStartLocation,
+          location: provider.startLocation,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+              borderRadius: BorderRadius.circular(8)),
+        )
+
       ],
     );
   }
