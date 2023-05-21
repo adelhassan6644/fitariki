@@ -21,7 +21,7 @@ class FollowerModel {
         id: json["id"],
         name: json["name"],
         age: json["age"],
-        gender: json["gender"],
+        gender: int.tryParse(json["gender"].toString()),
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),

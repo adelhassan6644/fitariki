@@ -10,7 +10,7 @@ class EndPoints {
   static const String updateProfile = 'profile/update';
   static const String postOffer = 'offer/postOffer';
   static const String listOffers = 'offer/listOffers';
-  static const String followers = 'profile/profile/followers_list';
+  static const String followers = 'profile/followers_list';
   static const String addFollower = 'profile/add_follower';
   static const String updateFollowerDetails = '';
   static const String deleteFollower = 'profile/delete_follower';

@@ -39,7 +39,7 @@ class PostOffer extends StatelessWidget {
                         : getTranslated("add_a_delivery_request", context),
                     textBtn: getTranslated("preview", context),
                     onTap: () {
-                      // if(provider.checkData() == true)
+                      if(provider.checkData() == true)
                       {
 
                         customShowModelBottomSheet(

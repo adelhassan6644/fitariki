@@ -15,10 +15,10 @@ class FollowersModel {
       );
 
   factory FollowersModel.fromJson(Map<String, dynamic> json) => FollowersModel(
-        data: json["data"]["client"] == null
+        data: json["data"]["followers"] == null
             ? []
             : List<FollowerModel>.from(
-                json["data"]!.map((x) => FollowerModel.fromJson(x))),
+            json["data"]["followers"]!.map((x) => FollowerModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

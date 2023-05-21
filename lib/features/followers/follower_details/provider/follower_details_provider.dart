@@ -6,9 +6,11 @@ import '../../../../app/core/utils/app_snack_bar.dart';
 import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
 import '../../../../components/loading_dialog.dart';
+import '../../../../data/config/di.dart';
 import '../../../../data/error/failures.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../maps/models/location_model.dart';
+import '../../followers/provider/followers_provider.dart';
 import '../model/follower_model.dart';
 import '../repo/follower_details_repo.dart';
 
@@ -155,10 +157,14 @@ class FollowerDetailsProvider extends ChangeNotifier {
   deleteFollower({required int id}) async {
     try {
       isLoading = true;
+
+      spinKitDialog();
       notifyListeners();
       Either<ServerFailure, Response> response =
           await followerDetailsRepo.deleteFollower(id: id);
       response.fold((l) {
+        CustomNavigator.pop();
+
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: l.toString(),
@@ -167,7 +173,10 @@ class FollowerDetailsProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
-      }, (response) {
+      }, (response) async {
+       await sl.get<FollowersProvider>().getFollowers();
+       CustomNavigator.pop();
+       CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: response.data["data"]["message"],

@@ -58,7 +58,10 @@ class AddFollower extends StatelessWidget {
                     ),
                     title: getTranslated("add_follower", context),
                     textBtn: getTranslated("save", context),
-                    onTap: () {}),
+                    onTap: () {
+                      provider.addFollower();
+
+                    }),
                 Expanded(
                     child: ListView(
                   padding: EdgeInsets.symmetric(

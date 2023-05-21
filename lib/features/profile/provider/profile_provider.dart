@@ -510,7 +510,7 @@ class ProfileProvider extends ChangeNotifier {
       };
 
       final personalData = {
-        "driver": {
+        role: {
           if (profileImage != null) "image": "cbb",
           // await MultipartFile.fromFile(profileImage!.path),
           "first_name": firstName.text.trim(),
@@ -530,7 +530,9 @@ class ProfileProvider extends ChangeNotifier {
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
           "drop_off_location": endLocation!.toJson(),
           "pickup_location": startLocation!.toJson(),
+          if (role == "driver")
           "car_info": carData,
+          if (role == "driver")
           "bank_info": bankData
         }
       };
@@ -596,7 +598,7 @@ class ProfileProvider extends ChangeNotifier {
   initClientData() {
     scheduleProvider.selectedDays = profileModel?.client?.clientDays ?? [];
 
-    if (profileModel?.client?.clientDays != null) {
+    if (profileModel!.client!.clientDays!.isNotEmpty) {
       startTime = Methods.convertStringToTime(
               profileModel?.client?.clientDays?[0].startTime) ??
           DateTime.now();

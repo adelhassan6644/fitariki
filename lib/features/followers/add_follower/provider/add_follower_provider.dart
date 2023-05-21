@@ -8,6 +8,7 @@ import '../../../../app/core/utils/app_snack_bar.dart';
 import '../../../../app/core/utils/color_resources.dart';
 import '../../../../app/core/utils/svg_images.dart';
 import '../../../../components/loading_dialog.dart';
+import '../../../../data/config/di.dart';
 import '../../../../data/error/failures.dart';
 import '../../../maps/models/location_model.dart';
 import '../../followers/provider/followers_provider.dart';
@@ -83,7 +84,7 @@ class AddFollowerProvider extends ChangeNotifier {
 
       log(data.toString());
       Either<ServerFailure, Response> response =
-          await addFollowersRepo.addFollower(body: data);
+          await addFollowersRepo.updateFollower(body: data);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -99,6 +100,62 @@ class AddFollowerProvider extends ChangeNotifier {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "تم تحديث بياناتك بنجاح !",
+                isFloating: true,
+                backgroundColor: ColorResources.ACTIVE,
+                borderColor: Colors.transparent));
+        isLoading = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      CustomNavigator.pop();
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+  addFollower() async {
+    try {
+      CustomNavigator.pop();
+      spinKitDialog();
+      isLoading = true;
+      notifyListeners();
+
+      final data = {
+
+          "name": followerFullName.text.trim(),
+          "gender": gender,
+
+          "age": age.text.trim(),
+          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
+          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
+
+      };
+
+
+      Either<ServerFailure, Response> response =
+          await addFollowersRepo.addFollower(body: data);
+      response.fold((fail) {
+        CustomNavigator.pop();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: fail.error,
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        isLoading = false;
+        notifyListeners();
+      }, (response) async {
+        await sl.get<FollowersProvider>().getFollowers();
+
+        CustomNavigator.pop();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "تم  بنجاح !",
                 isFloating: true,
                 backgroundColor: ColorResources.ACTIVE,
                 borderColor: Colors.transparent));

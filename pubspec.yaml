@@ -16,6 +16,7 @@ dependencies:
   flutter_clean_architecture:
   dio:
   internet_connection_checker:
+  fluttertoast: ^8.2.1
   dartz:
   pretty_dio_logger: ^1.3.1
   shared_preferences:

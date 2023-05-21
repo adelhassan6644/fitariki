@@ -118,84 +118,43 @@ class PostOfferProvider extends ChangeNotifier {
 
   checkData() {
     if (startLocation == null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار الصورةالشخصية!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast("برجاء اختيار نقطة البدية!");
+
       return;
     }
     if (scheduleProvider.selectedDays.isEmpty) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار الايام!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast( "برجاء اختيار الايام!");
+
       return;
     }
     if (startTime == null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء ادخال الاسم الثلاثي!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast( "برجاء ادخال وقت البداية!");
       return;
     }
-    if (endTime != startTime) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار العمر!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    if (endTime == startTime) {
+      showToast(" وقت البداية لا يمكن ان يكون مثل وقت النهاية!");
+
       return;
     }
-    if (startDate != null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار العمر!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+
+    if (endDate == startDate) {
+      showToast(" تاريخ البداية لا يمكن ان يكون مثل تاريخ النهاية!");
+
       return;
     }
-    if (endDate != startDate) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار العمر!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    if (minPrice == null) {
+      showToast("برجاء اختيار الحد الادني للسعر!");
       return;
     }
-    if (minPrice != null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار العمر!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      return;
-    }
-    if (maxPrice != null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار العمر!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    if (maxPrice == null) {
+      showToast("برجاء اختيار الحد الاعلي للسعر!");
+
       return;
     }
     if (endLocation == null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار الحنسية!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      print(minPrice);
+      showToast("برجاء اختيار نقطة النهاية!");
+
       return;
     }
     return true;
