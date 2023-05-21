@@ -12,6 +12,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
+import '../../home/provider/home_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../repo/firebase_auth_repo.dart';
 
@@ -206,14 +207,14 @@ class FirebaseAuthProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-      }, (success) {
+      }, (success) async {
         firebaseAuthRepo.setLoggedIn();
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getRoleType();
-        Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getProfile();
-
+        await Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getRoleType();
+        await Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getProfile();
+        await Provider.of<HomeProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getOffers();
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,

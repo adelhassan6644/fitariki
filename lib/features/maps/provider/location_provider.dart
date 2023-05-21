@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:fitariki/app/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -66,10 +65,29 @@ class LocationProvider extends ChangeNotifier {
     return _predictionList;
   }
 
-  getCurrentLocation(bool fromAddress,
-      {required GoogleMapController mapController,
-      required LatLng defaultLatLng,
-      bool notify = true}) async {
+  LocationModel? currentLocation;
+  getCurrentLocation() async {
+    Position newLocalData = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    Either<ServerFailure, Response> response =
+        await locationRepo.getAddressFromGeocode(
+            LatLng(newLocalData.latitude, newLocalData.longitude));
+    response.fold((l) => null, (response) {
+      pickAddress = response.data['results'][0]['formatted_address'].toString();
+      currentLocation = LocationModel(
+        latitude: newLocalData.latitude.toString(),
+        longitude: newLocalData.longitude.toString(),
+        address: response.data['results'][0]['formatted_address'].toString(),
+      );
+    });
+    notifyListeners();
+  }
+
+  getLocation(
+    bool fromAddress, {
+    required GoogleMapController mapController,
+    required LatLng defaultLatLng,
+  }) async {
     isLoading = true;
 
     try {
@@ -109,7 +127,10 @@ class LocationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> decodeLatLong({required latitude, required longitude}) async {
+  Future<void> decodeLatLong({
+    required latitude,
+    required longitude,
+  }) async {
     Either<ServerFailure, Response> response =
         await locationRepo.getAddressFromGeocode(LatLng(latitude, longitude));
 
@@ -124,7 +145,7 @@ class LocationProvider extends ChangeNotifier {
     });
   }
 
-  void updatePosition(
+  updatePosition(
     CameraPosition position,
   ) async {
     try {
@@ -141,10 +162,11 @@ class LocationProvider extends ChangeNotifier {
         speedAccuracy: 1,
         speed: 1,
       );
-
       decodeLatLong(
           latitude: position.target.latitude,
           longitude: position.target.longitude);
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(

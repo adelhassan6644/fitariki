@@ -47,4 +47,6 @@ class MapsRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
+
 }

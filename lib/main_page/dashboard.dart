@@ -40,7 +40,6 @@ class _DashBoardState extends State<DashBoard> {
   void initState() {
     _selectedIndex = widget.index ?? 0;
     NetworkInfo.checkConnectivity();
-
     super.initState();
   }
 

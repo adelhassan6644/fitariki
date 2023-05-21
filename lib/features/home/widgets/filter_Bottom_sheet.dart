@@ -56,7 +56,7 @@ class FilterBottomSheet extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        homeProvider.getOffers();
+                        homeProvider.getOffers(withFilter: true);
                         CustomNavigator.pop();
                       },
                       child: Text(

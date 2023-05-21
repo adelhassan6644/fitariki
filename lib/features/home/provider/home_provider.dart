@@ -12,23 +12,30 @@ import '../repo/home_repo.dart';
 
 class HomeProvider extends ChangeNotifier {
   HomeRepo homeRepo;
-  HomeProvider({required this.homeRepo});
+  HomeProvider({required this.homeRepo}) {
+    getOffers();
+  }
 
-  // int userTypeIndex = 0;
-  // List<String> users = ["passenger", "captain"];
+  int roleIndex = 0;
+  List<String> roles = ["client", "driver"];
+  List<String> titles = ["passenger", "captain"];
+  onSelectRole(int value) {
+    roleIndex = value;
+    getOffers(role: roles[roleIndex]);
+    notifyListeners();
+  }
+
   List<String> genders = ["male", "female"];
   List<String> genderIcons = [SvgImages.maleIcon, SvgImages.femaleIcon];
-  int _gender = 0;
-  int get gender => _gender;
+  int gender = 0;
   selectedGender(int value) {
-    _gender = value;
+    gender = value;
     notifyListeners();
   }
 
   LocationModel? startLocation;
   onSelectStartLocation(v) {
     startLocation = v;
-
     notifyListeners();
   }
 
@@ -38,33 +45,30 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  reset(){
-    startLocation=endLocation =null;
-    _gender=0;
+  reset() {
+    startLocation = endLocation = null;
+    gender = 0;
     notifyListeners();
   }
 
-
-
   bool isLoading = false;
   List<OfferModel>? offer;
-  getOffers() async {
+  getOffers({String? role, bool withFilter = false}) async {
     try {
-
-
       offer = [];
       isLoading = true;
       notifyListeners();
 
       final filters = {
         "fillters": {
-        if(endLocation != null)  "drop_off_location": endLocation!.toJson(),
-          if(startLocation != null) "pickup_location": startLocation!.toJson(),
+          if (endLocation != null) "drop_off_location": endLocation!.toJson(),
+          if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "role": gender,
         }
       };
 
-      Either<ServerFailure, Response> response = await homeRepo.getOffer(filters);
+      Either<ServerFailure, Response> response = await homeRepo.getOffer(
+          body: withFilter ? filters : null, role: role ?? "client");
       response.fold((l) => null, (response) {
         offer = List<OfferModel>.from(response.data["data"]["offers"]!
             .map((x) => OfferModel.fromJson(x)));

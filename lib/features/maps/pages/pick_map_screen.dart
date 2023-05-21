@@ -79,7 +79,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
             myLocationButtonEnabled: false,
             onMapCreated: (GoogleMapController mapController) {
               _mapController = mapController;
-              locationController.getCurrentLocation(false,
+              locationController.getLocation(false,
                   defaultLatLng: _initialPosition,
                   mapController: _mapController!);
             },

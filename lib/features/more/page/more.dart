@@ -11,21 +11,8 @@ import '../widgets/more_options.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/wallet_card.dart';
 
-class More extends StatefulWidget {
+class More extends StatelessWidget {
   const More({Key? key}) : super(key: key);
-
-  @override
-  State<More> createState() => _MoreState();
-}
-
-class _MoreState extends State<More> {
-  @override
-  void initState() {
-    Future.delayed(Duration.zero, () {
-      Provider.of<ProfileProvider>(context, listen: false).getProfile();
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -26,6 +26,7 @@ class ProfileProvider extends ChangeNotifier {
     required this.scheduleProvider,
   }) {
     getRoleType();
+    getProfile();
   }
 
   ///Get Role Type

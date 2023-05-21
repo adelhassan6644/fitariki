@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
-
 import '../repo/splash_repo.dart';
 
 class SplashProvider extends ChangeNotifier{
