@@ -28,9 +28,10 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   @override
   void initState() {
+    print(widget.baseModel.object.toString() );
     if (widget.baseModel.object != null) {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
-          widget.baseModel.object.address;
+          widget.baseModel.object.address??"";
     } else {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
           AppStrings.defaultAddress;
@@ -44,8 +45,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   getInitialPosition() {
     if (widget.baseModel.object != null) {
-      _initialPosition = LatLng(double.parse(widget.baseModel.object.latitude),
-          double.parse(widget.baseModel.object.longitude));
+      _initialPosition = LatLng(double.parse(widget.baseModel.object.latitude??AppStrings.defaultLat),
+          double.parse(widget.baseModel.object.longitude??AppStrings.defaultLong));
     } else {
       _initialPosition = LatLng(
         double.parse(AppStrings.defaultLat),

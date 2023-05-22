@@ -13,7 +13,7 @@ class EndPoints {
   static const String availableOffers = 'offer/list_available';
   static const String followers = 'profile/followers_list';
   static const String addFollower = 'profile/add_follower';
-  static const String updateFollowerDetails = '';
+  static const String updateFollowerDetails = 'profile/update_follower';
   static const String deleteFollower = 'profile/delete_follower';
   static const String addOffer = '';
   /// maps

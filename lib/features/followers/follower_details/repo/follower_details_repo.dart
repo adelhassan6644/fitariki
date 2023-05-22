@@ -15,11 +15,11 @@ class FollowerDetailsRepo {
   FollowerDetailsRepo(
       {required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> updateFollowerDetails({var body}) async {
+  Future<Either<ServerFailure, Response>> updateFollowerDetails({var body,id }) async {
     try {
       Response response = await dioClient.post(
         uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.updateFollowerDetails}/${sharedPreferences.getString(AppStorageKey.userId)}",
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.updateFollowerDetails}/$id",
         data: body,
       );
       if (response.statusCode == 200) {

@@ -63,8 +63,9 @@ class HomeProvider extends ChangeNotifier {
         "fillters": {
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
-          "role": gender,
+          "gender": gender,
         }
+
       };
 
       Either<ServerFailure, Response> response = await homeRepo.getOffer(

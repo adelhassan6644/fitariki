@@ -63,7 +63,7 @@ class _FollowerDetailsState extends State<FollowerDetails> {
               withBack: true,
               actionWidth: 40,
               actionChild: GestureDetector(
-                onTap: () => provider.updateFollowerDetails(),
+                onTap: () => provider.updateFollowerDetails(widget.followerModel.id!),
                 child: SizedBox(
                   width: 40,
                   child: Text(

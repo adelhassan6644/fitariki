@@ -169,11 +169,12 @@ class OfferCard extends StatelessWidget {
                             children: [
                               customImageIconSVG(imageName: SvgImages.alarm),
                               const SizedBox(width: 4),
+                              if(offerModel.offerDays!.isNotEmpty )
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${Methods.convertStringToTime(offerModel.offerDays?[0].startTime, withFormat: true)}"
-                                    " - ${Methods.convertStringToTime(offerModel.offerDays?[0].endTime, withFormat: true)}ً",
+                                    "${Methods.convertStringToTime(offerModel.offerDays?[0].startTime??DateTime.now(), withFormat: true)}"
+                                    " - ${Methods.convertStringToTime(offerModel.offerDays?[0].endTime??DateTime.now(), withFormat: true)}ً",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,

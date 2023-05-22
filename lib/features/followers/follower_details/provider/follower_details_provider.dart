@@ -55,25 +55,25 @@ class FollowerDetailsProvider extends ChangeNotifier {
   }
 
   bool isLoading = false;
-  updateFollowerDetails() async {
+  updateFollowerDetails(id) async {
     try {
       spinKitDialog();
       isLoading = true;
       notifyListeners();
 
       final data = {
-        "follower": {
+
           "name": followerFullName.text.trim(),
           "gender": gender,
           "age": age.text.trim(),
           if (!sameDestination) "drop_off_location": endLocation!.toJson(),
           if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
-        }
+
       };
 
       log(data.toString());
       Either<ServerFailure, Response> response =
-          await followerDetailsRepo.updateFollowerDetails(body: data);
+          await followerDetailsRepo.updateFollowerDetails(body: data,id:id);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(

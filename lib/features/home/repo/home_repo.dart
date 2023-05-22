@@ -19,7 +19,8 @@ class HomeRepo {
       Response response = await dioClient.get(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role) ?? role}/${EndPoints.availableOffers}",
-          queryParameters: body
+          queryParameters:
+          body
           //${sharedPreferences.getString(AppStorageKey.userId)}
           );
       if (response.statusCode == 200) {

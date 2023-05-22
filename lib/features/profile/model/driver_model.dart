@@ -218,7 +218,7 @@ class CarInfo {
         name: json["name"],
         model: json["model"].toString(),
         palletNumber: json["pallet_number"],
-        seatsCount: json["seats_count"],
+        seatsCount: json["seats_count"].toString(),
         carImage: json["car_image"],
         licenceImage: json["licence_image"],
         insuranceImage: json["insurance_image"],
