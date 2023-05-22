@@ -126,14 +126,11 @@ class AddFollowerProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = {
-
           "name": followerFullName.text.trim(),
           "gender": gender,
-
           "age": age.text.trim(),
           if (!sameDestination) "drop_off_location": endLocation!.toJson(),
           if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
-
       };
 
 

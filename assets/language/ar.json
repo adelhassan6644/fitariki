@@ -40,7 +40,6 @@
   "home": "الرئيسية",
   "cart": "السلة",
   "profile": "الملف الشخصي",
-  "notifications": "الاشعارات",
   "contact_with_us": "تواصل معانا",
   "mail": "الايميل",
   "twitter": "تويتر",
@@ -181,8 +180,14 @@
   "delete_the_follower": "حذف التابع",
   "captains": "كباتن",
   "passengers": "ركاب",
-  "delivery_days": "عدد ايام التوصيل"
-
+  "delivery_days": "عدد ايام التوصيل",
+  "delivery_request_details": "تفاصيل طلب التوصيل",
+  "delivery_offer_details": "تفاصيل عرض التوصيل",
+  "offers": "العروض",
+  "requests": "الطلبات",
+  "participants_in_this_offer": "المشاركين في هذا العرض",
+  "note": "ملاحظة :",
+  "trip": "الرحلة"
 
 
 

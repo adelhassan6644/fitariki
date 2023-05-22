@@ -39,6 +39,12 @@ extension DateExtention on DateTime {
   }
 }
 
+extension DefaultFormat on DateTime {
+  String defaultFormat() {
+    return DateFormat("dMMM yyyy").format(this);
+  }
+}
+
 String localeCode = Provider.of<LocalizationProvider>(
         CustomNavigator.navigatorState.currentContext!,
         listen: false)

@@ -1,16 +1,14 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/svg_images.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
-import '../../../components/custom_images.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../main_widgets/captain_card.dart';
+import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../auth/pages/login.dart';
 import '../../profile/provider/profile_provider.dart';
@@ -48,45 +46,7 @@ class OfferDetails extends StatelessWidget {
                     builder: (_, profileProvider, child) {
                       return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: Dimensions.PADDING_SIZE_DEFAULT,
-                                vertical: 8),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                customImageIconSVG(
-                                  imageName: SvgImages.sparkles,
-                                  color: ColorResources.PRIMARY_COLOR,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  profileProvider.role != "driver"
-                                      ? getTranslated(
-                                          "the_client_starting_point_is_further_away_from_you",
-                                          context)
-                                      : getTranslated(
-                                          "the_captain_starting_point_is_further_away_from_you",
-                                          context),
-                                  maxLines: 1,
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 10,
-                                      color: ColorResources.HINT_COLOR,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                                Text(
-                                  " 2.5 كيلو ",
-                                  maxLines: 1,
-                                  style: AppTextStyles.w600.copyWith(
-                                      fontSize: 10,
-                                      color: ColorResources.PRIMARY_COLOR,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                              ],
-                            ),
-                          ),
+                          DistanceWidget(role:profileProvider.role??"client" ,),
                           if (profileProvider.role != "driver")
                             const CarDetails(),
                           if (profileProvider.role != "driver")

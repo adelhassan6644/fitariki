@@ -33,8 +33,8 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return Consumer<MapProvider>(builder: (context, vm, _) {
       return Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: 8, horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+        padding:  EdgeInsets.symmetric(
+            vertical: 8.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
         child: Column(
           children: [
             Padding(

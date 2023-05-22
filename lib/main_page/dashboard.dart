@@ -1,7 +1,7 @@
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/my_trips/page/my_trips.dart';
-import 'package:fitariki/features/search/page/search.dart';
 import 'package:fitariki/main_page/widget/nav_bar_bar.dart';
 import 'package:provider/provider.dart';
 import '../../app/core/utils/color_resources.dart';
@@ -13,6 +13,7 @@ import '../features/auth/pages/login.dart';
 import '../features/auth/provider/firebase_auth_provider.dart';
 import '../features/home/page/home.dart';
 import '../features/more/page/more.dart';
+import '../features/my_offers/page/my_offers.dart';
 import '../features/post_offer/page/post_offer.dart';
 import '../features/post_offer/provider/post_offer_provider.dart';
 
@@ -81,13 +82,20 @@ class _DashBoardState extends State<DashBoard> {
                       name: getTranslated("my_trips", context),
                     ),
                   ),
-                  Expanded(
-                    child: BottomNavBarItem(
-                      svgIcon: SvgImages.search,
-                      isSelected: _selectedIndex == 2,
-                      onTap: () => _setPage(2),
-                      name: getTranslated("search", context),
-                    ),
+
+                  Consumer<ProfileProvider>(
+                    builder: (_,provider,child) {
+                      return Expanded(
+                        child: BottomNavBarItem(
+                          svgIcon: SvgImages.delivered,
+                          isSelected: _selectedIndex == 2,
+                          onTap: () => _setPage(2),
+                          name:  provider.role != null?  provider.role == "client"
+                              ? getTranslated("delivery_requests", context)
+                              : getTranslated("delivery_offers", context) : getTranslated("offers", context),
+                        ),
+                      );
+                    }
                   ),
                   Expanded(
                     child: BottomNavBarItem(
@@ -127,7 +135,7 @@ class _DashBoardState extends State<DashBoard> {
             child: PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [Home(), MyTrips(), Search(), More()]),
+                children: const [Home(), MyTrips(), MyOffers(), More()]),
           ),
         ],
       ),

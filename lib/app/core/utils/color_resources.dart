@@ -27,6 +27,7 @@ abstract class ColorResources {
   static const Color LIGHT_BORDER_COLOR = Color(0xffE8ECF4);
   static const Color ALERT_COLOR = Color(0xffDBAB02);
   static const Color FAILED_COLOR = Color(0xffE61D27);
+  static const Color RED_COLOR = Color(0xffFF3B30);
   static const Color TITLE = Color(0xFF000000);
   static const Color SUBTITLE = Color(0xff373737);
   static const Color DETAILS_COLOR = Color(0xff737373);

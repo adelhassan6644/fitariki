@@ -1,5 +1,6 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
+import 'package:fitariki/features/trip_details/page/trip_details.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import '../features/contatct_with_us/page/contatct_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
+import '../features/my_offer_details/page/all_trips.dart';
+import '../features/my_offer_details/page/my_offer_details.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/ratting/page/ratting_page.dart';
 import '../features/success_offer/success_offer.dart';
@@ -77,6 +80,15 @@ abstract class CustomNavigator {
 
       case Routes.NOTIFICATIONS:
         return _pageRoute(const Notifications());
+
+        case Routes.MY_OFFERS_DETAILS:
+        return _pageRoute(const MyOfferDetails());
+
+        case Routes.ALL_TRIPS:
+        return _pageRoute( const AllTrips());
+
+        case Routes.TRIP_DETAILS:
+        return _pageRoute(  TripDetails(isRequest: settings.arguments as bool,));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

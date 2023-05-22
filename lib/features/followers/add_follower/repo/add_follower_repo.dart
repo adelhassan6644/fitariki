@@ -30,6 +30,7 @@ class AddFollowersRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
   Future<Either<ServerFailure, Response>> addFollower({var body}) async {
     try {
       Response response = await dioClient.post(

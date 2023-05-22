@@ -14,4 +14,7 @@ class Routes {
   static const RATTING = "RATTING";
   static const CONTACT_WITH_US = "CONTACT_WITH_US";
   static const NOTIFICATIONS = "NOTIFICATIONS";
+  static const MY_OFFERS_DETAILS = "MY_OFFERS_DETAILS";
+  static const ALL_TRIPS = "ALL_TRIPS";
+  static const TRIP_DETAILS = "TRIP_DETAILS";
 }

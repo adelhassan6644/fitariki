@@ -53,7 +53,7 @@ class CarDetails extends StatelessWidget {
                 ),
               ),
               customImageIconSVG(
-                  imageName: SvgImages.file,
+                  imageName: SvgImages.carModel,
                   color: ColorResources.SECOUND_PRIMARY_COLOR,
                   height: 14,
                   width: 14),

@@ -6,6 +6,7 @@ class SvgImages {
   static const String search = 'assets/svgs/search.svg';
   static const String profileIcon = 'assets/svgs/profile.svg';
   static const String file = 'assets/svgs/file.svg';
+  static const String carModel = 'assets/svgs/car_model.svg';
   static const String sparkles = 'assets/svgs/sparkles.svg';
   static const String seat = 'assets/svgs/seat.svg';
   static const String searchIcon = 'assets/svgs/search_icon.svg';
@@ -15,6 +16,9 @@ class SvgImages {
   static const String calendar = 'assets/svgs/calendar.svg';
   static const String wallet = 'assets/svgs/wallet.svg';
   static const String roadLine = 'assets/svgs/road_line.svg';
+  static const String carPlate = 'assets/svgs/car_plate.svg';
+  static const String carColor = 'assets/svgs/car_color.svg';
+  static const String newOffer = 'assets/svgs/new_offer.svg';
   static const String alarm = 'assets/svgs/alarm.svg';
   static const String emptyStar = 'assets/svgs/empty_star.svg';
   static const String fillStar = 'assets/svgs/fill_star.svg';

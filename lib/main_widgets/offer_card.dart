@@ -52,7 +52,7 @@ class OfferCard extends StatelessWidget {
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
                             image:
-                            "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(

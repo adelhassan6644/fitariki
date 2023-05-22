@@ -33,7 +33,7 @@
   "home": "home",
   "cart": "cart",
   "profile": "profile",
-  "notifications": "notifications",
+
   "change_city": "change city",
   "contact_with_us": "contact with us",
   "mail": "mail",
@@ -181,7 +181,14 @@
   "delete_the_follower": "Delete the follower",
   "captains": "captains",
   "delivery_days": "delivery days",
-  "passengers": "passengers"
+  "passengers": "passengers",
+  "delivery_request_details": "Delivery request details",
+  "delivery_offer_details": "Delivery offer details",
+  "offers": "offers",
+  "requests": "requests",
+  "participants_in_this_offer": "Participants in this offer",
+  "note": "Note :",
+  "trip": "Trip"
 
 
 }
