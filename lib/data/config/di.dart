@@ -95,7 +95,7 @@ Future<void> init() async {
   // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
   sl.registerLazySingleton(() => ProfileProvider(
-      editProfileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
+      profileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
   sl.registerLazySingleton(() => PostOfferProvider(
         postOfferRepo: sl(),

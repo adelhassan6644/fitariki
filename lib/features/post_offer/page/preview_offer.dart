@@ -47,9 +47,9 @@ class PreviewOffer extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  CaptainCard(
+                  UserCard(
                     days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
-                    daysNumInWeek: provider.scheduleProvider.selectedDays.length.toString(),
+                    createdAt: provider.scheduleProvider.selectedDays.length.toString(),
                     daysNum: provider.counts!.count.toString(),
                     priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
                     timeRange:

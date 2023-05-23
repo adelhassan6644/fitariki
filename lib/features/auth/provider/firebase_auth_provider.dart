@@ -149,10 +149,11 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance
             .signInWithCredential(phoneAuthCredential)
             .then((value) async {
-          CustomNavigator.pop();
+
 
           ///  to send Device token
           await userLogin();
+          CustomNavigator.pop();
           _isSubmit = false;
           notifyListeners();
         }).catchError((error) {
@@ -230,7 +231,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       });
     } catch (e) {
-      log(e.toString());
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),

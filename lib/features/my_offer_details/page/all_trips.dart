@@ -20,7 +20,7 @@ class AllTrips extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: sl.get<ProfileProvider>().role == "client"
+              title: sl.get<ProfileProvider>().isDriver
                   ? getTranslated("offers", context)
                   : getTranslated("requests", context),
               withBorder: true,
@@ -31,14 +31,7 @@ class AllTrips extends StatelessWidget {
                 data: [
                   ...List.generate(
                       3,
-                      (index) => const TripCard(
-                            isRequest: true,
-                          )),
-                  ...List.generate(
-                      5,
-                      (index) => const TripCard(
-                            isRequest: false,
-                          )),
+                      (index) => const TripCard()),
                 ],
               ),
             )

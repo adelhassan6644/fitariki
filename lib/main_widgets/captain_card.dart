@@ -9,18 +9,19 @@ import '../components/marquee_widget.dart';
 import '../components/rate_stars.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 
-class CaptainCard extends StatelessWidget {
-  const CaptainCard(
+class UserCard extends StatelessWidget {
+  const UserCard(
       {this.daysNum,
-      this.daysNumInWeek,
+      this.createdAt,
       this.days,
       this.timeRange,
       this.priceRange,
       this.withAnalytics = true,
+      this.isDriver = true,
       Key? key})
       : super(key: key);
-  final bool withAnalytics;
-  final String? daysNumInWeek, daysNum, days, timeRange, priceRange;
+  final bool withAnalytics,isDriver;
+  final String? createdAt, daysNum, days, timeRange, priceRange;
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +214,7 @@ class CaptainCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "$daysNumInWeek ايام",
+                  "$createdAt ايام",
                   style: AppTextStyles.w400.copyWith(fontSize: 10, height: 1),
                 ),
                 if (withAnalytics)

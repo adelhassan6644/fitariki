@@ -112,7 +112,7 @@
   "nationality": "الجنسية",
   "save": "حفظ",
   "make_an_offer_to_captain": "تقديم عرض لكابتن",
-  "make_an_offer_to_client": "تقديم عرض لراكب",
+  "make_a_request_to_client": "تقديم طلب لراكب",
   "send": "ارسال",
   "duration": "المدة",
   "price": "السعر",
@@ -187,7 +187,11 @@
   "requests": "الطلبات",
   "participants_in_this_offer": "المشاركين في هذا العرض",
   "note": "ملاحظة :",
-  "trip": "الرحلة"
+  "trip": "الرحلة",
+  "offers_or_requests": "العروض او الطلبات",
+  "add_request": "تقديم طلب",
+  "add_offer": "تقديم عرض",
+  "delivery_request": "طلب توصيل"
 
 
 

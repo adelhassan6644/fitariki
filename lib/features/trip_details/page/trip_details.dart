@@ -1,24 +1,21 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/main_widgets/captain_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/methods.dart';
-import '../../../app/core/utils/svg_images.dart';
-import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
-import '../../../components/custom_images.dart';
-import '../../../components/expansion_tile_widget.dart';
+import '../../../data/config/di.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../maps/models/location_model.dart';
-import '../../my_offers/widgets/my_offer_card.dart';
+import '../../profile/provider/profile_provider.dart';
+import '../widgets/car_trip_details_widget.dart';
 
 class TripDetails extends StatelessWidget {
-  const TripDetails({required this.isRequest, Key? key}) : super(key: key);
-  final bool isRequest;
+  const TripDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +38,12 @@ class TripDetails extends StatelessWidget {
                   ),
                   ListAnimator(
                     data: [
-                      MyOfferCard(
-                        startTime: "6:30:00",
-                        endTime: "18:30:00",
-                        minPrice: "200",
-                        maxPrice: "200",
-                        numberOfDays: 20,
-                        days: "الأحد، الإثنين، الثلاثاء،الإربعاء",
-                        createdAt: Methods.getDayCount(
-                          date: DateTime(2023, 5, 11, 12, 30, 30),
-                        ).toString(),
+                      UserCard(
+                        days: "الأحد، الإثنين، الثلاثاء",
+                        daysNum: "10",
+                        priceRange: "200",
+                        createdAt: "4",
+                        isDriver: sl.get<ProfileProvider>().isDriver,
                       ),
                       MapWidget(
                         startPoint: LocationModel(
@@ -65,129 +58,10 @@ class TripDetails extends StatelessWidget {
                                 "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
                       ),
                       DistanceWidget(
-                        role: isRequest ? "client" : "driver",
+                        isCaptain: sl.get<ProfileProvider>().isDriver,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                        child: ExpansionTileWidget(
-                          iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-                          title: getTranslated("car_data", context),
-                          children: [
-                            Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.car,
-                                    color: ColorResources.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                                Text(
-                                  "كامري، تايوتا",
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Container(
-                                    height: 10,
-                                    width: 1,
-                                    color: ColorResources.HINT_COLOR,
-                                    child: const SizedBox(),
-                                  ),
-                                ),
-                                customImageIconSVG(
-                                    imageName: SvgImages.carModel,
-                                    color: ColorResources.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                                Text(
-                                  "2024",
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Container(
-                                    height: 10,
-                                    width: 1,
-                                    color: ColorResources.HINT_COLOR,
-                                    child: const SizedBox(),
-                                  ),
-                                ),
-                                customImageIconSVG(
-                                    imageName: SvgImages.seat,
-                                    color: ColorResources.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                                Text(
-                                  "5 اشخاص",
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.carPlate,
-                                    color: ColorResources.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                                Text(
-                                  "7653 TNJ",
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Container(
-                                    height: 10,
-                                    width: 1,
-                                    color: ColorResources.HINT_COLOR,
-                                    child: const SizedBox(),
-                                  ),
-                                ),
-                                customImageIconSVG(
-                                    imageName: SvgImages.seat,
-                                    color: ColorResources.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                                Text(
-                                  "5 اشخاص",
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
+                      if (!sl.get<ProfileProvider>().isDriver)
+                        const CarTripDetailsWidget()
                     ],
                   ),
                 ],

@@ -90,9 +90,9 @@ class _DashBoardState extends State<DashBoard> {
                           svgIcon: SvgImages.delivered,
                           isSelected: _selectedIndex == 2,
                           onTap: () => _setPage(2),
-                          name:  provider.role != null?  provider.role == "client"
+                          name:  provider.roleType != null?  provider.isDriver
                               ? getTranslated("delivery_requests", context)
-                              : getTranslated("delivery_offers", context) : getTranslated("offers", context),
+                              : getTranslated("delivery_offers", context) : getTranslated("offers_or_requests", context),
                         ),
                       );
                     }

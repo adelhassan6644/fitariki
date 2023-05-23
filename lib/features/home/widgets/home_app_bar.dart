@@ -1,5 +1,6 @@
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:fitariki/features/post_offer/provider/post_offer_provider.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -11,8 +12,8 @@ import 'package:provider/provider.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../data/config/di.dart';
 import '../../auth/pages/login.dart';
-import '../../auth/provider/firebase_auth_provider.dart';
 import '../../post_offer/page/post_offer.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -69,7 +70,7 @@ class HomeAppBar extends StatelessWidget {
                     ],
                   ),
                 ),
-                Consumer<FirebaseAuthProvider>(
+                Consumer<ProfileProvider>(
                   builder: (_, provider, child) {
                     return InkWell(
                       child: const Icon(
@@ -77,9 +78,7 @@ class HomeAppBar extends StatelessWidget {
                         size: 24,
                       ),
                       onTap: () => customShowModelBottomSheet(
-                        onClose: Provider.of<PostOfferProvider>(context,
-                                listen: false)
-                            .reset,
+                        onClose: sl.get<PostOfferProvider>().reset,
                         body: provider.isLogin
                             ? const PostOffer()
                             : const Login(),

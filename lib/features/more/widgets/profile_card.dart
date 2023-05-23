@@ -81,7 +81,7 @@ class ProfileCard extends StatelessWidget {
                                       height: 10.h,
                                     ),
                                     Text(
-                                        provider.role == "driver"
+                                        provider.isDriver
                                             ? getTranslated(
                                                 "delivery_offers", context)
                                             : getTranslated(

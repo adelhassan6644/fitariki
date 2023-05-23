@@ -14,6 +14,10 @@ class ProfileRepo {
 
   ProfileRepo({required this.dioClient, required this.sharedPreferences});
 
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
   Future<Either<ServerFailure, Response>> updateProfile(
       {required dynamic body}) async {
     try {
@@ -55,5 +59,9 @@ class ProfileRepo {
     } else {
       return null;
     }
+  }
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 }

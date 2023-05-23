@@ -8,13 +8,12 @@ import '../../../components/custom_text_form_field.dart';
 import '../../../main_widgets/followers_widget.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../provider/add_offer_provider.dart';
 import '../widgets/duration_widget.dart';
 
-class ReplayOffer extends StatelessWidget {
-  const ReplayOffer({Key? key}) : super(key: key);
-
+class AddOffer extends StatelessWidget {
+  const AddOffer({ required this.isCaptain,Key? key}) : super(key: key);
+final bool isCaptain ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,17 +29,14 @@ class ReplayOffer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Consumer<ProfileProvider>(
-            builder: (_, profileProvider, child) {
-              return BottomSheetAppBar(
-                title: profileProvider.role == "driver"
-                    ? getTranslated("make_an_offer_to_client", context)
-                    : getTranslated("make_an_offer_to_captain", context),
-                textBtn: getTranslated("send", context),
-                onTap: (){
-                  CustomNavigator.push(Routes.SUCCESS_POST, replace: true,arguments: "محمد");
-                },
-              );
+          BottomSheetAppBar(
+            title: isCaptain
+                ? getTranslated("make_a_request_to_client", context)
+                : getTranslated("make_an_offer_to_captain", context),
+            textBtn: getTranslated("send", context),
+            onTap: () {
+              CustomNavigator.push(Routes.SUCCESS_POST,
+                  replace: true, arguments: "محمد");
             },
           ),
           Consumer<AddOfferProvider>(builder: (_, provider, child) {
@@ -56,13 +52,7 @@ class ReplayOffer extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  Consumer<ProfileProvider>(
-                    builder: (_, profileProvider, child) {
-                      return profileProvider.role == "driver"
-                          ? const SizedBox()
-                          : const FollowersWidget();
-                    },
-                  ),
+                  if(!isCaptain)const FollowersWidget(),
                   const SizedBox(
                     height: 8,
                   ),

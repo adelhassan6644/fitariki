@@ -41,10 +41,11 @@ Widget build(BuildContext context) {
             width: width,
           ),
           name != null?
-          Text(name!,style: TextStyle(
+          Text(name!, textAlign: TextAlign.center,style: TextStyle(
             fontWeight:isSelected? FontWeight.w600: FontWeight.w400,
             color: isSelected? ColorResources.PRIMARY_COLOR
                 :ColorResources.DISABLED,
+            overflow: TextOverflow.ellipsis,
             fontSize: 11,
           ),):const SizedBox.shrink()
         ],

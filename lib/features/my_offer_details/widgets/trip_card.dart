@@ -11,18 +11,20 @@ import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
 import '../../../components/rate_stars.dart';
+import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../home/widgets/acceptable_analytics_widget.dart';
+import '../../profile/provider/profile_provider.dart';
 
 class TripCard extends StatelessWidget {
-  const TripCard({required this.isRequest ,Key? key}) : super(key: key);
-  final bool isRequest;
+  const TripCard({ Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=>CustomNavigator.push(Routes.TRIP_DETAILS,arguments: isRequest),
+      onTap: () =>
+          CustomNavigator.push(Routes.TRIP_DETAILS,),
       child: Stack(
         children: [
           Padding(
@@ -63,7 +65,8 @@ class TripCard extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -186,7 +189,7 @@ class TripCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        if (!isRequest)
+                        if (! sl.get<ProfileProvider>().isDriver)
                           Row(
                             children: [
                               Expanded(
@@ -195,8 +198,8 @@ class TripCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.car,
-                                        color:
-                                            ColorResources.SECOUND_PRIMARY_COLOR,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -231,8 +234,8 @@ class TripCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.carModel,
-                                        color:
-                                            ColorResources.SECOUND_PRIMARY_COLOR,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -267,8 +270,8 @@ class TripCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.seat,
-                                        color:
-                                            ColorResources.SECOUND_PRIMARY_COLOR,
+                                        color: ColorResources
+                                            .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -289,14 +292,15 @@ class TripCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        if (isRequest)
+                        if ( sl.get<ProfileProvider>().isDriver)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 getTranslated(
                                     "participants_in_this_offer", context),
-                                style: AppTextStyles.w600.copyWith(fontSize: 10),
+                                style:
+                                    AppTextStyles.w600.copyWith(fontSize: 10),
                               ),
                               SizedBox(
                                 height: 4.h,
@@ -374,8 +378,8 @@ class TripCard extends StatelessWidget {
                                 children: [
                                   Text(
                                     getTranslated("note", context),
-                                    style:
-                                        AppTextStyles.w600.copyWith(fontSize: 10),
+                                    style: AppTextStyles.w600
+                                        .copyWith(fontSize: 10),
                                   ),
                                   Text(
                                     "“ يوجد معي راكب بنفس حيك + نفس وجهتك “",
@@ -387,7 +391,9 @@ class TripCard extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 30.w,)
+                            SizedBox(
+                              height: 30.w,
+                            )
                           ],
                         )
                       ],
@@ -415,13 +421,16 @@ class TripCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 20.h,left: 30.w,
+              bottom: 20.h,
+              left: 30.w,
               child: CustomButton(
-            text: getTranslated("preview", context),
-            width: 75.h,
-            height: 30.h,
-            radius: 100,
-          ))
+                text: getTranslated("preview", context),
+                width: 75.h,
+                height: 30.h,
+                radius: 100,
+                onTap: () =>
+                    CustomNavigator.push(Routes.TRIP_DETAILS,),
+              ))
         ],
       ),
     );

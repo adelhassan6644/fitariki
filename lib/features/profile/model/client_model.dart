@@ -93,7 +93,7 @@ class ClientModel {
         email: json["email"],
         image: json["image"],
         nickname: json["nickname"],
-        gender: json["gender"],
+        gender: int.parse(json["gender"] ?? "0"),
         age: json["age"],
         national: json["national"],
         city: json["city"],

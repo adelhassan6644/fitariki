@@ -28,7 +28,7 @@ class MyOfferDetails extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: sl.get<ProfileProvider>().role == "client"
+              title: sl.get<ProfileProvider>().isDriver
                   ? getTranslated("delivery_request_details", context)
                   : getTranslated("delivery_offer_details", context),
               actionChild: InkWell(
@@ -81,7 +81,7 @@ class MyOfferDetails extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                sl.get<ProfileProvider>().role == "client"
+                                sl.get<ProfileProvider>().isDriver
                                     ? getTranslated("offers", context)
                                     : getTranslated("requests", context),
                                 style:
@@ -104,14 +104,8 @@ class MyOfferDetails extends StatelessWidget {
                       ),
                       ...List.generate(
                           2,
-                          (index) => const TripCard(
-                                isRequest: false,
-                              )),
-                      ...List.generate(
-                          2,
-                          (index) => const TripCard(
-                                isRequest: true,
-                              ))
+                          (index) =>  const TripCard()),
+
                     ],
                   ),
                 ],

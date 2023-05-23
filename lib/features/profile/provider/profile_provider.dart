@@ -17,11 +17,11 @@ import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
 
 class ProfileProvider extends ChangeNotifier {
-  final ProfileRepo editProfileRepo;
+  final ProfileRepo profileRepo;
   final PostOfferProvider postOfferProvider;
   final ScheduleProvider scheduleProvider;
   ProfileProvider({
-    required this.editProfileRepo,
+    required this.profileRepo,
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
@@ -33,9 +33,14 @@ class ProfileProvider extends ChangeNotifier {
 
   String? role;
   getRoleType() {
-    role = editProfileRepo.getRoleType();
+    role = profileRepo.getRoleType();
     notifyListeners();
   }
+
+  bool get isLogin => profileRepo.isLoggedIn();
+  bool get isDriver =>  profileRepo.isDriver();
+
+  String? get roleType => profileRepo.getRoleType();
 
   ///Car Data
   TextEditingController carName = TextEditingController();
@@ -530,16 +535,14 @@ class ProfileProvider extends ChangeNotifier {
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
           "drop_off_location": endLocation!.toJson(),
           "pickup_location": startLocation!.toJson(),
-          if (role == "driver")
-          "car_info": carData,
-          if (role == "driver")
-          "bank_info": bankData
+          if (role == "driver") "car_info": carData,
+          if (role == "driver") "bank_info": bankData
         }
       };
 
       log(personalData.toString());
       Either<ServerFailure, Response> response =
-          await editProfileRepo.updateProfile(body: personalData);
+          await profileRepo.updateProfile(body: personalData);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -581,8 +584,7 @@ class ProfileProvider extends ChangeNotifier {
   getProfile() async {
     isLoading = true;
     notifyListeners();
-    Either<ServerFailure, Response> response =
-        await editProfileRepo.getProfile();
+    Either<ServerFailure, Response> response = await profileRepo.getProfile();
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
       if (role == "driver") {

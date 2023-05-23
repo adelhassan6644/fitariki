@@ -107,7 +107,7 @@
   "nationality": "Nationality",
   "save": "save",
   "make_an_offer_to_captain": "Make an offer to Captain",
-  "make_an_offer_to_client": "Make an offer to Client",
+  "make_a_request_to_client": "Make a request to Client",
   "send": "send",
   "duration": "duration",
   "price": "price",
@@ -188,7 +188,11 @@
   "requests": "requests",
   "participants_in_this_offer": "Participants in this offer",
   "note": "Note :",
-  "trip": "Trip"
+  "trip": "Trip",
+  "offers_or_requests": "Offers or Requests",
+"add_request": "add request",
+"add_offer": "add offer",
+"delivery_request": "delivery request"
 
 
 }

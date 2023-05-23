@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../data/config/di.dart';
 import '../../../main_widgets/followers_widget.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';
@@ -31,24 +32,18 @@ class PostOffer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Consumer<ProfileProvider>(
-              builder: (_, profileProvider, child) {
-                return BottomSheetAppBar(
-                    title: profileProvider.role == "driver"
-                        ? getTranslated("add_a_delivery_offer", context)
-                        : getTranslated("add_a_delivery_request", context),
-                    textBtn: getTranslated("preview", context),
-                    onTap: () {
-                      if(provider.checkData() == true)
-                      {
-
-                        customShowModelBottomSheet(
-                          body: const PreviewOffer(),
-                        );
-                      }
-                    });
-              },
-            ),
+            BottomSheetAppBar(
+                title: sl.get<ProfileProvider>().isDriver
+                    ? getTranslated("add_a_delivery_request", context)
+                    : getTranslated("add_a_delivery_offer", context),
+                textBtn: getTranslated("preview", context),
+                onTap: () {
+                  if (provider.checkData() == true) {
+                    customShowModelBottomSheet(
+                      body: const PreviewOffer(),
+                    );
+                  }
+                }),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(
@@ -59,16 +54,11 @@ class PostOffer extends StatelessWidget {
                   OfferInformationWidget(
                     provider: provider,
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 8.h,
                   ),
-                  Consumer<ProfileProvider>(
-                    builder: (_, profileProvider, child) {
-                      return profileProvider.role == "driver"
-                          ? const SizedBox()
-                          : const FollowersWidget();
-                    },
-                  ),
+                  if (!sl.get<ProfileProvider>().isDriver)
+                    const FollowersWidget(),
                   SizedBox(
                     height: 8.h,
                   ),

@@ -8,8 +8,8 @@ import '../app/localization/localization/language_constant.dart';
 import '../components/custom_images.dart';
 
 class DistanceWidget extends StatelessWidget {
-  const DistanceWidget({required this.role, Key? key}) : super(key: key);
-  final String role;
+  const DistanceWidget({required this.isCaptain, Key? key}) : super(key: key);
+  final bool isCaptain;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class DistanceWidget extends StatelessWidget {
             width: 4,
           ),
           Text(
-            role != "driver"
+            isCaptain
                 ? getTranslated(
                     "the_client_starting_point_is_further_away_from_you",
                     context)

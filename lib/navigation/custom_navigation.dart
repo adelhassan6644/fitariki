@@ -81,14 +81,14 @@ abstract class CustomNavigator {
       case Routes.NOTIFICATIONS:
         return _pageRoute(const Notifications());
 
-        case Routes.MY_OFFERS_DETAILS:
+      case Routes.MY_OFFERS_DETAILS:
         return _pageRoute(const MyOfferDetails());
 
-        case Routes.ALL_TRIPS:
-        return _pageRoute( const AllTrips());
+      case Routes.ALL_TRIPS:
+        return _pageRoute(const AllTrips());
 
-        case Routes.TRIP_DETAILS:
-        return _pageRoute(  TripDetails(isRequest: settings.arguments as bool,));
+      case Routes.TRIP_DETAILS:
+        return _pageRoute(const TripDetails());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
@@ -96,8 +96,8 @@ abstract class CustomNavigator {
   }
 
   static PageRouteBuilder<dynamic> _pageRoute(Widget child) => PageRouteBuilder(
-      transitionDuration: const Duration(milliseconds: 400),
-      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 100),
+      reverseTransitionDuration: const Duration(milliseconds: 100),
       transitionsBuilder: (c, anim, a2, child) {
         var begin = const Offset(1.0, 0.0);
         var end = Offset.zero;
