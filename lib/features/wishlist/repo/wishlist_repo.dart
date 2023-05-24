@@ -17,7 +17,6 @@ class WishlistRepo {
     try {
       Response response = await dioClient.get(
         uri:
-            // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getWishList}/1",
             "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
       );
       if (response.statusCode == 200) {
@@ -35,7 +34,6 @@ class WishlistRepo {
     try {
       Response response = await dioClient.post(
           uri:
-              // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/1",
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
           queryParameters: {
             "offer_id": offerId,
