@@ -60,13 +60,14 @@ class _OfferDetailsState extends State<OfferDetails> {
                         child:  UserCard(
                           isDriver: sl.get<ProfileProvider>().isDriver,
                           withAnalytics: true,
+                          createdAt:provider.offerDetails!.createdAt!.difference(DateTime.now()).inDays.toString().replaceAll("-", '') ,
                           days:provider.day ,
                           daysNum: provider.offerDetails!.duration.toString(),
                           name:provider.offerDetails?.name ,
 
                           priceRange:"${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
                           followers:provider.offerDetails!.followers?.length.toString() ,
-                          timeRange:"${provider.offerDetails!.offerDays!.first.startTime}: ${provider.offerDetails!.offerDays!.first.endTime}" ,
+                          timeRange:provider.offerDetails!.offerDays!.isEmpty?"":"${provider.offerDetails!.offerDays?.first.startTime}: ${provider.offerDetails!.offerDays?.first.endTime}" ,
                         )),
                      MapWidget(startPoint:provider.offerDetails!.pickLocation ,endPoint:provider.offerDetails!.endLocation ,),
                     DistanceWidget(
