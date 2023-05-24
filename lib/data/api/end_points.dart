@@ -16,6 +16,8 @@ class EndPoints {
   static const String updateFollowerDetails = 'profile/update_follower';
   static const String deleteFollower = 'profile/delete_follower';
   static const String addOffer = '';
+  static const String getWishList = 'favorites/index';
+  static const String postWishList = 'favorites/addOrDelete';
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';
