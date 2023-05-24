@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
-import '../../../main_widgets/captain_card.dart';
+import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';

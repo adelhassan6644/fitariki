@@ -14,6 +14,7 @@ class UserCard extends StatelessWidget {
       {this.daysNum,
       this.createdAt,
       this.days,
+      this.followers,
       this.timeRange,
       this.priceRange,
       this.withAnalytics = true,
@@ -21,7 +22,7 @@ class UserCard extends StatelessWidget {
       Key? key})
       : super(key: key);
   final bool withAnalytics,isDriver;
-  final String? createdAt, daysNum, days, timeRange, priceRange;
+  final String? createdAt, daysNum, days, timeRange, priceRange,followers;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,33 @@ class UserCard extends StatelessWidget {
                         child: const SizedBox(),
                       ),
                     ),
+                    if(isDriver)Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          customImageIconSVG(imageName: SvgImages.addFollower),
+                          const SizedBox(height: 4),
+                          MarqueeWidget(
+                            child: Text(
+                              "$followers",
+                              maxLines: 1,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if(isDriver)Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Container(
+                        color: ColorResources.HINT_COLOR,
+                        height: 30,
+                        width: 1,
+                        child: const SizedBox(),
+                      ),
+                    ),
                     Expanded(
                       flex: 3,
                       child: Column(
@@ -179,7 +207,7 @@ class UserCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
+                    if(!isDriver)  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
                         color: ColorResources.HINT_COLOR,
@@ -188,7 +216,7 @@ class UserCard extends StatelessWidget {
                         child: const SizedBox(),
                       ),
                     ),
-                    Expanded(
+                    if(!isDriver)  Expanded(
                       flex: 2,
                       child: Column(
                         children: [

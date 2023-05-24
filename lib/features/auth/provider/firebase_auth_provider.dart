@@ -150,7 +150,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
             .signInWithCredential(phoneAuthCredential)
             .then((value) async {
 
-
           ///  to send Device token
           await userLogin();
           CustomNavigator.pop();

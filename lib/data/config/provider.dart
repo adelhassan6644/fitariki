@@ -13,10 +13,12 @@ import '../../features/home/provider/home_provider.dart';
 import '../../features/my_offers/provider/my_offers_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/notifictions/provider/notifications_provider.dart';
+import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
+import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
@@ -48,5 +50,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<NotificationsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FollowersProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyOffersProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<TripDetailsProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<PaymentProvider>()),
   ];
 }

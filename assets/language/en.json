@@ -192,7 +192,21 @@
   "offers_or_requests": "Offers or Requests",
 "add_request": "add request",
 "add_offer": "add offer",
-"delivery_request": "delivery request"
+"delivery_request": "delivery request",
+  "accept_offer": "Accept offer",
+  "reject_offer": "Reject offer",
+  "negotiation": "Negotiation",
+  "accept_request": "Accept request",
+  "reject_request": "Reject request",
+  "stop_points": "Stop points : ",
+  "payment": "Payment",
+  "complete_theـpaymentـprocess": "Complete the payment process",
+  "discountـcode": "Discount code",
+  "payment_method": "Payment method",
+  "payment_details": "Payment details",
+  "trip_amount": "Trip amount",
+  "tax": "tax",
+  "service_costs": "Service costs"
 
 
 }

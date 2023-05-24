@@ -13,6 +13,7 @@ import '../features/maps/pages/pick_map_screen.dart';
 import '../features/my_offer_details/page/all_trips.dart';
 import '../features/my_offer_details/page/my_offer_details.dart';
 import '../features/notifictions/page/notifications.dart';
+import '../features/payment/page/payment.dart';
 import '../features/ratting/page/ratting_page.dart';
 import '../features/success_offer/success_offer.dart';
 import '../features/profile/page/profile_page.dart';
@@ -89,6 +90,9 @@ abstract class CustomNavigator {
 
       case Routes.TRIP_DETAILS:
         return _pageRoute(const TripDetails());
+
+      case Routes.PAYMENT:
+        return _pageRoute(const Payment());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

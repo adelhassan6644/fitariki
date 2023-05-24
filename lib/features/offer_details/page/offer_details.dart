@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
-import '../../../main_widgets/captain_card.dart';
+import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../auth/pages/login.dart';

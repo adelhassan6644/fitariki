@@ -136,16 +136,8 @@ class CarTripDetailsWidget extends StatelessWidget {
                   child: const SizedBox(),
                 ),
               ),
-              customImageIconSVG(
-                  imageName: SvgImages.seat,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
-                  height: 14,
-                  width: 14),
-              SizedBox(
-                width: 4.w,
-              ),
               Text(
-                "5 اشخاص",
+                "عرض صورة السيارة",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),

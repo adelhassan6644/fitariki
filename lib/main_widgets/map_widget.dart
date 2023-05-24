@@ -7,13 +7,24 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/core/utils/dimensions.dart';
+import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
+import '../components/custom_images.dart';
 import '../components/marquee_widget.dart';
 
 class MapWidget extends StatefulWidget {
-  const MapWidget({this.startPoint, this.endPoint, Key? key}) : super(key: key);
+  const MapWidget(
+      {this.startPoint,
+      this.endPoint,
+      this.stopPoints,
+      this.clientName,
+      this.gender,
+      Key? key})
+      : super(key: key);
   final LocationModel? startPoint, endPoint;
+  final int? stopPoints, gender;
+  final String? clientName;
 
   @override
   State<MapWidget> createState() => _MapWidgetState();
@@ -33,10 +44,35 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return Consumer<MapProvider>(builder: (context, vm, _) {
       return Padding(
-        padding:  EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
             vertical: 8.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
         child: Column(
           children: [
+            if (widget.clientName != null)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.clientName!,
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 14,
+                        height: 1.25,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  customImageIconSVG(
+                      imageName: widget.gender == 0
+                          ? SvgImages.maleIcon
+                          : SvgImages.femaleIcon,
+                      color: ColorResources.BLUE_COLOR,
+                      width: 11,
+                      height: 11)
+                ],
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
@@ -66,7 +102,33 @@ class _MapWidgetState extends State<MapWidget> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 15),
+                  SizedBox(width: 15.w),
+                  if (widget.stopPoints != null)
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated("stop_points", context),
+                            maxLines: 1,
+                            style: AppTextStyles.w600.copyWith(
+                                fontSize: 10, overflow: TextOverflow.ellipsis),
+                          ),
+                          MarqueeWidget(
+                            child: Text(
+                              widget.stopPoints.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  color: ColorResources.HINT_COLOR,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  if (widget.stopPoints != null) SizedBox(width: 15.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

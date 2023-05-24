@@ -191,8 +191,21 @@
   "offers_or_requests": "العروض او الطلبات",
   "add_request": "تقديم طلب",
   "add_offer": "تقديم عرض",
-  "delivery_request": "طلب توصيل"
-
+  "delivery_request": "طلب توصيل",
+  "accept_offer": "قبول العرض",
+  "reject_offer": "رفض العرض",
+  "negotiation": "تفاوض",
+  "accept_request": "قبول الطلب",
+  "reject_request": "رفض الطلب",
+  "stop_points": "نقاط التوقف : ",
+  "payment": "الدفع",
+  "complete_theـpaymentـprocess": "اتمام عملية الدفع",
+  "discountـcode": "كود خصم",
+  "payment_method": "طريقة الدفع",
+  "payment_details": "تفاصيل الدفع",
+  "trip_amount": "مبلغ الرحلة",
+  "tax": "الضريبة",
+  "service_costs": "تكاليف الخدمة"
 
 
 }
