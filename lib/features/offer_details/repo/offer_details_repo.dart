@@ -8,19 +8,20 @@ import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-class AddOfferRepo{
+class OfferDetailsRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  AddOfferRepo({required this.dioClient,required this.sharedPreferences});
-
-  Future<Either<ServerFailure, Response>> requestOffer({var body, tripID}) async {
+  OfferDetailsRepo({required this.dioClient, required this.sharedPreferences});
+  Future<Either<ServerFailure, Response>> getOfferDetails(
+      { offerID}) async {
     try {
-      Response response = await dioClient.post(
-        uri:
-        "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.addOffer}/$tripID",
-        data: body,
-      );
+      Response response = await dioClient.get(
+          uri:
+              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.offerDetails}/$offerID",
+
+
+          );
       if (response.statusCode == 200) {
         return Right(response);
       } else {
@@ -30,5 +31,4 @@ class AddOfferRepo{
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
-
 }

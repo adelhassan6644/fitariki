@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fitariki/app/core/utils/app_strings.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/maps/models/location_model.dart';
 import 'package:fitariki/main_providers/map_provider.dart';
@@ -35,7 +36,7 @@ class _MapWidgetState extends State<MapWidget> {
   void initState() {
     Future.delayed(Duration.zero, () {
       Provider.of<MapProvider>(context, listen: false)
-          .setLocation(pickup: widget.startPoint!, dropOff: widget.endPoint!);
+          .setLocation(pickup: widget.startPoint??AppStrings.defaultPickUp, dropOff: widget.endPoint??AppStrings.defaultDrop,);
     });
     super.initState();
   }

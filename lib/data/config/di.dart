@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fitariki/features/home/repo/home_repo.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
+import 'package:fitariki/features/offer_details/repo/offer_details_repo.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
@@ -20,6 +21,7 @@ import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
 import '../../features/notifictions/provider/notifications_provider.dart';
 import '../../features/notifictions/repo/notifications_repo.dart';
+import '../../features/offer_details/provider/offer_details_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/post_offer/repo/post_offer_repo.dart';
@@ -61,6 +63,8 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(
       () => AuthRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => OfferDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
@@ -118,6 +122,8 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(() => HomeProvider(
         homeRepo: sl(),
+      ));  sl.registerLazySingleton(() => OfferDetailsProvider(
+        repo: sl(),
       ));
   sl.registerLazySingleton(() => NotificationsProvider(
         notificationsRepo: sl(),

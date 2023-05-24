@@ -11,13 +11,14 @@ class EndPoints {
   static const String postOffer = 'offer/postOffer';
   static const String listOffers = 'offer/listOffers';
   static const String availableOffers = 'offer/list_available';
+  static const String offerDetails = 'offer/view_offer';
   static const String followers = 'profile/followers_list';
   static const String addFollower = 'profile/add_follower';
   static const String updateFollowerDetails = 'profile/update_follower';
   static const String deleteFollower = 'profile/delete_follower';
-  static const String addOffer = '';
   static const String getWishList = 'favorites/index';
   static const String postWishList = 'favorites/addOrDelete';
+  static const String addOffer = 'offer/request_offer';
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';

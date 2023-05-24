@@ -50,7 +50,9 @@ abstract class CustomNavigator {
         ));
 
       case Routes.OFFER_DETAILS:
-        return _pageRoute(const OfferDetails());
+        return _pageRoute( OfferDetails(
+          offerId: settings.arguments as int,
+        ));
 
       case Routes.SUCCESS_POST:
         return _pageRoute(SuccessPost(
