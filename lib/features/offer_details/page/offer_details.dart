@@ -67,7 +67,7 @@ class _OfferDetailsState extends State<OfferDetails> {
 
                           priceRange:"${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
                           followers:provider.offerDetails!.followers?.length.toString() ,
-                          timeRange:"${provider.offerDetails!.offerDays!.first.startTime}: ${provider.offerDetails!.offerDays!.first.endTime}" ,
+                          timeRange:provider.offerDetails!.offerDays!.isEmpty?"":"${provider.offerDetails!.offerDays?.first.startTime}: ${provider.offerDetails!.offerDays?.first.endTime}" ,
                         )),
                      MapWidget(startPoint:provider.offerDetails!.pickLocation ,endPoint:provider.offerDetails!.endLocation ,),
                     DistanceWidget(
