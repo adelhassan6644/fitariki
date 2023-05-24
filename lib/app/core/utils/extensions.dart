@@ -36,6 +36,10 @@ extension StringExtension on String {
 extension DateExtention on DateTime {
   String dateFormat({required String format, String? lang}) {
     return DateFormat(format, ).format(this);
+
+  }
+  String arTimeFormat() {
+    return DateFormat("hh,mm aa" ).format(this);
   }
 }
 

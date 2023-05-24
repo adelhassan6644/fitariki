@@ -12,8 +12,9 @@ import '../provider/add_offer_provider.dart';
 import '../widgets/duration_widget.dart';
 
 class AddOffer extends StatelessWidget {
-  const AddOffer({ required this.isCaptain,Key? key}) : super(key: key);
+  const AddOffer({ required this.isCaptain,Key? key, required this.tripID}) : super(key: key);
 final bool isCaptain ;
+final int tripID ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,22 +26,22 @@ final bool isCaptain ;
         ),
         color: Colors.white,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          BottomSheetAppBar(
-            title: isCaptain
-                ? getTranslated("make_a_request_to_client", context)
-                : getTranslated("make_an_offer_to_captain", context),
-            textBtn: getTranslated("send", context),
-            onTap: () {
-              CustomNavigator.push(Routes.SUCCESS_POST,
-                  replace: true, arguments: "محمد");
-            },
-          ),
-          Consumer<AddOfferProvider>(builder: (_, provider, child) {
-            return Expanded(
+      child: Consumer<AddOfferProvider>(builder: (_, provider, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BottomSheetAppBar(
+              title: isCaptain
+                  ? getTranslated("make_a_request_to_client", context)
+                  : getTranslated("make_an_offer_to_captain", context),
+              textBtn: getTranslated("send", context),
+              onTap: () {
+                provider.requestOffer(tripID:tripID);
+
+              },
+            ),
+            Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(
                     horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 12),
@@ -56,7 +57,7 @@ final bool isCaptain ;
                   const SizedBox(
                     height: 8,
                   ),
-                  CustomTextFormField(
+                /*  CustomTextFormField(
                       label: true,
                       inputType: TextInputType.text,
                       hint: getTranslated("add_a_note", context),
@@ -64,13 +65,13 @@ final bool isCaptain ;
                       minLine: 1,
                       onChanged: (v) {
                         provider.note = v;
-                      }),
+                      }),*/
                 ],
               ),
-            );
-          }),
-        ],
-      ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

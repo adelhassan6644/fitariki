@@ -1,3 +1,4 @@
+import '../../../features/maps/models/location_model.dart';
 import '../../../main_models/weak_model.dart';
 
 class AppStrings {
@@ -6,6 +7,9 @@ class AppStrings {
   static const String defaultAddress = 'الرياض';
   static const String defaultLat = '24.774265';
   static const String defaultLong = '46.738586';
+  static  LocationModel defaultPickUp = LocationModel(address: defaultAddress,longitude: defaultLong,latitude: defaultLat);
+  static  LocationModel defaultDrop = LocationModel(address: defaultAddress,longitude: defaultLong,latitude: defaultLat);
+
   static const String fontFamily = 'Cairo';
   static const String noRouteFound = 'No Route Found';
   static const String cachedRandomQuote = 'CACHED_RANDOM_QUOTE';

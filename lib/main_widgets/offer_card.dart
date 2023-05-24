@@ -23,7 +23,7 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => CustomNavigator.push(Routes.OFFER_DETAILS),
+      onTap: () => CustomNavigator.push(Routes.OFFER_DETAILS,arguments:offerModel.id ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
