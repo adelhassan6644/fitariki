@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
+import '../../features/contatct_with_us/provider/contact_provider.dart';
+import '../../features/contatct_with_us/repo/contact_repo.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
 import '../../features/followers/add_follower/repo/add_follower_repo.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
@@ -94,6 +96,7 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => TripDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -117,9 +120,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => MyOffersProvider(myOffersRepo: sl(),));
   sl.registerLazySingleton(() =>
       AddFollowerProvider(addFollowersRepo: sl(), followerProvider: sl()));
-  sl.registerLazySingleton(() => WishlistProvider(
-        wishlistRepo: sl(),
-      ));
+  sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
+  sl.registerLazySingleton(() => ContactProvider(contactRepo: sl(),));
   sl.registerLazySingleton(() => HomeProvider(
         homeRepo: sl(),
       ));  sl.registerLazySingleton(() => OfferDetailsProvider(

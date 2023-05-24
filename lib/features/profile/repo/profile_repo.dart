@@ -42,7 +42,6 @@ class ProfileRepo {
         uri:
             "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
       );
-      //{{base}}api/v1/driver/profile/1
       if (response.statusCode == 200) {
         return Right(response);
       } else {

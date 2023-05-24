@@ -6,10 +6,11 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/tab_widget.dart';
+import '../../../data/config/di.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/wishlist_provider.dart';
-import '../widgets/captains_widget.dart';
-import '../widgets/delievery_orders_widget.dart';
+import '../widgets/favourite_users_widget.dart';
+import '../widgets/favourite_offers_widget.dart';
 
 class Wishlist extends StatelessWidget {
   const Wishlist({Key? key}) : super(key: key);
@@ -41,23 +42,20 @@ class Wishlist extends StatelessWidget {
                           child: Row(
                               children: List.generate(
                             provider.clientTabs.length,
-                            (index) => Consumer<ProfileProvider>(
-                                builder: (_, profileProvider, child) {
-                              return Expanded(
-                                  child: TabWidget(
-                                title: profileProvider.role == "driver"
-                                    ? getTranslated(
-                                        provider.driverTabs[index], context)
-                                    : getTranslated(
-                                        provider.clientTabs[index], context),
-                                isSelected: index == provider.currentTab,
-                                onTab: () => provider.selectedTab(index),
-                              ));
-                            }),
+                            (index) => Expanded(
+                                child: TabWidget(
+                                  title: sl.get<ProfileProvider>().isDriver
+                                      ? getTranslated(
+                                      provider.driverTabs[index], context)
+                                      : getTranslated(
+                                      provider.clientTabs[index], context),
+                                  isSelected: index == provider.currentTab,
+                                  onTab: () => provider.selectedTab(index),
+                                )),
                           )),
                         )),
-                    if (provider.currentTab == 0) const DeliveryOrdersWidgets(),
-                    if (provider.currentTab == 1) const CaptainsWidgets()
+                    if (provider.currentTab == 0) const FavouriteOffersWidgets(),
+                    if (provider.currentTab == 1) const UsersWidgets()
                   ],
                 ),
               );

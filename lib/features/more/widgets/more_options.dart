@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
+import 'package:fitariki/features/wishlist/provider/wishlist_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../data/config/di.dart';
+import '../../contatct_with_us/provider/contact_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import 'more_button.dart';
 
@@ -53,7 +56,10 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("archives", context),
                   icon: SvgImages.bookMark,
-                  onTap: () => CustomNavigator.push(Routes.WISHLIST),
+                  onTap: () {
+                    sl<WishlistProvider>().getWishList();
+                    CustomNavigator.push(Routes.WISHLIST);
+                  },
                 ),
                 MoreButton(
                   title: getTranslated("notifications", context),
@@ -65,13 +71,13 @@ class MoreOptions extends StatelessWidget {
                   icon: SvgImages.card,
                 ),
                 MoreButton(
-                  title: provider.role == "driver"
+                  title: provider.isDriver
                       ? getTranslated("clients_evaluation", context)
                       : getTranslated("captain_evaluation", context),
                   icon: SvgImages.rate,
                   onTap: () => CustomNavigator.push(
                     Routes.RATTING,
-                    arguments: provider.role == "driver"
+                    arguments: provider.isDriver
                         ? getTranslated("clients_evaluation", context)
                         : getTranslated("captain_evaluation", context),
                   ),
@@ -79,7 +85,10 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
-                  onTap: () => CustomNavigator.push(Routes.CONTACT_WITH_US),
+                  onTap: () {
+                    sl<ContactProvider>().getContact();
+                    CustomNavigator.push(Routes.CONTACT_WITH_US);
+                  },
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {

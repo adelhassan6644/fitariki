@@ -16,8 +16,9 @@ class WishlistRepo {
   Future<Either<ServerFailure, Response>> getWishList() async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/"
-            "${EndPoints.getWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri:
+            // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getWishList}/1",
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -30,12 +31,21 @@ class WishlistRepo {
   }
 
   Future<Either<ServerFailure, Response>> postWishList(
-      {required int id}) async {
+      {int? offerId, int? userId}) async {
     try {
       Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/$id",
-      );
+          uri:
+              // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/1",
+              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
+          queryParameters: {
+            "offer_id": offerId,
+            if (sharedPreferences.getString(AppStorageKey.role) == "driver" &&
+                userId != null)
+              "client_id": userId,
+            if (sharedPreferences.getString(AppStorageKey.role) == "client" &&
+                userId != null)
+              "driver_id": userId,
+          });
 
       if (response.statusCode == 200) {
         return Right(response);

@@ -2,15 +2,21 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/features/profile/model/client_model.dart';
+import 'package:fitariki/features/profile/model/driver_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/rate_stars.dart';
+import '../../../data/config/di.dart';
+import '../provider/wishlist_provider.dart';
 
-class CaptainCardWidget extends StatelessWidget {
-  const CaptainCardWidget({Key? key}) : super(key: key);
-
+class FavouriteUserCard extends StatelessWidget {
+  const FavouriteUserCard({this.driver, this.client, Key? key})
+      : super(key: key);
+  final DriverModel? driver;
+  final ClientModel? client;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,8 +39,7 @@ class CaptainCardWidget extends StatelessWidget {
           child: Row(
             children: [
               CustomNetworkImage.circleNewWorkImage(
-                  image:
-                      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                  image: driver != null ? driver!.image! : client!.image??"",
                   radius: 16,
                   color: ColorResources.SECOUND_PRIMARY_COLOR),
               const SizedBox(
@@ -50,7 +55,7 @@ class CaptainCardWidget extends StatelessWidget {
                         SizedBox(
                           width: 60,
                           child: Text(
-                            "محمد م..",
+                            driver != null ? "${driver!.firstName}": "${client!.firstName} ${client!.lastName}",
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             style: AppTextStyles.w600.copyWith(
@@ -63,20 +68,21 @@ class CaptainCardWidget extends StatelessWidget {
                           width: 4,
                         ),
                         customImageIconSVG(
-                            imageName: SvgImages.maleIcon,
+                            imageName:driver != null ? driver!.gender! ==0? SvgImages.maleIcon:SvgImages.femaleIcon : client!.gender! ==0  ? SvgImages.maleIcon:SvgImages.femaleIcon,
                             color: ColorResources.BLUE_COLOR,
                             width: 11,
                             height: 11)
                       ],
                     ),
-                    const RateStars(
-                      rate: 3,
+                     RateStars(
+                      rate: driver != null ? driver!.rate :client!.rate,
                     )
                   ],
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () => sl<WishlistProvider>().postWishList(
+                    userId: driver != null ? driver!.id! : client!.id!),
                 child: customImageIconSVG(imageName: SvgImages.saved),
               )
             ],

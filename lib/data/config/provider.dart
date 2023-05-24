@@ -6,6 +6,7 @@ import 'package:fitariki/data/config/di.dart' as di;
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
+import '../../features/contatct_with_us/provider/contact_provider.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
 import '../../features/followers/followers/provider/followers_provider.dart';
@@ -54,5 +55,6 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<TripDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<PaymentProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<ContactProvider>()),
   ];
 }

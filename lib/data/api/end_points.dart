@@ -16,6 +16,7 @@ class EndPoints {
   static const String addFollower = 'profile/add_follower';
   static const String updateFollowerDetails = 'profile/update_follower';
   static const String deleteFollower = 'profile/delete_follower';
+  static const String getContact = 'app/contact';
   static const String getWishList = 'favorites/index';
   static const String postWishList = 'favorites/addOrDelete';
   static const String addOffer = 'offer/request_offer';

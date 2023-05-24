@@ -32,7 +32,7 @@ dependencies:
   flutter_styled_toast:
   flutter_animated_dialog:
   flutter_animate:
-  url_launcher: ^6.1.10
+  url_launcher: ^6.1.11
   readmore:
   flutter_svg:
   flutter_local_notifications: ^9.8.0+1

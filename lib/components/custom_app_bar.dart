@@ -15,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withSave;
   final bool withBorder;
   final  double? actionWidth;
+  final  Function()? onSave;
 
   const CustomAppBar(
       {Key? key,
@@ -24,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.withBorder = false,
       this.withBack = true,
         this.actionWidth,
+        this.onSave,
         this.actionChild})
       : super(key: key);
 
@@ -52,8 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
               withSave
                   ? GestureDetector(
-                      onTap: () {
-                      },
+                      onTap: onSave,
                       child: customImageIconSVG(
                           imageName: SvgImages.bookMark,
                           color: Colors.black,

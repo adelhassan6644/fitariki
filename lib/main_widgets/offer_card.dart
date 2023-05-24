@@ -11,6 +11,8 @@ import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
 import '../components/rate_stars.dart';
+import '../data/config/di.dart';
+import '../features/wishlist/provider/wishlist_provider.dart';
 import '../navigation/routes.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 
@@ -23,7 +25,8 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => CustomNavigator.push(Routes.OFFER_DETAILS,arguments:offerModel.id ),
+      onTap: () =>
+          CustomNavigator.push(Routes.OFFER_DETAILS, arguments: offerModel.id),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
@@ -95,7 +98,8 @@ class OfferCard extends StatelessWidget {
                         ),
                         if (isSaved == true)
                           InkWell(
-                            onTap: () {},
+                            onTap: () => sl<WishlistProvider>()
+                                .postWishList(offerId: offerModel.id!),
                             child:
                                 customImageIconSVG(imageName: SvgImages.saved),
                           )
@@ -137,7 +141,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: 9,
+                          flex: isSaved ? 14 : 9,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -169,19 +173,19 @@ class OfferCard extends StatelessWidget {
                             children: [
                               customImageIconSVG(imageName: SvgImages.alarm),
                               const SizedBox(width: 4),
-                              if(offerModel.offerDays!.isNotEmpty )
-                              Expanded(
-                                child: MarqueeWidget(
-                                  child: Text(
-                                    "${Methods.convertStringToTime(offerModel.offerDays?[0].startTime??DateTime.now(), withFormat: true)}"
-                                    " - ${Methods.convertStringToTime(offerModel.offerDays?[0].endTime??DateTime.now(), withFormat: true)}ً",
-                                    textAlign: TextAlign.start,
-                                    style: AppTextStyles.w400.copyWith(
-                                        fontSize: 10,
-                                        overflow: TextOverflow.ellipsis),
+                              if (offerModel.offerDays!.isNotEmpty)
+                                Expanded(
+                                  child: MarqueeWidget(
+                                    child: Text(
+                                      "${Methods.convertStringToTime(offerModel.offerDays?[0].startTime ?? DateTime.now(), withFormat: true)}"
+                                      " - ${Methods.convertStringToTime(offerModel.offerDays?[0].endTime ?? DateTime.now(), withFormat: true)}ً",
+                                      textAlign: TextAlign.start,
+                                      style: AppTextStyles.w400.copyWith(
+                                          fontSize: 10,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
                                   ),
                                 ),
-                              ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
@@ -196,7 +200,7 @@ class OfferCard extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: isSaved ? 7 : 5,
+                          flex: isSaved ? 3 : 5,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.wallet),

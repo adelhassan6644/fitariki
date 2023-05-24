@@ -6,11 +6,10 @@ import '../app/core/utils/text_styles.dart';
 import 'custom_images.dart';
 
 class RateStars extends StatelessWidget {
-  const RateStars(
-      {Key? key, required this.rate, this.size, this.showRateNumber = true})
+  const RateStars({Key? key, this.rate, this.size, this.showRateNumber = true})
       : super(key: key);
 
-  final int rate;
+  final num? rate;
   final double? size;
   final bool showRateNumber;
 
@@ -21,19 +20,19 @@ class RateStars extends StatelessWidget {
         Row(
           children: [
             ...List.generate(
-              rate,
+              rate?.toInt() ?? 0,
               (index) => customImageIconSVG(
                   imageName: SvgImages.fillStar, width: size, height: size),
             ),
             ...List.generate(
-              5 - rate,
+              5 - (rate?.toInt() ?? 0),
               (index) => customImageIconSVG(
                   imageName: SvgImages.emptyStar, width: size, height: size),
             )
           ],
         ),
         if (showRateNumber)
-          Text("(${rate.toDouble()})",
+          Text("(${rate?.toInt().toDouble()??0.0})",
               style: AppTextStyles.w400
                   .copyWith(fontSize: 10, color: ColorResources.RATE_COLOR)),
       ],
