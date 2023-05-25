@@ -11,7 +11,6 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
-import '../../contatct_with_us/provider/contact_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import 'more_button.dart';
 
@@ -85,10 +84,7 @@ class MoreOptions extends StatelessWidget {
                 MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
-                  onTap: () {
-                    sl<ContactProvider>().getContact();
-                    CustomNavigator.push(Routes.CONTACT_WITH_US);
-                  },
+                  onTap: ()=>CustomNavigator.push(Routes.CONTACT_WITH_US),
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -12,7 +13,9 @@ import '../repo/contact_repo.dart';
 
 class ContactProvider extends ChangeNotifier {
   ContactRepo contactRepo;
-  ContactProvider({required this.contactRepo});
+  ContactProvider({required this.contactRepo}){
+    getContact();
+  }
 
   ///Get contact Data
   bool isLoading = false;
@@ -48,23 +51,43 @@ class ContactProvider extends ChangeNotifier {
     }
   }
 
-  bool isLaunchWebsite = false;
   launchWebsite() {
     try {
-      isLaunchWebsite = true;
-      notifyListeners();
-      Uri(
-          scheme: 'https',
-          host: 'www.figma.com',
-          path:
-              'file/DbVn2afFaEUBJUMRTK5Mag/Transportation?type=design&node-id=528-15426&t=UgYle8jQ2V2VvxaK-0');
-
-      isLaunchWebsite = false;
-      notifyListeners();
+      launchUrl(Uri.parse(
+        'https://codoweb.com/',
+      ));
     } catch (e) {
       log("=====> Exception WebSite Launch $e");
-      isLaunchWebsite = false;
-      notifyListeners();
+    }
+  }
+
+  launchMail() {
+    try {
+      launchUrl(Uri(
+        scheme: 'mailto',
+        path: 'adelhassan6644@gmail.com',
+        query: 'subject=Hello&body=Test',
+      ));
+    } catch (e) {
+      log("=====> Exception Mail Launch $e");
+    }
+  }
+
+  launchTwitter() {
+    try {
+      launchUrl(Uri.parse(
+        'https://www.twitter.com/Software_Cloud2',
+      ));
+    } catch (e) {
+      log("=====> Exception Twitter Launch $e");
+    }
+  }
+
+  launchCustomerService() {
+    try {
+      launch("tel://+201010201884");
+    } catch (e) {
+      log("=====> Exception Customer Service Launch $e");
     }
   }
 }

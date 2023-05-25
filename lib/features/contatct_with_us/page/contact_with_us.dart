@@ -29,7 +29,7 @@ class ContactWithUs extends StatelessWidget {
                 CustomButton(
                   text: getTranslated("mail", context),
                   radius: 50,
-                  onTap: () {},
+                  onTap: ()=>provider.launchMail(),
                 ),
                 SizedBox(
                   height: 8.h,
@@ -37,7 +37,7 @@ class ContactWithUs extends StatelessWidget {
                 CustomButton(
                   text: getTranslated("twitter", context),
                   radius: 50,
-                  onTap: () {},
+                  onTap: ()=>provider.launchTwitter(),
                 ),
                 SizedBox(
                   height: 8.h,
@@ -46,7 +46,6 @@ class ContactWithUs extends StatelessWidget {
                   text: getTranslated("website", context),
                   radius: 50,
                   onTap: ()=>provider.launchWebsite(),
-                  isLoading: provider.isLaunchWebsite,
                 ),
                 SizedBox(
                   height: 8.h,
@@ -54,7 +53,7 @@ class ContactWithUs extends StatelessWidget {
                 CustomButton(
                   text: getTranslated("customerـservice", context),
                   radius: 50,
-                  onTap: () {},
+                  onTap: ()=>provider.launchCustomerService(),
                 ),
                 SizedBox(
                   height: 8.h,
