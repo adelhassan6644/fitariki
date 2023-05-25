@@ -45,7 +45,8 @@ class ContactWithUs extends StatelessWidget {
                 CustomButton(
                   text: getTranslated("website", context),
                   radius: 50,
-                  onTap: () {},
+                  onTap: ()=>provider.launchWebsite(),
+                  isLoading: provider.isLaunchWebsite,
                 ),
                 SizedBox(
                   height: 8.h,

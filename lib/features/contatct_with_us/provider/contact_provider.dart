@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,26 @@ class ContactProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  bool isLaunchWebsite = false;
+  launchWebsite() {
+    try {
+      isLaunchWebsite = true;
+      notifyListeners();
+      Uri(
+          scheme: 'https',
+          host: 'www.figma.com',
+          path:
+              'file/DbVn2afFaEUBJUMRTK5Mag/Transportation?type=design&node-id=528-15426&t=UgYle8jQ2V2VvxaK-0');
+
+      isLaunchWebsite = false;
+      notifyListeners();
+    } catch (e) {
+      log("=====> Exception WebSite Launch $e");
+      isLaunchWebsite = false;
       notifyListeners();
     }
   }
