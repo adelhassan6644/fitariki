@@ -1,13 +1,16 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
+import '../../../data/config/di.dart';
 import '../../../main_models/offer_details_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../maps/models/location_model.dart';
+import '../../success/model/success_model.dart';
 import '../repo/post_offer_repo.dart';
 
 class PostOfferProvider extends ChangeNotifier {
@@ -123,36 +126,47 @@ class PostOfferProvider extends ChangeNotifier {
       return;
     }
     if (scheduleProvider.selectedDays.isEmpty) {
-      showToast( "برجاء اختيار الايام!");
+      showToast("برجاء اختيار الايام!");
 
       return;
     }
-    if (startTime == null) {
-      showToast( "برجاء ادخال وقت البداية!");
-      return;
-    }
-    if (endTime == startTime) {
-      showToast(" وقت البداية لا يمكن ان يكون مثل وقت النهاية!");
+    // if (startTime == null) {
+    //   showToast( "برجاء ادخال وقت البداية!");
+    //   return;
+    // }
+    if (startTime.isAtSameMomentAs(endTime)) {
+      showToast(" وقت النهاية لا يجب ان يكون مثل وقت البداية!");
 
       return;
     }
 
-    if (endDate == startDate) {
-      showToast(" تاريخ البداية لا يمكن ان يكون مثل تاريخ النهاية!");
+    if (startDate.isAtSameMomentAs(endDate)) {
+      showToast(" تاريخ النهاية لا يجب ان يكون مثل تاريخ البداية!");
 
       return;
     }
-    if (minPrice == null) {
+
+    if (!startDate.isBefore(endDate)) {
+      showToast(" تاريخ النهاية لا يجب ان يكون قبل تاريخ البداية!");
+
+      return;
+    }
+
+    if (minPrice == null || minPrice == "") {
       showToast("برجاء اختيار الحد الادني للسعر!");
       return;
     }
-    if (maxPrice == null) {
+    if (maxPrice == null || maxPrice == "") {
       showToast("برجاء اختيار الحد الاعلي للسعر!");
 
       return;
     }
+    if (double.parse(minPrice!) >= double.parse(maxPrice!)) {
+      showToast("الحد الاعلي للسعر يجب ان يكون اعلي من الحد الادني للسعر!");
+
+      return;
+    }
     if (endLocation == null) {
-      print(minPrice);
       showToast("برجاء اختيار نقطة النهاية!");
 
       return;
@@ -185,7 +199,17 @@ class PostOfferProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     }, (response) {
-      CustomNavigator.push(Routes.SUCCESS_POST, clean: true, arguments: "");
+      CustomNavigator.push(Routes.SUCCESS,
+          clean: true,
+          arguments: SuccessModel(
+              boolean: true,
+              routeName: Routes.DASHBOARD,
+              btnText: "في طريقي",
+              argument: 0,
+              description: sl<ProfileProvider>().isDriver
+                  ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
+                  : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));
+      reset();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "Success",

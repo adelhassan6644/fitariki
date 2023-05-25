@@ -205,7 +205,8 @@
   "payment_details": "تفاصيل الدفع",
   "trip_amount": "مبلغ الرحلة",
   "tax": "الضريبة",
-  "service_costs": "تكاليف الخدمة"
+  "service_costs": "تكاليف الخدمة",
+  "has_been_sent": "تم الارسال!"
 
 
 }

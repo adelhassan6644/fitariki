@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
@@ -12,24 +13,21 @@ import '../features/home/widgets/acceptable_analytics_widget.dart';
 class UserCard extends StatelessWidget {
   const UserCard(
       {this.daysNum,
-      this.createdAt,
+      required this.createdAt,
       this.days,
       this.followers,
       this.timeRange,
-      this.name, this.national,
+      this.name,
+      this.national,
       this.priceRange,
       this.withAnalytics = true,
       this.isDriver = true,
       Key? key})
       : super(key: key);
   final bool withAnalytics, isDriver;
-  final String? createdAt,
-      daysNum,
-      days,
-      name,national,
-      timeRange,
-      priceRange,
-      followers;
+  final DateTime createdAt;
+
+  final String? daysNum, days, name, national, timeRange, priceRange, followers;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +96,7 @@ class UserCard extends StatelessWidget {
                         SizedBox(
                           width: 50,
                           child: Text(
-                            national??    "سعودي",
+                            national ?? "سعودي",
                             maxLines: 1,
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
@@ -134,7 +132,7 @@ class UserCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
                         color: ColorResources.HINT_COLOR,
                         height: 30,
@@ -142,7 +140,7 @@ class UserCard extends StatelessWidget {
                         child: const SizedBox(),
                       ),
                     ),
-                    if (isDriver)
+                    if (followers != null)
                       Expanded(
                         flex: 2,
                         child: Column(
@@ -162,9 +160,9 @@ class UserCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    if (isDriver)
+                    if (followers != null)
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
                           color: ColorResources.HINT_COLOR,
                           height: 30,
@@ -173,7 +171,7 @@ class UserCard extends StatelessWidget {
                         ),
                       ),
                     Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: Column(
                         children: [
                           customImageIconSVG(imageName: SvgImages.calendar),
@@ -207,7 +205,7 @@ class UserCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           MarqueeWidget(
                             child: Text(
-                              timeRange ?? "9 صباحاً - 5 مساءً",
+                              timeRange ?? "9 صباحاً - 4 مساءً",
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,
@@ -217,7 +215,7 @@ class UserCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (!isDriver)
+                    if (followers == null)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
@@ -227,7 +225,7 @@ class UserCard extends StatelessWidget {
                           child: const SizedBox(),
                         ),
                       ),
-                    if (!isDriver)
+                    if (followers == null)
                       Expanded(
                         flex: 2,
                         child: Column(
@@ -254,8 +252,13 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "$createdAt ايام",
+                  Methods.getDayCount(
+                    date: createdAt,
+                  ).toString(),
                   style: AppTextStyles.w400.copyWith(fontSize: 10, height: 1),
+                ),
+                SizedBox(
+                  height: 4.h,
                 ),
                 if (withAnalytics)
                   const AcceptableAnalytics(

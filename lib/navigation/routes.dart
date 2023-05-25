@@ -7,7 +7,7 @@ class Routes {
   static const EDIT_PROFILE = "EDIT_PROFILE";
   static const VERIFICATION = "VERIFICATION_CODE";
   static const PICK_LOCATION = "PICK_LOCATION";
-  static const SUCCESS_POST = "SUCCESS_POST";
+  static const SUCCESS = "SUCCESS";
   static const FOLLOWERS = "FOLLOWERS";
   static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
   static const WISHLIST = "WISHLIST";

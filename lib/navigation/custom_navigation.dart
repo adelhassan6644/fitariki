@@ -15,7 +15,8 @@ import '../features/my_offer_details/page/my_offer_details.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/ratting/page/ratting_page.dart';
-import '../features/success_offer/success_offer.dart';
+import '../features/success/model/success_model.dart';
+import '../features/success/success_page.dart';
 import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
 import '../main.dart';
@@ -54,9 +55,9 @@ abstract class CustomNavigator {
           offerId: settings.arguments as int,
         ));
 
-      case Routes.SUCCESS_POST:
-        return _pageRoute(SuccessPost(
-          name: settings.arguments as String,
+      case Routes.SUCCESS:
+        return _pageRoute(SuccessPage(
+          successModel: settings.arguments as SuccessModel,
         ));
 
       case Routes.PICK_LOCATION:

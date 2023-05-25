@@ -4,17 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
-import '../../../components/custom_text_form_field.dart';
 import '../../../main_widgets/followers_widget.dart';
-import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
 import '../provider/add_offer_provider.dart';
 import '../widgets/duration_widget.dart';
 
 class AddOffer extends StatelessWidget {
-  const AddOffer({ required this.isCaptain,Key? key, required this.tripID}) : super(key: key);
+  const AddOffer({ required this.isCaptain,Key? key, required this.tripID,required this.name}) : super(key: key);
 final bool isCaptain ;
 final int tripID ;
+final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +35,10 @@ final int tripID ;
                   : getTranslated("make_an_offer_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
-                provider.requestOffer(tripID:tripID);
+                if (provider.checkData() == true) {
+                  provider.requestOffer(tripID:tripID,name: name);
+                }
+
 
               },
             ),

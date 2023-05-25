@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
@@ -70,11 +71,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                           child: UserCard(
                             isDriver: sl.get<ProfileProvider>().isDriver,
                             withAnalytics: true,
-                            createdAt: provider.offerDetails!.createdAt!
-                                .difference(DateTime.now())
-                                .inDays
-                                .toString()
-                                .replaceAll("-", ''),
+                            createdAt: provider.offerDetails!.createdAt!,
                             days: provider.day,
                             daysNum: provider.offerDetails!.duration.toString(),
                             name: provider.offerDetails?.name,
@@ -84,7 +81,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                 .toString(),
                             timeRange: provider.offerDetails!.offerDays!.isEmpty
                                 ? ""
-                                : "${provider.offerDetails!.offerDays?.first.startTime}: ${provider.offerDetails!.offerDays?.first.endTime}",
+                                : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
                           )),
                       MapWidget(
                         startPoint: provider.offerDetails!.pickLocation,
@@ -111,6 +108,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                     onTap: () => customShowModelBottomSheet(
                       body: sl.get<ProfileProvider>().isLogin
                           ? AddOffer(
+                              name: provider.offerDetails?.name ?? "",
                               tripID: widget.offerId,
                               isCaptain: sl.get<ProfileProvider>().isDriver,
                             )

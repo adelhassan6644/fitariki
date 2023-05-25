@@ -35,30 +35,27 @@ class TripDetails extends StatelessWidget {
               title: getTranslated("trip", context),
             ),
             Expanded(
-              child:  ListAnimator(
+              child: ListAnimator(
                 data: [
                   UserCard(
                     withAnalytics: false,
                     days: "الأحد، الإثنين، الثلاثاء",
                     daysNum: "10",
                     priceRange: "200",
-                    createdAt: "4",
+                    createdAt: DateTime.now(),
                     isDriver: sl.get<ProfileProvider>().isDriver,
                     followers: "2",
                   ),
                   MapWidget(
-                    stopPoints:
-                    sl.get<ProfileProvider>().isDriver ? 2 : null,
+                    stopPoints: sl.get<ProfileProvider>().isDriver ? 2 : null,
                     startPoint: LocationModel(
                         longitude: "20",
                         latitude: "20.2",
-                        address:
-                        "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
+                        address: "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
                     endPoint: LocationModel(
                         longitude: "20.13",
                         latitude: "20.25",
-                        address:
-                        "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
+                        address: "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
                   ),
                   DistanceWidget(
                     isCaptain: sl.get<ProfileProvider>().isDriver,
@@ -78,19 +75,19 @@ class TripDetails extends StatelessWidget {
                   if (sl.get<ProfileProvider>().isDriver)
                     ...List.generate(
                       2,
-                          (index) => MapWidget(
+                      (index) => MapWidget(
                         clientName: "يارا محمد",
                         gender: 1,
                         startPoint: LocationModel(
                             longitude: "20",
                             latitude: "20.2",
                             address:
-                            "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
+                                "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
                         endPoint: LocationModel(
                             longitude: "20.13",
                             latitude: "20.25",
                             address:
-                            "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
+                                "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
                       ),
                     ),
                   if (!sl.get<ProfileProvider>().isDriver)
@@ -107,8 +104,8 @@ class TripDetails extends StatelessWidget {
                             children: [
                               Text(
                                 getTranslated("note", context),
-                                style: AppTextStyles.w600
-                                    .copyWith(fontSize: 10),
+                                style:
+                                    AppTextStyles.w600.copyWith(fontSize: 10),
                               ),
                               Text(
                                 "“ يوجد معي راكب بنفس حيك + نفس وجهتك “",
@@ -136,30 +133,31 @@ class TripDetails extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
               child: CustomButton(
-                  text: sl.get<ProfileProvider>().isDriver
-                      ? getTranslated("accept_offer", context)
-                      : getTranslated("accept_request", context),
-              onTap: (){
-                    if(!sl.get<ProfileProvider>().isDriver){
-                      CustomNavigator.push(Routes.PAYMENT);
-                    }
-              },),
+                text: sl.get<ProfileProvider>().isDriver
+                    ? getTranslated("accept_offer", context)
+                    : getTranslated("accept_request", context),
+                onTap: () {
+                  if (!sl.get<ProfileProvider>().isDriver) {
+                    CustomNavigator.push(Routes.PAYMENT);
+                  }
+                },
+              ),
             ),
-            Consumer<TripDetailsProvider>(
-              builder: (_,provider,child) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 8.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                  child: CustomButton(
-                    text: getTranslated("negotiation", context),
-                    backgroundColor: ColorResources.WHITE_COLOR,
-                    withBorderColor: true,
-                    textColor: ColorResources.PRIMARY_COLOR,
-                    onTap: ()=>CupertinoPopUpHelper.showCupertinoTextController(controller: provider.negotiationPrice),
-                  ),
-                );
-              }
-            ),
+            Consumer<TripDetailsProvider>(builder: (_, provider, child) {
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: 8.h,
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                child: CustomButton(
+                  text: getTranslated("negotiation", context),
+                  backgroundColor: ColorResources.WHITE_COLOR,
+                  withBorderColor: true,
+                  textColor: ColorResources.PRIMARY_COLOR,
+                  onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
+                      controller: provider.negotiationPrice),
+                ),
+              );
+            }),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),

@@ -230,7 +230,9 @@ class OfferCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "4 ايام",
+                      Methods.getDayCount(
+                        date: offerModel.createdAt!,
+                      ).toString(),
                       style: AppTextStyles.w400.copyWith(fontSize: 10),
                     ),
                     const SizedBox(

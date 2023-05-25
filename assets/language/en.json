@@ -206,7 +206,7 @@
   "payment_details": "Payment details",
   "trip_amount": "Trip amount",
   "tax": "tax",
-  "service_costs": "Service costs"
-
+  "service_costs": "Service costs",
+"has_been_sent": "has been sent!"
 
 }

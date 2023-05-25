@@ -60,6 +60,7 @@ dependencies:
   flag:
   flutter_spinkit:
   app_settings: ^4.2.0
+  substring_highlight: ^1.0.33
 
 
 dev_dependencies:

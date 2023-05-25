@@ -87,7 +87,9 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.startTime
-                                      .dateFormat(format: "mm : hh aa"),
+                                      .dateFormat(format: "mm : hh aa")
+                                      .replaceAll("AM", "صباحاً")
+                                      .replaceAll("PM", "مساءً"),
                                   style: AppTextStyles.w500.copyWith(
                                     fontSize: 13,
                                   )),
@@ -158,7 +160,9 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.endTime
-                                      .dateFormat(format: "mm : hh aa"),
+                                      .dateFormat(format: "mm : hh aa")
+                                      .replaceAll("AM", "صباحاً")
+                                      .replaceAll("PM", "مساءً"),
                                   style: AppTextStyles.w500.copyWith(
                                     fontSize: 13,
                                   )),

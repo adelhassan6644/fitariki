@@ -31,12 +31,12 @@ class Payment extends StatelessWidget {
               Expanded(
                 child: ListAnimator(
                   data: [
-                    const UserCard(
+                     UserCard(
                       withAnalytics: false,
                       days: "الأحد، الإثنين، الثلاثاء",
                       daysNum: "10",
                       priceRange: "200",
-                      createdAt: "4",
+                      createdAt: DateTime.now(),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(

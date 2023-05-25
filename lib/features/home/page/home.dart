@@ -22,7 +22,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   void initState() {
     // if(LocationHelper.checkLocation()){
@@ -31,6 +30,7 @@ class _HomeState extends State<Home> {
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,20 +53,22 @@ class _HomeState extends State<Home> {
                                     ColorResources.CONTAINER_BACKGROUND_COLOR,
                                 borderRadius: BorderRadius.circular(6)),
                             child: Consumer<HomeProvider>(
-                                builder: (context, provider, child)  {
-                                return Row(
-                                  children: List.generate(
-                                      provider.titles.length,
-                                      (index) => Expanded(
-                                            child: TabWidget(
-                                                title: getTranslated(provider.titles[index], context),
-                                                isSelected: index == provider.roleIndex,
-                                                onTab: ()=>provider.onSelectRole(index)
-                                            ),
-                                          )),
-                                );
-                              }
-                            )),
+                                builder: (context, provider, child) {
+                              return Row(
+                                children: List.generate(
+                                    provider.titles.length,
+                                    (index) => Expanded(
+                                          child: TabWidget(
+                                              title: getTranslated(
+                                                  provider.titles[index],
+                                                  context),
+                                              isSelected:
+                                                  index == provider.roleIndex,
+                                              onTab: () =>
+                                                  provider.onSelectRole(index)),
+                                        )),
+                              );
+                            })),
                       ),
                       const SizedBox(
                         height: 14,
@@ -86,14 +88,16 @@ class _HomeState extends State<Home> {
               child: ListAnimator(
                 data: homeProvider.isLoading
                     ? List.generate(7, (index) => const ShimmerOfferCard())
-                    : homeProvider.offer == null || homeProvider.offer!.isEmpty ? [
-                  const EmptyState(
-                    txt: "لا يوجود عروض توصيل",
-                  )
-                ]
-                    : List.generate(
-                        homeProvider.offer?.length??0,
-                        (index) => OfferCard(offerModel: homeProvider.offer![index])),
+                    : homeProvider.offer == null || homeProvider.offer!.isEmpty
+                        ? [
+                            const EmptyState(
+                              txt: "لا يوجود عروض توصيل",
+                            )
+                          ]
+                        : List.generate(
+                            homeProvider.offer?.length ?? 0,
+                            (index) => OfferCard(
+                                offerModel: homeProvider.offer![index])),
               ),
             ),
           );
