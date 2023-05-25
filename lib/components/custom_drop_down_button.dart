@@ -4,10 +4,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/dimensions.dart';
 import '../../app/core/utils/text_styles.dart';
+import '../features/profile/model/bank_model.dart';
 import 'custom_images.dart';
 
 class CustomDropDownButton extends StatefulWidget {
-  final List<dynamic> items;
+  final items;
   final Widget? icon;
   final String? pAssetIcon;
   final String? pSvgIcon;
@@ -15,8 +16,10 @@ class CustomDropDownButton extends StatefulWidget {
   final double iconSize;
   final String? label;
   final String name;
-  final String? value;
-  final void Function(dynamic)? onChange;
+  final Object? value;
+  final dynamic dataType;
+
+  final void Function(Object?)? onChange;
   final String? Function(Object?)? validation;
 
   const CustomDropDownButton({
@@ -28,7 +31,8 @@ class CustomDropDownButton extends StatefulWidget {
     this.onChange,
     this.validation,
     this.icon,
-    this.label,
+
+    this.label,this.dataType,
     required this.name,
     this.iconSize = 22,
     Key? key,
@@ -44,16 +48,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
     return SizedBox(
       width: context.width,
       child: FormBuilderDropdown(
-        items: widget.items.map((dynamic item) {
-          return DropdownMenuItem(
-            value: item,
-            child: Text(
-              item,
-              style: AppTextStyles.w500
-                  .copyWith(color: ColorResources.TITLE, fontSize: 13),
-            ),
-          );
-        }).toList(),
+        items: widget.items,
         onChanged: widget.onChange,
         menuMaxHeight: context.height * 0.4,
         initialValue: widget.value,

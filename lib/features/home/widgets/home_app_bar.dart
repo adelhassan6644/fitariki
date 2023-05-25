@@ -16,9 +16,21 @@ import '../../../data/config/di.dart';
 import '../../auth/pages/login.dart';
 import '../../post_offer/page/post_offer.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatefulWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  @override
+  void initState() {
+   Future.delayed(Duration.zero,(){
+     Provider.of<LocationProvider>(context,listen: false).getCurrentLocation();
+   });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<LocationProvider>(builder: (_, provider, child) {

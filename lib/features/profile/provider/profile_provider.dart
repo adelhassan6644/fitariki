@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
@@ -13,6 +14,7 @@ import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
+import '../model/country_model.dart';
 import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
 
@@ -27,11 +29,15 @@ class ProfileProvider extends ChangeNotifier {
   }) {
     getRoleType();
     getProfile();
+    getBanks();
+    getCountries();
   }
 
   ///Get Role Type
 
   String? role;
+
+
   getRoleType() {
     role = profileRepo.getRoleType();
     notifyListeners();
@@ -105,10 +111,12 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController fullName = TextEditingController();
   TextEditingController bankAccount = TextEditingController();
 
-  String? bankName;
-  List<String> banks = ["بنك الاهلي المصري", "بنك الرياض", "بنك QNB"];
-  void selectedBank(value) {
-    bankName = value;
+  Bank? bank;
+  // List<String> banks = ["بنك الاهلي المصري", "بنك الرياض", "بنك QNB"];
+  void selectedBank(  value) {
+    bank = bankList[bankList.indexWhere((element) => element.name==value)];
+
+
     notifyListeners();
   }
 
@@ -147,9 +155,10 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? nationality;
+  Country? nationality;
   selectedNationality(value) {
-    nationality = value;
+
+    nationality = countryList[countryList.indexWhere((element) => element.name==value)];
     notifyListeners();
   }
 
@@ -506,27 +515,25 @@ class ProfileProvider extends ChangeNotifier {
 
       final bankData = {
         "name": fullName.text.trim(),
-        "bank": bankName,
+        "bank_id": bank?.id,
         "iban": "null",
         "swift": "null",
         "account_number": bankAccount.text.trim(),
-        if (bankAccountImage != null) "account_image": "dsdsds",
-        // await MultipartFile.fromFile(bankAccountImage!.path),
+
       };
 
       final personalData = {
         role: {
-          if (profileImage != null) "image": "cbb",
-          // await MultipartFile.fromFile(profileImage!.path),
+
           "first_name": firstName.text.trim(),
           "last_name": lastName.text.trim(),
           "email": email.text.trim(),
           "gender": gender,
           "age": age.text.trim(),
-          "national": nationality,
-          // "identity_number": identityNumber.text.trim(),
-          "identity_image": "cbb",
-          // await MultipartFile.fromFile(identityImage!.path),
+          "national": nationality?.name,
+          "country_id": nationality?.id,
+          "identity_number": identityNumber.text.trim(),
+
           if (role == "driver")
             "driver_days": List<dynamic>.from(
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
@@ -539,6 +546,13 @@ class ProfileProvider extends ChangeNotifier {
           if (role == "driver") "bank_info": bankData
         }
       };
+      FormData.fromMap({
+        if (identityImage != null)
+        "identity_image":
+        await MultipartFile.fromFile(identityImage!.path),
+        if (profileImage != null) "image":
+        await MultipartFile.fromFile(profileImage!.path),
+      });
 
       log(personalData.toString());
       Either<ServerFailure, Response> response =
@@ -587,6 +601,8 @@ class ProfileProvider extends ChangeNotifier {
     Either<ServerFailure, Response> response = await profileRepo.getProfile();
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
+      notifyListeners();
+
       if (role == "driver") {
         initDriverData();
       } else {
@@ -594,6 +610,36 @@ class ProfileProvider extends ChangeNotifier {
       }
       isLoading = false;
       notifyListeners();
+    });
+  }
+  List<Country> countryList=[];
+  getCountries() async {
+    countryList=[];
+    Either<ServerFailure, Response> response = await profileRepo.getCountries();
+    response.fold((l) => null, (response) {
+      countryList=response.data['data']["countries"] == null ? [] : List<Country>.from(response.data['data']["countries"]!.map((x) => Country.fromJson(x)));
+      profileModel = ProfileModel.fromJson(response.data['data']);
+      if (role == "driver") {
+        initDriverData();
+      } else {
+        initClientData();
+      }
+
+    });
+  }
+  List<Bank> bankList=[];
+  getBanks() async {
+    bankList=[];
+    Either<ServerFailure, Response> response = await profileRepo.getBanks();
+    response.fold((l) => null, (response) {
+      profileModel = ProfileModel.fromJson(response.data['data']);
+      bankList=response.data['data']["banks"] == null ? [] : List<Bank>.from(response.data['data']["banks"]!.map((x) => Bank.fromJson(x)));
+      if (role == "driver") {
+        initDriverData();
+      } else {
+        initClientData();
+      }
+
     });
   }
 
@@ -647,12 +693,14 @@ class ProfileProvider extends ChangeNotifier {
     email.text = profileModel?.driver?.email ?? "";
     phone.text = profileModel?.driver?.phone ?? "";
     identityNumber.text = profileModel?.driver?.identityNumber ?? "";
-    nationality = profileModel?.driver?.national;
+    if(profileModel?.driver?.national!=null) {
+      nationality = profileModel?.driver?.national;
+    }
     _gender = profileModel?.driver?.gender ?? 0;
     rate = profileModel?.driver?.rate ?? 0.0;
 
     lastUpdate = Methods.getDayCount(
-      date: profileModel!.driver!.updatedAt!,
+      date: profileModel?.driver?.updatedAt != null? profileModel!.driver!.updatedAt! :DateTime.now()
     ).toString();
 
     carName.text = profileModel?.driver?.carInfo?.name ?? "";
@@ -662,6 +710,7 @@ class ProfileProvider extends ChangeNotifier {
 
     fullName.text = profileModel?.driver?.bankInfo?.fullName ?? "";
     bankAccount.text = profileModel?.driver?.bankInfo?.accountNumber ?? "";
-    bankName = profileModel?.driver?.bankInfo?.bank;
+    bank = profileModel?.driver?.bankInfo?.bank;
+    notifyListeners();
   }
 }

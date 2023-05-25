@@ -1,3 +1,4 @@
+import 'package:fitariki/features/my_offers/model/my_offer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -7,11 +8,12 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../main_models/weak_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 
 class MyOfferCard extends StatelessWidget {
-  const MyOfferCard(
+   MyOfferCard(
       {this.numberOfDays,
       this.days,
       this.startTime,
@@ -19,19 +21,25 @@ class MyOfferCard extends StatelessWidget {
       this.minPrice,
       this.maxPrice,
       this.createdAt,
-      Key? key})
+      Key? key,  this.offer})
       : super(key: key);
   final int? numberOfDays;
-  final String? days;
+  final List<WeekModel>? days;
   final String? startTime, endTime;
   final String? maxPrice, minPrice;
-  final String? createdAt;
+  final String? createdAt; final MyOfferModle? offer;
 
-
+  List<String> dayss=[];
+  String? day;
   @override
   Widget build(BuildContext context) {
+    for (WeekModel element in days!) {
+      dayss.add(element.dayName! );
+      print(element.dayName);
+    }
+    day =dayss.toString().replaceAll("[", '').replaceAll(']', '');
     return InkWell(
-      onTap: ()=>CustomNavigator.push(Routes.MY_OFFERS_DETAILS),
+      onTap: ()=>offer!=null?CustomNavigator.push(Routes.MY_OFFERS_DETAILS,arguments:offer! ):(){},
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
@@ -106,12 +114,14 @@ class MyOfferCard extends StatelessWidget {
                         customImageIconSVG(imageName: SvgImages.calendar),
                         const SizedBox(height: 4),
                         MarqueeWidget(
-                          child: Text(
-                            days ?? "",
+                          child:
+                          Text(
+                            day??"",
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),
-                        ),
+                        )
+
                       ],
                     ),
                   ),

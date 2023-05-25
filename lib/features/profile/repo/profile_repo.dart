@@ -7,6 +7,7 @@ import '../../../data/api/end_points.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
+import '../model/bank_model.dart';
 
 class ProfileRepo {
   final DioClient dioClient;
@@ -52,6 +53,37 @@ class ProfileRepo {
     }
   }
 
+  Future<Either<ServerFailure, Response>> getCountries() async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+        EndPoints.getCountries,
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
+  Future<Either<ServerFailure, Response>> getBanks() async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+        EndPoints.getBanks,
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
   getRoleType() {
     if (sharedPreferences.containsKey(AppStorageKey.role)) {
       return sharedPreferences.getString(AppStorageKey.role);

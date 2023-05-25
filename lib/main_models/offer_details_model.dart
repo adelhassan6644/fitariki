@@ -1,5 +1,7 @@
 import 'package:fitariki/main_models/weak_model.dart';
+import '../data/config/di.dart';
 import '../features/followers/follower_details/model/follower_model.dart';
+import '../features/followers/followers/provider/followers_provider.dart';
 import '../features/maps/models/location_model.dart';
 import 'car_model.dart';
 
@@ -40,6 +42,7 @@ class OfferDetailsModel {
       this.startLength,
       this.endDate,
       this.startDate,
+        this.followers,
       this.carData});
 
   OfferDetailsModel copyWith(
@@ -135,9 +138,12 @@ class OfferDetailsModel {
               : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
           "pickup_location": pickLocation?.toJson(),
           "drop_off_location": endLocation?.toJson(),
-          "offer_followers": followers == null
-              ? []
-              : List<dynamic>.from(followers!.map((x) => x.toPostJson())),
+          if (sl.get<FollowersProvider>().addFollowers)
+            "offer_followers": List<dynamic>.from(sl
+                .get<FollowersProvider>()
+                .selectedFollowers
+                .map((x) => x.toPostJson()))
+
         }
       };
 }

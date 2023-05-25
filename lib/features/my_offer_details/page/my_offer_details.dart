@@ -12,12 +12,14 @@ import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../navigation/routes.dart';
+import '../../my_offers/model/my_offer.dart';
 import '../../my_offers/widgets/my_offer_card.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/trip_card.dart';
 
 class MyOfferDetails extends StatelessWidget {
-  const MyOfferDetails({Key? key}) : super(key: key);
+  final MyOfferModle myOfferDetails;
+  const MyOfferDetails({Key? key,required this.myOfferDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,27 +53,21 @@ class MyOfferDetails extends StatelessWidget {
                   ListAnimator(
                     data: [
                       MyOfferCard(
-                        startTime: "6:30:00",
-                        endTime: "18:30:00",
-                        minPrice: "200",
-                        maxPrice: "200",
-                        numberOfDays: 20,
-                        days: "الأحد، الإثنين، الثلاثاء،الإربعاء",
+
+                        startTime: myOfferDetails.offerDays?.first.startTime,
+                        endTime: myOfferDetails.offerDays?.first.endTime,
+                        minPrice: myOfferDetails.minPrice.toString(),
+                        maxPrice:  myOfferDetails.maxPrice.toString(),
+                        numberOfDays: myOfferDetails.duration,
+                        days: myOfferDetails.offerDays,
                         createdAt: Methods.getDayCount(
-                          date: DateTime(2023, 5, 11, 12, 30, 30),
+                          date: myOfferDetails.createdAt!,
                         ).toString(),
                       ),
+
                       MapWidget(
-                        startPoint: LocationModel(
-                            longitude: "20",
-                            latitude: "20.2",
-                            address:
-                                "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
-                        endPoint: LocationModel(
-                            longitude: "20.13",
-                            latitude: "20.25",
-                            address:
-                                "Al Munsiyah، طريق الامير محمد بن سلمـ..."),
+                        startPoint: myOfferDetails.pickupLocation,
+                        endPoint:myOfferDetails.dropOffLocation ,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(

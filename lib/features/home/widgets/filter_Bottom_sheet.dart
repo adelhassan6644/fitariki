@@ -15,19 +15,20 @@ class FilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: true,
-      child: Container(
-        height: 340.h,
-        width: context.width,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(15),
-          ),
-          color: Colors.white,
+    return Container(
+      height: 340.h,
+      width: context.width,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(15),
         ),
-        child: Consumer<HomeProvider>(builder: (context, homeProvider, _) {
-          return Column(
+        color: Colors.white,
+      ),
+      child: Consumer<HomeProvider>(builder: (context, homeProvider, _) {
+        return SafeArea(
+          bottom: true,
+          top: false,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -305,9 +306,9 @@ class FilterBottomSheet extends StatelessWidget {
                 ),
               ),
             ],
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

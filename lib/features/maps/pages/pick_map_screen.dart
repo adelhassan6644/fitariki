@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
   @override
   void initState() {
     print(widget.baseModel.object.toString() );
+
     if (widget.baseModel.object != null) {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
           widget.baseModel.object.address??"";
@@ -38,20 +40,23 @@ class _PickMapScreenState extends State<PickMapScreen> {
     }
 
     Future.delayed(const Duration(milliseconds: 100), () {
-      getInitialPosition();
+
+        getInitialPosition();
     });
     super.initState();
   }
 
   getInitialPosition() {
+
     if (widget.baseModel.object != null) {
+
       _initialPosition = LatLng(double.parse(widget.baseModel.object.latitude??AppStrings.defaultLat),
           double.parse(widget.baseModel.object.longitude??AppStrings.defaultLong));
     } else {
-      _initialPosition = LatLng(
-        double.parse(AppStrings.defaultLat),
-        double.parse(AppStrings.defaultLong),
-      );
+      // _initialPosition = LatLng(
+      //   double.parse(AppStrings.defaultLat),
+      //   double.parse(AppStrings.defaultLong),
+      // );
     }
 
     _mapController!.animateCamera(CameraUpdate.newCameraPosition(
@@ -80,9 +85,11 @@ class _PickMapScreenState extends State<PickMapScreen> {
             myLocationButtonEnabled: false,
             onMapCreated: (GoogleMapController mapController) {
               _mapController = mapController;
-              locationController.getLocation(false,
-                  defaultLatLng: _initialPosition,
+              if (widget.baseModel.object == null) {
+                locationController.getLocation(false,
+                  // defaultLatLng: _initialPosition,
                   mapController: _mapController!);
+              }
             },
             scrollGesturesEnabled: true,
             zoomControlsEnabled: false,
@@ -118,9 +125,10 @@ class _PickMapScreenState extends State<PickMapScreen> {
           ),
 */
 
-          Align(
-            alignment: Alignment.bottomCenter,
-            // bottom: 30,
+          Positioned(
+            bottom:-10,
+            width: context.width,
+
 
             child: !locationController.isLoading
                 ? SafeArea(

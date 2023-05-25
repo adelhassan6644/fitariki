@@ -186,8 +186,11 @@ class PostOfferProvider extends ChangeNotifier {
       offerDays: scheduleProvider.selectedDays,
       duration: counts!.count,
 
+
+
       // duration:
     );
+    print(offerModel?.toPostClientJson());
     isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);

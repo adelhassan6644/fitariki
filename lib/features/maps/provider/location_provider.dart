@@ -67,8 +67,10 @@ class LocationProvider extends ChangeNotifier {
 
   LocationModel? currentLocation;
   getCurrentLocation() async {
+    await Geolocator.requestPermission();
     Position newLocalData = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+
     Either<ServerFailure, Response> response =
         await locationRepo.getAddressFromGeocode(
             LatLng(newLocalData.latitude, newLocalData.longitude));
@@ -86,26 +88,27 @@ class LocationProvider extends ChangeNotifier {
   getLocation(
     bool fromAddress, {
     required GoogleMapController mapController,
-    required LatLng defaultLatLng,
+    // required LatLng defaultLatLng,
   }) async {
     isLoading = true;
 
-    try {
+    // try {
+      await Geolocator.requestPermission();
       Position newLocalData = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
       _myPosition = newLocalData;
-    } catch (e) {
-      _myPosition = Position(
-        latitude: defaultLatLng.latitude,
-        longitude: defaultLatLng.longitude,
-        timestamp: DateTime.now(),
-        accuracy: 1,
-        altitude: 1,
-        heading: 1,
-        speed: 1,
-        speedAccuracy: 1,
-      );
-    }
+    // } catch (e) {
+    //   _myPosition = Position(
+    //     latitude: defaultLatLng.latitude,
+    //     longitude: defaultLatLng.longitude,
+    //     timestamp: DateTime.now(),
+    //     accuracy: 1,
+    //     altitude: 1,
+    //     heading: 1,
+    //     speed: 1,
+    //     speedAccuracy: 1,
+    //   );
+    // }
     if (fromAddress) {
       position = _myPosition!;
     } else {
@@ -115,7 +118,7 @@ class LocationProvider extends ChangeNotifier {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(_myPosition!.latitude, _myPosition!.longitude),
-          zoom: 16),
+          zoom: 800),
     ));
 
     await decodeLatLong(

@@ -20,6 +20,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProfileProvider>(context,listen: false).getProfile();
     return Scaffold(
         body: Consumer<ProfileProvider>(builder: (_, provider, child) {
       return SafeArea(

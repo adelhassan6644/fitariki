@@ -97,7 +97,7 @@ class ClientModel {
         age: json["age"],
         national: json["national"],
         city: json["city"],
-        countryId: json["country_id"],
+        countryId: json["country_id"].toString(),
         phone: json["phone"],
         status: json["status"],
         rate: json["rate"],

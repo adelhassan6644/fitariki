@@ -1,3 +1,6 @@
+import 'package:fitariki/features/profile/model/bank_model.dart';
+import 'package:fitariki/features/profile/model/country_model.dart';
+
 import '../../../main_models/weak_model.dart';
 import '../../maps/models/location_model.dart';
 
@@ -12,7 +15,7 @@ class DriverModel {
   String? nickname;
   int? gender;
   String? age;
-  String? national;
+  Country? national;
   String? city;
   String? countryId;
   String? phone;
@@ -53,54 +56,7 @@ class DriverModel {
       this.createdAt,
       this.updatedAt});
 
-  DriverModel copyWith({
-    int? id,
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? image,
-    String? nickname,
-    String? identityNumber,
-    String? identityImage,
-    int? gender,
-    String? age,
-    String? national,
-    String? city,
-    String? countryId,
-    String? phone,
-    String? status,
-    double? rate,
-    double? wallet,
-    LocationModel? dropOffLocation,
-    LocationModel? pickupLocation,
-    List<WeekModel>? driverDays,
-    CarInfo? carInfo,
-    BankInfo? bankInfo,
-  }) =>
-      DriverModel(
-        id: id ?? this.id,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        email: email ?? this.email,
-        image: image ?? this.image,
-        nickname: nickname ?? this.nickname,
-        identityNumber: identityNumber ?? this.identityNumber,
-        identityImage: identityImage ?? this.identityImage,
-        gender: gender ?? this.gender,
-        age: age ?? this.age,
-        national: national ?? this.national,
-        city: city ?? this.city,
-        countryId: countryId ?? this.countryId,
-        phone: phone ?? this.phone,
-        status: status ?? this.status,
-        rate: rate ?? this.rate,
-        wallet: wallet ?? this.wallet,
-        dropOffLocation: dropOffLocation ?? this.dropOffLocation,
-        pickupLocation: pickupLocation ?? this.pickupLocation,
-        driverDays: driverDays ?? this.driverDays,
-        carInfo: carInfo ?? this.carInfo,
-        bankInfo: bankInfo ?? this.bankInfo,
-      );
+
 
   factory DriverModel.fromJson(Map<String, dynamic> json) => DriverModel(
         id: json["id"],
@@ -110,10 +66,10 @@ class DriverModel {
         image: json["image"],
         nickname: json["nickname"],
         gender: int.parse(json["gender"] ?? "0"),
-        age: json["age"],
-        national: json["national"],
+        age: json["age"].toString(),
+        national:json["country"]!=null? Country.fromJson(json["country"],):null,
         city: json["city"],
-        countryId: json["country_id"],
+        countryId: json["country_id"].toString(),
         identityNumber: json["identity_number"],
         identityImage: json["identity_image"],
         phone: json["phone"],
@@ -239,7 +195,7 @@ class CarInfo {
 
 class BankInfo {
   String? fullName;
-  String? bank;
+  Bank? bank;
   String? iban;
   String? swift;
   String? accountNumber;
@@ -254,26 +210,11 @@ class BankInfo {
     this.accountImage,
   });
 
-  BankInfo copyWith({
-    String? fullName,
-    String? bank,
-    String? iban,
-    String? swift,
-    String? accountNumber,
-    String? accountImage,
-  }) =>
-      BankInfo(
-        fullName: fullName ?? this.fullName,
-        bank: bank ?? this.bank,
-        iban: iban ?? this.iban,
-        swift: swift ?? this.swift,
-        accountNumber: accountNumber ?? this.accountNumber,
-        accountImage: accountImage ?? this.accountImage,
-      );
+
 
   factory BankInfo.fromJson(Map<String, dynamic> json) => BankInfo(
         fullName: json["name"],
-        bank: json["bank"],
+        bank:json["bank"]!=null? Bank.fromJson(json["bank"]):null,
         iban: json["iban"],
         swift: json["swift"],
         accountNumber: json["account_number"],

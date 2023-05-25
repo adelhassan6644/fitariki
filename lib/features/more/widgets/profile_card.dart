@@ -143,7 +143,7 @@ class ProfileCard extends StatelessWidget {
                                       size: 6,
                                     ),
                                     Text(
-                                      provider.nationality ?? "سعودي",
+                                      provider.nationality?.name ?? "سعودي",
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       style: AppTextStyles.w400.copyWith(

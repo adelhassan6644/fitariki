@@ -7,10 +7,13 @@ class EndPoints {
   static const String logIn = 'auth/login';
   static const String verifyPhone = 'auth/verify_phone';
   static const String getProfile = 'profile/profile';
+  static const String getCountries = '/app/countries';
+  static const String getBanks = '/app/banks';
   static const String updateProfile = 'profile/update';
   static const String postOffer = 'offer/postOffer';
   static const String listOffers = 'offer/listOffers';
   static const String availableOffers = 'offer/list_available';
+  static const String myOffers = 'offer/listOffers';
   static const String offerDetails = 'offer/view_offer';
   static const String followers = 'profile/followers_list';
   static const String addFollower = 'profile/add_follower';
