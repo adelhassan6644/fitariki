@@ -140,10 +140,11 @@ class MyOfferCard extends StatelessWidget {
                       children: [
                         customImageIconSVG(imageName: SvgImages.alarm),
                         const SizedBox(height: 4),
+                        if(endTime!=null)
                         MarqueeWidget(
                           child: Text(
-                            "${Methods.convertStringToTime(startTime, withFormat: true)}"
-                            " - ${Methods.convertStringToTime(endTime, withFormat: true)}ً",
+                            "${Methods.convertStringToTime(startTime??TimeOfDay.now().toString(), withFormat: true)}"
+                            " - ${Methods.convertStringToTime(endTime??TimeOfDay.now().toString(), withFormat: true)}ً",
                             maxLines: 1,
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),

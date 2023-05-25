@@ -86,29 +86,13 @@ class LocationProvider extends ChangeNotifier {
   }
 
   getLocation(
-    bool fromAddress, {
-    required GoogleMapController mapController,
-    // required LatLng defaultLatLng,
-  }) async {
-    isLoading = true;
-
-    // try {
+    bool fromAddress, {required GoogleMapController mapController,}) async {
+    // isLoading = true;
+    // notifyListeners();
       await Geolocator.requestPermission();
       Position newLocalData = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+          desiredAccuracy: LocationAccuracy.high,);
       _myPosition = newLocalData;
-    // } catch (e) {
-    //   _myPosition = Position(
-    //     latitude: defaultLatLng.latitude,
-    //     longitude: defaultLatLng.longitude,
-    //     timestamp: DateTime.now(),
-    //     accuracy: 1,
-    //     altitude: 1,
-    //     heading: 1,
-    //     speed: 1,
-    //     speedAccuracy: 1,
-    //   );
-    // }
     if (fromAddress) {
       position = _myPosition!;
     } else {
@@ -118,7 +102,7 @@ class LocationProvider extends ChangeNotifier {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(_myPosition!.latitude, _myPosition!.longitude),
-          zoom: 800),
+          zoom: 100),
     ));
 
     await decodeLatLong(
@@ -126,8 +110,8 @@ class LocationProvider extends ChangeNotifier {
       longitude: _myPosition!.longitude,
     );
 
-    isLoading = false;
-    notifyListeners();
+    // isLoading = false;
+    // notifyListeners();
   }
 
   Future<void> decodeLatLong({
@@ -177,8 +161,9 @@ class LocationProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
+      isLoading = false;
+      notifyListeners();
     }
-    isLoading = false;
-    notifyListeners();
+
   }
 }

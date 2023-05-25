@@ -18,15 +18,15 @@ class MyOffers extends StatefulWidget {
   State<MyOffers> createState() => _MyOffersState();
 }
 
-
 class _MyOffersState extends State<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      Provider.of<MyOffersProvider>(context, listen: false)
-          .getMyOffer();
-    });    super.initState();
+      Provider.of<MyOffersProvider>(context, listen: false).getMyOffer();
+    });
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProfileProvider>(builder: (_, profileProvider, child) {
@@ -45,9 +45,9 @@ class _MyOffersState extends State<MyOffers> {
               ? Expanded(
                   child:
                       Consumer<MyOffersProvider>(builder: (_, provider, child) {
-                        if(provider.isLoading) {
-                          return  const CupertinoActivityIndicator();
-                        }
+                    if (provider.isLoading) {
+                      return const CupertinoActivityIndicator();
+                    }
 
                     return ListAnimator(
                       data: [
@@ -55,13 +55,19 @@ class _MyOffersState extends State<MyOffers> {
                           height: 8.h,
                         ),
                         ...List.generate(
-                            provider.offer?.length??0,
+                            provider.offer?.length ?? 0,
                             (index) => MyOfferCard(
-                              offer:provider.offer![index],
-                                  startTime: provider.offer![index].offerDays?.first.startTime,
-                                  endTime: provider.offer![index].offerDays?.first.endTime,
-                                  minPrice: provider.offer![index].minPrice.toString(),
-                                  maxPrice:  provider.offer![index].maxPrice.toString(),
+                                  offer: provider.offer![index],
+                                  startTime:provider
+                                      .offer![index].offerDays!.isNotEmpty? provider
+                                      .offer![index].offerDays?.first.startTime:null,
+                                  endTime: provider
+                                      .offer![index].offerDays!.isNotEmpty?provider
+                                      .offer![index].offerDays?.first.endTime:null,
+                                  minPrice: provider.offer![index].minPrice
+                                      .toString(),
+                                  maxPrice: provider.offer![index].maxPrice
+                                      .toString(),
                                   numberOfDays: provider.offer![index].duration,
                                   days: provider.offer![index].offerDays,
                                   createdAt: Methods.getDayCount(

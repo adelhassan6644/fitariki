@@ -28,9 +28,9 @@ class ProfileProvider extends ChangeNotifier {
     required this.scheduleProvider,
   }) {
     getRoleType();
-    getProfile();
-    getBanks();
-    getCountries();
+    // getProfile();
+    // getBanks();
+    // getCountries();
   }
 
   ///Get Role Type

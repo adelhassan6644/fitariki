@@ -29,39 +29,30 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   @override
   void initState() {
-    print(widget.baseModel.object.toString() );
 
     if (widget.baseModel.object != null) {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
-          widget.baseModel.object.address??"";
+          widget.baseModel.object.address ?? "";
     } else {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
           AppStrings.defaultAddress;
     }
 
-    Future.delayed(const Duration(milliseconds: 100), () {
-
-        getInitialPosition();
-    });
+    Future.delayed(const Duration(milliseconds: 100), ()=>getInitialPosition());
     super.initState();
   }
 
   getInitialPosition() {
-
     if (widget.baseModel.object != null) {
-
-      _initialPosition = LatLng(double.parse(widget.baseModel.object.latitude??AppStrings.defaultLat),
-          double.parse(widget.baseModel.object.longitude??AppStrings.defaultLong));
-    } else {
-      // _initialPosition = LatLng(
-      //   double.parse(AppStrings.defaultLat),
-      //   double.parse(AppStrings.defaultLong),
-      // );
+      _initialPosition = LatLng(
+          double.parse(
+              widget.baseModel.object.latitude ?? AppStrings.defaultLat),
+          double.parse(
+              widget.baseModel.object.longitude ?? AppStrings.defaultLong));
+      _mapController!.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: _initialPosition, zoom: 100),
+      ));
     }
-
-    _mapController!.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(target: _initialPosition, zoom: 30),
-    ));
   }
 
   @override
@@ -79,16 +70,15 @@ class _PickMapScreenState extends State<PickMapScreen> {
                 double.parse(AppStrings.defaultLat),
                 double.parse(AppStrings.defaultLong),
               ),
-              zoom: 60,
+              zoom: 50,
             ),
-            minMaxZoomPreference: const MinMaxZoomPreference(0, 20),
+            minMaxZoomPreference: const MinMaxZoomPreference(0, 100),
             myLocationButtonEnabled: false,
             onMapCreated: (GoogleMapController mapController) {
               _mapController = mapController;
               if (widget.baseModel.object == null) {
                 locationController.getLocation(false,
-                  // defaultLatLng: _initialPosition,
-                  mapController: _mapController!);
+                    mapController: _mapController!);
               }
             },
             scrollGesturesEnabled: true,
@@ -126,10 +116,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
 */
 
           Positioned(
-            bottom:-10,
+            bottom: -10,
             width: context.width,
-
-
             child: !locationController.isLoading
                 ? SafeArea(
                     bottom: true,

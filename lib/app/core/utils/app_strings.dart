@@ -5,8 +5,8 @@ class AppStrings {
   static const String appName = 'fitariki';
   static const String googleApiKey = 'AIzaSyBxi2NcKA8JE90J07U9M2D90tHgaSg3Xjg';
   static const String defaultAddress = 'الرياض';
-  static const String defaultLat = '24.774265';
-  static const String defaultLong = '46.738586';
+  static const String defaultLat = '24.67401824245781';
+  static const String defaultLong = '46.691234707832336';
   static  LocationModel defaultPickUp = LocationModel(address: defaultAddress,longitude: defaultLong,latitude: defaultLat);
   static  LocationModel defaultDrop = LocationModel(address: defaultAddress,longitude: defaultLong,latitude: defaultLat);
 
