@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:fitariki/data/dio/dio_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
@@ -16,7 +15,7 @@ class ContactRepo {
   Future<Either<ServerFailure, Response>> getContact() async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getContact}",
+        uri: EndPoints.getContact,
       );
       if (response.statusCode == 200) {
         return Right(response);
