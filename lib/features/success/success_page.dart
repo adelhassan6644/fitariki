@@ -38,7 +38,7 @@ class SuccessPage extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  successModel.boolean!
+                  successModel.isCongrats!
                       ? getTranslated("congratulations", context)
                       : getTranslated("has_been_sent", context),
                   style: AppTextStyles.w600.copyWith(
@@ -66,7 +66,7 @@ class SuccessPage extends StatelessWidget {
                 onTap: () {
                   if (successModel.routeName != null) {
                     CustomNavigator.push(successModel.routeName!,
-                        clean: true, arguments: successModel.argument??0);
+                        clean: successModel.isClean??false, replace: successModel.isReplace??false,arguments: successModel.argument??0);
                   } else {
                     CustomNavigator.push(
                       Routes.DASHBOARD,

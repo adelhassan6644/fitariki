@@ -10,6 +10,9 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../main_widgets/user_card.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
+import '../../success/model/success_model.dart';
 import '../widgets/payment_details_widget.dart';
 import '../widgets/payment_method_widget.dart';
 
@@ -71,7 +74,17 @@ class Payment extends StatelessWidget {
                     horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                 child: CustomButton(
                   text: getTranslated("complete_theـpaymentـprocess", context),
-                  onTap: () {},
+                  onTap: () {
+                    CustomNavigator.push(Routes.SUCCESS,
+                        replace: true,
+                        arguments: SuccessModel(
+                            isCongrats: true,
+                            isReplace: true,
+                            routeName: Routes.TRIP_DETAILS,
+                            title: "محمد م...",
+                            btnText: getTranslated("trip", context),
+                            description:"تم دفع تكاليف الرحله بنجاح مع كابتن محمد م..."));
+                  },
                 ),
               ),
               SizedBox(

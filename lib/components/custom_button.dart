@@ -43,7 +43,10 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).requestFocus(FocusNode());
-        onTap!();
+        if(onTap != null){
+          onTap!();
+
+        }
       },
       child: AnimatedContainer(
         width: isLoading ? 90.w :width?? context.width,

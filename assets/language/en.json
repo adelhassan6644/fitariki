@@ -207,6 +207,7 @@
   "trip_amount": "Trip amount",
   "tax": "tax",
   "service_costs": "Service costs",
-"has_been_sent": "has been sent!"
+"has_been_sent": "has been sent!",
+  "negotiation_description": "You can negotiate with the other party by setting a new price"
 
 }

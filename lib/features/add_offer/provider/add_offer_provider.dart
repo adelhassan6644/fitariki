@@ -97,10 +97,11 @@ class AddOfferProvider extends ChangeNotifier {
         CustomNavigator.push(Routes.SUCCESS,
             replace: true,
             arguments: SuccessModel(
-                boolean: true,
+                isCongrats: true,
                 routeName: Routes.DASHBOARD,
                 argument: 1,
                 title: name,
+                isClean: true,
                 btnText: getTranslated(
                     "my_trips", CustomNavigator.navigatorState.currentContext!),
                 description: sl<ProfileProvider>().isDriver

@@ -202,7 +202,8 @@ class PostOfferProvider extends ChangeNotifier {
       CustomNavigator.push(Routes.SUCCESS,
           clean: true,
           arguments: SuccessModel(
-              boolean: true,
+              isCongrats: true,
+              isClean: false,
               routeName: Routes.DASHBOARD,
               btnText: "في طريقي",
               argument: 0,
