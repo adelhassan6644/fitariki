@@ -29,7 +29,6 @@ class _PickMapScreenState extends State<PickMapScreen> {
 
   @override
   void initState() {
-
     if (widget.baseModel.object != null) {
       Provider.of<LocationProvider>(context, listen: false).pickAddress =
           widget.baseModel.object.address ?? "";
@@ -38,7 +37,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
           AppStrings.defaultAddress;
     }
 
-    Future.delayed(const Duration(milliseconds: 100), ()=>getInitialPosition());
+    Future.delayed(
+        const Duration(milliseconds: 100), () => getInitialPosition());
     super.initState();
   }
 
@@ -70,7 +70,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                 double.parse(AppStrings.defaultLat),
                 double.parse(AppStrings.defaultLong),
               ),
-              zoom: 50,
+              zoom: 14,
             ),
             minMaxZoomPreference: const MinMaxZoomPreference(0, 100),
             myLocationButtonEnabled: false,
@@ -116,79 +116,81 @@ class _PickMapScreenState extends State<PickMapScreen> {
 */
 
           Positioned(
-            bottom: -10,
-            width: context.width,
-            child: !locationController.isLoading
-                ? SafeArea(
-                    bottom: true,
-                    child: Container(
-                      height: 205.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: ColorResources.WHITE_COLOR,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.08),
-                                blurRadius: 5.0,
-                                spreadRadius: -1,
-                                offset: const Offset(0, 6))
-                          ]),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 5.h,
+              bottom: -10,
+              width: context.width,
+              child: SafeArea(
+                bottom: true,
+                child: Container(
+                    height: 205.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: ColorResources.WHITE_COLOR,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 5.0,
+                              spreadRadius: -1,
+                              offset: const Offset(0, 6))
+                        ]),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Center(
+                            child: Container(
+                              height: 5,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    Dimensions.RADIUS_DEFAULT),
+                                color: ColorResources.BORDER_COLOR,
+                              ),
                             ),
-                            Center(
-                              child: Container(
-                                height: 5,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.RADIUS_DEFAULT),
-                                  color: ColorResources.BORDER_COLOR,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          Text(
+                            getTranslated("address", context),
+                            style: AppTextStyles.w600
+                                .copyWith(color: Colors.black, fontSize: 14),
+                          ),
+                          Text(
+                            locationController.pickAddress,
+                            maxLines: 2,
+                            style: AppTextStyles.w400.copyWith(
+                                color: Colors.black,
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 13),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          !locationController.isLoading
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 24.h),
+                                  child: CustomButton(
+                                    text: getTranslated(
+                                        "confirm_location", context),
+                                    onTap: () {
+                                      widget.baseModel.valueChanged!(
+                                          locationController.addressModel!);
+                                      CustomNavigator.pop();
+                                    },
+                                  ),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(bottom: 50.h),
+                                  child: const Center(
+                                      child: CupertinoActivityIndicator()),
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Text(
-                              getTranslated("address", context),
-                              style: AppTextStyles.w600
-                                  .copyWith(color: Colors.black, fontSize: 14),
-                            ),
-                            Text(
-                              locationController.pickAddress,
-                              maxLines: 2,
-                              style: AppTextStyles.w400.copyWith(
-                                  color: Colors.black,
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 13),
-                            ),
-                            const Expanded(child: SizedBox()),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 24.h),
-                              child: CustomButton(
-                                text:
-                                    getTranslated("confirm_location", context),
-                                onTap: () {
-                                  widget.baseModel.valueChanged!(
-                                      locationController.addressModel!);
-                                  CustomNavigator.pop();
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                    ),
-                  )
-                : const Center(child: CupertinoActivityIndicator()),
-          ),
+                    )),
+              )),
         ]);
       }))),
     );

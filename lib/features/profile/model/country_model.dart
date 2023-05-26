@@ -1,7 +1,5 @@
 class Country {
   int? id;
-  dynamic createdAt;
-  dynamic updatedAt;
   String? iso;
   String? name;
   String? nicename;
@@ -11,8 +9,6 @@ class Country {
 
   Country({
     this.id,
-    this.createdAt,
-    this.updatedAt,
     this.iso,
     this.name,
     this.nicename,
@@ -23,8 +19,6 @@ class Country {
 
   Country copyWith({
     int? id,
-    dynamic createdAt,
-    dynamic updatedAt,
     String? iso,
     String? name,
     String? nicename,
@@ -34,8 +28,6 @@ class Country {
   }) =>
       Country(
         id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
         iso: iso ?? this.iso,
         name: name ?? this.name,
         nicename: nicename ?? this.nicename,
@@ -46,8 +38,6 @@ class Country {
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
     id: json["id"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
     iso: json["iso"],
     name: json["name"],
     nicename: json["nicename"],
@@ -58,8 +48,6 @@ class Country {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
     "iso": iso,
     "name": name,
     "nicename": nicename,

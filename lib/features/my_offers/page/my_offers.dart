@@ -22,7 +22,9 @@ class _MyOffersState extends State<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      Provider.of<MyOffersProvider>(context, listen: false).getMyOffer();
+    if ( Provider.of<ProfileProvider>(context, listen: false).isLogin) {
+        Provider.of<MyOffersProvider>(context, listen: false).getMyOffer();
+      }
     });
     super.initState();
   }

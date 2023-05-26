@@ -3,7 +3,6 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_drop_down_button.dart';
 import '../../../components/custom_image_picker_widget.dart';
@@ -32,19 +31,10 @@ class CarDataWidget extends StatelessWidget {
             SizedBox(
               width: 8.w,
             ),
+
             Expanded(
               child: CustomDropDownButton(
-                items:provider.models.map((item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item.toString(),
-                      style: AppTextStyles.w500
-                          .copyWith(color: ColorResources.TITLE, fontSize: 13),
-                    ),
-                  );
-                }).toList(),
-
+                items:provider.models,
                 name: getTranslated("model", context),
                 onChange: provider.selectedModel,
                 value: provider.carModel,
@@ -88,18 +78,7 @@ class CarDataWidget extends StatelessWidget {
           children: [
             Expanded(
               child:  CustomDropDownButton(
-                items:   provider.capacities.map((item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item.toString(),
-                      style: AppTextStyles.w500
-                          .copyWith(color: ColorResources.TITLE, fontSize: 13),
-                    ),
-                  );
-                }).toList(),
-
-
+                items:   provider.capacities,
                 name: getTranslated("capacity", context),
                 onChange: provider.selectedCapacity,
                 value: provider.carCapacity,

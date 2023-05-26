@@ -28,15 +28,16 @@ class ProfileProvider extends ChangeNotifier {
     required this.scheduleProvider,
   }) {
     getRoleType();
-    // getProfile();
-    // getBanks();
-    // getCountries();
+    if(isLogin) {
+      getProfile();
+    }
+    getBanks();
+    getCountries();
   }
 
   ///Get Role Type
 
   String? role;
-
 
   getRoleType() {
     role = profileRepo.getRoleType();
@@ -44,7 +45,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   bool get isLogin => profileRepo.isLoggedIn();
-  bool get isDriver =>  profileRepo.isDriver();
+  bool get isDriver => profileRepo.isDriver();
 
   String? get roleType => profileRepo.getRoleType();
 
@@ -112,11 +113,8 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController bankAccount = TextEditingController();
 
   Bank? bank;
-  // List<String> banks = ["بنك الاهلي المصري", "بنك الرياض", "بنك QNB"];
-  void selectedBank(  value) {
-    bank = bankList[bankList.indexWhere((element) => element.name==value)];
-
-
+  void selectedBank(value) {
+    bank = value;
     notifyListeners();
   }
 
@@ -157,8 +155,7 @@ class ProfileProvider extends ChangeNotifier {
 
   Country? nationality;
   selectedNationality(value) {
-
-    nationality = countryList[countryList.indexWhere((element) => element.name==value)];
+    nationality = value;
     notifyListeners();
   }
 
@@ -519,12 +516,10 @@ class ProfileProvider extends ChangeNotifier {
         "iban": "null",
         "swift": "null",
         "account_number": bankAccount.text.trim(),
-
       };
 
       final personalData = {
         role: {
-
           "first_name": firstName.text.trim(),
           "last_name": lastName.text.trim(),
           "email": email.text.trim(),
@@ -533,7 +528,6 @@ class ProfileProvider extends ChangeNotifier {
           "national": nationality?.name,
           "country_id": nationality?.id,
           "identity_number": identityNumber.text.trim(),
-
           if (role == "driver")
             "driver_days": List<dynamic>.from(
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
@@ -548,10 +542,9 @@ class ProfileProvider extends ChangeNotifier {
       };
       FormData.fromMap({
         if (identityImage != null)
-        "identity_image":
-        await MultipartFile.fromFile(identityImage!.path),
-        if (profileImage != null) "image":
-        await MultipartFile.fromFile(profileImage!.path),
+          "identity_image": await MultipartFile.fromFile(identityImage!.path),
+        if (profileImage != null)
+          "image": await MultipartFile.fromFile(profileImage!.path),
       });
 
       log(personalData.toString());
@@ -603,7 +596,7 @@ class ProfileProvider extends ChangeNotifier {
       profileModel = ProfileModel.fromJson(response.data['data']);
       notifyListeners();
 
-      if (role == "driver") {
+      if (isDriver) {
         initDriverData();
       } else {
         initClientData();
@@ -612,34 +605,25 @@ class ProfileProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-  List<Country> countryList=[];
+
+  List<Country> countryList = [];
   getCountries() async {
-    countryList=[];
+    countryList.clear();
     Either<ServerFailure, Response> response = await profileRepo.getCountries();
     response.fold((l) => null, (response) {
-      countryList=response.data['data']["countries"] == null ? [] : List<Country>.from(response.data['data']["countries"]!.map((x) => Country.fromJson(x)));
-      profileModel = ProfileModel.fromJson(response.data['data']);
-      if (role == "driver") {
-        initDriverData();
-      } else {
-        initClientData();
-      }
-
+      countryList = response.data['data']["countries"] == null
+          ? [] : List<Country>.from(response.data['data']["countries"]!.map((x) => Country.fromJson(x)));
     });
   }
-  List<Bank> bankList=[];
+
+  List<Bank> bankList = [];
   getBanks() async {
-    bankList=[];
+    bankList.clear();
     Either<ServerFailure, Response> response = await profileRepo.getBanks();
     response.fold((l) => null, (response) {
-      profileModel = ProfileModel.fromJson(response.data['data']);
-      bankList=response.data['data']["banks"] == null ? [] : List<Bank>.from(response.data['data']["banks"]!.map((x) => Bank.fromJson(x)));
-      if (role == "driver") {
-        initDriverData();
-      } else {
-        initClientData();
-      }
-
+      bankList = response.data['data']["banks"] == null
+          ? []
+          : List<Bank>.from(response.data['data']["banks"]!.map((x) => Bank.fromJson(x)));
     });
   }
 
@@ -693,15 +677,13 @@ class ProfileProvider extends ChangeNotifier {
     email.text = profileModel?.driver?.email ?? "";
     phone.text = profileModel?.driver?.phone ?? "";
     identityNumber.text = profileModel?.driver?.identityNumber ?? "";
-    if(profileModel?.driver?.national!=null) {
-      nationality = profileModel?.driver?.national;
-    }
+    nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
     rate = profileModel?.driver?.rate ?? 0.0;
-
     lastUpdate = Methods.getDayCount(
-      date: profileModel?.driver?.updatedAt != null? profileModel!.driver!.updatedAt! :DateTime.now()
-    ).toString();
+            date: profileModel?.driver?.updatedAt != null
+                ? profileModel!.driver!.updatedAt!
+                : DateTime.now()).toString();
 
     carName.text = profileModel?.driver?.carInfo?.name ?? "";
     carPlate.text = profileModel?.driver?.carInfo?.palletNumber ?? "";

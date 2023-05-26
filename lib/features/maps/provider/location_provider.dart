@@ -87,8 +87,8 @@ class LocationProvider extends ChangeNotifier {
 
   getLocation(
     bool fromAddress, {required GoogleMapController mapController,}) async {
-    // isLoading = true;
-    // notifyListeners();
+    isLoading = true;
+    notifyListeners();
       await Geolocator.requestPermission();
       Position newLocalData = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high,);
@@ -102,7 +102,7 @@ class LocationProvider extends ChangeNotifier {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(_myPosition!.latitude, _myPosition!.longitude),
-          zoom: 100),
+          zoom: 18),
     ));
 
     await decodeLatLong(
@@ -110,8 +110,8 @@ class LocationProvider extends ChangeNotifier {
       longitude: _myPosition!.longitude,
     );
 
-    // isLoading = false;
-    // notifyListeners();
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<void> decodeLatLong({

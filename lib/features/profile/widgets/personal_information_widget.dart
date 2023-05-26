@@ -2,17 +2,14 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_address_picker.dart';
-import '../../../components/custom_drop_down_button.dart';
 import '../../../components/custom_image_picker_widget.dart';
 import '../../../components/custom_text_form_field.dart';
+import '../../../components/dynamic_drop_down_button.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/tab_widget.dart';
 import '../../../helpers/image_picker_helper.dart';
-import '../model/country_model.dart';
 import '../provider/profile_provider.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
@@ -97,26 +94,12 @@ class PersonalInformationWidget extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        CustomDropDownButton(
-          items:provider.countryList.map((item) {
-            return DropdownMenuItem(
-              value: item.name,
-              child: Text(
-                item.name??"",
-                style: AppTextStyles.w500
-                    .copyWith(color: ColorResources.TITLE, fontSize: 13),
-              ),
-            );
-          }).toList(),
-
-
-          name: getTranslated("nationality", context),
+        DynamicDropDownButton(
+          items:provider.countryList,
+          name: provider.nationality?.name??getTranslated("nationality", context),
           onChange: provider.selectedNationality,
-          value: provider.nationality?.name,
-          icon: const Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: ColorResources.SECOUND_PRIMARY_COLOR,
-          ),
+          value: provider.nationality,
+          isInitial: provider.nationality != null ,
         ),
         const SizedBox(
           height: 8,

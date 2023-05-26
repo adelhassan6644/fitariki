@@ -6,14 +6,11 @@ class Bank {
   Bank({
     this.id,
     this.name,
-
   });
 
   Bank copyWith({
     int? id,
     String? name,
-    dynamic createdAt,
-    dynamic updatedAt,
   }) =>
       Bank(
         id: id ?? this.id,
