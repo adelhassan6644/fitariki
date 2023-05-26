@@ -27,7 +27,8 @@ class MyOfferCard extends StatelessWidget {
   final List<WeekModel>? days;
   final String? startTime, endTime;
   final String? maxPrice, minPrice;
-  final String? createdAt; final MyOfferModle? offer;
+  final String? createdAt;
+  final MyOfferModle? offer;
 
   List<String> dayss=[];
   String? day;
