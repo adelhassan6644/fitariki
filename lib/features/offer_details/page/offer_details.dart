@@ -8,6 +8,7 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/shimmer_widgets/offer_details_shimmer.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
@@ -44,59 +45,64 @@ class _OfferDetailsState extends State<OfferDetails> {
         top: false,
         bottom: true,
         child: Consumer<OfferDetailsProvider>(builder: (_, provider, child) {
-          if (!provider.isLoading) {
-            return Column(
-              children: [
-                Consumer<ProfileProvider>(builder: (_, provider, child) {
-                  return CustomAppBar(
-                    title: provider.isDriver
-                        ? getTranslated("delivery_request", context)
-                        : getTranslated("delivery_offer", context),
-                    withSave: true,
-                    onSave: () {
-                      if (provider.isLogin) {
-                        sl<WishlistProvider>()
-                            .postWishList(offerId: widget.offerId);
-                      }
-                    },
-                  );
-                }),
-                Expanded(
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.all(0),
-                    children: [
-                      Container(
-                          color: ColorResources.APP_BAR_BACKGROUND_COLOR,
-                          child: UserCard(
-                            isDriver: sl.get<ProfileProvider>().isDriver,
-                            withAnalytics: true,
-                            createdAt: provider.offerDetails!.createdAt!,
-                            days: provider.day,
-                            daysNum: provider.offerDetails!.duration.toString(),
-                            name: provider.offerDetails?.name,
-                            priceRange:
-                                "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
-                            followers: provider.offerDetails!.followers?.length
-                                .toString(),
-                            timeRange: provider.offerDetails!.offerDays!.isEmpty
-                                ? ""
-                                : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
-                          )),
-                      MapWidget(
-                        startPoint: provider.offerDetails!.pickLocation,
-                        endPoint: provider.offerDetails!.endLocation,
+          return Column(
+            children: [
+              Consumer<ProfileProvider>(builder: (_, provider, child) {
+                return CustomAppBar(
+                  title: provider.isDriver
+                      ? getTranslated("delivery_request", context)
+                      : getTranslated("delivery_offer", context),
+                  withSave: true,
+                  onSave: () {
+                    if (provider.isLogin) {
+                      sl<WishlistProvider>()
+                          .postWishList(offerId: widget.offerId);
+                    }
+                  },
+                );
+              }),
+              !provider.isLoading
+                  ? Expanded(
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.all(0),
+                        children: [
+                          Container(
+                              color: ColorResources.APP_BAR_BACKGROUND_COLOR,
+                              child: UserCard(
+                                isDriver: sl.get<ProfileProvider>().isDriver,
+                                withAnalytics: true,
+                                createdAt: provider.offerDetails!.createdAt!,
+                                days: provider.day,
+                                daysNum:
+                                    provider.offerDetails!.duration.toString(),
+                                name: provider.offerDetails?.name,
+                                priceRange:
+                                    "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
+                                followers: provider
+                                    .offerDetails!.followers?.length
+                                    .toString(),
+                                timeRange: provider
+                                        .offerDetails!.offerDays!.isEmpty
+                                    ? ""
+                                    : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
+                              )),
+                          MapWidget(
+                            startPoint: provider.offerDetails!.pickLocation,
+                            endPoint: provider.offerDetails!.endLocation,
+                          ),
+                          DistanceWidget(
+                            isCaptain: sl.get<ProfileProvider>().isDriver,
+                          ),
+                          if (!sl.get<ProfileProvider>().isDriver)
+                            const CarDetails(),
+                          if (!sl.get<ProfileProvider>().isDriver)
+                            const ReviewsWidget()
+                        ],
                       ),
-                      DistanceWidget(
-                        isCaptain: sl.get<ProfileProvider>().isDriver,
-                      ),
-                      if (!sl.get<ProfileProvider>().isDriver)
-                        const CarDetails(),
-                      if (!sl.get<ProfileProvider>().isDriver)
-                        const ReviewsWidget()
-                    ],
-                  ),
-                ),
+                    )
+                  : const OfferDetailsShimmer(),
+              if (!provider.isLoading)
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT,
@@ -116,11 +122,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                     ),
                   ),
                 )
-              ],
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
+            ],
+          );
         }),
       ),
     );
