@@ -525,14 +525,12 @@ class ProfileProvider extends ChangeNotifier {
           "email": email.text.trim(),
           "gender": gender,
           "age": age.text.trim(),
-          "national": nationality?.name,
+          // "national": nationality?.name,
           "country_id": nationality?.id,
-          "identity_number": identityNumber.text.trim(),
-          if (role == "driver")
-            "driver_days": List<dynamic>.from(
+          "id_number": identityNumber.text.trim(),
+          if (role == "driver")"driver_days": List<dynamic>.from(
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
-          if (role == "client")
-            "client_days": List<dynamic>.from(
+          if (role == "client")"client_days": List<dynamic>.from(
                 scheduleProvider.selectedDays.map((x) => x.toJson())),
           "drop_off_location": endLocation!.toJson(),
           "pickup_location": startLocation!.toJson(),
@@ -542,7 +540,7 @@ class ProfileProvider extends ChangeNotifier {
       };
       FormData.fromMap({
         if (identityImage != null)
-          "identity_image": await MultipartFile.fromFile(identityImage!.path),
+          "id_image": await MultipartFile.fromFile(identityImage!.path),
         if (profileImage != null)
           "image": await MultipartFile.fromFile(profileImage!.path),
       });

@@ -2,7 +2,7 @@ class Country {
   int? id;
   String? iso;
   String? name;
-  String? nicename;
+  String? niceName;
   String? iso3;
   int? numcode;
   String? phonecode;
@@ -11,7 +11,7 @@ class Country {
     this.id,
     this.iso,
     this.name,
-    this.nicename,
+    this.niceName,
     this.iso3,
     this.numcode,
     this.phonecode,
@@ -30,7 +30,7 @@ class Country {
         id: id ?? this.id,
         iso: iso ?? this.iso,
         name: name ?? this.name,
-        nicename: nicename ?? this.nicename,
+        niceName: nicename ?? this.niceName,
         iso3: iso3 ?? this.iso3,
         numcode: numcode ?? this.numcode,
         phonecode: phonecode ?? this.phonecode,
@@ -39,8 +39,9 @@ class Country {
   factory Country.fromJson(Map<String, dynamic> json) => Country(
     id: json["id"],
     iso: json["iso"],
-    name: json["name"],
-    nicename: json["nicename"],
+    // name: json["name"],
+    name: json["nicename"],
+    niceName: json["nicename"],
     iso3: json["iso3"],
     numcode: json["numcode"],
     phonecode: json["phonecode"],
@@ -50,7 +51,7 @@ class Country {
     "id": id,
     "iso": iso,
     "name": name,
-    "nicename": nicename,
+    "nicename": niceName,
     "iso3": iso3,
     "numcode": numcode,
     "phonecode": phonecode,

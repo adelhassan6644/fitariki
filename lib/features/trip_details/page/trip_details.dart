@@ -2,8 +2,6 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/components/custom_button.dart';
 import 'package:fitariki/features/trip_details/provider/trip_details_provider.dart';
 import 'package:fitariki/main_widgets/user_card.dart';
-import 'package:fitariki/navigation/custom_navigation.dart';
-import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +17,6 @@ import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../maps/models/location_model.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../../success/model/success_model.dart';
 import '../widgets/car_trip_details_widget.dart';
 
 class TripDetails extends StatelessWidget {
@@ -131,71 +128,60 @@ class TripDetails extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-              child: CustomButton(
-                text: sl.get<ProfileProvider>().isDriver
-                    ? getTranslated("accept_offer", context)
-                    : getTranslated("accept_request", context),
-                onTap: () {
-                  if (!sl.get<ProfileProvider>().isDriver) {
-                    CustomNavigator.push(Routes.PAYMENT);
-                  } else {
-                    CustomNavigator.push(Routes.SUCCESS,
-                        replace: true,
-                        arguments: SuccessModel(
-                            isCongrats: true,
-                            routeName: Routes.DASHBOARD,
-                            argument: 1,
-                            isClean: true,
-                            title: "أمل ب...",
-                            btnText: getTranslated("my_trips", context),
-                            description:
-                                "تم قبول عرض من أمل ب... بإنتظار الدفع ..."));
-                  }
-                },
-              ),
-            ),
+        
             Consumer<TripDetailsProvider>(builder: (_, provider, child) {
-              return Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                child: CustomButton(
-                  text: getTranslated("negotiation", context),
-                  backgroundColor: ColorResources.WHITE_COLOR,
-                  withBorderColor: true,
-                  textColor: ColorResources.PRIMARY_COLOR,
-                  onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
-                      title: getTranslated("negotiation", context),
-                      description:
-                          getTranslated("negotiation_description", context),
-                      controller: provider.negotiationPrice,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}')),
-                      ],
-                      onSend: () {},
-                      onClose: () {
-                        provider.negotiationPrice.clear();
-                      }),
-                ),
+              return Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                    child: CustomButton(
+                      text: sl.get<ProfileProvider>().isDriver
+                          ? getTranslated("accept_offer", context)
+                          : getTranslated("accept_request", context),
+                      onTap: ()=>provider.updateRequest(status: 1, id: 1),
+                      isLoading: provider.isAccepting,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 8.h,
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                    child: CustomButton(
+                      text: getTranslated("negotiation", context),
+                      backgroundColor: ColorResources.WHITE_COLOR,
+                      withBorderColor: true,
+                      textColor: ColorResources.PRIMARY_COLOR,
+                      onTap: () => CupertinoPopUpHelper.showCupertinoTextController(title: getTranslated("negotiation", context),
+                          description: getTranslated("negotiation_description", context),
+                          controller: provider.negotiationPrice,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),],
+                          onSend: ()=>provider.updateRequest(status: 2, id: 1),
+                          onClose: () {
+                            provider.negotiationPrice.clear();
+                          }),
+                      isLoading: provider.isNegotiation,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                    child: CustomButton(
+                      text: sl.get<ProfileProvider>().isDriver
+                          ? getTranslated("reject_offer", context) :
+                      getTranslated("reject_request", context),
+                      backgroundColor: ColorResources.WHITE_COLOR,
+                      withBorderColor: true,
+                      textColor: ColorResources.PRIMARY_COLOR,
+                      onTap: ()=>provider.updateRequest(status: 3, id: 1),
+                      isLoading: provider.isRejecting,
+                    ),
+                  ),
+                ],
               );
             }),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-              child: CustomButton(
-                text: sl.get<ProfileProvider>().isDriver
-                    ? getTranslated("reject_offer", context)
-                    : getTranslated("reject_request", context),
-                backgroundColor: ColorResources.WHITE_COLOR,
-                withBorderColor: true,
-                textColor: ColorResources.PRIMARY_COLOR,
-              ),
-            ),
+           
             SizedBox(
               height: 24.h,
             )
