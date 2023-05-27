@@ -16,12 +16,14 @@ abstract class Methods {
       required List<int> weekdays}) {
     int count = 0;
     int days = 0;
+    List<DateTime> daysList=[];
 
     for (int weekday in weekdays) {
       DateTime currentDate = startDate;
       int daysToWeekday = ((weekday - startDate.weekday) + 7) % 7;
 
       if (daysToWeekday == 0) {
+        daysList.add(startDate);
         count += 1;
         days += 1;
       }
@@ -30,14 +32,15 @@ abstract class Methods {
 
       while (currentDate.isBefore(endDate)) {
         if (currentDate.weekday == weekday) {
+          daysList.add(currentDate);
           count += 1;
           days += 1;
         }
         currentDate = currentDate.add(const Duration(days: 7));
       }
     }
-
-    return WeekdayCount(count, days);
+print(WeekdayCount(count, days,daysList).toString());
+    return WeekdayCount(count, days,daysList);
   }
 
   static convertStringToTime(timeString, {bool withFormat = false}) {
@@ -98,10 +101,11 @@ abstract class Methods {
 class WeekdayCount {
   final int count;
   final int days;
+  final List<DateTime> daysList;
 
-  WeekdayCount(this.count, this.days);
+  WeekdayCount(this.count, this.days, this.daysList);
   @override
   String toString() {
-    return "cont: $count -- days:$days  ";
+    return "cont: $count -- days:$daysList  ";
   }
 }

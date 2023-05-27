@@ -128,6 +128,7 @@ class TripDetails extends StatelessWidget {
                 ],
               ),
             ),
+        
             Consumer<TripDetailsProvider>(builder: (_, provider, child) {
               return Column(
                 children: [
@@ -136,9 +137,9 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("accept_request", context)
-                          : getTranslated("accept_offer", context),
-                      onTap: () => provider.updateRequest(status: 1, id: 1),
+                          ? getTranslated("accept_offer", context)
+                          : getTranslated("accept_request", context),
+                      onTap: ()=>provider.updateRequest(status: 1, id: 1),
                       isLoading: provider.isAccepting,
                     ),
                   ),
@@ -151,20 +152,15 @@ class TripDetails extends StatelessWidget {
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
-                              title: getTranslated("negotiation", context),
-                              description: getTranslated("negotiation_description", context),
-                              controller: provider.negotiationPrice,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+\.?\d{0,2}')),
-                              ],
-                              onSend: () =>
-                                  provider.updateRequest(status: 2, id: 1),
-                              onClose: () {
-                                provider.negotiationPrice.clear();
-                              }),
+                      onTap: () => CupertinoPopUpHelper.showCupertinoTextController(title: getTranslated("negotiation", context),
+                          description: getTranslated("negotiation_description", context),
+                          controller: provider.negotiationPrice,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),],
+                          onSend: ()=>provider.updateRequest(status: 2, id: 1),
+                          onClose: () {
+                            provider.negotiationPrice.clear();
+                          }),
                       isLoading: provider.isNegotiation,
                     ),
                   ),
@@ -173,18 +169,19 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("reject_request", context)
-                          : getTranslated("reject_offer", context),
+                          ? getTranslated("reject_offer", context) :
+                      getTranslated("reject_request", context),
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: () => provider.updateRequest(status: 3, id: 1),
+                      onTap: ()=>provider.updateRequest(status: 3, id: 1),
                       isLoading: provider.isRejecting,
                     ),
                   ),
                 ],
               );
             }),
+           
             SizedBox(
               height: 24.h,
             )

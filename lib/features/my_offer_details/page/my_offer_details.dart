@@ -9,6 +9,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
+import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../navigation/routes.dart';
 import '../../my_offers/widgets/my_offer_card.dart';
@@ -57,6 +58,7 @@ class MyOfferDetails extends StatelessWidget {
                         startPoint: offerModel.pickupLocation,
                         endPoint: offerModel.dropOffLocation,
                       ),
+                      // CalenderWidget(startDate: DateTime.now(),days: offerModel.offerDays!, endDate: DateTime.now(),),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
