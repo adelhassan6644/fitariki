@@ -55,13 +55,13 @@ class _MyOffersState extends State<MyOffers> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          if (!provider.isLoading&&
+                          if ( provider.myOffers?.offers == null||
                               provider.myOffers!.offers!.isEmpty)
                             EmptyState(
                                 txt: profileProvider.isDriver
                                     ? "لا يوجد عروض توصيل حاليا \n أضف عرض جديد"
                                     : "لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"),
-                          if (provider.myOffers?.offers != null ||
+                          if (provider.myOffers?.offers != null &&
                               provider.myOffers!.offers!.isNotEmpty)
                             ...List.generate(
                                 provider.myOffers!.offers!.length,
