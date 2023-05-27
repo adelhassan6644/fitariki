@@ -33,6 +33,8 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/trip_details/repo/trip_details_repo.dart';
+import '../../features/user_profile/provider/user_profile_provider.dart';
+import '../../features/user_profile/repo/user_profile_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../features/wishlist/repo/wishlist_repo.dart';
 import '../../main_providers/map_provider.dart';
@@ -97,6 +99,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => TripDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -127,9 +130,8 @@ Future<void> init() async {
       ));  sl.registerLazySingleton(() => OfferDetailsProvider(
         repo: sl(),
       ));
-  sl.registerLazySingleton(() => NotificationsProvider(
-        notificationsRepo: sl(),
-      ));
+  sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
+  sl.registerLazySingleton(() => UserProfileProvider(userProfileRepo: sl(),));
   sl.registerLazySingleton(() => FollowersProvider(followersRepo: sl(),));
   sl.registerLazySingleton(() => TripDetailsProvider(tripDetailsRepo: sl(),));
   sl.registerLazySingleton(() => PaymentProvider());

@@ -9,11 +9,14 @@ import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
 import '../components/rate_stars.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
+import '../navigation/custom_navigation.dart';
+import '../navigation/routes.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard(
       {this.daysNum,
       required this.createdAt,
+       this.userId,
       this.days,
       this.followers,
       this.timeRange,
@@ -28,6 +31,7 @@ class UserCard extends StatelessWidget {
   final DateTime createdAt;
 
   final String? daysNum, days, name, national, timeRange, priceRange, followers;
+  final int? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -53,60 +57,63 @@ class UserCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    CustomNetworkImage.circleNewWorkImage(
-                        image:
-                            "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-                        radius: 28,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 50,
-                              child: Text(
-                                name ?? "محمد م..",
-                                textAlign: TextAlign.start,
-                                maxLines: 1,
-                                style: AppTextStyles.w600.copyWith(
-                                    fontSize: 14,
-                                    height: 1.25,
-                                    overflow: TextOverflow.ellipsis),
+                InkWell(
+                  onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE,arguments:userId ),
+                  child: Row(
+                    children: [
+                      CustomNetworkImage.circleNewWorkImage(
+                          image:
+                              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                          radius: 28,
+                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 50,
+                                child: Text(
+                                  name ?? "محمد م..",
+                                  textAlign: TextAlign.start,
+                                  maxLines: 1,
+                                  style: AppTextStyles.w600.copyWith(
+                                      fontSize: 14,
+                                      height: 1.25,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            customImageIconSVG(
-                                imageName: SvgImages.maleIcon,
-                                color: ColorResources.BLUE_COLOR,
-                                width: 11,
-                                height: 11)
-                          ],
-                        ),
-                        const RateStars(
-                          rate: 3,
-                        ),
-                        SizedBox(
-                          width: 50,
-                          child: Text(
-                            national ?? "سعودي",
-                            maxLines: 1,
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 10,
-                                height: 1.25,
-                                overflow: TextOverflow.ellipsis),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              customImageIconSVG(
+                                  imageName: SvgImages.maleIcon,
+                                  color: ColorResources.BLUE_COLOR,
+                                  width: 11,
+                                  height: 11)
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const RateStars(
+                            rate: 3,
+                          ),
+                          SizedBox(
+                            width: 50,
+                            child: Text(
+                              national ?? "سعودي",
+                              maxLines: 1,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  height: 1.25,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 8,

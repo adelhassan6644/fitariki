@@ -1,6 +1,8 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/home/provider/home_provider.dart';
+import 'package:fitariki/features/user_profile/provider/user_profile_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -14,8 +16,23 @@ import '../../profile/provider/profile_provider.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
 import '../widgets/follower_distance_widget.dart';
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+class UserProfile extends StatefulWidget {
+  final int userId;
+  const UserProfile({required this.userId, Key? key}) : super(key: key);
+
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  @override
+  void initState() {
+    Future.delayed(
+        Duration.zero,
+        () => Provider.of<UserProfileProvider>(context, listen: false)
+            .getUserProfile(userId: widget.userId));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +45,7 @@ class UserProfile extends StatelessWidget {
                 withSave: true,
                 onSave: () {
                   if (sl<ProfileProvider>().isLogin) {
-                    sl<WishlistProvider>().postWishList(userId: 1);
+                    sl<WishlistProvider>().postWishList(userId: widget.userId);
                   }
                 },
               ),

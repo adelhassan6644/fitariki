@@ -22,10 +22,10 @@ class FavouriteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE),
+      onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE,arguments:driver != null ? driver!.id : client!.id),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
+        padding:  EdgeInsets.symmetric(
+            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           decoration: BoxDecoration(
@@ -42,7 +42,7 @@ class FavouriteUserCard extends StatelessWidget {
           child: Row(
             children: [
               CustomNetworkImage.circleNewWorkImage(
-                  image: driver != null ? driver!.image! : client!.image??"",
+                  image: driver != null ? driver!.image??"" : client!.image??"",
                   radius: 16,
                   color: ColorResources.SECOUND_PRIMARY_COLOR),
               const SizedBox(

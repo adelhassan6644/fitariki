@@ -70,6 +70,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(
+                                userId: sl.get<ProfileProvider>().isDriver
+                                    ? provider.offerDetails!.clientId!
+                                    : provider.offerDetails!.driverId!,
                                 isDriver: sl.get<ProfileProvider>().isDriver,
                                 withAnalytics: true,
                                 createdAt: provider.offerDetails!.createdAt!,

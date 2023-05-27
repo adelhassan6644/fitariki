@@ -82,7 +82,7 @@ abstract class CustomNavigator {
         return _pageRoute(const Wishlist());
 
         case Routes.USER_PROFILE:
-        return _pageRoute(const UserProfile());
+        return _pageRoute( UserProfile(userId: settings.arguments as int,));
 
       case Routes.CONTACT_WITH_US:
         return _pageRoute(const ContactWithUs());

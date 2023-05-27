@@ -12,6 +12,8 @@ class OfferDetailsModel {
   String? nationality;
   double? rate;
   int? duration;
+  int? driverId;
+  int? clientId;
   double? minPrice;
   double? maxPrice;
   double? compatibleRatio;
@@ -31,6 +33,8 @@ class OfferDetailsModel {
       this.nationality,
       this.name,
       this.rate,
+      this.driverId,
+      this.clientId,
       this.duration,
       this.minPrice,
       this.maxPrice,
@@ -42,7 +46,7 @@ class OfferDetailsModel {
       this.startLength,
       this.endDate,
       this.startDate,
-        this.followers,
+      this.followers,
       this.carData});
 
   OfferDetailsModel copyWith(
@@ -85,6 +89,8 @@ class OfferDetailsModel {
         nationality: json["nationality"],
         rate: json["rate"]?.toDouble(),
         duration: json["duration"],
+        clientId:json["client_id"],
+        driverId:json["driver_id"],
         minPrice: json["min_price"]?.toDouble(),
         maxPrice: json["max_price"]?.toDouble(),
         startLength: json["start_length"]?.toDouble(),
@@ -109,12 +115,14 @@ class OfferDetailsModel {
 
   Map<String, dynamic> toPostDriverJson() => {
         "offer": {
-          "driver_id": id,
+          "id": id,
           "start_date": startDate.toString(),
           "end_date": endDate.toString(),
           "duration": duration,
           "min_price": minPrice,
           "max_price": maxPrice,
+          "client_id": clientId,
+          "driver_id": driverId,
           "offer_type": 1,
           "offer_days": offerDays == null
               ? []
@@ -143,7 +151,6 @@ class OfferDetailsModel {
                 .get<FollowersProvider>()
                 .selectedFollowers
                 .map((x) => x.toPostJson()))
-
         }
       };
 }

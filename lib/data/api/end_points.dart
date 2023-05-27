@@ -24,6 +24,7 @@ class EndPoints {
   static const String postWishList = 'favorites/addOrDelete';
   static const String addOffer = 'offer/request_offer';
   static const String updateOffer = 'offer/request_update';
+  static const String userProfile = 'profile';
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';
