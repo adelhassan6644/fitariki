@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
+import 'package:fitariki/features/profile/model/driver_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/text_styles.dart';
@@ -8,7 +9,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 
 class CarDetails extends StatelessWidget {
-  const CarDetails({Key? key}) : super(key: key);
+  const CarDetails({this.carInfo ,Key? key}) : super(key: key);
+ final CarInfo? carInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CarDetails extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                "كامري، تايوتا",
+                carInfo?.name??"كامري، تايوتا",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -61,7 +63,7 @@ class CarDetails extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                "2023",
+                carInfo?.model??  "2023",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -84,7 +86,7 @@ class CarDetails extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                "5 اشخاص",
+                "${carInfo?.seatsCount} اشخاص",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),

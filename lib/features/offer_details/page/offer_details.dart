@@ -77,17 +77,11 @@ class _OfferDetailsState extends State<OfferDetails> {
                                 withAnalytics: true,
                                 createdAt: provider.offerDetails!.createdAt!,
                                 days: provider.day,
-                                daysNum:
-                                    provider.offerDetails!.duration.toString(),
+                                daysNum: provider.offerDetails!.duration.toString(),
                                 name: provider.offerDetails?.name,
-                                priceRange:
-                                    "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
-                                followers: provider
-                                    .offerDetails!.followers?.length
-                                    .toString(),
-                                timeRange: provider
-                                        .offerDetails!.offerDays!.isEmpty
-                                    ? ""
+                                priceRange: "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
+                                followers: provider.offerDetails!.followers?.length.toString(),
+                                timeRange: provider.offerDetails!.offerDays!.isEmpty ? ""
                                     : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
                               )),
                           MapWidget(

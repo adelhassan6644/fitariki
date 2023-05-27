@@ -16,7 +16,7 @@ class UserCard extends StatelessWidget {
   const UserCard(
       {this.daysNum,
       required this.createdAt,
-       this.userId,
+      this.userId,
       this.days,
       this.followers,
       this.timeRange,
@@ -25,6 +25,7 @@ class UserCard extends StatelessWidget {
       this.priceRange,
       this.withAnalytics = true,
       this.isDriver = true,
+
       Key? key})
       : super(key: key);
   final bool withAnalytics, isDriver;
@@ -32,7 +33,6 @@ class UserCard extends StatelessWidget {
 
   final String? daysNum, days, name, national, timeRange, priceRange, followers;
   final int? userId;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,7 +58,8 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE,arguments:userId ),
+                  onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
+                      arguments: userId),
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(

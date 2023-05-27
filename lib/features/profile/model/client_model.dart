@@ -1,5 +1,6 @@
 import '../../../main_models/weak_model.dart';
 import '../../maps/models/location_model.dart';
+import 'country_model.dart';
 
 class ClientModel {
   int? id;
@@ -10,7 +11,7 @@ class ClientModel {
   String? nickname;
   int? gender;
   String? age;
-  String? national;
+  Country? national;
   String? city;
   String? countryId;
   String? phone;
@@ -45,46 +46,6 @@ class ClientModel {
       this.createdAt,
       this.updatedAt});
 
-  ClientModel copyWith({
-    int? id,
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? image,
-    String? nickname,
-    int? gender,
-    String? age,
-    String? national,
-    String? city,
-    String? countryId,
-    String? phone,
-    String? status,
-    double? rate,
-    double? wallet,
-    LocationModel? dropOffLocation,
-    LocationModel? pickupLocation,
-    List<WeekModel>? clientDays,
-  }) =>
-      ClientModel(
-        id: id ?? this.id,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        email: email ?? this.email,
-        image: image ?? this.image,
-        nickname: nickname ?? this.nickname,
-        gender: gender ?? this.gender,
-        age: age ?? this.age,
-        national: national ?? this.national,
-        city: city ?? this.city,
-        countryId: countryId ?? this.countryId,
-        phone: phone ?? this.phone,
-        status: status ?? this.status,
-        rate: rate ?? this.rate,
-        wallet: wallet ?? this.wallet,
-        dropOffLocation: dropOffLocation ?? this.dropOffLocation,
-        pickupLocation: pickupLocation ?? this.pickupLocation,
-        clientDays: clientDays ?? this.clientDays,
-      );
 
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
         id: json["id"],
@@ -95,7 +56,9 @@ class ClientModel {
         nickname: json["nickname"],
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"],
-        national: json["national"],
+        national: json["country"] != null ? Country.fromJson(
+                json["country"],
+              ) : null,
         city: json["city"],
         countryId: json["country_id"].toString(),
         phone: json["phone"],
@@ -129,7 +92,7 @@ class ClientModel {
         "nickname": nickname,
         "gender": gender,
         "age": age,
-        "national": national,
+        "national": national?.toJson(),
         "city": city,
         "country_id": countryId,
         "phone": phone,

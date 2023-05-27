@@ -109,7 +109,7 @@ class DriverModel {
         "nickname": nickname,
         "gender": gender,
         "age": age,
-        "country": national,
+        "country": national?.toJson(),
         "city": city,
         "country_id": countryId,
         "phone": phone,
