@@ -137,8 +137,8 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("accept_offer", context)
-                          : getTranslated("accept_request", context),
+                          ? getTranslated("accept_request", context)
+                          : getTranslated("accept_offer", context),
                       onTap: ()=>provider.updateRequest(status: 1, id: 1),
                       isLoading: provider.isAccepting,
                     ),
@@ -169,8 +169,8 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("reject_offer", context) :
-                      getTranslated("reject_request", context),
+                          ? getTranslated("reject_request", context) :
+                      getTranslated("reject_offer", context),
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,

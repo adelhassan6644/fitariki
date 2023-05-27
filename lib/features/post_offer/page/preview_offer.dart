@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../data/config/di.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../profile/provider/profile_provider.dart';
@@ -26,18 +27,14 @@ class PreviewOffer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Consumer<ProfileProvider>(
-            builder: (_, editProfileProvider, child) {
-              return BottomSheetAppBar(
-                title: editProfileProvider.role == "driver"
-                    ? getTranslated("add_a_delivery_offer", context)
-                    : getTranslated("add_a_delivery_request", context),
-                textBtn: getTranslated("post", context),
-                onTap: () {
-                  Provider.of<PostOfferProvider>(context, listen: false)
-                      .postOffer();
-                },
-              );
+          BottomSheetAppBar(
+            title: sl.get<ProfileProvider>().isDriver
+                ? getTranslated("add_a_delivery_offer", context)
+                : getTranslated("add_a_delivery_request", context),
+            textBtn: getTranslated("post", context),
+            onTap: () {
+              Provider.of<PostOfferProvider>(context, listen: false)
+                  .postOffer();
             },
           ),
           Consumer<PostOfferProvider>(builder: (_, provider, child) {

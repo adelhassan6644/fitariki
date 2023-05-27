@@ -33,21 +33,23 @@ class UserProfile extends StatelessWidget {
                 },
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal:Dimensions.PADDING_SIZE_DEFAULT.w),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                 child: const ProfileCard(
                   distance: "2.5 كيلو",
                 ),
               ),
-
-
             ],
           ),
           Expanded(
             child: ListAnimator(
-              data:  [
-                SizedBox(height: 12.h,),
-                if (!sl<ProfileProvider>().isDriver)  const CarDetails(),
-                if (sl<ProfileProvider>().isDriver)  const FollowerDistanceWidget(),
+              data: [
+                SizedBox(
+                  height: 12.h,
+                ),
+                if (!sl<ProfileProvider>().isDriver) const CarDetails(),
+                if (sl<ProfileProvider>().isDriver)
+                  const FollowerDistanceWidget(),
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
@@ -59,26 +61,23 @@ class UserProfile extends StatelessWidget {
                           sl.get<ProfileProvider>().isDriver
                               ? getTranslated("current_requests", context)
                               : getTranslated("current_offers", context),
-                          style:
-                          AppTextStyles.w600.copyWith(fontSize: 16),
+                          style: AppTextStyles.w600.copyWith(fontSize: 16),
                         ),
                       ),
                       InkWell(
-
                         child: Text(
                           getTranslated("view_all", context),
                           style: AppTextStyles.w400.copyWith(
-                              fontSize: 11,
-                              color: ColorResources.DISABLED),
+                              fontSize: 11, color: ColorResources.DISABLED),
                         ),
                       )
                     ],
                   ),
                 ),
-               ... List.generate(
+                ...List.generate(
                     sl<HomeProvider>().offer?.length ?? 0,
-                        (index) => OfferCard(
-                        offerModel:  sl<HomeProvider>().offer![index]))
+                    (index) =>
+                        OfferCard(offerModel: sl<HomeProvider>().offer![index]))
               ],
             ),
           ),

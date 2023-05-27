@@ -6,7 +6,6 @@ import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/core/utils/methods.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../guest/guest_mode.dart';
@@ -40,8 +39,8 @@ class _MyOffersState extends State<MyOffers> {
           CustomAppBar(
             title: profileProvider.roleType != null
                 ? profileProvider.isDriver
-                    ? getTranslated("delivery_requests", context)
-                    : getTranslated("delivery_offers", context)
+                    ? getTranslated("delivery_offers", context)
+                    : getTranslated("delivery_requests", context)
                 : getTranslated("offers_or_requests", context),
             withBorder: true,
             withBack: false,
@@ -56,32 +55,19 @@ class _MyOffersState extends State<MyOffers> {
                           SizedBox(
                             height: 8.h,
                           ),
-                      if(provider.offer != null ||provider.offer!.isNotEmpty )    ...List.generate(
-                              provider.offer?.length ?? 0,
-                              (index) => MyOfferCard(
-                                    offer: provider.offer![index],
-                                    startTime: provider
-                                            .offer![index].offerDays!.isNotEmpty
-                                        ? provider.offer![index].offerDays
-                                            ?.first.startTime
-                                        : null,
-                                    endTime: provider
-                                            .offer![index].offerDays!.isNotEmpty
-                                        ? provider.offer![index].offerDays
-                                            ?.first.endTime
-                                        : null,
-                                    minPrice: provider.offer![index].minPrice
-                                        .toString(),
-                                    maxPrice: provider.offer![index].maxPrice
-                                        .toString(),
-                                    numberOfDays:
-                                        provider.offer![index].duration,
-                                    days: provider.offer![index].offerDays,
-                                    createdAt: Methods.getDayCount(
-                                      date: provider.offer![index].createdAt!,
-                                    ).toString(),
-                                  )),
-                          if(provider.offer == null ||provider.offer!.isEmpty ) EmptyState(txt: !profileProvider.isDriver?"لا يوجد طلبات توصيل حاليا" : "لا يوجد عروض توصيل حاليا")
+                          if (provider.myOffers!.offers != null ||
+                              provider.myOffers!.offers!.isNotEmpty)
+                            ...List.generate(
+                                provider.myOffers!.offers!.length,
+                                (index) => MyOfferCard(
+                                      offer: provider.myOffers!.offers![index],
+                                    )),
+                          if (provider.myOffers!.offers == null ||
+                              provider.myOffers!.offers!.isEmpty)
+                            EmptyState(
+                                txt: profileProvider.isDriver
+                                    ? "لا يوجد عروض توصيل حاليا \n أضف عرض جديد"
+                                    : "لا يوجد طلبات توصيل حاليا \n أضف طلب جديد")
                         ],
                       );
                     }

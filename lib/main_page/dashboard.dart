@@ -91,8 +91,8 @@ class _DashBoardState extends State<DashBoard> {
                           isSelected: _selectedIndex == 2,
                           onTap: () => _setPage(2),
                           name:  provider.roleType != null?  provider.isDriver
-                              ? getTranslated("delivery_requests", context)
-                              : getTranslated("delivery_offers", context) : getTranslated("offers_or_requests", context),
+                              ? getTranslated("delivery_offers", context)
+                              : getTranslated("delivery_requests", context) : getTranslated("offers_or_requests", context),
                         ),
                       );
                     }

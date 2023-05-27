@@ -34,8 +34,8 @@ class PostOffer extends StatelessWidget {
           children: [
             BottomSheetAppBar(
                 title: sl.get<ProfileProvider>().isDriver
-                    ? getTranslated("add_a_delivery_request", context)
-                    : getTranslated("add_a_delivery_offer", context),
+                    ? getTranslated("add_a_delivery_offer", context)
+                    : getTranslated("add_a_delivery_request", context),
                 textBtn: getTranslated("preview", context),
                 onTap: () {
                   if (provider.checkData() == true) {

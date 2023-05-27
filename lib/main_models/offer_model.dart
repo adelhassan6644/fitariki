@@ -1,4 +1,5 @@
 import 'package:fitariki/main_models/weak_model.dart';
+import '../features/maps/models/location_model.dart';
 
 class OfferModel {
   int? id;
@@ -11,20 +12,24 @@ class OfferModel {
   double? compatibleRatio;
   DateTime? createdAt;
   List<WeekModel>? offerDays;
+  LocationModel? dropOffLocation;
+  LocationModel? pickupLocation;
+  List<dynamic>? offerRequests;
 
-
-  OfferModel({
-    this.id,
-    this.image,
-    this.name,
-    this.rate,
-    this.duration,
-    this.minPrice,
-    this.maxPrice,
-    this.compatibleRatio,
-    this.createdAt,
-    this.offerDays,
-  });
+  OfferModel(
+      {this.id,
+      this.image,
+      this.name,
+      this.rate,
+      this.duration,
+      this.minPrice,
+      this.maxPrice,
+      this.compatibleRatio,
+      this.createdAt,
+      this.offerDays,
+      this.dropOffLocation,
+      this.pickupLocation,
+      this.offerRequests});
 
   factory OfferModel.fromJson(Map<String, dynamic> json) => OfferModel(
         id: json["id"],
@@ -42,6 +47,15 @@ class OfferModel {
             ? null
             : List<WeekModel>.from(
                 json["offer_days"]!.map((x) => WeekModel.fromJson(x))),
+        pickupLocation: json["pickup_location"] == null
+            ? null
+            : LocationModel.fromJson(json["pickup_location"]),
+        dropOffLocation: json["drop_off_location"] == null
+            ? null
+            : LocationModel.fromJson(json["drop_off_location"]),
+        offerRequests: json["offer_requests"] == null
+            ? []
+            : List<dynamic>.from(json["offer_requests"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,5 +71,10 @@ class OfferModel {
         "offer_days": offerDays == null
             ? []
             : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
+        "drop_off_location": dropOffLocation?.toJson(),
+        "pickup_location": pickupLocation?.toJson(),
+        "offer_requests": offerRequests == null
+            ? []
+            : List<dynamic>.from(offerRequests!.map((x) => x)),
       };
 }
