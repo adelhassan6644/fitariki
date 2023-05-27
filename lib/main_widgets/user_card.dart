@@ -58,8 +58,8 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
-                      arguments: userId),
+                  // onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
+                  //     arguments: userId),
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(
