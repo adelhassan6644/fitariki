@@ -22,6 +22,7 @@ import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
+import '../../main_providers/calender_provider.dart';
 import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
@@ -41,6 +42,8 @@ abstract class ProviderList {
     ),
     ChangeNotifierProvider(
       create: (_) => di.sl<MapProvider>(),
+    ), ChangeNotifierProvider(
+      create: (_) => di.sl<CalenderProvider>(),
     ),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),

@@ -35,6 +35,7 @@ import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/trip_details/repo/trip_details_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../features/wishlist/repo/wishlist_repo.dart';
+import '../../main_providers/calender_provider.dart';
 import '../../main_providers/map_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 import '../api/end_points.dart';
@@ -113,6 +114,7 @@ Future<void> init() async {
         scheduleProvider: sl(),
       ));
   sl.registerLazySingleton(() => MapProvider());
+  sl.registerLazySingleton(() => CalenderProvider());
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));

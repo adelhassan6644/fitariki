@@ -39,7 +39,7 @@ abstract class Methods {
         currentDate = currentDate.add(const Duration(days: 7));
       }
     }
-
+print(WeekdayCount(count, days,daysList).toString());
     return WeekdayCount(count, days,daysList);
   }
 
