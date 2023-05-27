@@ -86,6 +86,7 @@ class PostOfferProvider extends ChangeNotifier {
     }
     counts = Methods.getWeekdayCount(
         startDate: startDate, endDate: endDate, weekdays: days);
+    print(counts.toString());
     notifyListeners();
   }
 
