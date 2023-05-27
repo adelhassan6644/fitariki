@@ -46,6 +46,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.width,
+      height: 40,
       child: FormBuilderDropdown(
         items: widget.items.map((String item) {
           return DropdownMenuItem(
@@ -80,15 +81,15 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
             child: widget.pAssetIcon != null
                 ? Image.asset(
                     widget.pAssetIcon!,
-                    height: 22.h,
-                    width: 22.w,
+                    height: 20.h,
+                    width: 20.w,
                     color: widget.pIconColor ?? Colors.black,
                   )
                 : widget.pSvgIcon != null
                     ? customImageIconSVG(
                         imageName: widget.pSvgIcon!,
                         color: widget.pIconColor ?? Colors.black,
-                        height: 22.h,
+                        height: 20.h,
                       )
                     : null,
           ),
@@ -148,8 +149,8 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
-          contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal:8.w),
-          prefixIconConstraints: BoxConstraints(maxHeight: 25.h, ),
+          contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+          prefixIconConstraints: BoxConstraints(maxHeight: 20.h, ),
           labelText: widget.label,
           errorStyle: AppTextStyles.w500.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
           labelStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),

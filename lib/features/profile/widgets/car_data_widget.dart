@@ -19,19 +19,16 @@ class CarDataWidget extends StatelessWidget {
     return ExpansionTileWidget(
       title: getTranslated("car_data", context),
       children: [
+        CustomTextFormField(
+          valid: Validations.name,
+          controller: provider.carName,
+          hint: getTranslated("name", context),
+        ),
+        SizedBox(
+          height: 8.h,
+        ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextFormField(
-                valid: Validations.name,
-               controller: provider.carName,
-                hint: getTranslated("name", context),
-              ),
-            ),
-            SizedBox(
-              width: 8.w,
-            ),
-
             Expanded(
               child: CustomDropDownButton(
                 items:provider.models,
@@ -44,6 +41,17 @@ class CarDataWidget extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              width: 8.w,
+            ),
+            Expanded(
+              child: CustomTextFormField(
+                valid: Validations.name,
+                controller: provider.carColor,
+                hint: getTranslated("color", context),
+              ),
+            ),
+
           ],
         ),
         SizedBox(
@@ -78,10 +86,10 @@ class CarDataWidget extends StatelessWidget {
           children: [
             Expanded(
               child:  CustomDropDownButton(
-                items:   provider.capacities,
+                items:   provider.seats,
                 name: getTranslated("capacity", context),
-                onChange: provider.selectedCapacity,
-                value: provider.carCapacity,
+                onChange: provider.selectedSeat,
+                value: provider.carSeats,
                 icon: const Icon(
                   Icons.keyboard_arrow_down_rounded,
                   color: ColorResources.SECOUND_PRIMARY_COLOR,

@@ -24,7 +24,7 @@ class _MyOffersState extends State<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-    if ( Provider.of<ProfileProvider>(context, listen: false).isLogin) {
+      if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
         Provider.of<MyOffersProvider>(context, listen: false).getMyOffer();
       }
     });
@@ -57,24 +57,29 @@ class _MyOffersState extends State<MyOffers> {
                           ),
                           ...List.generate(
                               provider.offer?.length ?? 0,
-                                  (index) => MyOfferCard(
-                                offer: provider.offer![index],
-                                startTime:provider
-                                    .offer![index].offerDays!.isNotEmpty? provider
-                                    .offer![index].offerDays?.first.startTime:null,
-                                endTime: provider
-                                    .offer![index].offerDays!.isNotEmpty?provider
-                                    .offer![index].offerDays?.first.endTime:null,
-                                minPrice: provider.offer![index].minPrice
-                                    .toString(),
-                                maxPrice: provider.offer![index].maxPrice
-                                    .toString(),
-                                numberOfDays: provider.offer![index].duration,
-                                days: provider.offer![index].offerDays,
-                                createdAt: Methods.getDayCount(
-                                  date: provider.offer![index].createdAt!,
-                                ).toString(),
-                              ))
+                              (index) => MyOfferCard(
+                                    offer: provider.offer![index],
+                                    startTime: provider
+                                            .offer![index].offerDays!.isNotEmpty
+                                        ? provider.offer![index].offerDays
+                                            ?.first.startTime
+                                        : null,
+                                    endTime: provider
+                                            .offer![index].offerDays!.isNotEmpty
+                                        ? provider.offer![index].offerDays
+                                            ?.first.endTime
+                                        : null,
+                                    minPrice: provider.offer![index].minPrice
+                                        .toString(),
+                                    maxPrice: provider.offer![index].maxPrice
+                                        .toString(),
+                                    numberOfDays:
+                                        provider.offer![index].duration,
+                                    days: provider.offer![index].offerDays,
+                                    createdAt: Methods.getDayCount(
+                                      date: provider.offer![index].createdAt!,
+                                    ).toString(),
+                                  ))
                         ],
                       );
                     }
@@ -84,11 +89,19 @@ class _MyOffersState extends State<MyOffers> {
                         SizedBox(
                           height: 8.h,
                         ),
-                        ...List.generate(5,
-                            (index) =>Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,vertical: 8.h),
-                              child: CustomShimmerContainer(width: context.width,height:80.h ,radius: 8,),
-                            ))
+                        ...List.generate(
+                            5,
+                            (index) => Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w,
+                                      vertical: 8.h),
+                                  child: CustomShimmerContainer(
+                                    width: context.width,
+                                    height: 80.h,
+                                    radius: 8,
+                                  ),
+                                ))
                       ],
                     );
                   }),

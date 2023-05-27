@@ -32,7 +32,7 @@ class CustomButtonImagePicker extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 9),
               decoration: BoxDecoration(
                   border: Border.all(
                       color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
@@ -42,7 +42,7 @@ class CustomButtonImagePicker extends StatelessWidget {
                   Expanded(
                     child: MarqueeWidget(
                       child: Text(
-                  title,
+                        title,
                         style: AppTextStyles.w400.copyWith(
                             color: ColorResources.DISABLED,
                             fontSize: 14,
@@ -93,7 +93,7 @@ class CustomButtonImagePicker extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: GestureDetector(
-                    onTap:onTap,
+                    onTap: onTap,
                     child: Text(getTranslated("edit", context),
                         textAlign: TextAlign.center,
                         style: AppTextStyles.w400.copyWith(

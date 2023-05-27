@@ -140,6 +140,7 @@
   "car_data": "Car data",
   "name": "Name",
   "model": "Model",
+  "color": "Color",
   "plate": "Plate",
   "car_image": "Car image",
   "licence_image": "Licence image",

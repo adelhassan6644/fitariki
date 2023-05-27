@@ -132,6 +132,7 @@ class CarInfo {
   String? name;
   String? model;
   String? palletNumber;
+  String? color;
   String? seatsCount;
   String? carImage;
   String? licenceImage;
@@ -142,6 +143,7 @@ class CarInfo {
     this.name,
     this.model,
     this.palletNumber,
+    this.color,
     this.seatsCount,
     this.carImage,
     this.licenceImage,
@@ -153,6 +155,7 @@ class CarInfo {
     String? name,
     String? model,
     String? palletNumber,
+    String? color,
     String? seatsCount,
     String? carImage,
     String? licenceImage,
@@ -163,6 +166,7 @@ class CarInfo {
         name: name ?? this.name,
         model: model ?? this.model,
         palletNumber: palletNumber ?? this.palletNumber,
+        color: color ?? this.color,
         seatsCount: seatsCount ?? this.seatsCount,
         carImage: carImage ?? this.carImage,
         licenceImage: licenceImage ?? this.licenceImage,
@@ -174,6 +178,7 @@ class CarInfo {
         name: json["name"],
         model: json["model"].toString(),
         palletNumber: json["pallet_number"],
+        color: json["color"],
         seatsCount: json["seats_count"].toString(),
         carImage: json["car_image"],
         licenceImage: json["licence_image"],
@@ -185,6 +190,7 @@ class CarInfo {
         "name": name,
         "model": model,
         "pallet_number": palletNumber,
+        "color": color,
         "seats_count": seatsCount,
         "car_image": carImage,
         "licence_image": licenceImage,
