@@ -56,9 +56,9 @@ class MoreOptions extends StatelessWidget {
                   title: getTranslated("archives", context),
                   icon: SvgImages.bookMark,
                   onTap: () {
-                 CustomNavigator.push(Routes.USER_PROFILE);
-                    // sl<WishlistProvider>().getWishList();
-                    // CustomNavigator.push(Routes.WISHLIST);
+                 // CustomNavigator.push(Routes.USER_PROFILE);
+                    sl<WishlistProvider>().getWishList();
+                    CustomNavigator.push(Routes.WISHLIST);
                   },
                 ),
                 MoreButton(

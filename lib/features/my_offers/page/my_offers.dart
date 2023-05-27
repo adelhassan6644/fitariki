@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/components/animated_widget.dart';
+import 'package:fitariki/components/empty_widget.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _MyOffersState extends State<MyOffers> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          ...List.generate(
+                      if(provider.offer != null ||provider.offer!.isNotEmpty )    ...List.generate(
                               provider.offer?.length ?? 0,
                               (index) => MyOfferCard(
                                     offer: provider.offer![index],
@@ -79,7 +80,8 @@ class _MyOffersState extends State<MyOffers> {
                                     createdAt: Methods.getDayCount(
                                       date: provider.offer![index].createdAt!,
                                     ).toString(),
-                                  ))
+                                  )),
+                          if(provider.offer == null ||provider.offer!.isEmpty ) EmptyState(txt: !profileProvider.isDriver?"لا يوجد طلبات توصيل حاليا" : "لا يوجد عروض توصيل حاليا")
                         ],
                       );
                     }
