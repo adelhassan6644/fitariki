@@ -1,8 +1,6 @@
 import 'package:fitariki/main_providers/calender_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:provider/provider.dart';
 
@@ -74,10 +72,10 @@ Future.delayed(Duration.zero,(){
             color: Colors.black12,
           ),
           markedDateIconBuilder: (event) {
-            return event.icon ?? Icon(Icons.help_outline);
+            return event.icon ?? const Icon(Icons.help_outline);
           },
-          minSelectedDate: DateTime.now().subtract(Duration(days: 360)),
-          maxSelectedDate: DateTime.now().add(Duration(days: 360)),
+          minSelectedDate: DateTime.now().subtract(const Duration(days: 360)),
+          maxSelectedDate: DateTime.now().add(const Duration(days: 360)),
           todayButtonColor: Colors.grey,
           todayBorderColor: Colors.grey,
           markedDateMoreShowTotal:
