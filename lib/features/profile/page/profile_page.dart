@@ -1,5 +1,4 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
-import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/dimensions.dart';
@@ -119,9 +118,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                     child: CustomButton(
                         text: getTranslated("save", context),
-                        onTap: () {
-                          CustomNavigator.pop();
-                        }),
+                      onTap: () => provider.updateProfile(),
+                    ),
                   ),
                   SizedBox(
                     height: 12.h,

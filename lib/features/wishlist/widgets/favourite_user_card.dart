@@ -4,12 +4,14 @@ import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/features/profile/model/client_model.dart';
 import 'package:fitariki/features/profile/model/driver_model.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/rate_stars.dart';
 import '../../../data/config/di.dart';
+import '../../../navigation/routes.dart';
 import '../provider/wishlist_provider.dart';
 
 class FavouriteUserCard extends StatelessWidget {
@@ -20,6 +22,7 @@ class FavouriteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),

@@ -12,6 +12,7 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
+import '../../../navigation/routes.dart';
 import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
 import '../model/country_model.dart';
@@ -84,7 +85,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   String? carSeats;
-  List<String> seats = ["2", "3", "4", "5", "6", "6", "8"];
+  List<String> seats = ["2", "3", "4", "5", "6", "7", "8"];
   void selectedSeat(value) {
     carSeats = value;
     notifyListeners();
@@ -441,7 +442,7 @@ class ProfileProvider extends ChangeNotifier {
 
   ///Update Profile
   updateProfile() async {
-    if (checkData()) {
+    if (checkData() == true) {
       try {
         spinKitDialog();
         isLoading = true;
@@ -516,7 +517,7 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
-          CustomNavigator.pop();
+          CustomNavigator.push(Routes.DASHBOARD,arguments: 0);
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: "تم تحديث بياناتك بنجاح !",

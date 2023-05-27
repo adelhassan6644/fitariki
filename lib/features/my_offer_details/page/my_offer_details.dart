@@ -18,7 +18,7 @@ import '../../profile/provider/profile_provider.dart';
 import '../widgets/trip_card.dart';
 
 class MyOfferDetails extends StatelessWidget {
-  final MyOfferModle myOfferDetails;
+  final MyOfferModel myOfferDetails;
   const MyOfferDetails({Key? key,required this.myOfferDetails}) : super(key: key);
 
   @override

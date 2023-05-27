@@ -20,6 +20,7 @@ import '../features/success/model/success_model.dart';
 import '../features/success/success_page.dart';
 import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
+import '../features/user_profile/page/user_profile.dart';
 import '../main.dart';
 import '../main_page/dashboard.dart';
 import 'routes.dart';
@@ -80,6 +81,9 @@ abstract class CustomNavigator {
       case Routes.WISHLIST:
         return _pageRoute(const Wishlist());
 
+        case Routes.USER_PROFILE:
+        return _pageRoute(const UserProfile());
+
       case Routes.CONTACT_WITH_US:
         return _pageRoute(const ContactWithUs());
 
@@ -87,7 +91,7 @@ abstract class CustomNavigator {
         return _pageRoute(const Notifications());
 
       case Routes.MY_OFFERS_DETAILS:
-        return _pageRoute( MyOfferDetails(myOfferDetails: settings.arguments as MyOfferModle,));
+        return _pageRoute( MyOfferDetails(myOfferDetails: settings.arguments as MyOfferModel,));
 
       case Routes.ALL_TRIPS:
         return _pageRoute(const AllTrips());

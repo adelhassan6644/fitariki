@@ -14,7 +14,7 @@ class MyOffersProvider extends ChangeNotifier {
   MyOffersRepo myOffersRepo;
   MyOffersProvider({required this.myOffersRepo});
 
-  List<MyOfferModle>? offer;
+  List<MyOfferModel>? offer;
   bool isLoading = false;
   List<String> days=[];
   String? day;
@@ -27,8 +27,8 @@ class MyOffersProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response =
           await myOffersRepo.getMyOffer();
       response.fold((l) => null, (response) {
-        offer = List<MyOfferModle>.from(response.data["data"]["offers"]!
-            .map((x) => MyOfferModle.fromJson(x)));
+        offer = List<MyOfferModel>.from(response.data["data"]["offers"]!
+            .map((x) => MyOfferModel.fromJson(x)));
         isLoading = false;
         notifyListeners();
       });

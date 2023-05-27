@@ -14,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withBack;
   final bool withSave;
   final bool withBorder;
+  final bool withBackGround;
   final  double? actionWidth;
   final  Function()? onSave;
 
@@ -22,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.title,
       this.withCart = false,
       this.withSave = false,
+      this.withBackGround = true,
       this.withBorder = false,
       this.withBack = true,
         this.actionWidth,
@@ -34,7 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       width: context.width,
       decoration: BoxDecoration(
-        color:ColorResources.APP_BAR_BACKGROUND_COLOR ,
+        color:withBackGround? ColorResources.APP_BAR_BACKGROUND_COLOR : Colors.transparent,
         border:withBorder? Border(
             bottom: BorderSide(color: ColorResources.BORDER_COLOR, width: 1.h)):null,
       ),

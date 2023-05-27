@@ -1,32 +1,11 @@
-// To parse this JSON data, do
-//
-//     final myOOffers = myOOffersFromJson(jsonString);
-
-
-
 import 'package:fitariki/features/maps/models/location_model.dart';
 
 import '../../../main_models/weak_model.dart';
 import '../../followers/follower_details/model/follower_model.dart';
 import '../../profile/model/client_model.dart';
 
-// class MyOOffers {
-//   List<Offer>? offers;
-//
-//   MyOOffers({
-//     this.offers,
-//   });
-//
-//   factory MyOOffers.fromJson(Map<String, dynamic> json) => MyOOffers(
-//     offers: json["offers"] == null ? [] : List<Offer>.from(json["offers"]!.map((x) => Offer.fromJson(x))),
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "offers": offers == null ? [] : List<dynamic>.from(offers!.map((x) => x.toJson())),
-//   };
-// }
 
-class MyOfferModle {
+class MyOfferModel {
   int? id;
   String? name;
   DateTime? startDate;
@@ -47,7 +26,7 @@ class MyOfferModle {
   List<dynamic>? offerRequests;
   List<OfferFollower>? offerFollowers;
 
-  MyOfferModle({
+  MyOfferModel({
     this.id,
     this.name,
     this.startDate,
@@ -69,7 +48,7 @@ class MyOfferModle {
     this.offerFollowers,
   });
 
-  factory MyOfferModle.fromJson(Map<String, dynamic> json) => MyOfferModle(
+  factory MyOfferModel.fromJson(Map<String, dynamic> json) => MyOfferModel(
     id: json["id"],
     name: json["name"],
     startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),

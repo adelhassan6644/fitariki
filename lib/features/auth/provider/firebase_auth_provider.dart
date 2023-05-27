@@ -213,7 +213,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
         await Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getRoleType();
-        await Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getProfile();
+
         await Provider.of<HomeProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getOffers();
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
@@ -221,6 +221,10 @@ class FirebaseAuthProvider extends ChangeNotifier {
               replace: true, arguments: true);
         } else {
           CustomNavigator.pop();
+          await Provider.of<ProfileProvider>(
+              CustomNavigator.navigatorState.currentContext!,
+              listen: false)
+              .getProfile();
         }
         CustomSnackBar.showSnackBar(
             notification: AppNotification(

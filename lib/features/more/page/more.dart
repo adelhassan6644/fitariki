@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../guest/guest_mode.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/more_options.dart';
@@ -25,7 +26,16 @@ class More extends StatelessWidget {
                     child: ListAnimator(
                       customPadding: EdgeInsets.symmetric(horizontal: 16.w),
                       data: [
-                        const ProfileCard(),
+                      provider.isLoading? const ProfileCardShimmer(): ProfileCard(
+                         lastUpdate: provider.lastUpdate,
+                         name: "${provider.firstName.text} ${provider.lastName.text}",
+                         isDriver:  provider.isDriver,
+                         male: provider.gender == 0,
+                         nationality:  provider.nationality?.name,
+                         rate: provider.rate.ceil(),
+                         completedNumber: 2,
+                         offersNumber: 2,
+                       ),
                         if (provider.isDriver)
                           Column(
                             children: [
