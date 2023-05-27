@@ -4,12 +4,9 @@ import 'package:fitariki/features/trip_details/provider/trip_details_provider.da
 import 'package:fitariki/main_widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
@@ -27,8 +24,6 @@ class TripDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: SafeArea(
         bottom: true,
@@ -129,11 +124,11 @@ class TripDetails extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 24.h,
-                  ),
-
+                  )
                 ],
               ),
             ),
+        
             Consumer<TripDetailsProvider>(builder: (_, provider, child) {
               return Column(
                 children: [
@@ -144,7 +139,7 @@ class TripDetails extends StatelessWidget {
                       text: sl.get<ProfileProvider>().isDriver
                           ? getTranslated("accept_offer", context)
                           : getTranslated("accept_request", context),
-                      onTap: () => provider.updateRequest(status: 1, id: 1),
+                      onTap: ()=>provider.updateRequest(status: 1, id: 1),
                       isLoading: provider.isAccepting,
                     ),
                   ),
@@ -157,22 +152,15 @@ class TripDetails extends StatelessWidget {
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: () =>
-                          CupertinoPopUpHelper.showCupertinoTextController(
-                              title: getTranslated("negotiation", context),
-                              description: getTranslated(
-                                  "negotiation_description", context),
-                              controller: provider.negotiationPrice,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+\.?\d{0,2}')),
-                              ],
-                              onSend: () =>
-                                  provider.updateRequest(status: 2, id: 1),
-                              onClose: () {
-                                provider.negotiationPrice.clear();
-                              }),
+                      onTap: () => CupertinoPopUpHelper.showCupertinoTextController(title: getTranslated("negotiation", context),
+                          description: getTranslated("negotiation_description", context),
+                          controller: provider.negotiationPrice,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),],
+                          onSend: ()=>provider.updateRequest(status: 2, id: 1),
+                          onClose: () {
+                            provider.negotiationPrice.clear();
+                          }),
                       isLoading: provider.isNegotiation,
                     ),
                   ),
@@ -181,18 +169,19 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("reject_offer", context)
-                          : getTranslated("reject_request", context),
+                          ? getTranslated("reject_offer", context) :
+                      getTranslated("reject_request", context),
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: () => provider.updateRequest(status: 3, id: 1),
+                      onTap: ()=>provider.updateRequest(status: 3, id: 1),
                       isLoading: provider.isRejecting,
                     ),
                   ),
                 ],
               );
             }),
+           
             SizedBox(
               height: 24.h,
             )

@@ -109,8 +109,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                       vertical: 24),
                   child: CustomButton(
                     text: sl.get<ProfileProvider>().isDriver
-                        ? getTranslated("add_request", context)
-                        : getTranslated("add_offer", context),
+                        ? getTranslated("add_offer", context)
+                        : getTranslated("add_request", context),
                     onTap: () => customShowModelBottomSheet(
                       body: sl.get<ProfileProvider>().isLogin
                           ? AddOffer(

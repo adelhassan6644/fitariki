@@ -187,8 +187,6 @@ class PostOfferProvider extends ChangeNotifier {
       offerDays: scheduleProvider.selectedDays,
       duration: counts!.count,
 
-
-
       // duration:
     );
     print(offerModel?.toPostClientJson());
@@ -206,11 +204,7 @@ class PostOfferProvider extends ChangeNotifier {
       CustomNavigator.push(Routes.SUCCESS,
           clean: true,
           arguments: SuccessModel(
-              isCongrats: true,
-              isClean: false,
-              routeName: Routes.DASHBOARD,
-              btnText: "في طريقي",
-              argument: 0,
+              isPopUp: true,
               description: sl<ProfileProvider>().isDriver
                   ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
                   : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));

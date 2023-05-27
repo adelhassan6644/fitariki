@@ -1,4 +1,3 @@
-import 'package:fitariki/features/my_offers/model/my_offer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -8,44 +7,26 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/marquee_widget.dart';
-import '../../../main_models/weak_model.dart';
+import '../../../data/config/di.dart';
+import '../../../main_models/offer_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
 
 class MyOfferCard extends StatelessWidget {
-   MyOfferCard(
-      {this.numberOfDays,
-      this.days,
-      this.startTime,
-      this.endTime,
-      this.minPrice,
-      this.maxPrice,
-      this.createdAt,
-      Key? key,  this.offer})
-      : super(key: key);
-  final int? numberOfDays;
-  final List<WeekModel>? days;
-  final String? startTime, endTime;
-  final String? maxPrice, minPrice;
-  final String? createdAt;
-  final MyOfferModel? offer;
+  const MyOfferCard({Key? key, this.offer}) : super(key: key);
+  final OfferModel? offer;
 
-  List<String> dayss=[];
-  String? day;
   @override
   Widget build(BuildContext context) {
-    for (WeekModel element in days!) {
-      dayss.add(element.dayName! );
-      print(element.dayName);
-    }
-    day =dayss.toString().replaceAll("[", '').replaceAll(']', '');
     return InkWell(
-      onTap: ()=>offer!=null?CustomNavigator.push(Routes.MY_OFFERS_DETAILS,arguments:offer! ):(){},
+      onTap: () =>
+          CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
         child: Container(
-          padding:  EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           decoration: BoxDecoration(
             color: ColorResources.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
@@ -67,13 +48,19 @@ class MyOfferCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      "عروض جديده",
+                      sl.get<ProfileProvider>().isDriver
+                          ? "طلبات جديدة"
+                          : "عروض جديدة",
                       style: AppTextStyles.w400.copyWith(
                           fontSize: 10, overflow: TextOverflow.ellipsis),
                     ),
                   ),
                   Text(
-                    createdAt??"",
+                    Methods.getDayCount(
+                            date: offer!.createdAt != null
+                                ? offer!.createdAt!
+                                : DateTime.now())
+                        .toString(),
                     style: AppTextStyles.w400.copyWith(fontSize: 10, height: 1),
                   ),
                 ],
@@ -88,10 +75,10 @@ class MyOfferCard extends StatelessWidget {
                     child: Column(
                       children: [
                         customImageIconSVG(imageName: SvgImages.roadLine),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4.h),
                         MarqueeWidget(
                           child: Text(
-                            "$numberOfDays يوم ",
+                            "${offer!.duration} يوم ",
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),
@@ -113,16 +100,17 @@ class MyOfferCard extends StatelessWidget {
                     child: Column(
                       children: [
                         customImageIconSVG(imageName: SvgImages.calendar),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4.h),
                         MarqueeWidget(
-                          child:
-                          Text(
-                            day??"",
+                          child: Text(
+                            offer!.offerDays!
+                                .map((e) => e.dayName)
+                                .toList()
+                                .join(", "),
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),
                         )
-
                       ],
                     ),
                   ),
@@ -141,16 +129,17 @@ class MyOfferCard extends StatelessWidget {
                       children: [
                         customImageIconSVG(imageName: SvgImages.alarm),
                         const SizedBox(height: 4),
-                        if(endTime!=null)
-                        MarqueeWidget(
-                          child: Text(
-                            "${Methods.convertStringToTime(startTime??TimeOfDay.now().toString(), withFormat: true)}"
-                            " - ${Methods.convertStringToTime(endTime??TimeOfDay.now().toString(), withFormat: true)}ً",
-                            maxLines: 1,
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 10, overflow: TextOverflow.ellipsis),
+                        if (offer!.offerDays!.first.endTime != null)
+                          MarqueeWidget(
+                            child: Text(
+                              "${Methods.convertStringToTime(offer!.offerDays!.first.startTime ?? TimeOfDay.now().toString(), withFormat: true)}"
+                              " - ${Methods.convertStringToTime(offer!.offerDays!.first.endTime ?? TimeOfDay.now().toString(), withFormat: true)}ً",
+                              maxLines: 1,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),
@@ -171,7 +160,7 @@ class MyOfferCard extends StatelessWidget {
                         const SizedBox(height: 4),
                         MarqueeWidget(
                           child: Text(
-                            "$minPrice - $maxPrice",
+                            "${offer!.minPrice} - ${offer!.maxPrice}",
                             maxLines: 1,
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),

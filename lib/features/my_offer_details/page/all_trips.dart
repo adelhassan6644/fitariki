@@ -20,7 +20,7 @@ class AllTrips extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: sl.get<ProfileProvider>().isDriver
+              title: !sl.get<ProfileProvider>().isDriver
                   ? getTranslated("offers", context)
                   : getTranslated("requests", context),
               withBorder: true,

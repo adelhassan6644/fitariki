@@ -12,9 +12,25 @@ import '../../components/custom_images.dart';
 import '../../navigation/routes.dart';
 import 'model/success_model.dart';
 
-class SuccessPage extends StatelessWidget {
+class SuccessPage extends StatefulWidget {
   const SuccessPage({required this.successModel, Key? key}) : super(key: key);
   final SuccessModel successModel;
+
+  @override
+  State<SuccessPage> createState() => _SuccessPageState();
+}
+
+class _SuccessPageState extends State<SuccessPage> {
+  @override
+  void initState() {
+    if (widget.successModel.isPopUp) {
+      Future.delayed(const Duration(seconds: 2), () {
+        CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
+      });
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +54,7 @@ class SuccessPage extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  successModel.isCongrats!
+                  widget.successModel.isCongrats
                       ? getTranslated("congratulations", context)
                       : getTranslated("has_been_sent", context),
                   style: AppTextStyles.w600.copyWith(
@@ -50,8 +66,9 @@ class SuccessPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16.0.h),
                   child: SubstringHighlight(
                     textAlign: TextAlign.center,
-                    text: successModel.description!, // search result string from database or something
-                    term: successModel.title ?? "iiiiiii",
+                    text: widget.successModel
+                        .description!, // search result string from database or something
+                    term: widget.successModel.title ?? "iiiiiii",
                     textStyle: AppTextStyles.w500.copyWith(
                         fontSize: 16,
                         color: ColorResources.SECOUND_PRIMARY_COLOR),
@@ -61,33 +78,30 @@ class SuccessPage extends StatelessWidget {
                   ),
                 ),
               ),
-              CustomButton(
-                text: successModel.btnText ?? "في طريقي",
-                onTap: () {
-                  if (successModel.routeName != null) {
-                    CustomNavigator.push(successModel.routeName!,
-                        clean: successModel.isClean??false, replace: successModel.isReplace??false,arguments: successModel.argument??0);
-                  } else {
-                    CustomNavigator.push(
-                      Routes.DASHBOARD,
-                      clean: true,
-                      arguments: 0
-                    );
-                  }
-                },
-              ),
-
+              if (!widget.successModel.isPopUp)
+                CustomButton(
+                  text: widget.successModel.btnText ?? "في طريقي",
+                  onTap: () {
+                    if (widget.successModel.routeName != null) {
+                      CustomNavigator.push(widget.successModel.routeName!,
+                          clean: widget.successModel.isClean ?? false,
+                          replace: widget.successModel.isReplace ?? false,
+                          arguments: widget.successModel.argument ?? 0);
+                    } else {
+                      CustomNavigator.push(Routes.DASHBOARD,
+                          clean: true, arguments: 0);
+                    }
+                  },
+                ),
+              if (!widget.successModel.isPopUp)
                 SizedBox(
                   height: 8.h,
                 ),
-
+              if (!widget.successModel.isPopUp)
                 CustomButton(
                   onTap: () {
-                    CustomNavigator.push(
-                      Routes.DASHBOARD,
-                      clean: true,
-                      arguments: 0
-                    );
+                    CustomNavigator.push(Routes.DASHBOARD,
+                        clean: true, arguments: 0);
                   },
                   text: getTranslated("close", context),
                   backgroundColor: ColorResources.WHITE_COLOR,

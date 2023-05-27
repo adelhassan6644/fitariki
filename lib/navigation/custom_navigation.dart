@@ -12,7 +12,6 @@ import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
 import '../features/my_offer_details/page/all_trips.dart';
 import '../features/my_offer_details/page/my_offer_details.dart';
-import '../features/my_offers/model/my_offer.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/ratting/page/ratting_page.dart';
@@ -22,6 +21,7 @@ import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
 import '../features/user_profile/page/user_profile.dart';
 import '../main.dart';
+import '../main_models/offer_model.dart';
 import '../main_page/dashboard.dart';
 import 'routes.dart';
 
@@ -91,7 +91,7 @@ abstract class CustomNavigator {
         return _pageRoute(const Notifications());
 
       case Routes.MY_OFFERS_DETAILS:
-        return _pageRoute( MyOfferDetails(myOfferDetails: settings.arguments as MyOfferModel,));
+        return _pageRoute( MyOfferDetails(offerModel: settings.arguments as OfferModel,));
 
       case Routes.ALL_TRIPS:
         return _pageRoute(const AllTrips());
