@@ -58,7 +58,6 @@ class MyOfferDetails extends StatelessWidget {
                         startPoint: offerModel.pickupLocation,
                         endPoint: offerModel.dropOffLocation,
                       ),
-                      // CalenderWidget(startDate: DateTime.now(),days: offerModel.offerDays!, endDate: DateTime.now(),),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,

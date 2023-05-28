@@ -129,7 +129,7 @@ class MyOfferCard extends StatelessWidget {
                       children: [
                         customImageIconSVG(imageName: SvgImages.alarm),
                         const SizedBox(height: 4),
-                        if (offer!.offerDays!.first.endTime != null)
+                        if (offer!.offerDays!.isNotEmpty &&offer!.offerDays?.first.endTime != null)
                           MarqueeWidget(
                             child: Text(
                               "${Methods.convertStringToTime(offer!.offerDays!.first.startTime ?? TimeOfDay.now().toString(), withFormat: true)}"

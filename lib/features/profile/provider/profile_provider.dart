@@ -495,12 +495,16 @@ class ProfileProvider extends ChangeNotifier {
           }
         };
 
-        FormData.fromMap({
-          if (identityImage != null)
-            "id_image": await MultipartFile.fromFile(identityImage!.path),
-          if (profileImage != null)
+        if (profileImage != null) {
+
+          Either<ServerFailure, Response> response =
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            // if (identityImage != null)
+            //   "id_image": await MultipartFile.fromFile(identityImage!.path),
+
             "image": await MultipartFile.fromFile(profileImage!.path),
-        });
+          }));
+        }
 
         log(personalData.toString());
         Either<ServerFailure, Response> response =
@@ -600,6 +604,7 @@ class ProfileProvider extends ChangeNotifier {
 
     startLocation = profileModel?.client?.pickupLocation;
     endLocation = profileModel?.client?.dropOffLocation;
+    nationality = profileModel?.client?.national;
 
     image = profileModel?.client?.image;
     firstName.text = profileModel?.client?.firstName ?? "";

@@ -24,33 +24,26 @@ class CalenderWidget extends StatefulWidget {
 }
 
 class _CalenderWidgetState extends State<CalenderWidget> {
-
-
   late WeekdayCount counts;
   @override
   void initState() {
-
-
-
-Future.delayed(Duration.zero,(){
-  // Provider.of<CalenderProvider>(context,listen: false).getEventsList();
-});
-
+    Future.delayed(Duration.zero, () {
+      Provider.of<CalenderProvider>(context, listen: false).getEventsList(startDate: widget.startDate,endDate: widget.endDate,days: widget.days.map((e) => e.id!).toList());
+    });
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-    return Consumer<CalenderProvider>(
-      builder: (context,provider,_) {
-        return CalendarCarousel<Event>(
-          onDayPressed: (date, events) {
-          },
+    return Consumer<CalenderProvider>(builder: (context, provider, _) {
+      return Directionality(
+          
+        textDirection: TextDirection.rtl,
+        child: CalendarCarousel<Event>(
+          onDayPressed: (date, events) {},
+          locale: 'ar',
           weekendTextStyle: const TextStyle(
-
             color: ColorResources.PRIMARY_COLOR,
           ),
           thisMonthDayBorderColor: Colors.grey,
@@ -80,8 +73,8 @@ Future.delayed(Duration.zero,(){
           todayBorderColor: Colors.grey,
           markedDateMoreShowTotal:
               true, // null for not showing hidden events indicator
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

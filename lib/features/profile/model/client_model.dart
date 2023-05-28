@@ -55,7 +55,7 @@ class ClientModel {
         image: json["image"],
         nickname: json["nickname"],
         gender: int.parse(json["gender"] ?? "0"),
-        age: json["age"],
+        age: json["age"].toString(),
         national: json["country"] != null ? Country.fromJson(
                 json["country"],
               ) : null,

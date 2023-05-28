@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/loading_dialog.dart';
 import 'package:flutter/material.dart';
@@ -73,11 +74,13 @@ class AddOfferProvider extends ChangeNotifier {
         "request_offer": {
           "client_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
-          "start_date": startDate,
-          "end_date": endDate,
+          "start_date": startDate.defaultFormat(),
+          "end_date": endDate.defaultFormat(),
           "duration": 10,
           "price": 250,
-          if (sl.get<FollowersProvider>().addFollowers)
+          if (sl.get<FollowersProvider>().addFollowers&&sl
+              .get<FollowersProvider>()
+              .selectedFollowers.isNotEmpty)
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers

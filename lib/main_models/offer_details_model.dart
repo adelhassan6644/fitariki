@@ -88,6 +88,8 @@ class OfferDetailsModel {
         name: json["name"],
         nationality: json["nationality"],
         rate: json["rate"]?.toDouble(),
+        startDate:DateTime.parse( json["start_date"]) ,
+        endDate:DateTime.parse( json["end_date"]) ,
         duration: json["duration"],
         clientId:json["client_id"],
         driverId:json["driver_id"],
