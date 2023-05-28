@@ -15,13 +15,16 @@ import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../home/widgets/acceptable_analytics_widget.dart';
+import '../../my_offers/model/my_offer.dart';
 import '../../profile/provider/profile_provider.dart';
 
 class TripCard extends StatelessWidget {
-  const TripCard({ Key? key}) : super(key: key);
+  final OfferRequest? offerRequest;
+  const TripCard({ Key? key, this.offerRequest}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: () =>
           CustomNavigator.push(Routes.TRIP_DETAILS,),
@@ -73,7 +76,8 @@ class TripCard extends StatelessWidget {
                                       SizedBox(
                                         width: 50,
                                         child: Text(
-                                          "محمد احمد",
+                                          !sl.get<ProfileProvider>().isDriver?offerRequest!.driver!.firstName??"":offerRequest!.client!.firstName??"",
+
                                           textAlign: TextAlign.start,
                                           maxLines: 1,
                                           style: AppTextStyles.w600.copyWith(
@@ -114,7 +118,7 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "٥ يوم",
+                                          "${offerRequest?.duration} يوم",
                                           textAlign: TextAlign.start,
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
@@ -145,7 +149,7 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          DateTime.now().defaultFormat(),
+                                          "${offerRequest?.startAt!.defaultFormat()} - ${offerRequest?.endAt!.defaultFormat()}",
                                           textAlign: TextAlign.start,
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
@@ -176,7 +180,7 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "400 ريال",
+                                          "${offerRequest!.price} ريال",
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis),
@@ -370,7 +374,8 @@ class TripCard extends StatelessWidget {
                         SizedBox(
                           height: 16.h,
                         ),
-                        Row(
+                       /// description
+                       /* Row(
                           children: [
                             Expanded(
                               child: Column(
@@ -395,7 +400,7 @@ class TripCard extends StatelessWidget {
                               height: 30.w,
                             )
                           ],
-                        )
+                        )*/
                       ],
                     ),
                   ),
@@ -411,7 +416,7 @@ class TripCard extends StatelessWidget {
                         height: 10.h,
                       ),
                       const AcceptableAnalytics(
-                        value: 50,
+                        value: 0,
                         color: ColorResources.PRIMARY_COLOR,
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:fitariki/main_models/weak_model.dart';
 import '../features/maps/models/location_model.dart';
+import '../features/my_offers/model/my_offer.dart';
 
 class OfferModel {
   int? id;
@@ -14,8 +15,7 @@ class OfferModel {
   List<WeekModel>? offerDays;
   LocationModel? dropOffLocation;
   LocationModel? pickupLocation;
-  List<dynamic>? offerRequests;
-
+  List<OfferRequest>? offerRequests;
   OfferModel(
       {this.id,
       this.image,
@@ -29,6 +29,7 @@ class OfferModel {
       this.offerDays,
       this.dropOffLocation,
       this.pickupLocation,
+
       this.offerRequests});
 
   factory OfferModel.fromJson(Map<String, dynamic> json) => OfferModel(
@@ -53,10 +54,9 @@ class OfferModel {
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),
-        offerRequests: json["offer_requests"] == null
-            ? []
-            : List<dynamic>.from(json["offer_requests"]!.map((x) => x)),
-      );
+        offerRequests:  json["offer_requests"] == null ? [] : List<OfferRequest>.from(json["offer_requests"]!.map((x) => OfferRequest.fromJson(x)))
+
+  );
 
   Map<String, dynamic> toJson() => {
         "id": id,

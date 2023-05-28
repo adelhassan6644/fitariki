@@ -87,7 +87,7 @@ class MyOfferDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ...List.generate(2, (index) => const TripCard()),
+                      ...List.generate(offerModel.offerRequests?.length??0, (index) =>  TripCard(offerRequest: offerModel.offerRequests![index],)),
                     ],
                   ),
                 ],
