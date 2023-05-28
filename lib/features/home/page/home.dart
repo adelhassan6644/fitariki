@@ -14,9 +14,21 @@ import '../widgets/home_app_bar.dart';
 import '../../../main_widgets/offer_card.dart';
 import 'package:fitariki/features/home/widgets/search_bar.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  ScrollController controller = ScrollController();
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero,()=>Provider.of<HomeProvider>(context,listen: false).scroll(controller));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -72,6 +84,7 @@ class Home extends StatelessWidget {
                 await homeProvider.getOffers();
               },
               child: ListAnimator(
+                controller: controller,
                 data: homeProvider.isLoading
                     ? List.generate(7, (index) => const ShimmerOfferCard())
                     : homeProvider.offer == null || homeProvider.offer!.isEmpty

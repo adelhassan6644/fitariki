@@ -9,11 +9,29 @@ import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../maps/models/location_model.dart';
 import '../repo/home_repo.dart';
+import 'package:flutter/rendering.dart';
+
 
 class HomeProvider extends ChangeNotifier {
   HomeRepo homeRepo;
   HomeProvider({required this.homeRepo}) {
     getOffers();
+  }
+
+  bool goingDown = false;
+   scroll(controller) {
+     controller.addListener(() {
+       if (controller.position.userScrollDirection ==
+           ScrollDirection.forward) {
+         goingDown = false;
+         notifyListeners();
+
+       } else {
+         goingDown = true;
+         notifyListeners();
+
+       }
+     });
   }
 
   int roleIndex = 0;
