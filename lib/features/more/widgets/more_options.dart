@@ -48,8 +48,7 @@ class MoreOptions extends StatelessWidget {
                     title: getTranslated("followers", context),
                     icon: SvgImages.addFollower,
                     onTap: () {
-                      Provider.of<FollowersProvider>(context, listen: false)
-                          .getFollowers();
+                      Provider.of<FollowersProvider>(context,listen: false).getFollowers();
                       CustomNavigator.push(Routes.FOLLOWERS);
                     },
                   ),
@@ -57,7 +56,7 @@ class MoreOptions extends StatelessWidget {
                   title: getTranslated("archives", context),
                   icon: SvgImages.bookMark,
                   onTap: () {
-                    // CustomNavigator.push(Routes.USER_PROFILE);
+                 // CustomNavigator.push(Routes.USER_PROFILE);
                     sl<WishlistProvider>().getWishList();
                     CustomNavigator.push(Routes.WISHLIST);
                   },
@@ -76,12 +75,11 @@ class MoreOptions extends StatelessWidget {
                       ? getTranslated("clients_evaluation", context)
                       : getTranslated("captain_evaluation", context),
                   icon: SvgImages.rate,
-                  onTap: () => CustomNavigator.push(Routes.RATE_USER,arguments: 1),
-                ),
+                  onTap: () => CustomNavigator.push(Routes.RATTING,),),
                 MoreButton(
                   title: getTranslated("contact_with_us", context),
                   icon: SvgImages.call,
-                  onTap: () => CustomNavigator.push(Routes.CONTACT_WITH_US),
+                  onTap: ()=>CustomNavigator.push(Routes.CONTACT_WITH_US),
                 ),
                 Consumer<FirebaseAuthProvider>(
                   builder: (_, authProvider, child) {
