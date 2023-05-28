@@ -454,14 +454,7 @@ class ProfileProvider extends ChangeNotifier {
           "pallet_number": carPlate.text.trim(),
           "color": carColor.text.trim(),
           "seats_count": carSeats,
-          if (carImage != null) "car_image": "cbvb",
-          // await MultipartFile.fromFile(carImage!.path),
-          if (formImage != null) "form_image": "cbvb",
-          // await MultipartFile.fromFile(formImage!.path),
-          if (insuranceImage != null) "insurance_image": "cb",
-          // await MultipartFile.fromFile(insuranceImage!.path),
-          if (licenceImage != null) "licence_image": "cb",
-          // await MultipartFile.fromFile(licenceImage!.path),
+
         };
 
         final bankData = {
@@ -494,14 +487,41 @@ class ProfileProvider extends ChangeNotifier {
             if (role == "driver") "bank_info": bankData
           }
         };
+        if (carImage != null) {
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            "car_image":
+            await MultipartFile.fromFile(carImage!.path),
+          }));
+        }
+           if (formImage != null) {
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            "form_image":
+            await MultipartFile.fromFile(formImage!.path),
+          }));
+        }
+           if (insuranceImage != null) {
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            "insurance_image":
+            await MultipartFile.fromFile(insuranceImage!.path),
+          }));
+        }
+           if (licenceImage != null) {
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            "licence_image":
+            await MultipartFile.fromFile(licenceImage!.path),
+          }));
+        }
+           if (identityImage != null) {
+          await profileRepo.updateProfile(body:   FormData.fromMap({
+            "id_image":
+            await MultipartFile.fromFile(identityImage!.path),
+          }));
+        }
 
         if (profileImage != null) {
 
           Either<ServerFailure, Response> response =
           await profileRepo.updateProfile(body:   FormData.fromMap({
-            // if (identityImage != null)
-            //   "id_image": await MultipartFile.fromFile(identityImage!.path),
-
             "image": await MultipartFile.fromFile(profileImage!.path),
           }));
         }
