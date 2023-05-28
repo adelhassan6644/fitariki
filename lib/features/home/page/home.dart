@@ -8,7 +8,8 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/tab_widget.dart';
-import '../../auth/provider/firebase_auth_provider.dart';
+import '../../../data/config/di.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
 import '../../../main_widgets/offer_card.dart';
@@ -26,16 +27,17 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero,()=>Provider.of<HomeProvider>(context,listen: false).scroll(controller));
+    Future.delayed(Duration.zero, sl<HomeProvider>().scroll(controller));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const HomeAppBar(),
         const AcceptableWidget(),
-        Consumer<FirebaseAuthProvider>(
+        Consumer<ProfileProvider>(
           builder: (context, provider, child) {
             return provider.isLogin
                 ? const SizedBox()
