@@ -19,6 +19,7 @@ import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
+import '../../features/ratting/provider/ratting_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
@@ -61,5 +62,6 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ContactProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<UserProfileProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<RattingProvider>()),
   ];
 }

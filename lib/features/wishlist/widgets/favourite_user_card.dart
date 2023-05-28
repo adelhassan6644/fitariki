@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
 import '../provider/wishlist_provider.dart';
@@ -77,7 +77,7 @@ class FavouriteUserCard extends StatelessWidget {
                             height: 11)
                       ],
                     ),
-                     RateStars(
+                     ShowRate(
                       rate: driver != null ? driver!.rate :client!.rate,
                     )
                   ],

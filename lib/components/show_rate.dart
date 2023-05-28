@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../app/core/utils/text_styles.dart';
 import 'custom_images.dart';
 
-class RateStars extends StatelessWidget {
-  const RateStars({Key? key, this.rate, this.size, this.showRateNumber = true})
+class ShowRate extends StatelessWidget {
+  const ShowRate({Key? key, this.rate, this.size, this.showRateNumber = true})
       : super(key: key);
 
   final num? rate;

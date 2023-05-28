@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/home/provider/home_provider.dart';
 import 'package:fitariki/features/user_profile/provider/user_profile_provider.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -9,14 +10,16 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../components/empty_widget.dart';
 import '../../../data/config/di.dart';
-import '../../../main_widgets/offer_card.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
+import '../../../navigation/routes.dart';
 import '../../more/widgets/profile_card.dart';
 import '../../offer_details/widgets/car_details.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
 import '../widgets/follower_distance_widget.dart';
+import '../widgets/user_offer_card.dart';
 
 class UserProfile extends StatefulWidget {
   final int userId;
@@ -116,20 +119,35 @@ class _UserProfileState extends State<UserProfile> {
                             style: AppTextStyles.w600.copyWith(fontSize: 16),
                           ),
                         ),
-                        InkWell(
-                          child: Text(
-                            getTranslated("view_all", context),
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 11, color: ColorResources.DISABLED),
-                          ),
-                        )
+                        if (sl<HomeProvider>().offer != null &&
+                            sl<HomeProvider>().offer!.isNotEmpty &&
+                            sl<HomeProvider>().offer!.length > 3)
+                          InkWell(
+                            onTap: () =>
+                                CustomNavigator.push(Routes.ALL_USER_OFFERS),
+                            child: Text(
+                              getTranslated("view_all", context),
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 11, color: ColorResources.DISABLED),
+                            ),
+                          )
                       ],
                     ),
                   ),
-                  ...List.generate(
-                      sl<HomeProvider>().offer?.length ?? 0,
-                      (index) => OfferCard(
-                          offerModel: sl<HomeProvider>().offer![index]))
+                  if (sl<HomeProvider>().offer != null &&
+                      sl<HomeProvider>().offer!.isNotEmpty)
+                    ...List.generate(
+                        sl<HomeProvider>().offer!.length > 3
+                            ? 3
+                            : sl<HomeProvider>().offer!.length,
+                        (index) => UserOfferCard(
+                            offerModel: sl<HomeProvider>().offer![index])),
+                  if (sl<HomeProvider>().offer == null ||
+                      sl<HomeProvider>().offer!.isEmpty)
+                    EmptyState(
+                        txt: sl.get<ProfileProvider>().isDriver
+                            ? "لا يوجود عروض حاليا"
+                            : "لا يوجود طلبات حاليا")
                 ],
               ),
             ),

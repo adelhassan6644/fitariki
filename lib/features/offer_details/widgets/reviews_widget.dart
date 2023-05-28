@@ -7,7 +7,7 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 
 class ReviewsWidget extends StatelessWidget {
   const ReviewsWidget({Key? key}) : super(key: key);
@@ -67,7 +67,7 @@ class ReviewsWidget extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    const RateStars(
+                    const ShowRate(
                       rate: 3,
                     ),
                     const SizedBox(

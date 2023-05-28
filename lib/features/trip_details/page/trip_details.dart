@@ -91,37 +91,37 @@ class TripDetails extends StatelessWidget {
                     ),
                   if (!sl.get<ProfileProvider>().isDriver)
                     const CarTripDetailsWidget(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 8.h,
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                getTranslated("note", context),
-                                style:
-                                    AppTextStyles.w600.copyWith(fontSize: 10),
-                              ),
-                              Text(
-                                "“ يوجد معي راكب بنفس حيك + نفس وجهتك “",
-                                maxLines: 2,
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                    overflow: TextOverflow.ellipsis),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30.w,
-                        )
-                      ],
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(
+                  //       vertical: 8.h,
+                  //       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                  //   child: Row(
+                  //     children: [
+                  //       Expanded(
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               getTranslated("note", context),
+                  //               style:
+                  //                   AppTextStyles.w600.copyWith(fontSize: 10),
+                  //             ),
+                  //             Text(
+                  //               "“ يوجد معي راكب بنفس حيك + نفس وجهتك “",
+                  //               maxLines: 2,
+                  //               style: AppTextStyles.w400.copyWith(
+                  //                   fontSize: 10,
+                  //                   overflow: TextOverflow.ellipsis),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       SizedBox(
+                  //         height: 30.w,
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 24.h,
                   )

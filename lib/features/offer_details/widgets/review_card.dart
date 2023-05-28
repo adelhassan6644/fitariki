@@ -5,7 +5,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class ReviewCard extends StatelessWidget {
                                 height: 11)
                           ],
                         ),
-                        const RateStars(
+                        const ShowRate(
                           rate: 3,
                           size: 10,
                         ),

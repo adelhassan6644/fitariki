@@ -31,6 +31,8 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
 import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/add_offer/repo/add_offer_repo.dart';
+import '../../features/ratting/provider/ratting_provider.dart';
+import '../../features/ratting/repo/ratting_repo.dart';
 import '../../features/trip_details/provider/trip_details_provider.dart';
 import '../../features/trip_details/repo/trip_details_repo.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
@@ -95,12 +97,19 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
       () => FollowersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
 
-  sl.registerLazySingleton(() => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => TripDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => TripDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => RattingRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -121,21 +130,41 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
-  sl.registerLazySingleton(() => FollowerDetailsProvider(followerDetailsRepo: sl(),));
-  sl.registerLazySingleton(() => MyOffersProvider(myOffersRepo: sl(),));
+  sl.registerLazySingleton(() => FollowerDetailsProvider(
+        followerDetailsRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => MyOffersProvider(
+        myOffersRepo: sl(),
+      ));
   sl.registerLazySingleton(() =>
       AddFollowerProvider(addFollowersRepo: sl(), followerProvider: sl()));
-  sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
-  sl.registerLazySingleton(() => ContactProvider(contactRepo: sl(),));
+  sl.registerLazySingleton(() => WishlistProvider(
+        wishlistRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => ContactProvider(
+        contactRepo: sl(),
+      ));
   sl.registerLazySingleton(() => HomeProvider(
         homeRepo: sl(),
-      ));  sl.registerLazySingleton(() => OfferDetailsProvider(
+      ));
+  sl.registerLazySingleton(() => OfferDetailsProvider(
         repo: sl(),
       ));
-  sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
-  sl.registerLazySingleton(() => UserProfileProvider(userProfileRepo: sl(),));
-  sl.registerLazySingleton(() => FollowersProvider(followersRepo: sl(),));
-  sl.registerLazySingleton(() => TripDetailsProvider(tripDetailsRepo: sl(),));
+  sl.registerLazySingleton(() => NotificationsProvider(
+        notificationsRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => UserProfileProvider(
+        userProfileRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => FollowersProvider(
+        followersRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => TripDetailsProvider(
+        tripDetailsRepo: sl(),
+      ));
+  sl.registerLazySingleton(() => RattingProvider(
+        rattingRepo: sl(),
+      ));
   sl.registerLazySingleton(() => PaymentProvider());
 
   // External

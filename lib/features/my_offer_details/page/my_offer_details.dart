@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/components/animated_widget.dart';
+import 'package:fitariki/components/empty_widget.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -9,7 +10,6 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
-import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../navigation/routes.dart';
 import '../../my_offers/widgets/my_offer_card.dart';
@@ -29,9 +29,9 @@ class MyOfferDetails extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: !sl.get<ProfileProvider>().isDriver
-                  ? getTranslated("delivery_request_details", context)
-                  : getTranslated("delivery_offer_details", context),
+              title: sl.get<ProfileProvider>().isDriver
+                  ? getTranslated("delivery_offer_details", context)
+                  : getTranslated("delivery_request_details", context),
               actionChild: InkWell(
                 onTap: () {},
                 child: Text(
@@ -66,14 +66,16 @@ class MyOfferDetails extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                !sl.get<ProfileProvider>().isDriver
-                                    ? getTranslated("offers", context)
-                                    : getTranslated("requests", context),
+                                sl.get<ProfileProvider>().isDriver
+                                    ? getTranslated("requests", context)
+                                    : getTranslated("offers", context),
                                 style:
                                     AppTextStyles.w600.copyWith(fontSize: 16),
                               ),
                             ),
-                            InkWell(
+                            if (offerModel.offerRequests != null &&
+                                offerModel.offerRequests!.isNotEmpty&&
+                                offerModel.offerRequests!.length>3)   InkWell(
                               onTap: () => CustomNavigator.push(
                                 Routes.ALL_TRIPS,
                               ),
@@ -87,7 +89,20 @@ class MyOfferDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ...List.generate(offerModel.offerRequests?.length??0, (index) =>  TripCard(offerRequest: offerModel.offerRequests![index],)),
+                      if (offerModel.offerRequests != null &&
+                          offerModel.offerRequests!.isNotEmpty)
+                        ...List.generate(
+                            offerModel.offerRequests!.length>3 ? 3:offerModel.offerRequests!.length,
+                            (index) => TripCard(
+                                  offerRequest:
+                                      offerModel.offerRequests![index],
+                                )),
+                      if (offerModel.offerRequests == null ||
+                          offerModel.offerRequests!.isEmpty)
+                        EmptyState(
+                            txt: sl.get<ProfileProvider>().isDriver
+                                ? "لا يوجود عروض الان"
+                                : "لا يوجود طلبات الان")
                     ],
                   ),
                 ],

@@ -1,18 +1,22 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
+import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../data/config/di.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../widegts/ratting_card.dart';
 
 class Ratting extends StatelessWidget {
-  const Ratting({required this.title, Key? key}) : super(key: key);
-  final String title;
+  const Ratting({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           CustomAppBar(
-            title: title,
+            title: sl<ProfileProvider>().isDriver
+                ? getTranslated("clients_evaluation", context)
+                : getTranslated("captain_evaluation", context),
           ),
           Expanded(
               child: ListView(

@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -20,14 +21,14 @@ import '../../profile/provider/profile_provider.dart';
 
 class TripCard extends StatelessWidget {
   final OfferRequest? offerRequest;
-  const TripCard({ Key? key, this.offerRequest}) : super(key: key);
+  const TripCard({Key? key, this.offerRequest}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
-      onTap: () =>
-          CustomNavigator.push(Routes.TRIP_DETAILS,),
+      onTap: () => CustomNavigator.push(
+        Routes.TRIP_DETAILS,
+      ),
       child: Stack(
         children: [
           Padding(
@@ -76,8 +77,9 @@ class TripCard extends StatelessWidget {
                                       SizedBox(
                                         width: 50,
                                         child: Text(
-                                          !sl.get<ProfileProvider>().isDriver?offerRequest!.driver!.firstName??"":offerRequest!.client!.firstName??"",
-
+                                          !sl.get<ProfileProvider>().isDriver
+                                              ? "${offerRequest!.driver!.firstName}"
+                                              : "${offerRequest!.client!.firstName} ${offerRequest!.client!.lastName}",
                                           textAlign: TextAlign.start,
                                           maxLines: 1,
                                           style: AppTextStyles.w600.copyWith(
@@ -96,8 +98,10 @@ class TripCard extends StatelessWidget {
                                           height: 11)
                                     ],
                                   ),
-                                  const RateStars(
-                                    rate: 3,
+                                  ShowRate(
+                                    rate: sl.get<ProfileProvider>().isDriver
+                                        ? offerRequest!.client?.rate
+                                        : offerRequest!.driver?.rate,
                                   )
                                 ],
                               ),
@@ -193,7 +197,7 @@ class TripCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        if (! sl.get<ProfileProvider>().isDriver)
+                        if (!sl.get<ProfileProvider>().isDriver)
                           Row(
                             children: [
                               Expanded(
@@ -212,7 +216,8 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "كامري، تايوتا",
+                                          offerRequest!.driver?.carInfo?.name ??
+                                              "",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),
@@ -248,7 +253,9 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "2024",
+                                          offerRequest!
+                                                  .driver?.carInfo?.model ??
+                                              "",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),
@@ -284,7 +291,7 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "5 اشخاص",
+                                          "${offerRequest!.driver?.carInfo?.seatsCount} اشخاص",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),
@@ -296,7 +303,7 @@ class TripCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        if ( sl.get<ProfileProvider>().isDriver)
+                        if (sl.get<ProfileProvider>().isDriver)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -374,8 +381,9 @@ class TripCard extends StatelessWidget {
                         SizedBox(
                           height: 16.h,
                         ),
-                       /// description
-                       /* Row(
+
+                        /// description
+                        /* Row(
                           children: [
                             Expanded(
                               child: Column(
@@ -408,7 +416,9 @@ class TripCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "4 ايام",
+                        Methods.getDayCount(
+                          date: offerRequest!.createdAt!,
+                        ).toString(),
                         style: AppTextStyles.w400.copyWith(
                             fontSize: 10, color: ColorResources.DISABLED),
                       ),
@@ -433,8 +443,9 @@ class TripCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () =>
-                    CustomNavigator.push(Routes.TRIP_DETAILS,),
+                onTap: () => CustomNavigator.push(
+                  Routes.TRIP_DETAILS,
+                ),
               ))
         ],
       ),

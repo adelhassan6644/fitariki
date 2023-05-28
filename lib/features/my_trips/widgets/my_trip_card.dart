@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +99,9 @@ class MyTripCard extends StatelessWidget {
                           ],
                         )
                       ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
                     ),
                     Row(
                       children: [

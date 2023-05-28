@@ -14,16 +14,16 @@ class MyOffersProvider extends ChangeNotifier {
 
   MyOffersModel? myOffers;
   bool isLoading = false;
-  List<String> days=[];
-  String? day;
+
   getMyOffer() async {
     try {
       isLoading = true;
       notifyListeners();
 
-      Either<ServerFailure, Response> response = await myOffersRepo.getMyOffer();
+      Either<ServerFailure, Response> response =
+          await myOffersRepo.getMyOffer();
       response.fold((l) => null, (response) {
-        myOffers =MyOffersModel.fromJson(response.data["data"]);
+        myOffers = MyOffersModel.fromJson(response.data["data"]);
         isLoading = false;
         notifyListeners();
       });

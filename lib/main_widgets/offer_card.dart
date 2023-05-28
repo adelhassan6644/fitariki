@@ -10,7 +10,7 @@ import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
-import '../components/rate_stars.dart';
+import '../components/show_rate.dart';
 import '../data/config/di.dart';
 import '../features/wishlist/provider/wishlist_provider.dart';
 import '../navigation/routes.dart';
@@ -90,7 +90,7 @@ class OfferCard extends StatelessWidget {
                                       height: 11)
                                 ],
                               ),
-                              const RateStars(
+                              const ShowRate(
                                 rate: 3,
                               )
                             ],

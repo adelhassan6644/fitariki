@@ -7,7 +7,7 @@ import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
-import '../components/rate_stars.dart';
+import '../components/show_rate.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 import '../navigation/custom_navigation.dart';
 import '../navigation/routes.dart';
@@ -25,7 +25,6 @@ class UserCard extends StatelessWidget {
       this.priceRange,
       this.withAnalytics = true,
       this.isDriver = true,
-
       Key? key})
       : super(key: key);
   final bool withAnalytics, isDriver;
@@ -58,8 +57,10 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  // onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
-                  //     arguments: userId),
+                  onTap: userId != null
+                      ? () => CustomNavigator.push(Routes.USER_PROFILE,
+                          arguments: userId)
+                      : () {},
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(
@@ -97,7 +98,7 @@ class UserCard extends StatelessWidget {
                                   height: 11)
                             ],
                           ),
-                          const RateStars(
+                          const ShowRate(
                             rate: 3,
                           ),
                           SizedBox(

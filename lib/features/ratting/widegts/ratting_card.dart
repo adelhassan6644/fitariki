@@ -6,7 +6,7 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 
 class RattingCard extends StatelessWidget {
   const RattingCard({this.isSeen = true, Key? key}) : super(key: key);
@@ -70,7 +70,7 @@ class RattingCard extends StatelessWidget {
                                       height: 11)
                                 ],
                               ),
-                              const RateStars(
+                              const ShowRate(
                                 rate: 3,
                                 size: 10,
                               ),

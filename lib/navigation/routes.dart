@@ -19,4 +19,6 @@ class Routes {
   static const TRIP_DETAILS = "TRIP_DETAILS";
   static const PAYMENT = "PAYMENT";
   static const USER_PROFILE = "USER_PROFILE";
+  static const ALL_USER_OFFERS = "ALL_USER_OFFERS";
+  static const RATE_USER = "RATE_USER";
 }

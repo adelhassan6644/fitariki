@@ -8,7 +8,7 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
-import '../../../components/rate_stars.dart';
+import '../../../components/show_rate.dart';
 import '../../../navigation/routes.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -154,7 +154,7 @@ class ProfileCard extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
-                            RateStars(
+                            ShowRate(
                               rate: rate,
                               size: 6,
                             ),
