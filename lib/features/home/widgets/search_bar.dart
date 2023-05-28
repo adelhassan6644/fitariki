@@ -12,7 +12,8 @@ import '../../../components/custom_show_model_bottom_sheet.dart';
 import 'filter_Bottom_sheet.dart';
 
 class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({this.hint, this.withFilter = true, Key? key})
+  const SearchBarWidget(
+      { this.hint, this.withFilter = true, Key? key})
       : super(key: key);
 
   final bool withFilter;
@@ -23,8 +24,7 @@ class SearchBarWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => customShowModelBottomSheet(
           body: const FilterBottomSheet(),
-          onClose: () =>
-              Provider.of<HomeProvider>(context, listen: false).reset()),
+          onClose: () => Provider.of<HomeProvider>(context, listen: false).reset()),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT),
@@ -41,7 +41,8 @@ class SearchBarWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  hint ?? getTranslated("search_for_delivery_offers", context),
+                  hint ??
+                      getTranslated("search_for_delivery_offers", context),
                   style: AppTextStyles.w400.copyWith(
                       color: ColorResources.DISABLED,
                       fontSize: 14,
@@ -51,30 +52,32 @@ class SearchBarWidget extends StatelessWidget {
               Container(
                   padding: EdgeInsets.only(
                       right: Provider.of<LocalizationProvider>(context,
-                                  listen: false)
-                              .isLtr
+                          listen: false)
+                          .isLtr
                           ? 0
                           : 10,
                       left: Provider.of<LocalizationProvider>(context,
-                                  listen: false)
-                              .isLtr
+                          listen: false)
+                          .isLtr
                           ? 10
                           : 0),
                   decoration: BoxDecoration(
                       border: Border(
-                    right: Provider.of<LocalizationProvider>(context,
-                                listen: false)
+                        right: Provider.of<LocalizationProvider>(context,
+                            listen: false)
                             .isLtr
-                        ? const BorderSide(color: Colors.transparent, width: 0)
-                        : const BorderSide(
+                            ? const BorderSide(
+                            color: Colors.transparent, width: 0)
+                            : const BorderSide(
                             color: ColorResources.HINT_COLOR, width: 1),
-                    left: Provider.of<LocalizationProvider>(context,
-                                listen: false)
+                        left: Provider.of<LocalizationProvider>(context,
+                            listen: false)
                             .isLtr
-                        ? const BorderSide(
+                            ? const BorderSide(
                             color: ColorResources.HINT_COLOR, width: 1)
-                        : const BorderSide(color: Colors.transparent, width: 0),
-                  )),
+                            : const BorderSide(
+                            color: Colors.transparent, width: 0),
+                      )),
                   child: customImageIconSVG(
                     imageName: SvgImages.filter,
                   ))
