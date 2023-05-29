@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 abstract class Methods {
   static diffBtw2Dates({
@@ -94,6 +95,11 @@ abstract class Methods {
     } else {
       return "الآن";
     }
+  }
+
+ static calcDistance({required lat1,required long1,required lat2,required long2}){
+    return Geolocator.distanceBetween(double.parse(lat1),
+        double.parse(long1), double.parse(lat2), double.parse(long2));
   }
 }
 

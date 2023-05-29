@@ -2,14 +2,23 @@ import 'package:flutter/cupertino.dart';
 
 import '../app/core/utils/color_resources.dart';
 import '../app/core/utils/dimensions.dart';
+import '../app/core/utils/methods.dart';
 import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../components/custom_images.dart';
 
 class DistanceWidget extends StatelessWidget {
-  const DistanceWidget({required this.isCaptain, Key? key}) : super(key: key);
+  const DistanceWidget(
+      {required this.isCaptain,
+      required this.lat1,
+      required this.long1,
+      required this.lat2,
+      required this.long2,
+      Key? key})
+      : super(key: key);
   final bool isCaptain;
+  final String lat1, long1, lat2, long2;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,9 @@ class DistanceWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis),
           ),
           Text(
-            " 2.5 كيلو ",
+            Methods.calcDistance(
+                    lat1: lat1, long1: long1, lat2: lat2, long2: long2)
+                .toString(),
             maxLines: 1,
             style: AppTextStyles.w600.copyWith(
                 fontSize: 10,

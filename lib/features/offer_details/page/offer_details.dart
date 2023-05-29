@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
@@ -58,7 +59,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                     if (provider.isLogin) {
                       sl<WishlistProvider>()
                           .postWishList(offerId: widget.offerId);
-                    }else{
+                    } else {
                       showToast("برجاء الستجيل اولا !");
                     }
                   },
@@ -73,16 +74,26 @@ class _OfferDetailsState extends State<OfferDetails> {
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(
-                                userId: provider.offerDetails!.clientId != null?
-                                     provider.offerDetails!.clientId!
+                                userId: provider.offerDetails!.clientId != null
+                                    ? provider.offerDetails!.clientId!
                                     : provider.offerDetails!.driverId!,
-                                isDriver:  provider.offerDetails?.driverId != null? true:false,
+                                isDriver:
+                                    provider.offerDetails?.driverId != null
+                                        ? true
+                                        : false,
                                 createdAt: provider.offerDetails!.createdAt!,
-                                days: provider.offerDetails!.offerDays!.map((e) => e.dayName).toList().join(", "),
-                                duration: provider.offerDetails!.duration.toString(),
+                                days: provider.offerDetails!.offerDays!
+                                    .map((e) => e.dayName)
+                                    .toList()
+                                    .join(", "),
+                                duration:
+                                    provider.offerDetails!.duration.toString(),
                                 name: provider.offerDetails?.name,
-                                priceRange: "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
-                                timeRange: provider.offerDetails!.offerDays!.isEmpty ? ""
+                                priceRange:
+                                    "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
+                                timeRange: provider
+                                        .offerDetails!.offerDays!.isEmpty
+                                    ? ""
                                     : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
                               )),
                           MapWidget(
@@ -91,13 +102,19 @@ class _OfferDetailsState extends State<OfferDetails> {
                           ),
 
                           DistanceWidget(
-                            isCaptain:  provider.offerDetails?.driverId != null? true:false,
+                            isCaptain: provider.offerDetails?.driverId == null
+                                ? true
+                                : false,
+                            lat1: sl<LocationProvider>().currentLocation!.latitude!,
+                            long1:
+                            sl<LocationProvider>().currentLocation!.longitude!,
+                            lat2: sl<LocationProvider>().currentLocation!.latitude!,
+                            long2:  sl<LocationProvider>().currentLocation!.longitude!,
                           ),
-                          // CalenderWidget(startDate: provider.offerDetails!.startDate??DateTime.now(),days: provider.offerDetails!.offerDays!, endDate:  provider.offerDetails!.endDate??DateTime.now(),),
 
-                          if ( provider.offerDetails?.clientId == null)
+                          if (provider.offerDetails?.clientId == null)
                             const CarDetails(),
-                          if ( provider.offerDetails?.clientId == null)
+                          if (provider.offerDetails?.clientId == null)
                             const ReviewsWidget()
                         ],
                       ),

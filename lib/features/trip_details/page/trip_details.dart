@@ -17,13 +17,14 @@ import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../maps/models/location_model.dart';
+import '../../maps/provider/location_provider.dart';
 import '../../my_offers/model/my_offer.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/car_trip_details_widget.dart';
 
 class TripDetails extends StatelessWidget {
   final OfferRequest offerRequest;
-  const TripDetails({ required this.offerRequest,Key? key}) : super(key: key);
+  const TripDetails({required this.offerRequest, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,10 @@ class TripDetails extends StatelessWidget {
                   ),
                   DistanceWidget(
                     isCaptain: sl.get<ProfileProvider>().isDriver,
+                    lat1: sl<LocationProvider>().currentLocation!.latitude!,
+                    long1: sl<LocationProvider>().currentLocation!.longitude!,
+                    lat2: sl<LocationProvider>().currentLocation!.latitude!,
+                    long2: sl<LocationProvider>().currentLocation!.longitude!,
                   ),
                   if (sl.get<ProfileProvider>().isDriver)
                     Padding(
@@ -94,8 +99,12 @@ class TripDetails extends StatelessWidget {
                     ),
                   if (!sl.get<ProfileProvider>().isDriver)
                     const CarTripDetailsWidget(),
-                   CalenderWidget(startDate: offerRequest.startAt!, endDate: offerRequest.endAt!, days: sl.get<ProfileProvider>().isDriver?offerRequest.client!.clientDays!:
-                   offerRequest.driver!.driverDays!),
+                  CalenderWidget(
+                      startDate: offerRequest.startAt!,
+                      endDate: offerRequest.endAt!,
+                      days: sl.get<ProfileProvider>().isDriver
+                          ? offerRequest.client!.clientDays!
+                          : offerRequest.driver!.driverDays!),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(
                   //       vertical: 8.h,
@@ -133,7 +142,6 @@ class TripDetails extends StatelessWidget {
                 ],
               ),
             ),
-        
             Consumer<TripDetailsProvider>(builder: (_, provider, child) {
               return Column(
                 children: [
@@ -144,7 +152,7 @@ class TripDetails extends StatelessWidget {
                       text: sl.get<ProfileProvider>().isDriver
                           ? getTranslated("accept_offer", context)
                           : getTranslated("accept_request", context),
-                      onTap: ()=>provider.updateRequest(status: 1, id: 1),
+                      onTap: () => provider.updateRequest(status: 1, id: 1),
                       isLoading: provider.isAccepting,
                     ),
                   ),
@@ -157,15 +165,22 @@ class TripDetails extends StatelessWidget {
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: () => CupertinoPopUpHelper.showCupertinoTextController(title: getTranslated("negotiation", context),
-                          description: getTranslated("negotiation_description", context),
-                          controller: provider.negotiationPrice,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),],
-                          onSend: ()=>provider.updateRequest(status: 2, id: 1),
-                          onClose: () {
-                            provider.negotiationPrice.clear();
-                          }),
+                      onTap: () =>
+                          CupertinoPopUpHelper.showCupertinoTextController(
+                              title: getTranslated("negotiation", context),
+                              description: getTranslated(
+                                  "negotiation_description", context),
+                              controller: provider.negotiationPrice,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}')),
+                              ],
+                              onSend: () =>
+                                  provider.updateRequest(status: 2, id: 1),
+                              onClose: () {
+                                provider.negotiationPrice.clear();
+                              }),
                       isLoading: provider.isNegotiation,
                     ),
                   ),
@@ -174,19 +189,18 @@ class TripDetails extends StatelessWidget {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                     child: CustomButton(
                       text: sl.get<ProfileProvider>().isDriver
-                          ? getTranslated("reject_offer", context) :
-                      getTranslated("reject_request", context),
+                          ? getTranslated("reject_offer", context)
+                          : getTranslated("reject_request", context),
                       backgroundColor: ColorResources.WHITE_COLOR,
                       withBorderColor: true,
                       textColor: ColorResources.PRIMARY_COLOR,
-                      onTap: ()=>provider.updateRequest(status: 3, id: 1),
+                      onTap: () => provider.updateRequest(status: 3, id: 1),
                       isLoading: provider.isRejecting,
                     ),
                   ),
                 ],
               );
             }),
-           
             SizedBox(
               height: 24.h,
             )
