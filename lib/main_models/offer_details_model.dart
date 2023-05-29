@@ -51,37 +51,6 @@ class OfferDetailsModel {
       this.followers,
       this.carData});
 
-  OfferDetailsModel copyWith(
-          {int? id,
-          String? image,
-          String? name,
-          String? nationality,
-          double? rate,
-          double? startLength,
-          DateTime? startDate,
-          DateTime? endDate,
-          int? duration,
-          double? minPrice,
-          double? maxPrice,
-          double? compatibleRatio,
-          DateTime? createdAt,
-          List<WeekModel>? offerDays,
-          CarModel? carData}) =>
-      OfferDetailsModel(
-        id: id ?? this.id,
-        image: image ?? this.image,
-        name: name ?? this.name,
-        nationality: nationality ?? this.nationality,
-        rate: rate ?? this.rate,
-        duration: duration ?? this.duration,
-        minPrice: minPrice ?? this.minPrice,
-        maxPrice: maxPrice ?? this.maxPrice,
-        compatibleRatio: compatibleRatio ?? this.compatibleRatio,
-        createdAt: createdAt ?? this.createdAt,
-        offerDays: offerDays ?? this.offerDays,
-        carData: carData ?? this.carData,
-        startLength: startLength ?? this.startLength,
-      );
 
   factory OfferDetailsModel.fromJson(Map<String, dynamic> json) =>
       OfferDetailsModel(
@@ -112,9 +81,9 @@ class OfferDetailsModel {
         endLocation: json["end_location"] == null
             ? null
             : LocationModel.fromJson(json["end_location"]),
-        carData: json["car_data"] == null
+        carData: json["driver"]["car_data"] == null
             ? null
-            : CarModel.fromJson(json["car_data"]),
+            : CarModel.fromJson(json["driver"]["car_data"]),
       );
 
   Map<String, dynamic> toPostDriverJson() => {

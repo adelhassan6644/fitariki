@@ -8,7 +8,6 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../data/config/di.dart';
-import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/shimmer_widgets/offer_details_shimmer.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/distance_widget.dart';
@@ -75,13 +74,11 @@ class _OfferDetailsState extends State<OfferDetails> {
                                     ? provider.offerDetails!.clientId!
                                     : provider.offerDetails!.driverId!,
                                 isDriver: sl.get<ProfileProvider>().isDriver,
-                                withAnalytics: true,
                                 createdAt: provider.offerDetails!.createdAt!,
-                                days: provider.day,
-                                daysNum: provider.offerDetails!.duration.toString(),
+                                days: provider.offerDetails!.offerDays!.map((e) => e.dayName).toList().join(", "),
+                                duration: provider.offerDetails!.duration.toString(),
                                 name: provider.offerDetails?.name,
                                 priceRange: "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
-                                followers: provider.offerDetails!.followers?.length.toString(),
                                 timeRange: provider.offerDetails!.offerDays!.isEmpty ? ""
                                     : "${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.offerDetails!.offerDays![0].endTime, withFormat: true)}",
                               )),

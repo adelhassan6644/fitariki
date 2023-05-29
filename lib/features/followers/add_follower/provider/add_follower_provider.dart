@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +32,14 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool sameHomeLocation = true;
+  bool sameHomeLocation = false;
   void onSelect(bool value) {
     sameHomeLocation = value;
+    if (value) {
+      startLocation = sl<ProfileProvider>().startLocation;
+    } else {
+      startLocation = null;
+    }
     notifyListeners();
   }
 
@@ -50,9 +55,14 @@ class AddFollowerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool sameDestination = true;
+  bool sameDestination = false;
   void onSelect1(bool value) {
     sameDestination = value;
+    if (value) {
+      endLocation = sl<ProfileProvider>().endLocation;
+    } else {
+      endLocation = null;
+    }
     notifyListeners();
   }
 
@@ -62,62 +72,12 @@ class AddFollowerProvider extends ChangeNotifier {
     _gender = 0;
     startLocation = null;
     endLocation = null;
+    sameDestination = false;
+    sameHomeLocation = false;
     notifyListeners();
   }
 
   bool isLoading = false;
-  updateFollowerDetails() async {
-    try {
-      spinKitDialog();
-      isLoading = true;
-      notifyListeners();
-
-      final data = {
-        "follower": {
-          "name": followerFullName.text.trim(),
-          "gender": gender,
-          "age": age.text.trim(),
-          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
-          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
-        }
-      };
-
-      log(data.toString());
-      Either<ServerFailure, Response> response =
-          await addFollowersRepo.updateFollower(body: data);
-      response.fold((fail) {
-        CustomNavigator.pop();
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: fail.error,
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        isLoading = false;
-        notifyListeners();
-      }, (response) {
-        CustomNavigator.pop();
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "تم تحديث بياناتك بنجاح !",
-                isFloating: true,
-                backgroundColor: ColorResources.ACTIVE,
-                borderColor: Colors.transparent));
-        isLoading = false;
-        notifyListeners();
-      });
-    } catch (e) {
-      CustomNavigator.pop();
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoading = false;
-      notifyListeners();
-    }
-  }
   addFollower() async {
     try {
       CustomNavigator.pop();
@@ -126,13 +86,12 @@ class AddFollowerProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = {
-          "name": followerFullName.text.trim(),
-          "gender": gender,
-          "age": age.text.trim(),
-          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
-          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
+        "name": followerFullName.text.trim(),
+        "gender": gender,
+        "age": age.text.trim(),
+        "drop_off_location": endLocation!.toJson(),
+        "pickup_location": startLocation!.toJson(),
       };
-
 
       Either<ServerFailure, Response> response =
           await addFollowersRepo.addFollower(body: data);
@@ -150,6 +109,7 @@ class AddFollowerProvider extends ChangeNotifier {
         await sl.get<FollowersProvider>().getFollowers();
 
         CustomNavigator.pop();
+        reset();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "تم  بنجاح !",

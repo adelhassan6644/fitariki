@@ -14,7 +14,7 @@ import '../navigation/routes.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard(
-      {this.daysNum,
+      {this.duration,
       required this.createdAt,
       this.userId,
       this.days,
@@ -30,7 +30,7 @@ class UserCard extends StatelessWidget {
   final bool withAnalytics, isDriver;
   final DateTime createdAt;
 
-  final String? daysNum, days, name, national, timeRange, priceRange, followers;
+  final String? duration, days, name, national, timeRange, priceRange, followers;
   final int? userId;
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class UserCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           MarqueeWidget(
                             child: Text(
-                              "$daysNum يوم ",
+                              "$duration يوم ",
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,

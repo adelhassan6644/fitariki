@@ -12,6 +12,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
 import '../../../data/error/failures.dart';
+import '../../../main_providers/calender_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../followers/followers/provider/followers_provider.dart';
@@ -27,25 +28,22 @@ class AddOfferProvider extends ChangeNotifier {
   String? minPrice, note;
 
   DateTime startDate = DateTime.now();
-  bool isDateChanged= false;
   int duration=0;
+
   onSelectStartDate(v) {
-    isDateChanged= true;
     startDate = v;
+    sl<CalenderProvider>().getEventsList(startDate: startDate,endDate: endDate);
     duration = Methods.getWeekdayCount(
         startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
-    isDateChanged= false;
     notifyListeners();
   }
 
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
-
-    isDateChanged= true;
     endDate = v;
+    sl<CalenderProvider>().getEventsList(startDate: startDate,endDate: endDate);
     duration = Methods.getWeekdayCount(
         startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
-    isDateChanged= false;
     notifyListeners();
   }
 

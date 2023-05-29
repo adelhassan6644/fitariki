@@ -50,7 +50,7 @@ class PreviewOffer extends StatelessWidget {
                         .toList()
                         .join("،"),
                     createdAt: DateTime.now(),
-                    daysNum: provider.counts!.count.toString(),
+                    duration: provider.counts!.count.toString(),
                     priceRange:
                         "${provider.minPrice}- ${provider.maxPrice} SAR",
                     timeRange:

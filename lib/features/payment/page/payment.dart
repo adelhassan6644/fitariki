@@ -37,7 +37,7 @@ class Payment extends StatelessWidget {
                      UserCard(
                       withAnalytics: false,
                       days: "الأحد، الإثنين، الثلاثاء",
-                      daysNum: "10",
+                      duration: "10",
                       priceRange: "200",
                       createdAt: DateTime.now(),
                     ),

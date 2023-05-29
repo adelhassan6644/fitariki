@@ -15,8 +15,9 @@ class CalenderProvider extends ChangeNotifier {
   );
   Map<DateTime, List<Event>> eventsMAP = {};
   EventList<Event>? eventList;
+  List<int> days=[];
   bool isLoad = false;
-  getEventsList({startDate, endDate, required List<int> days}) {
+  getEventsList({required DateTime startDate,required DateTime endDate}) {
     isLoad = true;
     eventList = null;
     eventsMAP = {};
