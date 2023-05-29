@@ -5,7 +5,6 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
-import '../../../components/animated_widget.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/tab_widget.dart';
 import '../../../data/config/di.dart';
@@ -85,14 +84,16 @@ class _HomeState extends State<Home> {
               onRefresh: () async {
                 await homeProvider.getOffers();
               },
-              child: ListAnimator(
+              child: ListView(
                 controller: controller,
-                data: homeProvider.isLoading
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(0),
+                children: homeProvider.isLoading
                     ? List.generate(7, (index) => const ShimmerOfferCard())
                     : homeProvider.offer == null || homeProvider.offer!.isEmpty
                         ? [
-                            const EmptyState(
-                              txt: "لا يوجود عروض توصيل",
+                             EmptyState(
+                              txt: getTranslated("there_is_no_delivery_requests_or_delivery_offers", context)
                             )
                           ]
                         : List.generate(

@@ -212,6 +212,7 @@
   "service_costs": "Service costs",
 "has_been_sent": "has been sent!",
   "negotiation_description": "You can negotiate with the other party by setting a new price",
-  "rate_trip": "Rate Trip..."
+  "rate_trip": "Rate Trip...",
+  "there_is_no_delivery_requests_or_delivery_offers": "There is no delivery requests or delivery offers"
 
 }
