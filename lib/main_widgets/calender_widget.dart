@@ -37,7 +37,6 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   Widget build(BuildContext context) {
     return Consumer<CalenderProvider>(builder: (context, provider, _) {
       return Directionality(
-          
         textDirection: TextDirection.rtl,
         child: CalendarCarousel<Event>(
           onDayPressed: (date, events) {},

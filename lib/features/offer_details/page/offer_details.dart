@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
@@ -57,6 +58,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                     if (provider.isLogin) {
                       sl<WishlistProvider>()
                           .postWishList(offerId: widget.offerId);
+                    }else{
+                      showToast("برجاء الستجيل اولا !");
                     }
                   },
                 );

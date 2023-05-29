@@ -22,9 +22,10 @@ class FavouriteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: ()=>CustomNavigator.push(Routes.USER_PROFILE,arguments:driver != null ? driver!.id : client!.id),
+      onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
+          arguments: driver != null ? driver!.id : client!.id),
       child: Padding(
-        padding:  EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
@@ -42,7 +43,9 @@ class FavouriteUserCard extends StatelessWidget {
           child: Row(
             children: [
               CustomNetworkImage.circleNewWorkImage(
-                  image: driver != null ? driver!.image??"" : client!.image??"",
+                  image: driver != null
+                      ? driver!.image ?? ""
+                      : client!.image ?? "",
                   radius: 16,
                   color: ColorResources.SECOUND_PRIMARY_COLOR),
               const SizedBox(
@@ -58,7 +61,9 @@ class FavouriteUserCard extends StatelessWidget {
                         SizedBox(
                           width: 60,
                           child: Text(
-                            driver != null ? "${driver!.firstName}": "${client!.firstName} ${client!.lastName}",
+                            driver != null
+                                ? "${driver!.firstName}"
+                                : "${client!.firstName} ${client!.lastName}",
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             style: AppTextStyles.w600.copyWith(
@@ -71,14 +76,20 @@ class FavouriteUserCard extends StatelessWidget {
                           width: 4,
                         ),
                         customImageIconSVG(
-                            imageName:driver != null ? driver!.gender! ==0? SvgImages.maleIcon:SvgImages.femaleIcon : client!.gender! ==0  ? SvgImages.maleIcon:SvgImages.femaleIcon,
+                            imageName: driver != null
+                                ? driver!.gender! == 0
+                                    ? SvgImages.maleIcon
+                                    : SvgImages.femaleIcon
+                                : client!.gender! == 0
+                                    ? SvgImages.maleIcon
+                                    : SvgImages.femaleIcon,
                             color: ColorResources.BLUE_COLOR,
                             width: 11,
                             height: 11)
                       ],
                     ),
-                     ShowRate(
-                      rate: driver != null ? driver!.rate :client!.rate,
+                    ShowRate(
+                      rate: driver != null ? driver!.rate : client!.rate,
                     )
                   ],
                 ),

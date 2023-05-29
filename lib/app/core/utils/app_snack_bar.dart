@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +60,13 @@ class CustomSnackBar{
     CustomNavigator.scaffoldState.currentState!.hideCurrentSnackBar(reason: SnackBarClosedReason.remove);
   }
 }
+
 showToast(msg){return Fluttertoast.showToast(
     msg: msg,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.TOP,
     timeInSecForIosWeb: 1,
-    backgroundColor: Colors.red,
-    textColor: Colors.white,
+    backgroundColor: ColorResources.SECOUND_PRIMARY_COLOR,
+    textColor: ColorResources.WHITE_COLOR,
     fontSize: 16.0
 );}
