@@ -13,14 +13,17 @@ import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../helpers/cupertino_pop_up_helper.dart';
+import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../maps/models/location_model.dart';
+import '../../my_offers/model/my_offer.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/car_trip_details_widget.dart';
 
 class TripDetails extends StatelessWidget {
-  const TripDetails({Key? key}) : super(key: key);
+  final OfferRequest offerRequest;
+  const TripDetails({ required this.offerRequest,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +94,8 @@ class TripDetails extends StatelessWidget {
                     ),
                   if (!sl.get<ProfileProvider>().isDriver)
                     const CarTripDetailsWidget(),
+                   CalenderWidget(startDate: offerRequest.startAt!, endDate: offerRequest.endAt!, days: sl.get<ProfileProvider>().isDriver?offerRequest.client!.clientDays!:
+                   offerRequest.driver!.driverDays!),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(
                   //       vertical: 8.h,

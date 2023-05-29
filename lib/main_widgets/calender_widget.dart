@@ -5,7 +5,6 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:provider/provider.dart';
 
 import '../app/core/utils/color_resources.dart';
-import '../app/core/utils/methods.dart';
 import '../main_models/weak_model.dart';
 
 class CalenderWidget extends StatefulWidget {
@@ -24,13 +23,13 @@ class CalenderWidget extends StatefulWidget {
 }
 
 class _CalenderWidgetState extends State<CalenderWidget> {
-  late WeekdayCount counts;
   @override
   void initState() {
+    print("=====>${widget.days.map((e) => e.id).toList().toString()}");
+    print("=====>${widget.startDate} ${widget.endDate}");
     Future.delayed(Duration.zero, () {
       Provider.of<CalenderProvider>(context, listen: false).getEventsList(startDate: widget.startDate,endDate: widget.endDate,days: widget.days.map((e) => e.id!).toList());
     });
-
     super.initState();
   }
 

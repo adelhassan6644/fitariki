@@ -18,7 +18,7 @@ class MyOffersRepo{
     try {
       Response response = await dioClient.get(
           uri:
-          "${sharedPreferences.getString(AppStorageKey.role) }/${EndPoints.myOffers}/${sharedPreferences.getString(AppStorageKey.userId)}",
+          "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myOffers}/${sharedPreferences.getString(AppStorageKey.userId)}",
 
 
       );

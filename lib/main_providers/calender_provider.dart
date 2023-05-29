@@ -32,7 +32,7 @@ class CalenderProvider extends ChangeNotifier {
         ];
       }
     }
-    print(eventsMAP);
+    print("&&"+eventsMAP.toString());
     eventList = EventList<Event>(events: eventsMAP);
     isLoad = false;
     notifyListeners();

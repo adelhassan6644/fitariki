@@ -28,6 +28,7 @@ class TripCard extends StatelessWidget {
     return InkWell(
       onTap: () => CustomNavigator.push(
         Routes.TRIP_DETAILS,
+        arguments: offerRequest
       ),
       child: Stack(
         children: [
