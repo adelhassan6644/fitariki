@@ -73,10 +73,10 @@ class _OfferDetailsState extends State<OfferDetails> {
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(
-                                userId: sl.get<ProfileProvider>().isDriver
-                                    ? provider.offerDetails!.clientId!
+                                userId: provider.offerDetails!.clientId != null?
+                                     provider.offerDetails!.clientId!
                                     : provider.offerDetails!.driverId!,
-                                isDriver: sl.get<ProfileProvider>().isDriver,
+                                isDriver:  provider.offerDetails?.driverId != null? true:false,
                                 createdAt: provider.offerDetails!.createdAt!,
                                 days: provider.offerDetails!.offerDays!.map((e) => e.dayName).toList().join(", "),
                                 duration: provider.offerDetails!.duration.toString(),
@@ -91,13 +91,13 @@ class _OfferDetailsState extends State<OfferDetails> {
                           ),
 
                           DistanceWidget(
-                            isCaptain: sl.get<ProfileProvider>().isDriver,
+                            isCaptain:  provider.offerDetails?.driverId != null? true:false,
                           ),
                           // CalenderWidget(startDate: provider.offerDetails!.startDate??DateTime.now(),days: provider.offerDetails!.offerDays!, endDate:  provider.offerDetails!.endDate??DateTime.now(),),
 
-                          if (!sl.get<ProfileProvider>().isDriver)
+                          if ( provider.offerDetails?.clientId == null)
                             const CarDetails(),
-                          if (!sl.get<ProfileProvider>().isDriver)
+                          if ( provider.offerDetails?.clientId == null)
                             const ReviewsWidget()
                         ],
                       ),

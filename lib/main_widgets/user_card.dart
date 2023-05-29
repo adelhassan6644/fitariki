@@ -8,7 +8,9 @@ import '../components/custom_images.dart';
 import '../components/custom_network_image.dart';
 import '../components/marquee_widget.dart';
 import '../components/show_rate.dart';
+import '../data/config/di.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
+import '../features/user_profile/provider/user_profile_provider.dart';
 import '../navigation/custom_navigation.dart';
 import '../navigation/routes.dart';
 
@@ -57,10 +59,15 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: userId != null
-                      ? () => CustomNavigator.push(Routes.USER_PROFILE,
-                          arguments: userId)
-                      : () {},
+                  onTap:() {
+                      if (userId != null) {
+                        sl<UserProfileProvider>().getUserProfile(
+                            userId: userId!,
+                            userType: isDriver ? "driver" : "client");
+                      CustomNavigator.push(Routes.USER_PROFILE,
+                          arguments: userId);
+                    }
+                  },
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(

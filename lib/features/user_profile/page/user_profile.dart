@@ -4,6 +4,7 @@ import 'package:fitariki/features/user_profile/provider/user_profile_provider.da
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
@@ -21,23 +22,9 @@ import '../../wishlist/provider/wishlist_provider.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 
-class UserProfile extends StatefulWidget {
+class UserProfile extends StatelessWidget {
   final int userId;
   const UserProfile({required this.userId, Key? key}) : super(key: key);
-
-  @override
-  State<UserProfile> createState() => _UserProfileState();
-}
-
-class _UserProfileState extends State<UserProfile> {
-  @override
-  void initState() {
-    Future.delayed(
-        Duration.zero,
-        () => Provider.of<UserProfileProvider>(context, listen: false)
-            .getUserProfile(userId: widget.userId));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +38,9 @@ class _UserProfileState extends State<UserProfile> {
                   withSave: true,
                   onSave: () {
                     if (sl<ProfileProvider>().isLogin) {
-                      sl<WishlistProvider>()
-                          .postWishList(userId: widget.userId);
+                      sl<WishlistProvider>().postWishList(userId: userId);
+                    }else{
+                      showToast("برجاء الستجيل اولا !");
                     }
                   },
                 ),
@@ -63,27 +51,28 @@ class _UserProfileState extends State<UserProfile> {
                       ? const ProfileCardShimmer()
                       : ProfileCard(
                           lastUpdate: Methods.getDayCount(
-                                  date: !sl<ProfileProvider>().isDriver
-                                      ? provider
-                                          .userProfileModel!.driver!.updatedAt!
-                                      : provider
-                                          .userProfileModel!.client!.updatedAt!)
+                                  date:
+                                      provider.userProfileModel!.driver != null
+                                          ? provider.userProfileModel!.driver!
+                                              .updatedAt!
+                                          : provider.userProfileModel!.client!
+                                              .updatedAt!)
                               .toString(),
-                          name: !sl<ProfileProvider>().isDriver
+                          name: provider.userProfileModel!.driver != null
                               ? "${provider.userProfileModel!.driver!.firstName}"
                               : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
-                          isDriver: !sl<ProfileProvider>().isDriver,
-                          male: !sl<ProfileProvider>().isDriver
+                          isDriver: provider.userProfileModel!.driver != null,
+                          male: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel!.driver!.gender == 0
                               : provider.userProfileModel!.client!.gender == 0,
-                          nationality: !sl<ProfileProvider>().isDriver
+                          nationality: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel!.driver!.national
                                       ?.name ??
                                   ""
                               : provider.userProfileModel?.client?.national
                                       ?.name ??
                                   "",
-                          rate: !sl<ProfileProvider>().isDriver
+                          rate: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel?.driver?.rate?.ceil()
                               : provider.userProfileModel?.client?.rate?.ceil(),
                           completedNumber: 2,

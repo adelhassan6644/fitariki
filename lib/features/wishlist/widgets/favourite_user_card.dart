@@ -12,6 +12,7 @@ import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
+import '../../user_profile/provider/user_profile_provider.dart';
 import '../provider/wishlist_provider.dart';
 
 class FavouriteUserCard extends StatelessWidget {
@@ -22,8 +23,13 @@ class FavouriteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
-          arguments: driver != null ? driver!.id : client!.id),
+      onTap: () {
+        sl<UserProfileProvider>().getUserProfile(
+            userId: driver != null ? driver!.id! : client!.id!,
+            userType: driver != null ? "driver" : "client");
+        CustomNavigator.push(Routes.USER_PROFILE,
+            arguments: driver != null ? driver!.id : client!.id);
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),

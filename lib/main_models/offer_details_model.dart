@@ -81,9 +81,9 @@ class OfferDetailsModel {
         endLocation: json["end_location"] == null
             ? null
             : LocationModel.fromJson(json["end_location"]),
-        carData: json["driver"]["car_data"] == null
+        carData: json["car_data"]== null
             ? null
-            : CarModel.fromJson(json["driver"]["car_data"]),
+            : CarModel.fromJson(json["car_data"]),
       );
 
   Map<String, dynamic> toPostDriverJson() => {

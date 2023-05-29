@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
@@ -14,17 +12,17 @@ class UserProfileRepo {
 
   UserProfileRepo({required this.dioClient, required this.sharedPreferences});
   Future<Either<ServerFailure, Response>> getUserProfile(
-      {required int userID}) async {
+      {required int userID,required userType}) async {
     try {
-      String? userType;
-      if (sharedPreferences.getString(AppStorageKey.role) == "driver") {
-        userType = "client";
+      String? role;
+      if (userType == "driver") {
+        role = "client";
       } else {
-        userType = "driver";
+        role = "driver";
       }
       Response response = await dioClient.get(
         uri:
-        "${sharedPreferences.getString(AppStorageKey.role)}/$userType/${EndPoints.userProfile}/$userID",
+        "$role/$userType/${EndPoints.userProfile}/$userID",
       );
       if (response.statusCode == 200) {
         return Right(response);

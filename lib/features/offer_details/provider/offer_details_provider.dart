@@ -18,7 +18,6 @@ class OfferDetailsProvider extends ChangeNotifier {
   OfferDetailsModel? offerDetails;
   getOfferDetails({int? offerId,}) async {
     try {
-
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await repo.getOfferDetails(
