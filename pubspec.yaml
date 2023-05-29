@@ -55,7 +55,7 @@ dependencies:
   flutter_typeahead:
   geolocator_platform_interface:
   geolocator: ^9.0.2
-  google_maps_flutter: ^2.2.7
+  google_maps_flutter: ^2.2.8
   flutter_polyline_points:
   country_picker: ^2.0.20
   flag:

@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../main_models/offer_details_model.dart';
+import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../provider/add_offer_provider.dart';
 import '../widgets/duration_widget.dart';
 
 class AddOffer extends StatelessWidget {
-  const AddOffer({ required this.isCaptain,Key? key, required this.tripID,required this.name}) : super(key: key);
+  const AddOffer({ required this.isCaptain,Key? key, required this.offer,required this.name}) : super(key: key);
 final bool isCaptain ;
-final int tripID ;
+final OfferDetailsModel offer ;
 final String name;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ final String name;
               textBtn: getTranslated("send", context),
               onTap: () {
                 if (provider.checkData() == true) {
-                  provider.requestOffer(tripID:tripID,name: name);
+                  provider.requestOffer(tripID:offer.id,name: name);
                 }
 
 
@@ -58,7 +61,10 @@ final String name;
                   const SizedBox(
                     height: 8,
                   ),
-                /*  CustomTextFormField(
+        if(!provider.isDateChanged)
+        CalenderWidget(startDate: provider.startDate, endDate: provider.endDate, days: offer.offerDays!)
+
+        /*  CustomTextFormField(
                       label: true,
                       inputType: TextInputType.text,
                       hint: getTranslated("add_a_note", context),

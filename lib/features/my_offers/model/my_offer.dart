@@ -71,8 +71,8 @@ class OfferRequest {
 
   factory OfferRequest.fromJson(Map<String, dynamic> json) => OfferRequest(
     id: json["id"],
-    startAt: json["start_at"] == null ? null : DateTime.parse(json["start_at"]),
-    endAt: json["end_at"] == null ? null : DateTime.parse(json["end_at"]),
+    startAt: json["start_at"] == null ? DateTime.now() : DateTime.parse(json["start_at"]),
+    endAt: json["end_at"] == null ? DateTime.now() : DateTime.parse(json["end_at"]),
     duration: json["duration"],
     price: json["price"],
     offerPrice: json["offer_price"],

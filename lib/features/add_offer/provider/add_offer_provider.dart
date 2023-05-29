@@ -9,11 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../followers/followers/provider/followers_provider.dart';
+import '../../offer_details/provider/offer_details_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
 import '../repo/add_offer_repo.dart';
@@ -25,14 +27,25 @@ class AddOfferProvider extends ChangeNotifier {
   String? minPrice, note;
 
   DateTime startDate = DateTime.now();
+  bool isDateChanged= false;
+  int duration=0;
   onSelectStartDate(v) {
+    isDateChanged= true;
     startDate = v;
+    duration = Methods.getWeekdayCount(
+        startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
+    isDateChanged= false;
     notifyListeners();
   }
 
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
+
+    isDateChanged= true;
     endDate = v;
+    duration = Methods.getWeekdayCount(
+        startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
+    isDateChanged= false;
     notifyListeners();
   }
 
@@ -72,12 +85,12 @@ class AddOfferProvider extends ChangeNotifier {
 
       final data = {
         "request_offer": {
-          "client_id":
+          sl<ProfileProvider>().isDriver?'driver_id':  "client_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
-          "start_date": startDate.defaultFormat(),
-          "end_date": endDate.defaultFormat(),
-          "duration": 10,
-          "price": 250,
+          "start_date": startDate.defaultFormat2(),
+          "end_date": endDate.defaultFormat2(),
+          "duration": duration,
+          "price": minPrice,
           if (sl.get<FollowersProvider>().addFollowers&&sl
               .get<FollowersProvider>()
               .selectedFollowers.isNotEmpty)

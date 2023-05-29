@@ -13,7 +13,7 @@ abstract class Methods {
   static WeekdayCount getWeekdayCount(
       {required DateTime startDate,
       required DateTime endDate,
-      required List<int> weekdays}) {
+      required List weekdays}) {
     int count = 0;
     int days = 0;
     List<DateTime> daysList=[];

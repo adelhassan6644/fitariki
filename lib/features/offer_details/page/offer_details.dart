@@ -116,7 +116,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                       body: sl.get<ProfileProvider>().isLogin
                           ? AddOffer(
                               name: provider.offerDetails?.name ?? "",
-                              tripID: widget.offerId,
+                              offer: provider.offerDetails!,
                               isCaptain: sl.get<ProfileProvider>().isDriver,
                             )
                           : const Login(),
