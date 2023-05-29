@@ -1,7 +1,7 @@
 class EndPoints {
   static const String baseUrl = 'https://test.fitariki.com/api/v1/';
   static const String googleMapsBaseUrl = 'https://maps.googleapis.com';
-  static const String imageUrl = 'https://fitariki.app/';
+  static const String imageUrl = 'https://test.fitariki.com/';
   static const String apiKey = 'eGvviZ/npgc2Blb4/PSymh1tyb/UIt3aq82W6f+Wn4=';
   static const String topic = 'fitariki';
   static const String logIn = 'auth/login';

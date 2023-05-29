@@ -154,7 +154,7 @@ class TripCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "${offerRequest?.startAt!.defaultFormat()} - ${offerRequest?.endAt!.defaultFormat()}",
+                                          "${offerRequest?.startAt?.defaultFormat()} - ${offerRequest?.endAt!.defaultFormat()}",
                                           textAlign: TextAlign.start,
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
@@ -446,6 +446,7 @@ class TripCard extends StatelessWidget {
                 radius: 100,
                 onTap: () => CustomNavigator.push(
                   Routes.TRIP_DETAILS,
+                  arguments: offerRequest
                 ),
               ))
         ],

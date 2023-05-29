@@ -57,6 +57,8 @@ class ProfileProvider extends ChangeNotifier {
 
   File? carImage;
   onSelectCarImage(File? file) {
+    profileModel?.driver?.carInfo?.carImage = file!.path;
+
     carImage = file;
     notifyListeners();
   }
@@ -122,6 +124,7 @@ class ProfileProvider extends ChangeNotifier {
 
   File? bankAccountImage;
   onSelectBankAccountImage(File? file) {
+    profileModel?.driver?.bankInfo?.accountImage = file!.path;
     bankAccountImage = file;
     notifyListeners();
   }
@@ -142,6 +145,10 @@ class ProfileProvider extends ChangeNotifier {
 
   File? profileImage;
   onSelectImage(File? file) {
+    isDriver
+        ? profileModel?.driver?.image = file!.path
+        : profileModel?.client?.image = file!.path;
+
     profileImage = file;
     notifyListeners();
   }
@@ -215,15 +222,31 @@ class ProfileProvider extends ChangeNotifier {
 
   checkData() {
     updateTimes();
-    if (profileImage == null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء اختيار الصورةالشخصية!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      return;
+    if (!isDriver && profileImage == null) {
+      if (profileModel?.client?.image == null) {
+        print("sdsd");
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار الصورةالشخصية!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
     }
+
+    if (isDriver && profileImage == null) {
+      if (isDriver && profileModel?.driver?.image == null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار الصورةالشخصية!",
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+    }
+
     if (firstName.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -281,14 +304,16 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (identityImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الهوية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && identityImage == null) {
+        if (profileModel?.driver?.identityImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الهوية!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
       if (email.text.isEmpty) {
         CustomSnackBar.showSnackBar(
@@ -355,14 +380,16 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (carImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة السيارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && carImage == null) {
+        if (profileModel?.driver?.carInfo?.carImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة السيارة!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
       if (carSeats == null) {
         CustomSnackBar.showSnackBar(
@@ -373,32 +400,38 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (licenceImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الرخصة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && licenceImage == null) {
+        if (profileModel?.driver?.carInfo?.licenceImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الرخصة!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
-      if (formImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة الاستمارة!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && formImage == null) {
+        if (profileModel?.driver?.carInfo?.formImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الاستمارة!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
-      if (insuranceImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة التأمين!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && insuranceImage == null) {
+        if (profileModel?.driver?.carInfo?.insuranceImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة التأمين!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
       if (fullName.text.isEmpty) {
         CustomSnackBar.showSnackBar(
@@ -427,14 +460,16 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (bankAccountImage == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار صورة رقم الحساب!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
+      if (isDriver && bankAccountImage == null) {
+        if (profileModel?.driver?.bankInfo?.accountImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة رقم الحساب!",
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
       }
     }
     return true;
@@ -454,7 +489,6 @@ class ProfileProvider extends ChangeNotifier {
           "pallet_number": carPlate.text.trim(),
           "color": carColor.text.trim(),
           "seats_count": carSeats,
-
         };
 
         final bankData = {
@@ -488,40 +522,48 @@ class ProfileProvider extends ChangeNotifier {
           }
         };
         if (carImage != null) {
-          await profileRepo.updateProfile(body:   FormData.fromMap({
-            "car_image":
-            await MultipartFile.fromFile(carImage!.path),
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+            "car_image": await MultipartFile.fromFile(carImage!.path),
           }));
         }
-           if (formImage != null) {
-          await profileRepo.updateProfile(body:   FormData.fromMap({
-            "form_image":
-            await MultipartFile.fromFile(formImage!.path),
+        if (formImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+            "form_image": await MultipartFile.fromFile(formImage!.path),
           }));
         }
-           if (insuranceImage != null) {
-          await profileRepo.updateProfile(body:   FormData.fromMap({
+        if (insuranceImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
             "insurance_image":
-            await MultipartFile.fromFile(insuranceImage!.path),
+                await MultipartFile.fromFile(insuranceImage!.path),
           }));
         }
-           if (licenceImage != null) {
-          await profileRepo.updateProfile(body:   FormData.fromMap({
-            "licence_image":
-            await MultipartFile.fromFile(licenceImage!.path),
+        if (licenceImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+            "licence_image": await MultipartFile.fromFile(licenceImage!.path),
           }));
         }
-           if (identityImage != null) {
-          await profileRepo.updateProfile(body:   FormData.fromMap({
-            "id_image":
-            await MultipartFile.fromFile(identityImage!.path),
+        if (identityImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+            "id_image": await MultipartFile.fromFile(identityImage!.path),
+          }));
+        }
+        if (bankAccountImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+            "account_image":
+                await MultipartFile.fromFile(bankAccountImage!.path),
           }));
         }
 
         if (profileImage != null) {
-
           Either<ServerFailure, Response> response =
-          await profileRepo.updateProfile(body:   FormData.fromMap({
+              await profileRepo.updateProfile(
+                  body: FormData.fromMap({
             "image": await MultipartFile.fromFile(profileImage!.path),
           }));
         }
@@ -541,7 +583,7 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
-          CustomNavigator.push(Routes.DASHBOARD,arguments: 0);
+          CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: "تم تحديث بياناتك بنجاح !",
@@ -642,7 +684,29 @@ class ProfileProvider extends ChangeNotifier {
 
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
-
+    // if (profileModel?.driver?.image != null) {
+    // onSelectImage(File(profileModel!.driver!.image!));
+    // }
+    // if (profileModel?.driver?.identityImage != null) {
+    //   onSelectIdentityImage(File(profileModel!.driver!.identityImage!));
+    // }
+    // if (profileModel?.driver?.carInfo?.carImage != null) {
+    //   onSelectCarImage(File(profileModel!.driver!.carInfo!.carImage!));
+    // }
+    // if (profileModel?.driver?.carInfo?.insuranceImage != null) {
+    //   onSelectInsuranceImage(
+    //       File(profileModel!.driver!.carInfo!.insuranceImage!));
+    // }
+    // if (profileModel?.driver?.carInfo?.formImage != null) {
+    //   onSelectFormImage(File(profileModel!.driver!.carInfo!.formImage!));
+    // }
+    // if (profileModel?.driver?.carInfo?.licenceImage != null) {
+    //   onSelectLicenceImage(File(profileModel!.driver!.carInfo!.licenceImage!));
+    // }
+    // if (profileModel?.driver?.bankInfo?.accountImage != null) {
+    //   onSelectBankAccountImage(
+    //       File(profileModel!.driver!.bankInfo!.accountImage!));
+    // }
     if (scheduleProvider.selectedDays.isNotEmpty) {
       startTime = Methods.convertStringToTime(
               profileModel?.driver?.driverDays?[0].startTime) ??

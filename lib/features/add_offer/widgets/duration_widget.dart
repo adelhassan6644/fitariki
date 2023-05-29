@@ -143,7 +143,7 @@ class DurationWidget extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Center(
                   child: Text(
-                    "${Methods.diffBtw2Dates(startDate: provider.startDate, endDate: provider.endDate)} ${getTranslated("days", context).replaceAll("ال", "").convertDigits()}",
+                    "${provider.duration}",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,

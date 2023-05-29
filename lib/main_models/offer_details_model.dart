@@ -1,4 +1,6 @@
 import 'package:fitariki/main_models/weak_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../app/core/utils/app_storage_keys.dart';
 import '../data/config/di.dart';
 import '../features/followers/follower_details/model/follower_model.dart';
 import '../features/followers/followers/provider/followers_provider.dart';
@@ -124,7 +126,7 @@ class OfferDetailsModel {
           "min_price": minPrice,
           "max_price": maxPrice,
           "client_id": clientId,
-          "driver_id": driverId,
+          "driver_id":  sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "offer_type": 1,
           "offer_days": offerDays == null
               ? []
@@ -136,7 +138,7 @@ class OfferDetailsModel {
 
   Map<String, dynamic> toPostClientJson() => {
         "offer": {
-          "client_id": id,
+          "client_id":  sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "start_date": startDate.toString(),
           "end_date": endDate.toString(),
           "duration": duration,

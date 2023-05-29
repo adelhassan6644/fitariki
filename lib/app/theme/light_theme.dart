@@ -10,6 +10,8 @@ ThemeData light = ThemeData(
   primaryColor:ColorResources.PRIMARY_COLOR,
   brightness: Brightness.light,
   // accentColor: Colors.white,
+  colorScheme: ColorScheme.light(primary: ColorResources.PRIMARY_COLOR, secondary: ColorResources.PRIMARY_COLOR),
+
   scaffoldBackgroundColor: ColorResources.BACKGROUND_COLOR,
   focusColor: const Color(0xFFADC4C8),
   hintColor: ColorResources.HINT_COLOR,
@@ -20,6 +22,7 @@ ThemeData light = ThemeData(
       color: ColorResources.WHITE_COLOR,
     ),
   )),
+
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: <TargetPlatform, PageTransitionsBuilder>{
       TargetPlatform.android: ZoomPageTransitionsBuilder(),
