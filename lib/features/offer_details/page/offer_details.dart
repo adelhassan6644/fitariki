@@ -4,7 +4,6 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
@@ -17,7 +16,6 @@ import '../../../main_widgets/map_widget.dart';
 import '../../auth/pages/login.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../add_offer/page/add_offer.dart';
-import '../../wishlist/provider/wishlist_provider.dart';
 import '../provider/offer_details_provider.dart';
 import '../widgets/car_details.dart';
 import '../widgets/reviews_widget.dart';
@@ -49,22 +47,12 @@ class _OfferDetailsState extends State<OfferDetails> {
         child: Consumer<OfferDetailsProvider>(builder: (_, provider, child) {
           return Column(
             children: [
-              Consumer<ProfileProvider>(builder: (_, provider, child) {
-                return CustomAppBar(
-                  title: provider.isDriver
-                      ? getTranslated("delivery_request", context)
-                      : getTranslated("delivery_offer", context),
-                  withSave: true,
-                  onSave: () {
-                    if (provider.isLogin) {
-                      sl<WishlistProvider>()
-                          .postWishList(offerId: widget.offerId);
-                    } else {
-                      showToast("برجاء الستجيل اولا !");
-                    }
-                  },
-                );
-              }),
+              CustomAppBar(
+                title: provider.isLoading? "" : provider.offerDetails?.clientId != null
+                    ? getTranslated("delivery_request", context)
+                    : getTranslated("delivery_offer", context),
+                savedItemId:  widget.offerId,
+              ),
               !provider.isLoading
                   ? Expanded(
                       child: ListView(
@@ -78,7 +66,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                     ? provider.offerDetails!.clientId!
                                     : provider.offerDetails!.driverId!,
                                 isDriver:
-                                    provider.offerDetails?.driverId != null
+                                provider.offerDetails?.driverId != null
                                         ? true
                                         : false,
                                 createdAt: provider.offerDetails!.createdAt!,
@@ -87,7 +75,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                     .toList()
                                     .join(", "),
                                 duration:
-                                    provider.offerDetails!.duration.toString(),
+                                provider.offerDetails!.duration.toString(),
                                 name: provider.offerDetails?.name,
                                 priceRange:
                                     "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",

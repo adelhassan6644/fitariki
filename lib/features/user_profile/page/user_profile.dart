@@ -4,7 +4,6 @@ import 'package:fitariki/features/user_profile/provider/user_profile_provider.da
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
@@ -18,7 +17,6 @@ import '../../../navigation/routes.dart';
 import '../../more/widgets/profile_card.dart';
 import '../../offer_details/widgets/car_details.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../../wishlist/provider/wishlist_provider.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 
@@ -35,14 +33,7 @@ class UserProfile extends StatelessWidget {
             Stack(
               children: [
                 CustomAppBar(
-                  withSave: true,
-                  onSave: () {
-                    if (sl<ProfileProvider>().isLogin) {
-                      sl<WishlistProvider>().postWishList(userId: userId);
-                    }else{
-                      showToast("برجاء الستجيل اولا !");
-                    }
-                  },
+                  savedItemId: userId,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(

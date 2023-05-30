@@ -12,10 +12,18 @@ class WishlistProvider extends ChangeNotifier {
 
   WishlistProvider({
     required this.wishlistRepo,
-  });
+  }) {
+    if (isLogin) {
+      getWishList();
+    }
+  }
+
+  bool get isLogin => wishlistRepo.isLoggedIn();
+
+  List<int>? _wishIdList;
+  List<int>? get wishIdList => _wishIdList;
 
   List<String> driverTabs = ["delivery_offers", "passengers"];
-
   List<String> clientTabs = ["delivery_offers", "captains"];
 
   int currentTab = 0;
@@ -43,6 +51,25 @@ class WishlistProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         favouriteModel = FavouriteModel.fromJson(response.data['data']);
+        _wishIdList = [];
+        if (favouriteModel!.offers != null &&
+            favouriteModel!.offers!.isNotEmpty) {
+          for (var e in favouriteModel!.offers!) {
+            _wishIdList!.add(e.id!);
+          }
+        }
+        if (favouriteModel!.drivers != null &&
+            favouriteModel!.drivers!.isNotEmpty) {
+          for (var e in favouriteModel!.drivers!) {
+            _wishIdList!.add(e.id!);
+          }
+        }
+        if (favouriteModel!.clients != null &&
+            favouriteModel!.clients!.isNotEmpty) {
+          for (var e in favouriteModel!.clients!) {
+            _wishIdList!.add(e.id!);
+          }
+        }
         isLoading = false;
         notifyListeners();
       });
@@ -58,23 +85,56 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  postWishList({int? offerId, int? userId}) async {
+  postWishList({int? offerId, int? userId,bool isExist = false}) async {
     try {
-      isLoading = true;
+
+      if(isExist){
+        if(offerId != null) {
+          _wishIdList!.remove(offerId);
+        }else{
+          _wishIdList!.remove(userId);
+
+        }
+      }else{
+        if(offerId != null) {
+          _wishIdList!.add(offerId);
+        }else{
+          _wishIdList!.add(userId!);
+
+        }
+      }
       notifyListeners();
+
       Either<ServerFailure, Response> response =
           await wishlistRepo.postWishList(offerId: offerId, userId: userId);
       response.fold((l) {
+        getWishList();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: l.error,
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        isLoading = false;
         notifyListeners();
       }, (response) {
         getWishList();
+        if(isExist){
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "تم الازلة من المحفوظات بنجاح",
+                  isFloating: true,
+                  backgroundColor: ColorResources.ACTIVE,
+                  borderColor: Colors.transparent));
+        }else{
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "تم الاضافة الي المفضلة بنجاح",
+                  isFloating: true,
+                  backgroundColor: ColorResources.ACTIVE,
+                  borderColor: Colors.transparent));
+        }
+        notifyListeners();
+
       });
     } catch (e) {
       CustomSnackBar.showSnackBar(

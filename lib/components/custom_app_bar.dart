@@ -3,31 +3,28 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/dimensions.dart';
-import '../../app/core/utils/svg_images.dart';
 import '../../navigation/custom_navigation.dart';
-import 'custom_images.dart';
+import '../features/wishlist/widgets/save_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Widget? actionChild;
   final bool withCart;
   final bool withBack;
-  final bool withSave;
+  final int? savedItemId;
   final bool withBorder;
   final bool withBackGround;
   final  double? actionWidth;
-  final  Function()? onSave;
 
   const CustomAppBar(
       {Key? key,
       this.title,
       this.withCart = false,
-      this.withSave = false,
+      this.savedItemId ,
       this.withBackGround = true,
       this.withBorder = false,
       this.withBack = true,
         this.actionWidth,
-        this.onSave,
         this.actionChild})
       : super(key: key);
 
@@ -54,13 +51,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
 
-              withSave
-                  ? GestureDetector(
-                      onTap: onSave,
-                      child: customImageIconSVG(
-                          imageName: SvgImages.bookMark,
-                          color: Colors.black,
-                          width: 18))
+              savedItemId != null
+                  ? SaveButton(id: savedItemId!,)
                   :  actionChild??const SizedBox(
                       width: 18,
                     ),
@@ -78,9 +70,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: SizedBox(
                         width: actionWidth?? 18,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.arrow_forward_ios,
                               size: 18,

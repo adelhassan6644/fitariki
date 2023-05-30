@@ -10,10 +10,12 @@ import '../../../../navigation/routes.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../components/loading_dialog.dart';
+import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../home/provider/home_provider.dart';
 import '../../profile/provider/profile_provider.dart';
+import '../../wishlist/provider/wishlist_provider.dart';
 import '../repo/firebase_auth_repo.dart';
 
 class FirebaseAuthProvider extends ChangeNotifier {
@@ -212,9 +214,11 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        await Provider.of<ProfileProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getRoleType();
 
-        await Provider.of<HomeProvider>(CustomNavigator.navigatorState.currentContext!, listen: false).getOffers();
+        sl<ProfileProvider>().getRoleType();
+        sl<HomeProvider>().getOffers();
+        sl<WishlistProvider>().getWishList();
+        
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,

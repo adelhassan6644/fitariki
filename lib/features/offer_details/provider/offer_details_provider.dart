@@ -24,9 +24,10 @@ class OfferDetailsProvider extends ChangeNotifier {
       offerID: offerId);
       response.fold((l) => null, (response) {
         offerDetails=OfferDetailsModel.fromJson(response.data["data"]["offer"]);
-        isLoading = false;
-        notifyListeners();
       });
+
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(

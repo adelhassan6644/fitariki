@@ -13,6 +13,10 @@ class WishlistRepo {
 
   WishlistRepo({required this.dioClient, required this.sharedPreferences});
 
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
   Future<Either<ServerFailure, Response>> getWishList() async {
     try {
       Response response = await dioClient.get(
