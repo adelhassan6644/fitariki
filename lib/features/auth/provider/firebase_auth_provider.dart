@@ -218,7 +218,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<ProfileProvider>().getRoleType();
         sl<HomeProvider>().getOffers();
         sl<WishlistProvider>().getWishList();
-        
+
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
         if (success.data['data'][role[_userType]]["new_user"] == 1) {
           CustomNavigator.push(Routes.EDIT_PROFILE,
@@ -252,10 +252,10 @@ class FirebaseAuthProvider extends ChangeNotifier {
       Future.delayed(Duration.zero, () async {
         await FirebaseAuth.instance.signOut();
         await firebaseAuthRepo.clearSharedData();
+        sl<WishlistProvider>().wishIdList!.clear();
         Provider.of<ProfileProvider>(
                 CustomNavigator.navigatorState.currentContext!,
-                listen: false)
-            .getRoleType();
+                listen: false).getRoleType();
       });
 
       CustomNavigator.push(Routes.SPLASH, clean: true);

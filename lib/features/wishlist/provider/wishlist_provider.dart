@@ -13,6 +13,7 @@ class WishlistProvider extends ChangeNotifier {
   WishlistProvider({
     required this.wishlistRepo,
   }) {
+    wishIdList.clear();
     if (isLogin) {
       getWishList();
     }
@@ -20,9 +21,7 @@ class WishlistProvider extends ChangeNotifier {
 
   bool get isLogin => wishlistRepo.isLoggedIn();
 
-  List<int>? _wishIdList;
-  List<int>? get wishIdList => _wishIdList;
-
+  List<int> wishIdList = [];
   List<String> driverTabs = ["delivery_offers", "passengers"];
   List<String> clientTabs = ["delivery_offers", "captains"];
 
@@ -51,23 +50,23 @@ class WishlistProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         favouriteModel = FavouriteModel.fromJson(response.data['data']);
-        _wishIdList = [];
+        wishIdList = [];
         if (favouriteModel!.offers != null &&
             favouriteModel!.offers!.isNotEmpty) {
           for (var e in favouriteModel!.offers!) {
-            _wishIdList!.add(e.id!);
+            wishIdList.add(e.id!);
           }
         }
         if (favouriteModel!.drivers != null &&
             favouriteModel!.drivers!.isNotEmpty) {
           for (var e in favouriteModel!.drivers!) {
-            _wishIdList!.add(e.id!);
+            wishIdList.add(e.id!);
           }
         }
         if (favouriteModel!.clients != null &&
             favouriteModel!.clients!.isNotEmpty) {
           for (var e in favouriteModel!.clients!) {
-            _wishIdList!.add(e.id!);
+            wishIdList.add(e.id!);
           }
         }
         isLoading = false;
@@ -90,16 +89,16 @@ class WishlistProvider extends ChangeNotifier {
 
       if(isExist){
         if(offerId != null) {
-          _wishIdList!.remove(offerId);
+          wishIdList.remove(offerId);
         }else{
-          _wishIdList!.remove(userId);
+          wishIdList.remove(userId);
 
         }
       }else{
         if(offerId != null) {
-          _wishIdList!.add(offerId);
+          wishIdList.add(offerId);
         }else{
-          _wishIdList!.add(userId!);
+          wishIdList.add(userId!);
 
         }
       }
