@@ -16,9 +16,7 @@ class SaveButton extends StatelessWidget {
     return Consumer<WishlistProvider>(
       builder: (_, wishlistProvider, child) {
         bool isExist =false;
-        if(  wishlistProvider.wishIdList != null) {
-          isExist = wishlistProvider.wishIdList!.indexWhere((e) => e == id) != -1;
-        }
+        isExist = wishlistProvider.wishIdList.indexWhere((e) => e == id) != -1;
         return InkWell(
           splashColor: Colors.transparent,
             focusColor: Colors.transparent,
@@ -30,7 +28,7 @@ class SaveButton extends StatelessWidget {
                 sl<WishlistProvider>().postWishList(offerId: id,isExist: isExist);
               }
               else {
-                showToast("برجاء الستجيل اولا !");
+                showToast("برجاء التسجيل اولا !");
               }
             },
             child: customImageIconSVG(

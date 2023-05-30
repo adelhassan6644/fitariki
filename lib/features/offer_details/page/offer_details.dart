@@ -48,12 +48,12 @@ class _OfferDetailsState extends State<OfferDetails> {
           return Column(
             children: [
               CustomAppBar(
-                title: provider.isLoading? "" : provider.offerDetails?.clientId != null
+                title: provider.isLoading && provider.offerDetails == null? "" : provider.offerDetails?.clientId != null
                     ? getTranslated("delivery_request", context)
                     : getTranslated("delivery_offer", context),
                 savedItemId:  widget.offerId,
               ),
-              !provider.isLoading
+              !provider.isLoading&& provider.offerDetails != null
                   ? Expanded(
                       child: ListView(
                         physics: const BouncingScrollPhysics(),

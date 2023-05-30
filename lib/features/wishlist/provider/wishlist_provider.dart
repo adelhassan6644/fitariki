@@ -84,22 +84,19 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  postWishList({int? offerId, int? userId,bool isExist = false}) async {
+  postWishList({int? offerId, int? userId, bool isExist = false}) async {
     try {
-
-      if(isExist){
-        if(offerId != null) {
+      if (isExist) {
+        if (offerId != null) {
           wishIdList.remove(offerId);
-        }else{
+        } else {
           wishIdList.remove(userId);
-
         }
-      }else{
-        if(offerId != null) {
+      } else {
+        if (offerId != null) {
           wishIdList.add(offerId);
-        }else{
+        } else {
           wishIdList.add(userId!);
-
         }
       }
       notifyListeners();
@@ -107,34 +104,40 @@ class WishlistProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response =
           await wishlistRepo.postWishList(offerId: offerId, userId: userId);
       response.fold((l) {
-        getWishList();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: l.error,
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        notifyListeners();
       }, (response) {
-        getWishList();
-        if(isExist){
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "تم الازلة من المحفوظات بنجاح",
-                  isFloating: true,
-                  backgroundColor: ColorResources.ACTIVE,
-                  borderColor: Colors.transparent));
-        }else{
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "تم الاضافة الي المفضلة بنجاح",
-                  isFloating: true,
-                  backgroundColor: ColorResources.ACTIVE,
-                  borderColor: Colors.transparent));
-        }
-        notifyListeners();
+        if (isExist) {
+          showToast(
+            "تم الازلة من المحفوظات بنجاح",
+            backGroundColor: ColorResources.ACTIVE,
+          );
+          // CustomSnackBar.showSnackBar(
+          //     notification: AppNotification(
+          //         message: "تم الازلة من المحفوظات بنجاح",
+          //         isFloating: true,
+          //         backgroundColor: ColorResources.ACTIVE,
+          //         borderColor: Colors.transparent));
+        } else {
+          showToast(
+            "تم الاضافة الي المحفوظات بنجاح",
+            backGroundColor: ColorResources.ACTIVE,
+          );
 
+          // CustomSnackBar.showSnackBar(
+          //     notification: AppNotification(
+          //         message: "تم الاضافة الي المفضلة بنجاح",
+          //         isFloating: true,
+          //         backgroundColor: ColorResources.ACTIVE,
+          //         borderColor: Colors.transparent));
+        }
       });
+      getWishList();
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -142,7 +145,6 @@ class WishlistProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-      isLoading = false;
       notifyListeners();
     }
   }
