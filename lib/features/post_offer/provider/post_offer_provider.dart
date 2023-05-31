@@ -131,10 +131,6 @@ class PostOfferProvider extends ChangeNotifier {
 
       return;
     }
-    // if (startTime == null) {
-    //   showToast( "برجاء ادخال وقت البداية!");
-    //   return;
-    // }
     if (startTime.isAtSameMomentAs(endTime)) {
       showToast(" وقت النهاية لا يجب ان يكون مثل وقت البداية!");
 
@@ -189,7 +185,6 @@ class PostOfferProvider extends ChangeNotifier {
 
       // duration:
     );
-    print(offerModel?.toPostClientJson());
     isLoading = true;
     notifyListeners();
     final response = await postOfferRepo.postOffer(offerModel: offerModel!);

@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import '../../../navigation/custom_navigation.dart';
 
 class AppNotification {
@@ -85,7 +89,44 @@ showToast(msg, {Color? backGroundColor, Color? textColor, Toast? toastLength}) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
-      backgroundColor:backGroundColor?? ColorResources.SECOUND_PRIMARY_COLOR,
-      textColor:textColor?? ColorResources.WHITE_COLOR,
+      backgroundColor: backGroundColor ?? ColorResources.SECOUND_PRIMARY_COLOR,
+      textColor: textColor ?? ColorResources.WHITE_COLOR,
       fontSize: 16.0);
+}
+
+successMotionToast(msg,{MotionToastPosition? position,AnimationType? animationType}) {
+  return MotionToast.success(
+    title: Text(
+      getTranslated("success", CustomNavigator.navigatorState.currentContext!),
+      style: AppTextStyles.w600.copyWith(fontSize: 13, color: ColorResources.ACTIVE),
+    ),
+    description: Text(msg, style: AppTextStyles.w400
+          .copyWith(fontSize: 11, color: ColorResources.ACTIVE),
+    ),
+    height: 70.h,
+    width: CustomNavigator.navigatorState.currentContext!.width-60.w,
+    layoutOrientation: ToastOrientation.ltr,
+    animationType:animationType?? AnimationType.fromTop,
+    position: position?? MotionToastPosition.top,
+  ).show(CustomNavigator.navigatorState.currentContext!);
+}
+
+errorMotionToast(msg,{MotionToastPosition? position,AnimationType? animationType}) {
+  return MotionToast.error(
+    title: Text(
+      getTranslated("error", CustomNavigator.navigatorState.currentContext!),
+      style: AppTextStyles.w600
+          .copyWith(fontSize: 13, color: ColorResources.IN_ACTIVE),
+    ),
+    description: Text(
+      msg,
+      style: AppTextStyles.w400
+          .copyWith(fontSize: 11, color: ColorResources.IN_ACTIVE),
+    ),
+    height: 70.h,
+    width: CustomNavigator.navigatorState.currentContext!.width-60.w,
+    layoutOrientation: ToastOrientation.ltr,
+    animationType:animationType?? AnimationType.fromTop,
+    position: position?? MotionToastPosition.top,
+  ).show(CustomNavigator.navigatorState.currentContext!);
 }
