@@ -80,7 +80,7 @@ class Payment extends StatelessWidget {
                         arguments: SuccessModel(
                             isCongrats: true,
                             isReplace: true,
-                            routeName: Routes.TRIP_DETAILS,
+                            routeName: Routes.REQUEST_DETAILS,
                             title: "محمد م...",
                             btnText: getTranslated("trip", context),
                             description:"تم دفع تكاليف الرحله بنجاح مع كابتن محمد م..."));

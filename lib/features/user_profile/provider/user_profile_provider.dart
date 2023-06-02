@@ -15,13 +15,12 @@ class UserProfileProvider extends ChangeNotifier {
   bool isLoading = false;
   ProfileModel? userProfileModel;
 
-  getUserProfile({required int userId,required userType}) async {
+  getUserProfile({required int userId}) async {
     try {
-      print("====>${userType}");
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
-          await userProfileRepo.getUserProfile(userID: userId,userType: userType);
+          await userProfileRepo.getUserProfile(userID: userId,);
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(

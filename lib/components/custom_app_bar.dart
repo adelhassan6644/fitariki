@@ -14,18 +14,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int? savedItemId;
   final bool withBorder;
   final bool withBackGround;
-  final  double? actionWidth;
+  final bool isOffer;
+  final double? actionWidth;
 
   const CustomAppBar(
       {Key? key,
       this.title,
       this.withCart = false,
-      this.savedItemId ,
+      this.savedItemId,
       this.withBackGround = true,
       this.withBorder = false,
       this.withBack = true,
-        this.actionWidth,
-        this.actionChild})
+      this.isOffer = true,
+      this.actionWidth,
+      this.actionChild})
       : super(key: key);
 
   @override
@@ -33,9 +35,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       width: context.width,
       decoration: BoxDecoration(
-        color:withBackGround? ColorResources.APP_BAR_BACKGROUND_COLOR : Colors.transparent,
-        border:withBorder? Border(
-            bottom: BorderSide(color: ColorResources.BORDER_COLOR, width: 1.h)):null,
+        color: withBackGround
+            ? ColorResources.APP_BAR_BACKGROUND_COLOR
+            : Colors.transparent,
+        border: withBorder
+            ? Border(
+                bottom:
+                    BorderSide(color: ColorResources.BORDER_COLOR, width: 1.h))
+            : null,
       ),
       padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -50,12 +57,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
               savedItemId != null
-                  ? SaveButton(id: savedItemId!,)
-                  :  actionChild??const SizedBox(
-                      width: 18,
-                    ),
+                  ? SaveButton(
+                      id: savedItemId!,
+                      isOffer: isOffer,
+                    )
+                  : actionChild ??
+                      const SizedBox(
+                        width: 18,
+                      ),
               const Expanded(child: SizedBox()),
               Text(
                 title ?? "",
@@ -69,7 +79,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         CustomNavigator.pop();
                       },
                       child: SizedBox(
-                        width: actionWidth?? 18,
+                        width: actionWidth ?? 18,
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -81,8 +91,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ],
                         ),
                       ))
-                  :  SizedBox(
-                      width:actionWidth?? 18,
+                  : SizedBox(
+                      width: actionWidth ?? 18,
                     ),
             ],
           ),
@@ -93,5 +103,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(15005,  50);
+  Size get preferredSize => Size(15005, 50);
 }

@@ -12,7 +12,6 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
-import '../../../navigation/routes.dart';
 import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
 import '../model/country_model.dart';
@@ -28,7 +27,6 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
-    getRoleType();
     if (isLogin) {
       getProfile();
     }
@@ -36,19 +34,10 @@ class ProfileProvider extends ChangeNotifier {
     getCountries();
   }
 
-  ///Get Role Type
-
-  String? role;
-
-  getRoleType() {
-    role = profileRepo.getRoleType();
-    notifyListeners();
-  }
 
   bool get isLogin => profileRepo.isLoggedIn();
   bool get isDriver => profileRepo.isDriver();
 
-  String? get roleType => profileRepo.getRoleType();
 
   ///Car Data
   TextEditingController carName = TextEditingController();
@@ -224,7 +213,6 @@ class ProfileProvider extends ChangeNotifier {
     updateTimes();
     if (!isDriver && profileImage == null) {
       if (profileModel?.client?.image == null) {
-        print("sdsd");
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "برجاء اختيار الصورةالشخصية!",
@@ -500,25 +488,24 @@ class ProfileProvider extends ChangeNotifier {
         };
 
         final personalData = {
-          role: {
+          isDriver?"driver":"client" : {
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
             "gender": gender,
             "age": age.text.trim(),
-            // "national": nationality?.name,
             "country_id": nationality?.id,
             "id_number": identityNumber.text.trim(),
-            if (role == "driver")
+            if (isDriver)
               "driver_days": List<dynamic>.from(
                   scheduleProvider.selectedDays.map((x) => x.toJson())),
-            if (role == "client")
+            if (!isDriver)
               "client_days": List<dynamic>.from(
                   scheduleProvider.selectedDays.map((x) => x.toJson())),
             "drop_off_location": endLocation!.toJson(),
             "pickup_location": startLocation!.toJson(),
-            if (role == "driver") "car_info": carData,
-            if (role == "driver") "bank_info": bankData
+            if (isDriver) "car_info": carData,
+            if (isDriver) "bank_info": bankData
           }
         };
         if (carImage != null) {
@@ -583,7 +570,7 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
-          CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
+          CustomNavigator.pop();
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: "تم تحديث بياناتك بنجاح !",

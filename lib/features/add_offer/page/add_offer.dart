@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
-import '../../../main_models/offer_details_model.dart';
+import '../../../main_models/offer_model.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
 import '../provider/add_offer_provider.dart';
@@ -18,7 +18,7 @@ class AddOffer extends StatelessWidget {
       required this.name})
       : super(key: key);
   final bool isCaptain;
-  final OfferDetailsModel offer;
+  final OfferModel offer;
   final String name;
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class AddOffer extends StatelessWidget {
           children: [
             BottomSheetAppBar(
               title: isCaptain
-                  ? getTranslated("make_a_request_to_client", context)
-                  : getTranslated("make_an_offer_to_captain", context),
+                  ? getTranslated("make_an_offer_to_client", context)
+                  : getTranslated("make_a_request_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
                 if (provider.checkData() == true) {

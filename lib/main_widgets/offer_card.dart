@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/features/home/provider/home_provider.dart';
 import 'package:fitariki/main_models/offer_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +55,9 @@ class OfferCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
-                            image:
-                                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                            image: sl<HomeProvider>().isDriver
+                                ? offerModel.clientModel?.image ?? ""
+                                : offerModel.driverModel?.image ?? "",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -71,7 +73,11 @@ class OfferCard extends StatelessWidget {
                                   SizedBox(
                                     width: 50,
                                     child: Text(
-                                      offerModel.name ?? "",
+                                      sl<HomeProvider>().isDriver
+                                          ? offerModel.clientModel?.firstName ??
+                                              ""
+                                          : offerModel.driverModel?.firstName ??
+                                              "",
                                       textAlign: TextAlign.start,
                                       maxLines: 1,
                                       style: AppTextStyles.w600.copyWith(
@@ -84,22 +90,30 @@ class OfferCard extends StatelessWidget {
                                     width: 4,
                                   ),
                                   customImageIconSVG(
-                                      imageName: SvgImages.maleIcon,
+                                      imageName: sl<HomeProvider>().isDriver
+                                          ? offerModel.clientModel?.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon
+                                          : offerModel.driverModel?.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon,
                                       color: ColorResources.BLUE_COLOR,
                                       width: 11,
                                       height: 11)
                                 ],
                               ),
-                              const ShowRate(
-                                rate: 3,
+                              ShowRate(
+                                rate: sl<HomeProvider>().isDriver
+                                    ? offerModel.clientModel?.rate ?? 0
+                                    : offerModel.driverModel?.rate ?? 0,
                               )
                             ],
                           ),
                         ),
                         if (isSaved == true)
                           InkWell(
-                            onTap: () => sl<WishlistProvider>()
-                                .postWishList(offerId: offerModel.id!),
+                            onTap: () => sl<WishlistProvider>().postWishList(
+                                id: offerModel.id!, isOffer: true),
                             child:
                                 customImageIconSVG(imageName: SvgImages.saved),
                           )

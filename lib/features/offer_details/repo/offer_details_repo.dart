@@ -13,15 +13,21 @@ class OfferDetailsRepo {
   final SharedPreferences sharedPreferences;
 
   OfferDetailsRepo({required this.dioClient, required this.sharedPreferences});
-  Future<Either<ServerFailure, Response>> getOfferDetails(
-      { offerID}) async {
+
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
+  Future<Either<ServerFailure, Response>> getOfferDetails({offerID}) async {
     try {
       Response response = await dioClient.get(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.offerDetails}/$offerID",
-
-
-          );
+        uri:
+            "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.offerDetails}/$offerID",
+      );
       if (response.statusCode == 200) {
         return Right(response);
       } else {

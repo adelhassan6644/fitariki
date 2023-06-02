@@ -11,7 +11,6 @@ import '../../maps/models/location_model.dart';
 import '../repo/home_repo.dart';
 import 'package:flutter/rendering.dart';
 
-
 class HomeProvider extends ChangeNotifier {
   HomeRepo homeRepo;
   HomeProvider({required this.homeRepo}) {
@@ -19,27 +18,28 @@ class HomeProvider extends ChangeNotifier {
   }
 
   bool goingDown = false;
-   scroll(controller) {
-     controller.addListener(() {
-       if (controller.position.userScrollDirection ==
-           ScrollDirection.forward) {
-         goingDown = false;
-         notifyListeners();
-
-       } else {
-         goingDown = true;
-         notifyListeners();
-
-       }
-     });
+  scroll(controller) {
+    controller.addListener(() {
+      if (controller.position.userScrollDirection == ScrollDirection.forward) {
+        goingDown = false;
+        notifyListeners();
+      } else {
+        goingDown = true;
+        notifyListeners();
+      }
+    });
   }
+
+  bool get isDriver => homeRepo.isDriver();
+  bool get isLogin => homeRepo.isLoggedIn();
 
   int roleIndex = 0;
   List<String> roles = ["client", "driver"];
   List<String> titles = ["passenger", "captain"];
   onSelectRole(int value) {
     roleIndex = value;
-    getOffers(role: roles[roleIndex]);
+    homeRepo.saveUserRole(roles[roleIndex]);
+    getOffers();
     notifyListeners();
   }
 
@@ -71,7 +71,7 @@ class HomeProvider extends ChangeNotifier {
 
   bool isLoading = false;
   List<OfferModel>? offer;
-  getOffers({String? role, bool withFilter = false}) async {
+  getOffers({bool withFilter = false}) async {
     try {
       offer = [];
       isLoading = true;
@@ -83,11 +83,11 @@ class HomeProvider extends ChangeNotifier {
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,
         }
-
       };
 
       Either<ServerFailure, Response> response = await homeRepo.getOffer(
-          body: withFilter ? filters : null, role: role ?? "client");
+        body: withFilter ? filters : null,
+      );
       response.fold((l) => null, (response) {
         offer = List<OfferModel>.from(response.data["data"]["offers"]!
             .map((x) => OfferModel.fromJson(x)));

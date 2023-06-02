@@ -1,6 +1,6 @@
 {
   "welcome" : "اهلاً بك!",
-  "edit_profile_description": "اكمل بياناتك حتى تكون نسب توافق مشوارك\nاليومي مع الكباتن دقيقة!",
+  "welcome_description": "اكمل بياناتك حتى تكون نسب توافق مشوارك\nاليومي مع الكباتن دقيقة!",
   "user_name": "اسم المستخدم",
   "phone_number": "رقم الهاتف",
   "remember_me": "تذكرني",
@@ -111,8 +111,8 @@
   "age": "العمر",
   "nationality": "الجنسية",
   "save": "حفظ",
-  "make_an_offer_to_captain": "تقديم عرض لكابتن",
-  "make_a_request_to_client": "تقديم طلب لراكب",
+  "make_an_offer_to_client": "تقديم عرض لراكب",
+  "make_a_request_to_captain": "تقديم طلب لكابتن",
   "send": "ارسال",
   "duration": "المدة",
   "price": "السعر",

@@ -7,15 +7,24 @@ import '../../../data/api/end_points.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
-import '../../../main_models/offer_details_model.dart';
+import '../../../main_models/offer_model.dart';
 
 class PostOfferRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
   PostOfferRepo({required this.dioClient, required this.sharedPreferences});
+
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
   Future<Either<ServerFailure, Response>> postOffer(
-      {required OfferDetailsModel offerModel}) async {
+      {required OfferModel offerModel}) async {
     try {
       offerModel.id =
           int.parse(sharedPreferences.getString(AppStorageKey.userId)!);

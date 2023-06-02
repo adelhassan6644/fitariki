@@ -12,13 +12,13 @@ import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../navigation/routes.dart';
-import '../../my_offers/widgets/my_offer_card.dart';
+import '../widgets/my_offer_card.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../widgets/trip_card.dart';
+import '../widgets/request_card.dart';
 
 class MyOfferDetails extends StatelessWidget {
-  final OfferModel offerModel;
-  const MyOfferDetails({Key? key, required this.offerModel}) : super(key: key);
+  final OfferModel offer;
+  const MyOfferDetails({Key? key, required this.offer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +52,11 @@ class MyOfferDetails extends StatelessWidget {
                   ListAnimator(
                     data: [
                       MyOfferCard(
-                        offer: offerModel,
+                        offer: offer,
                       ),
                       MapWidget(
-                        startPoint: offerModel.pickupLocation,
-                        endPoint: offerModel.dropOffLocation,
+                        startPoint: offer.pickupLocation,
+                        endPoint: offer.dropOffLocation,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -73,32 +73,34 @@ class MyOfferDetails extends StatelessWidget {
                                     AppTextStyles.w600.copyWith(fontSize: 16),
                               ),
                             ),
-                            if (offerModel.offerRequests != null &&
-                                offerModel.offerRequests!.isNotEmpty&&
-                                offerModel.offerRequests!.length>3)   InkWell(
-                              onTap: () => CustomNavigator.push(
-                                Routes.ALL_TRIPS,
-                              ),
-                              child: Text(
-                                getTranslated("view_all", context),
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 11,
-                                    color: ColorResources.DISABLED),
-                              ),
-                            )
+                            if (offer.offerRequests != null &&
+                                offer.offerRequests!.isNotEmpty &&
+                                offer.offerRequests!.length > 3)
+                              InkWell(
+                                onTap: () => CustomNavigator.push(
+                                  Routes.ALL_REQUESTS,
+                                ),
+                                child: Text(
+                                  getTranslated("view_all", context),
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 11,
+                                      color: ColorResources.DISABLED),
+                                ),
+                              )
                           ],
                         ),
                       ),
-                      if (offerModel.offerRequests != null &&
-                          offerModel.offerRequests!.isNotEmpty)
+                      if (offer.offerRequests != null &&
+                          offer.offerRequests!.isNotEmpty)
                         ...List.generate(
-                            offerModel.offerRequests!.length>3 ? 3:offerModel.offerRequests!.length,
-                            (index) => TripCard(
-                                  offerRequest:
-                                      offerModel.offerRequests![index],
+                            offer.offerRequests!.length > 3
+                                ? 3
+                                : offer.offerRequests!.length,
+                            (index) => RequestCard(
+                                  offerRequest: offer.offerRequests![index],
                                 )),
-                      if (offerModel.offerRequests == null ||
-                          offerModel.offerRequests!.isEmpty)
+                      if (offer.offerRequests == null ||
+                          offer.offerRequests!.isEmpty)
                         EmptyState(
                             txt: sl.get<ProfileProvider>().isDriver
                                 ? "لا يوجود عروض الان"

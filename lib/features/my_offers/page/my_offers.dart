@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../data/config/di.dart';
 import '../../guest/guest_mode.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/my_offers_provider.dart';
@@ -24,8 +25,8 @@ class _MyOffersState extends State<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
-        Provider.of<MyOffersProvider>(context, listen: false).getMyOffer();
+      if (sl<MyOffersProvider>().isLogin) {
+        sl<MyOffersProvider>().getMyOffer();
       }
     });
     super.initState();
@@ -37,7 +38,7 @@ class _MyOffersState extends State<MyOffers> {
       return Column(
         children: [
           CustomAppBar(
-            title: profileProvider.roleType != null
+            title: profileProvider.isLogin
                 ? profileProvider.isDriver
                     ? getTranslated("delivery_offers", context)
                     : getTranslated("delivery_requests", context)
@@ -55,7 +56,7 @@ class _MyOffersState extends State<MyOffers> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          if ( provider.myOffers?.offers == null||
+                          if (provider.myOffers?.offers == null ||
                               provider.myOffers!.offers!.isEmpty)
                             EmptyState(
                                 txt: profileProvider.isDriver
@@ -68,7 +69,6 @@ class _MyOffersState extends State<MyOffers> {
                                 (index) => MyOfferCard(
                                       offer: provider.myOffers!.offers![index],
                                     )),
-
                         ],
                       );
                     }

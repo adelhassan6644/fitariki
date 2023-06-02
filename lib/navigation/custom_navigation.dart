@@ -1,7 +1,6 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/ratting/page/rate_user.dart';
-import 'package:fitariki/features/trip_details/page/trip_details.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
@@ -12,12 +11,12 @@ import '../features/contatct_with_us/page/contact_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
-import '../features/my_offer_details/page/all_trips.dart';
-import '../features/my_offer_details/page/my_offer_details.dart';
-import '../features/my_offers/model/my_offer.dart';
+import '../features/my_offers/page/all_requests.dart';
+import '../features/my_offers/page/my_offer_details.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/ratting/page/ratting.dart';
+import '../features/request_details/page/request_details.dart';
 import '../features/success/model/success_model.dart';
 import '../features/success/success_page.dart';
 import '../features/profile/page/profile_page.dart';
@@ -56,7 +55,7 @@ abstract class CustomNavigator {
         ));
 
       case Routes.OFFER_DETAILS:
-        return _pageRoute( OfferDetails(
+        return _pageRoute(OfferDetails(
           offerId: settings.arguments as int,
         ));
 
@@ -87,8 +86,10 @@ abstract class CustomNavigator {
       case Routes.WISHLIST:
         return _pageRoute(const Wishlist());
 
-        case Routes.USER_PROFILE:
-        return _pageRoute( UserProfile(userId: settings.arguments as int,));
+      case Routes.USER_PROFILE:
+        return _pageRoute(UserProfile(
+          userId: settings.arguments as int,
+        ));
 
       case Routes.ALL_USER_OFFERS:
         return _pageRoute(const AllUserOffers());
@@ -100,13 +101,17 @@ abstract class CustomNavigator {
         return _pageRoute(const Notifications());
 
       case Routes.MY_OFFERS_DETAILS:
-        return _pageRoute( MyOfferDetails(offerModel: settings.arguments as OfferModel,));
+        return _pageRoute(MyOfferDetails(
+          offer: settings.arguments as OfferModel,
+        ));
 
-      case Routes.ALL_TRIPS:
-        return _pageRoute(const AllTrips());
+      case Routes.ALL_REQUESTS:
+        return _pageRoute(const AllRequests());
 
-      case Routes.TRIP_DETAILS:
-        return _pageRoute( TripDetails(offerRequest: settings.arguments as  OfferRequest,));
+      case Routes.REQUEST_DETAILS:
+        return _pageRoute(RequestDetails(
+          requestId: settings.arguments as int,
+        ));
 
       case Routes.PAYMENT:
         return _pageRoute(const Payment());

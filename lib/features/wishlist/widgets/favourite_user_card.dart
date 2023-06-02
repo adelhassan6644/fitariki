@@ -25,8 +25,8 @@ class FavouriteUserCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         sl<UserProfileProvider>().getUserProfile(
-            userId: driver != null ? driver!.id! : client!.id!,
-            userType: driver != null ? "driver" : "client");
+          userId: driver != null ? driver!.id! : client!.id!,
+        );
         CustomNavigator.push(Routes.USER_PROFILE,
             arguments: driver != null ? driver!.id : client!.id);
       },
@@ -102,7 +102,7 @@ class FavouriteUserCard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () => sl<WishlistProvider>().postWishList(
-                    userId: driver != null ? driver!.id! : client!.id!),
+                    id: driver != null ? driver!.id! : client!.id!,isOffer: false),
                 child: customImageIconSVG(imageName: SvgImages.saved),
               )
             ],

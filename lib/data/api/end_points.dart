@@ -14,6 +14,7 @@ class EndPoints {
   static const String listOffers = 'offer/listOffers';
   static const String availableOffers = 'offer/list_available';
   static const String myOffers = 'offer/listOffers';
+  static const String requestDetails = 'offer/view_request_offer';
   static const String offerDetails = 'offer/view_offer';
   static const String followers = 'profile/followers_list';
   static const String addFollower = 'profile/add_follower';
@@ -23,7 +24,7 @@ class EndPoints {
   static const String getWishList = 'favorites/index';
   static const String postWishList = 'favorites/addOrDelete';
   static const String addOffer = 'offer/request_offer';
-  static const String updateOffer = 'offer/request_update';
+  static const String updateRequest = 'offer/request_update';
   static const String userProfile = 'profile';
   static const String ratting = 'ratting';
   static const String sendRate = '';

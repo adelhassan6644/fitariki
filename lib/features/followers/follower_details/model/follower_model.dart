@@ -20,7 +20,7 @@ class FollowerModel {
   factory FollowerModel.fromJson(Map<String, dynamic> json) => FollowerModel(
         id: json["id"],
         name: json["name"],
-        age: json["age"],
+        age: json["age"].toString(),
         gender: int.tryParse(json["gender"].toString()),
         dropOffLocation: json["drop_off_location"] == null
             ? null

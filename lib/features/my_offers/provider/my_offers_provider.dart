@@ -12,6 +12,9 @@ class MyOffersProvider extends ChangeNotifier {
   MyOffersRepo myOffersRepo;
   MyOffersProvider({required this.myOffersRepo});
 
+  bool get isLogin => myOffersRepo.isLoggedIn();
+  bool get isDriver => myOffersRepo.isDriver();
+
   MyOffersModel? myOffers;
   bool isLoading = false;
 

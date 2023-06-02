@@ -69,10 +69,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                     height: 12,
                   ),
                   InkWell(
-                    onTap: (){
-                      CustomNavigator.push(Routes.FOLLOWERS);
-
-                    },
+                    onTap: ()=>CustomNavigator.push(Routes.FOLLOWERS),
                     child: Container(
                       padding:
                           const EdgeInsets.symmetric(horizontal: 8, vertical: 12),

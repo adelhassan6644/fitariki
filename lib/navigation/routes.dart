@@ -15,8 +15,8 @@ class Routes {
   static const CONTACT_WITH_US = "CONTACT_WITH_US";
   static const NOTIFICATIONS = "NOTIFICATIONS";
   static const MY_OFFERS_DETAILS = "MY_OFFERS_DETAILS";
-  static const ALL_TRIPS = "ALL_TRIPS";
-  static const TRIP_DETAILS = "TRIP_DETAILS";
+  static const ALL_REQUESTS = "ALL_REQUESTS";
+  static const REQUEST_DETAILS = "REQUEST_DETAILS";
   static const PAYMENT = "PAYMENT";
   static const USER_PROFILE = "USER_PROFILE";
   static const ALL_USER_OFFERS = "ALL_USER_OFFERS";

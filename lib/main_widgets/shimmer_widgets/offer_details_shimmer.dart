@@ -11,12 +11,11 @@ import '../../app/core/utils/svg_images.dart';
 import '../../app/core/utils/text_styles.dart';
 import '../../app/localization/localization/language_constant.dart';
 import '../../components/custom_images.dart';
-import '../../data/config/di.dart';
-import '../../features/profile/provider/profile_provider.dart';
 import 'distance_widget_shimmer.dart';
 
 class OfferDetailsShimmer extends StatelessWidget {
-  const OfferDetailsShimmer({Key? key}) : super(key: key);
+  const OfferDetailsShimmer({required this.isDriver ,Key? key}) : super(key: key);
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class OfferDetailsShimmer extends StatelessWidget {
          ),
           const MapWidgetShimmer(),
           const DistanceWidgetShimmer(),
-          if (!sl.get<ProfileProvider>().isDriver)  Padding(
+          if (!isDriver)  Padding(
             padding:  EdgeInsets.symmetric(
                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,vertical: 8.h),
             child: Column(
@@ -100,7 +99,7 @@ class OfferDetailsShimmer extends StatelessWidget {
               ],
             ),
           ),
-          if (!sl.get<ProfileProvider>().isDriver) const ReviewWidgetShimmer()
+          if (!isDriver) const ReviewWidgetShimmer()
         ],
       ),
     );

@@ -11,6 +11,7 @@ import '../widgets/bank_data_widget.dart';
 import '../widgets/car_data_widget.dart';
 import '../widgets/personal_information_widget.dart';
 import '../widgets/profile_image_widget.dart';
+import '../widgets/welcome_widget.dart';
 import '../widgets/work_information_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -55,53 +56,33 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (fromLogin)
-                          Column(
-                            children: [
-                              Center(
-                                child: Text(getTranslated("welcome", context),
-                                    style: AppTextStyles.w600.copyWith(
-                                        fontSize: 32,
-                                        color: ColorResources.PRIMARY_COLOR)),
-                              ),
-                              Center(
-                                child: Text(
-                                    getTranslated(
-                                        "edit_profile_description", context),
-                                    textAlign: TextAlign.center,
-                                    style: AppTextStyles.w500.copyWith(
-                                      fontSize: 16,
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                            ],
-                          ),
+                        Visibility(
+                            visible:fromLogin ,
+                            child: const WelcomeWidget()),
                         ProfileImageWidget(
                           provider: provider,
                           fromLogin: fromLogin,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16.h),
-                          child: PersonalInformationWidget(
+                        PersonalInformationWidget(
+                          provider: provider,
+                        ),
+                        Visibility(
+                          visible: provider.isDriver,
+                          child: CarDataWidget(
                             provider: provider,
                           ),
                         ),
-                        if (provider.role == "driver")
-                          CarDataWidget(
-                            provider: provider,
-                          ),
                         SizedBox(
                           height: 16.h,
                         ),
                         WorkInformationWidget(
                           provider: provider,
                         ),
-                        if (provider.role == "driver")
-                          BankDataWidget(
-                            provider: provider,
-                          )
+                        Visibility(
+                            visible: provider.isDriver,
+                            child: BankDataWidget(
+                              provider: provider,
+                            ))
                       ],
                     ),
                   ),
@@ -117,7 +98,7 @@ class ProfilePage extends StatelessWidget {
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT,
                     ),
                     child: CustomButton(
-                        text: getTranslated("save", context),
+                      text: getTranslated("save", context),
                       onTap: () => provider.updateProfile(),
                     ),
                   ),

@@ -6,10 +6,10 @@ import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../widgets/trip_card.dart';
+import '../widgets/request_card.dart';
 
-class AllTrips extends StatelessWidget {
-  const AllTrips({Key? key}) : super(key: key);
+class AllRequests extends StatelessWidget {
+  const AllRequests({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class AllTrips extends StatelessWidget {
                 data: [
                   ...List.generate(
                       3,
-                      (index) => const TripCard()),
+                      (index) => const RequestCard()),
                 ],
               ),
             )

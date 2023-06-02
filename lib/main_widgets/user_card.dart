@@ -16,24 +16,29 @@ import '../navigation/routes.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard(
-      {this.duration,
+      {this.photo,
+      this.name,
+      this.isMale = true,
+      this.duration,
       required this.createdAt,
       this.userId,
       this.days,
       this.followers,
       this.timeRange,
-      this.name,
       this.national,
       this.priceRange,
       this.withAnalytics = true,
-      this.isDriver = true,
       Key? key})
       : super(key: key);
-  final bool withAnalytics, isDriver;
+
+  final int? userId;
+  final String? photo, name, national;
+  final bool isMale;
+
+  final String? duration, days, timeRange, priceRange, followers;
+  final bool withAnalytics;
   final DateTime createdAt;
 
-  final String? duration, days, name, national, timeRange, priceRange, followers;
-  final int? userId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,11 +64,11 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap:() {
-                      if (userId != null) {
-                        sl<UserProfileProvider>().getUserProfile(
-                            userId: userId!,
-                            userType: isDriver ? "driver" : "client");
+                  onTap: () {
+                    if (userId != null) {
+                      sl<UserProfileProvider>().getUserProfile(
+                        userId: userId!,
+                      );
                       CustomNavigator.push(Routes.USER_PROFILE,
                           arguments: userId);
                     }
@@ -71,8 +76,7 @@ class UserCard extends StatelessWidget {
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(
-                          image:
-                              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                          image: photo,
                           radius: 28,
                           color: ColorResources.SECOUND_PRIMARY_COLOR),
                       const SizedBox(
@@ -86,7 +90,7 @@ class UserCard extends StatelessWidget {
                               SizedBox(
                                 width: 50,
                                 child: Text(
-                                  name ?? "محمد م..",
+                                  name ?? "",
                                   textAlign: TextAlign.start,
                                   maxLines: 1,
                                   style: AppTextStyles.w600.copyWith(
@@ -99,7 +103,9 @@ class UserCard extends StatelessWidget {
                                 width: 4,
                               ),
                               customImageIconSVG(
-                                  imageName: SvgImages.maleIcon,
+                                  imageName: isMale
+                                      ? SvgImages.maleIcon
+                                      : SvgImages.femaleIcon,
                                   color: ColorResources.BLUE_COLOR,
                                   width: 11,
                                   height: 11)
@@ -111,7 +117,7 @@ class UserCard extends StatelessWidget {
                           SizedBox(
                             width: 50,
                             child: Text(
-                              national ?? "سعودي",
+                              national ?? "",
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,
@@ -156,36 +162,41 @@ class UserCard extends StatelessWidget {
                         child: const SizedBox(),
                       ),
                     ),
-                    if (followers != null)
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            customImageIconSVG(
-                                imageName: SvgImages.addFollower),
-                            const SizedBox(height: 4),
-                            MarqueeWidget(
-                              child: Text(
-                                "$followers",
-                                maxLines: 1,
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
+                    Visibility(
+                      visible: followers != null,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                customImageIconSVG(
+                                    imageName: SvgImages.addFollower),
+                                const SizedBox(height: 4),
+                                MarqueeWidget(
+                                  child: Text(
+                                    "$followers",
+                                    maxLines: 1,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Container(
+                              color: ColorResources.HINT_COLOR,
+                              height: 30,
+                              width: 1,
+                              child: const SizedBox(),
+                            ),
+                          ),
+                        ],
                       ),
-                    if (followers != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Container(
-                          color: ColorResources.HINT_COLOR,
-                          height: 30,
-                          width: 1,
-                          child: const SizedBox(),
-                        ),
-                      ),
+                    ),
                     Expanded(
                       flex: 4,
                       child: Column(
@@ -221,7 +232,7 @@ class UserCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           MarqueeWidget(
                             child: Text(
-                              timeRange ?? "9 صباحاً - 4 مساءً",
+                              timeRange ?? "",
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,

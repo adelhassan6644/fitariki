@@ -2,7 +2,6 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/custom_button.dart';
 import 'package:flutter/material.dart';
-
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/methods.dart';
@@ -15,21 +14,21 @@ import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../followers/follower_details/model/follower_model.dart';
 import '../../home/widgets/acceptable_analytics_widget.dart';
-import '../../my_offers/model/my_offer.dart';
 import '../../profile/provider/profile_provider.dart';
+import '../../request_details/model/offer_request_details_model.dart';
 
-class TripCard extends StatelessWidget {
-  final OfferRequest? offerRequest;
-  const TripCard({Key? key, this.offerRequest}) : super(key: key);
+class RequestCard extends StatelessWidget {
+  final OfferRequestDetailsModel? offerRequest;
+final  List<FollowerModel>? followers;
+  const RequestCard({Key? key, this.offerRequest ,this.followers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(
-        Routes.TRIP_DETAILS,
-        arguments: offerRequest
-      ),
+      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
+          arguments: offerRequest!.id!),
       child: Stack(
         children: [
           Padding(
@@ -60,8 +59,9 @@ class TripCard extends StatelessWidget {
                         Row(
                           children: [
                             CustomNetworkImage.circleNewWorkImage(
-                                image:
-                                    "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                                image: sl.get<ProfileProvider>().isDriver
+                                    ? offerRequest!.client?.image
+                                    : offerRequest!.client?.image,
                                 radius: 16,
                                 color: ColorResources.SECOUND_PRIMARY_COLOR),
                             SizedBox(
@@ -78,9 +78,9 @@ class TripCard extends StatelessWidget {
                                       SizedBox(
                                         width: 50,
                                         child: Text(
-                                          !sl.get<ProfileProvider>().isDriver
-                                              ? "${offerRequest!.driver!.firstName}"
-                                              : "${offerRequest!.client!.firstName} ${offerRequest!.client!.lastName}",
+                                          sl.get<ProfileProvider>().isDriver
+                                              ? offerRequest!.client!.firstName ?? ""
+                                              : offerRequest!.driver!.firstName ?? "",
                                           textAlign: TextAlign.start,
                                           maxLines: 1,
                                           style: AppTextStyles.w600.copyWith(
@@ -93,7 +93,11 @@ class TripCard extends StatelessWidget {
                                         width: 4,
                                       ),
                                       customImageIconSVG(
-                                          imageName: SvgImages.maleIcon,
+                                          imageName: sl.get<ProfileProvider>().isDriver
+                                              ? offerRequest!.client?.gender == 0
+                                                  ? SvgImages.maleIcon : SvgImages.femaleIcon
+                                              : offerRequest!.driver?.gender == 0
+                                                  ? SvgImages.maleIcon : SvgImages.femaleIcon,
                                           color: ColorResources.BLUE_COLOR,
                                           width: 11,
                                           height: 11)
@@ -202,7 +206,7 @@ class TripCard extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                flex: 6,
+                                flex: 4,
                                 child: Row(
                                   children: [
                                     customImageIconSVG(
@@ -277,7 +281,7 @@ class TripCard extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                flex: 4,
+                                flex: 6,
                                 child: Row(
                                   children: [
                                     customImageIconSVG(
@@ -304,7 +308,7 @@ class TripCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        if (sl.get<ProfileProvider>().isDriver)
+                        if (followers != null)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -317,66 +321,46 @@ class TripCard extends StatelessWidget {
                               SizedBox(
                                 height: 4.h,
                               ),
-                              Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 50,
-                                        child: Text(
-                                          "محمد احمد",
-                                          textAlign: TextAlign.start,
-                                          maxLines: 1,
-                                          style: AppTextStyles.w600.copyWith(
-                                              fontSize: 10,
-                                              overflow: TextOverflow.ellipsis),
-                                        ),
+                              Wrap(
+                                direction: Axis.horizontal,
+                                spacing: 4.h,
+                                runSpacing: 0,
+                                children: List.generate(followers?.length??0, (index) =>   Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      child: Text(
+                                        followers![index].name??"" ,
+                                        textAlign: TextAlign.start,
+                                        maxLines: 1,
+                                        style: AppTextStyles.w600.copyWith(
+                                            fontSize: 14,
+                                            height: 1.25,
+                                            overflow: TextOverflow.ellipsis),
                                       ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      customImageIconSVG(
-                                          imageName: SvgImages.maleIcon,
-                                          color: ColorResources.BLUE_COLOR,
-                                          width: 11,
-                                          height: 11)
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Container(
-                                      height: 10,
-                                      width: 1,
-                                      color: ColorResources.HINT_COLOR,
-                                      child: const SizedBox(),
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 50,
-                                        child: Text(
-                                          "محمد احمد",
-                                          textAlign: TextAlign.start,
-                                          maxLines: 1,
-                                          style: AppTextStyles.w600.copyWith(
-                                              fontSize: 10,
-                                              overflow: TextOverflow.ellipsis),
-                                        ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    customImageIconSVG(
+                                        imageName:followers![index].gender == 0
+                                            ? SvgImages.maleIcon : SvgImages.femaleIcon,
+                                        color: ColorResources.BLUE_COLOR,
+                                        width: 11,
+                                        height: 11),
+                                if(index != followers!.length -1)    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Container(
+                                        height: 10,
+                                        width: 1,
+                                        color: ColorResources.HINT_COLOR,
+                                        child: const SizedBox(),
                                       ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      customImageIconSVG(
-                                          imageName: SvgImages.maleIcon,
-                                          color: ColorResources.BLUE_COLOR,
-                                          width: 11,
-                                          height: 11)
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),),
+                              )
                             ],
                           ),
                         SizedBox(
@@ -444,10 +428,8 @@ class TripCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () => CustomNavigator.push(
-                  Routes.TRIP_DETAILS,
-                  arguments: offerRequest
-                ),
+                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
+                    arguments: offerRequest),
               ))
         ],
       ),

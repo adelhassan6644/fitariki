@@ -28,22 +28,40 @@ class AddOfferProvider extends ChangeNotifier {
   String? minPrice, note;
 
   DateTime startDate = DateTime.now();
-  int duration=0;
+  int duration = 0;
 
   onSelectStartDate(v) {
     startDate = v;
-    sl<CalenderProvider>().getEventsList(startDate: startDate,endDate: endDate);
+    sl<CalenderProvider>()
+        .getEventsList(startDate: startDate, endDate: endDate);
     duration = Methods.getWeekdayCount(
-        startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
+            startDate: startDate,
+            endDate: endDate,
+            weekdays: sl
+                .get<OfferDetailsProvider>()
+                .offerDetails!
+                .offerDays!
+                .map((e) => e.id)
+                .toList())
+        .days;
     notifyListeners();
   }
 
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
     endDate = v;
-    sl<CalenderProvider>().getEventsList(startDate: startDate,endDate: endDate);
+    sl<CalenderProvider>()
+        .getEventsList(startDate: startDate, endDate: endDate);
     duration = Methods.getWeekdayCount(
-        startDate: startDate, endDate: endDate, weekdays: sl.get<OfferDetailsProvider>().offerDetails!.offerDays!.map((e) => e.id).toList()).days;
+            startDate: startDate,
+            endDate: endDate,
+            weekdays: sl
+                .get<OfferDetailsProvider>()
+                .offerDetails!
+                .offerDays!
+                .map((e) => e.id)
+                .toList())
+        .days;
     notifyListeners();
   }
 
@@ -83,15 +101,14 @@ class AddOfferProvider extends ChangeNotifier {
 
       final data = {
         "request_offer": {
-          sl<ProfileProvider>().isDriver?'driver_id':  "client_id":
+          sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "start_date": startDate.defaultFormat2(),
           "end_date": endDate.defaultFormat2(),
           "duration": duration,
           "price": minPrice,
-          if (sl.get<FollowersProvider>().addFollowers&&sl
-              .get<FollowersProvider>()
-              .selectedFollowers.isNotEmpty)
+          if (sl.get<FollowersProvider>().addFollowers &&
+              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty)
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers

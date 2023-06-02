@@ -5,7 +5,7 @@ import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
-import '../../../main_models/offer_details_model.dart';
+import '../../../main_models/offer_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -21,6 +21,9 @@ class PostOfferProvider extends ChangeNotifier {
     required this.scheduleProvider,
   });
 
+  bool get isLogin => postOfferRepo.isLoggedIn();
+  bool get isDriver => postOfferRepo.isDriver();
+
   LocationModel? startLocation;
   onSelectStartLocation(v) {
     startLocation = v;
@@ -28,7 +31,7 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  OfferDetailsModel? offerModel;
+  OfferModel? offerModel;
   LocationModel? endLocation;
   onSelectEndLocation(v) {
     endLocation = v;
@@ -173,9 +176,9 @@ class PostOfferProvider extends ChangeNotifier {
 
   bool isLoading = false;
   postOffer() async {
-    offerModel = OfferDetailsModel(
-      pickLocation: endLocation,
-      endLocation: startLocation,
+    offerModel = OfferModel(
+      pickupLocation: endLocation,
+      dropOffLocation: startLocation,
       startDate: startDate,
       endDate: endDate,
       minPrice: double.tryParse(minPrice!),

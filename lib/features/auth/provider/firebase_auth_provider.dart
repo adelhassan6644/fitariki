@@ -215,7 +215,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
 
-        sl<ProfileProvider>().getRoleType();
         sl<HomeProvider>().getOffers();
         sl<WishlistProvider>().getWishList();
 
@@ -252,10 +251,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
       Future.delayed(Duration.zero, () async {
         await FirebaseAuth.instance.signOut();
         await firebaseAuthRepo.clearSharedData();
-        sl<WishlistProvider>().wishIdList!.clear();
-        Provider.of<ProfileProvider>(
-                CustomNavigator.navigatorState.currentContext!,
-                listen: false).getRoleType();
+        sl<WishlistProvider>().wishListOfferId.clear();
       });
 
       CustomNavigator.push(Routes.SPLASH, clean: true);

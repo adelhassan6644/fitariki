@@ -13,16 +13,13 @@ class HomeRepo {
   final SharedPreferences sharedPreferences;
 
   HomeRepo({required this.dioClient, required this.sharedPreferences});
-  Future<Either<ServerFailure, Response>> getOffer(
-      {var body, String? role}) async {
+
+  Future<Either<ServerFailure, Response>> getOffer({var body}) async {
     try {
       Response response = await dioClient.get(
           uri:
-              "${sharedPreferences.getString(AppStorageKey.role) ?? role}/${EndPoints.availableOffers}",
-          queryParameters:
-          body
-          //${sharedPreferences.getString(AppStorageKey.userId)}
-          );
+              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.availableOffers}",
+          queryParameters: body);
       if (response.statusCode == 200) {
         return Right(response);
       } else {
@@ -31,5 +28,17 @@ class HomeRepo {
     } catch (error) {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
+  }
+
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
+  saveUserRole(role) {
+    sharedPreferences.setString(AppStorageKey.role, role);
   }
 }

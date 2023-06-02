@@ -34,19 +34,17 @@ class WishlistRepo {
   }
 
   Future<Either<ServerFailure, Response>> postWishList(
-      {int? offerId, int? userId}) async {
+      {required int id, required bool isOffer}) async {
     try {
       Response response = await dioClient.post(
           uri:
               "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postWishList}/${sharedPreferences.getString(AppStorageKey.userId)}",
           queryParameters: {
-            "offer_id": offerId,
-            if (sharedPreferences.getString(AppStorageKey.role) == "driver" &&
-                userId != null)
-              "client_id": userId,
-            if (sharedPreferences.getString(AppStorageKey.role) == "client" &&
-                userId != null)
-              "driver_id": userId,
+           if(isOffer) "offer_id": id,
+            if (sharedPreferences.getString(AppStorageKey.role) == "driver" && !isOffer)
+              "client_id": id,
+            if (sharedPreferences.getString(AppStorageKey.role) == "client" && !isOffer)
+              "driver_id": id,
           });
 
       if (response.statusCode == 200) {

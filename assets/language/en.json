@@ -1,6 +1,6 @@
 {
   "welcome" : "Welcome!",
-  "edit_profile_description": "Complete your data so that the percentages of your trip are compatible\nDaily with Min Captains!",
+  "welcome_description": "Complete your data so that the percentages of your trip are compatible\nDaily with Min Captains!",
   "user_name": "user name",
   "phone_number": "phone number",
   "remember_me": "Remember me",
@@ -106,8 +106,8 @@
   "age": "Age",
   "nationality": "Nationality",
   "save": "save",
-  "make_an_offer_to_captain": "Make an offer to Captain",
-  "make_a_request_to_client": "Make a request to Client",
+  "make_an_offer_to_client": "Make an offer to Client",
+  "make_a_request_to_captain": "Make a request to Captain",
   "send": "send",
   "duration": "duration",
   "price": "price",

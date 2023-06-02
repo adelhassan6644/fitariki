@@ -11,16 +11,11 @@ import '../../../helpers/date_time_picker.dart';
 import '../../../main_widgets/scchedule_widget.dart';
 import '../provider/profile_provider.dart';
 
-class WorkInformationWidget extends StatefulWidget {
+class WorkInformationWidget extends StatelessWidget {
   const WorkInformationWidget({required this.provider, Key? key})
       : super(key: key);
   final ProfileProvider provider;
 
-  @override
-  State<WorkInformationWidget> createState() => _WorkInformationWidgetState();
-}
-
-class _WorkInformationWidgetState extends State<WorkInformationWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProfileProvider>(builder: (context, provider, _) {

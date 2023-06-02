@@ -33,6 +33,7 @@ class UserProfile extends StatelessWidget {
             Stack(
               children: [
                 CustomAppBar(
+                  isOffer: false,
                   savedItemId: userId,
                 ),
                 Padding(

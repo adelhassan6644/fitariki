@@ -1,3 +1,4 @@
+import 'package:fitariki/features/my_offers/provider/my_offers_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -11,7 +12,6 @@ import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../profile/provider/profile_provider.dart';
 
 class MyOfferCard extends StatelessWidget {
   const MyOfferCard({Key? key, this.offer}) : super(key: key);
@@ -48,7 +48,7 @@ class MyOfferCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      sl.get<ProfileProvider>().isDriver
+                      sl.get<MyOffersProvider>().isDriver
                           ? "طلبات جديدة"
                           : "عروض جديدة",
                       style: AppTextStyles.w400.copyWith(
@@ -129,7 +129,8 @@ class MyOfferCard extends StatelessWidget {
                       children: [
                         customImageIconSVG(imageName: SvgImages.alarm),
                         const SizedBox(height: 4),
-                        if (offer!.offerDays!.isNotEmpty &&offer!.offerDays?.first.endTime != null)
+                        if (offer!.offerDays!.isNotEmpty &&
+                            offer!.offerDays?.first.endTime != null)
                           MarqueeWidget(
                             child: Text(
                               "${Methods.convertStringToTime(offer!.offerDays!.first.startTime ?? TimeOfDay.now().toString(), withFormat: true)}"

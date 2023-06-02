@@ -26,18 +26,22 @@ class More extends StatelessWidget {
                     child: ListAnimator(
                       customPadding: EdgeInsets.symmetric(horizontal: 16.w),
                       data: [
-                      provider.isLoading? const ProfileCardShimmer(): ProfileCard(
-                         lastUpdate: provider.lastUpdate,
-                         name: "${provider.firstName.text} ${provider.lastName.text}",
-                         isDriver:  provider.isDriver,
-                         male: provider.gender == 0,
-                         nationality:  provider.nationality?.name,
-                         rate: provider.rate.ceil(),
-                         completedNumber: 2,
-                         offersNumber: 2,
-                       ),
-                        if (provider.isDriver)
-                          Column(
+                        provider.isLoading
+                            ? const ProfileCardShimmer()
+                            : ProfileCard(
+                                lastUpdate: provider.lastUpdate,
+                                name:
+                                    "${provider.firstName.text} ${provider.lastName.text}",
+                                isDriver: provider.isDriver,
+                                male: provider.gender == 0,
+                                nationality: provider.nationality?.name,
+                                rate: provider.rate.ceil(),
+                                completedNumber: 2,
+                                offersNumber: 2,
+                              ),
+                        Visibility(
+                          visible: provider.isDriver,
+                          child: Column(
                             children: [
                               SizedBox(
                                 height: 24.h,
@@ -45,6 +49,7 @@ class More extends StatelessWidget {
                               WalletCard(availableBalance: provider.wallet),
                             ],
                           ),
+                        ),
                         const MoreOptions(),
                       ],
                     ),

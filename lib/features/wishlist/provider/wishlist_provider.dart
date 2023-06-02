@@ -13,7 +13,7 @@ class WishlistProvider extends ChangeNotifier {
   WishlistProvider({
     required this.wishlistRepo,
   }) {
-    wishIdList.clear();
+    wishListOfferId.clear();
     if (isLogin) {
       getWishList();
     }
@@ -21,7 +21,8 @@ class WishlistProvider extends ChangeNotifier {
 
   bool get isLogin => wishlistRepo.isLoggedIn();
 
-  List<int> wishIdList = [];
+  List<int> wishListOfferId = [];
+  List<int> wishListUsersId = [];
   List<String> driverTabs = ["delivery_offers", "passengers"];
   List<String> clientTabs = ["delivery_offers", "captains"];
 
@@ -50,23 +51,24 @@ class WishlistProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         favouriteModel = FavouriteModel.fromJson(response.data['data']);
-        wishIdList = [];
+        wishListOfferId = [];
         if (favouriteModel!.offers != null &&
             favouriteModel!.offers!.isNotEmpty) {
           for (var e in favouriteModel!.offers!) {
-            wishIdList.add(e.id!);
+            wishListOfferId.add(e.id!);
           }
         }
+        wishListUsersId = [];
         if (favouriteModel!.drivers != null &&
             favouriteModel!.drivers!.isNotEmpty) {
           for (var e in favouriteModel!.drivers!) {
-            wishIdList.add(e.id!);
+            wishListUsersId.add(e.id!);
           }
         }
         if (favouriteModel!.clients != null &&
             favouriteModel!.clients!.isNotEmpty) {
           for (var e in favouriteModel!.clients!) {
-            wishIdList.add(e.id!);
+            wishListUsersId.add(e.id!);
           }
         }
         isLoading = false;
@@ -84,25 +86,26 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  postWishList({int? offerId, int? userId, bool isExist = false}) async {
+  postWishList(
+      {required int id, required bool isOffer, bool isExist = false}) async {
     try {
       if (isExist) {
-        if (offerId != null) {
-          wishIdList.remove(offerId);
+        if (isOffer) {
+          wishListOfferId.remove(id);
         } else {
-          wishIdList.remove(userId);
+          wishListUsersId.remove(id);
         }
       } else {
-        if (offerId != null) {
-          wishIdList.add(offerId);
+        if (isOffer) {
+          wishListOfferId.add(id);
         } else {
-          wishIdList.add(userId!);
+          wishListUsersId.add(id);
         }
       }
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-          await wishlistRepo.postWishList(offerId: offerId, userId: userId);
+          await wishlistRepo.postWishList(id: id, isOffer: isOffer);
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(

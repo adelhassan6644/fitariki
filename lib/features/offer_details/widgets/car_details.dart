@@ -40,7 +40,7 @@ class CarDetails extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                carInfo?.name??"كامري، تايوتا",
+                carInfo?.name??"",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -63,7 +63,7 @@ class CarDetails extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                carInfo?.model??  "2023",
+                carInfo?.model??  "",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
