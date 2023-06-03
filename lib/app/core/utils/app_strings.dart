@@ -12,7 +12,7 @@ class AppStrings {
   static LocationModel defaultDrop = LocationModel(
       address: defaultAddress, longitude: defaultLong, latitude: defaultLat);
 
-  static const String fontFamily = 'Cairo';
+  static const String fontFamily = 'ar';
   static const String noRouteFound = 'No Route Found';
   static const String cachedRandomQuote = 'CACHED_RANDOM_QUOTE';
   static const String contentType = 'Content-Type';

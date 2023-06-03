@@ -66,7 +66,6 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: CustomNavigator.onCreateRoute,
       navigatorObservers: [CustomNavigator.routeObserver],
       title: AppStrings.appName,
-      supportedLocales: locals,
       scaffoldMessengerKey: CustomNavigator.scaffoldState,
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(
@@ -74,6 +73,8 @@ class _MyAppState extends State<MyApp> {
       ).darkTheme
           ? dark
           : light,
+      supportedLocales: locals,
+
       locale: Provider.of<LocalizationProvider>(
         context,
       ).locale,

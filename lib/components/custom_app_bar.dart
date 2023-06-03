@@ -80,9 +80,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: SizedBox(
                         width: actionWidth ?? 18,
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
+                          children: const [
                             Icon(
                               Icons.arrow_forward_ios,
                               size: 18,
