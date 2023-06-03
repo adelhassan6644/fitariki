@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,10 +55,8 @@ class _OfferDetailsState extends State<OfferDetails> {
               ),
               !provider.isLoading && provider.offerDetails != null
                   ? Expanded(
-                      child: ListView(
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.all(0),
-                        children: [
+                      child: ListAnimator(
+                        data: [
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(

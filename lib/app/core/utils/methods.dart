@@ -17,7 +17,7 @@ abstract class Methods {
       required List weekdays}) {
     int count = 0;
     int days = 0;
-    List<DateTime> daysList=[];
+    List<DateTime> daysList = [];
 
     for (int weekday in weekdays) {
       DateTime currentDate = startDate;
@@ -40,7 +40,7 @@ abstract class Methods {
         currentDate = currentDate.add(const Duration(days: 7));
       }
     }
-    return WeekdayCount(count, days,daysList);
+    return WeekdayCount(count, days, daysList);
   }
 
   static convertStringToTime(timeString, {bool withFormat = false}) {
@@ -64,6 +64,18 @@ abstract class Methods {
     } else {
       return dateTime;
     }
+  }
+
+  static convertStringToDataTime(timeString) {
+    List<String> parts = timeString.split('-');
+    return DateTime(
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+      int.parse(parts[2]),
+      0,
+      0,
+      0,
+    );
   }
 
   static getDayCount({
@@ -97,9 +109,12 @@ abstract class Methods {
     }
   }
 
- static calcDistance({required lat1,required long1,required lat2,required long2}){
-    return Geolocator.distanceBetween(double.parse(lat1),
-        double.parse(long1), double.parse(lat2), double.parse(long2));
+  static calcDistance(
+      {required lat1, required long1, required lat2, required long2}) {
+    return (Geolocator.distanceBetween(double.parse(lat1), double.parse(long1),
+                double.parse(lat2), double.parse(long2)) /
+            1000)
+        .toStringAsFixed(2);
   }
 }
 

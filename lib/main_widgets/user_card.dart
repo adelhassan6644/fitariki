@@ -135,6 +135,7 @@ class UserCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
+                    /// to show days number
                     Expanded(
                       flex: 2,
                       child: Column(
@@ -153,6 +154,44 @@ class UserCard extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    /// to show followers number
+                    Visibility(
+                      visible: followers != null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Container(
+                          color: ColorResources.HINT_COLOR,
+                          height: 30,
+                          width: 1,
+                          child: const SizedBox(),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: followers != null,
+                      child: Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            customImageIconSVG(
+                                imageName: SvgImages.addFollower),
+                            const SizedBox(height: 4),
+                            MarqueeWidget(
+                              child: Text(
+                                "$followers",
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// to show days
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
@@ -160,41 +199,6 @@ class UserCard extends StatelessWidget {
                         height: 30,
                         width: 1,
                         child: const SizedBox(),
-                      ),
-                    ),
-                    Visibility(
-                      visible: followers != null,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.addFollower),
-                                const SizedBox(height: 4),
-                                MarqueeWidget(
-                                  child: Text(
-                                    "$followers",
-                                    maxLines: 1,
-                                    style: AppTextStyles.w400.copyWith(
-                                        fontSize: 10,
-                                        overflow: TextOverflow.ellipsis),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Container(
-                              color: ColorResources.HINT_COLOR,
-                              height: 30,
-                              width: 1,
-                              child: const SizedBox(),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                     Expanded(
@@ -215,6 +219,8 @@ class UserCard extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    /// to show time range
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
@@ -242,8 +248,11 @@ class UserCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (followers == null)
-                      Padding(
+
+                    /// to show price range
+                    Visibility(
+                      visible: followers == null,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
                           color: ColorResources.HINT_COLOR,
@@ -252,8 +261,10 @@ class UserCard extends StatelessWidget {
                           child: const SizedBox(),
                         ),
                       ),
-                    if (followers == null)
-                      Expanded(
+                    ),
+                    Visibility(
+                      visible: followers == null,
+                      child: Expanded(
                         flex: 2,
                         child: Column(
                           children: [
@@ -270,7 +281,8 @@ class UserCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                    )
                   ],
                 ),
               ],

@@ -14,7 +14,12 @@ class RequestDetailsRepo {
   RequestDetailsRepo(
       {required this.dioClient, required this.sharedPreferences});
 
-  getRequestDetails({required int requestId}) async {
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
+  Future<Either<ServerFailure, Response>> getRequestDetails(
+      {required int requestId}) async {
     try {
       Response response = await dioClient.get(
         uri:

@@ -215,6 +215,9 @@
   "rate_trip": "Rate Trip...",
   "there_is_no_delivery_requests_or_delivery_offers": "There is no delivery requests or delivery offers",
   "success": "Success",
-  "error": "Error"
+  "error": "Error",
+  "trip_details": "Trip Details",
+  "offer_deleted_successfully": "Offer deleted successfully",
+  "request_deleted_successfully": "Request deleted successfully"
 
 }

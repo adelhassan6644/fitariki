@@ -10,6 +10,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
+import '../widgets/delete_offer_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../navigation/routes.dart';
 import '../widgets/my_offer_card.dart';
@@ -32,14 +33,7 @@ class MyOfferDetails extends StatelessWidget {
               title: sl.get<ProfileProvider>().isDriver
                   ? getTranslated("delivery_offer_details", context)
                   : getTranslated("delivery_request_details", context),
-              actionChild: InkWell(
-                onTap: () {},
-                child: Text(
-                  getTranslated("delete", context),
-                  style: AppTextStyles.w400
-                      .copyWith(fontSize: 14, color: ColorResources.RED_COLOR),
-                ),
-              ),
+              actionChild: DeleteOfferWidget(id: offer.id!,)
             ),
             Expanded(
               child: Stack(
@@ -97,7 +91,7 @@ class MyOfferDetails extends StatelessWidget {
                                 ? 3
                                 : offer.offerRequests!.length,
                             (index) => RequestCard(
-                                  offerRequest: offer.offerRequests![index],
+                                  request: offer.offerRequests![index],
                                 )),
                       if (offer.offerRequests == null ||
                           offer.offerRequests!.isEmpty)

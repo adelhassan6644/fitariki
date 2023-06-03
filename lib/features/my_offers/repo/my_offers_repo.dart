@@ -37,4 +37,19 @@ class MyOffersRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
+  Future<Either<ServerFailure, Response>> deleteMyOffer(id) async {
+    try {
+      Response response = await dioClient.post(
+        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myOffers}/$id}",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
 }

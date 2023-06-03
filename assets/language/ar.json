@@ -214,5 +214,8 @@
   "rate_trip": "قيم الرحلة...",
   "there_is_no_delivery_requests_or_delivery_offers": "لا يوجود عروض او طلبات توصيل",
   "success": "تم بنجاح",
-  "error": "خطأ"
+  "error": "خطأ",
+  "trip_details": "تفاصيل الرحلة",
+  "offer_deleted_successfully": "تم حذف العرض بنجاح",
+  "request_deleted_successfully": "تم حذف الطلب بنجاح"
 }

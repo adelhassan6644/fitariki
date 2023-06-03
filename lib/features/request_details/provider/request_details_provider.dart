@@ -15,30 +15,33 @@ import '../model/offer_request_details_model.dart';
 import '../repo/request_details_repo.dart';
 
 class RequestDetailsProvider extends ChangeNotifier {
-
   final RequestDetailsRepo requestDetailsRepo;
-  RequestDetailsProvider({required this.requestDetailsRepo,});
+  RequestDetailsProvider({
+    required this.requestDetailsRepo,
+  });
+
+  bool get isDriver => requestDetailsRepo.isDriver();
 
   TextEditingController negotiationPrice = TextEditingController(text: "");
   bool isAccepting = false;
   bool isNegotiation = false;
   bool isRejecting = false;
 
-
-
-  updateRequest({required int status, required int id,}) async {
+  updateRequest({
+    required int status,
+    required int id,
+  }) async {
     try {
-      if(status == 1){
-        isAccepting= true;
-      }
-      else if(status ==2){
+      if (status == 1) {
+        isAccepting = true;
+      } else if (status == 2) {
         isNegotiation = true;
-      }
-      else{
+      } else {
         isRejecting = true;
       }
       notifyListeners();
-      final response = await requestDetailsRepo.updateRequest(status: status, id: id,offerPrice: negotiationPrice.text.trim());
+      final response = await requestDetailsRepo.updateRequest(
+          status: status, id: id, offerPrice: negotiationPrice.text.trim());
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -54,9 +57,11 @@ class RequestDetailsProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: ColorResources.ACTIVE,
                 borderColor: Colors.transparent));
-        if(status == 1) {
+        if (status == 1) {
           if (!sl.get<ProfileProvider>().isDriver) {
-            CustomNavigator.push(Routes.PAYMENT,);
+            CustomNavigator.push(
+              Routes.PAYMENT,
+            );
           } else {
             CustomNavigator.push(Routes.SUCCESS,
                 replace: true,
@@ -70,17 +75,15 @@ class RequestDetailsProvider extends ChangeNotifier {
                         CustomNavigator.navigatorState.currentContext!),
                     description: "تم قبول عرض من أمل ب... بإنتظار الدفع ..."));
           }
-        }else{
+        } else {
           CustomNavigator.pop();
         }
       });
-      if(status == 1){
-        isAccepting= false;
-      }
-      else if(status ==2){
+      if (status == 1) {
+        isAccepting = false;
+      } else if (status == 2) {
         isNegotiation = false;
-      }
-      else{
+      } else {
         isRejecting = false;
       }
       notifyListeners();
@@ -91,22 +94,19 @@ class RequestDetailsProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-      if(status == 1){
-        isAccepting= false;
-      }
-      else if(status ==2){
+      if (status == 1) {
+        isAccepting = false;
+      } else if (status == 2) {
         isNegotiation = false;
-      }
-      else{
+      } else {
         isRejecting = false;
       }
       notifyListeners();
     }
   }
 
-
   bool isLoading = false;
-  OfferRequestDetailsModel? requestDetailsModel;
+  OfferRequestDetailsModel? requestModel;
   getRequestDetails({required int id}) async {
     try {
       isLoading = true;
@@ -114,15 +114,14 @@ class RequestDetailsProvider extends ChangeNotifier {
 
       Either<ServerFailure, Response> response =
           await requestDetailsRepo.getRequestDetails(requestId: id);
-      response.fold((l) => null, (response) {
-        if(response.data["data"]["request"] != null) {
-          requestDetailsModel = OfferRequestDetailsModel.fromJson(
-              response.data["data"]["request"]);
+      response.fold((l) => null, (res) {
+        if (res.data["data"]["request"] != null) {
+          requestModel =
+              OfferRequestDetailsModel.fromJson(res.data["data"]["request"]);
         }
         isLoading = false;
         notifyListeners();
       });
-
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -134,5 +133,4 @@ class RequestDetailsProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }

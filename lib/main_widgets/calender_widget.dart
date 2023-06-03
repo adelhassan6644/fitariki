@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/main_providers/calender_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
@@ -27,8 +28,11 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      sl<CalenderProvider>().getEventsList(startDate: widget.startDate,endDate: widget.endDate,);
-      sl<CalenderProvider>().days= widget.days.map((e) => e.id!).toList();
+      sl<CalenderProvider>().getEventsList(
+        startDate: widget.startDate,
+        endDate: widget.endDate,
+      );
+      sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
     });
     super.initState();
   }
@@ -41,6 +45,8 @@ class _CalenderWidgetState extends State<CalenderWidget> {
         child: CalendarCarousel<Event>(
           onDayPressed: (date, events) {},
           locale: 'ar',
+          headerMargin: EdgeInsets.symmetric(horizontal: 50.w),
+
           weekendTextStyle: const TextStyle(
             color: ColorResources.PRIMARY_COLOR,
           ),
@@ -48,11 +54,9 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           // headerText: 'days',
           weekFormat: false,
           markedDatesMap: provider.eventList,
-          height: 480.0,
-
+          height: 400.h,
           selectedDateTime: DateTime.now(),
           showIconBehindDayText: true,
-
           markedDateShowIcon: true,
           selectedDayTextStyle: const TextStyle(
             color: ColorResources.PRIMARY_COLOR,

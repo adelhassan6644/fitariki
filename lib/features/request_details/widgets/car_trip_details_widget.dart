@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/features/profile/model/driver_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -10,7 +11,8 @@ import '../../../components/custom_images.dart';
 import '../../../components/expansion_tile_widget.dart';
 
 class CarTripDetailsWidget extends StatelessWidget {
-  const CarTripDetailsWidget({Key? key}) : super(key: key);
+  const CarTripDetailsWidget({this.carInfo, Key? key}) : super(key: key);
+  final CarInfo? carInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "كامري، تايوتا",
+                carInfo?.name ?? "",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -55,7 +57,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "2024",
+                carInfo?.model ?? "",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -78,7 +80,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "5 اشخاص",
+                "${carInfo?.seatsCount} اشخاص",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -99,7 +101,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "7653 TNJ",
+                carInfo?.palletNumber ?? "",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -122,7 +124,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "ابيض",
+                carInfo?.color ?? "",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),

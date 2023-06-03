@@ -1,3 +1,4 @@
+import '../../../app/core/utils/methods.dart';
 import '../../../main_models/offer_model.dart';
 import '../../followers/follower_details/model/follower_model.dart';
 import '../../profile/model/client_model.dart';
@@ -22,8 +23,8 @@ class OfferRequestDetailsModel {
   int? offerId;
   DateTime? createdAt;
   DateTime? updatedAt;
-  DriverModel? driver;
-  ClientModel? client;
+  DriverModel? driverModel;
+  ClientModel? clientModel;
   List<FollowerModel>? followers;
   OfferModel? offer;
 
@@ -46,8 +47,8 @@ class OfferRequestDetailsModel {
     this.offerId,
     this.createdAt,
     this.updatedAt,
-    this.driver,
-    this.client,
+    this.driverModel,
+    this.clientModel,
     this.followers,
     this.offer,
   });
@@ -57,10 +58,10 @@ class OfferRequestDetailsModel {
         id: json["id"],
         startAt: json["start_at"] == null
             ? DateTime.now()
-            : DateTime.parse(json["start_at"]),
+            : Methods.convertStringToDataTime(json["start_at"]),
         endAt: json["end_at"] == null
             ? DateTime.now()
-            : DateTime.parse(json["end_at"]),
+            :  Methods.convertStringToDataTime(json["end_at"]),
         duration: json["duration"],
         price: json["price"],
         offerPrice: json["offer_price"],
@@ -81,44 +82,20 @@ class OfferRequestDetailsModel {
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
-        offer: json["offer"] == null ? null : OfferModel.fromJson(json["offer"]),
+        offer:
+            json["offer"] == null ? null : OfferModel.fromJson(json["offer"]),
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        client: json["client"] == null
+        clientModel: json["client"] == null
             ? null
             : ClientModel.fromJson(json["client"]),
-        driver: json["driver"] == null
+        driverModel: json["driver"] == null
             ? null
             : DriverModel.fromJson(json["driver"]),
-        followers: json["offer_followers"] == null
+        followers: json["request_followers"] == null
             ? null
-            : List<FollowerModel>.from(json["offer_followers"]!
+            : List<FollowerModel>.from(json["request_followers"]!
                 .map((x) => FollowerModel.fromJson(x["follower"]))),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "start_at":
-            "${startAt!.year.toString().padLeft(4, '0')}-${startAt!.month.toString().padLeft(2, '0')}-${startAt!.day.toString().padLeft(2, '0')}",
-        "end_at":
-            "${endAt!.year.toString().padLeft(4, '0')}-${endAt!.month.toString().padLeft(2, '0')}-${endAt!.day.toString().padLeft(2, '0')}",
-        "duration": duration,
-        "price": price,
-        "offer_price": offerPrice,
-        "message": message,
-        "approved_at": approvedAt,
-        "approved_by_client": approvedByClient,
-        "approved_by_driver": approvedByDriver,
-        "rejected_at": rejectedAt,
-        "rejected_by_client": rejectedByClient,
-        "rejected_by_driver": rejectedByDriver,
-        "client_id": clientId,
-        "driver_id": driverId,
-        "offer_id": offerId,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "driver": driver,
-        "client": client?.toJson(),
-      };
 }

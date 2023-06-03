@@ -50,9 +50,7 @@ class DistanceWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis),
           ),
           Text(
-            Methods.calcDistance(
-                    lat1: lat1, long1: long1, lat2: lat2, long2: long2)
-                .toString(),
+            "  ${Methods.calcDistance(lat1: lat1, long1: long1, lat2: lat2, long2: long2)} KM",
             maxLines: 1,
             style: AppTextStyles.w600.copyWith(
                 fontSize: 10,
