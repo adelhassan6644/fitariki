@@ -1,11 +1,10 @@
 class LocationModel {
   String? latitude;
   String? longitude;
-  String? address,city;
+  String? address;
 
   LocationModel({
     this.address,
-    this.city,
     this.latitude,
     this.longitude,
   });

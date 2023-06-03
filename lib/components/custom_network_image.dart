@@ -99,7 +99,7 @@ class CustomNetworkImage {
       backGroundColor,
       color}) {
     return CachedNetworkImage(
-      imageUrl: image == "" || image == null ? "https://" : image,
+      imageUrl: image == "" || image == null ? "https://" :EndPoints.imageUrl + image,
       repeat: ImageRepeat.noRepeat,
       errorWidget: (a, c, b) => Container(
         height: radius! * 2,

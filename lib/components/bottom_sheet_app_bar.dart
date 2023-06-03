@@ -42,7 +42,7 @@ class BottomSheetAppBar extends StatelessWidget {
             children: [
               action ??
                   const SizedBox(
-                    width: 40,
+                    width: 50,
                   ),
               const Expanded(child: SizedBox()),
               Text(
@@ -55,7 +55,7 @@ class BottomSheetAppBar extends StatelessWidget {
               GestureDetector(
                 onTap: onTap,
                 child: SizedBox(
-                  width: 40,
+                  width: 50,
                   child: Text(
                     textBtn,
                     textAlign: TextAlign.end,

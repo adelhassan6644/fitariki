@@ -20,12 +20,16 @@ import '../../request_details/model/offer_request_details_model.dart';
 
 class RequestCard extends StatelessWidget {
   final OfferRequestDetailsModel? request;
-  const RequestCard({Key? key, this.request,}) : super(key: key);
+  const RequestCard({
+    Key? key,
+    this.request,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+      onTap: () =>
+          CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
       child: Stack(
         children: [
           Padding(
@@ -76,8 +80,11 @@ class RequestCard extends StatelessWidget {
                                         width: 50,
                                         child: Text(
                                           sl.get<ProfileProvider>().isDriver
-                                              ? request!.clientModel!.firstName ?? ""
-                                              : request!.driverModel!.firstName ??
+                                              ? request!
+                                                      .clientModel!.firstName ??
+                                                  ""
+                                              : request!
+                                                      .driverModel!.firstName ??
                                                   "",
                                           textAlign: TextAlign.start,
                                           maxLines: 1,
@@ -91,14 +98,17 @@ class RequestCard extends StatelessWidget {
                                         width: 4,
                                       ),
                                       customImageIconSVG(
-                                          imageName:
-                                              sl.get<ProfileProvider>().isDriver
-                                                  ? request!.clientModel?.gender == 0
-                                                      ? SvgImages.maleIcon
-                                                      : SvgImages.femaleIcon
-                                                  : request!.driverModel?.gender == 0
-                                                      ? SvgImages.maleIcon
-                                                      : SvgImages.femaleIcon,
+                                          imageName: sl
+                                                  .get<ProfileProvider>()
+                                                  .isDriver
+                                              ? request!.clientModel?.gender ==
+                                                      0
+                                                  ? SvgImages.maleIcon
+                                                  : SvgImages.femaleIcon
+                                              : request!.driverModel?.gender ==
+                                                      0
+                                                  ? SvgImages.maleIcon
+                                                  : SvgImages.femaleIcon,
                                           color: ColorResources.BLUE_COLOR,
                                           width: 11,
                                           height: 11)
@@ -225,7 +235,8 @@ class RequestCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          request!.driverModel?.carInfo?.name ?? "",
+                                          request!.driverModel?.carInfo?.name ??
+                                              "",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),
@@ -261,7 +272,9 @@ class RequestCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          request!.driverModel?.carInfo?.model ?? "",
+                                          request!.driverModel?.carInfo
+                                                  ?.model ??
+                                              "",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),

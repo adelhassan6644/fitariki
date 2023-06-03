@@ -62,10 +62,10 @@ class MoreOptions extends StatelessWidget {
               icon: SvgImages.notifications,
               onTap: () => CustomNavigator.push(Routes.NOTIFICATIONS),
             ),
-            MoreButton(
-              title: getTranslated("bank_data", context),
-              icon: SvgImages.card,
-            ),
+            // MoreButton(
+            //   title: getTranslated("bank_data", context),
+            //   icon: SvgImages.card,
+            // ),
             MoreButton(
               title: sl<ProfileProvider>().isDriver
                   ? getTranslated("clients_evaluation", context)

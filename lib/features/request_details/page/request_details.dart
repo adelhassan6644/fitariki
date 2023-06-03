@@ -67,36 +67,20 @@ class _RequestDetailsState extends State<RequestDetails> {
                                   ? provider.requestModel?.clientId
                                   : provider.requestModel?.driverId,
                               name: provider.isDriver
-                                  ? provider
-                                      .requestModel?.clientModel?.firstName
-                                  : provider
-                                      .requestModel?.driverModel?.firstName,
+                                  ? provider.requestModel?.clientModel?.firstName
+                                  : provider.requestModel?.driverModel?.firstName,
                               isMale: provider.isDriver
-                                  ? provider
-                                          .requestModel?.clientModel?.gender ==
-                                      0
-                                  : provider
-                                          .requestModel?.driverModel?.gender ==
-                                      0,
+                                  ? provider.requestModel?.clientModel?.gender == 0
+                                  : provider.requestModel?.driverModel?.gender == 0,
                               national: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.national
-                                      ?.niceName
-                                  : provider.requestModel?.driverModel?.national
-                                      ?.niceName,
-                              createdAt: provider.requestModel?.createdAt ??
-                                  DateTime.now(),
-                              days: provider.requestModel?.offer?.offerDays!
-                                  .map((e) => e.dayName)
-                                  .toList()
-                                  .join(", "),
-                              duration:
-                                  provider.requestModel?.duration.toString(),
-                              priceRange:
-                                  "${provider.requestModel?.price ?? 0} ريال",
-                              followers:
-                                  "${provider.requestModel?.followers?.length ?? 0}",
-                              timeRange:
-                                  "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                                  ? provider.requestModel?.clientModel?.national?.niceName
+                                  : provider.requestModel?.driverModel?.national?.niceName,
+                              createdAt: provider.requestModel?.createdAt ?? DateTime.now(),
+                              days: provider.requestModel?.offer?.offerDays!.map((e) => e.dayName).toList().join(", "),
+                              duration: provider.requestModel?.duration.toString(),
+                              priceRange: "${provider.requestModel?.price ?? 0} ريال",
+                              followers:provider.requestModel!.followers!.isNotEmpty? "${ provider.requestModel?.followers?.length}" : null,
+                              timeRange: "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                             ),
 
                             ///client road map
