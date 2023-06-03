@@ -98,21 +98,21 @@ flutter:
 
     - family: ar
       fonts:
-        - asset: assets/fonts/arabic_font/w100.ttf
+        - asset: assets/fonts/ar/w100.ttf
           weight: 100
-        - asset: assets/fonts/arabic_font/w200.ttf
+        - asset: assets/fonts/ar/w200.ttf
           weight: 200
-        - asset: assets/fonts/arabic_font/w300.ttf
+        - asset: assets/fonts/ar/w300.ttf
           weight: 300
-        - asset: assets/fonts/arabic_font/w400.ttf
+        - asset: assets/fonts/ar/w400.ttf
           weight: 400
-        - asset: assets/fonts/arabic_font/w500.ttf
+        - asset: assets/fonts/ar/w500.ttf
           weight: 500
-        - asset: assets/fonts/arabic_font/w600.ttf
+        - asset: assets/fonts/ar/w600.ttf
           weight: 600
-        - asset: assets/fonts/arabic_font/w700.ttf
+        - asset: assets/fonts/ar/w700.ttf
           weight: 700
-        - asset: assets/fonts/arabic_font/w800.ttf
+        - asset: assets/fonts/ar/w800.ttf
           weight: 800
-        - asset: assets/fonts/arabic_font/w900.ttf
+        - asset: assets/fonts/ar/w900.ttf
           weight: 900
