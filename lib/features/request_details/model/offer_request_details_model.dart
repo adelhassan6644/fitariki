@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import '../../../app/core/utils/methods.dart';
 import '../../../main_models/offer_model.dart';
 import '../../followers/follower_details/model/follower_model.dart';
@@ -9,7 +11,7 @@ class OfferRequestDetailsModel {
   DateTime? startAt;
   DateTime? endAt;
   int? duration;
-  int? price;
+  double? price;
   int? offerPrice;
   String? message;
   DateTime? approvedAt;
@@ -63,7 +65,7 @@ class OfferRequestDetailsModel {
             ? DateTime.now()
             :  Methods.convertStringToDataTime(json["end_at"]),
         duration: json["duration"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
         offerPrice: json["offer_price"],
         message: json["message"],
         approvedAt: json["approved_at"] != null
