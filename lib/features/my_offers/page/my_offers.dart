@@ -23,7 +23,7 @@ class MyOffers extends StatefulWidget {
   State<MyOffers> createState() => _MyOffersState();
 }
 
-class _MyOffersState extends State<MyOffers> {
+class _MyOffersState extends State<MyOffers>with AutomaticKeepAliveClientMixin<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
@@ -110,4 +110,7 @@ class _MyOffersState extends State<MyOffers> {
       );
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

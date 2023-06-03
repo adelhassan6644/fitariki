@@ -49,6 +49,31 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
           ),
           SizedBox(
             height: 8.h,
+          ),Row(
+            children: [
+              Expanded(
+                child: Text(
+                  getTranslated("end_of_duration", context),
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                    borderRadius: BorderRadius.circular(4)),
+                child: Text(endDate!.dateFormat(format: "MMM yyyy d"),
+                    style: AppTextStyles.w400.copyWith(
+                      fontSize: 13,
+                    )),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 8.h,
           ),
           CalenderWidget(
               startDate: startDate!,

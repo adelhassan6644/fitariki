@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/components/custom_button.dart';
 import 'package:fitariki/main_widgets/user_card.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -152,8 +153,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     ),
                                   ),
                                   ...List.generate(
-                                    provider.requestModel?.followers?.length ??
-                                        0,
+                                    provider.requestModel?.followers?.length ?? 0,
                                     (index) => MapWidget(
                                       clientName: provider.requestModel
                                               ?.followers?[index].name ??
@@ -253,8 +253,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                           backgroundColor: ColorResources.WHITE_COLOR,
                           withBorderColor: true,
                           textColor: ColorResources.PRIMARY_COLOR,
-                          onTap: () =>
-                              CupertinoPopUpHelper.showCupertinoTextController(
+                          onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
                                   title: getTranslated("negotiation", context),
                                   description: getTranslated(
                                       "negotiation_description", context),
@@ -264,8 +263,11 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'^\d+\.?\d{0,2}')),
                                   ],
-                                  onSend: () => provider.updateRequest(
-                                      status: 2, id: widget.requestId),
+                                  onSend: () {
+                                    provider.updateRequest(
+                                        status: 2, id: widget.requestId);
+                                    CustomNavigator.pop();
+                                  },
                                   onClose: () {
                                     provider.negotiationPrice.clear();
                                   }),
