@@ -62,8 +62,8 @@ class OfferModel {
       minPrice: json["min_price"]?.toDouble(),
       maxPrice: json["max_price"]?.toDouble(),
       compatibleRatio: json["compatible_ratio"]?.toDouble(),
-      startDate: DateTime.parse(json["start_date"]),
-      endDate: DateTime.parse(json["end_date"]),
+      startDate: DateTime.parse(json["start_date"]??DateTime.now().toString()),
+      endDate: DateTime.parse(json["end_date"]??DateTime.now().toString()),
       createdAt: json["created_at"] == null
           ? null
           : DateTime.parse(json["created_at"]),
