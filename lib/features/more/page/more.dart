@@ -30,8 +30,8 @@ class More extends StatelessWidget {
                             ? const ProfileCardShimmer()
                             : ProfileCard(
                                 lastUpdate: provider.lastUpdate,
-                                name:
-                                    "${provider.firstName.text} ${provider.lastName.text}",
+                                image: provider.image,
+                                name: "${provider.firstName.text} ${provider.lastName.text}",
                                 isDriver: provider.isDriver,
                                 male: provider.gender == 0,
                                 nationality: provider.nationality?.name,

@@ -51,8 +51,8 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
             height: 8.h,
           ),
           CalenderWidget(
-              startDate: startDate ?? DateTime.now(),
-              endDate: endDate ?? DateTime.now(),
+              startDate: startDate!,
+              endDate: endDate!,
               days: days!),
         ],
       ),

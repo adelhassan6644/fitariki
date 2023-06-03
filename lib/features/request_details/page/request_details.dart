@@ -180,15 +180,11 @@ class _RequestDetailsState extends State<RequestDetails> {
 
                             /// to show days on calender
                             TripDaysOnCalenderWidget(
-                                startDate: provider.requestModel?.startAt ??
-                                    DateTime.now(),
-                                endDate: provider.requestModel?.endAt ??
-                                    DateTime.now(),
+                                startDate: provider.requestModel?.startAt,
+                                endDate: provider.requestModel?.endAt,
                                 days: provider.isDriver
-                                    ? provider
-                                        .requestModel!.clientModel!.clientDays!
-                                    : provider.requestModel!.driverModel!
-                                        .driverDays!),
+                                    ? provider.requestModel?.clientModel?.clientDays
+                                    : provider.requestModel?.driverModel?.driverDays),
 
                             // ///to show notes
                             // Padding(
