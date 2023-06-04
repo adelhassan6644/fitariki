@@ -671,29 +671,7 @@ class ProfileProvider extends ChangeNotifier {
 
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
-    // if (profileModel?.driver?.image != null) {
-    // onSelectImage(File(profileModel!.driver!.image!));
-    // }
-    // if (profileModel?.driver?.identityImage != null) {
-    //   onSelectIdentityImage(File(profileModel!.driver!.identityImage!));
-    // }
-    // if (profileModel?.driver?.carInfo?.carImage != null) {
-    //   onSelectCarImage(File(profileModel!.driver!.carInfo!.carImage!));
-    // }
-    // if (profileModel?.driver?.carInfo?.insuranceImage != null) {
-    //   onSelectInsuranceImage(
-    //       File(profileModel!.driver!.carInfo!.insuranceImage!));
-    // }
-    // if (profileModel?.driver?.carInfo?.formImage != null) {
-    //   onSelectFormImage(File(profileModel!.driver!.carInfo!.formImage!));
-    // }
-    // if (profileModel?.driver?.carInfo?.licenceImage != null) {
-    //   onSelectLicenceImage(File(profileModel!.driver!.carInfo!.licenceImage!));
-    // }
-    // if (profileModel?.driver?.bankInfo?.accountImage != null) {
-    //   onSelectBankAccountImage(
-    //       File(profileModel!.driver!.bankInfo!.accountImage!));
-    // }
+
     if (scheduleProvider.selectedDays.isNotEmpty) {
       startTime = Methods.convertStringToTime(
               profileModel?.driver?.driverDays?[0].startTime) ??

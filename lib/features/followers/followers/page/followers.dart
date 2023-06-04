@@ -27,7 +27,7 @@ class Followers extends StatelessWidget {
             withBorder: true,
             title: getTranslated("followers", context),
             withBack: true,
-            actionWidth: 40,
+            actionWidth: 50,
             actionChild: GestureDetector(
               onTap: () => customShowModelBottomSheet(
                 onClose:
@@ -36,7 +36,7 @@ class Followers extends StatelessWidget {
                 body: const AddFollower(),
               ),
               child: SizedBox(
-                width: 40,
+                width: 50,
                 child: Text(
                   getTranslated("add", context),
                   textAlign: TextAlign.start,

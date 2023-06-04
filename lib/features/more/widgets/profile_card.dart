@@ -13,7 +13,8 @@ import '../../../navigation/routes.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard(
-      {this.name,
+      {this.image,
+      this.name,
       this.nationality,
       this.distance,
       this.male = true,
@@ -25,7 +26,7 @@ class ProfileCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final String? nationality, name, lastUpdate,distance;
+  final String? nationality, name, lastUpdate, distance, image;
   final bool male, isDriver;
   final int? offersNumber, completedNumber, rate;
 
@@ -56,29 +57,33 @@ class ProfileCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                    distance != null? RichText(
-                      text:  TextSpan(
-                        text: "يبعد عنك ",
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 10,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
-                        children: <TextSpan>[
-                           TextSpan(
-                              text: distance,
-                              style: AppTextStyles.w700.copyWith(
-                                  fontSize: 10,
-                                  color: ColorResources.PRIMARY_COLOR),),
-                        ],
-                      ),
-                    ):
-                    GestureDetector(
-                          onTap: () => CustomNavigator.push(Routes.EDIT_PROFILE,
-                              arguments: false),
-                          child: Text(getTranslated("edit", context),
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  color: ColorResources.SYSTEM_COLOR)),
-                        ),
+                        distance != null
+                            ? RichText(
+                                text: TextSpan(
+                                  text: "يبعد عنك ",
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                      color:
+                                          ColorResources.SECOUND_PRIMARY_COLOR),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: distance,
+                                      style: AppTextStyles.w700.copyWith(
+                                          fontSize: 10,
+                                          color: ColorResources.PRIMARY_COLOR),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : GestureDetector(
+                                onTap: () => CustomNavigator.push(
+                                    Routes.EDIT_PROFILE,
+                                    arguments: false),
+                                child: Text(getTranslated("edit", context),
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        color: ColorResources.SYSTEM_COLOR)),
+                              ),
                         const Expanded(child: SizedBox()),
                         Text(lastUpdate ?? "ساعة",
                             style: AppTextStyles.w400.copyWith(
@@ -205,8 +210,7 @@ class ProfileCard extends StatelessWidget {
             ),
             Center(
               child: CustomNetworkImage.circleNewWorkImage(
-                  image:
-                      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                  image: image,
                   radius: 36,
                   color: ColorResources.PRIMARY_COLOR),
             ),

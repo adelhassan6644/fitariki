@@ -1,9 +1,11 @@
+import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/components/empty_widget.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
@@ -21,7 +23,7 @@ class MyOffers extends StatefulWidget {
   State<MyOffers> createState() => _MyOffersState();
 }
 
-class _MyOffersState extends State<MyOffers> {
+class _MyOffersState extends State<MyOffers>with AutomaticKeepAliveClientMixin<MyOffers> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
@@ -47,57 +49,68 @@ class _MyOffersState extends State<MyOffers> {
             withBack: false,
           ),
           profileProvider.isLogin
-              ? Expanded(
-                  child:
-                      Consumer<MyOffersProvider>(builder: (_, provider, child) {
-                    if (!provider.isLoading) {
-                      return ListAnimator(
-                        data: [
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          if (provider.myOffers?.offers == null ||
-                              provider.myOffers!.offers!.isEmpty)
-                            EmptyState(
-                                txt: profileProvider.isDriver
-                                    ? "لا يوجد عروض توصيل حاليا \n أضف عرض جديد"
-                                    : "لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"),
-                          if (provider.myOffers?.offers != null &&
-                              provider.myOffers!.offers!.isNotEmpty)
-                            ...List.generate(
-                                provider.myOffers!.offers!.length,
-                                (index) => MyOfferCard(
-                                      offer: provider.myOffers!.offers![index],
-                                    )),
-                        ],
-                      );
-                    }
-
-                    return ListAnimator(
-                      data: [
-                        SizedBox(
-                          height: 8.h,
+              ? Consumer<MyOffersProvider>(builder: (_, provider, child) {
+                  if (!provider.isLoading) {
+                    return Expanded(
+                      child: RefreshIndicator(
+                        color: ColorResources.PRIMARY_COLOR,
+                        onRefresh: () async {
+                          sl<MyOffersProvider>().getMyOffer();
+                        },
+                        child: ListView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          padding: const EdgeInsets.all(0),
+                          children: [
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            if (provider.myOffers?.offers == null ||
+                                provider.myOffers!.offers!.isEmpty)
+                              EmptyState(
+                                  txt: profileProvider.isDriver
+                                      ? "لا يوجد عروض توصيل حاليا \n أضف عرض جديد"
+                                      : "لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"),
+                            if (provider.myOffers?.offers != null &&
+                                provider.myOffers!.offers!.isNotEmpty)
+                              ...List.generate(
+                                  provider.myOffers!.offers!.length,
+                                  (index) => MyOfferCard(
+                                        offer:
+                                            provider.myOffers!.offers![index],
+                                      )),
+                          ],
                         ),
-                        ...List.generate(
-                            5,
-                            (index) => Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          Dimensions.PADDING_SIZE_DEFAULT.w,
-                                      vertical: 8.h),
-                                  child: CustomShimmerContainer(
-                                    width: context.width,
-                                    height: 80.h,
-                                    radius: 8,
-                                  ),
-                                ))
-                      ],
+                      ),
                     );
-                  }),
-                )
+                  }
+
+                  return ListAnimator(
+                    data: [
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      ...List.generate(
+                          5,
+                          (index) => Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        Dimensions.PADDING_SIZE_DEFAULT.w,
+                                    vertical: 8.h),
+                                child: CustomShimmerContainer(
+                                  width: context.width,
+                                  height: 80.h,
+                                  radius: 8,
+                                ),
+                              ))
+                    ],
+                  );
+                })
               : const Expanded(child: GuestMode()),
         ],
       );
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

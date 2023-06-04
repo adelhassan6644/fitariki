@@ -45,7 +45,7 @@ extension DateExtention on DateTime {
 
 extension DefaultFormat on DateTime {
   String defaultFormat() {
-    return DateFormat("dMMM yyyy").format(this);
+    return DateFormat("d MMM yyyy").format(this);
   }String defaultFormat2() {
     return DateFormat("d-MM-yyyy").format(this);
 

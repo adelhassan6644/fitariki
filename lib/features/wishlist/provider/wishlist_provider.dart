@@ -35,7 +35,7 @@ class WishlistProvider extends ChangeNotifier {
   bool isLoading = false;
   FavouriteModel? favouriteModel;
   getWishList() async {
-    try {
+    // try {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
@@ -74,21 +74,22 @@ class WishlistProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       });
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoading = false;
-      notifyListeners();
-    }
+    // }
+    // catch (e) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: e.toString(),
+    //           isFloating: true,
+    //           backgroundColor: ColorResources.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   isLoading = false;
+    //   notifyListeners();
+    // }
   }
 
   postWishList(
       {required int id, required bool isOffer, bool isExist = false}) async {
-    try {
+    // try {
       if (isExist) {
         if (isOffer) {
           wishListOfferId.remove(id);
@@ -141,14 +142,14 @@ class WishlistProvider extends ChangeNotifier {
       });
       getWishList();
       notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      notifyListeners();
-    }
+    // } catch (e) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: e.toString(),
+    //           isFloating: true,
+    //           backgroundColor: ColorResources.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   notifyListeners();
+    // }
   }
 }

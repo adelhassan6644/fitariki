@@ -14,6 +14,7 @@ import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../home/provider/home_provider.dart';
+import '../../my_offers/provider/my_offers_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
 import '../repo/firebase_auth_repo.dart';
@@ -216,6 +217,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
             id: success.data['data'][role[_userType]]["id"].toString());
 
         sl<HomeProvider>().getOffers();
+        sl<MyOffersProvider>().getMyOffer();
         sl<WishlistProvider>().getWishList();
 
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");

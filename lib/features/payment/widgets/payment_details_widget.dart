@@ -6,9 +6,9 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 
 class PaymentDetailsWidget extends StatelessWidget {
-  const PaymentDetailsWidget({required this.paymentProvider, Key? key})
+  const PaymentDetailsWidget({required this.price, Key? key})
       : super(key: key);
-  final PaymentProvider paymentProvider;
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class PaymentDetailsWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "600 ريال",
+                "$price ريال",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 14,
                 ),

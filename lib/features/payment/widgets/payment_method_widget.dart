@@ -6,9 +6,8 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 
 class PaymentMethodWidget extends StatelessWidget {
-  const PaymentMethodWidget({required this.paymentProvider, Key? key})
+  const PaymentMethodWidget({ Key? key})
       : super(key: key);
-  final PaymentProvider paymentProvider;
 
   @override
   Widget build(BuildContext context) {
