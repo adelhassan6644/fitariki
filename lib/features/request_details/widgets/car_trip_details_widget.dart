@@ -9,6 +9,7 @@ import '../../../app/localization/localization/language_constant.dart';
 
 import '../../../components/custom_images.dart';
 import '../../../components/expansion_tile_widget.dart';
+import '../../../components/image_viewer.dart';
 
 class CarTripDetailsWidget extends StatelessWidget {
   const CarTripDetailsWidget({this.carInfo, Key? key}) : super(key: key);
@@ -138,10 +139,21 @@ class CarTripDetailsWidget extends StatelessWidget {
                   child: const SizedBox(),
                 ),
               ),
-              Text(
-                "عرض صورة السيارة",
-                style: AppTextStyles.w400.copyWith(
-                  fontSize: 10,
+              InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImageViewer(
+                      image: carInfo?.carImage ?? "",
+                      isFromInternet: true,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  getTranslated("show_car_image", context),
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 10,
+                  ),
                 ),
               ),
             ],

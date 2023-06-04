@@ -218,6 +218,7 @@
   "error": "Error",
   "trip_details": "Trip Details",
   "offer_deleted_successfully": "Offer deleted successfully",
-  "request_deleted_successfully": "Request deleted successfully"
+  "request_deleted_successfully": "Request deleted successfully",
+  "show_car_image": "Show Car Image"
 
 }

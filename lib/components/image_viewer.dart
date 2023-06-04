@@ -1,8 +1,7 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/components/custom_app_bar.dart';
 import 'package:fitariki/components/custom_network_image.dart';
 import 'package:flutter/material.dart';
-
-
 
 class ImageViewer extends StatelessWidget {
   const ImageViewer({
@@ -17,16 +16,15 @@ class ImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const CustomAppBar(),
       body: isFromInternet
           ? Center(
               child: CustomNetworkImage.containerNewWorkImage(
-                image: image,
-                fit: BoxFit.fill,
-                radius: 0,
-                width: context.width,
-                height: context.height*.8
-              ),
+                  image: image,
+                  fit: BoxFit.fill,
+                  radius: 0,
+                  width: context.width,
+                  height: context.height * .8),
             )
           : Image.file(
               image,

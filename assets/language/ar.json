@@ -217,5 +217,6 @@
   "error": "خطأ",
   "trip_details": "تفاصيل الرحلة",
   "offer_deleted_successfully": "تم حذف العرض بنجاح",
-  "request_deleted_successfully": "تم حذف الطلب بنجاح"
+  "request_deleted_successfully": "تم حذف الطلب بنجاح",
+  "show_car_image": "عرض صورة السيارة"
 }
