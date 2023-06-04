@@ -17,7 +17,7 @@ class FavouriteModel {
         offers: json["offers"] == null
             ? []
             : List<OfferModel>.from(
-                json["offers"]!.map((x) => OfferModel.fromJson(x["offer"]))),
+                json["offers"]!.map((x) => OfferModel.fromJson((x["offer"]!=null)?x["offer"]:{}))),
         clients: json["clients"] == null
             ? []
             : List<ClientModel>.from(

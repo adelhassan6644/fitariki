@@ -163,7 +163,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${offerModel.offerDays!.length} ايام بالإسبوع",
+                                    "${offerModel.offerDays?.length??0} ايام بالإسبوع",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -187,7 +187,7 @@ class OfferCard extends StatelessWidget {
                             children: [
                               customImageIconSVG(imageName: SvgImages.alarm),
                               const SizedBox(width: 4),
-                              if (offerModel.offerDays!.isNotEmpty)
+                              if (offerModel.offerDays != null&&offerModel.offerDays!.isNotEmpty)
                                 Expanded(
                                   child: MarqueeWidget(
                                     child: Text(
