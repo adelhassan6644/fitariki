@@ -56,8 +56,6 @@ class DriverModel {
       this.createdAt,
       this.updatedAt});
 
-
-
   factory DriverModel.fromJson(Map<String, dynamic> json) => DriverModel(
         id: json["id"],
         firstName: json["first_name"],
@@ -67,13 +65,17 @@ class DriverModel {
         nickname: json["nickname"],
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"].toString(),
-        national:json["country"] !=null? Country.fromJson(json["country"],):null,
+        national: json["country"] != null
+            ? Country.fromJson(
+                json["country"],
+              )
+            : null,
         city: json["city"],
         countryId: json["country_id"].toString(),
         identityNumber: json["id_number"],
         identityImage: json["id_image"],
         phone: json["phone"],
-        status: json["status"],
+        status: json["status"].toString(),
         rate: json["rate"],
         wallet: double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null
@@ -216,11 +218,9 @@ class BankInfo {
     this.accountImage,
   });
 
-
-
   factory BankInfo.fromJson(Map<String, dynamic> json) => BankInfo(
         fullName: json["name"],
-        bank:json["bank"]!=null? Bank.fromJson(json["bank"]):null,
+        bank: json["bank"] != null ? Bank.fromJson(json["bank"]) : null,
         iban: json["iban"],
         swift: json["swift"],
         accountNumber: json["account_number"],

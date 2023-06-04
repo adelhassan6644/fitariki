@@ -46,7 +46,6 @@ class ClientModel {
       this.createdAt,
       this.updatedAt});
 
-
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
         id: json["id"],
         firstName: json["first_name"],
@@ -56,13 +55,15 @@ class ClientModel {
         nickname: json["nickname"],
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"].toString(),
-        national: json["country"] != null ? Country.fromJson(
+        national: json["country"] != null
+            ? Country.fromJson(
                 json["country"],
-              ) : null,
+              )
+            : null,
         city: json["city"],
         countryId: json["country_id"].toString(),
         phone: json["phone"],
-        status: json["status"],
+        status: json["status"].toString(),
         rate: json["rate"],
         wallet: double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null
