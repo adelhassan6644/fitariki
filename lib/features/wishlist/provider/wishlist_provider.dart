@@ -55,7 +55,9 @@ class WishlistProvider extends ChangeNotifier {
         if (favouriteModel!.offers != null &&
             favouriteModel!.offers!.isNotEmpty) {
           for (var e in favouriteModel!.offers!) {
-            wishListOfferId.add(e.id!);
+            if(e.id!=null) {
+              wishListOfferId.add(e.id!);
+            }
           }
         }
         wishListUsersId = [];
