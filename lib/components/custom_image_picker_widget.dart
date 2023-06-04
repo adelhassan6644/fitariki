@@ -9,6 +9,7 @@ import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
 import 'custom_images.dart';
+import 'image_viewer.dart';
 import 'marquee_widget.dart';
 
 class CustomButtonImagePicker extends StatelessWidget {
@@ -69,23 +70,33 @@ class CustomButtonImagePicker extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 5,
-                  child: Container(
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
+                  child: GestureDetector(
+                    onTap: ()=>  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ImageViewer(image:imageFile ?? imageUrl,
+                          isFromInternet:imageFile != null ? false: true,
+                        ),
+                      ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: imageFile != null
-                          ? Image.file(
-                              File(imageFile!.path),
-                              fit: BoxFit.cover,
-                            )
-                          : CachedNetworkImage(
-                              imageUrl: EndPoints.imageUrl + imageUrl!,
-                              fit: BoxFit.cover,
-                            ),
+                    child: Container(
+                      height: 50.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: imageFile != null
+                            ? Image.file(
+                                File(imageFile!.path),
+                                fit: BoxFit.cover,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: EndPoints.imageUrl + imageUrl!,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                     ),
                   ),
                 ),
