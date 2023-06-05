@@ -2,14 +2,14 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/profile/model/driver_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/svg_images.dart';
-import '../../../app/core/utils/text_styles.dart';
-import '../../../app/localization/localization/language_constant.dart';
+import '../app/core/utils/color_resources.dart';
+import '../app/core/utils/svg_images.dart';
+import '../app/core/utils/text_styles.dart';
+import '../app/localization/localization/language_constant.dart';
 
-import '../../../components/custom_images.dart';
-import '../../../components/expansion_tile_widget.dart';
-import '../../../components/image_viewer.dart';
+import '../components/custom_images.dart';
+import '../components/expansion_tile_widget.dart';
+import '../components/image_viewer.dart';
 
 class CarTripDetailsWidget extends StatelessWidget {
   const CarTripDetailsWidget({this.carInfo, Key? key}) : super(key: key);

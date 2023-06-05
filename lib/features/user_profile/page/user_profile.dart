@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/home/provider/home_provider.dart';
+import 'package:fitariki/main_widgets/car_trip_details_widget.dart';
 import 'package:fitariki/features/user_profile/provider/user_profile_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ import '../../../data/config/di.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../navigation/routes.dart';
 import '../../more/widgets/profile_card.dart';
-import '../../offer_details/widgets/car_details.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
@@ -45,11 +45,11 @@ class UserProfile extends StatelessWidget {
                           lastUpdate: Methods.getDayCount(
                                   date:
                                       provider.userProfileModel!.driver != null
-                                          ? provider.userProfileModel!.driver!
-                                              .updatedAt!
-                                          : provider.userProfileModel!.client!
-                                              .updatedAt!)
+                                          ? provider.userProfileModel!.driver!.updatedAt! : provider.userProfileModel!.client!.updatedAt!)
                               .toString(),
+                          image:provider.userProfileModel!.driver != null
+                              ? provider.userProfileModel!.driver!.image
+                              : provider.userProfileModel!.client!.image,
                           name: provider.userProfileModel!.driver != null
                               ? "${provider.userProfileModel!.driver!.firstName}"
                               : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
@@ -81,7 +81,7 @@ class UserProfile extends StatelessWidget {
                     height: 12.h,
                   ),
                   if (!sl<ProfileProvider>().isDriver)
-                    CarDetails(
+                    CarTripDetailsWidget(
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
                   if (sl<ProfileProvider>().isDriver)

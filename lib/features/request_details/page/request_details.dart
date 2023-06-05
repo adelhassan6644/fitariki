@@ -20,7 +20,7 @@ import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
 import '../../maps/provider/location_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../provider/request_details_provider.dart';
-import '../widgets/car_trip_details_widget.dart';
+import '../../../main_widgets/car_trip_details_widget.dart';
 import '../widgets/trip_days_on_calender_widget.dart';
 
 class RequestDetails extends StatefulWidget {
