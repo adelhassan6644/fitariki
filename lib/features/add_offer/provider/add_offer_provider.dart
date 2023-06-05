@@ -25,7 +25,9 @@ class AddOfferProvider extends ChangeNotifier {
   AddOfferRepo addOfferRepo;
   AddOfferProvider({required this.addOfferRepo});
 
-  String? minPrice, note;
+  // String?  note;
+
+  TextEditingController minPrice = TextEditingController();
 
   DateTime startDate = DateTime.now();
   int duration = 0;
@@ -66,13 +68,13 @@ class AddOfferProvider extends ChangeNotifier {
   }
 
   reset() {
-    minPrice = null;
-    note = null;
+    minPrice.clear();
+    // note = null;
     startDate = DateTime.now();
     onSelectEndDate(DateTime.now());
   }
 
-  checkData() {
+  checkData({required double minOfferPrice,required double maxOfferPrice}) {
     if (startDate.isAtSameMomentAs(endDate)) {
       showToast(" تاريخ النهاية لا يجب ان يكون مثل تاريخ البداية!");
 
@@ -85,8 +87,18 @@ class AddOfferProvider extends ChangeNotifier {
       return;
     }
 
-    if (minPrice == null || minPrice == "") {
-      showToast("برجاء اختيار الحد الادني للسعر!");
+    if (minPrice.text.trim().isEmpty ) {
+      showToast("برجاء ادخال الحد الادني للسعر!");
+      return;
+    }
+
+    if ( minOfferPrice > double.parse(minPrice.text.trim()) ) {
+      showToast("برجاء ادخال الحد الادني للسعر اكبر من الحد الادني لسعر العرض!");
+      return;
+    }
+
+    if ( maxOfferPrice < double.parse(minPrice.text.trim()) ) {
+      showToast("برجاء ادخال الحد الادني للسعر اقل من الحد الاقصي لسعر العرض!");
       return;
     }
     return true;

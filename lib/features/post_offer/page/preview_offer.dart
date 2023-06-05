@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../data/config/di.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/map_widget.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';
 
 class PreviewOffer extends StatelessWidget {
@@ -39,16 +41,15 @@ class PreviewOffer extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   UserCard(
-                    days: provider.scheduleProvider.selectedDays
-                        .map((e) => e.dayName)
-                        .toList()
-                        .join("،"),
-                    createdAt: DateTime.now(),
+                    image: sl<ProfileProvider>().image,
+                    name: "${sl<ProfileProvider>().firstName.text} ${sl<ProfileProvider>().lastName.text}",
+                    male: sl<ProfileProvider>().gender == 0,
+                    national: sl<ProfileProvider>().nationality?.name,
+                    rate: sl<ProfileProvider>().rate.ceil(),
+                    days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
                     duration: provider.counts!.count.toString(),
-                    priceRange:
-                    "${provider.minPrice}- ${provider.maxPrice} SAR",
-                    timeRange:
-                    "${provider.startTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}",
+                    priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
+                    timeRange: "${provider.startTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}",
                     withAnalytics: false,
                   ),
                   MapWidget(

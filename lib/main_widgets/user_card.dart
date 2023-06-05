@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
@@ -16,13 +17,14 @@ import '../navigation/routes.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard(
-      {this.photo,
+      {this.image,
       this.name,
-      this.isMale = true,
+      this.male = true,
       this.duration,
-      required this.createdAt,
+      this.createdAt,
       this.userId,
       this.days,
+      this.rate,
       this.followers,
       this.timeRange,
       this.national,
@@ -31,13 +33,13 @@ class UserCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final int? userId;
-  final String? photo, name, national;
-  final bool isMale;
+  final int? userId, rate;
+  final String? image, name, national;
+  final bool male;
 
   final String? duration, days, timeRange, priceRange, followers;
   final bool withAnalytics;
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class UserCard extends StatelessWidget {
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(
-                          image: photo,
+                          image: image,
                           radius: 28,
                           color: ColorResources.SECOUND_PRIMARY_COLOR),
                       const SizedBox(
@@ -103,7 +105,7 @@ class UserCard extends StatelessWidget {
                                 width: 4,
                               ),
                               customImageIconSVG(
-                                  imageName: isMale
+                                  imageName: male
                                       ? SvgImages.maleIcon
                                       : SvgImages.femaleIcon,
                                   color: ColorResources.BLUE_COLOR,
@@ -111,8 +113,8 @@ class UserCard extends StatelessWidget {
                                   height: 11)
                             ],
                           ),
-                          const ShowRate(
-                            rate: 3,
+                          ShowRate(
+                            rate: rate,
                           ),
                           SizedBox(
                             width: 50,
@@ -291,9 +293,11 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  Methods.getDayCount(
-                    date: createdAt,
-                  ).toString(),
+                  createdAt == null
+                      ? getTranslated("now", context)
+                      : Methods.getDayCount(
+                          date: createdAt!,
+                        ).toString(),
                   style: AppTextStyles.w400.copyWith(fontSize: 10, height: 1),
                 ),
                 SizedBox(

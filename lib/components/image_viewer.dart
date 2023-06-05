@@ -21,14 +21,14 @@ class ImageViewer extends StatelessWidget {
           ? Center(
               child: CustomNetworkImage.containerNewWorkImage(
                   image: image,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.fitWidth,
                   radius: 0,
                   width: context.width,
-                  height: context.height * .8),
+                  height: context.width * 1.4),
             )
           : Image.file(
               image,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             ),
     );
   }

@@ -70,7 +70,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                               name: provider.isDriver
                                   ? provider.requestModel?.clientModel?.firstName
                                   : provider.requestModel?.driverModel?.firstName,
-                              isMale: provider.isDriver
+                              male: provider.isDriver
                                   ? provider.requestModel?.clientModel?.gender == 0
                                   : provider.requestModel?.driverModel?.gender == 0,
                               national: provider.isDriver

@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/animated_widget.dart';
+import 'package:fitariki/features/add_offer/provider/add_offer_provider.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                         .offerDetails!.clientModel?.firstName
                                     : provider
                                         .offerDetails!.driverModel?.firstName,
-                                isMale: provider.isDriver
+                                male: provider.isDriver
                                     ? provider.offerDetails!.clientModel
                                             ?.gender ==
                                         0
@@ -135,6 +136,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                         ? getTranslated("add_offer", context)
                         : getTranslated("add_request", context),
                     onTap: () => customShowModelBottomSheet(
+                      onClose: ()=>sl<AddOfferProvider>().reset(),
                       body: provider.isLogin
                           ? AddOffer(
                               name: provider.offerDetails?.name ?? "",

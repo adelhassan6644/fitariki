@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
@@ -181,12 +180,10 @@ class DurationWidget extends StatelessWidget {
                     FilteringTextInputFormatter.allow(
                         RegExp(r'^\d+\.?\d{0,2}')),
                   ],
-                  initialValue: provider.minPrice,
                   inputType: TextInputType.number,
                   hint: "00000",
-                  onChanged: (v) {
-                    provider.minPrice = v;
-                  },
+                  controller: provider.minPrice,
+
                 ),
               ),
             ],

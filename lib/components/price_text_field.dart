@@ -11,7 +11,7 @@ class PriceTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? Function(String?)? validation;
   final List<TextInputFormatter>? formatter;
-
+final TextEditingController? controller;
 
   const PriceTextFormField({
     super.key,
@@ -21,6 +21,7 @@ class PriceTextFormField extends StatelessWidget {
     this.onChanged,
     this.inputType,
     this.formatter,
+    this.controller,
   });
 
   @override
@@ -28,6 +29,7 @@ class PriceTextFormField extends StatelessWidget {
     return TextFormField(
       initialValue: initialValue,
       textAlign: TextAlign.center,
+      controller: controller,
       minLines:1,
       validator: validation,
       keyboardType: inputType,

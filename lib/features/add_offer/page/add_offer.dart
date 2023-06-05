@@ -42,7 +42,7 @@ class AddOffer extends StatelessWidget {
                   : getTranslated("make_a_request_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
-                if (provider.checkData() == true) {
+                if (provider.checkData(minOfferPrice: offer.minPrice??0, maxOfferPrice: offer.maxPrice??0) == true) {
                   provider.requestOffer(tripID: offer.id, name: name);
                 }
               },
