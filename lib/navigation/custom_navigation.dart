@@ -1,5 +1,6 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
+import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/ratting/page/rate_user.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
@@ -115,6 +116,8 @@ abstract class CustomNavigator {
 
       case Routes.PAYMENT:
         return _pageRoute(const Payment());
+        case Routes.PAYMENTWEBVIEW:
+        return _pageRoute( PaymentWebViewScreen(rservationiD: settings.arguments! as int,));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
@@ -50,6 +51,7 @@ class AcceptableWidget extends StatelessWidget {
                                     style:  AppTextStyles.w600.copyWith(
                                       height: 1.25,
                                         fontSize: 14,
+                                        fontFamily: AppStrings.fontFamily,
                                         color: ColorResources.WHITE_COLOR
                                     ),
                                     children:[
@@ -57,6 +59,7 @@ class AcceptableWidget extends StatelessWidget {
                                           text: ' المتوافقه ',
                                          style:  AppTextStyles.w600.copyWith(
                                              fontSize: 14,
+                                             fontFamily: AppStrings.fontFamily,
                                              color: ColorResources.SECOUND_PRIMARY_COLOR
                                          ),),
                                       TextSpan(

@@ -18,13 +18,17 @@ class MapProvider extends ChangeNotifier {
   BitmapDescriptor? destinationIcon=BitmapDescriptor.defaultMarker;
   LocationModel? pickupLocation;
   LocationModel? dropOffLocation;
-
+bool isLoad=false;
   setLocation({required LocationModel pickup, required LocationModel dropOff}) {
+    isLoad=true;
+    notifyListeners();
  polylineCoordinates = [];
    gMapMarkers = {};
     pickupLocation = pickup;
     dropOffLocation = dropOff;
     drawTripPolyLines();
+    isLoad=false;
+
     notifyListeners();
   }
 

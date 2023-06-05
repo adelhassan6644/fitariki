@@ -17,10 +17,15 @@ import '../widgets/my_offer_card.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/request_card.dart';
 
-class MyOfferDetails extends StatelessWidget {
+class MyOfferDetails extends StatefulWidget {
   final OfferModel offer;
   const MyOfferDetails({Key? key, required this.offer}) : super(key: key);
 
+  @override
+  State<MyOfferDetails> createState() => _MyOfferDetailsState();
+}
+
+class _MyOfferDetailsState extends State<MyOfferDetails>with AutomaticKeepAliveClientMixin<MyOfferDetails>  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +38,7 @@ class MyOfferDetails extends StatelessWidget {
               title: sl.get<ProfileProvider>().isDriver
                   ? getTranslated("delivery_offer_details", context)
                   : getTranslated("delivery_request_details", context),
-              actionChild: DeleteOfferWidget(id: offer.id!,)
+              actionChild: DeleteOfferWidget(id: widget.offer.id!,)
             ),
             Expanded(
               child: Stack(
@@ -46,11 +51,11 @@ class MyOfferDetails extends StatelessWidget {
                   ListAnimator(
                     data: [
                       MyOfferCard(
-                        offer: offer,
+                        offer: widget.offer,
                       ),
                       MapWidget(
-                        startPoint: offer.pickupLocation,
-                        endPoint: offer.dropOffLocation,
+                        startPoint: widget.offer.pickupLocation,
+                        endPoint: widget.offer.dropOffLocation,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -67,9 +72,9 @@ class MyOfferDetails extends StatelessWidget {
                                     AppTextStyles.w600.copyWith(fontSize: 16),
                               ),
                             ),
-                            if (offer.offerRequests != null &&
-                                offer.offerRequests!.isNotEmpty &&
-                                offer.offerRequests!.length > 3)
+                            if (widget.offer.offerRequests != null &&
+                                widget.offer.offerRequests!.isNotEmpty &&
+                                widget.offer.offerRequests!.length > 3)
                               InkWell(
                                 onTap: () => CustomNavigator.push(
                                   Routes.ALL_REQUESTS,
@@ -84,17 +89,17 @@ class MyOfferDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (offer.offerRequests != null &&
-                          offer.offerRequests!.isNotEmpty)
+                      if (widget.offer.offerRequests != null &&
+                          widget.offer.offerRequests!.isNotEmpty)
                         ...List.generate(
-                            offer.offerRequests!.length > 3
+                            widget.offer.offerRequests!.length > 3
                                 ? 3
-                                : offer.offerRequests!.length,
+                                : widget.offer.offerRequests!.length,
                             (index) => RequestCard(
-                                  request: offer.offerRequests![index],
+                                  request: widget.offer.offerRequests![index],
                                 )),
-                      if (offer.offerRequests == null ||
-                          offer.offerRequests!.isEmpty)
+                      if (widget.offer.offerRequests == null ||
+                          widget.offer.offerRequests!.isEmpty)
                         EmptyState(
                             txt: sl.get<ProfileProvider>().isDriver
                                 ? "لا يوجود عروض الان"
@@ -109,4 +114,8 @@ class MyOfferDetails extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

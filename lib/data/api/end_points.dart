@@ -28,6 +28,8 @@ class EndPoints {
   static const String userProfile = 'profile';
   static const String ratting = 'ratting';
   static const String sendRate = '';
+  static const String couponURl = 'client/coupon/check';
+  static const String reserve = 'client/reservation/reserve';
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';

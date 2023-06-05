@@ -31,7 +31,7 @@ class ApiErrorHandler {
                   errorDescription = error.response!.statusMessage;
                   break;
                 default:
-                  log(error.response!.data);
+                  log(error.response!.data.toString());
 
                  try{
                    errorDescription = error.response!.data["message"];

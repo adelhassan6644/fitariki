@@ -455,8 +455,7 @@ class RequestCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
-                    arguments: request),
+                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
               ))
         ],
       ),

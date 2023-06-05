@@ -3,6 +3,7 @@ import 'package:fitariki/features/payment/provider/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -23,6 +24,8 @@ class Payment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: SafeArea(
         bottom: true,
@@ -58,6 +61,7 @@ class Payment extends StatelessWidget {
                         followers:provider.requestModel!.followers!.isNotEmpty? "${ provider.requestModel?.followers?.length}" : null,
                         timeRange: "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                       ),
+
                       Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: 8.h,
@@ -73,16 +77,91 @@ class Payment extends StatelessWidget {
                           return Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                            child: CustomTextFormField(
-                              controller: paymentProvider.discountCode,
-                              hint: "****",
-                            ),
+                            child:    Row(children: [
+                              Expanded(
+                                child: CustomTextFormField(
+                                  // controller: paymentProvider.discountCode,
+                                  controller: paymentProvider.discountCode,
+                                  hint: "****",
+                                ),
+
+                                // TextField(
+                                //   controller: _couponController,
+                                //   decoration: InputDecoration(
+                                //     hintText: "رمز القسيمة",
+                                //     isDense: true,
+                                //     filled: true,
+                                //     enabled: coupon.discount == 0,
+                                //     fillColor: Theme.of(context).primaryColor,
+                                //     border: OutlineInputBorder(
+                                //       borderRadius: BorderRadius.horizontal(
+                                //         left: Radius.circular(0),
+                                //         right: Radius.circular(10),
+                                //       ),
+                                //       borderSide: BorderSide.none,
+                                //     ),
+                                //   ),
+                                // ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  if (paymentProvider.discountCode.text.isNotEmpty &&
+                                      !paymentProvider.isLoading) {
+                                    if (paymentProvider.discount < 1) {
+                                      paymentProvider
+                                          .applyCoupon(
+                                          coupon: paymentProvider.discountCode.text.trim(),
+                                     )
+                                          .then((discount) {
+                                        if (discount > 0) {
+                                          showToast(
+                                            "تم تطبيق رمز القسيمة بنجاح",);
+                                        } else {
+                                          // showCustomSnackBar(
+                                          //     message: "fail", context: context);
+                                        }
+                                      });
+                                    } else {
+                                      paymentProvider.removeCouponData(true);
+                                    }
+                                  } else if (paymentProvider.discountCode.text.isEmpty) {
+                                    showToast( 'ادخل رمز القسيمة',
+
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 100,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: paymentProvider.discount <= 0
+                                      ? !paymentProvider.isLoading
+                                      ? Text(
+                                    "تطبيق",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                      : CircularProgressIndicator(
+                                      valueColor:
+                                      AlwaysStoppedAnimation<Color>(
+                                          Colors.white))
+                                      : Icon(Icons.clear, color: Colors.white),
+                                ),
+                              ),
+                            ])
                           );
                         }
                       ),
-                      PaymentMethodWidget(),
+                      // PaymentMethodWidget(),
                       PaymentDetailsWidget(
-                        price: provider.requestModel!.price!,
+
                       )
                     ],
                   ),
@@ -96,15 +175,7 @@ class Payment extends StatelessWidget {
                 return CustomButton(
                   text: getTranslated("complete_theـpaymentـprocess", context),
                   onTap: () {
-                    CustomNavigator.push(Routes.SUCCESS,
-                        replace: true,
-                        arguments: SuccessModel(
-                            isCongrats: true,
-                            isReplace: true,
-                            routeName: Routes.REQUEST_DETAILS,
-                            title: "محمد م...",
-                            btnText: getTranslated("trip", context),
-                            description:"تم دفع تكاليف الرحله بنجاح مع كابتن محمد م..."));
+                    provider.checkOut();
                   },
                 );
               }

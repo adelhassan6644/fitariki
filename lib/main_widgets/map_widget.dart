@@ -3,9 +3,12 @@ import 'package:fitariki/app/core/utils/app_strings.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/maps/models/location_model.dart';
 import 'package:fitariki/main_providers/map_provider.dart';
+import 'package:fitariki/main_widgets/shimmer_widgets/map_widget_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:map_launcher/map_launcher.dart'as mapLunch;
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/core/utils/dimensions.dart';
 import '../app/core/utils/svg_images.dart';
@@ -44,7 +47,12 @@ class _MapWidgetState extends State<MapWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<MapProvider>(builder: (context, vm, _) {
-      return Padding(
+      if(vm.isLoad)
+        {
+          return  const MapWidgetShimmer();
+        }
+      else {
+        return Padding(
         padding: EdgeInsets.symmetric(
             vertical: 8.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
         child: Column(
@@ -79,34 +87,59 @@ class _MapWidgetState extends State<MapWidget> {
               child: Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          getTranslated("start_point", context),
-                          maxLines: 1,
-                          style: AppTextStyles.w600.copyWith(
-                              fontSize: 10, overflow: TextOverflow.ellipsis),
-                        ),
-                        MarqueeWidget(
-                          child: Text(
-                            widget.startPoint?.address ??
-                                "Al Munsiyah، طريق الامير محمد بن سلمـ...",
+                    child: InkWell(
+                      onTap: () async {
+                        bool? isActive =await mapLunch.MapLauncher.isMapAvailable(mapLunch.MapType.google);
+                        bool? isAppleActive =await mapLunch.MapLauncher.isMapAvailable(mapLunch.MapType.apple);
+                        if (isActive!) {
+                          await mapLunch. MapLauncher.showDirections(
+                            mapType: mapLunch.MapType.google,
+                            destination: mapLunch.Coords(
+                              double.parse(widget.startPoint!.latitude!) ,
+                              double.parse(widget.startPoint!.longitude!) ,
+                            ),
+                            destinationTitle: widget.startPoint!.address,
+                          );
+                        } else if (isAppleActive!) {
+                          await mapLunch.MapLauncher.showDirections(
+                            // mapType: MapType.apple,
+                            destination: mapLunch.Coords(
+                              double.parse(widget.startPoint!.latitude!) ,
+                              double.parse(widget.startPoint!.longitude!) ,
+                            ),
+                            destinationTitle: widget.startPoint!.address, mapType: mapLunch.MapType.apple,
+                          );
+                        }
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated("start_point", context),
                             maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 10,
-                                color: ColorResources.HINT_COLOR,
-                                overflow: TextOverflow.ellipsis),
+                            style: AppTextStyles.w600.copyWith(
+                                fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),
-                        )
-                      ],
+                          MarqueeWidget(
+                            child: Text(
+                              widget.startPoint?.address ??
+                                  "Al Munsiyah، طريق الامير محمد بن سلمـ...",
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  color: ColorResources.HINT_COLOR,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(width: 15.w),
                   if (widget.stopPoints != null)
                     Expanded(
-                      child: Column(
+                      child:Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
@@ -131,28 +164,53 @@ class _MapWidgetState extends State<MapWidget> {
                     ),
                   if (widget.stopPoints != null) SizedBox(width: 15.w),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          getTranslated("final_destination", context),
-                          maxLines: 1,
-                          style: AppTextStyles.w600.copyWith(
-                              fontSize: 10, overflow: TextOverflow.ellipsis),
-                        ),
-                        MarqueeWidget(
-                          child: Text(
-                            widget.endPoint?.address ??
-                                "Al Maliyah، طريق الامير محمد بن سلمـ...",
+                    child: InkWell(
+                      onTap: () async {
+                        bool? isActive =await mapLunch.MapLauncher.isMapAvailable(mapLunch.MapType.google);
+                        bool? isAppleActive =await mapLunch.MapLauncher.isMapAvailable(mapLunch.MapType.apple);
+                        if (isActive!) {
+                          await mapLunch. MapLauncher.showDirections(
+                            mapType: mapLunch.MapType.google,
+                            destination: mapLunch.Coords(
+                              double.parse(widget.endPoint!.latitude!) ,
+                              double.parse(widget.endPoint!.longitude!) ,
+                            ),
+                            destinationTitle: widget.endPoint!.address,
+                          );
+                        } else if (isAppleActive!) {
+                          await mapLunch.MapLauncher.showDirections(
+                            // mapType: MapType.apple,
+                            destination: mapLunch.Coords(
+                              double.parse(widget.endPoint!.latitude!) ,
+                              double.parse(widget.endPoint!.longitude!) ,
+                            ),
+                            destinationTitle: widget.endPoint!.address, mapType: mapLunch.MapType.apple,
+                          );
+                        }
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated("final_destination", context),
                             maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 10,
-                                color: ColorResources.HINT_COLOR,
-                                overflow: TextOverflow.ellipsis),
+                            style: AppTextStyles.w600.copyWith(
+                                fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),
-                        )
-                      ],
+                          MarqueeWidget(
+                            child: Text(
+                              widget.endPoint?.address ??
+                                  "Al Maliyah، طريق الامير محمد بن سلمـ...",
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10,
+                                  color: ColorResources.HINT_COLOR,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -179,6 +237,7 @@ class _MapWidgetState extends State<MapWidget> {
           ],
         ),
       );
+      }
     });
   }
 }
