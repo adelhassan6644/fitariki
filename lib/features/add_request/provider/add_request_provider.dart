@@ -118,7 +118,7 @@ class AddRequestProvider extends ChangeNotifier {
           "start_date": startDate.defaultFormat2(),
           "end_date": endDate.defaultFormat2(),
           "duration": duration,
-          "price": minPrice,
+          "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
               sl.get<FollowersProvider>().selectedFollowers.isNotEmpty)
             "request_followers": List<dynamic>.from(sl

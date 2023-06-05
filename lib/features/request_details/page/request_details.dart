@@ -80,7 +80,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                               days: provider.requestModel?.offer?.offerDays!.map((e) => e.dayName).toList().join(", "),
                               duration: provider.requestModel?.duration.toString(),
                               priceRange: "${provider.requestModel?.price ?? 0} ريال",
-                              followers:provider.requestModel!.followers!.isNotEmpty? "${ provider.requestModel?.followers?.length}" : null,
+                              followers:provider.requestModel?.followers != null && provider.requestModel!.followers!.isNotEmpty? "${ provider.requestModel?.followers?.length}" : null,
                               timeRange: "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                             ),
 
