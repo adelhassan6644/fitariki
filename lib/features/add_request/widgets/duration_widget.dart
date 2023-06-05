@@ -8,11 +8,11 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/price_text_field.dart';
 import '../../../helpers/date_time_picker.dart';
-import '../provider/add_offer_provider.dart';
+import '../provider/add_request_provider.dart';
 
 class DurationWidget extends StatelessWidget {
   const DurationWidget({required this.provider, Key? key}) : super(key: key);
-  final AddOfferProvider provider;
+  final AddRequestProvider provider;
 
   @override
   Widget build(BuildContext context) {

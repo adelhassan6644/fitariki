@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/localization/provider/language_provider.dart';
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
+import '../../features/add_request/provider/add_request_provider.dart';
+import '../../features/add_request/repo/add_request_repo.dart';
 import '../../features/contatct_with_us/provider/contact_provider.dart';
 import '../../features/contatct_with_us/repo/contact_repo.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
@@ -29,8 +31,6 @@ import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/post_offer/repo/post_offer_repo.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
-import '../../features/add_offer/provider/add_offer_provider.dart';
-import '../../features/add_offer/repo/add_offer_repo.dart';
 import '../../features/ratting/provider/ratting_provider.dart';
 import '../../features/ratting/repo/ratting_repo.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
@@ -82,7 +82,7 @@ Future<void> init() async {
       () => HomeRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
-      () => AddOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => AddRequestRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
@@ -127,7 +127,7 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(() => MapProvider());
   sl.registerLazySingleton(() => CalenderProvider());
-  sl.registerLazySingleton(() => AddOfferProvider(addOfferRepo: sl()));
+  sl.registerLazySingleton(() => AddRequestProvider(addRequestRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
   sl.registerLazySingleton(() => FollowerDetailsProvider(

@@ -2,7 +2,6 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/animated_widget.dart';
-import 'package:fitariki/features/add_offer/provider/add_offer_provider.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +14,9 @@ import '../../../main_widgets/shimmer_widgets/offer_details_shimmer.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
+import '../../add_request/page/add_request.dart';
+import '../../add_request/provider/add_request_provider.dart';
 import '../../auth/pages/login.dart';
-import '../../add_offer/page/add_offer.dart';
 import '../provider/offer_details_provider.dart';
 import '../widgets/car_details.dart';
 import '../widgets/reviews_widget.dart';
@@ -136,9 +136,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                         ? getTranslated("add_offer", context)
                         : getTranslated("add_request", context),
                     onTap: () => customShowModelBottomSheet(
-                      onClose: ()=>sl<AddOfferProvider>().reset(),
+                      onClose: ()=>sl<AddRequestProvider>().reset(),
                       body: provider.isLogin
-                          ? AddOffer(
+                          ? AddRequest(
                               name: provider.offerDetails?.name ?? "",
                               offer: provider.offerDetails!,
                               isCaptain: provider.isDriver,

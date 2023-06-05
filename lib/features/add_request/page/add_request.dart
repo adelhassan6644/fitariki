@@ -7,11 +7,11 @@ import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
-import '../provider/add_offer_provider.dart';
+import '../provider/add_request_provider.dart';
 import '../widgets/duration_widget.dart';
 
-class AddOffer extends StatelessWidget {
-  const AddOffer(
+class AddRequest extends StatelessWidget {
+  const AddRequest(
       {required this.isCaptain,
       Key? key,
       required this.offer,
@@ -31,7 +31,7 @@ class AddOffer extends StatelessWidget {
         ),
         color: Colors.white,
       ),
-      child: Consumer<AddOfferProvider>(builder: (_, provider, child) {
+      child: Consumer<AddRequestProvider>(builder: (_, provider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

@@ -19,11 +19,11 @@ import '../../followers/followers/provider/followers_provider.dart';
 import '../../offer_details/provider/offer_details_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
-import '../repo/add_offer_repo.dart';
+import '../repo/add_request_repo.dart';
 
-class AddOfferProvider extends ChangeNotifier {
-  AddOfferRepo addOfferRepo;
-  AddOfferProvider({required this.addOfferRepo});
+class AddRequestProvider extends ChangeNotifier {
+  AddRequestRepo addRequestRepo;
+  AddRequestProvider({required this.addRequestRepo});
 
   // String?  note;
 
@@ -128,7 +128,7 @@ class AddOfferProvider extends ChangeNotifier {
         }
       };
       Either<ServerFailure, Response> response =
-          await addOfferRepo.requestOffer(body: data, tripID: tripID);
+          await addRequestRepo.requestOffer(body: data, tripID: tripID);
       response.fold((fail) {
         CustomNavigator.pop();
         showToast(fail.error);

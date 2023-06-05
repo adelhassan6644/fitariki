@@ -5,6 +5,7 @@ import 'package:fitariki/data/config/di.dart' as di;
 
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
+import '../../features/add_request/provider/add_request_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/contatct_with_us/provider/contact_provider.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
@@ -18,7 +19,6 @@ import '../../features/offer_details/provider/offer_details_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
-import '../../features/add_offer/provider/add_offer_provider.dart';
 import '../../features/ratting/provider/ratting_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
@@ -38,7 +38,7 @@ abstract class ProviderList {
     // ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<AddOfferProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<AddRequestProvider>()),
     ChangeNotifierProvider(
       create: (_) => di.sl<PostOfferProvider>(),
     ),
