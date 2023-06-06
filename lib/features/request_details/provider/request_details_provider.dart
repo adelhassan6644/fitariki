@@ -70,7 +70,7 @@ class RequestDetailsProvider extends ChangeNotifier {
                     routeName: Routes.DASHBOARD,
                     argument: 1,
                     isClean: true,
-                    title: "أمل ب...",
+                    term: "أمل ب...",
                     btnText: getTranslated("my_trips",
                         CustomNavigator.navigatorState.currentContext!),
                     description: "تم قبول عرض من أمل ب... بإنتظار الدفع ..."));

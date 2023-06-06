@@ -1,16 +1,11 @@
-import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
@@ -18,16 +13,13 @@ import '../../../data/api/end_points.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../request_details/provider/request_details_provider.dart';
 import '../../success/model/success_model.dart';
 
-
-
 class PaymentWebViewScreen extends StatefulWidget {
-final int rservationiD;
+  final int rservationId;
 
-
-
-  const PaymentWebViewScreen({required this.rservationiD});
+  const PaymentWebViewScreen({super.key, required this.rservationId});
 
   @override
   _PaymentWebViewScreenState createState() => _PaymentWebViewScreenState();
@@ -45,28 +37,25 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
         //
         javaScriptEnabled: true,
         userAgent:
-        'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
       ),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
-
-
       ),
       ios: IOSInAppWebViewOptions(
-
         allowsInlineMediaPlayback: true,
-
       ));
 
   PullToRefreshController? pullToRefreshController;
   ContextMenu? contextMenu;
-  PaymentProvider? reservationModelProvider ;
+  PaymentProvider? reservationModelProvider;
 
   double progress = 0;
   @override
   void initState() {
     super.initState();
-    reservationModelProvider   = Provider.of<PaymentProvider>(context,listen: false);
+    reservationModelProvider =
+        Provider.of<PaymentProvider>(context, listen: false);
     contextMenu = ContextMenu(
         menuItems: [
           ContextMenuItem(
@@ -74,68 +63,48 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               iosId: "1",
               title: "Special",
               action: () async {
-
-
                 await webViewController?.clearFocus();
               })
         ],
         options: ContextMenuOptions(hideDefaultSystemContextMenuItems: false),
-        onCreateContextMenu: (hitTestResult) async {
-
-
-        },
-        onHideContextMenu: () {
-        },
+        onCreateContextMenu: (hitTestResult) async {},
+        onHideContextMenu: () {},
         onContextMenuActionItemClicked: (contextMenuItemClicked) async {
           var id = (Platform.isAndroid)
               ? contextMenuItemClicked.androidId
               : contextMenuItemClicked.iosId;
-
         });
 
+    wiselectedUrl = "${EndPoints.baseUrl}client/OfferTapPayment";
 
-
-      wiselectedUrl ="${EndPoints.baseUrl}client/OfferTapPayment";
-
-print(wiselectedUrl);
-
+    log(wiselectedUrl);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-
-
       appBar: CustomAppBar(
-
-          title: "الدفع",
-    ),
+        title: getTranslated("payment", context),
+      ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: 1170,
-
           child: Stack(
             children: [
               InAppWebView(
-
                 initialUrlRequest: URLRequest(
                     url: Uri.parse(wiselectedUrl),
                     method: 'POST',
-
-                    body:
-                        (reservationModelProvider!.coupon!=null)?
-                    Uint8List.fromList(utf8.encode("reservation_id=${widget.rservationiD}&coupon_id=${reservationModelProvider!.coupon!.id}"
-                        )):    Uint8List.fromList(utf8.encode("reservation_id=${widget.rservationiD}"
-                        )),
-
-                    headers:
-                    {
+                    body: (reservationModelProvider!.coupon != null)
+                        ? Uint8List.fromList(utf8.encode(
+                            "reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}"))
+                        : Uint8List.fromList(utf8
+                            .encode("reservation_id=${widget.rservationId}")),
+                    headers: {
                       'Content-Type': 'application/json; charset=UTF-8',
                       "Accept": " application/json",
-
                     }),
-
 
                 // pullToRefreshController: pullToRefreshController,
                 initialOptions: options,
@@ -145,83 +114,70 @@ print(wiselectedUrl);
                   }
                   setState(() {
                     this.progress = progress / 100;
-
                   });
                 },
                 onWebViewCreated: (controller) {
                   setState(() {
-
                     webViewController = controller;
                   });
                 },
                 contextMenu: contextMenu,
                 onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                  print("PATH"+url!.path ); print("query"+url.query );
-                  bool _isSuccess = url.query.contains('success');
-                  bool _isFailed = url.query.contains('fail');
-                  bool _isCancel = url.query.contains('cancel');
+                  log("PATH${url!.path}");
+                  log("query${url.query}");
+                  bool isSuccess = url.query.contains('success');
+                  bool isFailed = url.query.contains('fail');
+                  bool isCancel = url.query.contains('cancel');
 
-                  if (_isSuccess) {
+                  if (isSuccess) {
                     CustomNavigator.push(Routes.SUCCESS,
                         replace: true,
                         arguments: SuccessModel(
+                            isPopUp: true,
                             isCongrats: true,
-                            isReplace: true,
-                            routeName: Routes.REQUEST_DETAILS,
-                            title: "محمد م...",
-                            btnText: getTranslated("trip", context),
-                            description:"تم دفع تكاليف الرحله بنجاح مع كابتن محمد م..."));
-                    // MyApp.navigatorKey.currentState!.pushAndRemoveUntil(CupertinoPageRoute(builder: (builder)=>SuccessScreen()),(x)=>false);
-
-                  } else if (_isFailed) {
+                            isClean: true,
+                            routeName: Routes.DASHBOARD,
+                            argument: 1,
+                            term: sl<RequestDetailsProvider>()
+                                    .requestModel
+                                    ?.driverModel
+                                    ?.firstName ??
+                                "محمد",
+                            btnText: getTranslated("my_trips", context),
+                            description: "${getTranslated(
+                                "trip_was_successfully_paid_for_captain",
+                                context)} ${sl<RequestDetailsProvider>()
+                                .requestModel
+                                ?.driverModel
+                                ?.firstName}"));
+                  } else if (isFailed || isCancel) {
                     CustomNavigator.push(Routes.SUCCESS,
                         replace: true,
                         arguments: SuccessModel(
-                            isCongrats: true,
+                            isFail: true,
                             isReplace: true,
-                            routeName: Routes.REQUEST_DETAILS,
-                            title: "فشل",
-                            btnText: getTranslated("trip", context),
-                            description:"فشل دفع تكاليف الرحله."));
-
-
-
-                  } else if (_isCancel) {
-                    CustomNavigator.push(Routes.SUCCESS,
-                        replace: true,
-                        arguments: SuccessModel(
-                            isCongrats: true,
-                            isReplace: true,
-                            routeName: Routes.REQUEST_DETAILS,
-                            title: "فشل",
-                            btnText: getTranslated("trip", context),
-                            description:"فشل دفع تكاليف الرحله."));
-
-
-
+                            isPopUp: true,
+                            routeName: Routes.PAYMENT,
+                            description: getTranslated(
+                                "failed_to_pay_for_the_trip", context)));
                   }
-
                 },
                 onConsoleMessage: (controller, consoleMessage) {
-                  print(consoleMessage);
+                  log("$consoleMessage");
                 },
-                onCloseWindow: (InAppWebViewController){
-
-                },
-
+                onCloseWindow: (InAppWebViewController) {},
               ),
-
-
               progress < 1.0
-                  ? LinearProgressIndicator(value: progress,color: ColorResources.PRIMARY_COLOR,backgroundColor: Colors.red.shade50,)
-
-                  : SizedBox.shrink(),
+                  ? LinearProgressIndicator(
+                      value: progress,
+                      color: ColorResources.PRIMARY_COLOR,
+                      backgroundColor: Colors.red.shade50,
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),
       ),
     );
   }
-
-
 }

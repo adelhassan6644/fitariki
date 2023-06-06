@@ -1,23 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../coupon/models/coupon_model.dart';
-import '../../coupon/repo/coupon_repo.dart';
+import '../model/coupon_model.dart';
 import '../../request_details/model/offer_request_details_model.dart';
 import '../../request_details/provider/request_details_provider.dart';
-import '../page/payment_webView_screen.dart';
 import '../repo/payment_repo.dart';
 
 class PaymentProvider extends ChangeNotifier {
-  final CouponRepo couponRepo;
   final PaymentRepo paymentRepo;
 
-  PaymentProvider({required this.couponRepo,required this.paymentRepo}){ calcTotal();}
+  PaymentProvider({required this.paymentRepo}) {
+    calcTotal();
+  }
 
   CouponModel? _coupon;
   double _discount = 0.0;
@@ -38,6 +36,7 @@ class PaymentProvider extends ChangeNotifier {
   TextEditingController discountCode = TextEditingController();
   OfferRequestDetailsModel? requestModel =
       sl.get<RequestDetailsProvider>().requestModel;
+
   int currentPayment = 0;
 
   onSelectPayment(index) {
@@ -52,7 +51,7 @@ class PaymentProvider extends ChangeNotifier {
     notifyListeners();
     double amount = requestModel!.price!;
     var apiResponse =
-        await couponRepo.applyCoupon(offer_id: requestModel!.id!, code: coupon);
+        await paymentRepo.applyCoupon(offerId: requestModel!.id!, code: coupon);
     apiResponse.fold((fail) {
       _isLoading = false;
       notifyListeners();
@@ -97,38 +96,54 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   calcTotal() {
-    tax = (offerPrice*(tax/100));
-    total = (offerPrice - discount) + tax+ serviceCost;
+    tax = (offerPrice * (tax / 100));
+    total = (offerPrice - discount) + tax + serviceCost;
     notifyListeners();
   }
 
   ///checkout & payment
-
+  bool isCheckOut = false;
   checkOut() async {
-    var apiResponse =
-        await paymentRepo.reserveOffer(requestModel: requestModel!);
-    apiResponse.fold((fail) {
-      _isLoading = false;
+    try {
+      isCheckOut = true;
       notifyListeners();
+
+      var apiResponse =
+          await paymentRepo.reserveOffer(requestModel: requestModel!);
+      apiResponse.fold((fail) {
+        isCheckOut = false;
+        notifyListeners();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: fail.error,
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (success) {
+        if (success.data["resID"] != null) {
+          CustomNavigator.push(Routes.PAYMENTWEBVIEW,
+              arguments: success.data["resID"]);
+        } else {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: getTranslated(
+                      "fail", CustomNavigator.navigatorState.currentContext!),
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+        }
+        isCheckOut = false;
+        notifyListeners();
+      });
+    } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
-              message: fail.error,
+              message: e.toString(),
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-    }, (succes) {
-      if (succes.data["resID"] != null) {
-
-        CustomNavigator.push(Routes.PAYMENTWEBVIEW,
-            replace: true,
-            arguments: succes.data["resID"]);
-
-      } else {
-        // showCustomSnackBar(message: succes.data["message"], context: context);
-      }
-
-    });
+      isCheckOut = false;
+      notifyListeners();
+    }
   }
-
-
 }

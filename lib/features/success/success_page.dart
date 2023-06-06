@@ -25,7 +25,10 @@ class _SuccessPageState extends State<SuccessPage> {
   void initState() {
     if (widget.successModel.isPopUp) {
       Future.delayed(const Duration(seconds: 2), () {
-        CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
+        CustomNavigator.push(widget.successModel.routeName ?? Routes.DASHBOARD,
+            arguments: widget.successModel.argument,
+            replace: widget.successModel.isReplace,
+            clean: widget.successModel.isClean);
       });
     }
 
@@ -47,18 +50,25 @@ class _SuccessPageState extends State<SuccessPage> {
             children: [
               Center(
                 child: customImageIcon(
-                    imageName: Images.doneCircle, width: 165, height: 165),
+                    imageName: widget.successModel.isFail
+                        ? Images.cancelCircle
+                        : Images.doneCircle,
+                    width: 165,
+                    height: 165),
               ),
               SizedBox(
                 height: 40.h,
               ),
               Center(
                 child: Text(
-                  widget.successModel.isCongrats
-                      ? getTranslated("congratulations", context)
-                      : getTranslated("has_been_sent", context),
+                  widget.successModel.isFail
+                      ? getTranslated("fail", context)
+                      : widget.successModel.isCongrats
+                          ? getTranslated("congratulations", context)
+                          : getTranslated("has_been_sent", context),
                   style: AppTextStyles.w600.copyWith(
-                      fontSize: 32, color: ColorResources.PRIMARY_COLOR),
+                      fontSize: 32,
+                      color: ColorResources.PRIMARY_COLOR),
                 ),
               ),
               Center(
@@ -66,9 +76,8 @@ class _SuccessPageState extends State<SuccessPage> {
                   padding: EdgeInsets.symmetric(vertical: 16.0.h),
                   child: SubstringHighlight(
                     textAlign: TextAlign.center,
-                    text: widget.successModel
-                        .description!, // search result string from database or something
-                    term: widget.successModel.title ?? "iiiiiii",
+                    text: widget.successModel.description!,
+                    term: widget.successModel.term ?? "iiiiiii",
                     textStyle: AppTextStyles.w500.copyWith(
                         fontSize: 16,
                         color: ColorResources.SECOUND_PRIMARY_COLOR),
@@ -84,8 +93,8 @@ class _SuccessPageState extends State<SuccessPage> {
                   onTap: () {
                     if (widget.successModel.routeName != null) {
                       CustomNavigator.push(widget.successModel.routeName!,
-                          clean: widget.successModel.isClean ?? false,
-                          replace: widget.successModel.isReplace ?? false,
+                          clean: widget.successModel.isClean,
+                          replace: widget.successModel.isReplace,
                           arguments: widget.successModel.argument ?? 0);
                     } else {
                       CustomNavigator.push(Routes.DASHBOARD,

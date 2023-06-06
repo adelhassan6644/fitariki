@@ -203,8 +203,8 @@
   "reject_request": "Reject request",
   "stop_points": "Stop points : ",
   "payment": "Payment",
-  "complete_theـpaymentـprocess": "Complete the payment process",
-  "discountـcode": "Discount code",
+  "check_out": "Check out",
+  "coupon": "Coupon",
   "payment_method": "Payment method",
   "payment_details": "Payment details",
   "trip_amount": "Trip amount",
@@ -220,6 +220,14 @@
   "offer_deleted_successfully": "Offer deleted successfully",
   "request_deleted_successfully": "Request deleted successfully",
   "show_car_image": "Show Car Image",
-  "now": "now"
+  "now": "now",
+  "apply": "Apply",
+  "coupon_code_applied_successfully": "Coupon code applied successfully",
+  "trip_was_successfully_paid_for_captain": "Trip was successfully paid for Captain",
+  "fail": "Fail",
+  "failed_to_pay_for_the_trip": "Failed to pay for the trip",
+  "cancel_to_pay_for_the_trip": "Cancel to pay for the trip",
+  "total": "ُTotal",
+  "discount": "Discount"
 
 }

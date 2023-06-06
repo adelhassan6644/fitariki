@@ -11,7 +11,6 @@ import '../../features/add_request/provider/add_request_provider.dart';
 import '../../features/add_request/repo/add_request_repo.dart';
 import '../../features/contatct_with_us/provider/contact_provider.dart';
 import '../../features/contatct_with_us/repo/contact_repo.dart';
-import '../../features/coupon/repo/coupon_repo.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
 import '../../features/followers/add_follower/repo/add_follower_repo.dart';
 import '../../features/followers/follower_details/provider/follower_details_provider.dart';
@@ -104,10 +103,9 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
       () => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => CouponRepo(dioClient: sl()));
   sl.registerLazySingleton(
-      () => RequestDetailsRepo(sharedPreferences: sl(), dioClient: sl()));  sl.registerLazySingleton(
-      () => PaymentRepo(dioClient: sl()));
+      () => RequestDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => PaymentRepo(dioClient: sl()));
   sl.registerLazySingleton(
       () => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
@@ -151,7 +149,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => HomeProvider(
         homeRepo: sl(),
       ));
-;
   sl.registerLazySingleton(() => OfferDetailsProvider(
         repo: sl(),
       ));
@@ -170,7 +167,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RattingProvider(
         rattingRepo: sl(),
       ));
-  sl.registerLazySingleton(() => PaymentProvider(couponRepo: sl(),paymentRepo: sl()));
+  sl.registerLazySingleton(() => PaymentProvider(paymentRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

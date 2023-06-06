@@ -143,7 +143,7 @@ class AddRequestProvider extends ChangeNotifier {
                 isCongrats: true,
                 routeName: Routes.DASHBOARD,
                 argument: 1,
-                title: name,
+                term: name,
                 isClean: true,
                 btnText: getTranslated(
                     "my_trips", CustomNavigator.navigatorState.currentContext!),

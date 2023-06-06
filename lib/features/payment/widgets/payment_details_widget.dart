@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.tax} ريال",
+                  "${paymentProvider.tax} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -96,7 +97,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.serviceCost} ريال",
+                  "${paymentProvider.serviceCost} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -110,16 +111,17 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    "${getTranslated("discount", context)}",
+                    getTranslated("discount", context),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 14,
                     ),
                   ),
                 ),
                 Text(
-                  "${paymentProvider.discount} ريال",
+                  "- ${paymentProvider.discount} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
+                    color: ColorResources.RED_COLOR
                   ),
                 ),
               ],
@@ -130,14 +132,14 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    "${getTranslated("Total", context)} ",
+                    getTranslated("total", context),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 14,
                     ),
                   ),
                 ),
                 Text(
-                  "${paymentProvider.total} ريال",
+                  "${paymentProvider.total} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),

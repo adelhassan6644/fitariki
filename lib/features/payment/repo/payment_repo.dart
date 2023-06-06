@@ -25,4 +25,15 @@ class PaymentRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(e)));
     }
   }
+
+  Future<Either<ServerFailure, Response>> applyCoupon(
+      {required String code, required int offerId}) async {
+    try {
+      Response response = await dioClient.post(
+          uri: EndPoints.couponURl, data: {'code': code, "offer_id": offerId});
+      return Right(response);
+    } catch (e) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(e)));
+    }
+  }
 }

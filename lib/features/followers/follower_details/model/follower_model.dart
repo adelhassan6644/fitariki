@@ -7,6 +7,8 @@ class FollowerModel {
   int? gender;
   LocationModel? dropOffLocation;
   LocationModel? pickupLocation;
+  bool? sameHomeLocation;
+  bool? sameDestination;
 
   FollowerModel({
     this.id,
@@ -15,6 +17,8 @@ class FollowerModel {
     this.gender,
     this.pickupLocation,
     this.dropOffLocation,
+    this.sameHomeLocation,
+    this.sameDestination,
   });
 
   factory FollowerModel.fromJson(Map<String, dynamic> json) => FollowerModel(
@@ -22,6 +26,10 @@ class FollowerModel {
         name: json["name"],
         age: json["age"].toString(),
         gender: int.tryParse(json["gender"].toString()),
+        sameHomeLocation:
+            json["is_same_pickup_location"].toString() == "1" ? true : false,
+        sameDestination:
+            json["is_same_drop_off_location"].toString() == "1" ? true : false,
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),

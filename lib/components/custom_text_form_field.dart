@@ -34,9 +34,11 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode autoValidateMode;
   final TextAlign? textAlign;
   final void Function(String?)? onSaved;
+  final BorderRadius? edge;
 
   const CustomTextFormField({
     super.key,
+    this.edge,
     this.keyboardAction = TextInputAction.next,
     this.autoValidateMode = AutovalidateMode.onUserInteraction,
     this.prefixWidget,
@@ -112,8 +114,8 @@ class CustomTextFormField extends StatelessWidget {
                       : null),
         ),
         focusedBorder: read == true
-            ? const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
+            ?  OutlineInputBorder(
+                borderRadius: edge??const BorderRadius.all(
                   Radius.circular(
                     Dimensions.RADIUS_DEFAULT,
                   ),
@@ -123,68 +125,68 @@ class CustomTextFormField extends StatelessWidget {
                     width: 1,
                     style: BorderStyle.solid),
               )
-            : const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
+            :  OutlineInputBorder(
+                borderRadius:edge?? const BorderRadius.all(
                   Radius.circular(
                     Dimensions.RADIUS_DEFAULT,
                   ),
                 ),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                     color: ColorResources.SECOUND_PRIMARY_COLOR,
                     width: 1,
                     style: BorderStyle.solid),
               ),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        border:  OutlineInputBorder(
+          borderRadius: edge?? const BorderRadius.all(
             Radius.circular(
               Dimensions.RADIUS_DEFAULT,
             ),
           ),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: ColorResources.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
-        disabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        disabledBorder:  OutlineInputBorder(
+          borderRadius: edge??const BorderRadius.all(
             Radius.circular(
               Dimensions.RADIUS_DEFAULT,
             ),
           ),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: ColorResources.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        enabledBorder:  OutlineInputBorder(
+          borderRadius:edge?? const BorderRadius.all(
             Radius.circular(
               Dimensions.RADIUS_DEFAULT,
             ),
           ),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: ColorResources.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        errorBorder:  OutlineInputBorder(
+          borderRadius: edge?? const BorderRadius.all(
             Radius.circular(
               Dimensions.RADIUS_DEFAULT,
             ),
           ),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: ColorResources.FAILED_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius:edge?? const BorderRadius.all(
             Radius.circular(
               Dimensions.RADIUS_DEFAULT,
             ),
           ),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: ColorResources.FAILED_COLOR,
               width: 1,
               style: BorderStyle.solid),

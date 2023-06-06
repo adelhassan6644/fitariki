@@ -11,7 +11,6 @@ import '../../../../data/error/failures.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../maps/models/location_model.dart';
 import '../../followers/provider/followers_provider.dart';
-import '../model/follower_model.dart';
 import '../repo/follower_details_repo.dart';
 
 class FollowerDetailsProvider extends ChangeNotifier {
@@ -62,18 +61,18 @@ class FollowerDetailsProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = {
-
-          "name": followerFullName.text.trim(),
-          "gender": gender,
-          "age": age.text.trim(),
-          if (!sameDestination) "drop_off_location": endLocation!.toJson(),
-          if (!sameHomeLocation) "pickup_location": startLocation!.toJson(),
-
+        "name": followerFullName.text.trim(),
+        "gender": gender,
+        "age": age.text.trim(),
+        "drop_off_location": endLocation!.toJson(),
+        "pickup_location": startLocation!.toJson(),
+        "is_same_pickup_location": sameHomeLocation ? 1 : 0,
+        "is_same_drop_off_location": sameDestination ? 1 : 0
       };
 
       log(data.toString());
       Either<ServerFailure, Response> response =
-          await followerDetailsRepo.updateFollowerDetails(body: data,id:id);
+          await followerDetailsRepo.updateFollowerDetails(body: data, id: id);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -108,50 +107,6 @@ class FollowerDetailsProvider extends ChangeNotifier {
     }
   }
 
-  // ///Get Follower Details
-
-  // FollowerModel? followerModel;
-  // getFollowerDetails() async {
-  //   try {
-  //     isLoading = true;
-  //     notifyListeners();
-  //     Either<ServerFailure, Response> response =
-  //         await followerDetailsRepo.getFollowerDetails();
-  //     response.fold((l) {
-  //       CustomSnackBar.showSnackBar(
-  //           notification: AppNotification(
-  //               message: l.toString(),
-  //               isFloating: true,
-  //               backgroundColor: ColorResources.IN_ACTIVE,
-  //               borderColor: Colors.transparent));
-  //       isLoading = false;
-  //       notifyListeners();
-  //     }, (response) {
-  //       followerModel = FollowerModel.fromJson(response.data['data']);
-  //       initFollowerData();
-  //       isLoading = false;
-  //       notifyListeners();
-  //     });
-  //   } catch (e) {
-  //     CustomSnackBar.showSnackBar(
-  //         notification: AppNotification(
-  //             message: e.toString(),
-  //             isFloating: true,
-  //             backgroundColor: ColorResources.IN_ACTIVE,
-  //             borderColor: Colors.transparent));
-  //     isLoading = false;
-  //     notifyListeners();
-  //   }
-  // }
-
-  // initFollowerData() {
-  //   startLocation = followerModel?.pickupLocation;
-  //   endLocation = followerModel?.dropOffLocation;
-  //   followerFullName.text = followerModel?.fullName ?? "";
-  //   age.text = followerModel?.age ?? "";
-  //   _gender = followerModel?.gender ?? 0;
-  // }
-
   ///delete follower
 
   deleteFollower({required int id}) async {
@@ -174,9 +129,9 @@ class FollowerDetailsProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) async {
-       await sl.get<FollowersProvider>().getFollowers();
-       CustomNavigator.pop();
-       CustomNavigator.pop();
+        await sl.get<FollowersProvider>().getFollowers();
+        CustomNavigator.pop();
+        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: response.data["data"]["message"],

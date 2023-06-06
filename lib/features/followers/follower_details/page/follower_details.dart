@@ -49,6 +49,14 @@ class _FollowerDetailsState extends State<FollowerDetails> {
         widget.followerModel.age ?? "";
     Provider.of<FollowerDetailsProvider>(context, listen: false)
         .selectedGender(widget.followerModel.gender ?? 0);
+
+    Provider.of<FollowerDetailsProvider>(context, listen: false)
+            .sameHomeLocation ==
+        widget.followerModel.sameHomeLocation;
+
+    Provider.of<FollowerDetailsProvider>(context, listen: false)
+            .sameDestination ==
+        widget.followerModel.sameDestination;
   }
 
   @override
@@ -63,7 +71,8 @@ class _FollowerDetailsState extends State<FollowerDetails> {
               withBack: true,
               actionWidth: 40,
               actionChild: GestureDetector(
-                onTap: () => provider.updateFollowerDetails(widget.followerModel.id!),
+                onTap: () =>
+                    provider.updateFollowerDetails(widget.followerModel.id!),
                 child: SizedBox(
                   width: 40,
                   child: Text(

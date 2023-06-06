@@ -91,6 +91,9 @@ class AddFollowerProvider extends ChangeNotifier {
         "age": age.text.trim(),
         "drop_off_location": endLocation!.toJson(),
         "pickup_location": startLocation!.toJson(),
+        "is_same_pickup_location": sameHomeLocation?1:0,
+        "is_same_drop_off_location": sameDestination?1:0
+
       };
 
       Either<ServerFailure, Response> response =

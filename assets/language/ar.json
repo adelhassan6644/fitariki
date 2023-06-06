@@ -127,6 +127,8 @@
   "replay": "اعادة",
   "pay": "دفع",
   "register_with_us": "سجل معنا!",
+  "apply": "تطبيق",
+  "enter_coupon": "ادخل رمز القسيمة",
   "and_enjoy_all_the_features_available_in_the_application": "و استمتع بجميع الخصائص المتوفره بالتطبيق",
   "personal_information": "بياناتي الشخصية",
   "archives": "المحفوظات",
@@ -202,8 +204,8 @@
   "reject_request": "رفض الطلب",
   "stop_points": "نقاط التوقف : ",
   "payment": "الدفع",
-  "complete_theـpaymentـprocess": "اتمام عملية الدفع",
-  "discountـcode": "كود خصم",
+  "check_out": "اتمام عملية الدفع",
+  "coupon": "كود خصم",
   "payment_method": "طريقة الدفع",
   "payment_details": "تفاصيل الدفع",
   "trip_amount": "مبلغ الرحلة",
@@ -219,5 +221,12 @@
   "offer_deleted_successfully": "تم حذف العرض بنجاح",
   "request_deleted_successfully": "تم حذف الطلب بنجاح",
   "show_car_image": "عرض صورة السيارة",
-  "now": "الآن"
+  "now": "الآن",
+  "coupon_code_applied_successfully": "تم تطبيق كود الخصم بنجاح",
+  "trip_was_successfully_paid_for_captain": "تم دفع تكاليف الرحله بنجاح مع كابتن",
+  "failed_to_pay_for_the_trip": "فشل دفع تكاليف الرحلة",
+  "fail": "فشل",
+  "cancel_to_pay_for_the_trip": "تم الغاء دفع تكاليف الرحلة",
+  "total": "الاجمالي",
+  "discount": "خصم"
 }

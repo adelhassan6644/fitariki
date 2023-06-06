@@ -117,7 +117,7 @@ abstract class CustomNavigator {
       case Routes.PAYMENT:
         return _pageRoute(const Payment());
         case Routes.PAYMENTWEBVIEW:
-        return _pageRoute( PaymentWebViewScreen(rservationiD: settings.arguments! as int,));
+        return _pageRoute( PaymentWebViewScreen(rservationId: settings.arguments! as int,));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
