@@ -231,5 +231,6 @@
   "fail": "فشل",
   "cancel_to_pay_for_the_trip": "تم الغاء دفع تكاليف الرحلة",
   "total": "الاجمالي",
-  "discount": "خصم"
+  "discount": "خصم",
+  "successfully_updated": "تم تحديث بياناتك بنجاح"
 }

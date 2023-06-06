@@ -99,7 +99,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     child: CustomButton(
                       text: getTranslated("save", context),
-                      onTap: () => provider.updateProfile(),
+                      onTap: () => provider.updateProfile(fromLogin: true),
                     ),
                   ),
                   SizedBox(

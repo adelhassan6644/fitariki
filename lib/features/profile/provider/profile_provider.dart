@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
+import '../../../navigation/routes.dart';
 import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
 import '../model/country_model.dart';
@@ -202,6 +204,39 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }*/
 
+  clear(){
+    ///personal data
+    image=null;
+    firstName.clear();
+    lastName.clear();
+    age.clear();
+    _gender=0;
+    email.clear();
+    nationality=null;
+    identityNumber.clear();
+    identityImage=null;
+    startLocation=null;
+    endLocation=null;
+    scheduleProvider.selectedDays.clear();
+    startTime=DateTime.now();
+    endTime=DateTime.now();
+    ///Car data
+    carName.clear();
+    carColor.clear();
+    carPlate.clear();
+    carSeats=null;
+    carModel=null;
+    carImage=null;
+    licenceImage=null;
+    formImage=null;
+    insuranceImage=null;
+    ///Bank data
+    fullName.clear();
+    bank=null;
+    bankAccount.clear();
+    bankAccountImage=null;
+
+  }
   updateTimes() {
     for (var element in scheduleProvider.selectedDays) {
       element.startTime = startTime.toString();
@@ -464,7 +499,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   ///Update Profile
-  updateProfile() async {
+  updateProfile({bool fromLogin = false}) async {
     if (checkData() == true) {
       try {
         spinKitDialog();
@@ -570,10 +605,15 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
-          CustomNavigator.pop();
+          if(fromLogin){
+            CustomNavigator.push(Routes.DASHBOARD,arguments: 0,clean: true);
+          }else{
+            CustomNavigator.push(Routes.DASHBOARD,arguments: 3,clean: true);
+          }
+
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
-                  message: "تم تحديث بياناتك بنجاح !",
+                  message: getTranslated("successfully_updated", CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
                   backgroundColor: ColorResources.ACTIVE,
                   borderColor: Colors.transparent));
@@ -696,8 +736,7 @@ class ProfileProvider extends ChangeNotifier {
     lastUpdate = Methods.getDayCount(
             date: profileModel?.driver?.updatedAt != null
                 ? profileModel!.driver!.updatedAt!
-                : DateTime.now())
-        .toString();
+                : DateTime.now()).toString();
 
     carName.text = profileModel?.driver?.carInfo?.name ?? "";
     carPlate.text = profileModel?.driver?.carInfo?.palletNumber ?? "";

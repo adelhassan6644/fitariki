@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
@@ -100,7 +100,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
     if (authException.code == 'invalid-phone-number') {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
-              message: "رقم الهاتف غير صحيح",
+              message: getTranslated("invalid_phone",
+                  CustomNavigator.navigatorState.currentContext!),
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
     } else {
@@ -152,7 +153,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance
             .signInWithCredential(phoneAuthCredential)
             .then((value) async {
-
           ///  to send Device token
           await userLogin();
           CustomNavigator.pop();
@@ -163,7 +163,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
           CustomNavigator.pop();
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
-                  message: "الكود غير صحيح",
+                  message: getTranslated("invalid_code",
+                      CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
@@ -220,20 +221,22 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<MyOffersProvider>().getMyOffer();
         sl<WishlistProvider>().getWishList();
 
-        // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
-        if (success.data['data'][role[_userType]]["new_user"] == 1) {
+        firebaseAuthRepo.remember(
+            phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
+
+        if (success.data['data'][role[_userType]]["new_user"].toString() ==
+            "1") {
+          CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
-              replace: true, arguments: true);
+              clean: true, arguments: true);
         } else {
           CustomNavigator.pop();
-          await Provider.of<ProfileProvider>(
-              CustomNavigator.navigatorState.currentContext!,
-              listen: false)
-              .getProfile();
+          sl<ProfileProvider>().getProfile();
         }
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: "تم تسجيل الدخول بنجاح",
+                message: getTranslated("successfully_login",
+                    CustomNavigator.navigatorState.currentContext!),
                 isFloating: true,
                 backgroundColor: ColorResources.ACTIVE,
                 borderColor: Colors.transparent));
@@ -254,6 +257,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await FirebaseAuth.instance.signOut();
         await firebaseAuthRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();
+        sl<ProfileProvider>().clear();
+
       });
 
       CustomNavigator.push(Routes.SPLASH, clean: true);
