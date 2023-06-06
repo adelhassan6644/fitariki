@@ -32,7 +32,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
-        // useShouldInterceptAjaxRequest: true,
+        useShouldInterceptAjaxRequest: true,
         javaScriptCanOpenWindowsAutomatically: true,
         //
         javaScriptEnabled: true,
@@ -43,6 +43,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
         useHybridComposition: true,
       ),
       ios: IOSInAppWebViewOptions(
+
         allowsInlineMediaPlayback: true,
       ));
 
@@ -63,16 +64,28 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               iosId: "1",
               title: "Special",
               action: () async {
+                print("Menu item Special clicked!");
+                print(await webViewController?.getSelectedText());
                 await webViewController?.clearFocus();
               })
         ],
         options: ContextMenuOptions(hideDefaultSystemContextMenuItems: false),
-        onCreateContextMenu: (hitTestResult) async {},
-        onHideContextMenu: () {},
+        onCreateContextMenu: (hitTestResult) async {
+          print("onCreateContextMenu");
+          print(hitTestResult.extra);
+          print(await webViewController?.getSelectedText());
+        },
+        onHideContextMenu: () {
+          print("onHideContextMenu");
+        },
         onContextMenuActionItemClicked: (contextMenuItemClicked) async {
           var id = (Platform.isAndroid)
               ? contextMenuItemClicked.androidId
               : contextMenuItemClicked.iosId;
+          print("onContextMenuActionItemClicked: " +
+              id.toString() +
+              " " +
+              contextMenuItemClicked.title);
         });
 
     wiselectedUrl = "${EndPoints.baseUrl}client/OfferTapPayment";
@@ -92,7 +105,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           width: 1170,
           child: Stack(
             children: [
-              InAppWebView(
+          InAppWebView(
                 initialUrlRequest: URLRequest(
                     url: Uri.parse(wiselectedUrl),
                     method: 'POST',
@@ -104,10 +117,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                     headers: {
                       'Content-Type': 'application/json; charset=UTF-8',
                       "Accept": " application/json",
-                    }),
+                    }
+                    ),
 
-                // pullToRefreshController: pullToRefreshController,
+                pullToRefreshController: pullToRefreshController,
                 initialOptions: options,
+
                 onProgressChanged: (controller, progress) {
                   if (progress == 100) {
                     pullToRefreshController!.endRefreshing();
@@ -119,6 +134,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 onWebViewCreated: (controller) {
                   setState(() {
                     webViewController = controller;
+
                   });
                 },
                 contextMenu: contextMenu,
