@@ -31,10 +31,10 @@ class FirebaseAuthRepo {
   //     return null;
   //   }
   // }
-  //
-  // remember({required String phone}) {
-  //   sharedPreferences.setString(AppStorageKey.phone, phone);
-  // }
+
+  remember({required String phone}) {
+    sharedPreferences.setString(AppStorageKey.phone, phone);
+  }
 
   forget() {
     sharedPreferences.remove(AppStorageKey.phone);
