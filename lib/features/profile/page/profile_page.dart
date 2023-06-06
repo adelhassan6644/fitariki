@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
                 actionChild: fromLogin
                     ? null
                     : GestureDetector(
-                        onTap: () => provider.updateProfile(),
+                        onTap: () => provider.updateProfile(fromLogin),
                         child: Text(getTranslated("save", context),
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
@@ -99,7 +99,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     child: CustomButton(
                       text: getTranslated("save", context),
-                      onTap: () => provider.updateProfile(),
+                      onTap: () => provider.updateProfile(fromLogin),
                     ),
                   ),
                   SizedBox(

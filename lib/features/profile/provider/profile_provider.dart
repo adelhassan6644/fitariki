@@ -12,6 +12,7 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
+import '../../../navigation/routes.dart';
 import '../../maps/models/location_model.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
 import '../model/country_model.dart';
@@ -464,7 +465,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   ///Update Profile
-  updateProfile() async {
+  updateProfile(fromLogin) async {
     if (checkData() == true) {
       try {
         spinKitDialog();
@@ -571,6 +572,11 @@ class ProfileProvider extends ChangeNotifier {
           notifyListeners();
         }, (response) {
           CustomNavigator.pop();
+          if(fromLogin)
+            {
+              CustomNavigator.push(Routes.DASHBOARD,
+                  clean: true, arguments: 0);
+            }
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: "تم تحديث بياناتك بنجاح !",

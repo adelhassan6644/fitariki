@@ -219,11 +219,12 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<HomeProvider>().getOffers();
         sl<MyOffersProvider>().getMyOffer();
         sl<WishlistProvider>().getWishList();
-
+        print((success.data['data'][role[_userType]]["new_user"] == 0).toString()+ "ccc");
         // firebaseAuthRepo.remember(phone:"$countryPhoneCode${_phoneTEC.text.trim()}");
-        if (success.data['data'][role[_userType]]["new_user"] == 1) {
+        if (success.data['data'][role[_userType]]["new_user"] == 1 ) {
+          CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
-              replace: true, arguments: true);
+              clean: true, arguments: true);
         } else {
           CustomNavigator.pop();
           await Provider.of<ProfileProvider>(
