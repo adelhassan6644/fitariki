@@ -116,11 +116,13 @@ class AddRequestProvider extends ChangeNotifier {
           sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "start_date": startDate.defaultFormat2(),
+          "start_at": startDate.defaultFormat2(),
           "end_date": endDate.defaultFormat2(),
+          "end_at": endDate.defaultFormat2(),
           "duration": duration,
           "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
-              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty)
+              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty&& !sl<ProfileProvider>().isDriver )
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers

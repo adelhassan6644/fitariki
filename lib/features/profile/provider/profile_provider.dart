@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
@@ -523,7 +524,9 @@ class ProfileProvider extends ChangeNotifier {
         };
 
         final personalData = {
+          "fcm_token": await saveDeviceToken(),
           isDriver?"driver":"client" : {
+
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
@@ -633,7 +636,20 @@ class ProfileProvider extends ChangeNotifier {
       }
     }
   }
+  Future<String?> saveDeviceToken() async {
+    String? _deviceToken;
+    if(Platform.isIOS) {
+      _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
+    }else {
+      _deviceToken = await FirebaseMessaging.instance.getToken();
+    }
 
+    if (_deviceToken != null) {
+      log('--------Device Token---------- $_deviceToken');
+    }
+    return _deviceToken;
+    // return "RVmsmxd5dg8v3cS0d48q3nvoFFuaSXuCwZbMU3LCjEren7VWhq";
+  }
   ///Update Profile
   bool isLoading = false;
   ProfileModel? profileModel;

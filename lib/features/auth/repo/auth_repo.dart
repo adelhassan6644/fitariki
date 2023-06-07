@@ -1,5 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';
@@ -39,18 +43,18 @@ class AuthRepo {
   }
 
   Future<String?> saveDeviceToken() async {
-    // String? _deviceToken;
-    // if(Platform.isIOS) {
-    //   _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
-    // }else {
-    //   _deviceToken = await FirebaseMessaging.instance.getToken();
-    // }
-    //
-    // if (_deviceToken != null) {
-    //   log('--------Device Token---------- $_deviceToken');
-    // }
-    // return _deviceToken;
-    return "RVmsmxd5dg8v3cS0d48q3nvoFFuaSXuCwZbMU3LCjEren7VWhq";
+    String? _deviceToken;
+    if(Platform.isIOS) {
+      _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
+    }else {
+      _deviceToken = await FirebaseMessaging.instance.getToken();
+    }
+
+    if (_deviceToken != null) {
+      log('--------Device Token---------- $_deviceToken');
+    }
+    return _deviceToken;
+    // return "RVmsmxd5dg8v3cS0d48q3nvoFFuaSXuCwZbMU3LCjEren7VWhq";
   }
 
   // Future<Either<ServerFailure, Response>> subscribeToTopic() async {
@@ -81,7 +85,7 @@ class AuthRepo {
     try {
       Response response = await dioClient.post(
           uri: EndPoints.logIn,
-          data: {"phone": phone, "device_token": await saveDeviceToken()});
+          data: {"phone": phone, "fcm_token": await saveDeviceToken()});
 
       if (response.statusCode == 200) {
         return Right(response);
