@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/features/feedback/model/feedback_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -8,9 +9,11 @@ import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 
-class RattingCard extends StatelessWidget {
-  const RattingCard({this.isSeen = true, Key? key}) : super(key: key);
+class FeedbackCard extends StatelessWidget {
+  const FeedbackCard({this.isSeen = true, required this.feedback, Key? key})
+      : super(key: key);
   final bool isSeen;
+  final FeedbackItem feedback;
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +73,8 @@ class RattingCard extends StatelessWidget {
                                       height: 11)
                                 ],
                               ),
-                              const ShowRate(
-                                rate: 3,
+                              ShowRate(
+                                rate: feedback.rate,
                                 size: 10,
                               ),
                             ],
@@ -85,7 +88,7 @@ class RattingCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "“عرض جيد و كابتن محترم”.",
+                              "“${feedback.feedback}”",
                               textAlign: TextAlign.start,
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(

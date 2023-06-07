@@ -4,8 +4,6 @@ import 'package:fitariki/features/followers/followers/provider/followers_provide
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -24,21 +22,18 @@ class MoreOptions extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
             color: ColorResources.WHITE_COLOR,
-            boxShadow: [
-              BoxShadow(
+            boxShadow: [BoxShadow(
                   color: Colors.black.withOpacity(0.08),
                   blurRadius: 5.0,
                   spreadRadius: -1,
-                  offset: const Offset(0, 6))
-            ]),
+                  offset: const Offset(0, 6))]),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
           children: [
             MoreButton(
               title: getTranslated("personal_information", context),
               icon: SvgImages.file,
-              onTap: () =>
-                  CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false),
+              onTap: () => CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false),
             ),
             Visibility(
               visible: !sl<ProfileProvider>().isDriver,
@@ -46,8 +41,7 @@ class MoreOptions extends StatelessWidget {
                 title: getTranslated("followers", context),
                 icon: SvgImages.addFollower,
                 onTap: () {
-                  Provider.of<FollowersProvider>(context, listen: false)
-                      .getFollowers();
+                sl<FollowersProvider>().getFollowers();
                   CustomNavigator.push(Routes.FOLLOWERS);
                 },
               ),
@@ -71,9 +65,7 @@ class MoreOptions extends StatelessWidget {
                   ? getTranslated("clients_evaluation", context)
                   : getTranslated("captain_evaluation", context),
               icon: SvgImages.rate,
-              onTap: () => CustomNavigator.push(
-                Routes.RATTING,
-              ),
+              onTap: () => CustomNavigator.push(Routes.FEEDBACK,),
             ),
             MoreButton(
               title: getTranslated("contact_with_us", context),

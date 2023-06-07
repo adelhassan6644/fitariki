@@ -32,8 +32,8 @@ import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/post_offer/repo/post_offer_repo.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
-import '../../features/ratting/provider/ratting_provider.dart';
-import '../../features/ratting/repo/ratting_repo.dart';
+import '../../features/feedback/provider/feedback_provider.dart';
+import '../../features/feedback/repo/feedback_repo.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/request_details/repo/request_details_repo.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
@@ -111,7 +111,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => RattingRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => FeedbackRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -164,8 +164,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RequestDetailsProvider(
         requestDetailsRepo: sl(),
       ));
-  sl.registerLazySingleton(() => RattingProvider(
-        rattingRepo: sl(),
+  sl.registerLazySingleton(() => FeedbackProvider(
+        feedbackRepo: sl(),
       ));
   sl.registerLazySingleton(() => PaymentProvider(paymentRepo: sl()));
 

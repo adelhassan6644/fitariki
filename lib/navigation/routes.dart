@@ -11,7 +11,7 @@ class Routes {
   static const FOLLOWERS = "FOLLOWERS";
   static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
   static const WISHLIST = "WISHLIST";
-  static const RATTING = "RATTING";
+  static const FEEDBACK = "FEEDBACK";
   static const CONTACT_WITH_US = "CONTACT_WITH_US";
   static const NOTIFICATIONS = "NOTIFICATIONS";
   static const MY_OFFERS_DETAILS = "MY_OFFERS_DETAILS";

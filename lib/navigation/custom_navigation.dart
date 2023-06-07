@@ -1,7 +1,7 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
-import 'package:fitariki/features/ratting/page/rate_user.dart';
+import 'package:fitariki/features/feedback/page/rate_user.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
@@ -16,7 +16,7 @@ import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/payment/page/payment.dart';
-import '../features/ratting/page/ratting.dart';
+import '../features/feedback/page/feedback.dart';
 import '../features/request_details/page/request_details.dart';
 import '../features/success/model/success_model.dart';
 import '../features/success/success_page.dart';
@@ -76,8 +76,8 @@ abstract class CustomNavigator {
         return _pageRoute(FollowerDetails(
           followerModel: settings.arguments as FollowerModel,
         ));
-      case Routes.RATTING:
-        return _pageRoute(const Ratting());
+      case Routes.FEEDBACK:
+        return _pageRoute(const FeedbackView());
 
       case Routes.RATE_USER:
         return _pageRoute(RateUser(

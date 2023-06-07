@@ -26,8 +26,8 @@ class EndPoints {
   static const String addOffer = 'offer/request_offer';
   static const String updateRequest = 'offer/request_update';
   static const String userProfile = 'profile';
-  static const String ratting = 'ratting';
-  static const String sendRate = '';
+  static const String getFeedback = 'feedback/list';
+  static const String sendFeedback = 'feedback/feedback';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
   /// maps

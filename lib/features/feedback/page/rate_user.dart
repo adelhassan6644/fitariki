@@ -13,7 +13,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_text_form_field.dart';
-import '../provider/ratting_provider.dart';
+import '../provider/feedback_provider.dart';
 
 class RateUser extends StatelessWidget {
   const RateUser({required this.userId, Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class RateUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Consumer<RattingProvider>(builder: (_, provider, child) {
+        body: Consumer<FeedbackProvider>(builder: (_, provider, child) {
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(
@@ -83,7 +83,7 @@ class RateUser extends StatelessWidget {
                           child: customImageIconSVG(
                             height: 20,
                             width: 20,
-                            imageName: provider.rate! < index
+                            imageName: provider.ratting! < index
                                 ? SvgImages.emptyStar
                                 : SvgImages.fillStar,
                           ),
@@ -100,7 +100,7 @@ class RateUser extends StatelessWidget {
                       hint: getTranslated("rate_trip", context),
                       minLine: 5,
                       maxLine: 5,
-                      controller: provider.rateMessage,
+                      controller: provider.feedback,
                       keyboardAction: TextInputAction.newline),
                 ),
 
@@ -109,7 +109,8 @@ class RateUser extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 8.0.h),
                   child: CustomButton(
                     text: getTranslated("submit", context),
-                    onTap: () => provider.sendRate(id: 1),
+                    onTap: () =>
+                        provider.sendFeedback(offerId: 1, userId: userId),
                     isLoading: provider.isSendRate,
                   ),
                 ),

@@ -19,7 +19,7 @@ import '../../features/offer_details/provider/offer_details_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
-import '../../features/ratting/provider/ratting_provider.dart';
+import '../../features/feedback/provider/feedback_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
@@ -44,7 +44,8 @@ abstract class ProviderList {
     ),
     ChangeNotifierProvider(
       create: (_) => di.sl<MapProvider>(),
-    ), ChangeNotifierProvider(
+    ),
+    ChangeNotifierProvider(
       create: (_) => di.sl<CalenderProvider>(),
     ),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
@@ -62,6 +63,6 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ContactProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<UserProfileProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<RattingProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<FeedbackProvider>()),
   ];
 }

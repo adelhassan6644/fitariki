@@ -55,8 +55,7 @@ class ProfileRepo {
   Future<Either<ServerFailure, Response>> getCountries() async {
     try {
       Response response = await dioClient.get(
-        uri:
-        EndPoints.getCountries,
+        uri: EndPoints.getCountries,
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -71,8 +70,7 @@ class ProfileRepo {
   Future<Either<ServerFailure, Response>> getBanks() async {
     try {
       Response response = await dioClient.get(
-        uri:
-        EndPoints.getBanks,
+        uri: EndPoints.getBanks,
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -83,6 +81,7 @@ class ProfileRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
   getRoleType() {
     if (sharedPreferences.containsKey(AppStorageKey.role)) {
       return sharedPreferences.getString(AppStorageKey.role);

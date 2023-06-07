@@ -231,6 +231,8 @@
   "failed_to_pay_for_the_trip": "Failed to pay for the trip",
   "cancel_to_pay_for_the_trip": "Cancel to pay for the trip",
   "total": "ُTotal",
-  "discount": "Discount"
+  "discount": "Discount",
+  "your_feedback_sent_successfully": "Your Feedback Send Successfully",
+  "there_is_no_evaluations": "There is no evaluations"
 
 }

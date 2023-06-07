@@ -232,5 +232,7 @@
   "cancel_to_pay_for_the_trip": "تم الغاء دفع تكاليف الرحلة",
   "total": "الاجمالي",
   "discount": "خصم",
-  "successfully_updated": "تم تحديث بياناتك بنجاح"
+  "successfully_updated": "تم تحديث بياناتك بنجاح",
+  "your_feedback_sent_successfully": "تم ارسال تقييمك بنجاح",
+  "there_is_no_evaluations": "لا يوجد تقييمات"
 }
