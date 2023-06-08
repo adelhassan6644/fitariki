@@ -84,8 +84,8 @@ class UserProfile extends StatelessWidget {
                     CarTripDetailsWidget(
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
-                  if (sl<ProfileProvider>().isDriver)
-                    const FollowerDistanceWidget(),
+                  if (sl<ProfileProvider>().isDriver&&provider.userFollweer!=null&&provider.userFollweer!.data!=null)
+                     FollowerDistanceWidget(follwers: provider.userFollweer,),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
@@ -100,9 +100,9 @@ class UserProfile extends StatelessWidget {
                             style: AppTextStyles.w600.copyWith(fontSize: 16),
                           ),
                         ),
-                        if (sl<HomeProvider>().offer != null &&
-                            sl<HomeProvider>().offer!.isNotEmpty &&
-                            sl<HomeProvider>().offer!.length > 3)
+                        if ( provider.myOffers != null &&
+                            provider.myOffers!.offers!.isNotEmpty &&
+                            provider.myOffers!.offers!.length > 3)
                           InkWell(
                             onTap: () =>
                                 CustomNavigator.push(Routes.ALL_USER_OFFERS),
@@ -115,16 +115,16 @@ class UserProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (sl<HomeProvider>().offer != null &&
-                      sl<HomeProvider>().offer!.isNotEmpty)
+                  if (provider.myOffers != null &&
+                      provider.myOffers!.offers!.isNotEmpty)
                     ...List.generate(
-                        sl<HomeProvider>().offer!.length > 3
-                            ? 3
-                            : sl<HomeProvider>().offer!.length,
+                        provider.myOffers!.offers!.length > 3
+                            ? 4
+                            :  provider.myOffers!.offers!.length,
                         (index) => UserOfferCard(
-                            offerModel: sl<HomeProvider>().offer![index])),
-                  if (sl<HomeProvider>().offer == null ||
-                      sl<HomeProvider>().offer!.isEmpty)
+                            offerModel:  provider.myOffers!.offers![index])),
+                  if ( provider.myOffers == null ||
+                      provider.myOffers!.offers!.isEmpty)
                     EmptyState(
                         txt: sl.get<ProfileProvider>().isDriver
                             ? "لا يوجود عروض حاليا"

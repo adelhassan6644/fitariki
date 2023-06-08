@@ -8,6 +8,7 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
+import '../../../main_models/offer_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../model/my_offer.dart';
 import '../repo/my_offers_repo.dart';
@@ -20,15 +21,17 @@ class MyOffersProvider extends ChangeNotifier {
   bool get isDriver => myOffersRepo.isDriver();
 
   MyOffersModel? myOffers;
+  OfferModel? offerDetails;
   bool isLoading = false;
+  bool isOfferDetailsLoading = false;
 
-  getMyOffer() async {
+  getMyOffers() async {
     try {
       isLoading = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-          await myOffersRepo.getMyOffer();
+          await myOffersRepo.getMyOffers();
       response.fold((l) => null, (response) {
         myOffers = MyOffersModel.fromJson(response.data["data"]);
         isLoading = false;
@@ -42,6 +45,36 @@ class MyOffersProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  getMyOfferDetails({required int id}) async {
+    try {
+      offerDetails=null;
+      isOfferDetailsLoading = true;
+      notifyListeners();
+
+      Either<ServerFailure, Response> response =
+          await myOffersRepo.getMyOfferDetails(id: id);
+      response.fold((l) =>   CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: l.error,
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent)), (response) {
+        offerDetails = OfferModel.fromJson(response.data["data"]['offer']);
+        isOfferDetailsLoading = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: ApiErrorHandler.getMessage(e),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isOfferDetailsLoading = false;
       notifyListeners();
     }
   }

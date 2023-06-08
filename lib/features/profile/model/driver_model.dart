@@ -14,6 +14,8 @@ class DriverModel {
   String? identityImage;
   String? nickname;
   int? gender;
+  int? requestsCount;
+  int? reservationsCount;
   String? age;
   Country? national;
   String? city;
@@ -48,6 +50,8 @@ class DriverModel {
       this.status,
       this.rate,
       this.wallet,
+      this.reservationsCount,
+      this.requestsCount,
       this.dropOffLocation,
       this.pickupLocation,
       this.driverDays,
@@ -63,6 +67,8 @@ class DriverModel {
         email: json["email"],
         image: json["image"],
         nickname: json["nickname"],
+        requestsCount: json["requests_count"],
+        reservationsCount: json["reservations_count"],
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"].toString(),
         national: json["country"] != null

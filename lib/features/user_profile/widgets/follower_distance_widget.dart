@@ -6,9 +6,11 @@ import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
+import '../../followers/followers/model/followers_model.dart';
 
 class FollowerDistanceWidget extends StatelessWidget {
-  const FollowerDistanceWidget({Key? key}) : super(key: key);
+ final FollowersModel? follwers;
+   const FollowerDistanceWidget({Key? key, required this.follwers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,10 @@ class FollowerDistanceWidget extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
+
           Column(
               children: List.generate(
-            3,
+                follwers!.data?.length??0,
             (index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 1.h),
               child: Row(
@@ -37,7 +40,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                   SizedBox(
                     width: 50,
                     child: Text(
-                      "محمد احمد",
+                      follwers!.data![index].name??"",
                       textAlign: TextAlign.start,
                       maxLines: 1,
                       style: AppTextStyles.w600.copyWith(
@@ -48,7 +51,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                     width: 4.w,
                   ),
                   customImageIconSVG(
-                      imageName: SvgImages.maleIcon,
+                      imageName:     follwers!.data![index].gender==0? SvgImages.maleIcon:SvgImages.femaleIcon,
                       color: ColorResources.BLUE_COLOR,
                       width: 11,
                       height: 11),

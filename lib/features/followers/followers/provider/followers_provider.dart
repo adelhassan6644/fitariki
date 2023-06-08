@@ -21,7 +21,7 @@ class FollowersProvider extends ChangeNotifier {
   }
 
   bool isLoading = false;
-  FollowersModel? model;
+
 
   List<FollowerModel> selectedFollowers = [];
   onSelectFollow(v, index) {
@@ -32,7 +32,7 @@ class FollowersProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
+  FollowersModel? model;
   getFollowers() async {
     try {
       isLoading = true;

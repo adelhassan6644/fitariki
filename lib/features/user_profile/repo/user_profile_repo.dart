@@ -34,4 +34,35 @@ class UserProfileRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+  Future<Either<ServerFailure, Response>> getUserOffers({required String role,required int id}) async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+        "$role/${EndPoints.myOffers}/$id",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+  Future<Either<ServerFailure, Response>> getUserFollowers({required int id}) async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+        // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.followers}",
+        "client/${EndPoints.followers}/$id",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
 }

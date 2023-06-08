@@ -99,12 +99,12 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     provider.isDriver
                                         ? provider.requestModel?.clientModel
                                             ?.pickupLocation
-                                        : provider.requestModel?.driverModel
+                                        : provider.requestModel?.offer
                                             ?.pickupLocation,
                                 endPoint: provider.isDriver
                                     ? provider.requestModel?.clientModel
                                         ?.dropOffLocation
-                                    : provider.requestModel?.driverModel
+                                    : provider.requestModel?.offer
                                         ?.dropOffLocation),
 
                             ///distance between client and driver

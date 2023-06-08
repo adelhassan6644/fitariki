@@ -14,14 +14,18 @@ import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 
 class MyOfferCard extends StatelessWidget {
-  const MyOfferCard({Key? key, this.offer}) : super(key: key);
+  const MyOfferCard({Key? key, this.offer, this.isFromMyOfferDetails=false}) : super(key: key);
   final OfferModel? offer;
+  final bool isFromMyOfferDetails;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!),
+      onTap:  !isFromMyOfferDetails? ()
+     {
+      sl<MyOffersProvider>().getMyOfferDetails(id:offer!.id! );
+        CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!);}
+          :null,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),

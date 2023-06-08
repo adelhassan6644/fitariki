@@ -28,7 +28,7 @@ class _MyOffersState extends State<MyOffers>with AutomaticKeepAliveClientMixin<M
   void initState() {
     Future.delayed(Duration.zero, () {
       if (sl<MyOffersProvider>().isLogin) {
-        sl<MyOffersProvider>().getMyOffer();
+        sl<MyOffersProvider>().getMyOffers();
       }
     });
     super.initState();
@@ -36,6 +36,7 @@ class _MyOffersState extends State<MyOffers>with AutomaticKeepAliveClientMixin<M
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Consumer<ProfileProvider>(builder: (_, profileProvider, child) {
       return Column(
         children: [
@@ -55,7 +56,7 @@ class _MyOffersState extends State<MyOffers>with AutomaticKeepAliveClientMixin<M
                       child: RefreshIndicator(
                         color: ColorResources.PRIMARY_COLOR,
                         onRefresh: () async {
-                          sl<MyOffersProvider>().getMyOffer();
+                          sl<MyOffersProvider>().getMyOffers();
                         },
                         child: ListView(
                           physics: const AlwaysScrollableScrollPhysics(),

@@ -218,7 +218,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
             id: success.data['data'][role[_userType]]["id"].toString());
 
         sl<HomeProvider>().getOffers();
-        sl<MyOffersProvider>().getMyOffer();
+        sl<MyOffersProvider>().getMyOffers();
         sl<WishlistProvider>().getWishList();
 
         firebaseAuthRepo.remember(

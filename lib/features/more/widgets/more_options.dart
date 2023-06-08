@@ -4,10 +4,12 @@ import 'package:fitariki/features/followers/followers/provider/followers_provide
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../../feedback/provider/feedback_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import 'more_button.dart';
 
@@ -33,7 +35,10 @@ class MoreOptions extends StatelessWidget {
             MoreButton(
               title: getTranslated("personal_information", context),
               icon: SvgImages.file,
-              onTap: () => CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false),
+              onTap: (){
+                sl<ProfileProvider>().getProfile();
+                CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false);
+              },
             ),
             Visibility(
               visible: !sl<ProfileProvider>().isDriver,
@@ -65,7 +70,11 @@ class MoreOptions extends StatelessWidget {
                   ? getTranslated("clients_evaluation", context)
                   : getTranslated("captain_evaluation", context),
               icon: SvgImages.rate,
-              onTap: () => CustomNavigator.push(Routes.FEEDBACK,),
+              onTap: () {
+                Provider.of<FeedbackProvider>(context,listen: false).getFeedback();
+                    CustomNavigator.push(Routes.FEEDBACK,);
+                // CustomNavigator.push(Routes.RATE_USER,arguments: 20);
+              },
             ),
             MoreButton(
               title: getTranslated("contact_with_us", context),

@@ -45,7 +45,6 @@ class FeedbackRepo {
     }
   }
 
-   // List<int>? feedbacks;
   getFeedback() async {
     try {
       Response response = await dioClient.get(
@@ -55,7 +54,7 @@ class FeedbackRepo {
       if (response.statusCode == 200) {
         // String? data = sharedPreferences.getString(AppStorageKey.feedbacks);
         // feedbacks = json.decode(data!);
-        return Right(response);
+        return Right(response.data);
       } else {
         return left(ServerFailure(response.data['message']));
       }
@@ -63,10 +62,4 @@ class FeedbackRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
-
-  // saveFeedbacks({required List<int> myFeedbacks}) {
-  //   sharedPreferences.setString(
-  //       AppStorageKey.feedbacks, json.encode(myFeedbacks));
-  // }
-
 }

@@ -10,6 +10,8 @@ class ClientModel {
   String? image;
   String? nickname;
   int? gender;
+  int? requestsCount;
+  int? reservationsCount;
   String? age;
   Country? national;
   String? city;
@@ -44,6 +46,8 @@ class ClientModel {
       this.pickupLocation,
       this.clientDays,
       this.createdAt,
+      this.reservationsCount,
+      this.requestsCount,
       this.updatedAt});
 
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
@@ -52,7 +56,10 @@ class ClientModel {
         lastName: json["last_name"],
         email: json["email"],
         image: json["image"],
+        requestsCount: json["requests_count"],
+        reservationsCount: json["reservations_count"],
         nickname: json["nickname"],
+
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"].toString(),
         national: json["country"] != null

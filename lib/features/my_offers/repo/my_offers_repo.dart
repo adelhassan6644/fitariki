@@ -22,11 +22,25 @@ class MyOffersRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
-  Future<Either<ServerFailure, Response>> getMyOffer() async {
+  Future<Either<ServerFailure, Response>> getMyOffers() async {
     try {
       Response response = await dioClient.get(
         uri:
             "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myOffers}/${sharedPreferences.getString(AppStorageKey.userId)}",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }  Future<Either<ServerFailure, Response>> getMyOfferDetails({required int id})async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);

@@ -14,6 +14,7 @@ class OfferModel {
   String? name;
   double? rate;
   int? duration;
+  bool? isSentOffer;
   double? minPrice;
   int? clientId;
   int? driverId;
@@ -36,6 +37,7 @@ class OfferModel {
       this.name,
       this.rate,
       this.duration,
+      this.isSentOffer,
       this.minPrice,
       this.maxPrice,
       this.compatibleRatio,
@@ -55,6 +57,7 @@ class OfferModel {
       id: json["id"],
       image: json["image"],
       name: json["name"],
+      isSentOffer: json["exist"]==1?true:false,
       rate: json["rate"]?.toDouble(),
       duration: json["duration"],
       clientId: json["client_id"],

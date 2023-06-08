@@ -14,6 +14,7 @@ class EndPoints {
   static const String listOffers = 'offer/listOffers';
   static const String availableOffers = 'offer/list_available';
   static const String myOffers = 'offer/listOffers';
+  static const String viewMyOffers= 'offer/view_my_offer';
   static const String requestDetails = 'offer/view_request_offer';
   static const String offerDetails = 'offer/view_offer';
   static const String followers = 'profile/followers_list';

@@ -524,9 +524,9 @@ class ProfileProvider extends ChangeNotifier {
         };
 
         final personalData = {
-          "fcm_token": await saveDeviceToken(),
-          isDriver?"driver":"client" : {
 
+          isDriver?"driver":"client" : {
+            "fcm_token": await saveDeviceToken(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),

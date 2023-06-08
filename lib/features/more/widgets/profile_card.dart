@@ -9,7 +9,9 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
+import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard(
@@ -76,9 +78,12 @@ class ProfileCard extends StatelessWidget {
                                 ),
                               )
                             : GestureDetector(
-                                onTap: () => CustomNavigator.push(
-                                    Routes.EDIT_PROFILE,
-                                    arguments: false),
+                                onTap: ()
+                                {
+                                  sl<ProfileProvider>().getProfile();
+                                  CustomNavigator.push(Routes.EDIT_PROFILE,
+                                      arguments: false);
+                                },
                                 child: Text(getTranslated("edit", context),
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,

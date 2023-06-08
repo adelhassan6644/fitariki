@@ -61,6 +61,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(
+                                role:provider.isDriver ,
                                 userId: provider.isDriver
                                     ? provider.offerDetails?.clientId
                                     : provider.offerDetails?.driverId,

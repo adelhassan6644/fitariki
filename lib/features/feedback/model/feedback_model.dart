@@ -7,10 +7,10 @@ class FeedbackModel {
   FeedbackModel({this.feedbacks});
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) => FeedbackModel(
-        feedbacks: json["data"] == null
+        feedbacks: json["data"]["feedbacks"] == null
             ? []
             : List<FeedbackItem>.from(
-                json["data"].map((x) => FeedbackModel.fromJson(x))),
+                json["data"]["feedbacks"].map((x) => FeedbackModel.fromJson(x))),
       );
 }
 

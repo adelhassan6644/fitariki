@@ -50,12 +50,12 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           weekendTextStyle: const TextStyle(
             color: ColorResources.PRIMARY_COLOR,
           ),
-          thisMonthDayBorderColor: Colors.grey,
+          thisMonthDayBorderColor: Colors.grey.withOpacity(.1),
           // headerText: 'days',
           weekFormat: false,
           markedDatesMap: provider.eventList,
           height: 400.h,
-          selectedDateTime: DateTime.now(),
+          selectedDateTime:widget.startDate,
           showIconBehindDayText: true,
           markedDateShowIcon: true,
           selectedDayTextStyle: const TextStyle(
@@ -67,7 +67,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
             color: Colors.black12,
           ),
           markedDateIconBuilder: (event) {
-            return event.icon ?? const Icon(Icons.help_outline);
+            return event.icon ?? const Icon(Icons.add_alert_rounded);
           },
           minSelectedDate: DateTime.now().subtract(const Duration(days: 360)),
           maxSelectedDate: DateTime.now().add(const Duration(days: 360)),
