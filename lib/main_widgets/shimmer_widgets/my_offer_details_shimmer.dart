@@ -1,6 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/main_widgets/shimmer_widgets/shimmer_offer_card.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../app/core/utils/text_styles.dart';

@@ -71,8 +71,8 @@ class UserCard extends StatelessWidget {
                       sl<UserProfileProvider>().getUserProfile(userId: userId!,);
                       sl<UserProfileProvider>().getUserOffers(id: userId!);
                     }
-                    if (sl<UserProfileProvider>().isDriver) {
-                      sl<UserProfileProvider>().getUserFollowers(id: userId!,);
+                    if (sl<UserProfileProvider>().isDriver && userId != null) {
+                      sl<UserProfileProvider>().getUserFollowers(id: userId!);
                     }
 
                     CustomNavigator.push(Routes.USER_PROFILE,

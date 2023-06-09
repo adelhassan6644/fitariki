@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
@@ -22,6 +23,8 @@ class AddRequest extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
+    ///to update days
+    sl<AddRequestProvider>().updateOfferDays(offer.offerDays!.map((e) => e.id!).toList());
     return Container(
       height: context.height * 0.9,
       width: context.width,
@@ -42,7 +45,10 @@ class AddRequest extends StatelessWidget {
                   : getTranslated("make_a_request_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
-                if (provider.checkData(minOfferPrice: offer.minPrice??0, maxOfferPrice: offer.maxPrice??0) == true) {
+                if (provider.checkData(
+                        minOfferPrice: offer.minPrice ?? 0,
+                        maxOfferPrice: offer.maxPrice ?? 0) ==
+                    true) {
                   provider.requestOffer(tripID: offer.id, name: name);
                 }
               },

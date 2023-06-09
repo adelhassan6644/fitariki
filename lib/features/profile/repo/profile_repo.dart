@@ -1,5 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fitariki/app/core/utils/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +20,20 @@ class ProfileRepo {
 
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
+  Future<String?> saveDeviceToken() async {
+    String? deviceToken;
+    if (Platform.isIOS) {
+      deviceToken = await FirebaseMessaging.instance.getAPNSToken();
+    } else {
+      deviceToken = await FirebaseMessaging.instance.getToken();
+    }
+
+    if (deviceToken != null) {
+      log('--------Device Token---------- $deviceToken');
+    }
+    return deviceToken;
   }
 
   Future<Either<ServerFailure, Response>> updateProfile(

@@ -16,7 +16,6 @@ import '../../../main_providers/calender_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../followers/followers/provider/followers_provider.dart';
-import '../../offer_details/provider/offer_details_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
 import '../repo/add_request_repo.dart';
@@ -32,19 +31,18 @@ class AddRequestProvider extends ChangeNotifier {
   DateTime startDate = DateTime.now();
   int duration = 0;
 
+  List<int>? days;
+  updateOfferDays(v) {
+    days = v;
+    notifyListeners();
+  }
+
   onSelectStartDate(v) {
     startDate = v;
     sl<CalenderProvider>()
         .getEventsList(startDate: startDate, endDate: endDate);
     duration = Methods.getWeekdayCount(
-            startDate: startDate,
-            endDate: endDate,
-            weekdays: sl
-                .get<OfferDetailsProvider>()
-                .offerDetails!
-                .offerDays!
-                .map((e) => e.id)
-                .toList())
+            startDate: startDate, endDate: endDate, weekdays: days!)
         .days;
     notifyListeners();
   }
@@ -55,14 +53,7 @@ class AddRequestProvider extends ChangeNotifier {
     sl<CalenderProvider>()
         .getEventsList(startDate: startDate, endDate: endDate);
     duration = Methods.getWeekdayCount(
-            startDate: startDate,
-            endDate: endDate,
-            weekdays: sl
-                .get<OfferDetailsProvider>()
-                .offerDetails!
-                .offerDays!
-                .map((e) => e.id)
-                .toList())
+            startDate: startDate, endDate: endDate, weekdays: days!)
         .days;
     notifyListeners();
   }
@@ -74,7 +65,7 @@ class AddRequestProvider extends ChangeNotifier {
     onSelectEndDate(DateTime.now());
   }
 
-  checkData({required double minOfferPrice,required double maxOfferPrice}) {
+  checkData({required double minOfferPrice, required double maxOfferPrice}) {
     if (startDate.isAtSameMomentAs(endDate)) {
       showToast(" تاريخ النهاية لا يجب ان يكون مثل تاريخ البداية!");
 
@@ -87,17 +78,18 @@ class AddRequestProvider extends ChangeNotifier {
       return;
     }
 
-    if (minPrice.text.trim().isEmpty ) {
+    if (minPrice.text.trim().isEmpty) {
       showToast("برجاء ادخال الحد الادني للسعر!");
       return;
     }
 
-    if ( minOfferPrice > double.parse(minPrice.text.trim()) ) {
-      showToast("برجاء ادخال الحد الادني للسعر اكبر من الحد الادني لسعر العرض!");
+    if (minOfferPrice > double.parse(minPrice.text.trim())) {
+      showToast(
+          "برجاء ادخال الحد الادني للسعر اكبر من الحد الادني لسعر العرض!");
       return;
     }
 
-    if ( maxOfferPrice < double.parse(minPrice.text.trim()) ) {
+    if (maxOfferPrice < double.parse(minPrice.text.trim())) {
       showToast("برجاء ادخال الحد الادني للسعر اقل من الحد الاقصي لسعر العرض!");
       return;
     }
@@ -122,7 +114,8 @@ class AddRequestProvider extends ChangeNotifier {
           "duration": duration,
           "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
-              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty&& !sl<ProfileProvider>().isDriver )
+              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty &&
+              !sl<ProfileProvider>().isDriver)
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers

@@ -10,7 +10,7 @@ class FeedbackModel {
         feedbacks: json["data"]["feedbacks"] == null
             ? []
             : List<FeedbackItem>.from(
-                json["data"]["feedbacks"].map((x) => FeedbackModel.fromJson(x))),
+                json["data"]["feedbacks"].map((x) => FeedbackItem.fromJson(x))),
       );
 }
 
@@ -34,11 +34,10 @@ class FeedbackItem {
 
   factory FeedbackItem.fromJson(Map<String, dynamic> json) => FeedbackItem(
       id: json["id"],
-      rate: double.parse(json["rate"] ?? "0".toString()),
+      rate: double.tryParse(json["rating"].toString()),
       feedback: json["feedback"],
       createdAt: DateTime.parse(json["created_at"]),
       isSeen: json["is_seen"],
-      // isSeen: sl<FeedbackRepo>().feedbacks!.contains(json["id"]) ,
       clientModel:
           json["client"] != null ? ClientModel.fromJson(json["client"]) : null,
       driverModel:

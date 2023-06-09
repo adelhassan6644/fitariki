@@ -3,6 +3,7 @@ import 'package:fitariki/features/feedback/model/feedback_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
@@ -10,9 +11,7 @@ import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 
 class FeedbackCard extends StatelessWidget {
-  const FeedbackCard({this.isSeen = true, required this.feedback, Key? key})
-      : super(key: key);
-  final bool isSeen;
+  const FeedbackCard({required this.feedback, Key? key}) : super(key: key);
   final FeedbackItem feedback;
 
   @override
@@ -39,8 +38,9 @@ class FeedbackCard extends StatelessWidget {
                       Row(
                         children: [
                           CustomNetworkImage.circleNewWorkImage(
-                              image:
-                                  "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                              image: feedback.driverModel != null
+                                  ? feedback.driverModel!.image
+                                  : feedback.clientModel!.image,
                               radius: 16,
                               color: ColorResources.SECOUND_PRIMARY_COLOR),
                           SizedBox(
@@ -54,7 +54,11 @@ class FeedbackCard extends StatelessWidget {
                                   SizedBox(
                                     width: 50,
                                     child: Text(
-                                      "محمد م..",
+                                      feedback.driverModel != null
+                                          ? feedback.driverModel!.firstName ??
+                                              ""
+                                          : feedback.clientModel!.firstName ??
+                                              "",
                                       maxLines: 1,
                                       textAlign: TextAlign.start,
                                       style: AppTextStyles.w600.copyWith(
@@ -67,14 +71,22 @@ class FeedbackCard extends StatelessWidget {
                                     width: 4.w,
                                   ),
                                   customImageIconSVG(
-                                      imageName: SvgImages.maleIcon,
+                                      imageName: feedback.driverModel != null
+                                          ? feedback.driverModel!.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon
+                                          : feedback.clientModel!.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon,
                                       color: ColorResources.BLUE_COLOR,
                                       width: 11,
                                       height: 11)
                                 ],
                               ),
                               ShowRate(
-                                rate: feedback.rate,
+                                rate: feedback.driverModel != null
+                                    ? feedback.driverModel!.rate
+                                    : feedback.clientModel!.rate,
                                 size: 10,
                               ),
                             ],
@@ -83,6 +95,13 @@ class FeedbackCard extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 16.h,
+                      ),
+                      ShowRate(
+                        rate: feedback.rate,
+                        size: 15,
+                      ),
+                      SizedBox(
+                        height: 4.h,
                       ),
                       Row(
                         children: [
@@ -101,11 +120,11 @@ class FeedbackCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                customImageIconSVG(
-                    imageName: isSeen ? SvgImages.seen : SvgImages.notSeen),
-                SizedBox(
-                  width: 8.w,
-                ),
+                // customImageIconSVG(
+                //     imageName: isSeen ? SvgImages.seen : SvgImages.notSeen),
+                // SizedBox(
+                //   width: 8.w,
+                // ),
               ],
             ),
           ),
@@ -113,7 +132,10 @@ class FeedbackCard extends StatelessWidget {
               top: 4,
               left: 10,
               child: Text(
-                "5 ايام",
+                Methods.getDayCount(
+                      date: feedback.createdAt!,
+                    ) ??
+                    "",
                 style: AppTextStyles.w400
                     .copyWith(color: ColorResources.HINT_COLOR, fontSize: 10),
               ))

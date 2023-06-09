@@ -149,9 +149,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => HomeProvider(
         homeRepo: sl(),
       ));
-  sl.registerLazySingleton(() => OfferDetailsProvider(
-        repo: sl(),
-      ));
+  // sl.registerLazySingleton(() => OfferDetailsProvider(
+  //       repo: sl(),
+  //     ));
   sl.registerLazySingleton(() => NotificationsProvider(
         notificationsRepo: sl(),
       ));

@@ -23,7 +23,6 @@ class MyOffersProvider extends ChangeNotifier {
   MyOffersModel? myOffers;
   bool isLoading = false;
 
-
   getMyOffers() async {
     try {
       isLoading = true;
@@ -48,22 +47,23 @@ class MyOffersProvider extends ChangeNotifier {
     }
   }
 
-
   bool isOfferDetailsLoading = false;
   OfferModel? myOfferDetails;
   getMyOfferDetails({required int id}) async {
     try {
-      myOfferDetails=null;
+      myOfferDetails = null;
       isOfferDetailsLoading = true;
       notifyListeners();
 
-      Either<ServerFailure, Response> response = await myOffersRepo.getMyOfferDetails(id: id);
-      response.fold((l) =>   CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: l.error,
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent)), (response) {
+      Either<ServerFailure, Response> response =
+          await myOffersRepo.getMyOfferDetails(id: id);
+      response.fold(
+          (l) => CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: l.error,
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent)), (response) {
         myOfferDetails = OfferModel.fromJson(response.data["data"]['offer']);
         isOfferDetailsLoading = false;
         notifyListeners();
@@ -100,7 +100,7 @@ class MyOffersProvider extends ChangeNotifier {
         isDelete = false;
         notifyListeners();
       }, (response) {
-        CustomNavigator.push(Routes.DASHBOARD,arguments: 3,clean: true);
+        CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: getTranslated(

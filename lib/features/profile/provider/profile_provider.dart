@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
@@ -37,10 +36,8 @@ class ProfileProvider extends ChangeNotifier {
     getCountries();
   }
 
-
   bool get isLogin => profileRepo.isLoggedIn();
   bool get isDriver => profileRepo.isDriver();
-
 
   ///Car Data
   TextEditingController carName = TextEditingController();
@@ -205,39 +202,41 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }*/
 
-  clear(){
+  clear() {
     ///personal data
-    image=null;
+    image = null;
     firstName.clear();
     lastName.clear();
     age.clear();
-    _gender=0;
+    _gender = 0;
     email.clear();
-    nationality=null;
+    nationality = null;
     identityNumber.clear();
-    identityImage=null;
-    startLocation=null;
-    endLocation=null;
+    identityImage = null;
+    startLocation = null;
+    endLocation = null;
     scheduleProvider.selectedDays.clear();
-    startTime=DateTime.now();
-    endTime=DateTime.now();
+    startTime = DateTime.now();
+    endTime = DateTime.now();
+
     ///Car data
     carName.clear();
     carColor.clear();
     carPlate.clear();
-    carSeats=null;
-    carModel=null;
-    carImage=null;
-    licenceImage=null;
-    formImage=null;
-    insuranceImage=null;
+    carSeats = null;
+    carModel = null;
+    carImage = null;
+    licenceImage = null;
+    formImage = null;
+    insuranceImage = null;
+
     ///Bank data
     fullName.clear();
-    bank=null;
+    bank = null;
     bankAccount.clear();
-    bankAccountImage=null;
-
+    bankAccountImage = null;
   }
+
   updateTimes() {
     for (var element in scheduleProvider.selectedDays) {
       element.startTime = startTime.toString();
@@ -524,9 +523,8 @@ class ProfileProvider extends ChangeNotifier {
         };
 
         final personalData = {
-
-          isDriver?"driver":"client" : {
-            "fcm_token": await saveDeviceToken(),
+          isDriver ? "driver" : "client": {
+            "fcm_token": profileRepo.saveDeviceToken(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
@@ -586,9 +584,8 @@ class ProfileProvider extends ChangeNotifier {
         }
 
         if (profileImage != null) {
-          Either<ServerFailure, Response> response =
-              await profileRepo.updateProfile(
-                  body: FormData.fromMap({
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
             "image": await MultipartFile.fromFile(profileImage!.path),
           }));
         }
@@ -608,15 +605,16 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
-          if(fromLogin){
-            CustomNavigator.push(Routes.DASHBOARD,arguments: 0,clean: true);
-          }else{
-            CustomNavigator.push(Routes.DASHBOARD,arguments: 3,clean: true);
+          if (fromLogin) {
+            CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
+          } else {
+            CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
           }
 
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
-                  message: getTranslated("successfully_updated", CustomNavigator.navigatorState.currentContext!),
+                  message: getTranslated("successfully_updated",
+                      CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
                   backgroundColor: ColorResources.ACTIVE,
                   borderColor: Colors.transparent));
@@ -636,20 +634,7 @@ class ProfileProvider extends ChangeNotifier {
       }
     }
   }
-  Future<String?> saveDeviceToken() async {
-    String? _deviceToken;
-    if(Platform.isIOS) {
-      _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
-    }else {
-      _deviceToken = await FirebaseMessaging.instance.getToken();
-    }
 
-    if (_deviceToken != null) {
-      log('--------Device Token---------- $_deviceToken');
-    }
-    return _deviceToken;
-    // return "RVmsmxd5dg8v3cS0d48q3nvoFFuaSXuCwZbMU3LCjEren7VWhq";
-  }
   ///Update Profile
   bool isLoading = false;
   ProfileModel? profileModel;
@@ -752,7 +737,8 @@ class ProfileProvider extends ChangeNotifier {
     lastUpdate = Methods.getDayCount(
             date: profileModel?.driver?.updatedAt != null
                 ? profileModel!.driver!.updatedAt!
-                : DateTime.now()).toString();
+                : DateTime.now())
+        .toString();
 
     carName.text = profileModel?.driver?.carInfo?.name ?? "";
     carPlate.text = profileModel?.driver?.carInfo?.palletNumber ?? "";

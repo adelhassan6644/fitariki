@@ -7,8 +7,6 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
-import '../../home/provider/home_provider.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../widgets/user_offer_card.dart';
 
 class AllUserOffers extends StatelessWidget {

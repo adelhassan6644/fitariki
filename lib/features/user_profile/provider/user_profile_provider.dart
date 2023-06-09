@@ -52,17 +52,26 @@ class UserProfileProvider extends ChangeNotifier {
     }
   }
 
-
   bool isLoadOffers = false;
   MyOffersModel? userOffers;
   getUserOffers({required int id}) async {
     try {
+      userOffers = null;
       isLoadOffers = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
           await userProfileRepo.getUserOffers(id: id);
-      response.fold((l) => null, (response) {
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: ApiErrorHandler.getMessage(l),
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        isLoadOffers = false;
+        notifyListeners();
+      }, (response) {
         userOffers = MyOffersModel.fromJson(response.data["data"]);
         isLoadOffers = false;
         notifyListeners();

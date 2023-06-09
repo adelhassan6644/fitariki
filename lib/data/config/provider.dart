@@ -60,7 +60,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<MyOffersProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<RequestDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<PaymentProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
+    // ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ContactProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<UserProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FeedbackProvider>()),
