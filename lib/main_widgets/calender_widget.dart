@@ -29,10 +29,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   void initState() {
     Future.delayed(Duration.zero, () {
       sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
-      sl<CalenderProvider>().getEventsList(
-        startDate: widget.startDate,
-        endDate: widget.endDate,
-      );
+      sl<CalenderProvider>().getEventsList(startDate: widget.startDate, endDate: widget.endDate,);
     });
     super.initState();
   }
@@ -47,9 +44,8 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           locale: 'ar',
           headerMargin: EdgeInsets.symmetric(horizontal: 50.w),
 
-          weekendTextStyle: const TextStyle(
-            color: ColorResources.PRIMARY_COLOR,
-          ),
+          weekendTextStyle: const TextStyle(color: ColorResources.PRIMARY_COLOR,),
+
           thisMonthDayBorderColor: Colors.grey.withOpacity(.1),
           // headerText: 'days',
           weekFormat: false,
@@ -58,23 +54,16 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           selectedDateTime: widget.startDate,
           showIconBehindDayText: true,
           markedDateShowIcon: true,
-          selectedDayTextStyle: const TextStyle(
-            color: ColorResources.PRIMARY_COLOR,
-          ),
+          selectedDayTextStyle: const TextStyle(color: ColorResources.PRIMARY_COLOR,),
           selectedDayBorderColor: Colors.black12,
           selectedDayButtonColor: Colors.transparent,
-          todayTextStyle: const TextStyle(
-            color: Colors.black12,
-          ),
-          markedDateIconBuilder: (event) {
-            return event.icon ?? const Icon(Icons.add_alert_rounded);
-          },
+          todayTextStyle: const TextStyle(color: Colors.black12,),
+          markedDateIconBuilder: (event) {return event.icon ?? const Icon(Icons.add_alert_rounded);},
           minSelectedDate: DateTime.now().subtract(const Duration(days: 360)),
           maxSelectedDate: DateTime.now().add(const Duration(days: 360)),
           todayButtonColor: Colors.grey,
           todayBorderColor: Colors.grey,
-          markedDateMoreShowTotal:
-              true, // null for not showing hidden events indicator
+          markedDateMoreShowTotal: true,
         ),
       );
     });

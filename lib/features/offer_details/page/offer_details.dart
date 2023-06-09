@@ -54,8 +54,7 @@ class OfferDetails extends StatelessWidget {
                                       ? provider.offerDetails?.clientId
                                       : provider.offerDetails?.driverId,
                                   name: provider.isDriver
-                                      ? provider
-                                          .offerDetails!.clientModel?.firstName
+                                      ? "${provider.offerDetails!.clientModel?.firstName} ${provider.offerDetails!.clientModel?.lastName}"
                                       : provider
                                           .offerDetails!.driverModel?.firstName,
                                   male: provider.isDriver
@@ -96,12 +95,10 @@ class OfferDetails extends StatelessWidget {
                               long1: sl<LocationProvider>()
                                   .currentLocation!
                                   .longitude!,
-                              lat2: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .latitude!,
-                              long2: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .longitude!,
+                              lat2: provider
+                                  .offerDetails!.pickupLocation!.latitude!,
+                              long2: provider
+                                  .offerDetails!.pickupLocation!.longitude!,
                             ),
                             if (!provider.isDriver)
                               CarDetails(

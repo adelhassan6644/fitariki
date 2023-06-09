@@ -68,8 +68,8 @@ class FavouriteUserCard extends StatelessWidget {
                           width: 60,
                           child: Text(
                             driver != null
-                                ? "${driver!.firstName}"
-                                : "${client!.firstName} ${client!.lastName}",
+                                ? "${driver!.firstName??""}"
+                                : "${client!.firstName ?? ""} ${client!.lastName ?? ""}",
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             style: AppTextStyles.w600.copyWith(
@@ -102,7 +102,8 @@ class FavouriteUserCard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () => sl<WishlistProvider>().postWishList(
-                    id: driver != null ? driver!.id! : client!.id!,isOffer: false),
+                    id: driver != null ? driver!.id! : client!.id!,
+                    isOffer: false),
                 child: customImageIconSVG(imageName: SvgImages.saved),
               )
             ],

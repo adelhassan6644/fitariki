@@ -74,8 +74,7 @@ class OfferCard extends StatelessWidget {
                                     width: 50,
                                     child: Text(
                                       sl<HomeProvider>().isDriver
-                                          ? offerModel.clientModel?.firstName ??
-                                              ""
+                                          ? "${offerModel.clientModel?.firstName??""} ${offerModel.clientModel?.lastName??""} "
                                           : offerModel.driverModel?.firstName ??
                                               "",
                                       textAlign: TextAlign.start,
