@@ -41,7 +41,7 @@ class MyTrips extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         children: const [
                           MyTripCard(
-                            status: "waiting",
+                            status: "pending",
                           ),
                           MyTripCard(
                               isCurrent: true, total: "20", userNumber: "2"),

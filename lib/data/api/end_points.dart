@@ -14,7 +14,7 @@ class EndPoints {
   static const String listOffers = 'offer/listOffers';
   static const String availableOffers = 'offer/list_available';
   static const String myOffers = 'offer/listOffers';
-  static const String viewMyOffers= 'offer/view_my_offer';
+  static const String viewMyOffers = 'offer/view_my_offer';
   static const String requestDetails = 'offer/view_request_offer';
   static const String offerDetails = 'offer/view_offer';
   static const String followers = 'profile/followers_list';
@@ -31,6 +31,8 @@ class EndPoints {
   static const String sendFeedback = 'feedback/feedback';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
+  static const String myTrips = 'reservation';
+
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';

@@ -33,18 +33,14 @@ abstract class ColorResources {
   static const Color DETAILS_COLOR = Color(0xff737373);
   static const Color HINT_COLOR = Color(0xffA5B7B8);
 
-
- static tripStatus(status){
-    if(status == "waiting"){
+  static tripStatus(status) {
+    if (status == "pending") {
       return DISABLED;
-    }
-    else if(status == "pay"){
+    } else if (status == "pay") {
       return PRIMARY_COLOR;
-    }
-    else if(status == "replay"){
+    } else if (status == "replay") {
       return PRIMARY_COLOR;
-    }
-    else{
+    } else {
       return WHITE_COLOR;
     }
   }

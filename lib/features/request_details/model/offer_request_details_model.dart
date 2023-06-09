@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../../../app/core/utils/methods.dart';
 import '../../../main_models/offer_model.dart';
 import '../../followers/follower_details/model/follower_model.dart';
