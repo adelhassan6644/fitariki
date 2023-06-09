@@ -234,5 +234,9 @@
   "discount": "خصم",
   "successfully_updated": "تم تحديث بياناتك بنجاح",
   "your_feedback_sent_successfully": "تم ارسال تقييمك بنجاح",
-  "there_is_no_evaluations": "لا يوجد تقييمات"
+  "there_is_no_evaluations": "لا يوجد تقييمات",
+  "offer_sent": "تم تقديم العرض",
+  "request_sent": "تم تقديم الطلب",
+  "there_is_no_offers_now": "لا يوجود عروض حاليا",
+  "there_is_no_requests_now": "لا يوجود طلبات حاليا"
 }

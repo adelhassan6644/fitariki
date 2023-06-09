@@ -56,8 +56,8 @@ class ClientModel {
         lastName: json["last_name"],
         email: json["email"],
         image: json["image"],
-        requestsCount: json["requests_count"],
-        reservationsCount: json["reservations_count"],
+        // requestsCount: json["requests_count"],
+        // reservationsCount: json["reservations_count"],
         nickname: json["nickname"],
 
         gender: int.parse(json["gender"] ?? "0"),

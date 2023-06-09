@@ -4,10 +4,8 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/components/empty_widget.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';

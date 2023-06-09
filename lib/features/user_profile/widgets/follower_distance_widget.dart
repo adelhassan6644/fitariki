@@ -2,15 +2,19 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
+import '../../../data/config/di.dart';
 import '../../followers/followers/model/followers_model.dart';
+import '../../maps/provider/location_provider.dart';
 
 class FollowerDistanceWidget extends StatelessWidget {
- final FollowersModel? follwers;
-   const FollowerDistanceWidget({Key? key, required this.follwers}) : super(key: key);
+  final FollowersModel? followers;
+  const FollowerDistanceWidget({Key? key, required this.followers})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,9 @@ class FollowerDistanceWidget extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
-
           Column(
               children: List.generate(
-                follwers!.data?.length??0,
+            followers!.data?.length ?? 0,
             (index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 1.h),
               child: Row(
@@ -40,7 +43,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                   SizedBox(
                     width: 50,
                     child: Text(
-                      follwers!.data![index].name??"",
+                      followers!.data![index].name ?? "",
                       textAlign: TextAlign.start,
                       maxLines: 1,
                       style: AppTextStyles.w600.copyWith(
@@ -51,7 +54,9 @@ class FollowerDistanceWidget extends StatelessWidget {
                     width: 4.w,
                   ),
                   customImageIconSVG(
-                      imageName:     follwers!.data![index].gender==0? SvgImages.maleIcon:SvgImages.femaleIcon,
+                      imageName: followers!.data![index].gender == 0
+                          ? SvgImages.maleIcon
+                          : SvgImages.femaleIcon,
                       color: ColorResources.BLUE_COLOR,
                       width: 11,
                       height: 11),
@@ -72,7 +77,18 @@ class FollowerDistanceWidget extends StatelessWidget {
                           color: ColorResources.SECOUND_PRIMARY_COLOR),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "2.5 كيلو",
+                          text: "  ${Methods.calcDistance(
+                            lat1: sl<LocationProvider>()
+                                .currentLocation!
+                                .latitude!,
+                            long1: sl<LocationProvider>()
+                                .currentLocation!
+                                .longitude!,
+                            lat2: followers!
+                                .data![index].pickupLocation?.latitude,
+                            long2: followers!
+                                .data![index].pickupLocation?.longitude,
+                          )} كيلو",
                           style: AppTextStyles.w700.copyWith(
                               fontSize: 10,
                               color: ColorResources.PRIMARY_COLOR),

@@ -21,9 +21,8 @@ class MyOffersProvider extends ChangeNotifier {
   bool get isDriver => myOffersRepo.isDriver();
 
   MyOffersModel? myOffers;
-  OfferModel? offerDetails;
   bool isLoading = false;
-  bool isOfferDetailsLoading = false;
+
 
   getMyOffers() async {
     try {
@@ -49,21 +48,23 @@ class MyOffersProvider extends ChangeNotifier {
     }
   }
 
+
+  bool isOfferDetailsLoading = false;
+  OfferModel? myOfferDetails;
   getMyOfferDetails({required int id}) async {
     try {
-      offerDetails=null;
+      myOfferDetails=null;
       isOfferDetailsLoading = true;
       notifyListeners();
 
-      Either<ServerFailure, Response> response =
-          await myOffersRepo.getMyOfferDetails(id: id);
+      Either<ServerFailure, Response> response = await myOffersRepo.getMyOfferDetails(id: id);
       response.fold((l) =>   CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: l.error,
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent)), (response) {
-        offerDetails = OfferModel.fromJson(response.data["data"]['offer']);
+        myOfferDetails = OfferModel.fromJson(response.data["data"]['offer']);
         isOfferDetailsLoading = false;
         notifyListeners();
       });

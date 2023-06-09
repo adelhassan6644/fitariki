@@ -233,6 +233,9 @@
   "total": "ُTotal",
   "discount": "Discount",
   "your_feedback_sent_successfully": "Your Feedback Send Successfully",
-  "there_is_no_evaluations": "There is no evaluations"
-
+  "there_is_no_evaluations": "There is no evaluations",
+  "offer_sent":"Offer Sent",
+  "request_sent": "Request Sent",
+  "there_is_no_offers_now": "There is no offers now",
+  "there_is_no_requests_now": "There is no requests now"
 }

@@ -1,5 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/features/user_profile/provider/user_profile_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
@@ -21,7 +23,7 @@ class AllUserOffers extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: sl.get<ProfileProvider>().isDriver
+              title: sl.get<UserProfileProvider>().isDriver
                   ? getTranslated("current_requests", context)
                   : getTranslated("current_offers", context),
               withBorder: true,
@@ -29,18 +31,18 @@ class AllUserOffers extends StatelessWidget {
             SizedBox(
               height: 8.h,
             ),
-            Expanded(
-              child: ListAnimator(
-                data: [
-                  ...List.generate(
-                      sl<HomeProvider>().offer!.length > 3
-                          ? 3
-                          : sl<HomeProvider>().offer!.length,
-                      (index) => UserOfferCard(
-                          offerModel: sl<HomeProvider>().offer![index])),
-                ],
-              ),
-            )
+            Consumer<UserProfileProvider>(builder: (_, provider, child) {
+              return Expanded(
+                child: ListAnimator(
+                  data: [
+                    ...List.generate(
+                        provider.userOffers?.offers?.length ?? 0,
+                        (index) => UserOfferCard(
+                            offerModel: provider.userOffers!.offers![index])),
+                  ],
+                ),
+              );
+            })
           ],
         ),
       ),

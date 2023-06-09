@@ -57,7 +57,7 @@ class OfferModel {
       id: json["id"],
       image: json["image"],
       name: json["name"],
-      isSentOffer: json["exist"]==1?true:false,
+      isSentOffer: json["exist"] ?? false,
       rate: json["rate"]?.toDouble(),
       duration: json["duration"],
       clientId: json["client_id"],

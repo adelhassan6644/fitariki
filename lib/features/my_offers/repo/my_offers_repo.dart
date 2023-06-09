@@ -36,11 +36,12 @@ class MyOffersRepo {
     } catch (error) {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
-  }  Future<Either<ServerFailure, Response>> getMyOfferDetails({required int id})async {
+  }
+
+  Future<Either<ServerFailure, Response>> getMyOfferDetails({required int id})async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
+        uri: "driver/${EndPoints.viewMyOffers}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);

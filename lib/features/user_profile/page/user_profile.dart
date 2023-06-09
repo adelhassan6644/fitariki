@@ -1,5 +1,4 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/features/home/provider/home_provider.dart';
 import 'package:fitariki/main_widgets/car_trip_details_widget.dart';
 import 'package:fitariki/features/user_profile/provider/user_profile_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
@@ -12,11 +11,12 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
+import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../navigation/routes.dart';
+import '../../maps/provider/location_provider.dart';
 import '../../more/widgets/profile_card.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 
@@ -39,15 +39,18 @@ class UserProfile extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                  child: provider.isLoading
+                  child: provider.isLoadProfile
                       ? const ProfileCardShimmer()
                       : ProfileCard(
                           lastUpdate: Methods.getDayCount(
                                   date:
-                                      provider.userProfileModel!.driver != null
-                                          ? provider.userProfileModel!.driver!.updatedAt! : provider.userProfileModel!.client!.updatedAt!)
+                                      provider.userProfileModel?.driver != null
+                                          ? provider.userProfileModel!.driver!
+                                              .updatedAt!
+                                          : provider.userProfileModel!.client!
+                                              .updatedAt!)
                               .toString(),
-                          image:provider.userProfileModel!.driver != null
+                          image: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel!.driver!.image
                               : provider.userProfileModel!.client!.image,
                           name: provider.userProfileModel!.driver != null
@@ -69,23 +72,44 @@ class UserProfile extends StatelessWidget {
                               : provider.userProfileModel?.client?.rate?.ceil(),
                           completedNumber: 2,
                           offersNumber: 2,
-                          distance: "2.5 كيلو",
+                          distance: "  ${Methods.calcDistance(
+                            lat1: sl<LocationProvider>()
+                                .currentLocation!
+                                .latitude!,
+                            long1: sl<LocationProvider>()
+                                .currentLocation!
+                                .longitude!,
+                            lat2: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel?.driver
+                                    ?.pickupLocation?.latitude
+                                : provider.userProfileModel?.client
+                                    ?.pickupLocation?.latitude,
+                            long2: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel?.driver
+                                    ?.pickupLocation?.longitude
+                                : provider.userProfileModel?.client
+                                    ?.pickupLocation?.longitude,
+                          )} كيلو",
                         ),
                 )
               ],
             ),
-            Expanded(
-              child: ListAnimator(
-                data: [
+            Consumer<UserProfileProvider>(builder: (_, provider, child) {
+              return Expanded(
+                child: ListAnimator(data: [
                   SizedBox(
                     height: 12.h,
                   ),
-                  if (!sl<ProfileProvider>().isDriver)
+                  if (!provider.isDriver)
                     CarTripDetailsWidget(
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
-                  if (sl<ProfileProvider>().isDriver&&provider.userFollweer!=null&&provider.userFollweer!.data!=null)
-                     FollowerDistanceWidget(follwers: provider.userFollweer,),
+                  if (provider.isDriver &&
+                      provider.userFollowers != null &&
+                      provider.userFollowers!.data != null)
+                    FollowerDistanceWidget(
+                      followers: provider.userFollowers,
+                    ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
@@ -94,15 +118,16 @@ class UserProfile extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            sl.get<ProfileProvider>().isDriver
+                            provider.isDriver
                                 ? getTranslated("current_requests", context)
                                 : getTranslated("current_offers", context),
                             style: AppTextStyles.w600.copyWith(fontSize: 16),
                           ),
                         ),
-                        if ( provider.myOffers != null &&
-                            provider.myOffers!.offers!.isNotEmpty &&
-                            provider.myOffers!.offers!.length > 3)
+                        if (!provider.isLoadOffers &&
+                            provider.userOffers != null &&
+                            provider.userOffers?.offers != null &&
+                            provider.userOffers!.offers!.length > 3)
                           InkWell(
                             onTap: () =>
                                 CustomNavigator.push(Routes.ALL_USER_OFFERS),
@@ -115,23 +140,38 @@ class UserProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (provider.myOffers != null &&
-                      provider.myOffers!.offers!.isNotEmpty)
+                  if (provider.isLoadOffers)
                     ...List.generate(
-                        provider.myOffers!.offers!.length > 3
-                            ? 4
-                            :  provider.myOffers!.offers!.length,
-                        (index) => UserOfferCard(
-                            offerModel:  provider.myOffers!.offers![index])),
-                  if ( provider.myOffers == null ||
-                      provider.myOffers!.offers!.isEmpty)
+                      4,
+                      (index) => Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                            vertical: 8.h),
+                        child: CustomShimmerContainer(
+                          height: 85.h,
+                          radius: 8,
+                        ),
+                      ),
+                    ),
+                  if (provider.userOffers == null ||
+                      provider.userOffers?.offers == null ||
+                      provider.userOffers!.offers!.isEmpty)
                     EmptyState(
-                        txt: sl.get<ProfileProvider>().isDriver
-                            ? "لا يوجود عروض حاليا"
-                            : "لا يوجود طلبات حاليا")
-                ],
-              ),
-            ),
+                        txt: provider.isDriver
+                            ? getTranslated("there_is_no_offers_now", context)
+                            : getTranslated(
+                                "there_is_no_requests_now", context)),
+                  if (!provider.isLoadOffers &&
+                      provider.userOffers != null &&
+                      provider.userOffers?.offers != null &&
+                      provider.userOffers!.offers!.isNotEmpty)
+                    ...List.generate(
+                        provider.userOffers!.offers!.length,
+                        (index) => UserOfferCard(
+                            offerModel: provider.userOffers!.offers![index])),
+                ]),
+              );
+            })
           ],
         );
       }),

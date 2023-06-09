@@ -23,8 +23,7 @@ class MyOfferCard extends StatelessWidget {
     return InkWell(
       onTap:  !isFromMyOfferDetails? ()
      {
-      sl<MyOffersProvider>().getMyOfferDetails(id:offer!.id! );
-        CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!);}
+        CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!.id!);}
           :null,
       child: Padding(
         padding: EdgeInsets.symmetric(

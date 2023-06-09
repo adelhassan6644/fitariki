@@ -12,11 +12,16 @@ class UserProfileRepo {
   final SharedPreferences sharedPreferences;
 
   UserProfileRepo({required this.dioClient, required this.sharedPreferences});
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
   Future<Either<ServerFailure, Response>> getUserProfile(
       {required int userID}) async {
     try {
       String role;
-      if (sharedPreferences.getString(AppStorageKey.role) == "driver") {
+      if (isDriver()) {
         role = "client";
       } else {
         role = "driver";
@@ -34,11 +39,18 @@ class UserProfileRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
-  Future<Either<ServerFailure, Response>> getUserOffers({required String role,required int id}) async {
+
+  Future<Either<ServerFailure, Response>> getUserOffers(
+      {required int id}) async {
     try {
+      String role;
+      if (isDriver()) {
+        role = "client";
+      } else {
+        role = "driver";
+      }
       Response response = await dioClient.get(
-        uri:
-        "$role/${EndPoints.myOffers}/$id",
+        uri: "$role/${EndPoints.myOffers}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -49,12 +61,12 @@ class UserProfileRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
-  Future<Either<ServerFailure, Response>> getUserFollowers({required int id}) async {
+
+  Future<Either<ServerFailure, Response>> getUserFollowers(
+      {required int id}) async {
     try {
       Response response = await dioClient.get(
-        uri:
-        // "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.followers}",
-        "client/${EndPoints.followers}/$id",
+        uri: "client/${EndPoints.followers}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);

@@ -28,11 +28,11 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
       sl<CalenderProvider>().getEventsList(
         startDate: widget.startDate,
         endDate: widget.endDate,
       );
-      sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
     });
     super.initState();
   }
@@ -55,7 +55,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           weekFormat: false,
           markedDatesMap: provider.eventList,
           height: 400.h,
-          selectedDateTime:widget.startDate,
+          selectedDateTime: widget.startDate,
           showIconBehindDayText: true,
           markedDateShowIcon: true,
           selectedDayTextStyle: const TextStyle(

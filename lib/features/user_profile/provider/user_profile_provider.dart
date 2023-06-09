@@ -14,15 +14,18 @@ class UserProfileProvider extends ChangeNotifier {
   UserProfileRepo userProfileRepo;
   UserProfileProvider({required this.userProfileRepo});
 
-  bool isLoading = false;
-  ProfileModel? userProfileModel;
+  bool get isDriver => userProfileRepo.isDriver();
 
+  bool isLoadProfile = false;
+  ProfileModel? userProfileModel;
   getUserProfile({required int userId}) async {
     try {
-      isLoading = true;
+      isLoadProfile = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
-          await userProfileRepo.getUserProfile(userID: userId,);
+          await userProfileRepo.getUserProfile(
+        userID: userId,
+      );
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -30,11 +33,11 @@ class UserProfileProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        isLoading = false;
+        isLoadProfile = false;
         notifyListeners();
       }, (response) {
         userProfileModel = ProfileModel.fromJson(response.data["data"]);
-        isLoading = false;
+        isLoadProfile = false;
         notifyListeners();
       });
     } catch (e) {
@@ -44,23 +47,24 @@ class UserProfileProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-      isLoading = false;
+      isLoadProfile = false;
       notifyListeners();
     }
   }
-  MyOffersModel? myOffers;
 
 
-  getUserOffers({required String role,required int id})async {
+  bool isLoadOffers = false;
+  MyOffersModel? userOffers;
+  getUserOffers({required int id}) async {
     try {
-      isLoading = true;
+      isLoadOffers = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-      await userProfileRepo.getUserOffers(role: role, id: id);
+          await userProfileRepo.getUserOffers(id: id);
       response.fold((l) => null, (response) {
-        myOffers = MyOffersModel.fromJson(response.data["data"]);
-        isLoading = false;
+        userOffers = MyOffersModel.fromJson(response.data["data"]);
+        isLoadOffers = false;
         notifyListeners();
       });
     } catch (e) {
@@ -70,19 +74,20 @@ class UserProfileProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-      isLoading = false;
+      isLoadOffers = false;
       notifyListeners();
     }
   }
 
-  FollowersModel? userFollweer;
+  bool isLoadFollowers = false;
+  FollowersModel? userFollowers;
   getUserFollowers({required int id}) async {
     try {
-      userFollweer=null;
-      isLoading = true;
+      userFollowers = null;
+      isLoadFollowers = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
-      await userProfileRepo.getUserFollowers(id: id);
+          await userProfileRepo.getUserFollowers(id: id);
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -90,11 +95,11 @@ class UserProfileProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        isLoading = false;
+        isLoadFollowers = false;
         notifyListeners();
       }, (response) {
-        userFollweer = FollowersModel.fromJson(response.data);
-        isLoading = false;
+        userFollowers = FollowersModel.fromJson(response.data);
+        isLoadFollowers = false;
         notifyListeners();
       });
     } catch (e) {
@@ -104,7 +109,7 @@ class UserProfileProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
-      isLoading = false;
+      isLoadFollowers = false;
       notifyListeners();
     }
   }

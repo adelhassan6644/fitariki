@@ -61,7 +61,6 @@ class _OfferDetailsState extends State<OfferDetails> {
                           Container(
                               color: ColorResources.APP_BAR_BACKGROUND_COLOR,
                               child: UserCard(
-                                role:provider.isDriver ,
                                 userId: provider.isDriver
                                     ? provider.offerDetails?.clientId
                                     : provider.offerDetails?.driverId,
@@ -133,20 +132,33 @@ class _OfferDetailsState extends State<OfferDetails> {
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT,
                       vertical: 24),
                   child: CustomButton(
-                    text: provider.isDriver
-                        ? getTranslated("add_offer", context)
-                        : getTranslated("add_request", context),
-                    onTap: () => customShowModelBottomSheet(
-                      onClose: ()=>sl<AddRequestProvider>().reset(),
-                      body: provider.isLogin
-                          ? AddRequest(
-                              name: provider.offerDetails?.name ?? "",
-                              offer: provider.offerDetails!,
-                              isCaptain: provider.isDriver,
-                            )
-                          : const Login(),
-                    ),
-                  ),
+                      textColor: provider.offerDetails?.isSentOffer == true
+                          ? ColorResources.PRIMARY_COLOR
+                          : ColorResources.WHITE_COLOR,
+                      backgroundColor:
+                          provider.offerDetails?.isSentOffer == true
+                              ? ColorResources.PRIMARY_COLOR.withOpacity(0.1)
+                              : ColorResources.PRIMARY_COLOR,
+                      text: provider.offerDetails?.isSentOffer == true
+                          ? provider.isDriver
+                              ? getTranslated("offer_sent", context)
+                              : getTranslated("request_sent", context)
+                          : provider.isDriver
+                              ? getTranslated("add_offer", context)
+                              : getTranslated("add_request", context),
+                      onTap: () {
+                        if (provider.offerDetails?.isSentOffer != true) {
+                          customShowModelBottomSheet(
+                              onClose: () => sl<AddRequestProvider>().reset(),
+                              body: provider.isLogin
+                                  ? AddRequest(
+                                      name: provider.offerDetails?.name ?? "",
+                                      offer: provider.offerDetails!,
+                                      isCaptain: provider.isDriver,
+                                    )
+                                  : const Login());
+                        }
+                      }),
                 )
             ],
           );

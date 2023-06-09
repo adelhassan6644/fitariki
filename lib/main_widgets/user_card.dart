@@ -24,8 +24,7 @@ class UserCard extends StatelessWidget {
       this.createdAt,
       this.userId,
       this.days,
-      this.rate,  this.role,
-
+      this.rate,
       this.followers,
       this.timeRange,
       this.national,
@@ -37,7 +36,6 @@ class UserCard extends StatelessWidget {
   final int? userId, rate;
   final String? image, name, national;
   final bool male;
-  final bool? role;
 
   final String? duration, days, timeRange, priceRange, followers;
   final bool withAnalytics;
@@ -70,23 +68,15 @@ class UserCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (userId != null) {
-                      sl<UserProfileProvider>().getUserProfile(
-                        userId: userId!,
-                      );
-                      if(role!)
-                      sl<UserProfileProvider>().getUserFollowers(
-                        id: userId!,
-                      );
-
-                      if (role != null) {
-                        sl<UserProfileProvider>().getUserOffers(
-                          id: userId!,
-                          role: !role! ? "driver" : "client",
-                        );
-                      }
-                      CustomNavigator.push(Routes.USER_PROFILE,
-                          arguments: userId);
+                      sl<UserProfileProvider>().getUserProfile(userId: userId!,);
+                      sl<UserProfileProvider>().getUserOffers(id: userId!);
                     }
+                    if (sl<UserProfileProvider>().isDriver) {
+                      sl<UserProfileProvider>().getUserFollowers(id: userId!,);
+                    }
+
+                    CustomNavigator.push(Routes.USER_PROFILE,
+                        arguments: userId);
                   },
                   child: Row(
                     children: [
