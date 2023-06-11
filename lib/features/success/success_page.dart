@@ -109,8 +109,7 @@ class _SuccessPageState extends State<SuccessPage> {
               if (!widget.successModel.isPopUp)
                 CustomButton(
                   onTap: () {
-                    CustomNavigator.push(Routes.DASHBOARD,
-                        clean: true, arguments: 0);
+                    CustomNavigator.pop();
                   },
                   text: getTranslated("close", context),
                   backgroundColor: ColorResources.WHITE_COLOR,

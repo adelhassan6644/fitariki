@@ -200,7 +200,7 @@ class RequestCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "${request!.price} ريال",
+                                          "${request!.price} ${getTranslated("sar", context)}",
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis),
@@ -339,54 +339,68 @@ class RequestCard extends StatelessWidget {
                               SizedBox(
                                 height: 4.h,
                               ),
-                              Wrap(
-                                direction: Axis.horizontal,
-                                spacing: 4.h,
-                                runSpacing: 0,
-                                children: List.generate(
-                                  request?.followers?.length ?? 0,
-                                  (index) => Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 50,
-                                        child: Text(
-                                          request?.followers?[index].name ?? "",
-                                          textAlign: TextAlign.start,
-                                          maxLines: 1,
-                                          style: AppTextStyles.w600.copyWith(
-                                              fontSize: 14,
-                                              height: 1.25,
-                                              overflow: TextOverflow.ellipsis),
+                              request!.followers!.isNotEmpty
+                                  ? Wrap(
+                                      direction: Axis.horizontal,
+                                      spacing: 4.h,
+                                      runSpacing: 0,
+                                      children: List.generate(
+                                        request?.followers?.length ?? 0,
+                                        (index) => Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                request?.followers?[index]
+                                                        .name ??
+                                                    "",
+                                                textAlign: TextAlign.start,
+                                                maxLines: 1,
+                                                style: AppTextStyles.w600
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        height: 1.25,
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 4,
+                                            ),
+                                            customImageIconSVG(
+                                                imageName: request
+                                                            ?.followers?[index]
+                                                            .gender ==
+                                                        0
+                                                    ? SvgImages.maleIcon
+                                                    : SvgImages.femaleIcon,
+                                                color:
+                                                    ColorResources.BLUE_COLOR,
+                                                width: 11,
+                                                height: 11),
+                                            if (index !=
+                                                request!.followers!.length - 1)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0),
+                                                child: Container(
+                                                  height: 10,
+                                                  width: 1,
+                                                  color:
+                                                      ColorResources.HINT_COLOR,
+                                                  child: const SizedBox(),
+                                                ),
+                                              ),
+                                          ],
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      customImageIconSVG(
-                                          imageName: request?.followers?[index]
-                                                      .gender ==
-                                                  0
-                                              ? SvgImages.maleIcon
-                                              : SvgImages.femaleIcon,
-                                          color: ColorResources.BLUE_COLOR,
-                                          width: 11,
-                                          height: 11),
-                                      if (index !=
-                                          request!.followers!.length - 1)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Container(
-                                            height: 10,
-                                            width: 1,
-                                            color: ColorResources.HINT_COLOR,
-                                            child: const SizedBox(),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              )
+                                    )
+                                  : Text(
+                                      "لا يوجد مشاركيين غير الراكب",
+                                      style: AppTextStyles.w400
+                                          .copyWith(fontSize: 10),
+                                    ),
                             ],
                           ),
                         ),
@@ -455,7 +469,8 @@ class RequestCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
+                    arguments: request!.id!),
               ))
         ],
       ),

@@ -11,6 +11,8 @@ import '../components/marquee_widget.dart';
 import '../components/show_rate.dart';
 import '../data/config/di.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
+import '../features/request_details/widgets/contact_buttons.dart';
+import '../features/request_details/widgets/report_button.dart';
 import '../features/user_profile/provider/user_profile_provider.dart';
 import '../navigation/custom_navigation.dart';
 import '../navigation/routes.dart';
@@ -23,6 +25,8 @@ class UserCard extends StatelessWidget {
       this.duration,
       this.createdAt,
       this.userId,
+      this.reservationId,
+      this.phone,
       this.days,
       this.rate,
       this.followers,
@@ -30,15 +34,17 @@ class UserCard extends StatelessWidget {
       this.national,
       this.priceRange,
       this.withAnalytics = true,
+      this.approved = false,
       Key? key})
       : super(key: key);
 
-  final int? userId, rate;
-  final String? image, name, national;
+  final int? userId, reservationId, rate;
+  final String? image, name, national, phone;
   final bool male;
 
   final String? duration, days, timeRange, priceRange, followers;
   final bool withAnalytics;
+  final bool approved;
   final DateTime? createdAt;
 
   @override
@@ -68,7 +74,9 @@ class UserCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (userId != null) {
-                      sl<UserProfileProvider>().getUserProfile(userId: userId!,);
+                      sl<UserProfileProvider>().getUserProfile(
+                        userId: userId!,
+                      );
                       sl<UserProfileProvider>().getUserOffers(id: userId!);
                     }
                     if (sl<UserProfileProvider>().isDriver && userId != null) {
@@ -162,7 +170,7 @@ class UserCard extends StatelessWidget {
 
                     /// to show followers number
                     Visibility(
-                      visible: followers != null,
+                      visible: followers != null && !approved,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
@@ -174,7 +182,7 @@ class UserCard extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: followers != null,
+                      visible: followers != null && !approved,
                       child: Expanded(
                         flex: 2,
                         child: Column(
@@ -256,7 +264,7 @@ class UserCard extends StatelessWidget {
 
                     /// to show price range
                     Visibility(
-                      visible: followers == null,
+                      visible: !approved,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
@@ -268,7 +276,7 @@ class UserCard extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: followers == null,
+                      visible: !approved,
                       child: Expanded(
                         flex: 2,
                         child: Column(
@@ -292,27 +300,42 @@ class UserCard extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  createdAt == null
-                      ? getTranslated("now", context)
-                      : Methods.getDayCount(
-                          date: createdAt!,
-                        ).toString(),
-                  style: AppTextStyles.w400.copyWith(fontSize: 10, height: 1),
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                if (withAnalytics)
-                  const AcceptableAnalytics(
-                    value: 50,
-                    color: ColorResources.PRIMARY_COLOR,
-                  ),
-              ],
-            )
+            approved
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ReportButton(
+                        userId: userId!,
+                        reservationId: reservationId!,
+                      ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      ContactButtons(phone: phone!)
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        createdAt == null
+                            ? getTranslated("now", context)
+                            : Methods.getDayCount(
+                                date: createdAt!,
+                              ).toString(),
+                        style: AppTextStyles.w400
+                            .copyWith(fontSize: 10, height: 1),
+                      ),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      if (withAnalytics)
+                        const AcceptableAnalytics(
+                          value: 50,
+                          color: ColorResources.PRIMARY_COLOR,
+                        ),
+                    ],
+                  )
           ],
         ),
       ),

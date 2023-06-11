@@ -70,8 +70,8 @@ class UserProfile extends StatelessWidget {
                           rate: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel?.driver?.rate?.ceil()
                               : provider.userProfileModel?.client?.rate?.ceil(),
-                          completedNumber: 2,
-                          offersNumber: 2,
+                          reservationCount: 2,
+                          requestsCount: 2,
                           distance: "  ${Methods.calcDistance(
                             lat1: sl<LocationProvider>()
                                 .currentLocation!

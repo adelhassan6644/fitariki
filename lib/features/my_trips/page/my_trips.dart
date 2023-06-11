@@ -1,12 +1,13 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../components/custom_app_bar.dart';
-import '../../auth/provider/firebase_auth_provider.dart';
 import '../../guest/guest_mode.dart';
 import '../provider/my_trips_provider.dart';
-import '../widgets/my_trip_card.dart';
+import '../widgets/current_trips_widget.dart';
+import '../widgets/pending_trips_widget.dart';
+import '../widgets/previous_trips_widget.dart';
 import '../widgets/tab_bar_widget.dart';
 
 class MyTrips extends StatelessWidget {
@@ -14,8 +15,13 @@ class MyTrips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentWidget = [
+      const PreviousTripsWidget(),
+      const CurrentTripsWidget(),
+      const PendingTripsWidget()
+    ];
     return Consumer<MyTripsProvider>(
-      builder: (_, provider, child) {
+      builder: (_, myTripProvider, child) {
         return Column(
           children: [
             CustomAppBar(
@@ -27,34 +33,29 @@ class MyTrips extends StatelessWidget {
               height: 8.h,
             ),
             TabBerWidget(
-              provider: provider,
+              provider: myTripProvider,
             ),
-            Consumer<FirebaseAuthProvider>(
-              builder: (context, provider, child) {
-                return provider.isLogin
-                    ? Expanded(
-                        child: ListView(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT,
-                            vertical: 8),
-                        physics: const BouncingScrollPhysics(),
-                        children: const [
-                          MyTripCard(
-                            status: "pending",
-                          ),
-                          MyTripCard(
-                              isCurrent: true, total: "20", userNumber: "2"),
-                          MyTripCard(
-                            status: "pay",
-                          ),
-                        ],
-                      ))
-                    : const Expanded(
-                        child: GuestMode(),
-                      );
-              },
-            ),
+            myTripProvider.isLogin
+                ? Expanded(
+                    child: RefreshIndicator(
+                        onRefresh: () async {
+                          if (myTripProvider.currentTap == 0) {
+                            await myTripProvider.getPreviousTrips();
+                          } else if (myTripProvider.currentTap == 1) {
+                            await myTripProvider.getCurrentTrips();
+                          } else {
+                            await myTripProvider.getPendingTrips();
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            currentWidget[myTripProvider.currentTap],
+                          ],
+                        )),
+                  )
+                : const Expanded(
+                    child: GuestMode(),
+                  )
           ],
         );
       },

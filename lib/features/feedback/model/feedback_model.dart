@@ -3,10 +3,12 @@ import '../../profile/model/driver_model.dart';
 
 class FeedbackModel {
   List<FeedbackItem>? feedbacks;
+  int? rate;
 
-  FeedbackModel({this.feedbacks});
+  FeedbackModel({this.feedbacks, this.rate});
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) => FeedbackModel(
+        rate: json["data"]["rate"],
         feedbacks: json["data"]["feedbacks"] == null
             ? []
             : List<FeedbackItem>.from(

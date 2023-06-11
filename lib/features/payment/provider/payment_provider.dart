@@ -2,26 +2,28 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../model/coupon_model.dart';
 import '../../request_details/model/offer_request_details_model.dart';
-import '../../request_details/provider/request_details_provider.dart';
 import '../repo/payment_repo.dart';
 
 class PaymentProvider extends ChangeNotifier {
   final PaymentRepo paymentRepo;
 
-  PaymentProvider({required this.paymentRepo}) {
+  PaymentProvider({required this.paymentRepo});
+
+  OfferRequestDetailsModel? requestModel;
+  setData(data) {
+    requestModel = data;
     calcTotal();
+    notifyListeners();
   }
 
   CouponModel? _coupon;
   double _discount = 0.0;
   String _code = '';
-  double offerPrice = sl.get<RequestDetailsProvider>().requestModel!.price!;
-  double tax = 0.0;
+  double? tax;
   double serviceCost = 15;
   double total = 0.0;
   bool _isLoading = false;
@@ -34,8 +36,6 @@ class PaymentProvider extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
   TextEditingController discountCode = TextEditingController();
-  OfferRequestDetailsModel? requestModel =
-      sl.get<RequestDetailsProvider>().requestModel;
 
   int currentPayment = 0;
 
@@ -96,8 +96,8 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   calcTotal() {
-    tax = (offerPrice * (tax / 100));
-    total = (offerPrice - discount) + tax + serviceCost;
+    tax = (requestModel?.price ?? 0) * 0.15;
+    total = (requestModel?.price ?? 0 - discount) + tax! + serviceCost;
     notifyListeners();
   }
 

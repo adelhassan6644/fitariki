@@ -7,52 +7,37 @@ import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-class FeedbackRepo {
+class ReportRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  FeedbackRepo({required this.dioClient, required this.sharedPreferences});
+  ReportRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> sendFeedback(
-      {required int offerId,
+  Future<Either<ServerFailure, Response>> sendReport(
+      {required int reservationId,
       required int userId,
-      required int rating,
-      required String feedback}) async {
+      required String report}) async {
     try {
       bool isDriver;
+      String role;
       if (sharedPreferences.getString(AppStorageKey.role) == "driver") {
         isDriver = true;
+        role = "client";
       } else {
         isDriver = false;
+        role = "driver";
       }
       Response response = await dioClient.post(
           uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.sendFeedback}/${sharedPreferences.getString(AppStorageKey.userId)}",
+              "${sharedPreferences.getString(AppStorageKey.role)}/$role/${EndPoints.report}/${sharedPreferences.getString(AppStorageKey.userId)}",
           queryParameters: {
-            "rating": rating,
-            "feedback": feedback,
-            "offer_id": offerId,
+            "comment": report,
+            "reservation_id": reservationId,
             if (isDriver) "client_id": userId,
             if (!isDriver) "driver_id": userId,
           });
       if (response.statusCode == 200) {
         return Right(response);
-      } else {
-        return left(ServerFailure(response.data['message']));
-      }
-    } catch (error) {
-      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
-    }
-  }
-
-  Future<Either<ServerFailure, Response>> getFeedback() async {
-    try {
-      Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getFeedback}/${sharedPreferences.getString(AppStorageKey.userId)}",
-      );
-      if (response.statusCode == 200) {
-        return Right(response.data);
       } else {
         return left(ServerFailure(response.data['message']));
       }

@@ -9,23 +9,32 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../data/config/di.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
+import '../../request_details/model/offer_request_details_model.dart';
+import '../../request_details/provider/request_details_provider.dart';
 
 class MyTripCard extends StatelessWidget {
   const MyTripCard(
-      {this.status,
-      this.total,
+      {required this.myTrip,
       this.isCurrent = false,
-      this.userNumber,
+      this.isPending = false,
+      this.isPrevious = false,
+      this.offerPassengers,
       Key? key})
       : super(key: key);
-  final String? status, total, userNumber;
-  final bool isCurrent;
+  final OfferRequestDetailsModel myTrip;
+  final int? offerPassengers;
+  final bool isCurrent, isPending, isPrevious;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      // onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: myTrip.id!),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        padding: EdgeInsets.symmetric(vertical: 4.0.h),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -50,8 +59,9 @@ class MyTripCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
-                            image:
-                                "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                            image: myTrip.clientModel != null
+                                ? myTrip.clientModel?.image ?? ""
+                                : myTrip.driverModel?.image ?? "",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -66,7 +76,9 @@ class MyTripCard extends StatelessWidget {
                                 SizedBox(
                                   width: 50,
                                   child: Text(
-                                    "محمد م..",
+                                    myTrip.clientModel != null
+                                        ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.lastName ?? ""} "
+                                        : myTrip.driverModel?.firstName ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(
@@ -79,7 +91,13 @@ class MyTripCard extends StatelessWidget {
                                   width: 4,
                                 ),
                                 customImageIconSVG(
-                                    imageName: SvgImages.maleIcon,
+                                    imageName: myTrip.clientModel != null
+                                        ? myTrip.clientModel?.gender == 0
+                                            ? SvgImages.maleIcon
+                                            : SvgImages.femaleIcon
+                                        : myTrip.driverModel?.gender == 0
+                                            ? SvgImages.maleIcon
+                                            : SvgImages.femaleIcon,
                                     color: ColorResources.BLUE_COLOR,
                                     width: 11,
                                     height: 11)
@@ -88,7 +106,11 @@ class MyTripCard extends StatelessWidget {
                             SizedBox(
                               width: 50,
                               child: Text(
-                                "سعودي",
+                                myTrip.clientModel != null
+                                    ? myTrip.clientModel?.national?.niceName ??
+                                        ""
+                                    : myTrip.driverModel?.national?.niceName ??
+                                        "",
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 10,
@@ -106,7 +128,7 @@ class MyTripCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: isCurrent ? 5 : 3,
+                          flex: isCurrent ? 7 : 3,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -114,7 +136,7 @@ class MyTripCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${getTranslated("start_date", context)}${DateTime.now().dateFormat(format: "yyyy MMM d")}",
+                                    "${getTranslated("start_date", context)} ${myTrip.startAt!.dateFormat(format: "yyyy MMM d")}",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -146,7 +168,7 @@ class MyTripCard extends StatelessWidget {
                                 Expanded(
                                   child: MarqueeWidget(
                                     child: Text(
-                                      "20 يوم",
+                                      "${myTrip.duration} يوم",
                                       textAlign: TextAlign.start,
                                       style: AppTextStyles.w400.copyWith(
                                           fontSize: 10,
@@ -177,7 +199,7 @@ class MyTripCard extends StatelessWidget {
                                 Expanded(
                                   child: MarqueeWidget(
                                     child: Text(
-                                      "600 ريال",
+                                      "${myTrip.price} ${getTranslated("sar", context)}",
                                       textAlign: TextAlign.start,
                                       style: AppTextStyles.w400.copyWith(
                                           fontSize: 10,
@@ -199,7 +221,7 @@ class MyTripCard extends StatelessWidget {
                                 Expanded(
                                   child: MarqueeWidget(
                                     child: Text(
-                                      userNumber!,
+                                      "${offerPassengers ?? 1}",
                                       textAlign: TextAlign.start,
                                       style: AppTextStyles.w400.copyWith(
                                           fontSize: 10,
@@ -215,33 +237,87 @@ class MyTripCard extends StatelessWidget {
                   ],
                 ),
               ),
-              isCurrent
-                  ? Row(
-                      children: [
-                        customImageIconSVG(
-                          imageName: SvgImages.down,
-                        ),
-                        Text(
-                          total!,
-                          textAlign: TextAlign.start,
-                          style: AppTextStyles.w700.copyWith(
-                            fontSize: 24,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 24),
-                      decoration: BoxDecoration(
-                          color: ColorResources.tripStatus(status),
-                          borderRadius: BorderRadius.circular(100)),
-                      child: Text(
-                        getTranslated(status!, context),
-                        style: AppTextStyles.w600.copyWith(
-                            fontSize: 12, color: ColorResources.WHITE_COLOR),
+              if (isCurrent)
+                Row(
+                  children: [
+                    customImageIconSVG(
+                      imageName: SvgImages.down,
+                    ),
+                    Text(
+                      "${myTrip.price ?? 0}",
+                      textAlign: TextAlign.start,
+                      style: AppTextStyles.w700.copyWith(
+                        fontSize: 24,
                       ),
-                    )
+                    ),
+                  ],
+                ),
+              if (isPrevious)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                  decoration: BoxDecoration(
+                      color: ColorResources.tripStatus("replay"),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Text(
+                    getTranslated("replay", context),
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                  ),
+                ),
+              if (isPending &&
+                  myTrip.approvedAt == null &&
+                  !sl.get<ProfileProvider>().isDriver)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                  decoration: BoxDecoration(
+                      color: ColorResources.tripStatus("pending"),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Text(
+                    getTranslated("pending", context),
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                  ),
+                ),
+              if (isPending && sl.get<ProfileProvider>().isDriver)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                  decoration: BoxDecoration(
+                      color: ColorResources.tripStatus("pending"),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Text(
+                    getTranslated("pending", context),
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                  ),
+                ),
+              if (isPending &&
+                  myTrip.approvedAt != null &&
+                  !sl.get<ProfileProvider>().isDriver)
+                InkWell(
+                  onTap: () {
+                    sl<RequestDetailsProvider>().getRequestDetails(
+                      id: myTrip.id!,
+                    );
+                    CustomNavigator.push(
+                      Routes.PAYMENT,
+                    );
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                    decoration: BoxDecoration(
+                        color: ColorResources.tripStatus("pay"),
+                        borderRadius: BorderRadius.circular(100)),
+                    child: Text(
+                      getTranslated("pay", context),
+                      style: AppTextStyles.w600.copyWith(
+                          fontSize: 12, color: ColorResources.WHITE_COLOR),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

@@ -8,8 +8,7 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 
 class PaymentDetailsWidget extends StatefulWidget {
-  const PaymentDetailsWidget({ Key? key})
-      : super(key: key);
+  const PaymentDetailsWidget({Key? key}) : super(key: key);
 
   @override
   State<PaymentDetailsWidget> createState() => _PaymentDetailsWidgetState();
@@ -18,17 +17,16 @@ class PaymentDetailsWidget extends StatefulWidget {
 class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
   @override
   void initState() {
-    Future.delayed(Duration.zero,(){
-
-      Provider.of<PaymentProvider>(context,listen: false).removeCouponData(true);
+    Future.delayed(Duration.zero, () {
+      Provider.of<PaymentProvider>(context, listen: false)
+          .removeCouponData(true);
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Consumer<PaymentProvider>(builder: (_, paymentProvider, child) {
-
       return Padding(
         padding: EdgeInsets.symmetric(
             vertical: 16.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -55,7 +53,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.offerPrice} ريال",
+                  "${paymentProvider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -103,7 +101,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
               ],
-            ) ,
+            ),
             SizedBox(
               height: 8.h,
             ),
@@ -119,13 +117,12 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                 ),
                 Text(
                   "- ${paymentProvider.discount} ${getTranslated("sar", context)}",
-                  style: AppTextStyles.w400.copyWith(
-                    fontSize: 14,
-                    color: ColorResources.RED_COLOR
-                  ),
+                  style: AppTextStyles.w400
+                      .copyWith(fontSize: 14, color: ColorResources.RED_COLOR),
                 ),
               ],
-            ) ,  SizedBox(
+            ),
+            SizedBox(
               height: 8.h,
             ),
             Row(
@@ -149,7 +146,6 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
           ],
         ),
       );
-    }
-    );
+    });
   }
 }

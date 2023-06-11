@@ -17,22 +17,36 @@ class OfferDetailsRepo {
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
-
-  isDriver() {
+  bool isDriver() {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
-  Future<Either<ServerFailure, Response>> getOfferDetails({offerID}) async {
+  Future<Either<ServerFailure, Response>> getOfferDetails({offerId}) async {
     try {
       Response response = await dioClient.get(
           uri:
-              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.offerDetails}/$offerID",
+              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/${EndPoints.offerDetails}/$offerId",
           queryParameters: {
             "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
                 sharedPreferences.getString(AppStorageKey.userId)
           });
       if (response.statusCode == 200) {
         return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
+  Future<Either<ServerFailure, Response>> getOfferFeedback(offerId) async {
+    try {
+      Response response = await dioClient.get(
+        uri: "client/${EndPoints.getOfferFeedback}/$offerId",
+      );
+      if (response.statusCode == 200) {
+        return Right(response.data);
       } else {
         return left(ServerFailure(response.data['message']));
       }

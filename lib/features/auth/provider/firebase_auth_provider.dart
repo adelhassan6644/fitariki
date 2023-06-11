@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/features/my_trips/provider/my_trips_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../../navigation/custom_navigation.dart';
@@ -220,12 +221,14 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<HomeProvider>().getOffers();
         sl<MyOffersProvider>().getMyOffers();
         sl<WishlistProvider>().getWishList();
+        sl<MyTripsProvider>().getCurrentTrips();
+        sl<MyTripsProvider>().getPreviousTrips();
+        sl<MyTripsProvider>().getPendingTrips();
 
         firebaseAuthRepo.remember(
             phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
 
-        if (success.data['data'][role[_userType]]["new_user"].toString() ==
-            "1") {
+        if (success.data['data'][role[_userType]]["new_user"].toString() == "1") {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);

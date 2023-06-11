@@ -122,6 +122,8 @@ class ProfileProvider extends ChangeNotifier {
 
   double rate = 0.0;
   double wallet = 0.0;
+  int reservationCount = 0;
+  int requestsCount = 0;
   String? lastUpdate;
 
   String? image;
@@ -704,7 +706,8 @@ class ProfileProvider extends ChangeNotifier {
     phone.text = profileModel?.client?.phone ?? "";
     _gender = profileModel?.client?.gender ?? 0;
     rate = profileModel?.client?.rate ?? 0.0;
-    wallet = profileModel?.client?.wallet ?? 0.0;
+    requestsCount = profileModel?.client?.requestsCount??0;
+    reservationCount = profileModel?.client?.reservationsCount??0;
     lastUpdate = Methods.getDayCount(
       date: profileModel!.client!.updatedAt!,
     ).toString();
@@ -734,6 +737,9 @@ class ProfileProvider extends ChangeNotifier {
     nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
     rate = profileModel?.driver?.rate ?? 0.0;
+    requestsCount = profileModel?.driver?.requestsCount??0;
+    reservationCount = profileModel?.driver?.reservationsCount??0;
+    wallet = profileModel?.driver?.wallet??0.0;
     lastUpdate = Methods.getDayCount(
             date: profileModel?.driver?.updatedAt != null
                 ? profileModel!.driver!.updatedAt!

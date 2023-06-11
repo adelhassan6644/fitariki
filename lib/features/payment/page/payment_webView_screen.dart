@@ -158,7 +158,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                     .requestModel
                                     ?.driverModel
                                     ?.firstName ??
-                                "محمد",
+                                "",
                             btnText: getTranslated("my_trips", context),
                             description: "${getTranslated(
                                 "trip_was_successfully_paid_for_captain",

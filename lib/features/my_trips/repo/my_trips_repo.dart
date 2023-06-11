@@ -14,6 +14,10 @@ class MyTripsRepo {
 
   MyTripsRepo({required this.dioClient, required this.sharedPreferences});
 
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
   Future<Either<ServerFailure, Response>> getMyTrips(status) async {
     try {
       Response response = await dioClient.get(

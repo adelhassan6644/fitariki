@@ -121,7 +121,7 @@
   "add_a_note":"Add a note (optional)",
   "sar": "sar",
   "current": "Current",
-  "past": "Previous",
+  "previous": "Previous",
   "start_date": "start date:",
   "replay": "replay",
   "pay": "pay",
@@ -199,6 +199,16 @@
 "add_offer": "add offer",
 "delivery_request": "delivery request",
   "accept_offer": "Accept offer",
+  "offer_accepted": "Offer Accepted",
+  "report": "report",
+  "report_description": "Report something bothering you on this trip",
+  "report_validation": "Please Explain what is bothering you about the trip so we can help you",
+  "report_success_message": "You will be contacted within the next 24 hours\nservice representatives.",
+  "new_offer_price_sent": "New Offer Price sent",
+  "offer_rejected": "Offer Rejected",
+  "there_is_no_feedbacks_on_this_offer": "There is no feedbacks on this offer",
+  "request_accepted": "Request Accepted",
+  "request_rejected": "Request Rejected",
   "reject_offer": "Reject offer",
   "negotiation": "Negotiation",
   "accept_request": "Accept request",
@@ -236,5 +246,6 @@
   "offer_sent":"Offer Sent",
   "request_sent": "Request Sent",
   "there_is_no_offers_now": "There is no offers now",
-  "there_is_no_requests_now": "There is no requests now"
+  "there_is_no_requests_now": "There is no requests now",
+  "there_is_no_trips": "There is no trips"
 }

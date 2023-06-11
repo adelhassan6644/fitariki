@@ -7,12 +7,4 @@ class NotificationsProvider extends ChangeNotifier {
   NotificationsProvider({
     required this.notificationsRepo,
   });
-
-  List<String> tabs = ["delivery_offers", "delivery_requests"];
-
-  int currentTab = 0;
-  selectedTab(int value) {
-    currentTab = value;
-    notifyListeners();
-  }
 }

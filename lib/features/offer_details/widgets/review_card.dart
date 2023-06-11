@@ -1,14 +1,18 @@
+import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
+import 'package:fitariki/features/feedback/model/feedback_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({Key? key}) : super(key: key);
+  const ReviewCard({required this.feedback, Key? key}) : super(key: key);
+  final FeedbackItem feedback;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +33,11 @@ class ReviewCard extends StatelessWidget {
                 Row(
                   children: [
                     CustomNetworkImage.circleNewWorkImage(
-                        image:
-                            "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+                        image: feedback.clientModel!.image,
                         radius: 16,
                         color: ColorResources.SECOUND_PRIMARY_COLOR),
-                    const SizedBox(
-                      width: 8,
+                    SizedBox(
+                      width: 8.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +47,7 @@ class ReviewCard extends StatelessWidget {
                             SizedBox(
                               width: 50,
                               child: Text(
-                                "محمد م..",
+                                feedback.clientModel!.firstName ?? "",
                                 maxLines: 1,
                                 textAlign: TextAlign.start,
                                 style: AppTextStyles.w600.copyWith(
@@ -53,18 +56,20 @@ class ReviewCard extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis),
                               ),
                             ),
-                            const SizedBox(
-                              width: 4,
+                            SizedBox(
+                              width: 4.w,
                             ),
                             customImageIconSVG(
-                                imageName: SvgImages.maleIcon,
+                                imageName: feedback.clientModel!.gender == 0
+                                    ? SvgImages.maleIcon
+                                    : SvgImages.femaleIcon,
                                 color: ColorResources.BLUE_COLOR,
                                 width: 11,
                                 height: 11)
                           ],
                         ),
-                        const ShowRate(
-                          rate: 3,
+                        ShowRate(
+                          rate: feedback.rate,
                           size: 10,
                         ),
                       ],
@@ -77,11 +82,11 @@ class ReviewCard extends StatelessWidget {
                 SizedBox(
                   width: 110,
                   child: Text(
-                    "“عرض جيد و كابتن محترم”.",
+                    "“${feedback.feedback ?? ""}”",
                     textAlign: TextAlign.start,
                     maxLines: 1,
-                    style: AppTextStyles.w400
-                        .copyWith(fontSize: 10, overflow: TextOverflow.ellipsis),
+                    style: AppTextStyles.w400.copyWith(
+                        fontSize: 10, overflow: TextOverflow.ellipsis),
                   ),
                 ),
               ],
@@ -91,7 +96,10 @@ class ReviewCard extends StatelessWidget {
               top: 4,
               left: 10,
               child: Text(
-                "5 ايام",
+                Methods.getDayCount(
+                      date: feedback.createdAt!,
+                    ) ??
+                    "",
                 style: AppTextStyles.w400
                     .copyWith(color: ColorResources.HINT_COLOR, fontSize: 10),
               ))

@@ -2,8 +2,8 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
-import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
+import '../../../components/loading_dialog.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_providers/schedule_provider.dart';
@@ -174,49 +174,45 @@ class PostOfferProvider extends ChangeNotifier {
     return true;
   }
 
-  bool isLoading = false;
   postOffer() async {
-    offerModel = OfferModel(
-      pickupLocation: endLocation,
-      dropOffLocation: startLocation,
-      startDate: startDate,
-      endDate: endDate,
-      minPrice: double.tryParse(minPrice!),
-      maxPrice: double.tryParse(maxPrice!),
-      offerDays: scheduleProvider.selectedDays,
-      duration: counts!.count,
+    try {
+      offerModel = OfferModel(
+        pickupLocation: endLocation,
+        dropOffLocation: startLocation,
+        startDate: startDate,
+        endDate: endDate,
+        minPrice: double.tryParse(minPrice!),
+        maxPrice: double.tryParse(maxPrice!),
+        offerDays: scheduleProvider.selectedDays,
+        duration: counts!.count,
 
-      // duration:
-    );
-    isLoading = true;
-    notifyListeners();
-    final response = await postOfferRepo.postOffer(offerModel: offerModel!);
-    response.fold((fail) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: fail.error,
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-    }, (response) {
-      CustomNavigator.push(Routes.SUCCESS,
-          clean: true,
-          arguments: SuccessModel(
-              isPopUp: true,
-              isClean: true,
-              argument: 0,
-              description: sl<ProfileProvider>().isDriver
-                  ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
-                  : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));
-      reset();
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "Success",
-              isFloating: true,
-              backgroundColor: ColorResources.ACTIVE,
-              borderColor: Colors.transparent));
-    });
-    isLoading = false;
-    notifyListeners();
+        // duration:
+      );
+      spinKitDialog();
+      notifyListeners();
+      final response = await postOfferRepo.postOffer(offerModel: offerModel!);
+      response.fold((fail) {
+        CustomNavigator.pop();
+        showToast(fail.error);
+        notifyListeners();
+      }, (response) {
+        reset();
+        sl<ProfileProvider>().getProfile();
+        CustomNavigator.push(Routes.SUCCESS,
+            clean: true,
+            arguments: SuccessModel(
+                isPopUp: true,
+                isClean: true,
+                argument: 0,
+                description: sl<ProfileProvider>().isDriver
+                    ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
+                    : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));
+      });
+      notifyListeners();
+    }catch(e){
+      CustomNavigator.pop();
+      showToast(e);
+      notifyListeners();
+    }
   }
 }

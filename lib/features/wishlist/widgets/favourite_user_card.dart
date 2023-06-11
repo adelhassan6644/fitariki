@@ -24,9 +24,16 @@ class FavouriteUserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        sl<UserProfileProvider>().getUserProfile(
-          userId: driver != null ? driver!.id! : client!.id!,
-        );
+        sl<UserProfileProvider>()
+            .getUserProfile(userId: driver != null ? driver!.id! : client!.id!);
+        sl<UserProfileProvider>()
+            .getUserOffers(id: driver != null ? driver!.id! : client!.id!);
+
+        if (sl<UserProfileProvider>().isDriver) {
+          sl<UserProfileProvider>()
+              .getUserFollowers(id: driver != null ? driver!.id! : client!.id!);
+        }
+
         CustomNavigator.push(Routes.USER_PROFILE,
             arguments: driver != null ? driver!.id : client!.id);
       },
@@ -68,7 +75,7 @@ class FavouriteUserCard extends StatelessWidget {
                           width: 60,
                           child: Text(
                             driver != null
-                                ? "${driver!.firstName??""}"
+                                ? driver!.firstName ?? ""
                                 : "${client!.firstName ?? ""} ${client!.lastName ?? ""}",
                             textAlign: TextAlign.start,
                             maxLines: 1,

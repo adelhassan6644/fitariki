@@ -21,8 +21,8 @@ class ProfileCard extends StatelessWidget {
       this.distance,
       this.male = true,
       this.isDriver = true,
-      this.offersNumber,
-      this.completedNumber,
+      this.requestsCount,
+      this.reservationCount,
       this.rate,
       this.lastUpdate,
       Key? key})
@@ -30,7 +30,7 @@ class ProfileCard extends StatelessWidget {
 
   final String? nationality, name, lastUpdate, distance, image;
   final bool male, isDriver;
-  final int? offersNumber, completedNumber, rate;
+  final int? requestsCount, reservationCount, rate;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,7 @@ class ProfileCard extends StatelessWidget {
                                 style: AppTextStyles.w400.copyWith(
                                   fontSize: 11,
                                 )),
-                            Text("$offersNumber",
+                            Text("$requestsCount",
                                 style: AppTextStyles.w700
                                     .copyWith(fontSize: 11, height: 1)),
                           ],
@@ -201,7 +201,7 @@ class ProfileCard extends StatelessWidget {
                                 style: AppTextStyles.w400.copyWith(
                                   fontSize: 11,
                                 )),
-                            Text("$completedNumber",
+                            Text("$reservationCount",
                                 style: AppTextStyles.w700
                                     .copyWith(fontSize: 11, height: 1)),
                           ],

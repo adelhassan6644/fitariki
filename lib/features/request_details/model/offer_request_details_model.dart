@@ -10,7 +10,7 @@ class OfferRequestDetailsModel {
   DateTime? endAt;
   int? duration;
   double? price;
-  int? offerPrice;
+  double? offerPrice;
   String? message;
   DateTime? approvedAt;
   int? approvedByClient;
@@ -23,6 +23,7 @@ class OfferRequestDetailsModel {
   int? offerId;
   DateTime? createdAt;
   DateTime? updatedAt;
+  DateTime? paidAt;
   DriverModel? driverModel;
   ClientModel? clientModel;
   List<FollowerModel>? followers;
@@ -47,6 +48,7 @@ class OfferRequestDetailsModel {
     this.offerId,
     this.createdAt,
     this.updatedAt,
+    this.paidAt,
     this.driverModel,
     this.clientModel,
     this.followers,
@@ -64,7 +66,7 @@ class OfferRequestDetailsModel {
             :  Methods.convertStringToDataTime(json["end_at"]),
         duration: json["duration"],
         price: double.parse(json["price"].toString()),
-        offerPrice: json["offer_price"],
+        offerPrice: double.parse(json["offer_price"].toString()),
         message: json["message"],
         approvedAt: json["approved_at"] != null
             ? DateTime.parse(json["approved_at"])
@@ -87,6 +89,9 @@ class OfferRequestDetailsModel {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
+        paidAt: json["paid_at"] == null
+            ? null
+            : DateTime.parse(json["paid_at"]),
         clientModel: json["client"] == null
             ? null
             : ClientModel.fromJson(json["client"]),
@@ -94,7 +99,7 @@ class OfferRequestDetailsModel {
             ? null
             : DriverModel.fromJson(json["driver"]),
         followers: json["request_followers"] == null
-            ? null
+            ? []
             : List<FollowerModel>.from(json["request_followers"]!
                 .map((x) => FollowerModel.fromJson(x["follower"]))),
       );

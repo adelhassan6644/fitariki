@@ -34,7 +34,9 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
 import '../../features/feedback/provider/feedback_provider.dart';
 import '../../features/feedback/repo/feedback_repo.dart';
+import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
+import '../../features/request_details/repo/report_repo.dart';
 import '../../features/request_details/repo/request_details_repo.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/user_profile/repo/user_profile_repo.dart';
@@ -113,6 +115,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => FeedbackRepo(sharedPreferences: sl(), dioClient: sl()));
 
+  sl.registerLazySingleton(
+      () => ReportRepo(sharedPreferences: sl(), dioClient: sl()));
+
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
   sl.registerLazySingleton(() => LanguageProvider());
@@ -168,6 +173,7 @@ Future<void> init() async {
         feedbackRepo: sl(),
       ));
   sl.registerLazySingleton(() => PaymentProvider(paymentRepo: sl()));
+  sl.registerLazySingleton(() => ReportProvider(reportRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

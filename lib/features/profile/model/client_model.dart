@@ -56,10 +56,9 @@ class ClientModel {
         lastName: json["last_name"],
         email: json["email"],
         image: json["image"],
-        // requestsCount: json["requests_count"],
-        // reservationsCount: json["reservations_count"],
+        requestsCount: json["requests_count"] ?? 0,
+        reservationsCount: json["reservations_count"] ?? 0,
         nickname: json["nickname"],
-
         gender: int.parse(json["gender"] ?? "0"),
         age: json["age"].toString(),
         national: json["country"] != null
@@ -69,7 +68,7 @@ class ClientModel {
             : null,
         city: json["city"],
         countryId: json["country_id"].toString(),
-        phone: json["phone"],
+        phone: json["phone"].toString(),
         status: json["status"].toString(),
         rate: json["rate"],
         wallet: double.tryParse(json["wallet"].toString()),

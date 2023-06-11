@@ -36,8 +36,8 @@ class More extends StatelessWidget {
                                 male: provider.gender == 0,
                                 nationality: provider.nationality?.name,
                                 rate: provider.rate.ceil(),
-                                completedNumber: 2,
-                                offersNumber: 2,
+                                reservationCount: provider.reservationCount,
+                                requestsCount: provider.requestsCount,
                               ),
                         Visibility(
                           visible: provider.isDriver,

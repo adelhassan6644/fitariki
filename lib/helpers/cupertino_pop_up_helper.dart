@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,21 +41,24 @@ abstract class CupertinoPopUpHelper {
                 onPressed: () {
                   if (onClose != null) {
                     onClose();
+                  } else {
+                    CustomNavigator.pop();
                   }
-                  CustomNavigator.pop();
                 },
                 child: Text(
-                  'الغاء',
+                  getTranslated(
+                      "cancel", CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w400.copyWith(
                       fontSize: 17, color: ColorResources.SYSTEM_COLOR),
                 )),
             CupertinoDialogAction(
                 onPressed: onSend,
                 child: Text(
-                  'ارسال',
-                  style: AppTextStyles.w600.copyWith(
-                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
-                )),
+                        getTranslated("send",
+                            CustomNavigator.navigatorState.currentContext!),
+                        style: AppTextStyles.w600.copyWith(
+                            fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                      )),
           ],
         );
       },

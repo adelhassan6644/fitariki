@@ -1,26 +1,21 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/components/custom_button.dart';
 import 'package:fitariki/main_widgets/user_card.dart';
-import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
-import '../../../helpers/cupertino_pop_up_helper.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
 import '../../maps/provider/location_provider.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../provider/request_details_provider.dart';
 import '../../../main_widgets/car_trip_details_widget.dart';
+import '../widgets/action_buttons.dart';
 import '../widgets/trip_days_on_calender_widget.dart';
 
 class RequestDetails extends StatefulWidget {
@@ -64,24 +59,51 @@ class _RequestDetailsState extends State<RequestDetails> {
                             ///user card
                             UserCard(
                               withAnalytics: false,
+                              approved:
+                                  provider.requestModel?.approvedAt != null &&
+                                      provider.requestModel?.paidAt != null,
+                              reservationId: provider.requestModel?.id,
+                              phone: provider.isDriver
+                                  ? provider.requestModel?.clientModel?.phone
+                                  : provider.requestModel?.driverModel?.phone,
                               userId: provider.isDriver
                                   ? provider.requestModel?.clientId
                                   : provider.requestModel?.driverId,
                               name: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.firstName
-                                  : provider.requestModel?.driverModel?.firstName,
+                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.firstName ?? ""}"
+                                  : provider.requestModel?.driverModel
+                                          ?.firstName ??
+                                      "",
                               male: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.gender == 0
-                                  : provider.requestModel?.driverModel?.gender == 0,
+                                  ? provider
+                                          .requestModel?.clientModel?.gender ==
+                                      0
+                                  : provider
+                                          .requestModel?.driverModel?.gender ==
+                                      0,
                               national: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.national?.niceName
-                                  : provider.requestModel?.driverModel?.national?.niceName,
-                              createdAt: provider.requestModel?.createdAt ?? DateTime.now(),
-                              days: provider.requestModel?.offer?.offerDays!.map((e) => e.dayName).toList().join(", "),
-                              duration: provider.requestModel?.duration.toString(),
-                              priceRange: "${provider.requestModel?.price ?? 0} ريال",
-                              followers:provider.requestModel?.followers != null && provider.requestModel!.followers!.isNotEmpty? "${ provider.requestModel?.followers?.length}" : null,
-                              timeRange: "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                                  ? provider.requestModel?.clientModel?.national
+                                      ?.niceName
+                                  : provider.requestModel?.driverModel?.national
+                                      ?.niceName,
+                              createdAt: provider.requestModel?.createdAt ??
+                                  DateTime.now(),
+                              days: provider.requestModel?.offer?.offerDays!
+                                  .map((e) => e.dayName)
+                                  .toList()
+                                  .join(", "),
+                              duration:
+                                  provider.requestModel?.duration.toString(),
+                              priceRange:
+                                  "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
+                              followers: provider.requestModel?.followers !=
+                                          null &&
+                                      provider
+                                          .requestModel!.followers!.isNotEmpty
+                                  ? "${provider.requestModel?.followers?.length}"
+                                  : null,
+                              timeRange:
+                                  "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                             ),
 
                             ///client road map
@@ -95,17 +117,16 @@ class _RequestDetailsState extends State<RequestDetails> {
                                             .requestModel?.followers?.length ??
                                         0
                                     : null,
-                                startPoint:
-                                    provider.isDriver
-                                        ? provider.requestModel?.clientModel
-                                            ?.pickupLocation
-                                        : provider.requestModel?.offer
-                                            ?.pickupLocation,
+                                startPoint: provider.isDriver
+                                    ? provider.requestModel?.clientModel
+                                        ?.pickupLocation
+                                    : provider
+                                        .requestModel?.offer?.pickupLocation,
                                 endPoint: provider.isDriver
                                     ? provider.requestModel?.clientModel
                                         ?.dropOffLocation
-                                    : provider.requestModel?.offer
-                                        ?.dropOffLocation),
+                                    : provider
+                                        .requestModel?.offer?.dropOffLocation),
 
                             ///distance between client and driver
                             DistanceWidget(
@@ -153,7 +174,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     ),
                                   ),
                                   ...List.generate(
-                                    provider.requestModel?.followers?.length ?? 0,
+                                    provider.requestModel?.followers?.length ??
+                                        0,
                                     (index) => MapWidget(
                                       clientName: provider.requestModel
                                               ?.followers?[index].name ??
@@ -226,74 +248,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                       ),
 
                 ///to update request
-                Visibility(
-                  visible: !provider.isLoading,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                            vertical: 8.h),
-                        child: CustomButton(
-                          text: sl.get<ProfileProvider>().isDriver
-                              ? getTranslated("accept_request", context)
-                              : getTranslated("accept_offer", context),
-                          onTap: () => provider.updateRequest(
-                              status: 1, id: widget.requestId),
-                          isLoading: provider.isAccepting,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                        child: CustomButton(
-                          text: getTranslated("negotiation", context),
-                          backgroundColor: ColorResources.WHITE_COLOR,
-                          withBorderColor: true,
-                          textColor: ColorResources.PRIMARY_COLOR,
-                          onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
-                                  title: getTranslated("negotiation", context),
-                                  description: getTranslated(
-                                      "negotiation_description", context),
-                                  controller: provider.negotiationPrice,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\.?\d{0,2}')),
-                                  ],
-                                  onSend: () {
-                                    provider.updateRequest(
-                                        status: 2, id: widget.requestId);
-                                    CustomNavigator.pop();
-                                  },
-                                  onClose: () {
-                                    provider.negotiationPrice.clear();
-                                  }),
-                          isLoading: provider.isNegotiation,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 8.h,
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                        child: CustomButton(
-                          text: sl.get<ProfileProvider>().isDriver
-                              ? getTranslated("reject_request", context)
-                              : getTranslated("reject_offer", context),
-                          backgroundColor: ColorResources.WHITE_COLOR,
-                          withBorderColor: true,
-                          textColor: ColorResources.PRIMARY_COLOR,
-                          onTap: () => provider.updateRequest(
-                              status: 3, id: widget.requestId),
-                          isLoading: provider.isRejecting,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      )
-                    ],
-                  ),
-                )
+                const ActionButtons()
               ],
             );
           })),

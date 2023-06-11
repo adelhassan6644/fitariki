@@ -130,12 +130,12 @@ class AddRequestProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) async {
-        CustomNavigator.pop();
         reset();
+        CustomNavigator.pop();
+        CustomNavigator.pop();
         CustomNavigator.push(Routes.SUCCESS,
             replace: true,
             arguments: SuccessModel(
-                isCongrats: true,
                 routeName: Routes.DASHBOARD,
                 argument: 1,
                 term: name,

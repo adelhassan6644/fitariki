@@ -126,12 +126,14 @@ class OfferDetails extends StatelessWidget {
                                 ? ColorResources.PRIMARY_COLOR.withOpacity(0.1)
                                 : ColorResources.PRIMARY_COLOR,
                         text: provider.offerDetails?.isSentOffer == true
-                            ? provider.isDriver
-                                ? getTranslated("offer_sent", context)
-                                : getTranslated("request_sent", context)
-                            : provider.isDriver
-                                ? getTranslated("add_offer", context)
-                                : getTranslated("add_request", context),
+                            ? getTranslated(
+                                provider.isDriver
+                                    ? "offer_sent"
+                                    : "request_sent",
+                                context)
+                            : getTranslated(
+                                provider.isDriver ? "add_offer" : "add_request",
+                                context),
                         onTap: () {
                           if (provider.offerDetails?.isSentOffer != true) {
                             customShowModelBottomSheet(
