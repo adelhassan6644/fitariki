@@ -14,17 +14,20 @@ import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 
 class MyOfferCard extends StatelessWidget {
-  const MyOfferCard({Key? key, this.offer, this.isFromMyOfferDetails=false}) : super(key: key);
+  const MyOfferCard({Key? key, this.offer, this.isFromMyOfferDetails = false})
+      : super(key: key);
   final OfferModel? offer;
   final bool isFromMyOfferDetails;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:  !isFromMyOfferDetails? ()
-     {
-        CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!.id!);}
-          :null,
+      onTap: !isFromMyOfferDetails
+          ? () {
+              CustomNavigator.push(Routes.MY_OFFERS_DETAILS,
+                  arguments: offer!.id!);
+            }
+          : null,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
@@ -45,19 +48,27 @@ class MyOfferCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  customImageIconSVG(imageName: SvgImages.newOffer),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  Expanded(
-                    child: Text(
-                      sl.get<MyOffersProvider>().isDriver
-                          ? "طلبات جديدة"
-                          : "عروض جديدة",
-                      style: AppTextStyles.w400.copyWith(
-                          fontSize: 10, overflow: TextOverflow.ellipsis),
+                  if (!isFromMyOfferDetails)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          customImageIconSVG(imageName: SvgImages.newOffer),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          Expanded(
+                            child: Text(
+                              sl.get<MyOffersProvider>().isDriver
+                                  ? "طلبات جديدة"
+                                  : "عروض جديدة",
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 10, overflow: TextOverflow.ellipsis),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+
                   Text(
                     Methods.getDayCount(
                             date: offer!.createdAt != null
