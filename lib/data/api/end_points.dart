@@ -28,7 +28,7 @@ class EndPoints {
   static const String updateRequest = 'offer/request_update';
   static const String userProfile = 'profile';
   static const String getFeedback = 'feedback/list';
-  static const String getOfferFeedback = 'feedback/list';
+  static const String getOfferFeedback = 'offer/feedbacks';
   static const String sendFeedback = 'feedback/feedback';
   static const String report = 'report';
   static const String couponURl = 'client/coupon/check';

@@ -32,7 +32,7 @@ class MyTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: myTrip.id!),
+      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: myTrip.id!),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 4.0.h),
         child: Container(

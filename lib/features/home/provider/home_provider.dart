@@ -2,9 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/main_models/offer_model.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
+import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
+import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../maps/models/location_model.dart';
@@ -78,7 +81,11 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
 
       final filters = {
+
         "fillters": {
+          if(sl.get<SharedPreferences>().getString(AppStorageKey.role) !=null)
+          "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
+          sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,

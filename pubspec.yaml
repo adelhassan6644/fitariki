@@ -64,7 +64,7 @@ dependencies:
   app_settings: ^4.2.0
   substring_highlight: ^1.0.33
   motion_toast: ^2.6.8
-  flutter_inappwebview: ^5.4.3+7
+  flutter_inappwebview: ^5.4.3
 
 
 

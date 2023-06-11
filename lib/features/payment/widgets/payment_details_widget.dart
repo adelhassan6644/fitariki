@@ -53,7 +53,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
+                  "${paymentProvider.requestModel?.price?.toStringAsFixed(3) ?? 0} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -74,7 +74,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.tax} ${getTranslated("sar", context)}",
+                  "${paymentProvider.tax!.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -95,7 +95,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.serviceCost} ${getTranslated("sar", context)}",
+                  "${paymentProvider.serviceCost.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -116,7 +116,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "- ${paymentProvider.discount} ${getTranslated("sar", context)}",
+                  "- ${paymentProvider.discount.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400
                       .copyWith(fontSize: 14, color: ColorResources.RED_COLOR),
                 ),

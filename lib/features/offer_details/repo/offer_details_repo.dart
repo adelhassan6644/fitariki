@@ -46,7 +46,7 @@ class OfferDetailsRepo {
         uri: "client/${EndPoints.getOfferFeedback}/$offerId",
       );
       if (response.statusCode == 200) {
-        return Right(response.data);
+        return Right(response);
       } else {
         return left(ServerFailure(response.data['message']));
       }

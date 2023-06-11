@@ -64,7 +64,7 @@ class OfferModel {
       driverId: json["driver_id"],
       minPrice: json["min_price"]?.toDouble(),
       maxPrice: json["max_price"]?.toDouble(),
-      compatibleRatio: json["compatible_ratio"]?.toDouble(),
+      compatibleRatio: double.parse(json["matching"]??"0".toString()),
       startDate:
           DateTime.parse(json["start_date"] ?? DateTime.now().toString()),
       endDate: DateTime.parse(json["end_date"] ?? DateTime.now().toString()),
