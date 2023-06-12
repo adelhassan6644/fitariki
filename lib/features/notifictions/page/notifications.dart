@@ -20,9 +20,9 @@ class Notifications extends StatelessWidget {
               title: getTranslated("notifications", context),
             ),
             Consumer<NotificationsProvider>(builder: (_, provider, child) {
-              return const Expanded(
+              return  Expanded(
                 child: Column(
-                  children: [DeliveryRequestsNotifications()],
+                  children: const [DeliveryRequestsNotifications()],
                 ),
               );
             }),
