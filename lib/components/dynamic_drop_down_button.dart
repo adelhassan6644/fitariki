@@ -61,23 +61,31 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
         onChanged: widget.onChange,
         onTap: widget.onTap,
         menuMaxHeight: context.height * 0.4,
-        initialValue:widget.value,
+        initialValue: widget.value,
         isDense: true,
         validator: widget.validation,
         isExpanded: true,
         dropdownColor: ColorResources.FILL_COLOR,
         itemHeight: 50,
-        icon: widget.icon ??const Icon(
-          Icons.keyboard_arrow_down_rounded,
-          color: ColorResources.SECOUND_PRIMARY_COLOR,
-        ),
+        icon: widget.icon ??
+            const Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: ColorResources.SECOUND_PRIMARY_COLOR,
+            ),
         iconSize: widget.iconSize,
-        borderRadius: const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
+        borderRadius:
+            const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
         decoration: InputDecoration(
-          hintStyle:widget.isInitial==true? AppTextStyles.w500
-              .copyWith(color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14) :  AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
+          hintStyle: widget.isInitial == true
+              ? AppTextStyles.w500.copyWith(
+                  color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)
+              : AppTextStyles.w400
+                  .copyWith(color: ColorResources.DISABLED, fontSize: 14),
           hintText: widget.name,
-          prefixIcon: Padding(padding: EdgeInsets.symmetric(horizontal: 8.w,),
+          prefixIcon: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 8.w,
+            ),
             child: widget.pAssetIcon != null
                 ? Image.asset(
                     widget.pAssetIcon!,
@@ -89,13 +97,14 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
                     ? customImageIconSVG(
                         imageName: widget.pSvgIcon!,
                         color: widget.pIconColor ?? Colors.black,
-                        height: 22.h,)
+                        height: 22.h,
+                      )
                     : null,
           ),
           fillColor: ColorResources.FILL_COLOR,
           filled: true,
           border: const OutlineInputBorder(
-           borderRadius: BorderRadius.all(
+            borderRadius: BorderRadius.all(
               Radius.circular(
                 Dimensions.RADIUS_DEFAULT,
               ),

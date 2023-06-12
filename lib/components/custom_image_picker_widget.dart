@@ -9,6 +9,7 @@ import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
 import 'custom_images.dart';
+import 'image_pop_up_viewer.dart';
 import 'image_viewer.dart';
 import 'marquee_widget.dart';
 
@@ -71,14 +72,27 @@ class CustomButtonImagePicker extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: GestureDetector(
-                    onTap: ()=>  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ImageViewer(image:imageFile ?? imageUrl,
-                          isFromInternet:imageFile != null ? false: true,
-                        ),
-                      ),
-                    ),
+                    onTap: () => Future.delayed(
+                        Duration.zero,
+                        () => showDialog(
+                            context: context,
+                            barrierColor: Colors.black.withOpacity(0.75),
+                            builder: (context) {
+                              return ImagePopUpViewer(
+                                image: imageFile ?? imageUrl,
+                                isFromInternet:
+                                    imageFile != null ? false : true,
+                                title: "",
+                              );
+                            })),
+
+                    // onTap: ()=>  Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ImageViewer(
+                    //     ),
+                    //   ),
+                    // ),
                     child: Container(
                       height: 50.h,
                       decoration: BoxDecoration(
