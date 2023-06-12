@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/custom_button.dart';
+import 'package:fitariki/features/request_details/page/request_details.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
@@ -28,8 +29,7 @@ class RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
       child: Stack(
         children: [
           Padding(
@@ -471,8 +471,7 @@ class RequestCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
-                    arguments: request!.id!),
+                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
               ))
         ],
       ),

@@ -18,21 +18,12 @@ class RequestDetailsRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
-  Future<Either<ServerFailure, Response>> getRequestDetails(
-      {required int requestId, required bool isFromMyTrips}) async {
+  Future<Either<ServerFailure, Response>> getRequestDetails({
+    required int requestId,
+  }) async {
     try {
-      String? role;
-      if (isFromMyTrips) {
-        if (isDriver()) {
-          role = "client";
-        } else {
-          role = "driver";
-        }
-      } else {
-        role = sharedPreferences.getString(AppStorageKey.role);
-      }
       Response response = await dioClient.get(
-        uri: "$role/${EndPoints.requestDetails}/$requestId",
+        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.requestDetails}/$requestId",
       );
       if (response.statusCode == 200) {
         return Right(response);

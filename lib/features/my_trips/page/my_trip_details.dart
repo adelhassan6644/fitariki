@@ -9,28 +9,28 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/car_trip_details_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
 import '../../maps/provider/location_provider.dart';
-import '../provider/request_details_provider.dart';
-import '../../../main_widgets/car_trip_details_widget.dart';
-import '../widgets/action_buttons.dart';
-import '../widgets/trip_days_on_calender_widget.dart';
+import '../../request_details/provider/request_details_provider.dart';
+import '../../request_details/widgets/trip_days_on_calender_widget.dart';
+import '../widgets/my_trip_details_action_button.dart';
 
-class RequestDetails extends StatefulWidget {
+class MyTripDetails extends StatefulWidget {
   final int id;
 
-  const RequestDetails({
+  const MyTripDetails({
     required this.id,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RequestDetails> createState() => _RequestDetailsState();
+  State<MyTripDetails> createState() => _MyTripDetailsState();
 }
 
-class _RequestDetailsState extends State<RequestDetails> {
+class _MyTripDetailsState extends State<MyTripDetails> {
   @override
   void initState() {
     Future.delayed(Duration.zero,
@@ -66,30 +66,34 @@ class _RequestDetailsState extends State<RequestDetails> {
                                       provider.requestModel?.paidAt != null,
                               reservationId: provider.requestModel?.id,
                               phone: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.phone
-                                  : provider.requestModel?.driverModel?.phone,
+                                  ? provider
+                                      .requestModel?.offer?.clientModel?.phone
+                                  : provider
+                                      .requestModel?.offer?.driverModel?.phone,
                               userId: provider.requestModel?.clientId ??
                                   provider.requestModel?.driverId,
                               name: provider.isDriver
-                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? ""}"
-                                  : provider.requestModel?.driverModel
+                                  ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
+                                  : provider.requestModel?.offer?.driverModel
                                           ?.firstName ??
                                       "",
                               image: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.image
-                                  : provider.requestModel?.driverModel?.image,
-                              male: provider.isDriver
                                   ? provider
-                                          .requestModel?.clientModel?.gender ==
-                                      0
+                                      .requestModel?.offer?.clientModel?.image
                                   : provider
-                                          .requestModel?.driverModel?.gender ==
+                                      .requestModel?.offer?.driverModel?.image,
+                              male: provider.isDriver
+                                  ? provider.requestModel?.offer?.clientModel
+                                          ?.gender ==
+                                      0
+                                  : provider.requestModel?.offer?.driverModel
+                                          ?.gender ==
                                       0,
                               national: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.national
-                                      ?.niceName
-                                  : provider.requestModel?.driverModel?.national
-                                      ?.niceName,
+                                  ? provider.requestModel?.offer?.clientModel
+                                      ?.national?.niceName
+                                  : provider.requestModel?.offer?.driverModel
+                                      ?.national?.niceName,
                               createdAt: provider.requestModel?.createdAt ??
                                   DateTime.now(),
                               days: provider.requestModel?.offer?.offerDays!
@@ -121,12 +125,12 @@ class _RequestDetailsState extends State<RequestDetails> {
                                       0
                                   : null,
                               startPoint: provider.isDriver
-                                  ? provider
-                                      .requestModel?.clientModel?.pickupLocation
+                                  ? provider.requestModel?.offer?.clientModel
+                                      ?.dropOffLocation
                                   : provider
                                       .requestModel?.offer?.pickupLocation,
                               endPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
+                                  ? provider.requestModel?.offer?.clientModel
                                       ?.dropOffLocation
                                   : provider
                                       .requestModel?.offer?.dropOffLocation,
@@ -200,8 +204,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                             Visibility(
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
-                                  carInfo: provider
-                                      .requestModel?.driverModel?.carInfo,
+                                  carInfo: provider.requestModel?.offer
+                                      ?.driverModel?.carInfo,
                                 )),
 
                             /// to show days on calender
@@ -210,40 +214,6 @@ class _RequestDetailsState extends State<RequestDetails> {
                                 endDate: provider.requestModel?.endAt,
                                 days: provider.requestModel?.offer?.offerDays),
 
-                            // ///to show notes
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(
-                            //       vertical: 8.h,
-                            //       horizontal:
-                            //       Dimensions.PADDING_SIZE_DEFAULT.w),
-                            //   child: Row(
-                            //     children: [
-                            //       Expanded(
-                            //         child: Column(
-                            //           crossAxisAlignment:
-                            //           CrossAxisAlignment.start,
-                            //           children: [
-                            //             Text(
-                            //               getTranslated("note", context),
-                            //               style: AppTextStyles.w600
-                            //                   .copyWith(fontSize: 10),
-                            //             ),
-                            //             Text(
-                            //               "“ يوجد معي راكب بنفس حيك + نفس وجهتك “",
-                            //               maxLines: 2,
-                            //               style: AppTextStyles.w400.copyWith(
-                            //                   fontSize: 10,
-                            //                   overflow: TextOverflow.ellipsis),
-                            //             )
-                            //           ],
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         height: 30.w,
-                            //       )
-                            //     ],
-                            //   ),
-                            // ),
                             SizedBox(
                               height: 24.h,
                             )
@@ -252,7 +222,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                       ),
 
                 ///to update request
-                const ActionButtons()
+                const MyTripDetailsActionButtons()
               ],
             );
           })),

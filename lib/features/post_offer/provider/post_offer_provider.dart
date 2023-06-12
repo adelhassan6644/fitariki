@@ -99,7 +99,7 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> followers = ["محمد احمد", "لؤي احمد", "محمد الفيصل"];
+  List<String> followers = [];
   List<String> selectedFollowers = [];
   onSelectFollow(v, index) {
     if (v) {

@@ -9,10 +9,10 @@ import '../../../components/custom_button.dart';
 import '../../../helpers/cupertino_pop_up_helper.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../provider/request_details_provider.dart';
+import '../../request_details/provider/request_details_provider.dart';
 
-class ActionButtons extends StatelessWidget {
-  const ActionButtons({
+class MyTripDetailsActionButtons extends StatelessWidget {
+  const MyTripDetailsActionButtons({
     Key? key,
   }) : super(key: key);
 
@@ -37,9 +37,11 @@ class ActionButtons extends StatelessWidget {
                         ? getTranslated("accept_request", context)
                         : getTranslated("accept_offer", context),
                     onTap: () => provider.updateRequest(
+                        fromMyTrip: true,
                         name: provider.isDriver
-                            ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.firstName ?? ""}"
-                            : provider.requestModel?.driverModel?.firstName ??
+                            ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.firstName ?? ""}"
+                            : provider.requestModel?.offer?.driverModel
+                                    ?.firstName ??
                                 "",
                         status: 1,
                         id: provider.requestModel!.id!),
@@ -67,7 +69,9 @@ class ActionButtons extends StatelessWidget {
                             ],
                             onSend: () {
                               provider.updateRequest(
-                                  status: 2, id: provider.requestModel!.id!);
+                                  fromMyTrip: true,
+                                  status: 2,
+                                  id: provider.requestModel!.id!);
                               CustomNavigator.pop();
                             },
                             onClose: () {
@@ -88,7 +92,9 @@ class ActionButtons extends StatelessWidget {
                     withBorderColor: true,
                     textColor: ColorResources.PRIMARY_COLOR,
                     onTap: () => provider.updateRequest(
-                        status: 3, id: provider.requestModel!.id!),
+                        fromMyTrip: true,
+                        status: 3,
+                        id: provider.requestModel!.id!),
                     isLoading: provider.isRejecting,
                   ),
                 ),
@@ -111,7 +117,7 @@ class ActionButtons extends StatelessWidget {
                   vertical: 16.h),
               child: CustomButton(
                 onTap: () =>
-                    CustomNavigator.push(Routes.PAYMENT, arguments: false),
+                    CustomNavigator.push(Routes.PAYMENT, arguments: true),
                 text: getTranslated("payment", context),
               ),
             ),

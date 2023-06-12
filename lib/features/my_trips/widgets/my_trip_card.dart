@@ -32,8 +32,8 @@ class MyTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
-          arguments: myTrip.requestId!),
+      onTap: () =>
+          CustomNavigator.push(Routes.MY_TRIP_DETAILS, arguments: myTrip.id!),
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -307,11 +307,9 @@ class MyTripCard extends StatelessWidget {
                   !sl.get<ProfileProvider>().isDriver)
                 InkWell(
                   onTap: () {
-                    sl<RequestDetailsProvider>().getRequestDetails(
-                        id: myTrip.requestId!, isFromMyTrips: true);
-                    CustomNavigator.push(
-                      Routes.PAYMENT,
-                    );
+                    sl<RequestDetailsProvider>()
+                        .getRequestDetails(id: myTrip.id!);
+                    CustomNavigator.push(Routes.PAYMENT, arguments: true);
                   },
                   child: Container(
                     padding:

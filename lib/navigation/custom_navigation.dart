@@ -1,4 +1,5 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
+import 'package:fitariki/features/my_trips/page/my_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/feedback/page/rate_user.dart';
@@ -110,11 +111,16 @@ abstract class CustomNavigator {
 
       case Routes.REQUEST_DETAILS:
         return _pageRoute(RequestDetails(
-          requestId: settings.arguments as int,
+         id: settings.arguments as int,
+        ));
+
+        case Routes.MY_TRIP_DETAILS:
+        return _pageRoute(MyTripDetails(
+         id: settings.arguments as int,
         ));
 
       case Routes.PAYMENT:
-        return _pageRoute(const Payment());
+        return _pageRoute( Payment(isFromMyTrips: settings.arguments! as bool,));
         case Routes.PAYMENTWEBVIEW:
         return _pageRoute( PaymentWebViewScreen(rservationId: settings.arguments! as int,));
 

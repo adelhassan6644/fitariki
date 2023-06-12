@@ -83,9 +83,6 @@ class HomeProvider extends ChangeNotifier {
       final filters = {
 
         "fillters": {
-          if(sl.get<SharedPreferences>().getString(AppStorageKey.role) !=null)
-          "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
-          sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,
@@ -93,8 +90,18 @@ class HomeProvider extends ChangeNotifier {
       };
 
       Either<ServerFailure, Response> response = await homeRepo.getOffer(
-        body: withFilter ? filters : null,
-      );
+        body: withFilter ? filters : {
+                  "fillters": {
+                    if (sl
+                            .get<SharedPreferences>()
+                            .getString(AppStorageKey.role) !=
+                        null)
+                      "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
+                          sl
+                              .get<SharedPreferences>()
+                              .getString(AppStorageKey.userId),
+                  },
+                });
       response.fold((l) => null, (response) {
         offer = List<OfferModel>.from(response.data["data"]["offers"]!
             .map((x) => OfferModel.fromJson(x)));

@@ -67,7 +67,7 @@ class OfferRequestDetailsModel {
             ? DateTime.now()
             :  Methods.convertStringToDataTime(json["end_at"]),
         duration: json["duration"],
-        price: double.parse(json["price"].toString()),
+        price:double.parse(json["offer_price"].toString())==0.0? double.parse(json["price"].toString()):double.parse(json["offer_price"].toString()),
         offerPrice: double.parse(json["offer_price"].toString()),
         message: json["message"],
         approvedAt: json["approved_at"] != null

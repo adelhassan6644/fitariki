@@ -32,6 +32,7 @@ class RequestDetailsProvider extends ChangeNotifier {
   updateRequest({
     required int status,
     required int id,
+    bool fromMyTrip = false,
     String? name,
   }) async {
     try {
@@ -65,6 +66,7 @@ class RequestDetailsProvider extends ChangeNotifier {
           if (!isDriver) {
             CustomNavigator.push(
               Routes.PAYMENT,
+              arguments: fromMyTrip,
               replace: true,
             );
           } else {
@@ -82,6 +84,7 @@ class RequestDetailsProvider extends ChangeNotifier {
         } else if (status == 2) {
           isNegotiation = false;
           negotiationPrice.clear();
+          getRequestDetails(id: id);
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: getTranslated("new_offer_price_sent",
@@ -120,13 +123,13 @@ class RequestDetailsProvider extends ChangeNotifier {
 
   bool isLoading = false;
   OfferRequestDetailsModel? requestModel;
-  getRequestDetails({required int id, bool isFromMyTrips = false}) async {
+  getRequestDetails({required int id}) async {
     try {
       isLoading = true;
       notifyListeners();
 
-      Either<ServerFailure, Response> response = await requestDetailsRepo
-          .getRequestDetails(requestId: id, isFromMyTrips: isFromMyTrips);
+      Either<ServerFailure, Response> response =
+          await requestDetailsRepo.getRequestDetails(requestId: id);
       response.fold((l) => null, (res) {
         if (res.data["data"]["request"] != null) {
           requestModel =
