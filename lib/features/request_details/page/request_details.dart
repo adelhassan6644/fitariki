@@ -108,25 +108,11 @@ class _RequestDetailsState extends State<RequestDetails> {
 
                             ///client road map
                             MapWidget(
-                                stopPoints: provider.isDriver &&
-                                        provider.requestModel?.followers !=
-                                            null &&
-                                        provider
-                                            .requestModel!.followers!.isNotEmpty
-                                    ? provider
-                                            .requestModel?.followers?.length ??
-                                        0
-                                    : null,
-                                startPoint: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                        ?.pickupLocation
-                                    : provider
-                                        .requestModel?.offer?.pickupLocation,
-                                endPoint: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                        ?.dropOffLocation
-                                    : provider
-                                        .requestModel?.offer?.dropOffLocation),
+                                stopPoints: provider.isDriver && provider.requestModel?.followers != null &&
+                                        provider.requestModel!.followers!.isNotEmpty
+                                    ? provider.requestModel?.followers?.length ?? 0 : null,
+                                startPoint: provider.requestModel?.offer?.pickupLocation,
+                                endPoint:  provider.requestModel?.offer?.dropOffLocation,),
 
                             ///distance between client and driver
                             DistanceWidget(

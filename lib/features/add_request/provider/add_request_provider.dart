@@ -15,6 +15,7 @@ import '../../../main_providers/calender_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../followers/followers/provider/followers_provider.dart';
+import '../../my_trips/provider/my_trips_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
 import '../repo/add_request_repo.dart';
@@ -133,6 +134,7 @@ class AddRequestProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) async {
         reset();
+        sl<MyTripsProvider>().getPendingTrips();
         CustomNavigator.pop();
         CustomNavigator.pop();
         CustomNavigator.push(Routes.SUCCESS,
