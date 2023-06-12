@@ -1,6 +1,4 @@
 import 'package:fitariki/features/maps/provider/location_provider.dart';
-import 'package:fitariki/features/post_offer/provider/post_offer_provider.dart';
-import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -10,11 +8,7 @@ import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:provider/provider.dart';
 import '../../../components/custom_images.dart';
-import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/marquee_widget.dart';
-import '../../../data/config/di.dart';
-import '../../auth/pages/login.dart';
-import '../../post_offer/page/post_offer.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -66,7 +60,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                             MarqueeWidget(
                               child: Text(
                                   provider.currentLocation?.address ??
-                                      "طريق بدون اسم، مطار الملك خالد الدولـي ز مدينة الرياض في المملكة العربية السعودية",
+                                      "المملكة العربية السعودية",
                                   maxLines: 1,
                                   style: AppTextStyles.w400.copyWith(
                                       overflow: TextOverflow.ellipsis,
@@ -82,22 +76,28 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     ],
                   ),
                 ),
-                Consumer<ProfileProvider>(
-                  builder: (_, provider, child) {
-                    return InkWell(
-                      child: const Icon(
-                        Icons.add,
-                        size: 24,
-                      ),
-                      onTap: () => customShowModelBottomSheet(
-                        onClose: sl.get<PostOfferProvider>().reset,
-                        body: provider.isLogin
-                            ? const PostOffer()
-                            : const Login(),
-                      ),
-                    );
-                  },
-                )
+                customImageIconSVG(
+                  imageName: SvgImages.navLogoIcon,
+                  color:ColorResources.PRIMARY_COLOR ,
+                    width: 25,
+                    height: 25)
+
+                // Consumer<ProfileProvider>(
+                //   builder: (_, provider, child) {
+                //     return InkWell(
+                //       child: const Icon(
+                //         Icons.add,
+                //         size: 24,
+                //       ),
+                //       onTap: () => customShowModelBottomSheet(
+                //         onClose: sl.get<PostOfferProvider>().reset,
+                //         body: provider.isLogin
+                //             ? const PostOffer()
+                //             : const Login(),
+                //       ),
+                //     );
+                //   },
+                // )
               ],
             ),
             SizedBox(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/methods.dart';
-import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
@@ -64,18 +63,8 @@ class Payment extends StatelessWidget {
                                     timeRange:
                                         "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 8.h,
-                                        horizontal:
-                                            Dimensions.PADDING_SIZE_DEFAULT.w),
-                                    child: Text(
-                                      getTranslated("coupon", context),
-                                      style: AppTextStyles.w600.copyWith(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
+
+                                  ///Coupon
                                   const CouponWidget(),
                                   // PaymentMethodWidget(),
                                   const PaymentDetailsWidget()

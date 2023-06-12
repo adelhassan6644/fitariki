@@ -138,7 +138,7 @@ class RequestCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "${request?.duration} يوم",
+                                          "${request?.duration} ${getTranslated("day", context)}",
                                           textAlign: TextAlign.start,
                                           style: AppTextStyles.w400.copyWith(
                                               fontSize: 10,
@@ -310,7 +310,7 @@ class RequestCard extends StatelessWidget {
                                     Expanded(
                                       child: MarqueeWidget(
                                         child: Text(
-                                          "${request!.driverModel?.carInfo?.seatsCount} اشخاص",
+                                          "${request!.driverModel?.carInfo?.seatsCount} ${getTranslated("persons", context)}",
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
                                           ),
@@ -397,7 +397,9 @@ class RequestCard extends StatelessWidget {
                                       ),
                                     )
                                   : Text(
-                                      "لا يوجد مشاركيين غير الراكب",
+                                      getTranslated(
+                                          "no_participants_in_this_offer",
+                                          context),
                                       style: AppTextStyles.w400
                                           .copyWith(fontSize: 10),
                                     ),
@@ -451,8 +453,8 @@ class RequestCard extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                      const AcceptableAnalytics(
-                        value: 0,
+                      AcceptableAnalytics(
+                        value: request?.offer?.matching ?? 0,
                         color: ColorResources.PRIMARY_COLOR,
                       ),
                     ],

@@ -247,5 +247,10 @@
   "request_sent": "Request Sent",
   "there_is_no_offers_now": "There is no offers now",
   "there_is_no_requests_now": "There is no requests now",
-  "there_is_no_trips": "There is no trips"
+  "there_is_no_trips": "There is no trips",
+  "new_requests": "new requests",
+  "new_offers": "new offers",
+  "day": "day",
+  "no_participants_in_this_offer": "No Participants in this offer except client",
+  "persons": "persons"
 }

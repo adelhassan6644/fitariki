@@ -32,7 +32,12 @@ class MyTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: myTrip.id!),
+      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
+          arguments: myTrip.requestId!),
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 4.0.h),
         child: Container(
@@ -59,9 +64,9 @@ class MyTripCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
-                            image: myTrip.clientModel != null
-                                ? myTrip.clientModel?.image ?? ""
-                                : myTrip.driverModel?.image ?? "",
+                            image: myTrip.offer?.clientModel != null
+                                ? myTrip.offer?.clientModel?.image ?? ""
+                                : myTrip.offer?.driverModel?.image ?? "",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -76,9 +81,11 @@ class MyTripCard extends StatelessWidget {
                                 SizedBox(
                                   width: 50,
                                   child: Text(
-                                    myTrip.clientModel != null
-                                        ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.lastName ?? ""} "
-                                        : myTrip.driverModel?.firstName ?? "",
+                                    myTrip.offer?.clientModel != null
+                                        ? "${myTrip.offer?.clientModel?.firstName ?? ""} ${myTrip.offer?.clientModel?.lastName ?? ""} "
+                                        : myTrip.offer?.driverModel
+                                                ?.firstName ??
+                                            "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(
@@ -91,11 +98,11 @@ class MyTripCard extends StatelessWidget {
                                   width: 4,
                                 ),
                                 customImageIconSVG(
-                                    imageName: myTrip.clientModel != null
-                                        ? myTrip.clientModel?.gender == 0
+                                    imageName: myTrip.offer?.clientModel != null
+                                        ? myTrip.offer?.clientModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon
-                                        : myTrip.driverModel?.gender == 0
+                                        : myTrip.offer?.driverModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon,
                                     color: ColorResources.BLUE_COLOR,
@@ -106,10 +113,12 @@ class MyTripCard extends StatelessWidget {
                             SizedBox(
                               width: 50,
                               child: Text(
-                                myTrip.clientModel != null
-                                    ? myTrip.clientModel?.national?.niceName ??
+                                myTrip.offer?.clientModel != null
+                                    ? myTrip.offer?.clientModel?.national
+                                            ?.niceName ??
                                         ""
-                                    : myTrip.driverModel?.national?.niceName ??
+                                    : myTrip.offer?.driverModel?.national
+                                            ?.niceName ??
                                         "",
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
@@ -299,8 +308,7 @@ class MyTripCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     sl<RequestDetailsProvider>().getRequestDetails(
-                      id: myTrip.id!,
-                    );
+                        id: myTrip.requestId!, isFromMyTrips: true);
                     CustomNavigator.push(
                       Routes.PAYMENT,
                     );

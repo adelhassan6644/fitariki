@@ -19,7 +19,7 @@ class OfferModel {
   int? clientId;
   int? driverId;
   double? maxPrice;
-  double? compatibleRatio;
+  double? matching;
   DateTime? createdAt;
   List<WeekModel>? offerDays;
   LocationModel? dropOffLocation;
@@ -40,7 +40,7 @@ class OfferModel {
       this.isSentOffer,
       this.minPrice,
       this.maxPrice,
-      this.compatibleRatio,
+      this.matching,
       this.createdAt,
       this.offerDays,
       this.clientId,
@@ -64,7 +64,7 @@ class OfferModel {
       driverId: json["driver_id"],
       minPrice: json["min_price"]?.toDouble(),
       maxPrice: json["max_price"]?.toDouble(),
-      compatibleRatio: double.parse(json["matching"]??"0".toString()),
+      matching: double.parse(json["matching"] ?? "0".toString()),
       startDate:
           DateTime.parse(json["start_date"] ?? DateTime.now().toString()),
       endDate: DateTime.parse(json["end_date"] ?? DateTime.now().toString()),

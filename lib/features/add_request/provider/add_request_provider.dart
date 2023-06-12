@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
-import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
 import '../../../data/error/failures.dart';
@@ -62,7 +61,10 @@ class AddRequestProvider extends ChangeNotifier {
     minPrice.clear();
     // note = null;
     startDate = DateTime.now();
-    onSelectEndDate(DateTime.now());
+    endDate = DateTime.now();
+    duration = 0;
+    sl<CalenderProvider>()
+        .getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
   }
 
   checkData({required double minOfferPrice, required double maxOfferPrice}) {
@@ -150,12 +152,7 @@ class AddRequestProvider extends ChangeNotifier {
       });
     } catch (e) {
       CustomNavigator.pop();
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast(e);
       isLoading = false;
       notifyListeners();
     }

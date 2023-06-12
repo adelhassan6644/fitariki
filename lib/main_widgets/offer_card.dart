@@ -74,7 +74,7 @@ class OfferCard extends StatelessWidget {
                                     width: 50,
                                     child: Text(
                                       sl<HomeProvider>().isDriver
-                                          ? "${offerModel.clientModel?.firstName??""} ${offerModel.clientModel?.lastName??""} "
+                                          ? "${offerModel.clientModel?.firstName ?? ""} ${offerModel.clientModel?.lastName ?? ""} "
                                           : offerModel.driverModel?.firstName ??
                                               "",
                                       textAlign: TextAlign.start,
@@ -162,7 +162,7 @@ class OfferCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${offerModel.offerDays?.length??0} ايام بالإسبوع",
+                                    "${offerModel.offerDays?.length ?? 0} ايام بالإسبوع",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -186,7 +186,8 @@ class OfferCard extends StatelessWidget {
                             children: [
                               customImageIconSVG(imageName: SvgImages.alarm),
                               const SizedBox(width: 4),
-                              if (offerModel.offerDays != null&&offerModel.offerDays!.isNotEmpty)
+                              if (offerModel.offerDays != null &&
+                                  offerModel.offerDays!.isNotEmpty)
                                 Expanded(
                                   child: MarqueeWidget(
                                     child: Text(
@@ -251,8 +252,8 @@ class OfferCard extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    const AcceptableAnalytics(
-                      value: 50,
+                    AcceptableAnalytics(
+                      value: offerModel.matching ?? 0,
                       color: ColorResources.PRIMARY_COLOR,
                     ),
                   ],

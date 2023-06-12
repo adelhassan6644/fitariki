@@ -15,35 +15,41 @@ class PreviousTripsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MyTripsProvider>(builder: (_, provider, child) {
       return Expanded(
-          child: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: provider.isGetPreviousTrips
-            ? List.generate(
-                6,
-                (index) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                      child: CustomShimmerContainer(
-                        height: 95.h,
-                        radius: 8,
-                      ),
-                    ))
-            : !provider.isGetPreviousTrips && provider.previousTrips!.isNotEmpty
-                ? List.generate(
-                    provider.previousTrips!.length,
-                    (index) => Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                          child: MyTripCard(
-                            isPrevious: true,
-                            myTrip:
-                                provider.previousTrips![index].myTripRequest!,
-                          ),
-                        ))
-                : [
-                    EmptyState(txt: getTranslated("there_is_no_trips", context))
-                  ],
+          child: RefreshIndicator(
+        onRefresh: () async {
+          await provider.getPreviousTrips();
+        },
+        child: ListView(
+          padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: provider.isGetPreviousTrips
+              ? List.generate(
+                  6,
+                  (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                        child: CustomShimmerContainer(
+                          height: 95.h,
+                          radius: 8,
+                        ),
+                      ))
+              : !provider.isGetPreviousTrips &&
+                      provider.previousTrips!.isNotEmpty
+                  ? List.generate(
+                      provider.previousTrips!.length,
+                      (index) => Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                            child: MyTripCard(
+                              isPrevious: true,
+                              myTrip:
+                                  provider.previousTrips![index].myTripRequest!,
+                            ),
+                          ))
+                  : [
+                      EmptyState(
+                          txt: getTranslated("there_is_no_trips", context))
+                    ],
+        ),
       ));
     });
   }

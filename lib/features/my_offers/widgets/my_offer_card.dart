@@ -1,3 +1,4 @@
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/my_offers/provider/my_offers_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +25,7 @@ class MyOfferCard extends StatelessWidget {
     return InkWell(
       onTap: !isFromMyOfferDetails
           ? () {
-              CustomNavigator.push(Routes.MY_OFFERS_DETAILS,
-                  arguments: offer!.id!);
-            }
+              CustomNavigator.push(Routes.MY_OFFERS_DETAILS, arguments: offer!.id!);}
           : null,
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -49,26 +48,22 @@ class MyOfferCard extends StatelessWidget {
               Row(
                 children: [
                   if (!isFromMyOfferDetails)
-                    Expanded(
-                      child: Row(
-                        children: [
-                          customImageIconSVG(imageName: SvgImages.newOffer),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Expanded(
-                            child: Text(
-                              sl.get<MyOffersProvider>().isDriver
-                                  ? "طلبات جديدة"
-                                  : "عروض جديدة",
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10, overflow: TextOverflow.ellipsis),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        customImageIconSVG(imageName: SvgImages.newOffer),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          sl.get<MyOffersProvider>().isDriver
+                              ? getTranslated("new_requests", context)
+                              : getTranslated("new_offers", context),
+                          style: AppTextStyles.w400.copyWith(
+                              fontSize: 10, overflow: TextOverflow.ellipsis),
+                        ),
+                      ],
                     ),
-
+                  const Expanded(child: SizedBox()),
                   Text(
                     Methods.getDayCount(
                             date: offer!.createdAt != null
@@ -92,7 +87,7 @@ class MyOfferCard extends StatelessWidget {
                         SizedBox(height: 4.h),
                         MarqueeWidget(
                           child: Text(
-                            "${offer!.duration} يوم ",
+                            "${offer!.duration} ${getTranslated("day", context)}",
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),
                           ),

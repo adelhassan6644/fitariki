@@ -53,6 +53,11 @@ class OfferDetails extends StatelessWidget {
                                   userId: provider.isDriver
                                       ? provider.offerDetails?.clientId
                                       : provider.offerDetails?.driverId,
+                                  image: provider.isDriver
+                                      ? provider
+                                          .offerDetails!.clientModel?.image
+                                      : provider
+                                          .offerDetails!.driverModel?.image,
                                   name: provider.isDriver
                                       ? "${provider.offerDetails!.clientModel?.firstName} ${provider.offerDetails!.clientModel?.lastName}"
                                       : provider

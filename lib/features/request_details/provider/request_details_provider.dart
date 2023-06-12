@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../my_trips/provider/my_trips_provider.dart';
 import '../../success/model/success_model.dart';
 import '../model/offer_request_details_model.dart';
 import '../repo/request_details_repo.dart';
@@ -91,6 +93,12 @@ class RequestDetailsProvider extends ChangeNotifier {
           isRejecting = false;
           CustomNavigator.pop();
         }
+
+        ///to Reflect in my Trips
+        sl<MyTripsProvider>().getPendingTrips();
+        sl<MyTripsProvider>().getCurrentTrips();
+        sl<MyTripsProvider>().getPreviousTrips();
+
         notifyListeners();
       });
     } catch (e) {
@@ -112,15 +120,13 @@ class RequestDetailsProvider extends ChangeNotifier {
 
   bool isLoading = false;
   OfferRequestDetailsModel? requestModel;
-  getRequestDetails({
-    required int id,
-  }) async {
+  getRequestDetails({required int id, bool isFromMyTrips = false}) async {
     try {
       isLoading = true;
       notifyListeners();
 
-      Either<ServerFailure, Response> response =
-          await requestDetailsRepo.getRequestDetails(requestId: id);
+      Either<ServerFailure, Response> response = await requestDetailsRepo
+          .getRequestDetails(requestId: id, isFromMyTrips: isFromMyTrips);
       response.fold((l) => null, (res) {
         if (res.data["data"]["request"] != null) {
           requestModel =

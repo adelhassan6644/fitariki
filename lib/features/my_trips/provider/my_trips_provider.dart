@@ -30,11 +30,15 @@ class MyTripsProvider extends ChangeNotifier {
 
   onSelectTap(index) {
     currentTap = index;
-    print(index);
-    switch (index)
-    { case 0:return    getPreviousTrips();
-      case 1:return    getCurrentTrips();
-      case 2:return    getPendingTrips();
+    if (isLogin) {
+      switch (index) {
+        case 0:
+          return getPreviousTrips();
+        case 1:
+          return getCurrentTrips();
+        case 2:
+          return getPendingTrips();
+      }
     }
     notifyListeners();
   }

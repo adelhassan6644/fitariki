@@ -19,6 +19,7 @@ class ActionButtons extends StatelessWidget {
     return Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
       return Column(
         children: [
+          /// when offer or request is new
           Visibility(
             visible: !provider.isLoading &&
                 provider.requestModel?.approvedAt == null &&
@@ -95,6 +96,8 @@ class ActionButtons extends StatelessWidget {
               ],
             ),
           ),
+
+          /// when request accepted but not paid and current type is client
           Visibility(
             visible: !provider.isLoading &&
                 provider.requestModel?.approvedAt != null &&
@@ -112,6 +115,8 @@ class ActionButtons extends StatelessWidget {
               ),
             ),
           ),
+
+          /// when request accepted but not paid and current type is driver
           Visibility(
             visible: !provider.isLoading &&
                 provider.requestModel?.approvedAt != null &&
@@ -128,7 +133,8 @@ class ActionButtons extends StatelessWidget {
               ),
             ),
           ),
-          ///
+
+          /// when offer rejected
           Visibility(
             visible: !provider.isLoading &&
                 provider.requestModel?.rejectedAt != null &&

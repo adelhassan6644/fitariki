@@ -96,8 +96,8 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   calcTotal() {
-    tax = (requestModel?.price ?? 0) * 0.15;
-    total = (requestModel?.price ?? 0 - discount) + tax! + serviceCost;
+    tax = double.parse(((requestModel?.price ?? 0) * 0.15).toStringAsFixed(2));
+    total = requestModel?.price ?? 0 - discount + tax! + serviceCost;
     notifyListeners();
   }
 

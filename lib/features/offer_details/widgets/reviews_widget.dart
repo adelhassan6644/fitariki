@@ -66,20 +66,23 @@ class ReviewsWidget extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              "${provider.offerFeedback?.feedbacks?.length ?? ""} ${getTranslated(provider.offerFeedback?.feedbacks?.length == 0 ? "there_is_no_feedbacks_on_this_offer" : "people_benefited_from_this_offer", context)}",
+                              "${provider.offerFeedback!.feedbacks!.isEmpty ? "" : provider.offerFeedback?.feedbacks?.length} ${getTranslated(provider.offerFeedback!.feedbacks!.isEmpty ? "there_is_no_feedbacks_on_this_offer" : "people_benefited_from_this_offer", context)}",
                               style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
                               ),
                             ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            ShowRate(
-                              rate: provider.offerFeedback?.rate ?? 0,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
+                            if (provider.offerFeedback!.feedbacks!.isNotEmpty)
+                              const SizedBox(
+                                width: 4,
+                              ),
+                            if (provider.offerFeedback!.feedbacks!.isNotEmpty)
+                              ShowRate(
+                                rate: provider.offerFeedback?.rate ?? 0,
+                              ),
+                            if (provider.offerFeedback!.feedbacks!.isNotEmpty)
+                              const SizedBox(
+                                height: 8,
+                              ),
                           ],
                         ),
                         const SizedBox(

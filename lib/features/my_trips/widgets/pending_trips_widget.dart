@@ -14,34 +14,39 @@ class PendingTripsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MyTripsProvider>(builder: (_, provider, child) {
       return Expanded(
-          child: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: provider.isGetPendingTrips
-            ? List.generate(
-                6,
-                (index) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                      child: CustomShimmerContainer(
-                        height: 95.h,
-                        radius: 8,
-                      ),
-                    ))
-            : !provider.isGetPendingTrips && provider.pendingTrips!.isNotEmpty
-                ? List.generate(
-                    provider.pendingTrips!.length,
-                    (index) => Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                          child: MyTripCard(
-                            isPending: true,
-                            myTrip: provider.pendingTrips![index],
-                          ),
-                        ))
-                : [
-                    EmptyState(txt: getTranslated("there_is_no_trips", context))
-                  ],
+          child: RefreshIndicator(
+        onRefresh: () async {
+          await provider.getPendingTrips();
+        },
+        child: ListView(
+          padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: provider.isGetPendingTrips
+              ? List.generate(
+                  6,
+                  (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                        child: CustomShimmerContainer(
+                          height: 95.h,
+                          radius: 8,
+                        ),
+                      ))
+              : !provider.isGetPendingTrips && provider.pendingTrips!.isNotEmpty
+                  ? List.generate(
+                      provider.pendingTrips!.length,
+                      (index) => Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                            child: MyTripCard(
+                              isPending: true,
+                              myTrip: provider.pendingTrips![index],
+                            ),
+                          ))
+                  : [
+                      EmptyState(
+                          txt: getTranslated("there_is_no_trips", context))
+                    ],
+        ),
       ));
     });
   }

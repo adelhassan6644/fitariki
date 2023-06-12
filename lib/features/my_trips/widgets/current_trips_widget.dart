@@ -14,38 +14,45 @@ class CurrentTripsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MyTripsProvider>(builder: (_, provider, child) {
       return Expanded(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await provider.getCurrentTrips();
+          },
           child: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: provider.isGetCurrentTrips
-            ? List.generate(
-                6,
-                (index) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                      child: CustomShimmerContainer(
-                        height: 95.h,
-                        radius: 8,
-                      ),
-                    ))
-            : !provider.isGetCurrentTrips && provider.currentTrips!.isNotEmpty
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: provider.isGetCurrentTrips
                 ? List.generate(
-                    provider.currentTrips!.length,
+                    6,
                     (index) => Padding(
                           padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                          child: MyTripCard(
-                            isCurrent: true,
-                            offerPassengers:
-                                provider.currentTrips![index].offerPassengers!,
-                            myTrip:
-                                provider.currentTrips![index].myTripRequest!,
+                          child: CustomShimmerContainer(
+                            height: 95.h,
+                            radius: 8,
                           ),
                         ))
-                : [
-                    EmptyState(txt: getTranslated("there_is_no_trips", context))
-                  ],
-      ));
+                : !provider.isGetCurrentTrips &&
+                        provider.currentTrips!.isNotEmpty
+                    ? List.generate(
+                        provider.currentTrips!.length,
+                        (index) => Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                              child: MyTripCard(
+                                isCurrent: true,
+                                offerPassengers: provider
+                                    .currentTrips![index].offerPassengers!,
+                                myTrip: provider
+                                    .currentTrips![index].myTripRequest!,
+                              ),
+                            ))
+                    : [
+                        EmptyState(
+                            txt: getTranslated("there_is_no_trips", context))
+                      ],
+          ),
+        ),
+      );
     });
   }
 }

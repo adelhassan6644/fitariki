@@ -21,6 +21,7 @@ class OfferRequestDetailsModel {
   int? clientId;
   int? driverId;
   int? offerId;
+  int? requestId;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? paidAt;
@@ -46,6 +47,7 @@ class OfferRequestDetailsModel {
     this.clientId,
     this.driverId,
     this.offerId,
+    this.requestId,
     this.createdAt,
     this.updatedAt,
     this.paidAt,
@@ -81,6 +83,7 @@ class OfferRequestDetailsModel {
         clientId: json["client_id"],
         driverId: json["driver_id"],
         offerId: json["offer_id"],
+        requestId: json["request_id"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),

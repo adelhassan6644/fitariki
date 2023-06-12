@@ -51,77 +51,79 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                   id: widget.offerId,
                 )),
             Consumer<MyOffersProvider>(builder: (context, provider, _) {
-              return !provider.isOfferDetailsLoading?
-             Expanded(
-               child: ListAnimator(
-                data: [
-                  MyOfferCard(
-                    offer: provider.myOfferDetails,
-                    isFromMyOfferDetails: true,
-                  ),
-                  MapWidget(
-                    startPoint: provider.myOfferDetails?.pickupLocation,
-                    endPoint: provider.myOfferDetails?.dropOffLocation,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                        vertical: 16.h),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            sl.get<ProfileProvider>().isDriver
-                                ? getTranslated("requests", context)
-                                : getTranslated("offers", context),
-                            style:
-                                AppTextStyles.w600.copyWith(fontSize: 16),
+              return !provider.isOfferDetailsLoading
+                  ? Expanded(
+                      child: ListAnimator(
+                        data: [
+                          MyOfferCard(
+                            offer: provider.myOfferDetails,
+                            isFromMyOfferDetails: true,
                           ),
-                        ),
-                        if (provider.myOfferDetails != null &&
-                            provider.myOfferDetails!.offerRequests!
-                                .isNotEmpty &&
-                            provider.myOfferDetails!.offerRequests!.length >
-                                3)
-                          InkWell(
-                            onTap: () => CustomNavigator.push(
-                              Routes.ALL_REQUESTS,
+                          MapWidget(
+                            startPoint: provider.myOfferDetails?.pickupLocation,
+                            endPoint: provider.myOfferDetails?.dropOffLocation,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                vertical: 16.h),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    sl.get<ProfileProvider>().isDriver
+                                        ? getTranslated("requests", context)
+                                        : getTranslated("offers", context),
+                                    style: AppTextStyles.w600
+                                        .copyWith(fontSize: 16),
+                                  ),
+                                ),
+                                if (provider.myOfferDetails != null &&
+                                    provider.myOfferDetails!.offerRequests!
+                                        .isNotEmpty &&
+                                    provider.myOfferDetails!.offerRequests!
+                                            .length >
+                                        3)
+                                  InkWell(
+                                    onTap: () => CustomNavigator.push(
+                                      Routes.ALL_REQUESTS,
+                                    ),
+                                    child: Text(
+                                      getTranslated("view_all", context),
+                                      style: AppTextStyles.w400.copyWith(
+                                          fontSize: 11,
+                                          color: ColorResources.DISABLED),
+                                    ),
+                                  )
+                              ],
                             ),
-                            child: Text(
-                              getTranslated("view_all", context),
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 11,
-                                  color: ColorResources.DISABLED),
-                            ),
-                          )
-                      ],
-                    ),
-                  ),
-                  if (provider.myOfferDetails!.offerRequests != null &&
-                      provider.myOfferDetails!.offerRequests!.isNotEmpty)
-                    ...List.generate(
-                        provider.myOfferDetails!.offerRequests!.length > 3
-                            ? 3
-                            : provider
-                                .myOfferDetails!.offerRequests!.length,
-                        (index) => RequestCard(
-                              request: provider
-                                  .myOfferDetails!.offerRequests![index],
-                            )),
-                  if (provider.myOfferDetails!.offerRequests == null ||
-                      provider.myOfferDetails!.offerRequests!.isEmpty)
-                    EmptyState(
-                        txt: sl.get<ProfileProvider>().isDriver
-                            ? getTranslated(
-                                "there_is_no_offers_now", context)
-                            : getTranslated(
-                                "there_is_no_requests_now", context))
-                ],
-            ),
-             ):
-             const MyOfferDetailsShimmer();
-
-              })
+                          ),
+                          if (provider.myOfferDetails!.offerRequests != null &&
+                              provider
+                                  .myOfferDetails!.offerRequests!.isNotEmpty)
+                            ...List.generate(
+                                provider.myOfferDetails!.offerRequests!.length >
+                                        3
+                                    ? 3
+                                    : provider
+                                        .myOfferDetails!.offerRequests!.length,
+                                (index) => RequestCard(
+                                      request: provider.myOfferDetails!
+                                          .offerRequests![index],
+                                    )),
+                          if (provider.myOfferDetails!.offerRequests == null ||
+                              provider.myOfferDetails!.offerRequests!.isEmpty)
+                            EmptyState(
+                                txt: sl.get<ProfileProvider>().isDriver
+                                    ? getTranslated(
+                                        "there_is_no_offers_now", context)
+                                    : getTranslated(
+                                        "there_is_no_requests_now", context))
+                        ],
+                      ),
+                    )
+                  : const MyOfferDetailsShimmer();
+            })
           ],
         ),
       ),

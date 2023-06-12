@@ -36,23 +36,7 @@ class MyTrips extends StatelessWidget {
               provider: myTripProvider,
             ),
             myTripProvider.isLogin
-                ? Expanded(
-                    child: RefreshIndicator(
-                        onRefresh: () async {
-                          if (myTripProvider.currentTap == 0) {
-                            await myTripProvider.getPreviousTrips();
-                          } else if (myTripProvider.currentTap == 1) {
-                            await myTripProvider.getCurrentTrips();
-                          } else {
-                            await myTripProvider.getPendingTrips();
-                          }
-                        },
-                        child: Column(
-                          children: [
-                            currentWidget[myTripProvider.currentTap],
-                          ],
-                        )),
-                  )
+                ? currentWidget[myTripProvider.currentTap]
                 : const Expanded(
                     child: GuestMode(),
                   )

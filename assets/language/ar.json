@@ -86,6 +86,7 @@
   "offer": "تقديم عرض",
   "display_stats": "احصائيات العرض",
   "people_benefited_from_this_offer": "اشخاص استفاد من هذا العرض",
+  "persons": "اشخاص",
   "view_all": "عرض الكل",
   "login": "تسجيل دخول",
   "enter_your_mobile_number": "ادخل رقم جوالك",
@@ -190,6 +191,7 @@
   "requests": "الطلبات",
   "current_requests": "طلبات التوصيل الحالية",
   "participants_in_this_offer": "المشاركين في هذا العرض",
+  "no_participants_in_this_offer": "لا يوجد مشاركيين غير الراكب في هذا العرض",
   "note": "ملاحظة :",
   "trip": "الرحلة",
   "offers_or_requests": "العروض او الطلبات",
@@ -248,5 +250,8 @@
   "request_sent": "تم تقديم الطلب",
   "there_is_no_offers_now": "لا يوجود عروض حاليا",
   "there_is_no_requests_now": "لا يوجود طلبات حاليا",
-  "there_is_no_trips": "لا يوجود رحلات"
+  "there_is_no_trips": "لا يوجود رحلات",
+  "new_requests": "طلبات جديدة",
+  "new_offers": "عروض جديدة",
+  "day": "يوم"
 }
