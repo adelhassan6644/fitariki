@@ -34,7 +34,7 @@ class NotificationsRepo {
     try {
       Response response = await dioClient.post(
         uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.readNotification}/${sharedPreferences.getString(AppStorageKey.userId)}/$id}",
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.readNotification}/${sharedPreferences.getString(AppStorageKey.userId)}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);
