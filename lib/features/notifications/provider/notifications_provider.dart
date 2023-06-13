@@ -49,4 +49,28 @@ class NotificationsProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  readNotification(id) async {
+    try {
+      Either<ServerFailure, Response> response =
+          await notificationsRepo.readNotification(id);
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: ApiErrorHandler.getMessage(l),
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        notifyListeners();
+      }, (response) {});
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      notifyListeners();
+    }
+  }
 }
