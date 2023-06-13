@@ -118,6 +118,7 @@
   "price": "السعر",
   "start_of_duration": "بداية المدة",
   "start_date": "تاريخ البداية:",
+  "end_date": "تاريخ النهاية:",
   "end_of_duration": "نهاية المدة",
   "followers": "التابعين",
   "add_follower": "اضافة تابع",
@@ -256,5 +257,7 @@
   "day": "يوم",
   "rate": "تقييم",
   "your_trip_end_with": "تم انتهاء رحلتك مع",
-  "please_enter_your_feedback": "من فضلك ادخل تقييمك"
+  "please_enter_your_feedback": "من فضلك ادخل تقييمك",
+  "explore_new_offers_with_this_captain": "استكشاف المزيد من العروض مع هذا الكابتن",
+  "explore_new_requests_with_this_client": "استكشاف المزيد من الطلبات مع هذا الراكب"
 }

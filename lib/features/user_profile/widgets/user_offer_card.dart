@@ -19,7 +19,8 @@ class UserOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => CustomNavigator.push(Routes.OFFER_DETAILS, arguments: offerModel.id),
+      onTap: () =>
+          CustomNavigator.push(Routes.OFFER_DETAILS, arguments: offerModel.id),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
@@ -27,7 +28,8 @@ class UserOfferCard extends StatelessWidget {
           alignment: Alignment.centerLeft,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 25.h),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 25.h),
               decoration: BoxDecoration(
                 color: ColorResources.WHITE_COLOR,
                 borderRadius: BorderRadius.circular(8),
@@ -153,7 +155,9 @@ class UserOfferCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 80,)
+                      const SizedBox(
+                        width: 80,
+                      )
                     ],
                   )
                 ],
@@ -176,8 +180,8 @@ class UserOfferCard extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      const AcceptableAnalytics(
-                        value: 50,
+                      AcceptableAnalytics(
+                        value: offerModel.matching ?? 0,
                         color: ColorResources.PRIMARY_COLOR,
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/profile/model/driver_model.dart';
+import 'package:fitariki/main_widgets/shimmer_widgets/car_trip_details_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import '../app/core/utils/color_resources.dart';
@@ -10,15 +11,15 @@ import '../app/localization/localization/language_constant.dart';
 import '../components/custom_images.dart';
 import '../components/expansion_tile_widget.dart';
 import '../components/image_pop_up_viewer.dart';
-import '../components/image_viewer.dart';
 
 class CarTripDetailsWidget extends StatelessWidget {
-  const CarTripDetailsWidget({this.carInfo, Key? key}) : super(key: key);
+  const CarTripDetailsWidget({this.carInfo,this.isLoading = false, Key? key}) : super(key: key);
   final CarInfo? carInfo;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return isLoading? const CarTripDetailsShimmer() : Padding(
       padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: ExpansionTileWidget(
@@ -82,7 +83,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 width: 4.w,
               ),
               Text(
-                "${carInfo?.seatsCount} اشخاص",
+                "${carInfo?.seatsCount} ${getTranslated("persons", context)}",
                 style: AppTextStyles.w400.copyWith(
                   fontSize: 10,
                 ),
@@ -168,6 +169,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                   getTranslated("show_car_image", context),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 10,
+                    color: ColorResources.PRIMARY_COLOR
                   ),
                 ),
               ),

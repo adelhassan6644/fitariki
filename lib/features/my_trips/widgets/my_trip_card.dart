@@ -9,9 +9,11 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../feedback/page/rate_trip.dart';
+import '../../user_profile/provider/user_profile_provider.dart';
 import '../model/my_trips_model.dart';
 
 class MyTripCard extends StatelessWidget {
@@ -33,7 +35,7 @@ class MyTripCard extends StatelessWidget {
       onTap: () {
         if (isCurrent) {
           CustomNavigator.push(Routes.MY_TRIP_DETAILS, arguments: myTrip);
-        } else {}
+        }
       },
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -133,8 +135,9 @@ class MyTripCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        ///to start date of trip
                         Expanded(
-                          flex: isCurrent ? 7 : 3,
+                          flex: isCurrent ? 12 : 3,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -142,7 +145,9 @@ class MyTripCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${getTranslated("start_date", context)} ${myTrip.myTripRequest!.startAt!.dateFormat(format: "yyyy MMM d")}",
+                                    isCurrent
+                                        ? "${getTranslated("start_date", context)} ${myTrip.myTripRequest!.startAt!.dateFormat(format: "yyyy MMM d")}"
+                                        : "${getTranslated("end_date", context)} ${myTrip.myTripRequest!.endAt!.dateFormat(format: "yyyy MMM d")}",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -163,8 +168,11 @@ class MyTripCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        if (!isCurrent)
-                          Expanded(
+
+                        ///to duration of trip
+                        Visibility(
+                          visible: isPrevious,
+                          child: Expanded(
                             flex: 2,
                             child: Row(
                               children: [
@@ -195,8 +203,12 @@ class MyTripCard extends StatelessWidget {
                               ],
                             ),
                           ),
-                        if (!isCurrent)
-                          Expanded(
+                        ),
+
+                        ///to price of trip
+                        Visibility(
+                          visible: isPrevious,
+                          child: Expanded(
                             flex: 2,
                             child: Row(
                               children: [
@@ -216,8 +228,12 @@ class MyTripCard extends StatelessWidget {
                               ],
                             ),
                           ),
-                        if (isCurrent)
-                          Expanded(
+                        ),
+
+                        ///to show number of passengers
+                        Visibility(
+                          visible: isCurrent,
+                          child: Expanded(
                             flex: 4,
                             child: Row(
                               children: [
@@ -238,10 +254,57 @@ class MyTripCard extends StatelessWidget {
                               ],
                             ),
                           ),
+                        ),
                       ],
+                    ),
+                    Visibility(
+                      visible: isPrevious,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              sl<UserProfileProvider>().getUserProfile(
+                                  userId: isDriver
+                                      ? myTrip.clientId!
+                                      : myTrip.driverId!);
+                              sl<UserProfileProvider>().getUserOffers(
+                                  id: isDriver
+                                      ? myTrip.clientId!
+                                      : myTrip.driverId!);
+
+                              if (isDriver) {
+                                sl<UserProfileProvider>().getUserFollowers(
+                                    id: isDriver
+                                        ? myTrip.clientId!
+                                        : myTrip.driverId!);
+                              }
+                              CustomNavigator.push(Routes.USER_PROFILE,
+                                  arguments: isDriver
+                                      ? myTrip.clientId
+                                      : myTrip.driverId);
+                            },
+                            child: Text(
+                              getTranslated(
+                                  isDriver
+                                      ? "explore_new_requests_with_this_client"
+                                      : "explore_new_offers_with_this_captain",
+                                  context),
+                              style: AppTextStyles.w600.copyWith(
+                                  fontSize: 12,
+                                  color: ColorResources.PRIMARY_COLOR),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                width: 8.w,
               ),
               if (isCurrent)
                 Row(

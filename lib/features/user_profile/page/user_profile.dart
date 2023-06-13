@@ -70,8 +70,17 @@ class UserProfile extends StatelessWidget {
                           rate: provider.userProfileModel!.driver != null
                               ? provider.userProfileModel?.driver?.rate?.ceil()
                               : provider.userProfileModel?.client?.rate?.ceil(),
-                          reservationCount: 2,
-                          requestsCount: 2,
+                          reservationCount:
+                              provider.userProfileModel!.driver != null
+                                  ? provider.userProfileModel?.driver
+                                      ?.reservationsCount
+                                  : provider.userProfileModel?.client
+                                      ?.reservationsCount,
+                          requestsCount: provider.userProfileModel!.driver !=
+                                  null
+                              ? provider.userProfileModel?.driver?.requestsCount
+                              : provider
+                                  .userProfileModel?.client?.requestsCount,
                           distance: "  ${Methods.calcDistance(
                             lat1: sl<LocationProvider>()
                                 .currentLocation!
@@ -105,12 +114,12 @@ class UserProfile extends StatelessWidget {
                 ),
                 if (!provider.isDriver)
                   CarTripDetailsWidget(
+                    isLoading: provider.isLoadProfile,
                     carInfo: provider.userProfileModel?.driver?.carInfo,
                   ),
-                if (provider.isDriver &&
-                    provider.userFollowers != null &&
-                    provider.userFollowers!.data != null)
+                if (provider.isDriver)
                   FollowerDistanceWidget(
+                    isLoading: provider.isLoadFollowers,
                     followers: provider.userFollowers,
                   ),
                 Padding(
