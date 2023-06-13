@@ -34,6 +34,8 @@ class EndPoints {
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
   static const String myTrips = 'reservation';
+  static const String notifications = 'notification/notification';
+  static const String readNotification = 'notification/read';
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';

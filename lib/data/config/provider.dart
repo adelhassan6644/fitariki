@@ -14,7 +14,7 @@ import '../../features/followers/followers/provider/followers_provider.dart';
 import '../../features/home/provider/home_provider.dart';
 import '../../features/my_offers/provider/my_offers_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
-import '../../features/notifictions/provider/notifications_provider.dart';
+import '../../features/notifications/provider/notifications_provider.dart';
 import '../../features/offer_details/provider/offer_details_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';

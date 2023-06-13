@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
+import 'package:fitariki/features/notifications/provider/notifications_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,10 @@ class MoreOptions extends StatelessWidget {
             MoreButton(
               title: getTranslated("notifications", context),
               icon: SvgImages.notifications,
-              onTap: () => CustomNavigator.push(Routes.NOTIFICATIONS),
+              onTap: () {
+                sl<NotificationsProvider>().getNotifications();
+                CustomNavigator.push(Routes.NOTIFICATIONS);
+              },
             ),
             // MoreButton(
             //   title: getTranslated("bank_data", context),

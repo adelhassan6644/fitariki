@@ -255,9 +255,9 @@
   "no_participants_in_this_offer": "No Participants in this offer except client",
   "persons": "persons",
   "rate": "Rate",
-
   "your_trip_end_with": "Your trip end with",
   "please_enter_your_feedback": "Please, Enter your feedback",
   "explore_new_offers_with_this_captain": "Explore new offers with this captain",
-  "explore_new_requests_with_this_client": "Explore new requests with this client"
+  "explore_new_requests_with_this_client": "Explore new requests with this client",
+  "there_is_no_notifications": "There is no notifications"
 }

@@ -82,26 +82,28 @@ class _MyOffersState extends State<MyOffers>
                             ),
                           ),
                         )
-                      : ListAnimator(
-                          data: [
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            ...List.generate(
-                                5,
-                                (index) => Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              Dimensions.PADDING_SIZE_DEFAULT.w,
-                                          vertical: 8.h),
-                                      child: CustomShimmerContainer(
-                                        width: context.width,
-                                        height: 80.h,
-                                        radius: 8,
-                                      ),
-                                    ))
-                          ],
-                        );
+                      : Expanded(
+                        child: ListAnimator(
+                            data: [
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              ...List.generate(
+                                  5,
+                                  (index) => Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                Dimensions.PADDING_SIZE_DEFAULT.w,
+                                            vertical: 8.h),
+                                        child: CustomShimmerContainer(
+                                          width: context.width,
+                                          height: 80.h,
+                                          radius: 8,
+                                        ),
+                                      ))
+                            ],
+                          ),
+                      );
                 })
               : const Expanded(child: GuestMode()),
         ],

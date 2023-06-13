@@ -17,7 +17,7 @@ import '../features/maps/pages/pick_map_screen.dart';
 import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
 import '../features/my_trips/page/my_trip_details.dart';
-import '../features/notifictions/page/notifications.dart';
+import '../features/notifications/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/feedback/page/feedback.dart';
 import '../features/request_details/page/request_details.dart';
@@ -113,23 +113,27 @@ abstract class CustomNavigator {
 
       case Routes.REQUEST_DETAILS:
         return _pageRoute(RequestDetails(
-         id: settings.arguments as int,
+          id: settings.arguments as int,
         ));
 
-        case Routes.MY_TRIP_DETAILS:
+      case Routes.MY_TRIP_DETAILS:
         return _pageRoute(MyTripDetails(
-         myTripModel: settings.arguments as MyTripModel,
+          myTripModel: settings.arguments as MyTripModel,
         ));
 
-        case Routes.MY_PENDING_TRIP_DETAILS:
+      case Routes.MY_PENDING_TRIP_DETAILS:
         return _pageRoute(MyPendingTripDetails(
-         id: settings.arguments as int,
+          id: settings.arguments as int,
         ));
 
       case Routes.PAYMENT:
-        return _pageRoute( Payment(isFromMyTrips: settings.arguments! as bool,));
-        case Routes.PAYMENTWEBVIEW:
-        return _pageRoute( PaymentWebViewScreen(rservationId: settings.arguments! as int,));
+        return _pageRoute(Payment(
+          isFromMyTrips: settings.arguments! as bool,
+        ));
+      case Routes.PAYMENTWEBVIEW:
+        return _pageRoute(PaymentWebViewScreen(
+          rservationId: settings.arguments! as int,
+        ));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
