@@ -40,10 +40,11 @@ class CurrentTripsWidget extends StatelessWidget {
                               padding: EdgeInsets.symmetric(vertical: 4.0.h),
                               child: MyTripCard(
                                 isCurrent: true,
+                                isDriver: provider.isDriver,
                                 offerPassengers: provider
-                                    .currentTrips![index].offerPassengers!,
-                                myTrip: provider
-                                    .currentTrips![index].myTripRequest!,
+                                        .currentTrips![index].offerPassengers ??
+                                    1,
+                                myTrip: provider.currentTrips![index],
                               ),
                             ))
                     : [

@@ -5,7 +5,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/my_trips_provider.dart';
-import 'my_trip_card.dart';
+import 'my_pending_trip_card.dart';
 
 class PendingTripsWidget extends StatelessWidget {
   const PendingTripsWidget({Key? key}) : super(key: key);
@@ -37,8 +37,7 @@ class PendingTripsWidget extends StatelessWidget {
                       provider.pendingTrips!.length,
                       (index) => Padding(
                             padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                            child: MyTripCard(
-                              isPending: true,
+                            child: MyPendingTripCard(
                               myTrip: provider.pendingTrips![index],
                             ),
                           ))

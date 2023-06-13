@@ -1,8 +1,9 @@
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
-import 'package:fitariki/features/my_trips/page/my_trip_details.dart';
+import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
+import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
-import 'package:fitariki/features/feedback/page/rate_user.dart';
+import 'package:fitariki/features/feedback/page/rate_trip.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
@@ -15,6 +16,7 @@ import '../features/followers/followers/page/followers.dart';
 import '../features/maps/pages/pick_map_screen.dart';
 import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
+import '../features/my_trips/page/my_trip_details.dart';
 import '../features/notifictions/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/feedback/page/feedback.dart';
@@ -79,9 +81,9 @@ abstract class CustomNavigator {
       case Routes.FEEDBACK:
         return _pageRoute(const FeedbackView());
 
-      case Routes.RATE_USER:
-        return _pageRoute(RateUser(
-          userId: settings.arguments as int,
+      case Routes.RATE_TRIP:
+        return _pageRoute(RateTrip(
+          data: settings.arguments as RateUserNavigationModel,
         ));
 
       case Routes.WISHLIST:
@@ -116,6 +118,11 @@ abstract class CustomNavigator {
 
         case Routes.MY_TRIP_DETAILS:
         return _pageRoute(MyTripDetails(
+         myTripModel: settings.arguments as MyTripModel,
+        ));
+
+        case Routes.MY_PENDING_TRIP_DETAILS:
+        return _pageRoute(MyPendingTripDetails(
          id: settings.arguments as int,
         ));
 

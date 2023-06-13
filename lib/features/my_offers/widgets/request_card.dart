@@ -29,7 +29,8 @@ class RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+      onTap: () =>
+          CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
       child: Stack(
         children: [
           Padding(
@@ -62,7 +63,7 @@ class RequestCard extends StatelessWidget {
                             CustomNetworkImage.circleNewWorkImage(
                                 image: sl.get<ProfileProvider>().isDriver
                                     ? request!.clientModel?.image
-                                    : request!.clientModel?.image,
+                                    : request!.driverModel?.image,
                                 radius: 16,
                                 color: ColorResources.SECOUND_PRIMARY_COLOR),
                             SizedBox(
@@ -471,7 +472,8 @@ class RequestCard extends StatelessWidget {
                 width: 75.h,
                 height: 30.h,
                 radius: 100,
-                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+                onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
+                    arguments: request!.id!),
               ))
         ],
       ),

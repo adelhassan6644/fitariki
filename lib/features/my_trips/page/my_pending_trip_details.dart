@@ -9,28 +9,28 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/car_trip_details_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
 import '../../maps/provider/location_provider.dart';
-import '../provider/request_details_provider.dart';
-import '../../../main_widgets/car_trip_details_widget.dart';
-import '../widgets/action_buttons.dart';
-import '../widgets/trip_days_on_calender_widget.dart';
+import '../../request_details/provider/request_details_provider.dart';
+import '../../request_details/widgets/trip_days_on_calender_widget.dart';
+import '../widgets/my_trip_details_action_button.dart';
 
-class RequestDetails extends StatefulWidget {
+class MyPendingTripDetails extends StatefulWidget {
   final int id;
 
-  const RequestDetails({
+  const MyPendingTripDetails({
     required this.id,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RequestDetails> createState() => _RequestDetailsState();
+  State<MyPendingTripDetails> createState() => _MyPendingTripDetailsState();
 }
 
-class _RequestDetailsState extends State<RequestDetails> {
+class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
   @override
   void initState() {
     Future.delayed(Duration.zero,
@@ -61,36 +61,38 @@ class _RequestDetailsState extends State<RequestDetails> {
                             ///user card
                             UserCard(
                               withAnalytics: false,
-                              approved:
-                                  provider.requestModel?.approvedAt != null &&
-                                      provider.requestModel?.paidAt != null,
+                              // approved: provider.requestModel?.approvedAt != null &&
+                              //         provider.requestModel?.paidAt != null,
                               reservationId: provider.requestModel?.id,
-                              phone: provider.requestModel?.clientModel != null
-                                  ? provider.requestModel?.clientModel?.phone
-                                  : provider.requestModel?.driverModel?.phone,
+                              phone: provider.isDriver
+                                  ? provider
+                                      .requestModel?.offer?.clientModel?.phone
+                                  : provider
+                                      .requestModel?.offer?.driverModel?.phone,
                               userId: provider.requestModel?.clientId ??
                                   provider.requestModel?.driverId,
-                              name: provider.requestModel?.clientModel != null
-                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? ""}"
-                                  : provider.requestModel?.driverModel
+                              name: provider.isDriver
+                                  ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
+                                  : provider.requestModel?.offer?.driverModel
                                           ?.firstName ??
                                       "",
-                              image: provider.requestModel?.clientModel != null
-                                  ? provider.requestModel?.clientModel?.image
-                                  : provider.requestModel?.driverModel?.image,
-                              male: provider.requestModel?.clientModel != null
+                              image: provider.isDriver
                                   ? provider
-                                          .requestModel?.clientModel?.gender ==
-                                      0
+                                      .requestModel?.offer?.clientModel?.image
                                   : provider
-                                          .requestModel?.driverModel?.gender ==
+                                      .requestModel?.offer?.driverModel?.image,
+                              male: provider.isDriver
+                                  ? provider.requestModel?.offer?.clientModel
+                                          ?.gender ==
+                                      0
+                                  : provider.requestModel?.offer?.driverModel
+                                          ?.gender ==
                                       0,
-                              national:
-                                  provider.requestModel?.clientModel != null
-                                      ? provider.requestModel?.clientModel
-                                          ?.national?.niceName
-                                      : provider.requestModel?.driverModel
-                                          ?.national?.niceName,
+                              national: provider.isDriver
+                                  ? provider.requestModel?.offer?.clientModel
+                                      ?.national?.niceName
+                                  : provider.requestModel?.offer?.driverModel
+                                      ?.national?.niceName,
                               createdAt: provider.requestModel?.createdAt ??
                                   DateTime.now(),
                               days: provider.requestModel?.offer?.offerDays!
@@ -122,12 +124,12 @@ class _RequestDetailsState extends State<RequestDetails> {
                                       0
                                   : null,
                               startPoint: provider.isDriver
-                                  ? provider
-                                      .requestModel?.clientModel?.pickupLocation
+                                  ? provider.requestModel?.offer?.clientModel
+                                      ?.dropOffLocation
                                   : provider
                                       .requestModel?.offer?.pickupLocation,
                               endPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
+                                  ? provider.requestModel?.offer?.clientModel
                                       ?.dropOffLocation
                                   : provider
                                       .requestModel?.offer?.dropOffLocation,
@@ -201,8 +203,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                             Visibility(
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
-                                  carInfo: provider
-                                      .requestModel?.driverModel?.carInfo,
+                                  carInfo: provider.requestModel?.offer
+                                      ?.driverModel?.carInfo,
                                 )),
 
                             /// to show days on calender
@@ -219,7 +221,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                       ),
 
                 ///to update request
-                const ActionButtons()
+                const MyTripDetailsActionButtons()
               ],
             );
           })),

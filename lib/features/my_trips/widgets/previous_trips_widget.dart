@@ -7,6 +7,7 @@ import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/my_trips_provider.dart';
 import 'my_trip_card.dart';
+import 'my_pending_trip_card.dart';
 
 class PreviousTripsWidget extends StatelessWidget {
   const PreviousTripsWidget({Key? key}) : super(key: key);
@@ -40,9 +41,10 @@ class PreviousTripsWidget extends StatelessWidget {
                       (index) => Padding(
                             padding: EdgeInsets.symmetric(vertical: 4.0.h),
                             child: MyTripCard(
+                              isDriver: provider.isDriver,
                               isPrevious: true,
                               myTrip:
-                                  provider.previousTrips![index].myTripRequest!,
+                                  provider.previousTrips![index],
                             ),
                           ))
                   : [

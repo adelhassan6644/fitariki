@@ -20,6 +20,7 @@ class MyTripsProvider extends ChangeNotifier {
   }
 
   bool get isLogin => myTripsRepo.isLoggedIn();
+  bool get isDriver => myTripsRepo.isDriver();
 
   List<String> taps = [
     "previous",

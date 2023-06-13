@@ -252,5 +252,8 @@
   "new_offers": "new offers",
   "day": "day",
   "no_participants_in_this_offer": "No Participants in this offer except client",
-  "persons": "persons"
+  "persons": "persons",
+  "rate": "Rate",
+  "your_trip_end_with": "Your trip end with",
+  "please_enter_your_feedback": "Please, Enter your feedback"
 }

@@ -81,14 +81,18 @@ class UserProfile extends StatelessWidget {
                                 .longitude!,
                             lat2: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel?.driver
-                                    ?.pickupLocation?.latitude
+                                        ?.pickupLocation?.latitude ??
+                                    "0"
                                 : provider.userProfileModel?.client
-                                    ?.pickupLocation?.latitude,
+                                        ?.pickupLocation?.latitude ??
+                                    "0",
                             long2: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel?.driver
-                                    ?.pickupLocation?.longitude
+                                        ?.pickupLocation?.longitude ??
+                                    "0"
                                 : provider.userProfileModel?.client
-                                    ?.pickupLocation?.longitude,
+                                        ?.pickupLocation?.longitude ??
+                                    "0",
                           )} كيلو",
                         ),
                 )

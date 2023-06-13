@@ -100,7 +100,7 @@ class RequestDetailsProvider extends ChangeNotifier {
         ///to Reflect in my Trips
         sl<MyTripsProvider>().getPendingTrips();
         sl<MyTripsProvider>().getCurrentTrips();
-        sl<MyTripsProvider>().getPreviousTrips();
+        // sl<MyTripsProvider>().getPreviousTrips();
 
         notifyListeners();
       });

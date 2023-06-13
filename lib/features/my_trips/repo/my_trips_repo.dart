@@ -18,6 +18,10 @@ class MyTripsRepo {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
 
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
   Future<Either<ServerFailure, Response>> getMyTrips(status) async {
     try {
       Response response = await dioClient.get(

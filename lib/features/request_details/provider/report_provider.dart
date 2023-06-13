@@ -22,7 +22,11 @@ class ReportProvider extends ChangeNotifier {
         CustomNavigator.pop();
         spinKitDialog();
         notifyListeners();
-        final response = await reportRepo.sendReport(userId: userId, reservationId: reservationId, report: report.text.trim(),);
+        final response = await reportRepo.sendReport(
+          userId: userId,
+          reservationId: reservationId,
+          report: report.text.trim(),
+        );
         response.fold((fail) {
           CustomNavigator.pop();
           CustomSnackBar.showSnackBar(
@@ -32,6 +36,7 @@ class ReportProvider extends ChangeNotifier {
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }, (response) {
+          CustomNavigator.pop();
           CustomNavigator.push(Routes.SUCCESS,
               arguments: SuccessModel(
                   isCongrats: false,

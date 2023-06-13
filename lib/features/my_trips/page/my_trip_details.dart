@@ -1,8 +1,8 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:fitariki/main_widgets/user_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -12,31 +12,16 @@ import '../../../data/config/di.dart';
 import '../../../main_widgets/car_trip_details_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
-import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
 import '../../maps/provider/location_provider.dart';
-import '../../request_details/provider/request_details_provider.dart';
 import '../../request_details/widgets/trip_days_on_calender_widget.dart';
-import '../widgets/my_trip_details_action_button.dart';
 
-class MyTripDetails extends StatefulWidget {
-  final int id;
+class MyTripDetails extends StatelessWidget {
+  final MyTripModel myTripModel;
 
   const MyTripDetails({
-    required this.id,
+    required this.myTripModel,
     Key? key,
   }) : super(key: key);
-
-  @override
-  State<MyTripDetails> createState() => _MyTripDetailsState();
-}
-
-class _MyTripDetailsState extends State<MyTripDetails> {
-  @override
-  void initState() {
-    Future.delayed(Duration.zero,
-        () => sl<RequestDetailsProvider>().getRequestDetails(id: widget.id));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,195 +29,148 @@ class _MyTripDetailsState extends State<MyTripDetails> {
       body: SafeArea(
           bottom: true,
           top: false,
-          child:
-              Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
-            return Column(
-              children: [
-                CustomAppBar(
-                  title: getTranslated("trip", context),
-                ),
-                provider.isLoading
-                    ? RequestDetailsShimmer(
-                        isDriver: provider.isDriver,
-                      )
-                    : Expanded(
-                        child: ListAnimator(
-                          data: [
-                            ///user card
-                            UserCard(
-                              withAnalytics: false,
-                              approved:
-                                  provider.requestModel?.approvedAt != null &&
-                                      provider.requestModel?.paidAt != null,
-                              reservationId: provider.requestModel?.id,
-                              phone: provider.isDriver
-                                  ? provider
-                                      .requestModel?.offer?.clientModel?.phone
-                                  : provider
-                                      .requestModel?.offer?.driverModel?.phone,
-                              userId: provider.requestModel?.clientId ??
-                                  provider.requestModel?.driverId,
-                              name: provider.isDriver
-                                  ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
-                                  : provider.requestModel?.offer?.driverModel
-                                          ?.firstName ??
-                                      "",
-                              image: provider.isDriver
-                                  ? provider
-                                      .requestModel?.offer?.clientModel?.image
-                                  : provider
-                                      .requestModel?.offer?.driverModel?.image,
-                              male: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                          ?.gender ==
-                                      0
-                                  : provider.requestModel?.offer?.driverModel
-                                          ?.gender ==
-                                      0,
-                              national: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.national?.niceName
-                                  : provider.requestModel?.offer?.driverModel
-                                      ?.national?.niceName,
-                              createdAt: provider.requestModel?.createdAt ??
-                                  DateTime.now(),
-                              days: provider.requestModel?.offer?.offerDays!
-                                  .map((e) => e.dayName)
-                                  .toList()
-                                  .join(", "),
-                              duration:
-                                  provider.requestModel?.duration.toString(),
-                              priceRange:
-                                  "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
-                              followers: provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? "${provider.requestModel?.followers?.length}"
-                                  : null,
-                              timeRange:
-                                  "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
-                            ),
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: getTranslated("trip", context),
+              ),
+              Expanded(
+                child: ListAnimator(
+                  data: [
+                    ///user card
+                    UserCard(
+                      withAnalytics: false,
+                      approved: true,
+                      reservationId: myTripModel.id,
+                      phone: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.phone
+                          : myTripModel.driverModel?.phone,
+                      userId: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.id
+                          : myTripModel.driverModel?.id,
+                      name: sl<ProfileProvider>().isDriver
+                          ? "${myTripModel.clientModel?.firstName ?? ""} ${myTripModel.clientModel?.lastName ?? ""}"
+                          : myTripModel.driverModel?.firstName ?? "",
+                      image: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.image
+                          : myTripModel.driverModel?.image,
+                      male: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.gender == 0
+                          : myTripModel.driverModel?.gender == 0,
+                      national: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.national?.niceName
+                          : myTripModel.driverModel?.national?.niceName,
+                      createdAt: myTripModel.createAt ?? DateTime.now(),
+                      days: myTripModel.offer?.offerDays!
+                          .map((e) => e.dayName)
+                          .toList()
+                          .join(", "),
+                      duration: myTripModel.myTripRequest?.duration.toString(),
+                      priceRange:
+                          "${myTripModel.myTripRequest?.price ?? 0} ${getTranslated("sar", context)}",
+                      passengers: myTripModel.myTripRequest?.followers !=
+                                  null &&
+                              myTripModel.myTripRequest!.followers!.isNotEmpty
+                          ? myTripModel.myTripRequest!.followers!.length + 1
+                          : 1,
+                      timeRange: "${Methods.convertStringToTime(myTripModel.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(myTripModel.offer?.offerDays?[0].endTime, withFormat: true)}",
+                    ),
 
-                            /// Map View
-                            MapWidget(
-                              stopPoints: provider.isDriver &&
-                                      provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel?.followers?.length ??
-                                      0
-                                  : null,
-                              startPoint: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
-                              endPoint: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.dropOffLocation,
-                            ),
+                    /// Map View
+                    MapWidget(
+                      stopPoints: sl<ProfileProvider>().isDriver &&
+                              myTripModel.myTripRequest?.followers != null &&
+                              myTripModel.myTripRequest!.followers!.isNotEmpty
+                          ? myTripModel.myTripRequest?.followers?.length ?? 0
+                          : null,
+                      startPoint: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.dropOffLocation
+                          : myTripModel.myTripRequest?.offer?.pickupLocation,
+                      endPoint: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.dropOffLocation
+                          : myTripModel.myTripRequest?.offer?.dropOffLocation,
+                    ),
 
-                            ///distance between client and driver
-                            DistanceWidget(
-                                isCaptain: provider.isDriver,
-                                lat1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .latitude!,
-                                long1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .longitude!,
-                                lat2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.latitude ??
-                                        "0"
-                                    : provider.requestModel?.driverModel
-                                            ?.pickupLocation?.latitude ??
-                                        "0",
-                                long2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.longitude ??
-                                        "1"
-                                    : provider.requestModel?.driverModel
-                                            ?.pickupLocation?.longitude ??
-                                        "1"),
+                    ///distance between client and driver
+                    DistanceWidget(
+                        isCaptain: sl<ProfileProvider>().isDriver,
+                        lat1: sl<LocationProvider>().currentLocation!.latitude!,
+                        long1:
+                            sl<LocationProvider>().currentLocation!.longitude!,
+                        lat2: sl<ProfileProvider>().isDriver
+                            ? myTripModel
+                                    .clientModel?.pickupLocation?.latitude ??
+                                "0"
+                            : myTripModel.myTripRequest?.offer?.pickupLocation
+                                    ?.latitude ??
+                                "0",
+                        long2: sl<ProfileProvider>().isDriver
+                            ? myTripModel
+                                    .clientModel?.pickupLocation?.longitude ??
+                                "0"
+                            : myTripModel.myTripRequest?.offer?.pickupLocation
+                                    ?.longitude ??
+                                "0"),
 
-                            /// to show stop points for followers request if driver
-                            Visibility(
-                              visible: provider.isDriver &&
-                                  provider.requestModel?.followers != null &&
-                                  provider.requestModel!.followers!.isNotEmpty,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 8.h,
-                                        horizontal:
-                                            Dimensions.PADDING_SIZE_DEFAULT.w),
-                                    child: Text(
-                                      getTranslated("stop_points", context),
-                                      style: AppTextStyles.w600.copyWith(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                  ...List.generate(
-                                    provider.requestModel?.followers?.length ??
-                                        0,
-                                    (index) => MapWidget(
-                                      clientName: provider.requestModel
-                                              ?.followers?[index].name ??
-                                          "",
-                                      gender: provider.requestModel
-                                          ?.followers?[index].gender,
-                                      startPoint: provider.requestModel
-                                          ?.followers?[index].pickupLocation,
-                                      endPoint: provider.requestModel
-                                          ?.followers?[index].dropOffLocation,
-                                    ),
-                                  ),
-                                ],
+                    /// to show stop points for followers request if driver
+                    Visibility(
+                      visible: sl<ProfileProvider>().isDriver &&
+                          myTripModel.myTripRequest?.followers != null &&
+                          myTripModel.myTripRequest!.followers!.isNotEmpty,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.h,
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                            child: Text(
+                              getTranslated("stop_points", context),
+                              style: AppTextStyles.w600.copyWith(
+                                fontSize: 14,
                               ),
                             ),
-
-                            /// to show car data if client
-                            Visibility(
-                                visible: !provider.isDriver,
-                                child: CarTripDetailsWidget(
-                                  carInfo: provider.requestModel?.offer
-                                      ?.driverModel?.carInfo,
-                                )),
-
-                            /// to show days on calender
-                            TripDaysOnCalenderWidget(
-                                startDate: provider.requestModel?.startAt,
-                                endDate: provider.requestModel?.endAt,
-                                days: provider.requestModel?.offer?.offerDays),
-
-                            SizedBox(
-                              height: 24.h,
-                            )
-                          ],
-                        ),
+                          ),
+                          ...List.generate(
+                            myTripModel.myTripRequest?.followers?.length ?? 0,
+                            (index) => MapWidget(
+                              clientName: myTripModel
+                                      .myTripRequest?.followers?[index].name ??
+                                  "",
+                              gender: myTripModel
+                                  .myTripRequest?.followers?[index].gender,
+                              startPoint: myTripModel.myTripRequest
+                                  ?.followers?[index].pickupLocation,
+                              endPoint: myTripModel.myTripRequest
+                                  ?.followers?[index].dropOffLocation,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
 
-                ///to update request
-                const MyTripDetailsActionButtons()
-              ],
-            );
-          })),
+                    /// to show car data if client
+                    Visibility(
+                        visible: !sl<ProfileProvider>().isDriver,
+                        child: CarTripDetailsWidget(
+                          carInfo: myTripModel.driverModel?.carInfo,
+                        )),
+
+                    /// to show days on calender
+                    TripDaysOnCalenderWidget(
+                        startDate: myTripModel.myTripRequest?.startAt,
+                        endDate: myTripModel.myTripRequest?.endAt,
+                        days: myTripModel.offer?.offerDays),
+
+                    SizedBox(
+                      height: 24.h,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
   }
-}
-
-class RequestDetailsNavigationModel {
-  final int requestId;
-  final bool isFromMyTrips;
-  RequestDetailsNavigationModel(
-      {required this.requestId, required this.isFromMyTrips});
 }

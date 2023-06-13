@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import '../app/core/utils/methods.dart';
 import '../components/custom_images.dart';
@@ -29,7 +30,7 @@ class UserCard extends StatelessWidget {
       this.phone,
       this.days,
       this.rate,
-      this.followers,
+      this.passengers,
       this.timeRange,
       this.national,
       this.priceRange,
@@ -38,11 +39,11 @@ class UserCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final int? userId, reservationId, rate;
+  final int? userId, reservationId, rate,passengers;
   final String? image, name, national, phone;
   final bool male;
 
-  final String? duration, days, timeRange, priceRange, followers;
+  final String? duration, days, timeRange, priceRange;
   final bool withAnalytics;
   final bool approved;
   final DateTime? createdAt;
@@ -157,7 +158,7 @@ class UserCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           MarqueeWidget(
                             child: Text(
-                              "$duration يوم ",
+                              "$duration ${getTranslated("day", context)}",
                               maxLines: 1,
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,
@@ -170,7 +171,7 @@ class UserCard extends StatelessWidget {
 
                     /// to show followers number
                     Visibility(
-                      visible: followers != null && !approved,
+                      visible:sl<ProfileProvider>().isDriver ,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
@@ -182,7 +183,7 @@ class UserCard extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: followers != null && !approved,
+                      visible: sl<ProfileProvider>().isDriver ,
                       child: Expanded(
                         flex: 2,
                         child: Column(
@@ -192,7 +193,7 @@ class UserCard extends StatelessWidget {
                             const SizedBox(height: 4),
                             MarqueeWidget(
                               child: Text(
-                                "$followers",
+                                "$passengers",
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 10,
@@ -311,7 +312,7 @@ class UserCard extends StatelessWidget {
                       SizedBox(
                         height: 12.h,
                       ),
-                      ContactButtons(phone: phone!)
+                      ContactButtons(phone: phone??"")
                     ],
                   )
                 : Column(

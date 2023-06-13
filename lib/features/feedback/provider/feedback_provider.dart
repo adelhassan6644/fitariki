@@ -61,46 +61,54 @@ class FeedbackProvider extends ChangeNotifier {
     ratting = -1;
   }
 
-  bool isSendRate = false;
+  bool isSendFeedback = false;
 
   sendFeedback({required int offerId, required int userId}) async {
-    try {
-      isSendRate = true;
-      notifyListeners();
-      final response = await feedbackRepo.sendFeedback(
-        userId: userId,
-        offerId: offerId,
-        rating: ratting!,
-        feedback: feedback.text.trim(),
-      );
-      response.fold((fail) {
+    if (feedback.text.trim().isNotEmpty && ratting != -1) {
+      try {
+        isSendFeedback = true;
+        notifyListeners();
+        final response = await feedbackRepo.sendFeedback(
+          userId: userId,
+          offerId: offerId,
+          rating: ratting!,
+          feedback: feedback.text.trim(),
+        );
+        response.fold((fail) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: fail.error,
+                  isFloating: true,
+                  backgroundColor: ColorResources.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+        }, (response) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: getTranslated("your_feedback_sent_successfully",
+                      CustomNavigator.navigatorState.currentContext!),
+                  isFloating: true,
+                  backgroundColor: ColorResources.ACTIVE,
+                  borderColor: Colors.transparent));
+          clear();
+          CustomNavigator.pop();
+        });
+        isSendFeedback = false;
+        notifyListeners();
+      } catch (e) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: fail.error,
+                message: e.toString(),
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-      }, (response) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: getTranslated("your_feedback_sent_successfully",
-                    CustomNavigator.navigatorState.currentContext!),
-                isFloating: true,
-                backgroundColor: ColorResources.ACTIVE,
-                borderColor: Colors.transparent));
-      });
-      clear();
-      isSendRate = false;
-      notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isSendRate = false;
-      notifyListeners();
+        isSendFeedback = false;
+        notifyListeners();
+      }
+    } else {
+      showToast(
+          getTranslated("please_enter_your_feedback",
+              CustomNavigator.navigatorState.currentContext!),
+          backGroundColor: ColorResources.IN_ACTIVE);
     }
   }
 }

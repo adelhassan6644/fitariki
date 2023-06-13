@@ -17,10 +17,11 @@ class Routes {
   static const MY_OFFERS_DETAILS = "MY_OFFERS_DETAILS";
   static const ALL_REQUESTS = "ALL_REQUESTS";
   static const REQUEST_DETAILS = "REQUEST_DETAILS";
+  static const MY_PENDING_TRIP_DETAILS = "MY_PENDING_TRIP_DETAILS";
   static const MY_TRIP_DETAILS = "MY_TRIP_DETAILS";
   static const PAYMENT = "PAYMENT";
   static const PAYMENTWEBVIEW = "PAYMENT_web_view";
   static const USER_PROFILE = "USER_PROFILE";
   static const ALL_USER_OFFERS = "ALL_USER_OFFERS";
-  static const RATE_USER = "RATE_USER";
+  static const RATE_TRIP = "RATE_TRIP";
 }

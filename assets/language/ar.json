@@ -253,5 +253,8 @@
   "there_is_no_trips": "لا يوجود رحلات",
   "new_requests": "طلبات جديدة",
   "new_offers": "عروض جديدة",
-  "day": "يوم"
+  "day": "يوم",
+  "rate": "تقييم",
+  "your_trip_end_with": "تم انتهاء رحلتك مع",
+  "please_enter_your_feedback": "من فضلك ادخل تقييمك"
 }

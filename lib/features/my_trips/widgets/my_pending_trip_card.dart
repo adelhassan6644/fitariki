@@ -9,32 +9,25 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../feedback/page/rate_trip.dart';
-import '../model/my_trips_model.dart';
+import '../../profile/provider/profile_provider.dart';
+import '../../request_details/model/offer_request_details_model.dart';
+import '../../request_details/provider/request_details_provider.dart';
 
-class MyTripCard extends StatelessWidget {
-  const MyTripCard(
-      {required this.myTrip,
-      this.isCurrent = false,
-      this.isPrevious = false,
-      required this.isDriver,
-      this.offerPassengers,
-      Key? key})
+class MyPendingTripCard extends StatelessWidget {
+  const MyPendingTripCard(
+      {required this.myTrip, this.offerPassengers, Key? key})
       : super(key: key);
-  final MyTripModel myTrip;
+  final OfferRequestDetailsModel myTrip;
   final int? offerPassengers;
-  final bool isCurrent, isPrevious, isDriver;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (isCurrent) {
-          CustomNavigator.push(Routes.MY_TRIP_DETAILS, arguments: myTrip);
-        } else {}
-      },
+      onTap: () => CustomNavigator.push(Routes.MY_PENDING_TRIP_DETAILS,
+          arguments: myTrip.id!),
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -65,9 +58,9 @@ class MyTripCard extends StatelessWidget {
                     Row(
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
-                            image: isDriver
-                                ? myTrip.clientModel?.image ?? ""
-                                : myTrip.driverModel?.image ?? "",
+                            image: myTrip.offer?.clientModel != null
+                                ? myTrip.offer?.clientModel?.image ?? ""
+                                : myTrip.offer?.driverModel?.image ?? "",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -82,9 +75,11 @@ class MyTripCard extends StatelessWidget {
                                 SizedBox(
                                   width: 50,
                                   child: Text(
-                                    isDriver
-                                        ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.lastName ?? ""} "
-                                        : myTrip.driverModel?.firstName ?? "",
+                                    myTrip.offer?.clientModel != null
+                                        ? "${myTrip.offer?.clientModel?.firstName ?? ""} ${myTrip.offer?.clientModel?.lastName ?? ""} "
+                                        : myTrip.offer?.driverModel
+                                                ?.firstName ??
+                                            "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(
@@ -97,11 +92,11 @@ class MyTripCard extends StatelessWidget {
                                   width: 4,
                                 ),
                                 customImageIconSVG(
-                                    imageName: isDriver
-                                        ? myTrip.clientModel?.gender == 0
+                                    imageName: myTrip.offer?.clientModel != null
+                                        ? myTrip.offer?.clientModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon
-                                        : myTrip.driverModel?.gender == 0
+                                        : myTrip.offer?.driverModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon,
                                     color: ColorResources.BLUE_COLOR,
@@ -112,10 +107,12 @@ class MyTripCard extends StatelessWidget {
                             SizedBox(
                               width: 50,
                               child: Text(
-                                isDriver
-                                    ? myTrip.clientModel?.national?.niceName ??
+                                myTrip.offer?.clientModel != null
+                                    ? myTrip.offer?.clientModel?.national
+                                            ?.niceName ??
                                         ""
-                                    : myTrip.driverModel?.national?.niceName ??
+                                    : myTrip.offer?.driverModel?.national
+                                            ?.niceName ??
                                         "",
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
@@ -134,7 +131,7 @@ class MyTripCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: isCurrent ? 7 : 3,
+                          flex: 3,
                           child: Row(
                             children: [
                               customImageIconSVG(imageName: SvgImages.calendar),
@@ -142,7 +139,7 @@ class MyTripCard extends StatelessWidget {
                               Expanded(
                                 child: MarqueeWidget(
                                   child: Text(
-                                    "${getTranslated("start_date", context)} ${myTrip.myTripRequest!.startAt!.dateFormat(format: "yyyy MMM d")}",
+                                    "${getTranslated("start_date", context)} ${myTrip.startAt!.dateFormat(format: "yyyy MMM d")}",
                                     textAlign: TextAlign.start,
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -163,124 +160,107 @@ class MyTripCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        if (!isCurrent)
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.roadLine),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: MarqueeWidget(
-                                    child: Text(
-                                      "${myTrip.myTripRequest!.duration} ${getTranslated("day", context)}",
-                                      textAlign: TextAlign.start,
-                                      style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
+                        Expanded(
+                          flex: 2,
+                          child: Row(
+                            children: [
+                              customImageIconSVG(imageName: SvgImages.roadLine),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "${myTrip.duration} ${getTranslated("day", context)}",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Container(
-                                    color: ColorResources.HINT_COLOR,
-                                    height: 10,
-                                    width: 1,
-                                    child: const SizedBox(),
-                                  ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Container(
+                                  color: ColorResources.HINT_COLOR,
+                                  height: 10,
+                                  width: 1,
+                                  child: const SizedBox(),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        if (!isCurrent)
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                customImageIconSVG(imageName: SvgImages.wallet),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: MarqueeWidget(
-                                    child: Text(
-                                      "${myTrip.myTripRequest?.price} ${getTranslated("sar", context)}",
-                                      textAlign: TextAlign.start,
-                                      style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Row(
+                            children: [
+                              customImageIconSVG(imageName: SvgImages.wallet),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: MarqueeWidget(
+                                  child: Text(
+                                    "${myTrip.price} ${getTranslated("sar", context)}",
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        if (isCurrent)
-                          Expanded(
-                            flex: 4,
-                            child: Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.userNumber),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: MarqueeWidget(
-                                    child: Text(
-                                      "${offerPassengers ?? 1}",
-                                      textAlign: TextAlign.start,
-                                      style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-              if (isCurrent)
-                Row(
-                  children: [
-                    customImageIconSVG(
-                      imageName: SvgImages.down,
-                    ),
-                    Text(
-                      "${myTrip.myTripRequest?.price ?? 0}",
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.w700.copyWith(
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
+              if (myTrip.approvedAt == null &&
+                  !sl.get<ProfileProvider>().isDriver)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                  decoration: BoxDecoration(
+                      color: ColorResources.tripStatus("pending"),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Text(
+                    getTranslated("pending", context),
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                  ),
                 ),
-              if (isPrevious)
-                GestureDetector(
+              if (sl.get<ProfileProvider>().isDriver)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                  decoration: BoxDecoration(
+                      color: ColorResources.tripStatus("pending"),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Text(
+                    getTranslated("pending", context),
+                    style: AppTextStyles.w600.copyWith(
+                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                  ),
+                ),
+              if (myTrip.paidAt == null &&
+                  myTrip.approvedAt != null &&
+                  !sl.get<ProfileProvider>().isDriver)
+                InkWell(
                   onTap: () {
-                    CustomNavigator.push(Routes.RATE_TRIP,
-                        arguments: RateUserNavigationModel(
-                            isDriver: isDriver,
-                            name: isDriver
-                                ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName ?? ""}"
-                                : myTrip.driverModel?.firstName ?? "",
-                            userId:
-                                isDriver ? myTrip.clientId : myTrip.driverId,
-                            offerId: myTrip.offerId));
+                    sl<RequestDetailsProvider>()
+                        .getRequestDetails(id: myTrip.id!);
+                    CustomNavigator.push(Routes.PAYMENT, arguments: true);
                   },
                   child: Container(
                     padding:
                         const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                     decoration: BoxDecoration(
-                        color: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                        color: ColorResources.tripStatus("pay"),
                         borderRadius: BorderRadius.circular(100)),
                     child: Text(
-                      getTranslated("rate", context),
+                      getTranslated("pay", context),
                       style: AppTextStyles.w600.copyWith(
-                          fontSize: 12, color: ColorResources.PRIMARY_COLOR),
+                          fontSize: 12, color: ColorResources.WHITE_COLOR),
                     ),
                   ),
                 ),

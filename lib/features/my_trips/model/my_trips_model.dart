@@ -1,14 +1,24 @@
+import '../../../main_models/offer_model.dart';
+import '../../profile/model/client_model.dart';
+import '../../profile/model/driver_model.dart';
 import '../../request_details/model/offer_request_details_model.dart';
 
 class MyTripModel {
   OfferRequestDetailsModel? myTripRequest;
+  OfferModel? offerModel;
   DateTime? createAt;
+  DateTime? endAt;
   bool? paid;
   int? status;
   int? id;
   int? offerId;
+  int? clientId;
+  int? driverId;
   int? requestId;
   int? offerPassengers;
+  DriverModel? driverModel;
+  ClientModel? clientModel;
+  OfferModel? offer;
 
   MyTripModel(
       {this.id,
@@ -17,16 +27,32 @@ class MyTripModel {
       this.myTripRequest,
       this.paid,
       this.status,
+      this.clientId,
+      this.driverId,
       this.offerPassengers,
-      this.createAt});
+      this.driverModel,
+      this.clientModel,
+      this.offer,
+      this.createAt,
+      this.endAt});
   factory MyTripModel.fromJson(Map<String, dynamic> json) => MyTripModel(
       id: json["id"],
       offerId: json["offer_id"],
+      driverId: json["driver_id"],
+      clientId: json["client_id"],
       requestId: json["offer_request_id"],
-      paid: json["paid"]==1?true:false,
+      paid: json["paid"] == 1 ? true : false,
       status: json["status"],
-      offerPassengers: json["status"],
-      createAt: DateTime.tryParse(json["created_at"]),
+      offerPassengers: json["offer_passengers"],
+      offer: json["offer"] == null ? null : OfferModel.fromJson(json["offer"]),
+      createAt: json["created_at"] != null
+          ? DateTime.tryParse(json["created_at"])
+          : null,
+      endAt: json["end_at"] != null ? DateTime.tryParse(json["end_at"]) : null,
+      clientModel:
+          json["client"] == null ? null : ClientModel.fromJson(json["client"]),
+      driverModel:
+          json["driver"] == null ? null : DriverModel.fromJson(json["driver"]),
       myTripRequest: json['offer_request'] != null
           ? OfferRequestDetailsModel.fromJson(json["offer_request"])
           : null);
