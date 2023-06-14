@@ -168,6 +168,31 @@ class MyTripCard extends StatelessWidget {
                             ],
                           ),
                         ),
+                        ///to show number of passengers
+                        Visibility(
+                          visible: isCurrent,
+                          child: Expanded(
+                            flex: 4,
+                            child: Row(
+                              children: [
+                                customImageIconSVG(
+                                    imageName: SvgImages.userNumber),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                  child: MarqueeWidget(
+                                    child: Text(
+                                      "${offerPassengers ?? 1}",
+                                      textAlign: TextAlign.start,
+                                      style: AppTextStyles.w400.copyWith(
+                                          fontSize: 10,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
 
                         ///to duration of trip
                         Visibility(
@@ -230,31 +255,7 @@ class MyTripCard extends StatelessWidget {
                           ),
                         ),
 
-                        ///to show number of passengers
-                        Visibility(
-                          visible: isCurrent,
-                          child: Expanded(
-                            flex: 4,
-                            child: Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.userNumber),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: MarqueeWidget(
-                                    child: Text(
-                                      "${offerPassengers ?? 1}",
-                                      textAlign: TextAlign.start,
-                                      style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+
                       ],
                     ),
                     Visibility(

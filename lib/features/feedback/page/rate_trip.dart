@@ -67,7 +67,7 @@ class RateTrip extends StatelessWidget {
                           child: SubstringHighlight(
                             textAlign: TextAlign.center,
                             text:
-                                "${getTranslated("your_trip_end_with", context)} ${getTranslated(data.isDriver! ? "client" : "captain", context)} ${data.name}",
+                                "${getTranslated("your_trip_end_with", context)} ${getTranslated(data.isDriver! ? "passenger" : "captain", context)} ${data.name}",
                             term: data.name,
                             textStyle: AppTextStyles.w500.copyWith(
                                 fontSize: 16,

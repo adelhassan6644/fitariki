@@ -81,7 +81,6 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
 
       final filters = {
-
         "fillters": {
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
@@ -90,7 +89,9 @@ class HomeProvider extends ChangeNotifier {
       };
 
       Either<ServerFailure, Response> response = await homeRepo.getOffer(
-        body: withFilter ? filters : {
+          body: withFilter
+              ? filters
+              : {
                   "fillters": {
                     if (sl
                             .get<SharedPreferences>()

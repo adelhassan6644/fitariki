@@ -54,7 +54,7 @@ class ContactProvider extends ChangeNotifier {
   launchWebsite() {
     try {
       launchUrl(Uri.parse(
-        'https://codoweb.com/',
+        contactModel?.website??'https://codoweb.com/',
       ));
     } catch (e) {
       log("=====> Exception WebSite Launch $e");
@@ -65,7 +65,7 @@ class ContactProvider extends ChangeNotifier {
     try {
       launchUrl(Uri(
         scheme: 'mailto',
-        path: 'adelhassan6644@gmail.com',
+        path:   contactModel?.email??'adelhassan6644@gmail.com',
         query: 'subject=Hello&body=Test',
       ));
     } catch (e) {
@@ -76,7 +76,7 @@ class ContactProvider extends ChangeNotifier {
   launchTwitter() {
     try {
       launchUrl(Uri.parse(
-        'https://www.twitter.com/Software_Cloud2',
+        contactModel?.twitter??'https://www.twitter.com/Software_Cloud2',
       ));
     } catch (e) {
       log("=====> Exception Twitter Launch $e");
@@ -85,7 +85,7 @@ class ContactProvider extends ChangeNotifier {
 
   launchCustomerService() {
     try {
-      launch("tel://+201010201884");
+      launch("tel:// ${  contactModel?.phone?? "+2966555666777"}");
     } catch (e) {
       log("=====> Exception Customer Service Launch $e");
     }

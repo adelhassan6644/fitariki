@@ -34,14 +34,16 @@ class UserCard extends StatelessWidget {
       this.timeRange,
       this.national,
       this.priceRange,
+      this.matching,
       this.withAnalytics = true,
       this.approved = false,
       Key? key})
       : super(key: key);
 
-  final int? userId, reservationId, rate,passengers;
+  final int? userId, reservationId, rate, passengers;
   final String? image, name, national, phone;
   final bool male;
+  final double? matching;
 
   final String? duration, days, timeRange, priceRange;
   final bool withAnalytics;
@@ -171,7 +173,8 @@ class UserCard extends StatelessWidget {
 
                     /// to show followers number
                     Visibility(
-                      visible:sl<ProfileProvider>().isDriver ,
+                      visible:
+                          sl<ProfileProvider>().isDriver && passengers != null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
@@ -183,7 +186,8 @@ class UserCard extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: sl<ProfileProvider>().isDriver ,
+                      visible:
+                          sl<ProfileProvider>().isDriver && passengers != null,
                       child: Expanded(
                         flex: 2,
                         child: Column(
@@ -312,7 +316,7 @@ class UserCard extends StatelessWidget {
                       SizedBox(
                         height: 12.h,
                       ),
-                      ContactButtons(phone: phone??"")
+                      ContactButtons(phone: phone ?? "")
                     ],
                   )
                 : Column(
@@ -331,8 +335,8 @@ class UserCard extends StatelessWidget {
                         height: 4.h,
                       ),
                       if (withAnalytics)
-                        const AcceptableAnalytics(
-                          value: 50,
+                         AcceptableAnalytics(
+                          value: matching??0,
                           color: ColorResources.PRIMARY_COLOR,
                         ),
                     ],

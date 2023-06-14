@@ -45,7 +45,7 @@ class DurationWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => customShowModelBottomSheet(
                   body: DateTimePicker(
-                    startDateTime: provider.startDate,
+                    startDateTime: DateTime.now(),
                     valueChanged: provider.onSelectStartDate,
                     label: getTranslated("start_of_duration", context),
                   ),

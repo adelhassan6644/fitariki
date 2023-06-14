@@ -3,6 +3,7 @@ import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:fitariki/features/feedback/provider/feedback_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
@@ -25,29 +26,53 @@ class FeedbackView extends StatelessWidget {
                   ? getTranslated("clients_evaluation", context)
                   : getTranslated("captain_evaluation", context),
             ),
-            Expanded(child:
-                Consumer<FeedbackProvider>(builder: (_, provider, child) {
-              return ListView(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                    vertical: 16.h),
-                physics: const BouncingScrollPhysics(),
-                children: provider.isLoading
-                    ? List.generate(5, (index) => Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              child: CustomShimmerContainer(
-                                height: 90.h,
-                                radius: 8,
-                              ),
-                            ))
-                    : provider.feedbackModel!.feedbacks!.isNotEmpty
-                        ? List.generate(provider.feedbackModel!.feedbacks!.length,
-                            (index) => FeedbackCard(feedback: provider.feedbackModel!.feedbacks![index],))
-                        : [EmptyState(
-                              txt: getTranslated("there_is_no_evaluations", context),
-                            ),],
-              );
-            }))
+            Consumer<FeedbackProvider>(builder: (_, provider, child) {
+              return provider.isLoading
+                  ? Expanded(
+                      child: ListView(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                              vertical: 16.h),
+                          physics: const BouncingScrollPhysics(),
+                          children: List.generate(
+                              5,
+                              (index) => Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 8.h),
+                                    child: CustomShimmerContainer(
+                                      height: 90.h,
+                                      radius: 8,
+                                    ),
+                                  ))))
+                  : Expanded(
+                      child: RefreshIndicator(
+                        color: ColorResources.PRIMARY_COLOR,
+                        onRefresh: () async {
+                          sl<FeedbackProvider>().getFeedback();
+                        },
+                        child: ListView(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                              vertical: 16.h),
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          children: provider.feedbackModel != null &&
+                                  provider.feedbackModel!.feedbacks!.isNotEmpty
+                              ? List.generate(
+                                  provider.feedbackModel!.feedbacks!.length,
+                                  (index) => FeedbackCard(
+                                        feedback: provider
+                                            .feedbackModel!.feedbacks![index],
+                                      ))
+                              : [
+                                  EmptyState(
+                                    txt: getTranslated(
+                                        "there_is_no_evaluations", context),
+                                  ),
+                                ],
+                        ),
+                      ),
+                    );
+            })
           ],
         ),
       ),

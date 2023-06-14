@@ -29,7 +29,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool sameHomeLocation = true;
+  bool sameHomeLocation = false;
   void onSelect(bool value) {
     sameHomeLocation = value;
     notifyListeners();
@@ -47,7 +47,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool sameDestination = true;
+  bool sameDestination = false;
   void onSelect1(bool value) {
     sameDestination = value;
     notifyListeners();

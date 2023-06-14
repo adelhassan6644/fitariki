@@ -101,7 +101,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                     widget.valueChanged!(date!);
                     CustomNavigator.pop();
                   } else {
-                    widget.valueChanged!(DateTime.now());
+                    widget.valueChanged!(widget.startDateTime??DateTime.now());
                     CustomNavigator.pop();
                   }
                 },

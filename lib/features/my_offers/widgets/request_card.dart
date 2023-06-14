@@ -1,7 +1,6 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/custom_button.dart';
-import 'package:fitariki/features/request_details/page/request_details.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';

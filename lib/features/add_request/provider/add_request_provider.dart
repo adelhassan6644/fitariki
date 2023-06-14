@@ -60,7 +60,6 @@ class AddRequestProvider extends ChangeNotifier {
 
   reset() {
     minPrice.clear();
-    // note = null;
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
@@ -69,15 +68,13 @@ class AddRequestProvider extends ChangeNotifier {
   }
 
   checkData({required double minOfferPrice, required double maxOfferPrice}) {
-    if (startDate.isAtSameMomentAs(endDate)) {
-      showToast(" تاريخ النهاية لا يجب ان يكون مثل تاريخ البداية!");
-
+    if (endDate.isBefore(startDate)) {
+      showToast("تاريخ النهاية لا يجب ان يكون قبل تاريخ البداية!");
       return;
     }
 
-    if (!startDate.isBefore(endDate)) {
-      showToast(" تاريخ النهاية لا يجب ان يكون قبل تاريخ البداية!");
-
+    if (endDate.isAtSameMomentAs(startDate)) {
+      showToast(" تاريخ النهاية لا يجب ان يكون مثل تاريخ البداية!");
       return;
     }
 

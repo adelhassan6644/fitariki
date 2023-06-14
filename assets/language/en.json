@@ -259,5 +259,11 @@
   "please_enter_your_feedback": "Please, Enter your feedback",
   "explore_new_offers_with_this_captain": "Explore new offers with this captain",
   "explore_new_requests_with_this_client": "Explore new requests with this client",
-  "there_is_no_notifications": "There is no notifications"
+  "there_is_no_notifications": "There is no notifications",
+  "notification_deleted_successfully": "Notification Deleted Successfully",
+  "something_went_wrong": "Something went wrong",
+  "added_to_wishlist_successfully": "Added to wishlist successfully",
+  "removed_from_wishlist_successfully": "Removed from wishlist successfully",
+  "there_is_no_offers_add_new_offer": "There is no offer \n Add new offer",
+  "there_is_no_requests_add_new_request":  "There is no requests \n Add new requests"
 }

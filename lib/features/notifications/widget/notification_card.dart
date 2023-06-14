@@ -23,46 +23,63 @@ class NotificationCard extends StatefulWidget {
 class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
+    return Dismissible(
+      key: ValueKey(widget.notificationItem.id),
+      background: Container(
+        color: ColorResources.SECOUND_PRIMARY_COLOR.withOpacity(0.20),
+        padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_DEFAULT.w),
+        alignment: Alignment.centerRight,
+        child: const Icon(
+          Icons.delete,
+          size: 30,
+          color: Colors.white,
+        ),
+      ),
+      onDismissed: (_) {
         sl<NotificationsProvider>()
-            .readNotification(widget.notificationItem.notifiableId);
-        setState(() => widget.notificationItem.isRead = true);
+            .deleteNotification(widget.notificationItem.id);
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(
-            vertical: 16.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-        decoration: BoxDecoration(
-            color: widget.notificationItem.isRead == true
-                ? null
-                : ColorResources.PRIMARY_COLOR.withOpacity(0.1),
-            border: Border(
-                bottom: BorderSide(
-                    color: ColorResources.LIGHT_GREY_BORDER, width: 1.h))),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                widget.notificationItem.notificationData?.message ?? "",
-                maxLines: 1,
-                style: AppTextStyles.w400
-                    .copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
+      child: InkWell(
+        onTap: () {
+          sl<NotificationsProvider>()
+              .readNotification(widget.notificationItem.id);
+          setState(() => widget.notificationItem.isRead = true);
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              vertical: 16.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+          decoration: BoxDecoration(
+              color: widget.notificationItem.isRead == true
+                  ? null
+                  : ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+              border: Border(
+                  bottom: BorderSide(
+                      color: ColorResources.LIGHT_GREY_BORDER, width: 1.h))),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  widget.notificationItem.notificationData?.message ?? "",
+                  maxLines: 1,
+                  style: AppTextStyles.w400
+                      .copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
+                ),
               ),
-            ),
-            if (widget.isRequest)
-              SizedBox(
-                width: 40.w,
-              ),
-            if (widget.isRequest)
-              CustomButton(
-                onTap: () {},
-                text: getTranslated("preview", context),
-                radius: 100,
-                width: 70,
-                textSize: 12,
-                height: 30,
-              )
-          ],
+              if (widget.isRequest)
+                SizedBox(
+                  width: 40.w,
+                ),
+              if (widget.isRequest)
+                CustomButton(
+                  onTap: () {},
+                  text: getTranslated("preview", context),
+                  radius: 100,
+                  width: 70,
+                  textSize: 12,
+                  height: 30,
+                )
+            ],
+          ),
         ),
       ),
     );

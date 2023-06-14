@@ -25,11 +25,9 @@ class _MyOffersState extends State<MyOffers>
     with AutomaticKeepAliveClientMixin<MyOffers> {
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      if (sl<MyOffersProvider>().isLogin) {
-        sl<MyOffersProvider>().getMyOffers();
-      }
-    });
+    if (sl<MyOffersProvider>().isLogin) {
+      sl<MyOffersProvider>().getMyOffers();
+    }
     super.initState();
   }
 
@@ -76,14 +74,18 @@ class _MyOffersState extends State<MyOffers>
                                     provider.myOffers!.offers!.isEmpty)
                                   EmptyState(
                                       txt: profileProvider.isDriver
-                                          ? "لا يوجد عروض توصيل حاليا \n أضف عرض جديد"
-                                          : "لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"),
+                                          ? getTranslated(
+                                              "there_is_no_offers_add_new_offer",
+                                              context)
+                                          : getTranslated(
+                                              "there_is_no_requests_add_new_request",
+                                              context)),
                               ],
                             ),
                           ),
                         )
                       : Expanded(
-                        child: ListAnimator(
+                          child: ListAnimator(
                             data: [
                               SizedBox(
                                 height: 8.h,
@@ -92,8 +94,8 @@ class _MyOffersState extends State<MyOffers>
                                   5,
                                   (index) => Padding(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal:
-                                                Dimensions.PADDING_SIZE_DEFAULT.w,
+                                            horizontal: Dimensions
+                                                .PADDING_SIZE_DEFAULT.w,
                                             vertical: 8.h),
                                         child: CustomShimmerContainer(
                                           width: context.width,
@@ -103,7 +105,7 @@ class _MyOffersState extends State<MyOffers>
                                       ))
                             ],
                           ),
-                      );
+                        );
                 })
               : const Expanded(child: GuestMode()),
         ],

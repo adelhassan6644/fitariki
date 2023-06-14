@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -50,10 +52,10 @@ class NotificationsProvider extends ChangeNotifier {
     }
   }
 
-  readNotification(id) async {
+  updateNotifications() async {
     try {
       Either<ServerFailure, Response> response =
-          await notificationsRepo.readNotification(id);
+          await notificationsRepo.getNotification();
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -62,7 +64,10 @@ class NotificationsProvider extends ChangeNotifier {
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
         notifyListeners();
-      }, (response) {});
+      }, (response) {
+        notificationsModel = NotificationsModel.fromJson(response.data);
+        notifyListeners();
+      });
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -71,6 +76,48 @@ class NotificationsProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
       notifyListeners();
+    }
+  }
+
+  readNotification(id) async {
+    try {
+      Either<ServerFailure, Response> response =
+          await notificationsRepo.readNotification(id);
+      response.fold((l) {
+        showToast(ApiErrorHandler.getMessage(l));
+        notifyListeners();
+      }, (response) {});
+    } catch (e) {
+      showToast(getTranslated("something_went_wrong",
+          CustomNavigator.navigatorState.currentContext!));
+      notifyListeners();
+    }
+  }
+
+  deleteNotification(id) async {
+    try {
+      notificationsModel!.notifications!.removeWhere((e) => e.id == id);
+      notifyListeners();
+      Either<ServerFailure, Response> response =
+          await notificationsRepo.deleteNotification(id);
+      response.fold((l) async {
+        await updateNotifications();
+        showToast(ApiErrorHandler.getMessage(l));
+        notifyListeners();
+      }, (response) async {
+        await updateNotifications();
+        showToast(
+          getTranslated("notification_deleted_successfully",
+              CustomNavigator.navigatorState.currentContext!),
+        );
+        notifyListeners();
+      });
+    } catch (e) {
+      await updateNotifications();
+      showToast(
+        getTranslated("something_went_wrong",
+            CustomNavigator.navigatorState.currentContext!),
+      );
     }
   }
 }

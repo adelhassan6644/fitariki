@@ -45,4 +45,20 @@ class NotificationsRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
+  Future<Either<ServerFailure, Response>> deleteNotification(id) async {
+    try {
+      Response response = await dioClient.post(
+        uri:
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteNotification}/${sharedPreferences.getString(AppStorageKey.userId)}/$id",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
 }

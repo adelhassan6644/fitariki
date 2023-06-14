@@ -260,5 +260,11 @@
   "please_enter_your_feedback": "من فضلك ادخل تقييمك",
   "explore_new_offers_with_this_captain": "استكشاف المزيد من العروض مع هذا الكابتن",
   "explore_new_requests_with_this_client": "استكشاف المزيد من الطلبات مع هذا الراكب",
-  "there_is_no_notifications": "لا يوجد تنبيهات"
+  "there_is_no_notifications": "لا يوجد تنبيهات",
+  "notification_deleted_successfully": "تم حذف التنبية بنجاح",
+  "something_went_wrong": "حدث خطآ ما",
+  "added_to_wishlist_successfully":  "تم الاضافة الي المحفوظات بنجاح",
+  "removed_from_wishlist_successfully":  "تم الازلة من المحفوظات بنجاح",
+  "there_is_no_offers_add_new_offer": "لا يوجد عروض توصيل حاليا \n أضف عرض جديد",
+  "there_is_no_requests_add_new_request":"لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"
 }

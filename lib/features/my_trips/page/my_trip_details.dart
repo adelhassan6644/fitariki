@@ -60,14 +60,14 @@ class MyTripDetails extends StatelessWidget {
                       national: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.national?.niceName
                           : myTripModel.driverModel?.national?.niceName,
-                      createdAt: myTripModel.createAt ?? DateTime.now(),
+                      // createdAt: myTripModel.createAt ?? DateTime.now(),
                       days: myTripModel.offer?.offerDays!
                           .map((e) => e.dayName)
                           .toList()
                           .join(", "),
                       duration: myTripModel.myTripRequest?.duration.toString(),
-                      priceRange:
-                          "${myTripModel.myTripRequest?.price ?? 0} ${getTranslated("sar", context)}",
+                      // priceRange:
+                      //     "${myTripModel.myTripRequest?.price ?? 0} ${getTranslated("sar", context)}",
                       passengers: myTripModel.myTripRequest?.followers !=
                                   null &&
                               myTripModel.myTripRequest!.followers!.isNotEmpty

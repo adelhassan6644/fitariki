@@ -1,5 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/data/error/api_error_handler.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -35,7 +38,7 @@ class WishlistProvider extends ChangeNotifier {
   bool isLoading = false;
   FavouriteModel? favouriteModel;
   getWishList() async {
-    // try {
+    try {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
@@ -55,7 +58,7 @@ class WishlistProvider extends ChangeNotifier {
         if (favouriteModel!.offers != null &&
             favouriteModel!.offers!.isNotEmpty) {
           for (var e in favouriteModel!.offers!) {
-            if(e.id!=null) {
+            if (e.id != null) {
               wishListOfferId.add(e.id!);
             }
           }
@@ -76,22 +79,21 @@ class WishlistProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       });
-    // }
-    // catch (e) {
-    //   CustomSnackBar.showSnackBar(
-    //       notification: AppNotification(
-    //           message: e.toString(),
-    //           isFloating: true,
-    //           backgroundColor: ColorResources.IN_ACTIVE,
-    //           borderColor: Colors.transparent));
-    //   isLoading = false;
-    //   notifyListeners();
-    // }
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isLoading = false;
+      notifyListeners();
+    }
   }
 
   postWishList(
       {required int id, required bool isOffer, bool isExist = false}) async {
-    // try {
+    try {
       if (isExist) {
         if (isOffer) {
           wishListOfferId.remove(id);
@@ -110,48 +112,28 @@ class WishlistProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response =
           await wishlistRepo.postWishList(id: id, isOffer: isOffer);
       response.fold((l) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: l.error,
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
+        showToast(ApiErrorHandler.getMessage(l));
       }, (response) {
         if (isExist) {
           showToast(
-            "تم الازلة من المحفوظات بنجاح",
-            backGroundColor: ColorResources.ACTIVE,
+            getTranslated("removed_from_wishlist_successfully",
+                CustomNavigator.navigatorState.currentContext!),
           );
-          // CustomSnackBar.showSnackBar(
-          //     notification: AppNotification(
-          //         message: "تم الازلة من المحفوظات بنجاح",
-          //         isFloating: true,
-          //         backgroundColor: ColorResources.ACTIVE,
-          //         borderColor: Colors.transparent));
         } else {
           showToast(
-            "تم الاضافة الي المحفوظات بنجاح",
-            backGroundColor: ColorResources.ACTIVE,
+            getTranslated("added_to_wishlist_successfully",
+                CustomNavigator.navigatorState.currentContext!),
           );
-
-          // CustomSnackBar.showSnackBar(
-          //     notification: AppNotification(
-          //         message: "تم الاضافة الي المفضلة بنجاح",
-          //         isFloating: true,
-          //         backgroundColor: ColorResources.ACTIVE,
-          //         borderColor: Colors.transparent));
         }
       });
       getWishList();
       notifyListeners();
-    // } catch (e) {
-    //   CustomSnackBar.showSnackBar(
-    //       notification: AppNotification(
-    //           message: e.toString(),
-    //           isFloating: true,
-    //           backgroundColor: ColorResources.IN_ACTIVE,
-    //           borderColor: Colors.transparent));
-    //   notifyListeners();
-    // }
+    } catch (e) {
+      showToast(
+        getTranslated("something_went_wrong",
+            CustomNavigator.navigatorState.currentContext!),
+      );
+      notifyListeners();
+    }
   }
 }

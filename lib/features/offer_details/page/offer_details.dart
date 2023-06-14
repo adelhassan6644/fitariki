@@ -75,6 +75,7 @@ class OfferDetails extends StatelessWidget {
                                       : provider.offerDetails!.driverModel
                                           ?.national?.niceName,
                                   createdAt: provider.offerDetails!.createdAt!,
+                                  matching: provider.offerDetails?.matching,
                                   days: provider.offerDetails!.offerDays!
                                       .map((e) => e.dayName)
                                       .toList()
@@ -101,9 +102,9 @@ class OfferDetails extends StatelessWidget {
                                   .currentLocation!
                                   .longitude!,
                               lat2: provider
-                                  .offerDetails!.pickupLocation!.latitude!,
+                                  .offerDetails?.pickupLocation?.latitude??"0",
                               long2: provider
-                                  .offerDetails!.pickupLocation!.longitude!,
+                                  .offerDetails?.pickupLocation?.longitude??"0",
                             ),
                             if (!provider.isDriver)
                               CarDetails(
@@ -117,11 +118,12 @@ class OfferDetails extends StatelessWidget {
                     : OfferDetailsShimmer(
                         isDriver: provider.isDriver,
                       ),
-                if (!provider.isLoading)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT,
-                        vertical: 24),
+                Visibility(
+                  visible: !provider.isLoading,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                        vertical: 24.h),
                     child: CustomButton(
                         textColor: provider.offerDetails?.isSentOffer == true
                             ? ColorResources.PRIMARY_COLOR
@@ -152,7 +154,8 @@ class OfferDetails extends StatelessWidget {
                                     : const Login());
                           }
                         }),
-                  )
+                  ),
+                )
               ],
             );
           }),

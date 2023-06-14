@@ -75,6 +75,7 @@ class FeedbackProvider extends ChangeNotifier {
           feedback: feedback.text.trim(),
         );
         response.fold((fail) {
+          clear();
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: fail.error,
@@ -95,6 +96,7 @@ class FeedbackProvider extends ChangeNotifier {
         isSendFeedback = false;
         notifyListeners();
       } catch (e) {
+        clear();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: e.toString(),

@@ -89,7 +89,7 @@ showToast(msg, {Color? backGroundColor, Color? textColor, Toast? toastLength}) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
-      backgroundColor: backGroundColor ?? ColorResources.SECOUND_PRIMARY_COLOR,
+      backgroundColor: backGroundColor ??  ColorResources.SECOUND_PRIMARY_COLOR.withOpacity(0.5),
       textColor: textColor ?? ColorResources.WHITE_COLOR,
       fontSize: 16.0);
 }

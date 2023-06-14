@@ -27,164 +27,168 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<UserProfileProvider>(builder: (_, provider, child) {
-        return Column(
-          children: [
-            Stack(
-              children: [
-                CustomAppBar(
-                  isOffer: false,
-                  savedItemId: userId,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                  child: provider.isLoadProfile
-                      ? const ProfileCardShimmer()
-                      : ProfileCard(
-                          lastUpdate: Methods.getDayCount(
-                                  date:
-                                      provider.userProfileModel?.driver != null
-                                          ? provider.userProfileModel!.driver!
-                                              .updatedAt!
-                                          : provider.userProfileModel!.client!
-                                              .updatedAt!)
-                              .toString(),
-                          image: provider.userProfileModel!.driver != null
-                              ? provider.userProfileModel!.driver!.image
-                              : provider.userProfileModel!.client!.image,
-                          name: provider.userProfileModel!.driver != null
-                              ? "${provider.userProfileModel!.driver!.firstName}"
-                              : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
-                          isDriver: provider.userProfileModel!.driver != null,
-                          male: provider.userProfileModel!.driver != null
-                              ? provider.userProfileModel!.driver!.gender == 0
-                              : provider.userProfileModel!.client!.gender == 0,
-                          nationality: provider.userProfileModel!.driver != null
-                              ? provider.userProfileModel!.driver!.national
-                                      ?.name ??
-                                  ""
-                              : provider.userProfileModel?.client?.national
-                                      ?.name ??
-                                  "",
-                          rate: provider.userProfileModel!.driver != null
-                              ? provider.userProfileModel?.driver?.rate?.ceil()
-                              : provider.userProfileModel?.client?.rate?.ceil(),
-                          reservationCount:
-                              provider.userProfileModel!.driver != null
+      body: SafeArea(
+        bottom: true,
+        top: false,
+        child: Consumer<UserProfileProvider>(builder: (_, provider, child) {
+          return Column(
+            children: [
+              Stack(
+                children: [
+                  CustomAppBar(
+                    isOffer: false,
+                    savedItemId: userId,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                    child: provider.isLoadProfile
+                        ? const ProfileCardShimmer()
+                        : ProfileCard(
+                            lastUpdate: Methods.getDayCount(date: provider.userProfileModel?.driver != null
+                                            ? provider.userProfileModel!.driver!.updatedAt!
+                                            : provider.userProfileModel!.client!.updatedAt!)
+                                .toString(),
+                            image: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel!.driver!.image
+                                : provider.userProfileModel!.client!.image,
+                            name: provider.userProfileModel!.driver != null
+                                ? "${provider.userProfileModel!.driver!.firstName}"
+                                : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
+                            isDriver: provider.userProfileModel!.driver != null,
+                            male: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel!.driver!.gender == 0
+                                : provider.userProfileModel!.client!.gender == 0,
+                            nationality: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel!.driver!.national
+                                        ?.name ??
+                                    ""
+                                : provider.userProfileModel?.client?.national
+                                        ?.name ??
+                                    "",
+                            rate: provider.userProfileModel!.driver != null
+                                ? provider.userProfileModel?.driver?.rate?.ceil()
+                                : provider.userProfileModel?.client?.rate?.ceil(),
+                            reservationCount:
+                                provider.userProfileModel!.driver != null
+                                    ? provider.userProfileModel?.driver
+                                        ?.reservationsCount
+                                    : provider.userProfileModel?.client
+                                        ?.reservationsCount,
+                            requestsCount: provider.userProfileModel!.driver !=
+                                    null
+                                ? provider.userProfileModel?.driver?.requestsCount
+                                : provider
+                                    .userProfileModel?.client?.requestsCount,
+                            distance: "  ${Methods.calcDistance(
+                              lat1: sl<LocationProvider>()
+                                  .currentLocation!
+                                  .latitude!,
+                              long1: sl<LocationProvider>()
+                                  .currentLocation!
+                                  .longitude!,
+                              lat2: provider.userProfileModel!.driver != null
                                   ? provider.userProfileModel?.driver
-                                      ?.reservationsCount
+                                          ?.pickupLocation?.latitude ??
+                                      "0"
                                   : provider.userProfileModel?.client
-                                      ?.reservationsCount,
-                          requestsCount: provider.userProfileModel!.driver !=
-                                  null
-                              ? provider.userProfileModel?.driver?.requestsCount
-                              : provider
-                                  .userProfileModel?.client?.requestsCount,
-                          distance: "  ${Methods.calcDistance(
-                            lat1: sl<LocationProvider>()
-                                .currentLocation!
-                                .latitude!,
-                            long1: sl<LocationProvider>()
-                                .currentLocation!
-                                .longitude!,
-                            lat2: provider.userProfileModel!.driver != null
-                                ? provider.userProfileModel?.driver
-                                        ?.pickupLocation?.latitude ??
-                                    "0"
-                                : provider.userProfileModel?.client
-                                        ?.pickupLocation?.latitude ??
-                                    "0",
-                            long2: provider.userProfileModel!.driver != null
-                                ? provider.userProfileModel?.driver
-                                        ?.pickupLocation?.longitude ??
-                                    "0"
-                                : provider.userProfileModel?.client
-                                        ?.pickupLocation?.longitude ??
-                                    "0",
-                          )} كيلو",
-                        ),
-                )
-              ],
-            ),
-            Expanded(
-              child: ListAnimator(data: [
-                SizedBox(
-                  height: 12.h,
-                ),
-                if (!provider.isDriver)
-                  CarTripDetailsWidget(
-                    isLoading: provider.isLoadProfile,
-                    carInfo: provider.userProfileModel?.driver?.carInfo,
-                  ),
-                if (provider.isDriver)
-                  FollowerDistanceWidget(
-                    isLoading: provider.isLoadFollowers,
-                    followers: provider.userFollowers,
-                  ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                      vertical: 16.h),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          provider.isDriver
-                              ? getTranslated("current_requests", context)
-                              : getTranslated("current_offers", context),
-                          style: AppTextStyles.w600.copyWith(fontSize: 16),
-                        ),
-                      ),
-                      if (!provider.isLoadOffers &&
-                          provider.userOffers != null &&
-                          provider.userOffers?.offers != null &&
-                          provider.userOffers!.offers!.length > 3)
-                        InkWell(
-                          onTap: () =>
-                              CustomNavigator.push(Routes.ALL_USER_OFFERS),
-                          child: Text(
-                            getTranslated("view_all", context),
-                            style: AppTextStyles.w400.copyWith(
-                                fontSize: 11, color: ColorResources.DISABLED),
+                                          ?.pickupLocation?.latitude ??
+                                      "0",
+                              long2: provider.userProfileModel!.driver != null
+                                  ? provider.userProfileModel?.driver
+                                          ?.pickupLocation?.longitude ??
+                                      "0"
+                                  : provider.userProfileModel?.client
+                                          ?.pickupLocation?.longitude ??
+                                      "0",
+                            )} كيلو",
                           ),
-                        )
-                    ],
+                  )
+                ],
+              ),
+              Expanded(
+                child: ListAnimator(data: [
+                  SizedBox(
+                    height: 12.h,
                   ),
-                ),
-                if (provider.isLoadOffers)
-                  ...List.generate(
-                    4,
-                    (index) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                          vertical: 8.h),
-                      child: CustomShimmerContainer(
-                        height: 85.h,
-                        radius: 8,
-                      ),
+                  if (!provider.isDriver)
+                    CarTripDetailsWidget(
+                      isLoading: provider.isLoadProfile,
+                      carInfo: provider.userProfileModel?.driver?.carInfo,
+                    ),
+                  if (provider.isDriver)
+                    FollowerDistanceWidget(
+                      isLoading: provider.isLoadFollowers,
+                      followers: provider.userFollowers,
+                    ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                        vertical: 16.h),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            provider.isDriver
+                                ? getTranslated("current_requests", context)
+                                : getTranslated("current_offers", context),
+                            style: AppTextStyles.w600.copyWith(fontSize: 16),
+                          ),
+                        ),
+                        if (!provider.isLoadOffers &&
+                            provider.userOffers != null &&
+                            provider.userOffers?.offers != null &&
+                            provider.userOffers!.offers!.length > 3)
+                          InkWell(
+                            onTap: () =>
+                                CustomNavigator.push(Routes.ALL_USER_OFFERS),
+                            child: Text(
+                              getTranslated("view_all", context),
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 11, color: ColorResources.DISABLED),
+                            ),
+                          )
+                      ],
                     ),
                   ),
-                if (provider.userOffers == null ||
-                    provider.userOffers?.offers == null ||
-                    provider.userOffers!.offers!.isEmpty)
-                  EmptyState(
-                      txt: provider.isDriver
-                          ? getTranslated("there_is_no_offers_now", context)
-                          : getTranslated("there_is_no_requests_now", context)),
-                if (!provider.isLoadOffers &&
-                    provider.userOffers != null &&
-                    provider.userOffers?.offers != null &&
-                    provider.userOffers!.offers!.isNotEmpty)
-                  ...List.generate(
-                      provider.userOffers!.offers!.length,
-                      (index) => UserOfferCard(
-                          offerModel: provider.userOffers!.offers![index])),
-              ]),
-            )
-          ],
-        );
-      }),
+                  if (provider.isLoadOffers)
+                    ...List.generate(
+                      4,
+                      (index) => Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                            vertical: 8.h),
+                        child: CustomShimmerContainer(
+                          height: 85.h,
+                          radius: 8,
+                        ),
+                      ),
+                    ),
+                  if (  provider.userOffers == null ||
+                      provider.userOffers?.offers == null ||
+                      provider.userOffers!.offers!.isEmpty)
+                    Visibility(
+                      visible: !provider.isLoadOffers,
+                      child: EmptyState(
+                          txt: provider.isDriver
+                              ? getTranslated("there_is_no_offers_now", context)
+                              : getTranslated("there_is_no_requests_now", context)),
+                    ),
+                  if (!provider.isLoadOffers &&
+                      provider.userOffers != null &&
+                      provider.userOffers?.offers != null &&
+                      provider.userOffers!.offers!.isNotEmpty)
+                    ...List.generate(
+                        provider.userOffers!.offers!.length > 5? 5:provider.userOffers!.offers!.length,
+                        (index) => UserOfferCard(
+                            offerModel: provider.userOffers!.offers![index])),
+                  SizedBox(height: 8.h,)
+                ]),
+              )
+            ],
+          );
+        }),
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class FollowerDistanceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: followers != null &&
+      visible: !isLoading && followers != null &&
           followers!.data != null &&
           followers!.data!.isNotEmpty,
       child: Padding(
@@ -41,7 +41,7 @@ class FollowerDistanceWidget extends StatelessWidget {
             ),
             Column(
                 children: List.generate(
-              followers!.data?.length ?? 0,
+              followers?.data?.length ?? 0,
               (index) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 1.h),
                 child: Row(
