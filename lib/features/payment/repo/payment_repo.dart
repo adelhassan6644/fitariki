@@ -36,4 +36,14 @@ class PaymentRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(e)));
     }
   }
+  Future<Either<ServerFailure, Response>> paymentFees(
+      ) async {
+    try {
+      Response response = await dioClient.get(
+          uri: EndPoints.paymentData, );
+      return Right(response);
+    } catch (e) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(e)));
+    }
+  }
 }

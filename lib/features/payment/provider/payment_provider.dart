@@ -11,10 +11,11 @@ import '../repo/payment_repo.dart';
 class PaymentProvider extends ChangeNotifier {
   final PaymentRepo paymentRepo;
 
-  PaymentProvider({required this.paymentRepo});
+  PaymentProvider({required this.paymentRepo}){paymentFees(); }
 
   OfferRequestDetailsModel? requestModel;
   setData(data) {
+
     requestModel = data;
     calcTotal();
     notifyListeners();
@@ -24,9 +25,11 @@ class PaymentProvider extends ChangeNotifier {
   double _discount = 0.0;
   String _code = '';
   double? tax;
+  double taxPercentage=0.0;
   double serviceCost = 15;
   double total = 0.0;
   bool _isLoading = false;
+  bool isPaymentFeeLoading = false;
 
   CouponModel? get coupon => _coupon;
 
@@ -94,10 +97,39 @@ class PaymentProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+  Future<double> paymentFees() async
+  {
+    isPaymentFeeLoading = true;
+    notifyListeners();
 
+    var apiResponse =
+    await paymentRepo.paymentFees();
+    apiResponse.fold((fail) {
+      isPaymentFeeLoading = false;
+      notifyListeners();
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: fail.error,
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+    }, (success) {
+      taxPercentage=double.parse(success.data['data']['settings'][0]['tax'].toString());
+      serviceCost=double.parse(success.data['data']['settings'][0]['service_fee']);
+
+      calcTotal();
+      isPaymentFeeLoading = false;
+      notifyListeners();
+    });
+
+    return _discount;
+  }
   calcTotal() {
-    tax = double.parse(((requestModel?.price ?? 0) * 0.15).toStringAsFixed(2));
-    total = (requestModel?.price ?? 0 - discount) + tax! + serviceCost;
+    tax=0;
+    total=0;
+    tax = double.parse(((requestModel?.price ?? 0) * taxPercentage/100).toStringAsFixed(2));
+    total = (requestModel!.price! - _discount) + tax! + serviceCost;
+    print((requestModel!.price! - _discount) + tax!  );
     notifyListeners();
   }
 

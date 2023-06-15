@@ -30,7 +30,7 @@ class Payment extends StatelessWidget {
                 title: getTranslated("payment", context),
               ),
               Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
-                return provider.isLoading
+                return (provider.isLoading)
                     ? const PaymentShimmerShimmer()
                     : Expanded(
                         child: Column(
