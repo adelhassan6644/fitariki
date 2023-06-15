@@ -1,4 +1,4 @@
-package com.softwarecloud.fitariki
+package com.softwareFitariki.fitariki
 
 import io.flutter.embedding.android.FlutterActivity
 

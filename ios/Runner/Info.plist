@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitariki</string>
+	<string>في طريقي</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.105813324547-d847ijofjhme0fbg87l2jcfjq6202s9a</string>
+				<string>com.googleusercontent.apps.105813324547-upk6427rl6n04c8b10eol3l3g77ektki</string>
 			</array>
 		</dict>
 	</array>
@@ -73,7 +73,6 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>audio</string>
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
