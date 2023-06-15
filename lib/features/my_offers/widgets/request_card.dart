@@ -454,7 +454,7 @@ class RequestCard extends StatelessWidget {
                         height: 10.h,
                       ),
                       AcceptableAnalytics(
-                        value: request?.offer?.matching ?? 0,
+                        value: request?.matching ?? 0,
                         color: ColorResources.PRIMARY_COLOR,
                       ),
                     ],

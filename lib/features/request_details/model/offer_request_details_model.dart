@@ -25,6 +25,7 @@ class OfferRequestDetailsModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? paidAt;
+  double? matching;
   DriverModel? driverModel;
   ClientModel? clientModel;
   List<FollowerModel>? followers;
@@ -41,6 +42,7 @@ class OfferRequestDetailsModel {
     this.approvedAt,
     this.approvedByClient,
     this.approvedByDriver,
+    this.matching,
     this.rejectedAt,
     this.rejectedByClient,
     this.rejectedByDriver,
@@ -70,6 +72,9 @@ class OfferRequestDetailsModel {
         price:double.parse(json["offer_price"].toString())==0.0? double.parse(json["price"].toString()):double.parse(json["offer_price"].toString()),
         offerPrice: double.parse(json["offer_price"].toString()),
         message: json["message"],
+        matching: json["matching"] == null
+            ? 0.0
+            : double.parse(json["matching"].toString())<0?0:double.parse(json["matching"].toString()),
         approvedAt: json["approved_at"] != null
             ? DateTime.parse(json["approved_at"])
             : null,
