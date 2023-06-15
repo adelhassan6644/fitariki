@@ -26,8 +26,7 @@ class FavouriteUserCard extends StatelessWidget {
       onTap: () {
         sl<UserProfileProvider>()
             .getUserProfile(userId: driver != null ? driver!.id! : client!.id!);
-        sl<UserProfileProvider>()
-            .getUserOffers(id: driver != null ? driver!.id! : client!.id!);
+
 
         if (sl<UserProfileProvider>().isDriver) {
           sl<UserProfileProvider>()

@@ -25,10 +25,16 @@ class _SuccessPageState extends State<SuccessPage> {
   void initState() {
     if (widget.successModel.isPopUp) {
       Future.delayed(const Duration(seconds: 2), () {
-        CustomNavigator.push(widget.successModel.routeName ?? Routes.DASHBOARD,
-            arguments: widget.successModel.argument,
-            replace: widget.successModel.isReplace,
-            clean: widget.successModel.isClean);
+        if(widget.successModel.routeName!=null) {
+          CustomNavigator.push(
+              widget.successModel.routeName ?? Routes.DASHBOARD,
+              arguments: widget.successModel.argument,
+              replace: widget.successModel.isReplace,
+              clean: widget.successModel.isClean);
+        }
+        else{
+          CustomNavigator.pop();
+        }
       });
     }
 
@@ -76,8 +82,8 @@ class _SuccessPageState extends State<SuccessPage> {
                   padding: EdgeInsets.symmetric(vertical: 16.0.h),
                   child: SubstringHighlight(
                     textAlign: TextAlign.center,
-                    text: widget.successModel.description!,
-                    term: widget.successModel.term ?? "iiiiiii",
+                    text: widget.successModel.description??"",
+                    term: widget.successModel.term ?? "",
                     textStyle: AppTextStyles.w500.copyWith(
                         fontSize: 16,
                         color: ColorResources.SECOUND_PRIMARY_COLOR),

@@ -29,7 +29,8 @@ class OfferDetailsRepo {
           queryParameters: {
             "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
                 sharedPreferences.getString(AppStorageKey.userId)
-          });
+          }
+          );
       if (response.statusCode == 200) {
         return Right(response);
       } else {

@@ -68,8 +68,8 @@ class MyTripCard extends StatelessWidget {
                       children: [
                         CustomNetworkImage.circleNewWorkImage(
                             image: isDriver
-                                ? myTrip.clientModel?.image ?? ""
-                                : myTrip.driverModel?.image ?? "",
+                                ? myTrip.offer?.clientModel?.image?? myTrip.clientModel?.image  ?? ""
+                                : myTrip.offer?.driverModel?.image ??myTrip.driverModel?.image ?? "",
                             radius: 16,
                             color: ColorResources.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
@@ -85,8 +85,8 @@ class MyTripCard extends StatelessWidget {
                                   width: 50,
                                   child: Text(
                                     isDriver
-                                        ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.lastName ?? ""} "
-                                        : myTrip.driverModel?.firstName ?? "",
+                                        ? "${myTrip.clientModel?.firstName?? myTrip.offer?.clientModel?.firstName  ?? ""} ${myTrip.clientModel?.lastName??myTrip.offer?.clientModel?.lastName ?? ""} "
+                                        : myTrip.driverModel?.firstName??myTrip.offer?.driverModel?.firstName ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(
@@ -115,9 +115,9 @@ class MyTripCard extends StatelessWidget {
                               width: 50,
                               child: Text(
                                 isDriver
-                                    ? myTrip.clientModel?.national?.niceName ??
+                                    ? myTrip.clientModel?.national?.niceName ??myTrip.offer?.clientModel?.national?.niceName??
                                         ""
-                                    : myTrip.driverModel?.national?.niceName ??
+                                    : myTrip.driverModel?.national?.niceName ??myTrip.offer?.driverModel?.national?.niceName??
                                         "",
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
@@ -271,10 +271,7 @@ class MyTripCard extends StatelessWidget {
                                   userId: isDriver
                                       ? myTrip.clientId!
                                       : myTrip.driverId!);
-                              sl<UserProfileProvider>().getUserOffers(
-                                  id: isDriver
-                                      ? myTrip.clientId!
-                                      : myTrip.driverId!);
+
 
                               if (isDriver) {
                                 sl<UserProfileProvider>().getUserFollowers(

@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAOzDx7xIAd_Hdf0GRosngBPeJj3MpUXoI',
-    appId: '1:105813324547:android:d322d9156015e1f690af36',
+    appId: '1:105813324547:android:d8c6b83d4b00cf6d90af36',
     messagingSenderId: '105813324547',
     projectId: 'fitariki-46646',
     storageBucket: 'fitariki-46646.appspot.com',
@@ -63,21 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDuc5q2UyvotvNUmVek3e_o9KhpCt2chdI',
-    appId: '1:105813324547:ios:6c4a322ce14cd59090af36',
+    appId: '1:105813324547:ios:0dc5a40be33e648b90af36',
     messagingSenderId: '105813324547',
     projectId: 'fitariki-46646',
     storageBucket: 'fitariki-46646.appspot.com',
-    iosClientId: '105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4.apps.googleusercontent.com',
-    iosBundleId: 'com.example.fitariki',
+    androidClientId: '105813324547-46hdomo0qffn4vghnu1aj5kl892cmakg.apps.googleusercontent.com',
+    iosClientId: '105813324547-d847ijofjhme0fbg87l2jcfjq6202s9a.apps.googleusercontent.com',
+    iosBundleId: 'com.softwarecloud.fitariki',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDuc5q2UyvotvNUmVek3e_o9KhpCt2chdI',
-    appId: '1:105813324547:ios:6c4a322ce14cd59090af36',
+    appId: '1:105813324547:ios:0dc5a40be33e648b90af36',
     messagingSenderId: '105813324547',
     projectId: 'fitariki-46646',
     storageBucket: 'fitariki-46646.appspot.com',
-    iosClientId: '105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4.apps.googleusercontent.com',
-    iosBundleId: 'com.example.fitariki',
+    androidClientId: '105813324547-46hdomo0qffn4vghnu1aj5kl892cmakg.apps.googleusercontent.com',
+    iosClientId: '105813324547-d847ijofjhme0fbg87l2jcfjq6202s9a.apps.googleusercontent.com',
+    iosBundleId: 'com.softwarecloud.fitariki',
   );
 }

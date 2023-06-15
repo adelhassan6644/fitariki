@@ -127,9 +127,17 @@ abstract class CustomNavigator {
         ));
 
       case Routes.PAYMENT:
-        return _pageRoute(Payment(
-          isFromMyTrips: settings.arguments! as bool,
-        ));
+        {
+          if (settings.arguments != null)
+            return _pageRoute(Payment(
+              isFromMyTrips: settings.arguments! as bool ,
+            ));
+          else{
+            return _pageRoute(Payment(
+
+            ));
+          }
+        }
       case Routes.PAYMENTWEBVIEW:
         return _pageRoute(PaymentWebViewScreen(
           rservationId: settings.arguments! as int,

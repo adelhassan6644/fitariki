@@ -42,6 +42,10 @@ class MyOffersRepo {
     try {
       Response response = await dioClient.get(
         uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
+          queryParameters: {
+            "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
+            sharedPreferences.getString(AppStorageKey.userId)
+          }
       );
       if (response.statusCode == 200) {
         return Right(response);

@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
+import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../followers/followers/model/followers_model.dart';
@@ -18,9 +23,14 @@ class UserProfileProvider extends ChangeNotifier {
 
   bool isLoadProfile = false;
   ProfileModel? userProfileModel;
+
+  bool isLoadOffers = false;
+  MyOffersModel? userOffers;
   getUserProfile({required int userId}) async {
     try {
+
       isLoadProfile = true;
+      isLoadOffers = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
           await userProfileRepo.getUserProfile(
@@ -34,13 +44,22 @@ class UserProfileProvider extends ChangeNotifier {
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoadProfile = false;
+        isLoadOffers = false;
         notifyListeners();
       }, (response) {
+final role= sl
+    .get<SharedPreferences>()
+    .getString(AppStorageKey.role)=="client"?"driver":"client";
+
         userProfileModel = ProfileModel.fromJson(response.data["data"]);
+
+        userOffers = MyOffersModel.fromJson(response.data["data"][role]);
         isLoadProfile = false;
+        isLoadOffers = false;
         notifyListeners();
       });
-    } catch (e) {
+    }
+    catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),
@@ -48,45 +67,13 @@ class UserProfileProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoadProfile = false;
-      notifyListeners();
-    }
-  }
-
-  bool isLoadOffers = false;
-  MyOffersModel? userOffers;
-  getUserOffers({required int id}) async {
-    try {
-      userOffers = null;
-      isLoadOffers = true;
-      notifyListeners();
-
-      Either<ServerFailure, Response> response =
-          await userProfileRepo.getUserOffers(id: id);
-      response.fold((l) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: ApiErrorHandler.getMessage(l),
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        isLoadOffers = false;
-        notifyListeners();
-      }, (response) {
-        userOffers = MyOffersModel.fromJson(response.data["data"]);
-        isLoadOffers = false;
-        notifyListeners();
-      });
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
       isLoadOffers = false;
+
       notifyListeners();
     }
   }
+
+
 
   bool isLoadFollowers = false;
   FollowersModel? userFollowers;

@@ -43,23 +43,23 @@ class MyTripDetails extends StatelessWidget {
                       approved: true,
                       reservationId: myTripModel.id,
                       phone: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.phone
-                          : myTripModel.driverModel?.phone,
+                          ? myTripModel.offer?.clientModel?.phone??myTripModel.clientModel?.phone
+                          : myTripModel.offer?.driverModel?.phone??myTripModel.driverModel?.phone,
                       userId: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.id
-                          : myTripModel.driverModel?.id,
+                          ? myTripModel.offer?.clientModel?.id ??myTripModel.clientModel?.id
+                          : myTripModel.offer?.driverModel?.id??myTripModel.driverModel?.id,
                       name: sl<ProfileProvider>().isDriver
-                          ? "${myTripModel.clientModel?.firstName ?? ""} ${myTripModel.clientModel?.lastName ?? ""}"
-                          : myTripModel.driverModel?.firstName ?? "",
+                          ? "${myTripModel.offer?.clientModel?.firstName ??myTripModel.clientModel?.firstName?? ""} ${myTripModel.offer?.clientModel?.lastName??myTripModel.clientModel?.lastName ?? ""}"
+                          : myTripModel.offer?.driverModel?.firstName??myTripModel.driverModel?.firstName ?? "",
                       image: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.image
-                          : myTripModel.driverModel?.image,
+                          ? myTripModel.offer?.clientModel?.image??myTripModel.clientModel?.image
+                          : myTripModel.offer?.driverModel?.image??myTripModel.driverModel?.image,
                       male: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.gender == 0
-                          : myTripModel.driverModel?.gender == 0,
+                          ? (myTripModel.offer?.clientModel?.gender??myTripModel.clientModel?.gender )== 0
+                          : (myTripModel.offer?.driverModel?.gender??myTripModel.driverModel?.gender) == 0,
                       national: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.national?.niceName
-                          : myTripModel.driverModel?.national?.niceName,
+                          ? myTripModel.offer?.clientModel?.national?.niceName??myTripModel.clientModel?.national?.niceName
+                          : myTripModel.offer?.driverModel?.national?.niceName??myTripModel.driverModel?.national?.niceName,
                       // createdAt: myTripModel.createAt ?? DateTime.now(),
                       days: myTripModel.offer?.offerDays!
                           .map((e) => e.dayName)

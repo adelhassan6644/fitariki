@@ -82,6 +82,15 @@ class HomeProvider extends ChangeNotifier {
 
       final filters = {
         "fillters": {
+          if (startLocation == null)
+            if (sl
+              .get<SharedPreferences>()
+              .getString(AppStorageKey.role) !=
+              null)
+            "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
+            sl
+                .get<SharedPreferences>()
+                .getString(AppStorageKey.userId),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,

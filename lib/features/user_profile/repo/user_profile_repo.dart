@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';
+import '../../../data/config/di.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
@@ -29,6 +30,16 @@ class UserProfileRepo {
       Response response = await dioClient.get(
         uri:
             "${sharedPreferences.getString(AppStorageKey.role)}/$role/${EndPoints.userProfile}/$userID",
+        queryParameters: {
+          if (sl
+              .get<SharedPreferences>()
+              .getString(AppStorageKey.role) !=
+              null)
+            "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
+            sl
+                .get<SharedPreferences>()
+                .getString(AppStorageKey.userId),
+        }
       );
       if (response.statusCode == 200) {
         return Right(response);

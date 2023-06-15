@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "105813324547-46hdomo0qffn4vghnu1aj5kl892cmakg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitariki",
+            "certificate_hash": "edb095a6325570602ac8ac236b4fc612f46614bc"
+          }
+        },
+        {
+          "client_id": "105813324547-hu4t3i39i7cb9kmtsib16eik39u0uf8k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitariki",
+            "certificate_hash": "78bff6825539ee30ec75e9c18b0a77aba39c9254"
+          }
+        },
+        {
           "client_id": "105813324547-1nbn1cagb12t59q8njgtnhor47col4j0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,49 @@
             {
               "client_id": "105813324547-1nbn1cagb12t59q8njgtnhor47col4j0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fitariki"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105813324547:android:d8c6b83d4b00cf6d90af36",
+        "android_client_info": {
+          "package_name": "com.softwarecloud.fitariki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105813324547-1nbn1cagb12t59q8njgtnhor47col4j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOzDx7xIAd_Hdf0GRosngBPeJj3MpUXoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105813324547-1nbn1cagb12t59q8njgtnhor47col4j0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fitariki"
+              }
             }
           ]
         }

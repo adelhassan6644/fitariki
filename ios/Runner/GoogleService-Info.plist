@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4.apps.googleusercontent.com</string>
+	<string>105813324547-d847ijofjhme0fbg87l2jcfjq6202s9a.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.105813324547-ka9cb59fajvrip5v711qqhv3ieof52g4</string>
+	<string>com.googleusercontent.apps.105813324547-d847ijofjhme0fbg87l2jcfjq6202s9a</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>105813324547-46hdomo0qffn4vghnu1aj5kl892cmakg.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.fitariki</string>
+	<string>com.softwarecloud.fitariki</string>
 	<key>PROJECT_ID</key>
 	<string>fitariki-46646</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:105813324547:ios:6c4a322ce14cd59090af36</string>
+	<string>1:105813324547:ios:0dc5a40be33e648b90af36</string>
 </dict>
 </plist>
