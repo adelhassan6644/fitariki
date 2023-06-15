@@ -56,7 +56,7 @@ class MyTripDetails extends StatelessWidget {
                           : myTripModel.offer?.driverModel?.image??myTripModel.driverModel?.image,
                       male: sl<ProfileProvider>().isDriver
                           ? (myTripModel.offer?.clientModel?.gender??myTripModel.clientModel?.gender )== 0
-                          : (myTripModel.offer?.driverModel?.gender??myTripModel.driverModel?.gender) == 0,
+                          : (myTripModel.offer?.driverModel?.gender??myTripModel.offer?.driverModel?.gender) == 0,
                       national: sl<ProfileProvider>().isDriver
                           ? myTripModel.offer?.clientModel?.national?.niceName??myTripModel.clientModel?.national?.niceName
                           : myTripModel.offer?.driverModel?.national?.niceName??myTripModel.driverModel?.national?.niceName,
