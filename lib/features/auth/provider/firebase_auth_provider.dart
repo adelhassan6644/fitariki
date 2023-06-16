@@ -228,7 +228,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.remember(
             phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
 
-        if (success.data['data'][role[_userType]]["new_user"].toString() == "1") {
+        if (success.data['data'][role[_userType]]["new_user"].toString() ==
+            "1") {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
@@ -261,7 +262,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await firebaseAuthRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();
         sl<ProfileProvider>().clear();
-
       });
 
       CustomNavigator.push(Routes.SPLASH, clean: true);

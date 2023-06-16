@@ -32,19 +32,20 @@ extension StringExtension on String {
     return Color(val);
   }
 
-  String hiddenNumber(){
-   return this[length-1]+this[length-2]+replaceRange(0, length-2, "*");
+  String hiddenNumber() {
+    return this[length - 2] + this[length - 1] + "*" * (length - 2);
   }
-
 }
 
 extension DateExtention on DateTime {
   String dateFormat({required String format, String? lang}) {
-    return DateFormat(format, ).format(this);
-
+    return DateFormat(
+      format,
+    ).format(this);
   }
+
   String arTimeFormat() {
-    return DateFormat("hh,mm aa" ).format(this);
+    return DateFormat("hh,mm aa").format(this);
   }
 }
 
@@ -52,6 +53,7 @@ extension DefaultFormat on DateTime {
   String defaultFormat() {
     return DateFormat("d MMM yyyy").format(this);
   }
+
   String defaultFormat2() {
     return DateFormat("d-MM-yyyy").format(this);
   }
