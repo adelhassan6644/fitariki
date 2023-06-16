@@ -43,7 +43,7 @@ class Verification extends StatelessWidget {
                               fontSize: 16,
                             )),
                         Text(
-                            provider.phoneTEC.text.hiddenNumber(),
+                            provider.phoneTEC.text.trim().hiddenNumber(),
                             style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                             )),
