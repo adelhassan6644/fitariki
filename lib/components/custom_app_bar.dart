@@ -74,13 +74,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               const Expanded(child: SizedBox()),
               withBack
-                  ? GestureDetector(
+                  ? InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () {
                         CustomNavigator.pop();
                       },
                       child: SizedBox(
                         width: actionWidth ?? 18,
-                        child:   Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Icon(

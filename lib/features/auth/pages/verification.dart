@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +43,7 @@ class Verification extends StatelessWidget {
                               fontSize: 16,
                             )),
                         Text(
-                            "${provider.phoneTEC.text[7]}${provider.phoneTEC.text[8]}*******",
+                            provider.phoneTEC.text.hiddenNumber(),
                             style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                             )),

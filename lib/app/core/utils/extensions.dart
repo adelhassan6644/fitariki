@@ -31,6 +31,11 @@ extension StringExtension on String {
     }
     return Color(val);
   }
+
+  String hiddenNumber(){
+   return this[length-1]+this[length-2]+replaceRange(0, length-2, "*");
+  }
+
 }
 
 extension DateExtention on DateTime {
