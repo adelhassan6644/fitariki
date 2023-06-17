@@ -211,6 +211,7 @@
   "offer_rejected": "تم رفض العرض",
   "negotiation": "تفاوض",
   "request_accepted": "تم قبول الطلب",
+  "request_accepted_and_waiting_client": "تم قبول الطلب وفي انتظار رد العميل",
   "request_rejected": "تم رفض الطلب",
   "accept_request": "قبول الطلب",
   "reject_request": "رفض الطلب",

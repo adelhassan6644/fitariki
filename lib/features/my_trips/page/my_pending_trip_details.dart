@@ -132,23 +132,19 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             /// Map View
                             MapWidget(
                               stopPoints: provider.isDriver &&
-                                      provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
+                                  provider.requestModel?.followers != null &&
+                                      provider.requestModel!.followers!.isNotEmpty
                                   ? provider.requestModel?.followers?.length ??
                                       0
                                   : null,
                               startPoint: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
+                                  ? provider.requestModel?.clientModel?.pickupLocation ??
+                                      provider.requestModel?.offer?.clientModel?.pickupLocation
+                                  : provider.requestModel?.offer?.pickupLocation,
                               endPoint: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.dropOffLocation,
+                                  ? provider.requestModel?.clientModel?.dropOffLocation ??
+                                      provider.requestModel?.offer?.clientModel?.dropOffLocation
+                                  : provider.requestModel?.offer?.dropOffLocation,
                             ),
 
                             ///distance between client and driver
@@ -161,20 +157,13 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                     .currentLocation!
                                     .longitude!,
                                 lat2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.latitude ??
-                                        provider
-                                            .requestModel
-                                            ?.offer
-                                            ?.clientModel
-                                            ?.pickupLocation
-                                            ?.latitude ??
+                                    ? provider.requestModel?.clientModel?.pickupLocation?.latitude ??
+                                        provider.requestModel?.offer?.clientModel?.pickupLocation?.latitude ??
                                         "0"
                                     : provider.requestModel?.offer?.pickupLocation?.latitude ??
                                         "0",
                                 long2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.longitude ??
+                                    ? provider.requestModel?.clientModel?.pickupLocation?.longitude ??
                                         provider
                                             .requestModel
                                             ?.offer
@@ -230,8 +219,10 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             Visibility(
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
-                                  carInfo: provider.requestModel?.driverModel?.carInfo ??
-                                      provider.requestModel?.offer?.driverModel?.carInfo,
+                                  carInfo: provider
+                                          .requestModel?.driverModel?.carInfo ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.carInfo,
                                 )),
 
                             /// to show days on calender

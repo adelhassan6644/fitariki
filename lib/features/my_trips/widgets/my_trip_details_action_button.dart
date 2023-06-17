@@ -136,7 +136,7 @@ class MyTripDetailsActionButtons extends StatelessWidget {
               child: CustomButton(
                 textColor: ColorResources.PRIMARY_COLOR,
                 backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
-                text: getTranslated("request_accepted", context),
+                text: getTranslated("request_accepted_and_waiting_client", context),
               ),
             ),
           ),

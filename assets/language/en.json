@@ -209,6 +209,7 @@
   "offer_rejected": "Offer Rejected",
   "there_is_no_feedbacks_on_this_offer": "There is no feedbacks on this offer",
   "request_accepted": "Request Accepted",
+  "request_accepted_and_waiting_client": "Request accepted and waiting client",
   "request_rejected": "Request Rejected",
   "reject_offer": "Reject offer",
   "negotiation": "Negotiation",

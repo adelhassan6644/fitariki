@@ -66,7 +66,9 @@ class OfferModel {
       maxPrice: json["max_price"]?.toDouble(),
       matching: json["matching"] == null
           ? 0.0
-          : double.parse(json["matching"].toString())<0?0:double.parse(json["matching"].toString()),
+          : double.parse(json["matching"].toString()) < 0
+              ? 0
+              : double.parse(json["matching"].toString()),
       startDate:
           DateTime.parse(json["start_date"] ?? DateTime.now().toString()),
       endDate: DateTime.parse(json["end_date"] ?? DateTime.now().toString()),

@@ -44,36 +44,59 @@ class MyTripDetails extends StatelessWidget {
                       reservationId: myTripModel.id,
                       phone: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.phone ??
-                              myTripModel.offer?.clientModel?.phone
+                              myTripModel.offer?.clientModel?.phone ??
+                              myTripModel.myTripRequest?.clientModel?.phone
                           : myTripModel.driverModel?.phone ??
-                              myTripModel.offer?.driverModel?.phone,
+                              myTripModel.offer?.driverModel?.phone ??
+                              myTripModel.myTripRequest?.driverModel?.phone,
                       userId: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.id ??
-                              myTripModel.offer?.clientModel?.id
+                              myTripModel.offer?.clientModel?.id ??
+                              myTripModel.myTripRequest?.clientModel?.id
                           : myTripModel.driverModel?.id ??
-                              myTripModel.offer?.driverModel?.id,
+                              myTripModel.offer?.driverModel?.id ??
+                              myTripModel.myTripRequest?.driverModel?.id,
                       name: sl<ProfileProvider>().isDriver
-                          ? "${myTripModel.clientModel?.firstName ?? myTripModel.offer?.clientModel?.firstName ?? ""} ${myTripModel.clientModel?.lastName ?? myTripModel.offer?.clientModel?.lastName ?? ""}"
+                          ? "${myTripModel.clientModel?.firstName ?? myTripModel.offer?.clientModel?.firstName ?? myTripModel.myTripRequest?.clientModel?.firstName ?? ""} ${myTripModel.clientModel?.lastName ?? myTripModel.offer?.clientModel?.lastName ?? myTripModel.myTripRequest?.clientModel?.lastName ?? ""}"
                           : myTripModel.driverModel?.firstName ??
                               myTripModel.offer?.driverModel?.firstName ??
+                              myTripModel
+                                  .myTripRequest?.driverModel?.firstName ??
                               "",
                       image: sl<ProfileProvider>().isDriver
                           ? myTripModel.offer?.clientModel?.image ??
+                              myTripModel.myTripRequest?.clientModel?.image ??
                               myTripModel.clientModel?.image
                           : myTripModel.offer?.driverModel?.image ??
+                              myTripModel.myTripRequest?.driverModel?.image ??
                               myTripModel.driverModel?.image,
                       male: sl<ProfileProvider>().isDriver
                           ? (myTripModel.clientModel?.gender ??
-                                  myTripModel.offer?.clientModel?.gender) == 0
+                                  myTripModel.offer?.clientModel?.gender ??
+                                  myTripModel
+                                      .myTripRequest?.clientModel?.gender) ==
+                              0
                           : (myTripModel.driverModel?.gender ??
-                                  myTripModel.offer?.driverModel?.gender) == 0,
+                                  myTripModel.offer?.driverModel?.gender ??
+                                  myTripModel
+                                      .myTripRequest?.driverModel?.gender) ==
+                              0,
                       national: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.national?.niceName ??
-                              myTripModel.offer?.clientModel?.national?.niceName
+                              myTripModel
+                                  .offer?.clientModel?.national?.niceName ??
+                              myTripModel.myTripRequest?.clientModel?.national
+                                  ?.niceName
                           : myTripModel.driverModel?.national?.niceName ??
-                              myTripModel.offer?.driverModel?.national?.niceName,
+                              myTripModel
+                                  .offer?.driverModel?.national?.niceName ??
+                              myTripModel.myTripRequest?.driverModel?.national
+                                  ?.niceName,
                       // createdAt: myTripModel.createAt ?? DateTime.now(),
-                      days: myTripModel.offer?.offerDays!.map((e) => e.dayName).toList().join(", "),
+                      days: myTripModel.offer?.offerDays!
+                          .map((e) => e.dayName)
+                          .toList()
+                          .join(", "),
                       duration: myTripModel.myTripRequest?.duration.toString(),
                       // priceRange:
                       //     "${myTripModel.myTripRequest?.price ?? 0} ${getTranslated("sar", context)}",
@@ -95,12 +118,16 @@ class MyTripDetails extends StatelessWidget {
                           : null,
                       startPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.pickupLocation ??
-                              myTripModel.offer?.clientModel?.pickupLocation
-                          : myTripModel.myTripRequest?.offer?.pickupLocation,
+                              myTripModel.offer?.clientModel?.pickupLocation ??
+                              myTripModel
+                                  .myTripRequest?.clientModel?.pickupLocation
+                          : myTripModel.offer?.pickupLocation,
                       endPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.dropOffLocation ??
-                              myTripModel.offer?.clientModel?.dropOffLocation
-                          : myTripModel.myTripRequest?.offer?.dropOffLocation,
+                              myTripModel.offer?.clientModel?.dropOffLocation ??
+                              myTripModel
+                                  .myTripRequest?.clientModel?.dropOffLocation
+                          : myTripModel.offer?.dropOffLocation,
                     ),
 
                     ///distance between client and driver
@@ -110,24 +137,14 @@ class MyTripDetails extends StatelessWidget {
                       long1: sl<LocationProvider>().currentLocation!.longitude!,
                       lat2: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.pickupLocation?.latitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation
-                                  ?.latitude ??
-                              "0"
-                          : myTripModel.driverModel?.pickupLocation?.latitude ??
-                              myTripModel.offer?.driverModel?.pickupLocation
-                                  ?.latitude ??
-                              "0",
+                              myTripModel.offer?.clientModel?.pickupLocation?.latitude ??
+                          myTripModel.myTripRequest?.clientModel?.pickupLocation?.latitude ?? "0"
+                          : myTripModel.offer?.pickupLocation?.latitude ?? "0",
                       long2: sl<ProfileProvider>().isDriver
-                          ? myTripModel
-                                  .clientModel?.pickupLocation?.longitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation
-                                  ?.longitude ??
-                              "0"
-                          : myTripModel
-                                  .driverModel?.pickupLocation?.longitude ??
-                              myTripModel.offer?.driverModel?.pickupLocation
-                                  ?.longitude ??
-                              "0",
+                          ? myTripModel.clientModel?.pickupLocation?.longitude ??
+                              myTripModel.offer?.clientModel?.pickupLocation?.longitude ??
+                              myTripModel.myTripRequest?.clientModel?.pickupLocation?.longitude ?? "0"
+                          : myTripModel.offer?.pickupLocation?.longitude ?? "0",
                     ),
 
                     /// to show stop points for followers request if driver
@@ -173,7 +190,8 @@ class MyTripDetails extends StatelessWidget {
                         visible: !sl<ProfileProvider>().isDriver,
                         child: CarTripDetailsWidget(
                           carInfo: myTripModel.driverModel?.carInfo ??
-                              myTripModel.offer?.driverModel?.carInfo,
+                              myTripModel.offer?.driverModel?.carInfo??
+                              myTripModel.myTripRequest?.driverModel?.carInfo,
                         )),
 
                     /// to show days on calender
