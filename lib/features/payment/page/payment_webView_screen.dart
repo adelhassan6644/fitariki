@@ -33,20 +33,18 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   var wiselectedUrl;
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-
-
       crossPlatform: InAppWebViewOptions(
 
-        // //
-        // ios: IOSInAppWebViewOptions(applePayAPIEnabled: true),
-        // crossPlatform: InAppWebViewOptions(
-        //     useShouldOverrideUrlLoading: true, useOnLoadResource: true),
-        //
-        //
-        // javaScriptEnabled: true,
-        // userAgent:
-        //     'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
-      ),
+          // //
+          // ios: IOSInAppWebViewOptions(applePayAPIEnabled: true),
+          // crossPlatform: InAppWebViewOptions(
+          //     useShouldOverrideUrlLoading: true, useOnLoadResource: true),
+          //
+          //
+          // javaScriptEnabled: true,
+          // userAgent:
+          //     'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
+          ),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
       ),
@@ -103,14 +101,13 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
     browser.pullToRefreshController = pullToRefreshController;
 
     await browser.openUrlRequest(
-      urlRequest:   URLRequest(
-    url: (reservationModelProvider!.coupon != null)
-        ? Uri.parse(wiselectedUrl +
-        "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
-        : Uri.parse(wiselectedUrl +
-        "?reservation_id=${widget.rservationId}"),
-
-    ),
+      urlRequest: URLRequest(
+        url: (reservationModelProvider!.coupon != null)
+            ? Uri.parse(wiselectedUrl +
+                "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
+            : Uri.parse(
+                wiselectedUrl + "?reservation_id=${widget.rservationId}"),
+      ),
       options: InAppBrowserClassOptions(
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(
           ios: IOSInAppWebViewOptions(applePayAPIEnabled: true),
@@ -125,7 +122,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   void initState() {
     reservationModelProvider =
         Provider.of<PaymentProvider>(context, listen: false);
-
 
     wiselectedUrl = "${EndPoints.baseUrl}client/OfferTapPayment";
 
@@ -153,7 +149,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                           "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
                       : Uri.parse(wiselectedUrl +
                           "?reservation_id=${widget.rservationId}"),
-
                 ),
                 pullToRefreshController: pullToRefreshController,
                 initialOptions: options,
@@ -191,10 +186,15 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                     .requestModel
                                     ?.driverModel
                                     ?.firstName ??
+                                sl<RequestDetailsProvider>()
+                                    .requestModel
+                                    ?.offer
+                                    ?.driverModel
+                                    ?.firstName ??
                                 "",
                             btnText: getTranslated("my_trips", context),
                             description:
-                                "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName}"));
+                                "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName ?? ""}"));
                   } else if (isFailed || isCancel) {
                     CustomNavigator.push(Routes.SUCCESS,
                         replace: true,
