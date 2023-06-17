@@ -16,13 +16,15 @@ class CouponWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+      padding:
+          EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h,),
+            padding: EdgeInsets.symmetric(
+              vertical: 8.h,
+            ),
             child: Text(
               getTranslated("coupon", context),
               style: AppTextStyles.w600.copyWith(
@@ -76,10 +78,15 @@ class CouponWidget extends StatelessWidget {
                 },
                 child: Container(
                   width: 100.w,
-                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: paymentProvider.discount <= 0
+                        ? !paymentProvider.isLoading
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).primaryColor.withOpacity(0.2)
+                        : ColorResources.ACTIVE,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(
                         Dimensions.RADIUS_DEFAULT,
@@ -98,7 +105,7 @@ class CouponWidget extends StatelessWidget {
                                   fontSize: 14),
                             )
                           : const SpinKitThreeBounce(
-                              color: ColorResources.WHITE_COLOR,
+                              color: ColorResources.PRIMARY_COLOR,
                               size: 20,
                             )
                       : const Icon(Icons.clear, color: Colors.white),

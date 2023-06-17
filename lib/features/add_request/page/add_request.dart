@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
-import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
 import '../provider/add_request_provider.dart';
 import '../widgets/duration_widget.dart';
 
-class AddRequest extends StatelessWidget {
+class AddRequest extends StatefulWidget {
   const AddRequest(
       {required this.isCaptain,
       Key? key,
@@ -21,10 +20,24 @@ class AddRequest extends StatelessWidget {
   final bool isCaptain;
   final OfferModel offer;
   final String name;
+
+  @override
+  State<AddRequest> createState() => _AddRequestState();
+}
+
+class _AddRequestState extends State<AddRequest> {
+  @override
+  void initState() {
+    Future.delayed(
+        Duration.zero,
+        () => Provider.of<AddRequestProvider>(context, listen: false)
+            .updateOfferDays(
+                widget.offer.offerDays!.map((e) => e.id!).toList()));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    ///to update days
-    sl<AddRequestProvider>().updateOfferDays(offer.offerDays!.map((e) => e.id!).toList());
     return Container(
       height: context.height * 0.9,
       width: context.width,
@@ -40,16 +53,17 @@ class AddRequest extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             BottomSheetAppBar(
-              title: isCaptain
+              title: widget.isCaptain
                   ? getTranslated("make_an_offer_to_client", context)
                   : getTranslated("make_a_request_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
                 if (provider.checkData(
-                        minOfferPrice: offer.minPrice ?? 0,
-                        maxOfferPrice: offer.maxPrice ?? 0) ==
+                        minOfferPrice: widget.offer.minPrice ?? 0,
+                        maxOfferPrice: widget.offer.maxPrice ?? 0) ==
                     true) {
-                  provider.requestOffer(tripID: offer.id, name: name);
+                  provider.requestOffer(
+                      tripID: widget.offer.id, name: widget.name);
                 }
               },
             ),
@@ -65,14 +79,14 @@ class AddRequest extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  if (!isCaptain) const FollowersWidget(),
+                  if (!widget.isCaptain) const FollowersWidget(),
                   const SizedBox(
                     height: 8,
                   ),
                   CalenderWidget(
                       startDate: provider.startDate,
                       endDate: provider.endDate,
-                      days: offer.offerDays!)
+                      days: widget.offer.offerDays!)
 
                   /*  CustomTextFormField(
                       label: true,

@@ -65,6 +65,7 @@ class AddRequestProvider extends ChangeNotifier {
     duration = 0;
     sl<CalenderProvider>()
         .getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
+    sl.get<FollowersProvider>().selectedFollowers.clear();
   }
 
   checkData({required double minOfferPrice, required double maxOfferPrice}) {
@@ -114,8 +115,7 @@ class AddRequestProvider extends ChangeNotifier {
           "duration": duration,
           "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
-              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty &&
-              !sl<ProfileProvider>().isDriver)
+              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty && !sl<ProfileProvider>().isDriver)
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers
