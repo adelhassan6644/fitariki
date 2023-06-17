@@ -247,8 +247,7 @@ class MyPendingTripCard extends StatelessWidget {
                   !sl.get<ProfileProvider>().isDriver)
                 InkWell(
                   onTap: () {
-                    sl<RequestDetailsProvider>()
-                        .getRequestDetails(id: myTrip.id!);
+                    sl<RequestDetailsProvider>().getRequestDetails(id: myTrip.id!);
                     CustomNavigator.push(Routes.PAYMENT, arguments: true);
                   },
                   child: Container(

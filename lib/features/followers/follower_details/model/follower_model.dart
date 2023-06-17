@@ -25,11 +25,11 @@ class FollowerModel {
         id: json["id"],
         name: json["name"],
         age: json["age"].toString(),
-        gender: int.tryParse(json["gender"].toString()),
-        sameHomeLocation:
-            json["is_same_pickup_location"].toString() == "1" ? true : false,
-        sameDestination:
-            json["is_same_drop_off_location"].toString() == "1" ? true : false,
+        gender: json["gender"] != null
+            ? int.tryParse(json["gender"].toString())
+            : 0,
+        sameHomeLocation: json["is_same_pickup_location"] == 1 ? true : false,
+        sameDestination: json["is_same_drop_off_location"] == 1 ? true : false,
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),

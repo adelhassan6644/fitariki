@@ -51,12 +51,10 @@ class _FollowerDetailsState extends State<FollowerDetails> {
         .selectedGender(widget.followerModel.gender ?? 0);
 
     Provider.of<FollowerDetailsProvider>(context, listen: false)
-            .sameHomeLocation ==
-        widget.followerModel.sameHomeLocation;
+        .sameHomeLocation = widget.followerModel.sameHomeLocation!;
 
     Provider.of<FollowerDetailsProvider>(context, listen: false)
-            .sameDestination ==
-        widget.followerModel.sameDestination;
+        .sameDestination = widget.followerModel.sameDestination!;
   }
 
   @override

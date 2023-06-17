@@ -42,16 +42,21 @@ class Payment extends StatelessWidget {
                                   if (isFromMyTrips)
                                     UserCard(
                                       withAnalytics: false,
-                                      userId: provider.requestModel?.driverId,
-                                      name: provider.requestModel?.offer
-                                          ?.driverModel?.firstName,
-                                      male: provider.requestModel?.offer
-                                              ?.driverModel?.gender ==
-                                          0,
-                                      image: provider.requestModel?.offer
-                                          ?.driverModel?.image,
-                                      national: provider.requestModel?.offer
-                                          ?.driverModel?.national?.niceName,
+                                      userId: provider.requestModel?.driverModel?.id ??
+                                          provider.requestModel?.offer?.driverModel?.id,
+                                      name: provider.requestModel?.driverModel?.firstName ??
+                                          provider.requestModel?.offer?.driverModel?.firstName,
+                                      male: (provider.requestModel?.driverModel?.gender ??
+                                              provider.requestModel?.offer?.driverModel?.gender) == 0,
+                                      image: provider.requestModel?.driverModel?.image ??
+                                          provider.requestModel?.offer?.driverModel?.image,
+                                      national: provider
+                                              .requestModel
+                                              ?.driverModel
+                                              ?.national
+                                              ?.niceName ??
+                                          provider.requestModel?.offer
+                                              ?.driverModel?.national?.niceName,
                                       createdAt:
                                           provider.requestModel?.createdAt ??
                                               DateTime.now(),

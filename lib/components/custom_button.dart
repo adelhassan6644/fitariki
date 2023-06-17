@@ -51,6 +51,7 @@ class CustomButton extends StatelessWidget {
       child: AnimatedContainer(
         width: isLoading ? 90.w :width?? context.width,
         height: height??50.h,
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         decoration: BoxDecoration(
           color: backgroundColor,
           border: Border.all(color: withBorderColor?ColorResources.PRIMARY_COLOR: Colors.transparent ),
@@ -84,10 +85,13 @@ class CustomButton extends StatelessWidget {
                       width: 18.w,
                       height: 18.w),
                   if(svgIcon != null)SizedBox(width: 8.w,),
-                  Text(text, style: AppTextStyles.w500.copyWith(
-                        fontSize: textSize??16,
-                        color: textColor??   ColorResources.WHITE_COLOR,
-                      ),),
+                  Expanded(
+                    child: Text(text, textAlign: TextAlign.center,style: AppTextStyles.w500.copyWith(
+                          fontSize: textSize??16,
+                          overflow: TextOverflow.ellipsis,
+                          color: textColor??   ColorResources.WHITE_COLOR,
+                        ),),
+                  ),
                 ],
               ),
         ),
