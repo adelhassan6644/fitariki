@@ -48,20 +48,23 @@ class MyOfferCard extends StatelessWidget {
               Row(
                 children: [
                   if (!isFromMyOfferDetails)
-                    Row(
-                      children: [
-                        customImageIconSVG(imageName: SvgImages.newOffer),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Text(
-                          sl.get<MyOffersProvider>().isDriver
-                              ? getTranslated("new_requests", context)
-                              : getTranslated("new_offers", context),
-                          style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, overflow: TextOverflow.ellipsis),
-                        ),
-                      ],
+                    Visibility(
+                      visible: offer!.isHaveNewRequests!,
+                      child: Row(
+                        children: [
+                          customImageIconSVG(imageName: SvgImages.newOffer),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          Text(
+                            sl.get<MyOffersProvider>().isDriver
+                                ? getTranslated("new_requests", context)
+                                : getTranslated("new_offers", context),
+                            style: AppTextStyles.w400.copyWith(
+                                fontSize: 10, overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
                     ),
                   const Expanded(child: SizedBox()),
                   Text(
