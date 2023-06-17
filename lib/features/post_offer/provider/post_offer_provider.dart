@@ -200,8 +200,8 @@ class PostOfferProvider extends ChangeNotifier {
         reset();
         CustomNavigator.pop();
         CustomNavigator.pop();
-        CustomNavigator.pop();
         CustomNavigator.push(Routes.SUCCESS,
+            replace: true,
             arguments: SuccessModel(
                 isPopUp: true,
                 isClean: true,
