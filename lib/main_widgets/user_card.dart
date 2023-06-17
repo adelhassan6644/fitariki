@@ -81,13 +81,13 @@ class UserCard extends StatelessWidget {
                         userId: userId!,
                       );
 
+                      CustomNavigator.push(Routes.USER_PROFILE,
+                          arguments: userId);
                     }
                     if (sl<UserProfileProvider>().isDriver && userId != null) {
                       sl<UserProfileProvider>().getUserFollowers(id: userId!);
                     }
 
-                    CustomNavigator.push(Routes.USER_PROFILE,
-                        arguments: userId);
                   },
                   child: Row(
                     children: [

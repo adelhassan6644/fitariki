@@ -60,17 +60,17 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                           data: [
                             ///user card
                             UserCard(
-                              withAnalytics: false,
-                              // approved: provider.requestModel?.approvedAt != null &&
-                              //         provider.requestModel?.paidAt != null,
                               reservationId: provider.requestModel?.id,
                               phone: provider.isDriver
                                   ? provider
                                       .requestModel?.offer?.clientModel?.phone
                                   : provider
                                       .requestModel?.offer?.driverModel?.phone,
-                              userId: provider.requestModel?.clientId ??
-                                  provider.requestModel?.driverId,
+                              userId: provider.isDriver
+                                  ? provider
+                                  .requestModel?.offer?.clientModel?.id
+                                  : provider
+                                  .requestModel?.offer?.driverModel?.id,
                               name: provider.isDriver
                                   ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
                                   : provider.requestModel?.offer?.driverModel
