@@ -36,9 +36,13 @@ class FeedbackItem {
 
   factory FeedbackItem.fromJson(Map<String, dynamic> json) => FeedbackItem(
       id: json["id"],
-      rate: double.tryParse(json["rating"].toString()),
+      rate: json["rating"] != null
+          ? double.tryParse(json["rating"].toString())
+          : null,
       feedback: json["feedback"],
-      createdAt: DateTime.parse(json["created_at"]),
+      createdAt: json["created_at"] == null
+          ? null
+          : DateTime.parse(json["created_at"]),
       isSeen: json["is_seen"],
       clientModel:
           json["client"] != null ? ClientModel.fromJson(json["client"]) : null,

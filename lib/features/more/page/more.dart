@@ -35,6 +35,7 @@ class More extends StatelessWidget {
                                 isDriver: provider.isDriver,
                                 male: provider.gender == 0,
                                 nationality: provider.nationality?.name,
+                                phone: "${provider.phone.text.trim().replaceAll("+", "")}+",
                                 rate: provider.rate.ceil(),
                                 reservationCount: provider.reservationCount,
                                 requestsCount: provider.requestsCount,

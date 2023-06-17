@@ -69,7 +69,9 @@ class DriverModel {
         nickname: json["nickname"],
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
-        gender: int.parse(json["gender"] ?? "0"),
+        gender: json["gender"] == null
+            ? null
+            : int.parse(json["gender"].toString()),
         age: json["age"].toString(),
         national: json["country"] != null
             ? Country.fromJson(
@@ -83,7 +85,9 @@ class DriverModel {
         phone: json["phone"].toString(),
         status: json["status"].toString(),
         rate: json["rate"],
-        wallet: double.tryParse(json["wallet"].toString()),
+        wallet: json["wallet"] == null
+            ? null
+            : double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),

@@ -45,9 +45,13 @@ class UserProfile extends StatelessWidget {
                     child: provider.isLoadProfile
                         ? const ProfileCardShimmer()
                         : ProfileCard(
-                            lastUpdate: Methods.getDayCount(date: provider.userProfileModel?.driver != null
-                                            ? provider.userProfileModel!.driver!.updatedAt!
-                                            : provider.userProfileModel!.client!.updatedAt!)
+                            lastUpdate: Methods.getDayCount(
+                                    date: provider.userProfileModel?.driver !=
+                                            null
+                                        ? provider.userProfileModel!.driver!
+                                            .updatedAt!
+                                        : provider.userProfileModel!.client!
+                                            .updatedAt!)
                                 .toString(),
                             image: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel!.driver!.image
@@ -58,28 +62,33 @@ class UserProfile extends StatelessWidget {
                             isDriver: provider.userProfileModel!.driver != null,
                             male: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel!.driver!.gender == 0
-                                : provider.userProfileModel!.client!.gender == 0,
-                            nationality: provider.userProfileModel!.driver != null
-                                ? provider.userProfileModel!.driver!.national
-                                        ?.name ??
-                                    ""
-                                : provider.userProfileModel?.client?.national
-                                        ?.name ??
-                                    "",
+                                : provider.userProfileModel!.client!.gender ==
+                                    0,
+                            nationality:
+                                provider.userProfileModel!.driver != null
+                                    ? provider.userProfileModel!.driver!
+                                            .national?.name ??
+                                        ""
+                                    : provider.userProfileModel?.client
+                                            ?.national?.name ??
+                                        "",
                             rate: provider.userProfileModel!.driver != null
-                                ? provider.userProfileModel?.driver?.rate?.ceil()
-                                : provider.userProfileModel?.client?.rate?.ceil(),
+                                ? provider.userProfileModel?.driver?.rate
+                                    ?.ceil()
+                                : provider.userProfileModel?.client?.rate
+                                    ?.ceil(),
                             reservationCount:
                                 provider.userProfileModel!.driver != null
                                     ? provider.userProfileModel?.driver
                                         ?.reservationsCount
                                     : provider.userProfileModel?.client
                                         ?.reservationsCount,
-                            requestsCount: provider.userProfileModel!.driver !=
-                                    null
-                                ? provider.userProfileModel?.driver?.requestsCount
-                                : provider
-                                    .userProfileModel?.client?.requestsCount,
+                            requestsCount:
+                                provider.userProfileModel!.driver != null
+                                    ? provider
+                                        .userProfileModel?.driver?.requestsCount
+                                    : provider.userProfileModel?.client
+                                        ?.requestsCount,
                             distance: "  ${Methods.calcDistance(
                               lat1: sl<LocationProvider>()
                                   .currentLocation!
@@ -164,7 +173,7 @@ class UserProfile extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (  provider.userOffers == null ||
+                  if (provider.userOffers == null ||
                       provider.userOffers?.offers == null ||
                       provider.userOffers!.offers!.isEmpty)
                     Visibility(
@@ -172,17 +181,22 @@ class UserProfile extends StatelessWidget {
                       child: EmptyState(
                           txt: provider.isDriver
                               ? getTranslated("there_is_no_offers_now", context)
-                              : getTranslated("there_is_no_requests_now", context)),
+                              : getTranslated(
+                                  "there_is_no_requests_now", context)),
                     ),
                   if (!provider.isLoadOffers &&
                       provider.userOffers != null &&
                       provider.userOffers?.offers != null &&
                       provider.userOffers!.offers!.isNotEmpty)
                     ...List.generate(
-                        provider.userOffers!.offers!.length > 5? 5:provider.userOffers!.offers!.length,
+                        provider.userOffers!.offers!.length > 5
+                            ? 5
+                            : provider.userOffers!.offers!.length,
                         (index) => UserOfferCard(
                             offerModel: provider.userOffers!.offers![index])),
-                  SizedBox(height: 8.h,)
+                  SizedBox(
+                    height: 8.h,
+                  )
                 ]),
               )
             ],

@@ -17,6 +17,7 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard(
       {this.image,
       this.name,
+      this.phone,
       this.nationality,
       this.distance,
       this.male = true,
@@ -28,7 +29,7 @@ class ProfileCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final String? nationality, name, lastUpdate, distance, image;
+  final String? nationality, name, phone, lastUpdate, distance, image;
   final bool male, isDriver;
   final int? requestsCount, reservationCount, rate;
 
@@ -77,9 +78,12 @@ class ProfileCard extends StatelessWidget {
                                   ],
                                 ),
                               )
-                            : GestureDetector(
-                                onTap: ()
-                                {
+                            : InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                onTap: () {
                                   sl<ProfileProvider>().getProfile();
                                   CustomNavigator.push(Routes.EDIT_PROFILE,
                                       arguments: false);
@@ -164,18 +168,32 @@ class ProfileCard extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
+                            Visibility(
+                              visible: phone != null,
+                              child:  Text(
+                                phone ?? "سعودي",
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 11,
+                                    height: 1,
+                                    overflow: TextOverflow.ellipsis),
+                              ),),
                             ShowRate(
                               rate: rate,
                               size: 6,
                             ),
-                            Text(
-                              nationality ?? "سعودي",
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 11,
-                                  height: 1,
-                                  overflow: TextOverflow.ellipsis),
+                            Visibility(
+                              visible: phone==null,
+                              child: Text(
+                                nationality ?? "سعودي",
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 11,
+                                    height: 1,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
                           ],
                         ),

@@ -67,14 +67,20 @@ class OfferRequestDetailsModel {
             : Methods.convertStringToDataTime(json["start_at"]),
         endAt: json["end_at"] == null
             ? DateTime.now()
-            :  Methods.convertStringToDataTime(json["end_at"]),
+            : Methods.convertStringToDataTime(json["end_at"]),
         duration: json["duration"],
-        price:double.parse(json["offer_price"].toString())==0.0? double.parse(json["price"].toString()):double.parse(json["offer_price"].toString()),
+        price: json["offer_price"] == null
+            ? 0.0
+            : double.parse(json["offer_price"].toString()) == 0.0
+                ? double.parse(json["price"].toString())
+                : double.parse(json["offer_price"].toString()),
         offerPrice: double.parse(json["offer_price"].toString()),
         message: json["message"],
         matching: json["matching"] == null
             ? 0.0
-            : double.parse(json["matching"].toString())<0?0:double.parse(json["matching"].toString()),
+            : double.parse(json["matching"].toString()) < 0
+                ? 0
+                : double.parse(json["matching"].toString()),
         approvedAt: json["approved_at"] != null
             ? DateTime.parse(json["approved_at"])
             : null,
@@ -97,9 +103,8 @@ class OfferRequestDetailsModel {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        paidAt: json["paid_at"] == null
-            ? null
-            : DateTime.parse(json["paid_at"]),
+        paidAt:
+            json["paid_at"] == null ? null : DateTime.parse(json["paid_at"]),
         clientModel: json["client"] == null
             ? null
             : ClientModel.fromJson(json["client"]),
