@@ -121,6 +121,7 @@ class PostOfferProvider extends ChangeNotifier {
     selectedFollowers.clear();
     scheduleProvider.selectedDays.clear();
     onSelectEndDate(DateTime.now());
+    sl<ProfileProvider>().getProfile();
   }
 
   checkData() {
@@ -197,9 +198,10 @@ class PostOfferProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         reset();
-        sl<ProfileProvider>().getProfile();
+        CustomNavigator.pop();
+        CustomNavigator.pop();
+        CustomNavigator.pop();
         CustomNavigator.push(Routes.SUCCESS,
-            clean: true,
             arguments: SuccessModel(
                 isPopUp: true,
                 isClean: true,
