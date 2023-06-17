@@ -62,37 +62,53 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             UserCard(
                               reservationId: provider.requestModel?.id,
                               phone: provider.isDriver
-                                  ? provider
-                                      .requestModel?.offer?.clientModel?.phone
-                                  : provider
-                                      .requestModel?.offer?.driverModel?.phone,
+                                  ? provider.requestModel?.clientModel?.phone ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.phone
+                                  : provider.requestModel?.driverModel?.phone ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.phone,
                               userId: provider.isDriver
-                                  ? provider
-                                  .requestModel?.offer?.clientModel?.id
-                                  : provider
-                                  .requestModel?.offer?.driverModel?.id,
+                                  ? provider.requestModel?.clientModel?.id ??
+                                      provider
+                                          .requestModel?.offer?.clientModel?.id
+                                  : provider.requestModel?.driverModel?.id ??
+                                      provider
+                                          .requestModel?.offer?.driverModel?.id,
                               name: provider.isDriver
-                                  ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
-                                  : provider.requestModel?.offer?.driverModel
+                                  ? "${provider.requestModel?.clientModel?.firstName ?? provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
+                                  : provider.requestModel?.driverModel
+                                          ?.firstName ??
+                                      provider.requestModel?.offer?.driverModel
                                           ?.firstName ??
                                       "",
                               image: provider.isDriver
-                                  ? provider
-                                      .requestModel?.offer?.clientModel?.image
-                                  : provider
-                                      .requestModel?.offer?.driverModel?.image,
+                                  ? provider.requestModel?.clientModel?.image ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.image
+                                  : provider.requestModel?.driverModel?.image ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.image,
                               male: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                          ?.gender ==
+                                  ? (provider.requestModel?.clientModel
+                                              ?.gender ??
+                                          provider.requestModel?.offer
+                                              ?.clientModel?.gender) ==
                                       0
-                                  : provider.requestModel?.offer?.driverModel
-                                          ?.gender ==
+                                  : (provider.requestModel?.driverModel
+                                              ?.gender ??
+                                          provider.requestModel?.offer
+                                              ?.driverModel?.gender) ==
                                       0,
                               national: provider.isDriver
-                                  ? provider.requestModel?.offer?.clientModel
-                                      ?.national?.niceName
-                                  : provider.requestModel?.offer?.driverModel
-                                      ?.national?.niceName,
+                                  ? provider.requestModel?.clientModel?.national
+                                          ?.niceName ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.national?.niceName
+                                  : provider.requestModel?.driverModel?.national
+                                          ?.niceName ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.national?.niceName,
                               createdAt: provider.requestModel?.createdAt ??
                                   DateTime.now(),
                               days: provider.requestModel?.offer?.offerDays!
@@ -147,17 +163,28 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                 lat2: provider.isDriver
                                     ? provider.requestModel?.clientModel
                                             ?.pickupLocation?.latitude ??
+                                        provider
+                                            .requestModel
+                                            ?.offer
+                                            ?.clientModel
+                                            ?.pickupLocation
+                                            ?.latitude ??
                                         "0"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.latitude ??
+                                    : provider.requestModel?.offer?.pickupLocation?.latitude ??
                                         "0",
                                 long2: provider.isDriver
                                     ? provider.requestModel?.clientModel
                                             ?.pickupLocation?.longitude ??
-                                        "1"
+                                        provider
+                                            .requestModel
+                                            ?.offer
+                                            ?.clientModel
+                                            ?.pickupLocation
+                                            ?.longitude ??
+                                        "0"
                                     : provider.requestModel?.offer
                                             ?.pickupLocation?.longitude ??
-                                        "1"),
+                                        "0"),
 
                             /// to show stop points for followers request if driver
                             Visibility(
@@ -203,8 +230,8 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             Visibility(
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
-                                  carInfo: provider.requestModel?.offer
-                                      ?.driverModel?.carInfo,
+                                  carInfo: provider.requestModel?.driverModel?.carInfo ??
+                                      provider.requestModel?.offer?.driverModel?.carInfo,
                                 )),
 
                             /// to show days on calender
