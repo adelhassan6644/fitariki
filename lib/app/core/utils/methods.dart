@@ -90,8 +90,10 @@ abstract class Methods {
       return "${difference.inMinutes} دقيقة";
     } else if (difference.inHours < 24) {
       return "${difference.inHours} ساعة";
+    } else if (difference.inDays < 30) {
+      return '${difference.inDays} يوم';
     } else {
-      return "${difference.inDays} يوم";
+      return date.defaultFormat();
     }
   }
 
