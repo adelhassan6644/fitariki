@@ -505,7 +505,7 @@ class ProfileProvider extends ChangeNotifier {
   updateProfile({bool fromLogin = false}) async {
     if (checkData() == true) {
       try {
-        if(fromLogin){
+        if(!fromLogin){
           spinKitDialog();
         }
         isLoading = true;
@@ -598,7 +598,7 @@ class ProfileProvider extends ChangeNotifier {
         Either<ServerFailure, Response> response =
             await profileRepo.updateProfile(body: personalData);
         response.fold((fail) {
-          if(fromLogin){
+          if(!fromLogin){
             CustomNavigator.pop();
           }
           CustomSnackBar.showSnackBar(
@@ -611,7 +611,7 @@ class ProfileProvider extends ChangeNotifier {
           notifyListeners();
         }, (response) {
           profileRepo.completedProfile();
-          if (fromLogin) {
+          if (!fromLogin) {
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {
             CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);

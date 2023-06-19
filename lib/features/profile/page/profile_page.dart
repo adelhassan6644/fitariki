@@ -57,8 +57,7 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Visibility(
-                            visible:fromLogin ,
-                            child: const WelcomeWidget()),
+                            visible: fromLogin, child: const WelcomeWidget()),
                         ProfileImageWidget(
                           provider: provider,
                           fromLogin: fromLogin,
@@ -92,6 +91,7 @@ class ProfilePage extends StatelessWidget {
 
             if (fromLogin)
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(

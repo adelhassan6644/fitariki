@@ -224,15 +224,16 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<MyTripsProvider>().getCurrentTrips();
         sl<MyTripsProvider>().getPreviousTrips();
         sl<MyTripsProvider>().getPendingTrips();
-        firebaseAuthRepo.remember(phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
+        firebaseAuthRepo.remember(
+            phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
 
         if (success.data['data'][role[_userType]]["new_user"].toString() ==
-            "1" || success.data['data'][role[_userType]]["first_name"] == null) {
+                "1" ||
+            success.data['data'][role[_userType]]["first_name"] == null) {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
-        }
-        else {
+        } else {
           firebaseAuthRepo.completedProfile();
           CustomNavigator.pop();
           sl<ProfileProvider>().getProfile();
@@ -254,6 +255,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
     }
   }
+
   logOut() async {
     try {
       Future.delayed(Duration.zero, () async {

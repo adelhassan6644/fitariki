@@ -15,9 +15,15 @@ import '../../../components/custom_text_form_field.dart';
 import '../../../components/tab_widget.dart';
 import '../provider/firebase_auth_provider.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,101 +113,105 @@ class Login extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: CustomTextFormField(
-                                controller: provider.phoneTEC,
-                                hint: "5xxxxxxxx",
-                                inputType: TextInputType.phone,
-                                valid: Validations.phone,
+                        Form(
+                          key: _formKey,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: CustomTextFormField(
+                                  controller: provider.phoneTEC,
+                                  hint: "5xxxxxxxx",
+                                  inputType: TextInputType.phone,
+                                  valid: Validations.phone,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: InkWell(
-                                  onTap: () {
-                                    showCountryPicker(
-                                      context: context,
-                                      showPhoneCode: true,
-                                      showSearch: false,
-                                      countryFilter: [
-                                        "SA",
-                                        "EG",
-                                        "AF",
-                                        "IN",
-                                        "PK",
-                                        "UA",
-                                        "BH",
-                                        "QA",
-                                        "UAE",
-                                        "USA",
-                                        "RA",
-                                      ],
-                                      onSelect: (Country value) =>
-                                          provider.onSelectCountry(
-                                              code: value.countryCode,
-                                              phone: value.phoneCode),
-                                      countryListTheme: CountryListThemeData(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(15),
-                                          topRight: Radius.circular(15),
-                                        ),
-                                        bottomSheetHeight: 360.h,
-                                        textStyle: AppTextStyles.w500
-                                            .copyWith(fontSize: 14),
-                                        flagSize: 20,
-                                        searchTextStyle: const TextStyle(
-                                          color: ColorResources
-                                              .SECOUND_PRIMARY_COLOR,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                  flex: 1,
+                                  child: InkWell(
+                                    onTap: () {
+                                      showCountryPicker(
+                                        context: context,
+                                        showPhoneCode: true,
+                                        showSearch: false,
+                                        countryFilter: [
+                                          "SA",
+                                          "EG",
+                                          "AF",
+                                          "IN",
+                                          "PK",
+                                          "UA",
+                                          "BH",
+                                          "QA",
+                                          "UAE",
+                                          "USA",
+                                          "RA",
+                                        ],
+                                        onSelect: (Country value) =>
+                                            provider.onSelectCountry(
+                                                code: value.countryCode,
+                                                phone: value.phoneCode),
+                                        countryListTheme: CountryListThemeData(
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(15),
+                                            topRight: Radius.circular(15),
+                                          ),
+                                          bottomSheetHeight: 360.h,
+                                          textStyle: AppTextStyles.w500
+                                              .copyWith(fontSize: 14),
+                                          flagSize: 20,
+                                          searchTextStyle: const TextStyle(
                                             color: ColorResources
-                                                .LIGHT_BORDER_COLOR,
-                                            width: 1),
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.RADIUS_DEFAULT)),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 4, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        const Expanded(
-                                            child: Icon(
-                                          Icons.keyboard_arrow_down_outlined,
-                                          size: 18,
-                                          color: ColorResources.PRIMARY_COLOR,
-                                        )),
-                                        Expanded(
-                                          child: Text(
-                                            provider.countryPhoneCode,
-                                            style: AppTextStyles.w400.copyWith(
-                                                fontSize: 14,
-                                                overflow:
-                                                    TextOverflow.ellipsis),
+                                                .SECOUND_PRIMARY_COLOR,
+                                            fontSize: 14,
                                           ),
                                         ),
-                                        Expanded(
-                                          child: Flag.fromString(
-                                            provider.countryCode,
-                                            width: 16,
-                                            height: 10,
+                                      );
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: ColorResources
+                                                  .LIGHT_BORDER_COLOR,
+                                              width: 1),
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.RADIUS_DEFAULT)),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 8),
+                                      child: Row(
+                                        children: [
+                                          const Expanded(
+                                              child: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            size: 18,
+                                            color: ColorResources.PRIMARY_COLOR,
+                                          )),
+                                          Expanded(
+                                            child: Text(
+                                              provider.countryPhoneCode,
+                                              style: AppTextStyles.w400
+                                                  .copyWith(
+                                                      fontSize: 14,
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: Flag.fromString(
+                                              provider.countryCode,
+                                              width: 16,
+                                              height: 10,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ))
-                          ],
+                                  ))
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 8,
@@ -224,7 +234,9 @@ class Login extends StatelessWidget {
                       child: CustomButton(
                           text: getTranslated("follow", context),
                           onTap: () {
-                            provider.signInWithMobileNo();
+                            if (_formKey.currentState!.validate()) {
+                              provider.signInWithMobileNo();
+                            }
                           },
                           isLoading: provider.isLoading),
                     ),

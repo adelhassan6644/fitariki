@@ -22,8 +22,8 @@ class Validations {
 
   static String? phone(String? value) {
     if (value!.isEmpty) {
-      return getTranslated(
-          "required", CustomNavigator.navigatorState.currentContext!);
+      return getTranslated("please_enter_valid_number",
+          CustomNavigator.navigatorState.currentContext!);
     } else {
       return null;
     }
