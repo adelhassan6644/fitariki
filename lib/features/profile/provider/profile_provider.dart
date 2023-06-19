@@ -30,7 +30,7 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
-    if (isLogin&&isCompleteProfile) {
+    if (isLogin && isCompleteProfile) {
       getProfile();
     }
     getBanks();
@@ -506,7 +506,7 @@ class ProfileProvider extends ChangeNotifier {
   updateProfile({bool fromLogin = false}) async {
     if (checkData() == true) {
       try {
-        if(!fromLogin){
+        if (!fromLogin) {
           spinKitDialog();
         }
         isLoading = true;
@@ -553,8 +553,8 @@ class ProfileProvider extends ChangeNotifier {
         if (profileImage != null) {
           await profileRepo.updateProfile(
               body: FormData.fromMap({
-                "image": await MultipartFile.fromFile(profileImage!.path),
-              }));
+            "image": await MultipartFile.fromFile(profileImage!.path),
+          }));
         }
         if (carImage != null) {
           await profileRepo.updateProfile(
@@ -599,7 +599,7 @@ class ProfileProvider extends ChangeNotifier {
         Either<ServerFailure, Response> response =
             await profileRepo.updateProfile(body: personalData);
         response.fold((fail) {
-          if(!fromLogin){
+          if (!fromLogin) {
             CustomNavigator.pop();
           }
           CustomSnackBar.showSnackBar(
