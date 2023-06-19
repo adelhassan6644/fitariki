@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/data/error/api_error_handler.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -603,7 +604,7 @@ class ProfileProvider extends ChangeNotifier {
           }
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
-                  message: fail.error,
+                  message: ApiErrorHandler.getMessage(fail),
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));

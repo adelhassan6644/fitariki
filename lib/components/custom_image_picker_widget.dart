@@ -10,7 +10,6 @@ import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
 import 'custom_images.dart';
 import 'image_pop_up_viewer.dart';
-import 'image_viewer.dart';
 import 'marquee_widget.dart';
 
 class CustomButtonImagePicker extends StatelessWidget {

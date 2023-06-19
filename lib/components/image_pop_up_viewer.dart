@@ -48,35 +48,40 @@ class ImagePopUpViewer extends StatelessWidget {
             ),
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.w600.copyWith(
-                  fontSize: 12,
-                  overflow: TextOverflow.ellipsis,
-                  color: ColorResources.WHITE_COLOR),
-            ),
-            isFromInternet
-                ? Center(
-                    child: ClipRRect(
+        Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.w600.copyWith(
+                    fontSize: 12,
+                    overflow: TextOverflow.ellipsis,
+                    color: ColorResources.WHITE_COLOR),
+              ),
+              isFromInternet
+                  ? Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: CustomNetworkImage.containerNewWorkImage(
+                            image: image,
+                            fit: BoxFit.fitWidth,
+                            radius: 14,
+                            width: context.width,
+                            height: context.width * 1.4),
+                      ),
+                    )
+                  : ClipRRect(
                       borderRadius: BorderRadius.circular(14),
-                      child: CustomNetworkImage.containerNewWorkImage(
-                          image: image,
+                      child: Image.file(image,
                           fit: BoxFit.fitWidth,
-                          radius: 14,
-                          width: context.width * 0.9,
+                          width: context.width,
                           height: context.width * 1.4),
-                    ),
-                  )
-                : Image.file(image,
-                    fit: BoxFit.fitWidth,
-                    width: context.width * 0.9,
-                    height: context.width * 1.4)
-          ],
+                    )
+            ],
+          ),
         ),
       ],
     );

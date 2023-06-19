@@ -90,23 +90,24 @@ class ProfilePage extends StatelessWidget {
             ),
 
             if (fromLogin)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+              Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_DEFAULT,
+                      ),
+                      child: CustomButton(
+                        isLoading: provider.isLoading,
+                        text: getTranslated("save", context),
+                        onTap: () => provider.updateProfile(fromLogin: true),
+                      ),
                     ),
-                    child: CustomButton(
-                      isLoading: provider.isLoading,
-                      text: getTranslated("save", context),
-                      onTap: () => provider.updateProfile(fromLogin: true),
+                    SizedBox(
+                      height: 12.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                ],
+                  ],
+                ),
               ),
           ],
         ),
