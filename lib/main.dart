@@ -18,7 +18,6 @@ import 'navigation/custom_navigation.dart';
 import 'navigation/routes.dart';
 import 'package:fitariki/data/config/di.dart' as di;
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,7 +27,8 @@ Future<void> main() async {
 
   FirebaseNotifications.init();
   await di.init();
-  runApp(MultiProvider(providers: ProviderList.providers,child: const MyApp()));
+  runApp(
+      MultiProvider(providers: ProviderList.providers, child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -75,7 +75,6 @@ class _MyAppState extends State<MyApp> {
           ? dark
           : light,
       supportedLocales: locals,
-
       locale: Provider.of<LocalizationProvider>(
         context,
       ).locale,
