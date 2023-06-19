@@ -29,7 +29,7 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
-    if (isLogin) {
+    if (isLogin&&isCompleteProfile) {
       getProfile();
     }
     getBanks();
@@ -37,6 +37,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   bool get isLogin => profileRepo.isLoggedIn();
+  bool get isCompleteProfile => profileRepo.isCompleteProfile();
   bool get isDriver => profileRepo.isDriver();
 
   ///Car Data

@@ -21,6 +21,9 @@ class ProfileRepo {
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
+  bool isCompleteProfile() {
+    return sharedPreferences.containsKey(AppStorageKey.isCompleteProfile);
+  }
 
   completedProfile() {
     sharedPreferences.setBool(AppStorageKey.isCompleteProfile, true);
