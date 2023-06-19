@@ -21,11 +21,15 @@ class ActionButtons extends StatelessWidget {
     return Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
       return Column(
         children: [
-          /// when offer or request is new
+          /// when offer or request is updated
           Visibility(
             visible: !provider.isLoading &&
                 provider.requestModel?.approvedAt == null &&
-                provider.requestModel?.rejectedAt == null,
+                provider.requestModel?.rejectedAt == null &&
+                canAnswer(
+                    isDriver: provider.isDriver,
+                    updateByDriver: provider.requestModel!.updatedByDriver!,
+                    updateByClient: provider.requestModel!.updatedByClient!),
             child: Column(
               children: [
                 Padding(
@@ -99,6 +103,31 @@ class ActionButtons extends StatelessWidget {
             ),
           ),
 
+          /// when offer or request sent and waiting replay on your offer
+          Visibility(
+            visible: !provider.isLoading &&
+                provider.requestModel?.approvedAt == null &&
+                provider.requestModel?.rejectedAt == null &&
+                !canAnswer(
+                    isDriver: provider.isDriver,
+                    updateByDriver: provider.requestModel!.updatedByDriver!,
+                    updateByClient: provider.requestModel!.updatedByClient!),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                  vertical: 16.h),
+              child: CustomButton(
+                textColor: ColorResources.PRIMARY_COLOR,
+                backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                text: getTranslated(
+                    provider.isDriver
+                        ? "waiting_for_client_replay"
+                        : "waiting_for_driver_replay",
+                    context),
+              ),
+            ),
+          ),
+
           /// when request accepted but not paid and current type is client
           Visibility(
             visible: !provider.isLoading &&
@@ -130,7 +159,8 @@ class ActionButtons extends StatelessWidget {
               child: CustomButton(
                 textColor: ColorResources.PRIMARY_COLOR,
                 backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
-                text: getTranslated("request_accepted_and_waiting_payment", context),
+                text: getTranslated(
+                    "request_accepted_and_waiting_payment", context),
               ),
             ),
           ),
@@ -156,5 +186,18 @@ class ActionButtons extends StatelessWidget {
         ],
       );
     });
+  }
+
+  canAnswer(
+      {required bool isDriver,
+      required bool updateByDriver,
+      required bool updateByClient}) {
+    if (isDriver && updateByDriver) {
+      return false;
+    } else if (!isDriver && updateByClient) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

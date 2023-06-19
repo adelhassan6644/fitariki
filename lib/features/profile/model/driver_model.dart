@@ -72,7 +72,7 @@ class DriverModel {
         gender: json["gender"] == null
             ? null
             : int.parse(json["gender"].toString()),
-        age: json["age"].toString(),
+        age: json["age"] != null ? json["age"].toString() : null,
         national: json["country"] != null
             ? Country.fromJson(
                 json["country"],

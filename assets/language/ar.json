@@ -267,5 +267,7 @@
   "added_to_wishlist_successfully":  "تم الاضافة الي المحفوظات بنجاح",
   "removed_from_wishlist_successfully":  "تم الازلة من المحفوظات بنجاح",
   "there_is_no_offers_add_new_offer": "لا يوجد عروض توصيل حاليا \n أضف عرض جديد",
-  "there_is_no_requests_add_new_request":"لا يوجد طلبات توصيل حاليا \n أضف طلب جديد"
+  "there_is_no_requests_add_new_request":"لا يوجد طلبات توصيل حاليا \n أضف طلب جديد",
+  "waiting_for_client_replay": "في انتظار رد الراكب",
+  "waiting_for_driver_replay": "في انتظار رد الكابتن"
 }

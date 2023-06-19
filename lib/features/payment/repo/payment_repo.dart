@@ -18,8 +18,10 @@ class PaymentRepo {
       {required OfferRequestDetailsModel requestModel}) async {
     try {
       Response response = await dioClient.post(uri: EndPoints.reserve, data: {
-        'client_id':sl.get<SharedPreferences>().getString(AppStorageKey.userId),
-        "driver_id": requestModel.driverId,
+        'client_id':
+            sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+        "driver_id":
+            requestModel.driverModel?.id ?? requestModel.offer?.driverModel?.id,
         "offer_id": requestModel.offerId,
         "offer_request_id": requestModel.id,
       });
@@ -39,11 +41,12 @@ class PaymentRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(e)));
     }
   }
-  Future<Either<ServerFailure, Response>> paymentFees(
-      ) async {
+
+  Future<Either<ServerFailure, Response>> paymentFees() async {
     try {
       Response response = await dioClient.get(
-          uri: EndPoints.paymentData, );
+        uri: EndPoints.paymentData,
+      );
       return Right(response);
     } catch (e) {
       return left(ServerFailure(ApiErrorHandler.getMessage(e)));

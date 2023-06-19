@@ -13,8 +13,6 @@ class SplashProvider extends ChangeNotifier {
         CustomNavigator.push(Routes.ON_BOARDING, clean: true);
       } else if (splashRepo.isLogin() && !splashRepo.isCompleteProfile()) {
         CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
-      } else if (splashRepo.isLogin() && splashRepo.isCompleteProfile()) {
-        CustomNavigator.push(Routes.DASHBOARD, clean: true, arguments: 0);
       } else {
         CustomNavigator.push(Routes.DASHBOARD, clean: true, arguments: 0);
       }

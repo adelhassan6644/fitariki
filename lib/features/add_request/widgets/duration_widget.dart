@@ -11,8 +11,9 @@ import '../../../helpers/date_time_picker.dart';
 import '../provider/add_request_provider.dart';
 
 class DurationWidget extends StatelessWidget {
-  const DurationWidget({required this.provider, Key? key}) : super(key: key);
+  const DurationWidget({required this.provider,required this.offerStartDate, Key? key}) : super(key: key);
   final AddRequestProvider provider;
+  final DateTime offerStartDate;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,8 @@ class DurationWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => customShowModelBottomSheet(
                   body: DateTimePicker(
-                    startDateTime: DateTime.now(),
+                    startDateTime: provider.startDate,
+                    minDateTime: offerStartDate,
                     valueChanged: provider.onSelectStartDate,
                     label: getTranslated("start_of_duration", context),
                   ),
@@ -91,7 +93,8 @@ class DurationWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => customShowModelBottomSheet(
                   body: DateTimePicker(
-                    startDateTime: provider.startDate,
+                    startDateTime: provider.endDate,
+                    minDateTime: offerStartDate,
                     valueChanged: provider.onSelectEndDate,
                     label: getTranslated("end_of_duration", context),
                   ),

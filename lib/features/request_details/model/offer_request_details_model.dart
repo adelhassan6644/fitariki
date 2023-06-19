@@ -13,11 +13,13 @@ class OfferRequestDetailsModel {
   double? offerPrice;
   String? message;
   DateTime? approvedAt;
-  int? approvedByClient;
-  int? approvedByDriver;
+  bool? approvedByClient;
+  bool? approvedByDriver;
   DateTime? rejectedAt;
-  int? rejectedByClient;
-  int? rejectedByDriver;
+  bool? rejectedByClient;
+  bool? rejectedByDriver;
+  bool? updatedByDriver;
+  bool? updatedByClient;
   int? clientId;
   int? driverId;
   int? offerId;
@@ -46,6 +48,8 @@ class OfferRequestDetailsModel {
     this.rejectedAt,
     this.rejectedByClient,
     this.rejectedByDriver,
+    this.updatedByDriver,
+    this.updatedByClient,
     this.clientId,
     this.driverId,
     this.offerId,
@@ -84,13 +88,15 @@ class OfferRequestDetailsModel {
         approvedAt: json["approved_at"] != null
             ? DateTime.parse(json["approved_at"])
             : null,
-        approvedByClient: json["approved_by_client"],
-        approvedByDriver: json["approved_by_driver"],
+        approvedByClient: json["approved_by_client"] == 1 ? true : false,
+        approvedByDriver: json["approved_by_driver"] == 1 ? true : false,
         rejectedAt: json["rejected_at"] != null
             ? DateTime.parse(json["rejected_at"])
             : null,
-        rejectedByClient: json["rejected_by_client"],
-        rejectedByDriver: json["rejected_by_driver"],
+        rejectedByClient: json["rejected_by_client"] == 1 ? true : false,
+        rejectedByDriver: json["rejected_by_driver"] == 1 ? true : false,
+        updatedByClient: json["updated_by_client"] == 1 ? true : false,
+        updatedByDriver: json["updated_by_driver"] == 1 ? true : false,
         clientId: json["client_id"],
         driverId: json["driver_id"],
         offerId: json["offer_id"],

@@ -102,9 +102,11 @@ class OfferDetails extends StatelessWidget {
                                   .currentLocation!
                                   .longitude!,
                               lat2: provider
-                                  .offerDetails?.pickupLocation?.latitude??"0",
-                              long2: provider
-                                  .offerDetails?.pickupLocation?.longitude??"0",
+                                      .offerDetails?.pickupLocation?.latitude ??
+                                  "0",
+                              long2: provider.offerDetails?.pickupLocation
+                                      ?.longitude ??
+                                  "0",
                             ),
                             if (!provider.isDriver)
                               CarDetails(
@@ -141,7 +143,7 @@ class OfferDetails extends StatelessWidget {
                             : getTranslated(
                                 provider.isDriver ? "add_offer" : "add_request",
                                 context),
-                        onTap: () {
+                        onTap: () async {
                           if (provider.offerDetails?.isSentOffer != true) {
                             customShowModelBottomSheet(
                                 onClose: () => sl<AddRequestProvider>().reset(),

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/my_trips/provider/my_trips_provider.dart';
+import 'package:fitariki/features/offer_details/provider/offer_details_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../../navigation/custom_navigation.dart';
@@ -224,9 +225,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         sl<MyTripsProvider>().getCurrentTrips();
         sl<MyTripsProvider>().getPreviousTrips();
         sl<MyTripsProvider>().getPendingTrips();
-
-        firebaseAuthRepo.remember(
-            phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
+        firebaseAuthRepo.remember(phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
 
         if (success.data['data'][role[_userType]]["new_user"].toString() ==
             "1" || success.data['data'][role[_userType]]["first_name"] == null) {
@@ -256,7 +255,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
     }
   }
-
   logOut() async {
     try {
       Future.delayed(Duration.zero, () async {
@@ -264,8 +262,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
         await firebaseAuthRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();
         sl<ProfileProvider>().clear();
+        sl<HomeProvider>().onSelectRole(0);
       });
-
       CustomNavigator.push(Routes.SPLASH, clean: true);
       notifyListeners();
     } catch (e) {

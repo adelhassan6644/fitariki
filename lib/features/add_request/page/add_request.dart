@@ -28,11 +28,14 @@ class AddRequest extends StatefulWidget {
 class _AddRequestState extends State<AddRequest> {
   @override
   void initState() {
-    Future.delayed(
-        Duration.zero,
-        () => Provider.of<AddRequestProvider>(context, listen: false)
-            .updateOfferDays(
-                widget.offer.offerDays!.map((e) => e.id!).toList()));
+    Future.delayed(Duration.zero, () {
+      Provider.of<AddRequestProvider>(context, listen: false)
+          .updateOfferDays(widget.offer.offerDays!.map((e) => e.id!).toList());
+      Provider.of<AddRequestProvider>(context, listen: false).startDate =
+          widget.offer.startDate ?? DateTime.now();
+      Provider.of<AddRequestProvider>(context, listen: false).endDate =
+          widget.offer.endDate ?? DateTime.now();
+    });
     super.initState();
   }
 
@@ -75,6 +78,7 @@ class _AddRequestState extends State<AddRequest> {
                 children: [
                   DurationWidget(
                     provider: provider,
+                    offerStartDate: widget.offer.startDate ?? DateTime.now(),
                   ),
                   const SizedBox(
                     height: 8,
@@ -87,16 +91,6 @@ class _AddRequestState extends State<AddRequest> {
                       startDate: provider.startDate,
                       endDate: provider.endDate,
                       days: widget.offer.offerDays!)
-
-                  /*  CustomTextFormField(
-                      label: true,
-                      inputType: TextInputType.text,
-                      hint: getTranslated("add_a_note", context),
-                      maxLine: 5,
-                      minLine: 1,
-                      onChanged: (v) {
-                        provider.note = v;
-                      }),*/
                 ],
               ),
             ),

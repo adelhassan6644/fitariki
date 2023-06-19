@@ -95,32 +95,6 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   )),
                             ),
                           ),
-                          // const SizedBox(
-                          //   width: 4,
-                          // ),
-                          // Container(
-                          //   width: 160,
-                          //   decoration: BoxDecoration(
-                          //       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                          //       borderRadius: BorderRadius.circular(6)),
-                          //   padding: const EdgeInsets.all(2),
-                          //   child: Row(
-                          //     children: List.generate(
-                          //         widget.provider.timeZones.length,
-                          //         (index) => Expanded(
-                          //               child: TabWidget(
-                          //                   backGroundColor: ColorResources.PRIMARY_COLOR,
-                          //                   innerVPadding: 2,
-                          //                   title: getTranslated(
-                          //                       widget.provider.timeZones[index], context),
-                          //                   isSelected: widget.provider.timeZones[index] ==
-                          //                       widget.provider.startTimeZone,
-                          //                   onTab: () => widget.provider
-                          //                       .selectedStartTimeZone(
-                          //                           widget.provider.timeZones[index])),
-                          //             )),
-                          //   ),
-                          // )
                         ],
                       ),
                       Padding(
@@ -168,31 +142,6 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                   )),
                             ),
                           ),
-                          // const SizedBox(
-                          //   width: 4,
-                          // ),
-                          // Container(
-                          //   width: 160,
-                          //   decoration: BoxDecoration(
-                          //       color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
-                          //       borderRadius: BorderRadius.circular(6)),
-                          //   padding: const EdgeInsets.all(2),
-                          //   child: Row(
-                          //     children: List.generate(
-                          //         widget.provider.timeZones.length,
-                          //         (index) => Expanded(
-                          //               child: TabWidget(
-                          //                   backGroundColor: ColorResources.PRIMARY_COLOR,
-                          //                   innerVPadding: 2,
-                          //                   title: getTranslated(
-                          //                       widget.provider.timeZones[index], context),
-                          //                   isSelected: widget.provider.timeZones[index] ==
-                          //                       widget.provider.endTimeZone,
-                          //                   onTab: () => widget.provider.selectedEndTimeZone(
-                          //                       widget.provider.timeZones[index])),
-                          //             )),
-                          //   ),
-                          // )
                         ],
                       ),
                       Padding(
@@ -220,6 +169,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             onTap: () => customShowModelBottomSheet(
                               body: DateTimePicker(
                                 startDateTime: widget.provider.startDate,
+                                minDateTime: DateTime.now(),
                                 valueChanged: widget.provider.onSelectStartDate,
                                 label:
                                     getTranslated("start_of_duration", context),
@@ -267,7 +217,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                           GestureDetector(
                             onTap: () => customShowModelBottomSheet(
                               body: DateTimePicker(
-                                startDateTime: widget.provider.startDate,
+                                startDateTime: widget.provider.endDate,
+                                minDateTime: DateTime.now(),
                                 valueChanged: widget.provider.onSelectEndDate,
                                 label:
                                     getTranslated("end_of_duration", context),

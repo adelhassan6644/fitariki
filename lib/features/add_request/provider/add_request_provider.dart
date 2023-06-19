@@ -63,8 +63,7 @@ class AddRequestProvider extends ChangeNotifier {
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
-    sl<CalenderProvider>()
-        .getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
+    sl<CalenderProvider>().getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
     sl.get<FollowersProvider>().selectedFollowers.clear();
   }
 

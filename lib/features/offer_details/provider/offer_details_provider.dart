@@ -20,7 +20,7 @@ class OfferDetailsProvider extends ChangeNotifier {
   OfferModel? offerDetails;
 
   getOfferDetails({
-    int? offerId,
+    required int offerId,
   }) async {
     try {
       isLoading = true;
