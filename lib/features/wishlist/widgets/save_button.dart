@@ -18,10 +18,14 @@ class SaveButton extends StatelessWidget {
       builder: (_, wishlistProvider, child) {
         bool isUserExist = false;
         bool isOfferExist = false;
-        isUserExist =
-            wishlistProvider.wishListUsersId.indexWhere((e) => e == id) != -1;
-        isOfferExist =
-            wishlistProvider.wishListOfferId.indexWhere((e) => e == id) != -1;
+        if (isOffer) {
+          isOfferExist =
+              wishlistProvider.wishListOfferId.indexWhere((e) => e == id) != -1;
+        } else {
+          isUserExist =
+              wishlistProvider.wishListUsersId.indexWhere((e) => e == id) != -1;
+        }
+
         return InkWell(
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
@@ -39,7 +43,13 @@ class SaveButton extends StatelessWidget {
               }
             },
             child: customImageIconSVG(
-                imageName: isOffer ? isOfferExist ? SvgImages.saved : SvgImages.bookMark: isUserExist? SvgImages.saved : SvgImages.bookMark,
+                imageName: isOffer
+                    ? isOfferExist
+                        ? SvgImages.saved
+                        : SvgImages.bookMark
+                    : isUserExist
+                        ? SvgImages.saved
+                        : SvgImages.bookMark,
                 color: Colors.black,
                 width: 18));
       },

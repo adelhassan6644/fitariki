@@ -38,6 +38,7 @@ class UserProfile extends StatelessWidget {
                   CustomAppBar(
                     isOffer: false,
                     savedItemId: userId,
+
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(

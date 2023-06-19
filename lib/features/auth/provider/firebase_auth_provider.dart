@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/my_trips/provider/my_trips_provider.dart';
-import 'package:fitariki/features/offer_details/provider/offer_details_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../../navigation/custom_navigation.dart';
