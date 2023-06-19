@@ -505,7 +505,9 @@ class ProfileProvider extends ChangeNotifier {
   updateProfile({bool fromLogin = false}) async {
     if (checkData() == true) {
       try {
-        spinKitDialog();
+        if(fromLogin){
+          spinKitDialog();
+        }
         isLoading = true;
         notifyListeners();
 
@@ -547,6 +549,12 @@ class ProfileProvider extends ChangeNotifier {
             if (isDriver) "bank_info": bankData
           }
         };
+        if (profileImage != null) {
+          await profileRepo.updateProfile(
+              body: FormData.fromMap({
+                "image": await MultipartFile.fromFile(profileImage!.path),
+              }));
+        }
         if (carImage != null) {
           await profileRepo.updateProfile(
               body: FormData.fromMap({
@@ -586,25 +594,19 @@ class ProfileProvider extends ChangeNotifier {
           }));
         }
 
-        if (profileImage != null) {
-          await profileRepo.updateProfile(
-              body: FormData.fromMap({
-            "image": await MultipartFile.fromFile(profileImage!.path),
-          }));
-        }
-
         log(personalData.toString());
         Either<ServerFailure, Response> response =
             await profileRepo.updateProfile(body: personalData);
         response.fold((fail) {
-          CustomNavigator.pop();
+          if(fromLogin){
+            CustomNavigator.pop();
+          }
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: fail.error,
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
-
           isLoading = false;
           notifyListeners();
         }, (response) {
@@ -614,7 +616,6 @@ class ProfileProvider extends ChangeNotifier {
           } else {
             CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
           }
-
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
                   message: getTranslated("successfully_updated",

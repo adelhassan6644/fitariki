@@ -98,6 +98,7 @@ class ProfilePage extends StatelessWidget {
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT,
                     ),
                     child: CustomButton(
+                      isLoading: provider.isLoading,
                       text: getTranslated("save", context),
                       onTap: () => provider.updateProfile(fromLogin: true),
                     ),
