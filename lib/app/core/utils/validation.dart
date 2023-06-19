@@ -12,7 +12,7 @@ class Validations {
   }
 
   static String? mail(String? email) {
-    if (email!.length < 10 || !email.contains("@")) {
+    if (email!.length < 8 || !email.contains("@") || !email.contains(".com")) {
       return getTranslated("please_enter_valid_email",
           CustomNavigator.navigatorState.currentContext!);
     } else {
@@ -21,7 +21,7 @@ class Validations {
   }
 
   static String? phone(String? value) {
-    if (value!.isEmpty) {
+    if (value!.isEmpty || value.length < 7) {
       return getTranslated("please_enter_valid_number",
           CustomNavigator.navigatorState.currentContext!);
     } else {
