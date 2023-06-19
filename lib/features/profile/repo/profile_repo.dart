@@ -22,6 +22,9 @@ class ProfileRepo {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
 
+  completedProfile() {
+    sharedPreferences.setBool(AppStorageKey.isCompleteProfile, true);
+  }
   Future<String?> saveDeviceToken() async {
     String? deviceToken;
     if (Platform.isIOS) {

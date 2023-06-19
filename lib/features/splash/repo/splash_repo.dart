@@ -5,12 +5,20 @@ import 'package:fitariki/app/core/utils/app_storage_keys.dart';
   final SharedPreferences sharedPreferences;
   SplashRepo({required this.sharedPreferences});
 
- bool notFirstTime(){
-    return sharedPreferences.containsKey(AppStorageKey.isFirstTime);
+ bool isFirstTime(){
+    return !sharedPreferences.containsKey(AppStorageKey.notFirstTime);
+  }
+
+  bool isCompleteProfile(){
+    return sharedPreferences.containsKey(AppStorageKey.isCompleteProfile);
+  }
+
+  bool isLogin(){
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
 
   setFirstTime(){
-  sharedPreferences.setBool(AppStorageKey.isFirstTime, true);
+  sharedPreferences.setBool(AppStorageKey.notFirstTime, true);
   }
 
 

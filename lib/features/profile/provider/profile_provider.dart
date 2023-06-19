@@ -526,7 +526,7 @@ class ProfileProvider extends ChangeNotifier {
 
         final personalData = {
           isDriver ? "driver" : "client": {
-            "fcm_token":await profileRepo.saveDeviceToken(),
+            "fcm_token": await profileRepo.saveDeviceToken(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
@@ -607,6 +607,7 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }, (response) {
+          profileRepo.completedProfile();
           if (fromLogin) {
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {
@@ -706,8 +707,8 @@ class ProfileProvider extends ChangeNotifier {
     phone.text = profileModel?.client?.phone ?? "";
     _gender = profileModel?.client?.gender ?? 0;
     rate = profileModel?.client?.rate ?? 0.0;
-    requestsCount = profileModel?.client?.requestsCount??0;
-    reservationCount = profileModel?.client?.reservationsCount??0;
+    requestsCount = profileModel?.client?.requestsCount ?? 0;
+    reservationCount = profileModel?.client?.reservationsCount ?? 0;
     lastUpdate = Methods.getDayCount(
       date: profileModel!.client!.updatedAt!,
     ).toString();
@@ -737,9 +738,9 @@ class ProfileProvider extends ChangeNotifier {
     nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
     rate = profileModel?.driver?.rate ?? 0.0;
-    requestsCount = profileModel?.driver?.requestsCount??0;
-    reservationCount = profileModel?.driver?.reservationsCount??0;
-    wallet = profileModel?.driver?.wallet??0.0;
+    requestsCount = profileModel?.driver?.requestsCount ?? 0;
+    reservationCount = profileModel?.driver?.reservationsCount ?? 0;
+    wallet = profileModel?.driver?.wallet ?? 0.0;
     lastUpdate = Methods.getDayCount(
             date: profileModel?.driver?.updatedAt != null
                 ? profileModel!.driver!.updatedAt!
