@@ -44,7 +44,6 @@ class ProfilePage extends StatelessWidget {
                         "complete_the_registration_information", context)
                     : getTranslated("modification_of_personal_data", context),
                 withBorder: true),
-            // if(!provider.isLoading)
             Expanded(
               child: ListView(
                 physics: const BouncingScrollPhysics(),
@@ -88,7 +87,6 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-
             if (fromLogin)
               Center(
                 child: Column(

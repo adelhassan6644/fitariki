@@ -141,21 +141,22 @@ class PersonalInformationWidget extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                CustomTextFormField(
-                  valid: Validations.mail,
-                  controller: provider.email,
-                  hint: getTranslated("email", context),
-                ),
-                // const SizedBox(
-                //   height: 8,
-                // ),
+
                 // CustomTextFormField(
                 //   valid: Validations.phone,
                 //   controller: provider.phone,
                 //   hint: getTranslated("phone", context),
                 // )
+                // const SizedBox(
+                //   height: 8,
+                // ),
               ],
             ),
+          ),
+          CustomTextFormField(
+            valid: Validations.mail,
+            controller: provider.email,
+            hint: getTranslated("email", context),
           ),
           const SizedBox(
             height: 8,
