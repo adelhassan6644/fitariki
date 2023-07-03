@@ -8,12 +8,11 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
-import '../../../components/custom_network_image.dart';
-import '../../../components/image_pop_up_viewer.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
+import '../../profile/widgets/profile_image_widget.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard(
@@ -235,31 +234,10 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              splashColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              onTap: () {
-                if(image != null) {
-                  showDialog(
-                    context: context,
-                    barrierColor: Colors.black.withOpacity(0.75),
-                    builder: (context) {
-                      return ImagePopUpViewer(
-                        image: image,
-                        isFromInternet: true,
-                        title: "",
-                      );
-                    });
-                }
-              },
-              child: Center(
-                child: CustomNetworkImage.circleNewWorkImage(
-                    image: image,
-                    radius: 36,
-                    color: ColorResources.PRIMARY_COLOR),
-              ),
+            const ProfileImageWidget(fromLogin: false,
+              withEdit: false,
+              radius: 36,
+
             ),
           ],
         ),

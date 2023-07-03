@@ -58,7 +58,6 @@ class ProfilePage extends StatelessWidget {
                         Visibility(
                             visible: fromLogin, child: const WelcomeWidget()),
                         ProfileImageWidget(
-                          provider: provider,
                           fromLogin: fromLogin,
                         ),
                         PersonalInformationWidget(
