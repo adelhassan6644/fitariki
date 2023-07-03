@@ -157,6 +157,7 @@ class PersonalInformationWidget extends StatelessWidget {
             valid: Validations.mail,
             controller: provider.email,
             hint: getTranslated("email", context),
+            inputType: TextInputType.emailAddress,
           ),
           const SizedBox(
             height: 8,

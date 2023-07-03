@@ -227,9 +227,8 @@ class FirebaseAuthProvider extends ChangeNotifier {
         firebaseAuthRepo.remember(
             phone: "$countryPhoneCode${_phoneTEC.text.trim()}");
 
-        if (success.data['data'][role[_userType]]["new_user"].toString() ==
-                "1" ||
-            success.data['data'][role[_userType]]["first_name"] == null) {
+        if (success.data['data'][role[_userType]]["first_name"] == null ||
+            success.data['data'][role[_userType]]["first_name"] == "") {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);

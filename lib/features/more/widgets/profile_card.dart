@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
@@ -8,6 +9,7 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
+import '../../../components/image_pop_up_viewer.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
@@ -17,11 +19,12 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard(
       {this.image,
       this.name,
-      this.phone,
+
       this.nationality,
       this.distance,
       this.male = true,
       this.isDriver = true,
+        this.withPhone = true,
       this.requestsCount,
       this.reservationCount,
       this.rate,
@@ -29,8 +32,8 @@ class ProfileCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final String? nationality, name, phone, lastUpdate, distance, image;
-  final bool male, isDriver;
+  final String? nationality, name, lastUpdate, distance, image;
+  final bool male, withPhone, isDriver;
   final int? requestsCount, reservationCount, rate;
 
   @override
@@ -169,22 +172,23 @@ class ProfileCard extends StatelessWidget {
                               height: 10.h,
                             ),
                             Visibility(
-                              visible: phone != null,
-                              child:  Text(
-                                phone ?? "",
+                              visible: withPhone,
+                              child: Text(
+                                "${FirebaseAuth.instance.currentUser?.phoneNumber?.replaceAll("+", "")}+",
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 11,
                                     height: 1,
                                     overflow: TextOverflow.ellipsis),
-                              ),),
+                              ),
+                            ),
                             ShowRate(
                               rate: rate,
                               size: 6,
                             ),
                             Visibility(
-                              visible: phone==null,
+                              visible: !withPhone,
                               child: Text(
                                 nationality ?? "سعودي",
                                 textAlign: TextAlign.center,
@@ -231,11 +235,31 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
-            Center(
-              child: CustomNetworkImage.circleNewWorkImage(
-                  image: image,
-                  radius: 36,
-                  color: ColorResources.PRIMARY_COLOR),
+            InkWell(
+              splashColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              onTap: () {
+                if(image != null) {
+                  showDialog(
+                    context: context,
+                    barrierColor: Colors.black.withOpacity(0.75),
+                    builder: (context) {
+                      return ImagePopUpViewer(
+                        image: image,
+                        isFromInternet: true,
+                        title: "",
+                      );
+                    });
+                }
+              },
+              child: Center(
+                child: CustomNetworkImage.circleNewWorkImage(
+                    image: image,
+                    radius: 36,
+                    color: ColorResources.PRIMARY_COLOR),
+              ),
             ),
           ],
         ),

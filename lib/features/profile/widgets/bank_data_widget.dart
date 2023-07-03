@@ -45,7 +45,7 @@ class BankDataWidget extends StatelessWidget {
           name: provider.bank?.name ?? getTranslated("bank_name", context),
           onChange: provider.selectedBank,
           value: provider.bank,
-          isInitial: provider.bank != null ,
+          isInitial: provider.bank != null,
         ),
         SizedBox(
           height: 8.h,
@@ -55,6 +55,7 @@ class BankDataWidget extends StatelessWidget {
           hint: "SA 00000 0000 0000 0000 0000",
           controller: provider.bankAccount,
           inputType: TextInputType.phone,
+          keyboardAction: TextInputAction.done,
         ),
         SizedBox(
           height: 8.h,

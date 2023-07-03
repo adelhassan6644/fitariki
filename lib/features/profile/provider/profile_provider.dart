@@ -134,7 +134,6 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController lastName = TextEditingController();
   TextEditingController age = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController phone = TextEditingController();
   TextEditingController identityNumber = TextEditingController();
 
   File? profileImage;
@@ -210,6 +209,7 @@ class ProfileProvider extends ChangeNotifier {
   clear() {
     ///personal data
     image = null;
+    profileImage = null;
     firstName.clear();
     lastName.clear();
     age.clear();
@@ -708,7 +708,6 @@ class ProfileProvider extends ChangeNotifier {
     lastName.text = profileModel?.client?.lastName ?? "";
     age.text = profileModel?.client?.age ?? "";
     email.text = profileModel?.client?.email ?? "";
-    phone.text = profileModel?.client?.phone ?? "";
     _gender = profileModel?.client?.gender ?? 0;
     rate = profileModel?.client?.rate ?? 0.0;
     requestsCount = profileModel?.client?.requestsCount ?? 0;
@@ -737,7 +736,6 @@ class ProfileProvider extends ChangeNotifier {
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
     email.text = profileModel?.driver?.email ?? "";
-    phone.text = profileModel?.driver?.phone ?? "";
     identityNumber.text = profileModel?.driver?.identityNumber ?? "";
     nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;
