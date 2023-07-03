@@ -124,6 +124,7 @@ class ProfileProvider extends ChangeNotifier {
 
   double rate = 0.0;
   double wallet = 0.0;
+  double pendingWallet = 0.0;
   int reservationCount = 0;
   int requestsCount = 0;
   String? lastUpdate;
@@ -744,6 +745,7 @@ class ProfileProvider extends ChangeNotifier {
     requestsCount = profileModel?.driver?.requestsCount ?? 0;
     reservationCount = profileModel?.driver?.reservationsCount ?? 0;
     wallet = profileModel?.driver?.wallet ?? 0.0;
+    pendingWallet = profileModel?.driver?.pendingWallet ?? 0.0;
     lastUpdate = Methods.getDayCount(
             date: profileModel?.driver?.updatedAt != null
                 ? profileModel!.driver!.updatedAt!

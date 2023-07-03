@@ -47,7 +47,7 @@ class More extends StatelessWidget {
                               SizedBox(
                                 height: 24.h,
                               ),
-                              WalletCard(availableBalance: provider.wallet),
+                              WalletCard(availableBalance: provider.wallet,pendingBalance:provider.pendingWallet ,),
                             ],
                           ),
                         ),

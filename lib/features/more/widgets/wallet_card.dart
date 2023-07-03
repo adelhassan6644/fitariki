@@ -9,8 +9,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 
 class WalletCard extends StatelessWidget {
-  const WalletCard({this.availableBalance,Key? key}) : super(key: key);
-  final double? availableBalance;
+  const WalletCard({this.availableBalance,Key? key, this.pendingBalance}) : super(key: key);
+  final double? availableBalance;  final double? pendingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class WalletCard extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      text: '200',
+                      text: pendingBalance?.toStringAsFixed(2)??"",
                       style: AppTextStyles.w700.copyWith(
                           fontSize: 12,
                           height: 1,
@@ -107,7 +107,7 @@ class WalletCard extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      text: "$availableBalance",
+                      text: availableBalance?.toStringAsFixed(2),
                       style: AppTextStyles.w700.copyWith(
                           fontSize: 12,
                           height: 1,

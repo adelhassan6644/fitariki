@@ -24,6 +24,7 @@ class DriverModel {
   String? status;
   double? rate;
   double? wallet;
+  double? pendingWallet;
   LocationModel? dropOffLocation;
   LocationModel? pickupLocation;
   List<WeekModel>? driverDays;
@@ -50,6 +51,7 @@ class DriverModel {
       this.status,
       this.rate,
       this.wallet,
+      this.pendingWallet,
       this.reservationsCount,
       this.requestsCount,
       this.dropOffLocation,
@@ -88,6 +90,9 @@ class DriverModel {
         wallet: json["wallet"] == null
             ? null
             : double.tryParse(json["wallet"].toString()),
+        pendingWallet: json["pending_wallet"] == null
+            ? null
+            : double.tryParse(json["pending_wallet"].toString()),
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),

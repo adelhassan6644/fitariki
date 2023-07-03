@@ -115,7 +115,7 @@ class PaymentProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
     }, (success) {
       taxPercentage=double.parse(success.data['data']['settings'][0]['tax'].toString());
-      serviceCost=double.parse(success.data['data']['settings'][0]['service_fee']);
+      serviceCost=double.parse(success.data['data']['settings'][0]['service_fee'].toString());
 
       calcTotal();
       isPaymentFeeLoading = false;

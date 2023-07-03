@@ -171,7 +171,7 @@ class ProfileCard extends StatelessWidget {
                             Visibility(
                               visible: phone != null,
                               child:  Text(
-                                phone ?? "سعودي",
+                                phone ?? "",
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(
