@@ -7,6 +7,7 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
+import '../../../components/image_pop_up_viewer.dart';
 import '../../../helpers/image_picker_helper.dart';
 import '../provider/profile_provider.dart';
 
@@ -21,11 +22,30 @@ class ProfileImageWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          GestureDetector(
-            onTap: () {
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            onTap: (){
               if (fromLogin) {
                 ImagePickerHelper.showOptionSheet(
                     onGet: provider.onSelectImage);
+              }
+              else{
+                if(provider.profileImage != null|| provider.image != null){
+                  showDialog(
+                      context: context,
+                      barrierColor: Colors.black.withOpacity(0.75),
+                      builder: (context) {
+                        return ImagePopUpViewer(
+                          image: provider.profileImage ?? provider.image,
+                          isFromInternet:
+                          provider.profileImage != null ? false : true,
+                          title: "",
+                        );
+                      });
+                }
               }
             },
             child: Stack(
