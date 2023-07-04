@@ -29,6 +29,15 @@ class Validations {
     }
   }
 
+  static String? bankAccount(String? value) {
+    if (value!.isEmpty || value.length < 8) {
+      return getTranslated("please_enter_valid_bank_account",
+          CustomNavigator.navigatorState.currentContext!);
+    } else {
+      return null;
+    }
+  }
+
   static String? code(String? value) {
     if (value!.isEmpty || value.length < 6) {
       return getTranslated("please_enter_valid_code",

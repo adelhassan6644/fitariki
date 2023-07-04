@@ -51,7 +51,7 @@ class BankDataWidget extends StatelessWidget {
           height: 8.h,
         ),
         CustomTextFormField(
-          valid: Validations.phone,
+          valid: Validations.bankAccount,
           hint: "SA 00000 0000 0000 0000 0000",
           controller: provider.bankAccount,
           inputType: TextInputType.phone,
