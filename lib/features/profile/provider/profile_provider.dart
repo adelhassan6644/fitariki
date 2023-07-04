@@ -240,6 +240,7 @@ class ProfileProvider extends ChangeNotifier {
     bank = null;
     bankAccount.clear();
     bankAccountImage = null;
+    profileModel=null;
   }
 
   updateTimes() {
