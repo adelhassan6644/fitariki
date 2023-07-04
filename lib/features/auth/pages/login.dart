@@ -6,6 +6,7 @@ import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -235,7 +236,12 @@ class _LoginState extends State<Login> {
                           text: getTranslated("follow", context),
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
-                              provider.signInWithMobileNo();
+                              if(provider.isAgree) {
+                                provider.signInWithMobileNo();
+                              }
+                              else{
+                                showToast(getTranslated("please__agree_to_the_terms_and_conditions", context));
+                              }
                             }
                           },
                           isLoading: provider.isLoading),
