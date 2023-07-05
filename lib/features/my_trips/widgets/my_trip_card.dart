@@ -4,6 +4,7 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
@@ -311,12 +312,22 @@ class MyTripCard extends StatelessWidget {
                       imageName: SvgImages.down,
                     ),
                     Text(
-                      "${myTrip.myTripRequest?.price ?? 0}",
+                      "${Methods.getWeekdayCount(
+                          startDate: DateTime.now(),
+                          endDate: myTrip.myTripRequest?.endAt??DateTime.now(),
+                          weekdays: myTrip.myTripRequest!.offer!.offerDays!.map((e) => e.id).toList()).count}",
                       textAlign: TextAlign.start,
                       style: AppTextStyles.w700.copyWith(
                         fontSize: 24,
                       ),
                     ),
+                    // Text(
+                    //   "${myTrip.myTripRequest?.price ?? 0}",
+                    //   textAlign: TextAlign.start,
+                    //   style: AppTextStyles.w700.copyWith(
+                    //     fontSize: 24,
+                    //   ),
+                    // ),
                   ],
                 ),
               if (isPrevious)
