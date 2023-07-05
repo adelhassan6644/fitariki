@@ -8,6 +8,7 @@ import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
+import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
@@ -240,7 +241,7 @@ class ProfileProvider extends ChangeNotifier {
     bank = null;
     bankAccount.clear();
     bankAccountImage = null;
-    profileModel=null;
+    profileModel = null;
   }
 
   updateTimes() {
@@ -674,6 +675,7 @@ class ProfileProvider extends ChangeNotifier {
           : List<Country>.from(response.data['data']["countries"]!
               .map((x) => Country.fromJson(x)));
     });
+    notifyListeners();
   }
 
   List<Bank> bankList = [];
@@ -686,6 +688,7 @@ class ProfileProvider extends ChangeNotifier {
           : List<Bank>.from(
               response.data['data']["banks"]!.map((x) => Bank.fromJson(x)));
     });
+    notifyListeners();
   }
 
   initClientData() {

@@ -38,7 +38,6 @@ class UserProfile extends StatelessWidget {
                   CustomAppBar(
                     isOffer: false,
                     savedItemId: userId,
-
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -60,6 +59,10 @@ class UserProfile extends StatelessWidget {
                             name: provider.userProfileModel!.driver != null
                                 ? "${provider.userProfileModel!.driver!.firstName}"
                                 : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
+                            phone: provider.userProfileModel!.driver != null
+                                ? "${provider.userProfileModel!.driver!.phone}"
+                                : "${provider.userProfileModel!.client!.phone}",
+                            withPhone: false,
                             isDriver: provider.userProfileModel!.driver != null,
                             male: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel!.driver!.gender == 0

@@ -118,6 +118,7 @@ class AuthRepo {
     await sharedPreferences.remove(AppStorageKey.cityId);
     await sharedPreferences.remove(AppStorageKey.cityName);
     await sharedPreferences.remove(AppStorageKey.userId);
+    await sharedPreferences.remove(AppStorageKey.isCompleteProfile);
     await sharedPreferences.remove(AppStorageKey.isLogin);
     return true;
   }

@@ -27,7 +27,7 @@ class UserProfileProvider extends ChangeNotifier {
   bool isLoadOffers = false;
   MyOffersModel? userOffers;
   getUserProfile({required int userId}) async {
-    try {
+    // try {
 
       isLoadProfile = true;
       isLoadOffers = true;
@@ -49,7 +49,7 @@ class UserProfileProvider extends ChangeNotifier {
       }, (response) {
 final role= sl
     .get<SharedPreferences>()
-    .getString(AppStorageKey.role)=="client"?"driver":"client";
+    .getString(AppStorageKey.role)=="driver"?"client":"driver";
 
         userProfileModel = ProfileModel.fromJson(response.data["data"]);
 
@@ -58,19 +58,19 @@ final role= sl
         isLoadOffers = false;
         notifyListeners();
       });
-    }
-    catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoadProfile = false;
-      isLoadOffers = false;
-
-      notifyListeners();
-    }
+    // }
+    // catch (e) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: e.toString(),
+    //           isFloating: true,
+    //           backgroundColor: ColorResources.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   isLoadProfile = false;
+    //   isLoadOffers = false;
+    //
+    //   notifyListeners();
+    // }
   }
 
 

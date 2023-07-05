@@ -9,6 +9,7 @@ class SplashProvider extends ChangeNotifier {
 
   startTheApp() {
     Future.delayed(const Duration(milliseconds: 4500), () {
+
       if (splashRepo.isFirstTime()) {
         CustomNavigator.push(Routes.ON_BOARDING, clean: true);
       } else if (splashRepo.isLogin() && !splashRepo.isCompleteProfile()) {

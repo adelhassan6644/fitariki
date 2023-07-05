@@ -84,6 +84,7 @@ class FirebaseAuthRepo {
     await sharedPreferences.remove(AppStorageKey.userId);
     await sharedPreferences.remove(AppStorageKey.role);
     await sharedPreferences.remove(AppStorageKey.isLogin);
+    await sharedPreferences.remove(AppStorageKey.isCompleteProfile);
     return true;
   }
 }

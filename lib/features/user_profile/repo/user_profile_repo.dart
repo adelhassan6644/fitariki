@@ -29,7 +29,7 @@ class UserProfileRepo {
       }
       Response response = await dioClient.get(
         uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/$role/${EndPoints.userProfile}/$userID",
+            "${sharedPreferences.getString(AppStorageKey.role)??"client"}/$role/${EndPoints.userProfile}/$userID",
         queryParameters: {
           if (sl
               .get<SharedPreferences>()

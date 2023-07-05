@@ -283,6 +283,7 @@ class MyTripCard extends StatelessWidget {
                                         ? myTrip.clientId!
                                         : myTrip.driverId!);
                               }
+
                               CustomNavigator.push(Routes.USER_PROFILE,
                                   arguments: isDriver
                                       ? myTrip.clientId

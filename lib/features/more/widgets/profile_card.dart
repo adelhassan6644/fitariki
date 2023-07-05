@@ -18,12 +18,12 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard(
       {this.image,
       this.name,
-
+      this.phone,
       this.nationality,
       this.distance,
       this.male = true,
       this.isDriver = true,
-        this.withPhone = true,
+      this.withPhone = false,
       this.requestsCount,
       this.reservationCount,
       this.rate,
@@ -31,7 +31,7 @@ class ProfileCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final String? nationality, name, lastUpdate, distance, image;
+  final String? nationality, name, lastUpdate, distance, image, phone;
   final bool male, withPhone, isDriver;
   final int? requestsCount, reservationCount, rate;
 
@@ -234,10 +234,11 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
-            const ProfileImageWidget(fromLogin: false,
+            ProfileImageWidget(
+              fromLogin: false,
               withEdit: false,
               radius: 36,
-
+              image: image,
             ),
           ],
         ),

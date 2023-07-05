@@ -59,6 +59,9 @@ class ProfilePage extends StatelessWidget {
                             visible: fromLogin, child: const WelcomeWidget()),
                         ProfileImageWidget(
                           fromLogin: fromLogin,
+                          onSelectImage: provider.onSelectImage,
+                          imageFile: provider.profileImage,
+                          image: provider.image,
                         ),
                         PersonalInformationWidget(
                           provider: provider,
