@@ -15,6 +15,7 @@ abstract class Methods {
       {required DateTime startDate,
       required DateTime endDate,
       required List weekdays}) {
+
     int count = 0;
     int days = 0;
     List<DateTime> daysList = [];

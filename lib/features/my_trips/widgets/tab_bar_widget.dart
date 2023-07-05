@@ -6,8 +6,8 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/tab_widget.dart';
 import '../provider/my_trips_provider.dart';
 
-class TabBerWidget extends StatelessWidget {
-  const TabBerWidget({required this.provider, Key? key}) : super(key: key);
+class TabBarWidget extends StatelessWidget {
+  const TabBarWidget({required this.provider, Key? key}) : super(key: key);
 
 final  MyTripsProvider provider;
 

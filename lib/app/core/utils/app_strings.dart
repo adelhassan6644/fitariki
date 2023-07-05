@@ -25,6 +25,14 @@ class AppStrings {
   static const String locale = 'locale';
   static List<WeekModel> days = [
     WeekModel(
+      id: 6,
+      dayName: "السبت",
+    ),
+    WeekModel(
+      id: 7,
+      dayName: "الاحد",
+    ),
+    WeekModel(
       id: 1,
       dayName: "الاثنين",
     ),
@@ -44,13 +52,6 @@ class AppStrings {
       id: 5,
       dayName: "الجمعة",
     ),
-    WeekModel(
-      id: 6,
-      dayName: "السبت",
-    ),
-    WeekModel(
-      id: 7,
-      dayName: "الاحد",
-    ),
+
   ];
 }

@@ -39,23 +39,27 @@ class AddRequestProvider extends ChangeNotifier {
 
   onSelectStartDate(v) {
     startDate = v;
-    sl<CalenderProvider>()
-        .getEventsList(startDate: startDate, endDate: endDate);
-    duration = Methods.getWeekdayCount(
-            startDate: startDate, endDate: endDate, weekdays: days!)
-        .days;
+    getDaysCount();
     notifyListeners();
   }
 
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
+
     endDate = v;
-    sl<CalenderProvider>()
-        .getEventsList(startDate: startDate, endDate: endDate);
-    duration = Methods.getWeekdayCount(
-            startDate: startDate, endDate: endDate, weekdays: days!)
-        .days;
+    getDaysCount();
     notifyListeners();
+  }
+
+  void getDaysCount() {
+    if(days!=null) {
+      sl<CalenderProvider>()
+          .getEventsList(startDate: startDate, endDate: endDate);
+
+      duration = Methods.getWeekdayCount(
+              startDate: startDate, endDate: endDate, weekdays: days!)
+          .days;
+    }
   }
 
   reset() {

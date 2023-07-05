@@ -32,7 +32,7 @@ class MyTrips extends StatelessWidget {
             SizedBox(
               height: 8.h,
             ),
-            TabBerWidget(
+            TabBarWidget(
               provider: myTripProvider,
             ),
             myTripProvider.isLogin
