@@ -122,10 +122,9 @@ class _RequestDetailsState extends State<RequestDetails> {
                                       0
                                   : null,
                               startPoint: provider.isDriver
-                                  ? provider
-                                      .requestModel?.clientModel?.pickupLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
+                                  ? provider.requestModel?.clientModel?.pickupLocation??
+                                  provider.requestModel?.offer?.clientModel?.pickupLocation
+                                  : provider.requestModel?.offer?.pickupLocation,
                               endPoint: provider.isDriver
                                   ? provider.requestModel?.clientModel
                                       ?.dropOffLocation
@@ -202,7 +201,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
                                   carInfo: provider
-                                      .requestModel?.driverModel?.carInfo,
+                                      .requestModel?.driverModel?.carInfo??
+                                      provider.requestModel?.offer?.driverModel?.carInfo,
                                 )),
 
                             /// to show days on calender
@@ -210,7 +210,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                 startDate: provider.requestModel?.startAt,
                                 endDate: provider.requestModel?.endAt,
                                 days:  provider.isDriver ?
-                                provider.requestModel?.clientModel?.clientDays
+                                provider.requestModel?.clientModel?.clientDays??
+                                    provider.requestModel?.offer?.clientModel?.clientDays
                                     : provider.requestModel?.offer?.offerDays,),
 
                             SizedBox(
