@@ -242,9 +242,13 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
 
                             /// to show days on calender
                             TripDaysOnCalenderWidget(
-                                startDate: provider.requestModel?.startAt,
-                                endDate: provider.requestModel?.endAt,
-                                days: provider.requestModel?.offer?.offerDays),
+                              startDate: provider.requestModel?.startAt,
+                              endDate: provider.requestModel?.endAt,
+                              days: provider.isDriver
+                                  ? provider.requestModel?.clientModel?.clientDays ??
+                                      provider.requestModel?.offer?.clientModel?.clientDays
+                                  : provider.requestModel?.offer?.offerDays,
+                            ),
 
                             SizedBox(
                               height: 24.h,

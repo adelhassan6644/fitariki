@@ -12,48 +12,54 @@ class CurrentTripsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyTripsProvider>(builder: (_, provider, child) {
-      return Expanded(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            await provider.getCurrentTrips();
-          },
-          child: ListView(
-            padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
-            physics: const AlwaysScrollableScrollPhysics(),
-            children: provider.isGetCurrentTrips
-                ? List.generate(
-                    6,
-                    (index) => Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                          child: CustomShimmerContainer(
-                            height: 95.h,
-                            radius: 8,
+    return Consumer<MyTripsProvider>(
+      builder: (_, provider, child) {
+        return Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await provider.getCurrentTrips();
+            },
+            child: ListView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: provider.isGetCurrentTrips
+                  ? List.generate(
+                      6,
+                      (index) => Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                            child: CustomShimmerContainer(
+                              height: 95.h,
+                              radius: 8,
+                            ),
+                          ))
+                  : !provider.isGetCurrentTrips &&
+                          provider.currentTrips!.isNotEmpty
+                      ? List.generate(
+                          provider.currentTrips!.length,
+                          (index) => Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                            child: MyTripCard(
+                              isCurrent: true,
+                              isDriver: provider.isDriver,
+                              offerPassengers: provider.currentTrips![index].offerPassengers ?? 1,
+                              myTrip: provider.currentTrips![index],
+                              offerDays: provider.isDriver
+                                  ? provider.currentTrips![index].myTripRequest?.clientModel?.clientDays ??
+                                      provider.currentTrips![index].offer?.clientModel?.clientDays ??
+                                      provider.currentTrips![index].clientModel?.clientDays
+                                  : provider.currentTrips![index].offer?.offerDays,
+                            ),
                           ),
-                        ))
-                : !provider.isGetCurrentTrips &&
-                        provider.currentTrips!.isNotEmpty
-                    ? List.generate(
-                        provider.currentTrips!.length,
-                        (index) => Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                              child: MyTripCard(
-                                isCurrent: true,
-                                isDriver: provider.isDriver,
-                                offerPassengers: provider
-                                        .currentTrips![index].offerPassengers ??
-                                    1,
-                                myTrip: provider.currentTrips![index],
-                              ),
-                            ))
-                    : [
-                        EmptyState(
-                            txt: getTranslated("there_is_no_trips", context))
-                      ],
+                        )
+                      : [
+                          EmptyState(
+                              txt: getTranslated("there_is_no_trips", context))
+                        ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

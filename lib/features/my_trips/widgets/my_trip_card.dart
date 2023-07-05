@@ -11,6 +11,7 @@ import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
 import '../../../data/config/di.dart';
+import '../../../main_models/weak_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../feedback/page/rate_trip.dart';
@@ -23,12 +24,14 @@ class MyTripCard extends StatelessWidget {
       this.isCurrent = false,
       this.isPrevious = false,
       required this.isDriver,
+       this.offerDays,
       this.offerPassengers,
       Key? key})
       : super(key: key);
   final MyTripModel myTrip;
   final int? offerPassengers;
   final bool isCurrent, isPrevious, isDriver;
+  final  List<WeekModel>? offerDays;
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +318,7 @@ class MyTripCard extends StatelessWidget {
                       "${Methods.getWeekdayCount(
                           startDate: DateTime.now(),
                           endDate: myTrip.myTripRequest?.endAt??DateTime.now(),
-                          weekdays: myTrip.myTripRequest!.offer!.offerDays!.map((e) => e.id).toList()).count}",
+                          weekdays: offerDays!.map((e) => e.id).toList()).count}",
                       textAlign: TextAlign.start,
                       style: AppTextStyles.w700.copyWith(
                         fontSize: 24,

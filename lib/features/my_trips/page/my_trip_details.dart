@@ -198,7 +198,12 @@ class MyTripDetails extends StatelessWidget {
                     TripDaysOnCalenderWidget(
                         startDate: myTripModel.myTripRequest?.startAt,
                         endDate: myTripModel.myTripRequest?.endAt,
-                        days: myTripModel.offer?.offerDays),
+                        days: sl<ProfileProvider>().isDriver ?
+                        myTripModel.clientModel?.clientDays ??
+                            myTripModel.offer?.clientModel?.clientDays ??
+                            myTripModel.myTripRequest?.clientModel?.clientDays
+                            :  myTripModel.offer?.offerDays,
+                      ),
 
                     SizedBox(
                       height: 24.h,
