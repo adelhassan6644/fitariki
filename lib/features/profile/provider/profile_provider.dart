@@ -253,17 +253,17 @@ class ProfileProvider extends ChangeNotifier {
 
   checkData() {
     updateTimes();
-    if (!isDriver && profileImage == null) {
-      if (profileModel?.client?.image == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار الصورةالشخصية!",
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-    }
+    // if (!isDriver && profileImage == null) {
+    //   if (profileModel?.client?.image == null) {
+    //     CustomSnackBar.showSnackBar(
+    //         notification: AppNotification(
+    //             message: "برجاء اختيار الصورةالشخصية!",
+    //             isFloating: true,
+    //             backgroundColor: ColorResources.IN_ACTIVE,
+    //             borderColor: Colors.transparent));
+    //     return;
+    //   }
+    // }
 
     if (isDriver && profileImage == null) {
       if (isDriver && profileModel?.driver?.image == null) {
