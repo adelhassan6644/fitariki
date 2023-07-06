@@ -37,6 +37,8 @@ import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/request_details/repo/report_repo.dart';
 import '../../features/request_details/repo/request_details_repo.dart';
+import '../../features/terms_and_conditions/provider/terms_provider.dart';
+import '../../features/terms_and_conditions/repo/terms_repo.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/user_profile/repo/user_profile_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
@@ -50,7 +52,6 @@ import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/auth/repo/firebase_auth_repo.dart';
 import '../dio/dio_client.dart';
 import '../dio/logging_interceptor.dart';
-import '../../features/auth/repo/auth_repo.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/splash/repo/splash_repo.dart';
 
@@ -59,63 +60,32 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
-  sl.registerLazySingleton(() => DioClient(
-        EndPoints.baseUrl,
-        dio: sl(),
-        loggingInterceptor: sl(),
-        sharedPreferences: sl(),
-      ));
+  sl.registerLazySingleton(() => DioClient(EndPoints.baseUrl, dio: sl(), loggingInterceptor: sl(), sharedPreferences: sl(),));
 
   // Repository
-  sl.registerLazySingleton(() => SplashRepo(
-        sharedPreferences: sl(),
-      ));
-  sl.registerLazySingleton(
-      () => AuthRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => OfferDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => PostOfferRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => HomeRepo(sharedPreferences: sl(), dioClient: sl()));
-
-  sl.registerLazySingleton(
-      () => AddRequestRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => AddFollowersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => WishlistRepo(sharedPreferences: sl(), dioClient: sl()));
-
-  sl.registerLazySingleton(
-      () => NotificationsRepo(sharedPreferences: sl(), dioClient: sl()));
-
-  sl.registerLazySingleton(
-      () => FollowersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
-
-  sl.registerLazySingleton(
-      () => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => RequestDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(),));
+  // sl.registerLazySingleton(() => AuthRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => OfferDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => FirebaseAuthRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ProfileRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => PostOfferRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => HomeRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => AddRequestRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MyTripsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MapsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => AddFollowersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => WishlistRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => NotificationsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => FollowersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => FollowerDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => RequestDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => PaymentRepo(dioClient: sl()));
-  sl.registerLazySingleton(
-      () => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(
-      () => FeedbackRepo(sharedPreferences: sl(), dioClient: sl()));
-
-  sl.registerLazySingleton(
-      () => ReportRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => UserProfileRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => FeedbackRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => ReportRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(() => TermsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -124,55 +94,29 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
   // sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
-  sl.registerLazySingleton(() => ProfileProvider(
-      profileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
+  sl.registerLazySingleton(() => ProfileProvider(profileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
-  sl.registerLazySingleton(() => PostOfferProvider(
-        postOfferRepo: sl(),
-        scheduleProvider: sl(),
-      ));
+  sl.registerLazySingleton(() => PostOfferProvider(postOfferRepo: sl(), scheduleProvider: sl(),));
   sl.registerLazySingleton(() => MapProvider());
   sl.registerLazySingleton(() => CalenderProvider());
   sl.registerLazySingleton(() => AddRequestProvider(addRequestRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
-  sl.registerLazySingleton(() => FollowerDetailsProvider(
-        followerDetailsRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => MyOffersProvider(
-        myOffersRepo: sl(),
-      ));
-  sl.registerLazySingleton(() =>
-      AddFollowerProvider(addFollowersRepo: sl(), followerProvider: sl()));
-  sl.registerLazySingleton(() => WishlistProvider(
-        wishlistRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => ContactProvider(
-        contactRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => HomeProvider(
-        homeRepo: sl(),
-      ));
-  // sl.registerLazySingleton(() => OfferDetailsProvider(
-  //       repo: sl(),
-  //     ));
-  sl.registerLazySingleton(() => NotificationsProvider(
-        notificationsRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => UserProfileProvider(
-        userProfileRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => FollowersProvider(
-        followersRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => RequestDetailsProvider(
-        requestDetailsRepo: sl(),
-      ));
-  sl.registerLazySingleton(() => FeedbackProvider(
-        feedbackRepo: sl(),
-      ));
+  sl.registerLazySingleton(() => FollowerDetailsProvider(followerDetailsRepo: sl(),));
+  sl.registerLazySingleton(() => MyOffersProvider(myOffersRepo: sl(),));
+  sl.registerLazySingleton(() => AddFollowerProvider(addFollowersRepo: sl(), followerProvider: sl()));
+  sl.registerLazySingleton(() => WishlistProvider(wishlistRepo: sl(),));
+  sl.registerLazySingleton(() => ContactProvider(contactRepo: sl(),));
+  sl.registerLazySingleton(() => HomeProvider(homeRepo: sl(),));
+  // sl.registerLazySingleton(() => OfferDetailsProvider(repo: sl(),));
+  sl.registerLazySingleton(() => NotificationsProvider(notificationsRepo: sl(),));
+  sl.registerLazySingleton(() => UserProfileProvider(userProfileRepo: sl(),));
+  sl.registerLazySingleton(() => FollowersProvider(followersRepo: sl(),));
+  sl.registerLazySingleton(() => RequestDetailsProvider(requestDetailsRepo: sl(),));
+  sl.registerLazySingleton(() => FeedbackProvider(feedbackRepo: sl(),));
   sl.registerLazySingleton(() => PaymentProvider(paymentRepo: sl()));
   sl.registerLazySingleton(() => ReportProvider(reportRepo: sl()));
+  sl.registerLazySingleton(() => TermsProvider(termsRepo: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

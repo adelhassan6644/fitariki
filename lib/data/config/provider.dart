@@ -15,7 +15,6 @@ import '../../features/home/provider/home_provider.dart';
 import '../../features/my_offers/provider/my_offers_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/notifications/provider/notifications_provider.dart';
-import '../../features/offer_details/provider/offer_details_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
 import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/profile/provider/profile_provider.dart';
@@ -23,6 +22,7 @@ import '../../features/feedback/provider/feedback_provider.dart';
 import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
+import '../../features/terms_and_conditions/provider/terms_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../main_providers/calender_provider.dart';
@@ -31,24 +31,16 @@ import '../../main_providers/schedule_provider.dart';
 
 abstract class ProviderList {
   static List<SingleChildWidget> providers = [
-    ChangeNotifierProvider(
-      create: (_) => di.sl<ThemeProvider>(),
-    ),
+    ChangeNotifierProvider(create: (_) => di.sl<ThemeProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocalizationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<SplashProvider>()),
     // ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddRequestProvider>()),
-    ChangeNotifierProvider(
-      create: (_) => di.sl<PostOfferProvider>(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => di.sl<MapProvider>(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => di.sl<CalenderProvider>(),
-    ),
+    ChangeNotifierProvider(create: (_) => di.sl<PostOfferProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<MapProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<CalenderProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ScheduleProvider>()),
@@ -66,5 +58,6 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<UserProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FeedbackProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ReportProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<TermsProvider>()),
   ];
 }

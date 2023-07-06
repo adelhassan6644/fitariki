@@ -4,6 +4,7 @@ import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/feedback/page/rate_trip.dart';
+import 'package:fitariki/features/terms_and_conditions/view/terms_view.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
@@ -128,20 +129,21 @@ abstract class CustomNavigator {
 
       case Routes.PAYMENT:
         {
-          if (settings.arguments != null)
+          if (settings.arguments != null) {
             return _pageRoute(Payment(
-              isFromMyTrips: settings.arguments! as bool ,
+              isFromMyTrips: settings.arguments! as bool,
             ));
-          else{
-            return _pageRoute(Payment(
-
-            ));
+          } else {
+            return _pageRoute(const Payment());
           }
         }
       case Routes.PAYMENTWEBVIEW:
         return _pageRoute(PaymentWebViewScreen(
           rservationId: settings.arguments! as int,
         ));
+
+      case Routes.TERMS_AND_CONDITIONS:
+        return _pageRoute(const TermsView());
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

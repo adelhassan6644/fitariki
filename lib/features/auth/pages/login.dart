@@ -2,6 +2,8 @@ import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
+import 'package:fitariki/features/terms_and_conditions/provider/terms_provider.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,7 @@ import '../../../components/checkbox_list_tile.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/tab_widget.dart';
+import '../../../navigation/routes.dart';
 import '../provider/firebase_auth_provider.dart';
 
 class Login extends StatefulWidget {
@@ -217,12 +220,10 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 8,
                         ),
-                        CheckBoxListTile(
-                          title: getTranslated(
-                              "agree_to_the_terms_and_conditions", context),
+                        _AgreeToTerms(
                           onChange: provider.onAgree,
                           check: provider.isAgree,
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -236,11 +237,12 @@ class _LoginState extends State<Login> {
                           text: getTranslated("follow", context),
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
-                              if(provider.isAgree) {
+                              if (provider.isAgree) {
                                 provider.signInWithMobileNo();
-                              }
-                              else{
-                                showToast(getTranslated("please__agree_to_the_terms_and_conditions", context));
+                              } else {
+                                showToast(getTranslated(
+                                    "please_agree_to_the_terms_and_conditions",
+                                    context));
                               }
                             }
                           },
@@ -253,6 +255,76 @@ class _LoginState extends State<Login> {
           }),
         ],
       ),
+    );
+  }
+}
+
+class _AgreeToTerms extends StatelessWidget {
+  const _AgreeToTerms({
+    Key? key,
+    this.check = false,
+    required this.onChange,
+  }) : super(key: key);
+  final bool check;
+  final Function(bool) onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          onTap: () => onChange(!check),
+          child: Container(
+            width: 18.w,
+            height: 18.h,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: ColorResources.WHITE_COLOR,
+                border: Border.all(
+                    color: check
+                        ? ColorResources.SECOUND_PRIMARY_COLOR
+                        : ColorResources.DISABLED,
+                    width: 1)),
+            child: check
+                ? const Icon(
+                    Icons.check,
+                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    size: 14,
+                  )
+                : null,
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Text(
+          getTranslated("agree_to", context),
+          style: AppTextStyles.w500.copyWith(
+              fontSize: 14, color: ColorResources.SECOUND_PRIMARY_COLOR),
+        ),
+        InkWell(
+          onTap: () {
+            Provider.of<TermsProvider>(context, listen: false).getTerms();
+            CustomNavigator.push(Routes.TERMS_AND_CONDITIONS);
+          },
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          child: Text(
+            getTranslated("terms_and_conditions", context),
+            style: AppTextStyles.w500.copyWith(
+                fontSize: 14,
+                decoration: TextDecoration.underline,
+                color: ColorResources.PRIMARY_COLOR),
+          ),
+        ),
+        const Expanded(
+          child: SizedBox(),
+        ),
+      ],
     );
   }
 }
