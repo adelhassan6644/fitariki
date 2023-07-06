@@ -81,7 +81,7 @@ class RequestDetailsProvider extends ChangeNotifier {
                     term: name,
                     btnText: getTranslated("my_trips",
                         CustomNavigator.navigatorState.currentContext!),
-                    description: "تم قبول عرض من $name بإنتظار الدفع ..."));
+                    description: "تم قبول طلب من $name بإنتظار الدفع ..."));
           }
         } else if (status == 2) {
           isNegotiation = false;

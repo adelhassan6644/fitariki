@@ -35,8 +35,7 @@ class TermsView extends StatelessWidget {
                               provider.terms != null
                                   ? HtmlWidget(provider.terms!)
                                   : EmptyState(
-                                      txt: getTranslated(
-                                          "something_went_wrong", context))
+                                      txt: getTranslated("something_went_wrong", context))
                             ],
                           ),
                         ),
