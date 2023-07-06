@@ -344,7 +344,7 @@ class MyTripCard extends StatelessWidget {
                                 ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName ?? ""}"
                                 : myTrip.driverModel?.firstName ?? "",
                             userId:
-                                isDriver ? myTrip.clientId : myTrip.driverId,
+                                !isDriver ? myTrip.clientId : myTrip.driverId,
                             offerId: myTrip.offerId));
                   },
                   child: Container(

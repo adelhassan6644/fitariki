@@ -27,14 +27,22 @@ class ReportRepo {
         isDriver = false;
         role = "driver";
       }
+    //   id: 38,
+    // created_at: "2023-07-06T16:31:31.000000Z",
+    // updated_at: "2023-07-06T16:36:05.000000Z",
+    // driver_id: 70,
+    // client_id: 54,
+    // offer_id: 101,
+    // status: 1,
+    // paid: 1,
       Response response = await dioClient.post(
           uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/$role/${EndPoints.report}/${sharedPreferences.getString(AppStorageKey.userId)}",
+              "${sharedPreferences.getString(AppStorageKey.role)}/$role/${EndPoints.report}/${userId}",
           queryParameters: {
             "comment": report,
             "reservation_id": reservationId,
-            if (isDriver) "client_id": userId,
-            if (!isDriver) "driver_id": userId,
+            if (!isDriver) "client_id": sharedPreferences.getString(AppStorageKey.userId),
+            if (isDriver) "driver_id": sharedPreferences.getString(AppStorageKey.userId),
           });
       if (response.statusCode == 200) {
         return Right(response);

@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../data/config/di.dart';
@@ -13,6 +14,8 @@ class PreviewOffer extends StatelessWidget {
   const PreviewOffer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    sl<ProfileProvider>().getProfile();
+    // Methods.convertStringToTime(provider.startTime.toString(), withFormat: true)
     return Container(
       height: context.height - context.toPadding,
       width: context.width,
@@ -40,17 +43,24 @@ class PreviewOffer extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  UserCard(
-                    image: sl<ProfileProvider>().image,
-                    name: "${sl<ProfileProvider>().firstName.text} ${sl<ProfileProvider>().lastName.text}",
-                    male: sl<ProfileProvider>().gender == 0,
-                    national: sl<ProfileProvider>().nationality?.name,
-                    rate: sl<ProfileProvider>().rate.ceil(),
-                    days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
-                    duration: provider.counts!.count.toString(),
-                    priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
-                    timeRange: "${provider.startTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}- ${provider.endTime.dateFormat(format: "hh : mm aa", lang: "ar-SA")}",
-                    withAnalytics: false,
+                  Consumer<ProfileProvider>(
+                      builder: (context, profileProvider, child) {
+                      return UserCard(
+                        image: profileProvider.image,
+                        name: "${profileProvider.firstName.text} ${profileProvider.lastName.text}",
+                        male: profileProvider.gender == 0,
+                        national: profileProvider.nationality?.name,
+                        rate: profileProvider.rate.ceil(),
+                        days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
+                        duration: provider.counts!.count.toString(),
+                        priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",
+
+                        timeRange: "${provider.startTime.dateFormat(format: "mm : hh aa", lang: "ar-SA").replaceAll("AM", "صباحاً")
+            .replaceAll("PM", "مساءً")}-  ${provider.endTime.dateFormat(format: "mm : hh aa", lang: "ar-SA").replaceAll("AM", "صباحاً")
+                            .replaceAll("PM", "مساءً")}",
+                        withAnalytics: false,
+                      );
+                    }
                   ),
                   MapWidget(
                     startPoint: provider.startLocation,

@@ -14,7 +14,7 @@ class FollowersProvider extends ChangeNotifier {
   FollowersRepo followersRepo;
   FollowersProvider({required this.followersRepo});
 
-  bool addFollowers = true;
+  bool addFollowers = false;
   onChange(v) {
     addFollowers = v;
     notifyListeners();

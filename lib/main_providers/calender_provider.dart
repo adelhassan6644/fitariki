@@ -16,8 +16,13 @@ class CalenderProvider extends ChangeNotifier {
   Map<DateTime, List<Event>> eventsMAP = {};
   EventList<Event>? eventList;
   List<int> days=[];
+  updateDays(weakDays){
+    days=weakDays;
+    notifyListeners();
+  }
   bool isLoad = false;
   getEventsList({required DateTime startDate,required DateTime endDate}) {
+
     isLoad = true;
     eventList = null;
     eventsMAP = {};
@@ -33,9 +38,10 @@ class CalenderProvider extends ChangeNotifier {
         ];
       }
     }
-    print("&&"+eventsMAP.toString());
+
     eventList = EventList<Event>(events: eventsMAP);
     isLoad = false;
+    print("&&"+eventsMAP.toString());
     notifyListeners();
   }
 }

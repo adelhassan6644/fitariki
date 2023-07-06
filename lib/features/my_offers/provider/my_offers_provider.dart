@@ -100,6 +100,7 @@ class MyOffersProvider extends ChangeNotifier {
         isDelete = false;
         notifyListeners();
       }, (response) {
+        getMyOffers();
         CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
         CustomSnackBar.showSnackBar(
             notification: AppNotification(

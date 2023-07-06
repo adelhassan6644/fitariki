@@ -237,7 +237,7 @@ class _MapWidgetState extends State<MapWidget> {
                     initialCameraPosition: vm.mapCameraPosition,
                     onMapCreated: vm.onMapCreated,
                     padding: vm.googleMapPadding,
-                    zoomGesturesEnabled: true,
+                    zoomGesturesEnabled: false,
                     zoomControlsEnabled: false,
                     myLocationButtonEnabled: false,
                     myLocationEnabled: false,

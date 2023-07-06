@@ -12,11 +12,13 @@ import '../main_models/weak_model.dart';
 class CalenderWidget extends StatefulWidget {
   final DateTime startDate;
   final DateTime endDate;
+  final bool fromAddRequest;
   final List<WeekModel> days;
   const CalenderWidget(
       {Key? key,
       required this.startDate,
       required this.endDate,
+        this.fromAddRequest=false,
       required this.days})
       : super(key: key);
 
@@ -27,16 +29,21 @@ class CalenderWidget extends StatefulWidget {
 class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
+    if(!widget.fromAddRequest) {
+      Future.delayed(Duration.zero, () {
       sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
       sl<CalenderProvider>().getEventsList(startDate: widget.startDate, endDate: widget.endDate,);
     });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CalenderProvider>(builder: (context, provider, _) {
+      if(provider.isLoad)
+        return CircularProgressIndicator();
+            else
       return Directionality(
         textDirection: TextDirection.rtl,
         child: CalendarCarousel<Event>(

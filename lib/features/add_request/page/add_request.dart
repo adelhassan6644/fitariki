@@ -1,10 +1,14 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
+import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
+import '../../../main_providers/calender_provider.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
 import '../provider/add_request_provider.dart';
@@ -30,11 +34,12 @@ class _AddRequestState extends State<AddRequest> {
   void initState() {
     Future.delayed(Duration.zero, () {
       Provider.of<AddRequestProvider>(context, listen: false)
-          .updateOfferDays(widget.offer.offerDays!.map((e) => e.id!).toList());
-      Provider.of<AddRequestProvider>(context, listen: false).startDate =
-          widget.offer.startDate ?? DateTime.now();
-      Provider.of<AddRequestProvider>(context, listen: false).endDate =
-          widget.offer.endDate ?? DateTime.now();
+          .updateOfferDays(sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
+      Provider.of<AddRequestProvider>(context, listen: false).onSelectStartDate( DateTime.now())
+         ;
+      Provider.of<AddRequestProvider>(context, listen: false).onSelectEndDate(widget.offer.endDate ?? DateTime.now()) ;
+      Provider.of<CalenderProvider>(context, listen: false)   .getEventsList(startDate: DateTime.now(), endDate: widget.offer.endDate ?? DateTime.now());
+
     });
     super.initState();
   }
@@ -90,7 +95,8 @@ class _AddRequestState extends State<AddRequest> {
                   CalenderWidget(
                       startDate: provider.startDate,
                       endDate: provider.endDate,
-                      days: widget.offer.offerDays!)
+                      fromAddRequest: true,
+                      days: sl.get<ScheduleProvider>().selectedDays)
                 ],
               ),
             ),

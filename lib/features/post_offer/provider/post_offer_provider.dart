@@ -216,7 +216,7 @@ class PostOfferProvider extends ChangeNotifier {
                 isClean: true,
                 routeName: Routes.DASHBOARD,
                 argument: 0,
-                description: sl<ProfileProvider>().isDriver
+                description: !sl<ProfileProvider>().isDriver
                     ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
                     : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));
       });

@@ -42,7 +42,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
     super.initState();
   }
 
-  getInitialPosition() {
+  getInitialPosition() async {
     if (widget.baseModel.object != null) {
       _initialPosition = LatLng(
           double.parse(
@@ -51,6 +51,18 @@ class _PickMapScreenState extends State<PickMapScreen> {
               widget.baseModel.object.longitude ?? AppStrings.defaultLong));
       _mapController!.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: _initialPosition, zoom: 100),
+      ));
+    }else{
+      await Provider.of<LocationProvider>(context, listen: false).getCurrentLocation();
+      _mapController!
+          .animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(
+                double.parse(Provider.of<LocationProvider>(context, listen: false)
+                    .currentLocation!.latitude!),
+                double.parse(Provider.of<LocationProvider>(context, listen: false)
+                    .currentLocation!.longitude!)),
+            zoom: 10),
       ));
     }
   }
@@ -191,8 +203,36 @@ class _PickMapScreenState extends State<PickMapScreen> {
                       ),
                     )),
               )),
+          Positioned(
+              bottom: 80.h,
+              left: 10.w,
+              // width: 150,
+              child: SafeArea(
+                bottom: true,
+                child: FloatingActionButton.small(
+                  backgroundColor: Colors.white,
+                  onPressed: () async {
+                    await locationController.getCurrentLocation();
+                    _mapController!
+                        .animateCamera(CameraUpdate.newCameraPosition(
+                      CameraPosition(
+                          target: LatLng(
+                              double.parse(locationController
+                                  .currentLocation!.latitude!),
+                              double.parse(locationController
+                                  .currentLocation!.longitude!)),
+                          zoom: 10),
+                    ));
+                  },
+                  child: Icon(
+                    Icons.location_on,
+                    color: ColorResources.PRIMARY_COLOR,
+                  ),
+                ),
+              )),
         ]);
       }))),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 }

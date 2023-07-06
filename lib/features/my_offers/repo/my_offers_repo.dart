@@ -60,7 +60,7 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> deleteMyOffer(id) async {
     try {
       Response response = await dioClient.post(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myOffers}/$id}",
+        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteOffer}/$id}",
       );
       if (response.statusCode == 200) {
         return Right(response);

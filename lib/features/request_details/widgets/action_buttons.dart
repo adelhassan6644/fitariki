@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -70,11 +72,20 @@ class ActionButtons extends StatelessWidget {
                                   RegExp(r'^\d+\.?\d{0,2}')),
                             ],
                             onSend: () {
+
+                              if(provider.negotiationPrice.text==""){
+
+                                showToast(
+                                    "لا يمكن ان تكون فارغة");
+
+                                return;
+                              }
                               provider.updateRequest(
                                   status: 2, id: provider.requestModel!.id!);
                               CustomNavigator.pop();
                             },
                             onClose: () {
+                              CustomNavigator.pop();
                               provider.negotiationPrice.clear();
                             }),
                     isLoading: provider.isNegotiation,

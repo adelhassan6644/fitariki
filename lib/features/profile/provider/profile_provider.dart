@@ -630,6 +630,7 @@ class ProfileProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         });
+
       } catch (e) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(

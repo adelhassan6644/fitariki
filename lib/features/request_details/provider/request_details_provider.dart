@@ -36,6 +36,8 @@ class RequestDetailsProvider extends ChangeNotifier {
     String? name,
   }) async {
     try {
+
+
       if (status == 1) {
         isAccepting = true;
       } else if (status == 2) {

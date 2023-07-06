@@ -57,13 +57,8 @@ class ReportProvider extends ChangeNotifier {
         notifyListeners();
       }
     } else {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: getTranslated("report_validation",
-                  CustomNavigator.navigatorState.currentContext!),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    showToast(getTranslated("report_validation",
+        CustomNavigator.navigatorState.currentContext!));
     }
   }
 }

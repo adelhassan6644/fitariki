@@ -27,13 +27,13 @@ class FeedbackRepo {
       }
       Response response = await dioClient.post(
           uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.sendFeedback}/${sharedPreferences.getString(AppStorageKey.userId)}",
+              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.sendFeedback}/$offerId",
           queryParameters: {
             "rating": rating,
             "feedback": feedback,
-            "offer_id": offerId,
-            if (isDriver) "client_id": userId,
-            if (!isDriver) "driver_id": userId,
+
+            if (!isDriver) "client_id": userId,
+            if (isDriver) "driver_id": userId,
           });
       if (response.statusCode == 200) {
         return Right(response);

@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -12,6 +13,7 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_text_form_field.dart';
+import '../../../data/config/di.dart';
 import '../provider/feedback_provider.dart';
 
 class RateTrip extends StatelessWidget {

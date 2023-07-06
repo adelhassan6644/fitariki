@@ -6,9 +6,10 @@ import '../app/core/utils/app_strings.dart';
 import '../features/maps/models/location_model.dart';
 
 class MapProvider extends ChangeNotifier {
-  CameraPosition mapCameraPosition = const CameraPosition(target: LatLng(24.280888, 37.987794),zoom: 5);
+  CameraPosition mapCameraPosition = const CameraPosition(target:
+  LatLng(24.280888, 37.987794),zoom:90.0);
   GoogleMapController? googleMapController;
-  EdgeInsets googleMapPadding = const EdgeInsets.all(40);
+  EdgeInsets googleMapPadding = const EdgeInsets.all(0);
   Set<Polyline> gMapPolylines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
