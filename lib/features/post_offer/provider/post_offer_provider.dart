@@ -64,7 +64,6 @@ class PostOfferProvider extends ChangeNotifier {
   DateTime endTime = DateTime.now();
 
   onSelectEndTime(v) {
-
     endTime = v;
     notifyListeners();
   }
@@ -72,7 +71,6 @@ class PostOfferProvider extends ChangeNotifier {
   DateTime startDate = DateTime.now();
 
   onSelectStartDate(v) {
-
     startDate = v;
     getDaysCount();
     notifyListeners();
@@ -90,7 +88,7 @@ class PostOfferProvider extends ChangeNotifier {
   }
 
   void getDaysCount() {
-       List<int> days = [];
+    List<int> days = [];
     for (var element in scheduleProvider.selectedDays) {
       element.startTime = startTime.dateFormat(format: "kk:mm");
       element.endTime = endTime.dateFormat(format: "kk:mm");
@@ -102,7 +100,7 @@ class PostOfferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool addFollowers = true;
+  bool addFollowers = false;
   onChange(v) {
     addFollowers = v;
     notifyListeners();
