@@ -18,7 +18,7 @@ class NotificationsModel {
 class NotificationItem {
   NotificationData? notificationData;
   bool? isRead;
-  String? id;
+  int? id;
   int? notifiableId;
 
   NotificationItem({
@@ -30,7 +30,7 @@ class NotificationItem {
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) =>
       NotificationItem(
-          id: json["id"],
+          id: int.tryParse(json["id"])??0,
           notifiableId: json["notifiable_id"],
           notificationData: json["data"] == null
               ? null
@@ -42,6 +42,8 @@ class NotificationItem {
 }
 
 class NotificationData {
+  String? title;
+  String? routName;
   String? message;
   int? status;
   int? id;
@@ -49,6 +51,8 @@ class NotificationData {
 
   NotificationData({
     this.message,
+    this.routName,
+    this.title,
     this.status,
     this.id,
     this.url,
@@ -58,8 +62,9 @@ class NotificationData {
       NotificationData(
         message: json["message"],
         status: json["status"],
-        id: json["id"],
-        url: json["url"],
+        title: json["title"],
+        id: int.tryParse(json["id"].toString())??0,
+        routName: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
