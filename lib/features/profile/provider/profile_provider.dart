@@ -263,7 +263,6 @@ class ProfileProvider extends ChangeNotifier {
     //     return;
     //   }
     // }
-
     if (isDriver && profileImage == null) {
       if (isDriver && profileModel?.driver?.image == null) {
         CustomSnackBar.showSnackBar(

@@ -8,6 +8,8 @@ import 'package:fitariki/features/notifications/provider/notifications_provider.
 import 'package:flutter/material.dart';
 
 import '../../../data/config/di.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 
 class NotificationCard extends StatefulWidget {
   const NotificationCard(
@@ -36,14 +38,15 @@ class _NotificationCardState extends State<NotificationCard> {
         ),
       ),
       onDismissed: (_) {
-        sl<NotificationsProvider>()
-            .deleteNotification(widget.notificationItem.id);
+        // sl<NotificationsProvider>()
+        //     .deleteNotification(widget.notificationItem.id);
       },
       child: InkWell(
         onTap: () {
-          sl<NotificationsProvider>()
-              .readNotification(widget.notificationItem.id);
-          setState(() => widget.notificationItem.isRead = true);
+      CustomNavigator.push(widget.notificationItem.notificationData!.routName!, arguments: widget.notificationItem.notificationData?.id!);
+          // sl<NotificationsProvider>()
+          //     .readNotification(widget.notificationItem.id);
+          // setState(() => widget.notificationItem.isRead = true);
         },
         child: Container(
           padding: EdgeInsets.symmetric(
