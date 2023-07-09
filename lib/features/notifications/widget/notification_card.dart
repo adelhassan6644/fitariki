@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../request_details/provider/request_details_provider.dart';
 
 class NotificationCard extends StatefulWidget {
-  const NotificationCard(
-      {this.isRequest = false, required this.notificationItem, Key? key})
+  const NotificationCard({required this.notificationItem, Key? key})
       : super(key: key);
-  final bool isRequest;
+
   final NotificationItem notificationItem;
 
   @override
@@ -43,7 +43,6 @@ class _NotificationCardState extends State<NotificationCard> {
       },
       child: InkWell(
         onTap: () {
-      CustomNavigator.push(widget.notificationItem.notificationData!.routName!, arguments: widget.notificationItem.notificationData?.id!);
           // sl<NotificationsProvider>()
           //     .readNotification(widget.notificationItem.id);
           // setState(() => widget.notificationItem.isRead = true);
@@ -68,18 +67,27 @@ class _NotificationCardState extends State<NotificationCard> {
                       .copyWith(fontSize: 14, overflow: TextOverflow.ellipsis),
                 ),
               ),
-              if (widget.isRequest)
-                SizedBox(
-                  width: 40.w,
+              Visibility(
+                visible: widget.notificationItem.notificationData!.status != 3,
+                  child: SizedBox(
+                    width: 40.w,
+                  ),
                 ),
-              if (widget.isRequest)
-                CustomButton(
-                  onTap: () {},
-                  text: getTranslated("preview", context),
-                  radius: 100,
-                  width: 70,
-                  textSize: 12,
-                  height: 30,
+
+                Visibility(
+                  visible: widget.notificationItem.notificationData!.status != 3,
+                  child: CustomButton(
+                    onTap: () {
+                      CustomNavigator.push(
+                          widget.notificationItem.notificationData!.routName!,
+                          arguments: widget.notificationItem.notificationData!.id!);
+                    },
+                    text: getTranslated("preview", context),
+                    radius: 100,
+                    width: 70,
+                    textSize: 12,
+                    height: 30,
+                  ),
                 )
             ],
           ),

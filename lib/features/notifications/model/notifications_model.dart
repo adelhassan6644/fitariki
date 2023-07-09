@@ -30,7 +30,7 @@ class NotificationItem {
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) =>
       NotificationItem(
-          id: int.tryParse(json["id"])??0,
+          id: int.tryParse(json["id"]) ?? 0,
           notifiableId: json["notifiable_id"],
           notificationData: json["data"] == null
               ? null
@@ -44,6 +44,7 @@ class NotificationItem {
 class NotificationData {
   String? title;
   String? routName;
+  bool? isMyOffer;
   String? message;
   int? status;
   int? id;
@@ -52,6 +53,7 @@ class NotificationData {
   NotificationData({
     this.message,
     this.routName,
+    this.isMyOffer,
     this.title,
     this.status,
     this.id,
@@ -63,14 +65,17 @@ class NotificationData {
         message: json["message"],
         status: json["status"],
         title: json["title"],
-        id: int.tryParse(json["id"].toString())??0,
+        isMyOffer: json["is_my_offer"] ?? false,
+        id: json["id"] != null ? int.tryParse(json["id"].toString()) : 0,
         routName: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
+        "is_my_offer": isMyOffer,
         "status": status,
+        "routName": url,
         "id": id,
-        "url": url,
+        "title": title,
       };
 }
