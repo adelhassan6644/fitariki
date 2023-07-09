@@ -45,10 +45,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () => provider.updateRequest(
                         fromMyTrip: true,
                         name: provider.isDriver
-                            ? "${provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.offer?.clientModel?.firstName ?? ""}"
-                            : provider.requestModel?.offer?.driverModel
-                                    ?.firstName ??
-                                "",
+                            ? "${provider.requestModel?.clientModel?.firstName??provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName??provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
+                            : provider.requestModel?.offer?.driverModel?.firstName ??provider.requestModel?.driverModel?.firstName ?? "",
                         status: 1,
                         id: provider.requestModel!.id!),
                     isLoading: provider.isAccepting,
@@ -65,8 +63,7 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description: getTranslated(
-                                "negotiation_description", context),
+                            description: getTranslated("negotiation_description", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
                             inputFormatters: [

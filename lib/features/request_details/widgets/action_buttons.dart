@@ -44,8 +44,10 @@ class ActionButtons extends StatelessWidget {
                         : getTranslated("accept_offer", context),
                     onTap: () => provider.updateRequest(
                         name: provider.isDriver
-                            ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.firstName ?? ""}"
+                            ? "${provider.requestModel?.clientModel?.firstName ?? provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
                             : provider.requestModel?.driverModel?.firstName ??
+                                provider.requestModel?.offer?.driverModel
+                                    ?.firstName ??
                                 "",
                         status: 1,
                         id: provider.requestModel!.id!),
@@ -63,26 +65,20 @@ class ActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description: getTranslated(
-                                "negotiation_description", context),
+                            description: getTranslated("negotiation_description", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d{0,2}')),
-                            ],
+                            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),],
                             onSend: () {
-
-                              if(provider.negotiationPrice.text==""){
-
-                                showToast(
-                                    "لا يمكن ان تكون فارغة");
-
+                              if (provider.negotiationPrice.text.trim() == "" ||
+                                  provider.negotiationPrice.text.isEmpty) {
+                                showToast("من فضلك أدخل سعر");
                                 return;
+                              }else{
+                                provider.updateRequest(status: 2, id: provider.requestModel!.id!);
+                                CustomNavigator.pop();
                               }
-                              provider.updateRequest(
-                                  status: 2, id: provider.requestModel!.id!);
-                              CustomNavigator.pop();
+
                             },
                             onClose: () {
                               CustomNavigator.pop();
@@ -102,8 +98,7 @@ class ActionButtons extends StatelessWidget {
                     backgroundColor: ColorResources.WHITE_COLOR,
                     withBorderColor: true,
                     textColor: ColorResources.PRIMARY_COLOR,
-                    onTap: () => provider.updateRequest(
-                        status: 3, id: provider.requestModel!.id!),
+                    onTap: () => provider.updateRequest(status: 3, id: provider.requestModel!.id!),
                     isLoading: provider.isRejecting,
                   ),
                 ),
