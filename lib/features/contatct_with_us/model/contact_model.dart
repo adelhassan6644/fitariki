@@ -4,6 +4,7 @@ class ContactModel {
   String? twitter;
   String? website;
   String? phone;
+  String? terms;
 
   ContactModel({
     this.id,
@@ -11,6 +12,7 @@ class ContactModel {
     this.twitter,
     this.website,
     this.phone,
+    this.terms,
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) => ContactModel(
@@ -19,6 +21,7 @@ class ContactModel {
     twitter: json["twitter"],
     website: json["website"],
     phone: json["phone"],
+    terms: json["terms"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -27,5 +30,6 @@ class ContactModel {
     "twitter": twitter,
     "website": website,
     "phone": phone,
+    "terms": terms,
   };
 }

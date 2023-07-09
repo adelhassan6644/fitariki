@@ -26,37 +26,57 @@ class ContactWithUs extends StatelessWidget {
                   vertical: 24.h),
               physics: const BouncingScrollPhysics(),
               children: [
-                CustomButton(
-                  text: getTranslated("mail", context),
-                  radius: 50,
-                  onTap: ()=>provider.launchMail(),
+                Visibility(
+                  visible: provider.contactModel?.email != null,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 8.h,
+                    ),
+                    child: CustomButton(
+                      text: getTranslated("mail", context),
+                      radius: 50,
+                      onTap: () => provider.launchMail(),
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 8.h,
+                Visibility(
+                  visible: provider.contactModel?.twitter != null,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 8.h,
+                    ),
+                    child: CustomButton(
+                      text: getTranslated("twitter", context),
+                      radius: 50,
+                      onTap: () => provider.launchTwitter(),
+                    ),
+                  ),
                 ),
-                CustomButton(
-                  text: getTranslated("twitter", context),
-                  radius: 50,
-                  onTap: ()=>provider.launchTwitter(),
+                Visibility(
+                  visible: provider.contactModel?.website != null,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 8.h,
+                    ),
+                    child: CustomButton(
+                      text: getTranslated("website", context),
+                      radius: 50,
+                      onTap: () => provider.launchWebsite(),
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                CustomButton(
-                  text: getTranslated("website", context),
-                  radius: 50,
-                  onTap: ()=>provider.launchWebsite(),
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                CustomButton(
-                  text: getTranslated("customerـservice", context),
-                  radius: 50,
-                  onTap: ()=>provider.launchCustomerService(),
-                ),
-                SizedBox(
-                  height: 8.h,
+                Visibility(
+                  visible: provider.contactModel?.phone != null,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 8.h,
+                    ),
+                    child: CustomButton(
+                      text: getTranslated("customerـservice", context),
+                      radius: 50,
+                      onTap: () => provider.launchCustomerService(),
+                    ),
+                  ),
                 ),
               ],
             );

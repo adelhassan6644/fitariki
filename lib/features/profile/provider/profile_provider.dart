@@ -8,7 +8,6 @@ import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
-import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
