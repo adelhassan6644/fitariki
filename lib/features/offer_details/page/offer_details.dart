@@ -82,6 +82,11 @@ class OfferDetails extends StatelessWidget {
                                       .join(", "),
                                   duration: provider.offerDetails!.duration
                                       .toString(),
+                                  rate:provider.isDriver
+                                      ? provider.offerDetails!.clientModel
+                                      ?.rate
+                                      : provider.offerDetails!.driverModel
+                                      ?.rate ,
                                   priceRange:
                                       "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
                                   timeRange: provider

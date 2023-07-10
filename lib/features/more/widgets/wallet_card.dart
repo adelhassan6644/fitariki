@@ -56,22 +56,24 @@ class WalletCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RichText(
-                        text: TextSpan(
-                          text: pendingBalance?.toStringAsFixed(2)??"",
-                          style: AppTextStyles.w700.copyWith(
-                              fontSize: 12,
-                              height: 1,
-                              color: ColorResources.WHITE_COLOR),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ' ${getTranslated("sar", context)}',
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  height: 1,
-                                  color: ColorResources.WHITE_COLOR),
-                            ),
-                          ],
+                      FittedBox(
+                        child: RichText(
+                          text: TextSpan(
+                            text: pendingBalance?.toStringAsFixed(2)??"",
+                            style: AppTextStyles.w700.copyWith(
+                                fontSize: 12,
+                                height: 1,
+                                color: ColorResources.WHITE_COLOR),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: ' ${getTranslated("sar", context)}',
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                    height: 1,
+                                    color: ColorResources.WHITE_COLOR),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Text(getTranslated("pending", context),

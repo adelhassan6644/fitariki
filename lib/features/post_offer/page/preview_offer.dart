@@ -50,7 +50,7 @@ class PreviewOffer extends StatelessWidget {
                         name: "${profileProvider.firstName.text} ${profileProvider.lastName.text}",
                         male: profileProvider.gender == 0,
                         national: profileProvider.nationality?.name,
-                        rate: profileProvider.rate.ceil(),
+                        rate: profileProvider.rate,
                         days: provider.scheduleProvider.selectedDays.map((e) => e.dayName).toList().join("،"),
                         duration: provider.counts!.count.toString(),
                         priceRange: "${provider.minPrice}- ${provider.maxPrice} SAR",

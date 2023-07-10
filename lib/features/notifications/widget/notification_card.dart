@@ -43,9 +43,13 @@ class _NotificationCardState extends State<NotificationCard> {
       },
       child: InkWell(
         onTap: () {
+          if(widget.notificationItem.notificationData!.routName!=null) {
+            CustomNavigator.push(widget.notificationItem.notificationData!.routName!,
+                arguments: widget.notificationItem.notificationData!.id! ,replace: true);
+          }
           // sl<NotificationsProvider>()
           //     .readNotification(widget.notificationItem.id);
-          // setState(() => widget.notificationItem.isRead = true);
+          setState(() => widget.notificationItem.isRead = true);
         },
         child: Container(
           padding: EdgeInsets.symmetric(

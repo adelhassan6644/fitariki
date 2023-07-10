@@ -40,7 +40,8 @@ class UserCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final int? userId, reservationId, rate, passengers;
+  final int? userId, reservationId,  passengers;
+  final double? rate;
   final String? image, name, national, phone;
   final bool male;
   final double? matching;

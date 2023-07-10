@@ -37,20 +37,47 @@ class CurrentTripsWidget extends StatelessWidget {
                           provider.currentTrips!.isNotEmpty
                       ? List.generate(
                           provider.currentTrips!.length,
-                          (index) => Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                            child: MyTripCard(
-                              isCurrent: true,
-                              isDriver: provider.isDriver,
-                              offerPassengers: provider.currentTrips![index].offerPassengers ?? 1,
-                              myTrip: provider.currentTrips![index],
-                              offerDays: provider.isDriver
-                                  ? provider.currentTrips![index].myTripRequest?.clientModel?.clientDays ??
-                                      provider.currentTrips![index].offer?.clientModel?.clientDays ??
-                                      provider.currentTrips![index].clientModel?.clientDays
-                                  : provider.currentTrips![index].offer?.offerDays,
-                            ),
-                          ),
+                          (index)
+                          {
+                            print((provider.currentTrips![index].offer!.offerFollowers!.isEmpty));
+                          return  Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                              child: MyTripCard(
+                                isCurrent: true,
+                                isDriver: provider.isDriver,
+                                offerPassengers: (provider.currentTrips![index]
+                                        .offer!.offerFollowers!.isEmpty)
+                                    ? (provider.currentTrips![index]
+                                            .myTripRequest!.followers!.isEmpty
+                                        ? 1
+                                        : provider
+                                                .currentTrips![index]
+                                                .myTripRequest!
+                                                .followers!
+                                                .length +
+                                            1)
+                                    : (provider.currentTrips![index].offer!
+                                            .offerFollowers!.isEmpty
+                                        ? 1
+                                        : provider.currentTrips![index].offer!
+                                                .offerFollowers!.length +
+                                            1),
+                                myTrip: provider.currentTrips![index],
+                                offerDays: provider.isDriver
+                                    ? provider
+                                            .currentTrips![index]
+                                            .myTripRequest
+                                            ?.clientModel
+                                            ?.clientDays ??
+                                        provider.currentTrips![index].offer
+                                            ?.clientModel?.clientDays ??
+                                        provider.currentTrips![index]
+                                            .clientModel?.clientDays
+                                    : provider
+                                        .currentTrips![index].offer?.offerDays,
+                              ),
+                            );
+                          },
                         )
                       : [
                           EmptyState(

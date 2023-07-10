@@ -470,7 +470,9 @@ class RequestCard extends StatelessWidget {
                 text: getTranslated("preview", context),
                 width: 75.h,
                 height: 30.h,
+                textSize:14,
                 radius: 100,
+
                 onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
                     arguments: request!.id!),
               ))

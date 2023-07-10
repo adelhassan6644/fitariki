@@ -1,3 +1,4 @@
+import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/main_models/weak_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../app/core/utils/app_storage_keys.dart';
@@ -28,6 +29,7 @@ class OfferModel {
   DriverModel? driverModel;
   ClientModel? clientModel;
   List<OfferRequestDetailsModel>? offerRequests;
+  List<FollowerModel>? offerFollowers;
 
   DateTime? startDate;
   DateTime? endDate;
@@ -35,6 +37,7 @@ class OfferModel {
   OfferModel(
       {this.id,
       this.image,
+        this.offerFollowers,
       this.name,
       this.rate,
       this.duration,
@@ -95,7 +98,13 @@ class OfferModel {
       offerRequests: json["offer_requests"] == null
           ? null
           : List<OfferRequestDetailsModel>.from(json["offer_requests"]!
-              .map((x) => OfferRequestDetailsModel.fromJson(x))));
+              .map((x) => OfferRequestDetailsModel.fromJson(x))) ,
+      offerFollowers: json["offer_followers"] == null
+          ? []
+          : List<FollowerModel>.from(json["offer_followers"]!
+              .map((x) => FollowerModel.fromJson(x['follower'])))
+
+  );
 
   Map<String, dynamic> toPostDriverJson() => {
         "offer": {

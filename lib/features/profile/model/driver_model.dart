@@ -86,7 +86,7 @@ class DriverModel {
         identityImage: json["id_image"],
         phone: json["phone"].toString(),
         status: json["status"].toString(),
-        rate: json["rate"],
+        rate: double.tryParse(json["rate"].toString()),
         wallet: json["wallet"] == null
             ? null
             : double.tryParse(json["wallet"].toString()),

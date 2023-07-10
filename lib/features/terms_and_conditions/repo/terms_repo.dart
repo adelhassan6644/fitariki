@@ -16,7 +16,7 @@ class TermsRepo {
   Future<Either<ServerFailure, Response>> getTerms() async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.terms}",
+        uri: "${EndPoints.paymentData}",
       );
       if (response.statusCode == 200) {
         return Right(response);

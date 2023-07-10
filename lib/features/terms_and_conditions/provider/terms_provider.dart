@@ -30,7 +30,7 @@ class TermsProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) {
-        terms = response.data["data"];
+        terms = response.data["data"]['settings'][0]['content'];
         isLoading = false;
         notifyListeners();
       });

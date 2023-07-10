@@ -23,36 +23,41 @@ class More extends StatelessWidget {
             ? Column(
                 children: [
                   Expanded(
-                    child: ListAnimator(
-                      customPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                      data: [
-                        provider.isLoading
-                            ? const ProfileCardShimmer()
-                            : ProfileCard(
-                                lastUpdate: provider.lastUpdate,
-                                image: provider.image,
-                                name: "${provider.firstName.text} ${provider.lastName.text}",
-                                isDriver: provider.isDriver,
-                                male: provider.gender == 0,
-                                nationality: provider.nationality?.name,
-                                withPhone:true,
-                                rate: provider.rate.ceil(),
-                                reservationCount: provider.reservationCount,
-                                requestsCount: provider.requestsCount,
-                              ),
-                        Visibility(
-                          visible: provider.isDriver,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 24.h,
-                              ),
-                              WalletCard(availableBalance: provider.wallet,pendingBalance:provider.pendingWallet ,),
-                            ],
+                    child: RefreshIndicator(
+                      onRefresh:()async{
+                      await  provider.getProfile();
+                      } ,
+                      child: ListAnimator(
+                        customPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                        data: [
+                          provider.isLoading
+                              ? const ProfileCardShimmer()
+                              : ProfileCard(
+                                  lastUpdate: provider.lastUpdate,
+                                  image: provider.image,
+                                  name: "${provider.firstName.text} ${provider.lastName.text}",
+                                  isDriver: provider.isDriver,
+                                  male: provider.gender == 0,
+                                  nationality: provider.nationality?.name,
+                                  withPhone:true,
+                                  rate: provider.rate.ceil(),
+                                  reservationCount: provider.reservationCount,
+                                  requestsCount: provider.requestsCount,
+                                ),
+                          Visibility(
+                            visible: provider.isDriver,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 24.h,
+                                ),
+                                WalletCard(availableBalance: provider.wallet,pendingBalance:provider.pendingWallet ,),
+                              ],
+                            ),
                           ),
-                        ),
-                        const MoreOptions(),
-                      ],
+                          const MoreOptions(),
+                        ],
+                      ),
                     ),
                   ),
                 ],

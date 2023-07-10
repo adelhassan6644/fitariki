@@ -9,7 +9,9 @@ import 'package:substring_highlight/substring_highlight.dart';
 import '../../app/core/utils/images.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_images.dart';
+import '../../data/config/di.dart';
 import '../../navigation/routes.dart';
+import '../my_trips/provider/my_trips_provider.dart';
 import 'model/success_model.dart';
 
 class SuccessPage extends StatefulWidget {
@@ -26,11 +28,16 @@ class _SuccessPageState extends State<SuccessPage> {
     if (widget.successModel.isPopUp) {
       Future.delayed(const Duration(seconds: 2), () {
         if(widget.successModel.routeName!=null) {
+          if( widget.successModel.routeName == Routes.DASHBOARD)
+            sl.get<MyTripsProvider>().onSelectTap(2);
+
           CustomNavigator.push(
               widget.successModel.routeName ?? Routes.DASHBOARD,
               arguments: widget.successModel.argument,
               replace: widget.successModel.isReplace,
               clean: widget.successModel.isClean);
+
+
         }
         else{
           CustomNavigator.pop();

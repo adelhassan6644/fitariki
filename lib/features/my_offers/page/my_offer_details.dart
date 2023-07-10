@@ -101,7 +101,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                               ],
                             ),
                           ),
-                          if (provider.myOfferDetails!.offerRequests != null &&
+                          if (provider.myOfferDetails?.offerRequests != null &&
                               provider
                                   .myOfferDetails!.offerRequests!.isNotEmpty)
                             ...List.generate(

@@ -26,7 +26,7 @@ class _MyOffersState extends State<MyOffers>
   @override
   void initState() {
     if (sl<MyOffersProvider>().isLogin) {
-      sl<MyOffersProvider>().getMyOffers();
+      Future.delayed(Duration.zero,(){sl<MyOffersProvider>().getMyOffers();});
     }
     super.initState();
   }

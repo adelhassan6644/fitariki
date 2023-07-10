@@ -504,13 +504,15 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   ///Update Profile
+  ///
+  bool isLoadingProfile = false;
   updateProfile({bool fromLogin = false}) async {
     if (checkData() == true) {
       try {
         if (!fromLogin) {
           spinKitDialog();
         }
-        isLoading = true;
+        isLoadingProfile = true;
         notifyListeners();
 
         final carData = {
@@ -609,7 +611,7 @@ class ProfileProvider extends ChangeNotifier {
                   isFloating: true,
                   backgroundColor: ColorResources.IN_ACTIVE,
                   borderColor: Colors.transparent));
-          isLoading = false;
+          isLoadingProfile = false;
           notifyListeners();
         }, (response) {
           profileRepo.completedProfile();
@@ -625,7 +627,7 @@ class ProfileProvider extends ChangeNotifier {
                   isFloating: true,
                   backgroundColor: ColorResources.ACTIVE,
                   borderColor: Colors.transparent));
-          isLoading = false;
+          isLoadingProfile = false;
           notifyListeners();
         });
 
@@ -637,7 +639,7 @@ class ProfileProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: ColorResources.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        isLoading = false;
+        isLoadingProfile = false;
         notifyListeners();
       }
     }

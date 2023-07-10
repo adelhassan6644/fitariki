@@ -97,7 +97,7 @@ class ReviewCard extends StatelessWidget {
               left: 10,
               child: Text(
                 Methods.getDayCount(
-                      date: feedback.createdAt!,
+                      date: feedback.createdAt == null?DateTime.now():feedback.createdAt!,
                     ) ??
                     "",
                 style: AppTextStyles.w400

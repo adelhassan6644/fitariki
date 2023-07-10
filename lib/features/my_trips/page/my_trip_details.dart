@@ -149,9 +149,9 @@ class MyTripDetails extends StatelessWidget {
 
                     /// to show stop points for followers request if driver
                     Visibility(
-                      visible: sl<ProfileProvider>().isDriver &&
-                          myTripModel.myTripRequest?.followers != null &&
-                          myTripModel.myTripRequest!.followers!.isNotEmpty,
+                      visible:
+                          (myTripModel.myTripRequest?.followers != null &&
+                          myTripModel.myTripRequest!.followers!.isNotEmpty),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -179,6 +179,39 @@ class MyTripDetails extends StatelessWidget {
                                   ?.followers?[index].pickupLocation,
                               endPoint: myTripModel.myTripRequest
                                   ?.followers?[index].dropOffLocation,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Visibility(
+                      visible:
+                          (myTripModel.offer?.offerFollowers != null &&
+                          myTripModel.offer!.offerFollowers!.isNotEmpty),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.h,
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                            child: Text(
+                              getTranslated("stop_points", context),
+                              style: AppTextStyles.w600.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          ...List.generate(
+                            myTripModel.offer?.offerFollowers?.length ?? 0,
+                            (index) => MapWidget(
+                              clientName:myTripModel.offer?.offerFollowers?[index].name ??
+                                  "",
+                              gender: myTripModel.offer?.offerFollowers?[index].gender,
+                              startPoint: myTripModel.offer?.offerFollowers?[index].pickupLocation,
+                              endPoint: myTripModel.offer?.offerFollowers?[index].dropOffLocation,
                             ),
                           ),
                         ],
