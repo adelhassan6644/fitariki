@@ -32,6 +32,7 @@ class MyPendingTripCard extends StatelessWidget {
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
+
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 4.0.h),
         child: Container(

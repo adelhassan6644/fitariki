@@ -105,7 +105,7 @@ class UserCard extends StatelessWidget {
                           Row(
                             children: [
                               SizedBox(
-                                width: 50,
+                                width: 85,
                                 child: Text(
                                   name ?? "",
                                   textAlign: TextAlign.start,

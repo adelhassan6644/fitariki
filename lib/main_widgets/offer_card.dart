@@ -71,7 +71,7 @@ class OfferCard extends StatelessWidget {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 50,
+                                    width: 80,
                                     child: Text(
                                       sl<HomeProvider>().isDriver
                                           ? "${offerModel.clientModel?.firstName ?? ""} ${offerModel.clientModel?.lastName ?? ""} "

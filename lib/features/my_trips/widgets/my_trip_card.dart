@@ -86,7 +86,7 @@ class MyTripCard extends StatelessWidget {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 50,
+                                  width: 80,
                                   child: Text(
                                     isDriver
                                         ? "${myTrip.clientModel?.firstName?? myTrip.offer?.clientModel?.firstName  ?? ""} ${myTrip.clientModel?.lastName??myTrip.offer?.clientModel?.lastName ?? ""} "

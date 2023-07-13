@@ -143,7 +143,7 @@ class ProfileCard extends StatelessWidget {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 50,
+                                  width: 80,
                                   child: Text(
                                     name ?? "",
                                     textAlign: TextAlign.center,

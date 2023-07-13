@@ -20,7 +20,7 @@ class MapProvider extends ChangeNotifier {
   LocationModel? pickupLocation;
   LocationModel? dropOffLocation;
 bool isLoad=false;
-  setLocation({required LocationModel pickup, required LocationModel dropOff}) {
+  setLocation({required LocationModel pickup, required LocationModel dropOff}) async {
     isLoad=true;
     notifyListeners();
  polylineCoordinates = [];

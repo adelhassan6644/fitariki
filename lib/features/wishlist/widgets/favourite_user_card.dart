@@ -71,7 +71,7 @@ class FavouriteUserCard extends StatelessWidget {
                     Row(
                       children: [
                         SizedBox(
-                          width: 60,
+                          width: 80,
                           child: Text(
                             driver != null
                                 ? driver!.firstName ?? ""
