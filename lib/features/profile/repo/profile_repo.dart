@@ -62,6 +62,7 @@ class ProfileRepo {
 
   Future<Either<ServerFailure, Response>> getProfile() async {
     try {
+
       Response response = await dioClient.get(
         uri:
             "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",

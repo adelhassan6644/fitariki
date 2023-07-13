@@ -7,9 +7,9 @@ import '../features/maps/models/location_model.dart';
 
 class MapProvider extends ChangeNotifier {
   CameraPosition mapCameraPosition = const CameraPosition(target:
-  LatLng(24.280888, 37.987794),zoom:90.0);
+  LatLng(24.280888, 37.987794),zoom:18);
   GoogleMapController? googleMapController;
-  EdgeInsets googleMapPadding = const EdgeInsets.all(0);
+  EdgeInsets googleMapPadding = const EdgeInsets.all(10);
   Set<Polyline> gMapPolylines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
@@ -92,6 +92,7 @@ bool isLoad=false;
     }
 
     // with an id, an RGB color and the list of LatLng pairs
+
     Polyline polyline = Polyline(
       polylineId: PolylineId("poly"),
       color: ColorResources.PRIMARY_COLOR,
@@ -143,7 +144,7 @@ bool isLoad=false;
       bounds = LatLngBounds(southwest: source, northeast: destination);
     }
 
-    CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 1);
+    CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 20);
 
     return checkCameraLocation(cameraUpdate, mapController);
   }

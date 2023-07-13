@@ -130,7 +130,14 @@ class RequestDetailsProvider extends ChangeNotifier {
 
       Either<ServerFailure, Response> response =
           await requestDetailsRepo.getRequestDetails(requestId: id);
-      response.fold((l) => null, (res) {
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: (l.error),
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (res) {
         if (res.data["data"]["request"] != null) {
           requestModel =
               OfferRequestDetailsModel.fromJson(res.data["data"]["request"]);

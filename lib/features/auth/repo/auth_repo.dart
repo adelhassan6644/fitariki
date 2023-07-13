@@ -43,6 +43,7 @@ class AuthRepo {
   }
 
   Future<String?> saveDeviceToken() async {
+    FirebaseMessaging.instance.subscribeToTopic(EndPoints.topic);
     String? _deviceToken;
     if(Platform.isIOS) {
       _deviceToken = await FirebaseMessaging.instance.getAPNSToken();

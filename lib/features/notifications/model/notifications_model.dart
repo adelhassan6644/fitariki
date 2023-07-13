@@ -18,7 +18,7 @@ class NotificationsModel {
 class NotificationItem {
   NotificationData? notificationData;
   bool? isRead;
-  int? id;
+  String? id;
   int? notifiableId;
 
   NotificationItem({
@@ -30,7 +30,7 @@ class NotificationItem {
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) =>
       NotificationItem(
-          id: int.tryParse(json["id"]) ?? 0,
+          id:(json["id"]) ?? "'",
           notifiableId: json["notifiable_id"],
           notificationData: json["data"] == null
               ? null

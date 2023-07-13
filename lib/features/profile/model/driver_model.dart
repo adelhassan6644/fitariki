@@ -21,7 +21,7 @@ class DriverModel {
   String? city;
   String? countryId;
   String? phone;
-  String? status;
+  int? status;
   double? rate;
   double? wallet;
   double? pendingWallet;
@@ -85,7 +85,7 @@ class DriverModel {
         identityNumber: json["id_number"],
         identityImage: json["id_image"],
         phone: json["phone"].toString(),
-        status: json["status"].toString(),
+        status: json["status"]??0,
         rate: double.tryParse(json["rate"].toString()),
         wallet: json["wallet"] == null
             ? null
