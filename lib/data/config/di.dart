@@ -97,7 +97,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProfileProvider(profileRepo: sl(), postOfferProvider: sl(), scheduleProvider: sl()));
   sl.registerLazySingleton(() => ScheduleProvider());
   sl.registerLazySingleton(() => PostOfferProvider(postOfferRepo: sl(), scheduleProvider: sl(),));
-  sl.registerLazySingleton(() => MapProvider());
+  // sl.registerLazySingleton(() => MapProvider());
   sl.registerLazySingleton(() => CalenderProvider());
   sl.registerLazySingleton(() => AddRequestProvider(addRequestRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));

@@ -31,9 +31,7 @@ class OfferDetails extends StatelessWidget {
       body: SafeArea(
         top: false,
         bottom: true,
-        child: ChangeNotifierProvider(
-          create: (_) => OfferDetailsProvider(repo: sl<OfferDetailsRepo>())
-            ..getOfferDetails(offerId: offerId),
+        child: ChangeNotifierProvider(create: (_) => OfferDetailsProvider(repo: sl<OfferDetailsRepo>())..getOfferDetails(offerId: offerId),
           child: Consumer<OfferDetailsProvider>(builder: (_, provider, child) {
             return Column(
               children: [

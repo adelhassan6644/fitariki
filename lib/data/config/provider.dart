@@ -39,7 +39,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddRequestProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<PostOfferProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<MapProvider>()),
+    // ChangeNotifierProvider(create: (_) => di.sl<MapProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<CalenderProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyTripsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocationProvider>()),
