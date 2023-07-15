@@ -54,11 +54,56 @@ abstract class CupertinoPopUpHelper {
             CupertinoDialogAction(
                 onPressed: onSend,
                 child: Text(
-                        getTranslated("send",
-                            CustomNavigator.navigatorState.currentContext!),
-                        style: AppTextStyles.w600.copyWith(
-                            fontSize: 17, color: ColorResources.SYSTEM_COLOR),
-                      )),
+                  getTranslated(
+                      "send", CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w600.copyWith(
+                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                )),
+          ],
+        );
+      },
+    ).then((value) => onClose);
+  }
+
+  static showCupertinoPopUp(
+      {required String title,
+      required String description,
+      String? textButton,
+      Function()? onConfirm,
+      Function()? onClose}) {
+    showDialog(
+      context: CustomNavigator.navigatorState.currentContext!,
+      builder: (_) {
+        return CupertinoAlertDialog(
+          title: Center(child: Text(title)),
+          content:  Text(
+            description,
+            style: AppTextStyles.w400.copyWith(fontSize: 13),
+          ),
+          actions: [
+            CupertinoDialogAction(
+                onPressed: () {
+                  if (onClose != null) {
+                    onClose();
+                  } else {
+                    CustomNavigator.pop();
+                  }
+                },
+                child: Text(
+                  getTranslated(
+                      "cancel", CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w400.copyWith(
+                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                )),
+            CupertinoDialogAction(
+                onPressed: onConfirm,
+                child: Text(
+                  textButton ??
+                      getTranslated("send",
+                          CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w600.copyWith(
+                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                )),
           ],
         );
       },
