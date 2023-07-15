@@ -116,8 +116,7 @@ class MapWidget extends StatelessWidget {
                               ),
                               MarqueeWidget(
                                 child: Text(
-                                  startPoint?.address ??
-                                      "Al Munsiyah، طريق الامير محمد بن سلمـ...",
+                                  startPoint?.address ?? "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
@@ -200,8 +199,7 @@ class MapWidget extends StatelessWidget {
                               ),
                               MarqueeWidget(
                                 child: Text(
-                                  endPoint?.address ??
-                                      "Al Maliyah، طريق الامير محمد بن سلمـ...",
+                                  endPoint?.address ?? "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
