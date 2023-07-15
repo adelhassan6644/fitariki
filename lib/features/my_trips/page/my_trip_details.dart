@@ -119,14 +119,12 @@ class MyTripDetails extends StatelessWidget {
                       startPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.pickupLocation ??
                               myTripModel.offer?.clientModel?.pickupLocation ??
-                              myTripModel
-                                  .myTripRequest?.clientModel?.pickupLocation
+                              myTripModel.myTripRequest?.clientModel?.pickupLocation
                           : myTripModel.offer?.pickupLocation,
                       endPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.dropOffLocation ??
                               myTripModel.offer?.clientModel?.dropOffLocation ??
-                              myTripModel
-                                  .myTripRequest?.clientModel?.dropOffLocation
+                              myTripModel.myTripRequest?.clientModel?.dropOffLocation
                           : myTripModel.offer?.dropOffLocation,
                     ),
 

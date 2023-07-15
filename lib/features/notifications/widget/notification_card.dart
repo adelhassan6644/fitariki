@@ -38,17 +38,18 @@ class _NotificationCardState extends State<NotificationCard> {
         ),
       ),
       onDismissed: (_) {
-        // sl<NotificationsProvider>()
-        //     .deleteNotification(widget.notificationItem.id);
+        sl<NotificationsProvider>()
+            .deleteNotification(widget.notificationItem.id);
       },
       child: InkWell(
         onTap: () {
           if(widget.notificationItem.notificationData!.routName!=null) {
+
             CustomNavigator.push(widget.notificationItem.notificationData!.routName!,
-                arguments: widget.notificationItem.notificationData!.id! ,replace: true);
+                arguments: widget.notificationItem.notificationData!.id! ,);
           }
-          // sl<NotificationsProvider>()
-          //     .readNotification(widget.notificationItem.id);
+          sl<NotificationsProvider>()
+              .readNotification(widget.notificationItem.id);
           setState(() => widget.notificationItem.isRead = true);
         },
         child: Container(

@@ -652,6 +652,7 @@ class ProfileProvider extends ChangeNotifier {
   getProfile() async {
     isLoading = true;
     notifyListeners();
+
     Either<ServerFailure, Response> response = await profileRepo.getProfile();
     response.fold((l) => null, (response) {
       profileModel = ProfileModel.fromJson(response.data['data']);
