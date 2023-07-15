@@ -65,7 +65,7 @@ class ClientModel {
         city: json["city"],
         countryId: json["country_id"].toString(),
         phone: json["phone"].toString(),
-        status: json["status"].toString(),
+        status: json["status"] != null ?  json["status"].toString():null,
         rate: double.tryParse(json["rate"].toString()),
         wallet: double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null

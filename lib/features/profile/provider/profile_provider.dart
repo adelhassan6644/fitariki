@@ -128,6 +128,7 @@ class ProfileProvider extends ChangeNotifier {
   int reservationCount = 0;
   int requestsCount = 0;
   String? lastUpdate;
+  String? status;
 
   String? image;
   TextEditingController firstName = TextEditingController();
@@ -704,6 +705,7 @@ class ProfileProvider extends ChangeNotifier {
           DateTime.now();
     }
 
+    status = profileModel?.client?.status;
     startLocation = profileModel?.client?.pickupLocation;
     endLocation = profileModel?.client?.dropOffLocation;
     nationality = profileModel?.client?.national;
@@ -724,6 +726,7 @@ class ProfileProvider extends ChangeNotifier {
 
   initDriverData() {
     scheduleProvider.selectedDays = profileModel?.driver?.driverDays ?? [];
+    status = profileModel?.driver?.status;
 
     if (scheduleProvider.selectedDays.isNotEmpty) {
       startTime = Methods.convertStringToTime(

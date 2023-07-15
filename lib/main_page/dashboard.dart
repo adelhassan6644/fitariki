@@ -6,11 +6,11 @@ import 'package:fitariki/main_page/widget/nav_bar_bar.dart';
 import 'package:provider/provider.dart';
 import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/svg_images.dart';
+import '../app/core/utils/app_snack_bar.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../components/custom_show_model_bottom_sheet.dart';
 import '../data/network/netwok_info.dart';
 import '../features/auth/pages/login.dart';
-import '../features/auth/provider/firebase_auth_provider.dart';
 import '../features/home/page/home.dart';
 import '../features/more/page/more.dart';
 import '../features/my_offers/page/my_offers.dart';
@@ -82,21 +82,20 @@ class _DashBoardState extends State<DashBoard> {
                       name: getTranslated("my_trips", context),
                     ),
                   ),
-
-                  Consumer<ProfileProvider>(
-                    builder: (_,provider,child) {
-                      return Expanded(
-                        child: BottomNavBarItem(
-                          svgIcon: SvgImages.delivered,
-                          isSelected: _selectedIndex == 2,
-                          onTap: () => _setPage(2),
-                          name:  provider.isLogin?  provider.isDriver
-                              ? getTranslated("delivery_offers", context)
-                              : getTranslated("delivery_requests", context) : getTranslated("offers_or_requests", context),
-                        ),
-                      );
-                    }
-                  ),
+                  Consumer<ProfileProvider>(builder: (_, provider, child) {
+                    return Expanded(
+                      child: BottomNavBarItem(
+                        svgIcon: SvgImages.delivered,
+                        isSelected: _selectedIndex == 2,
+                        onTap: () => _setPage(2),
+                        name: provider.isLogin
+                            ? provider.isDriver
+                                ? getTranslated("delivery_offers", context)
+                                : getTranslated("delivery_requests", context)
+                            : getTranslated("offers_or_requests", context),
+                      ),
+                    );
+                  }),
                   Expanded(
                     child: BottomNavBarItem(
                       svgIcon: SvgImages.profileIcon,
@@ -110,23 +109,47 @@ class _DashBoardState extends State<DashBoard> {
                 ])),
       ),
       floatingActionButton:
-         Consumer<FirebaseAuthProvider>(builder: (_, provider, child) {
-        return  _selectedIndex ==0? FloatingActionButton(
-          onPressed: () => customShowModelBottomSheet(
-            onClose:
-                Provider.of<PostOfferProvider>(context, listen: false).reset,
-            body: provider.isLogin ? const PostOffer() : const Login(),
-          ),
-          backgroundColor: ColorResources.PRIMARY_COLOR,
-          shape: RoundedRectangleBorder(
-              side: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(100)),
-          child: const Icon(
-            Icons.add,
-            size: 24,
-            color: ColorResources.WHITE_COLOR,
-          ),
-        ) : const SizedBox();
+          Consumer<ProfileProvider>(builder: (_, provider, child) {
+        return _selectedIndex == 0
+            ? FloatingActionButton(
+                onPressed: () {
+                  if (provider.isLogin) {
+                    if (provider.isDriver && provider.status != "1") {
+                      CustomSnackBar.showSnackBar(
+                          notification: AppNotification(
+                              message: "لم يتم تفعيل حسابك بعد",
+                              isFloating: true,
+                              backgroundColor: ColorResources.IN_ACTIVE,
+                              borderColor: Colors.transparent));
+                      // showToast("لم يتم تفعيل حسابك بعد");
+                    } else {
+                      customShowModelBottomSheet(
+                        onClose: Provider.of<PostOfferProvider>(context,
+                                listen: false)
+                            .reset,
+                        body: const PostOffer(),
+                      );
+                    }
+                  } else {
+                    customShowModelBottomSheet(
+                      onClose:
+                          Provider.of<PostOfferProvider>(context, listen: false)
+                              .reset,
+                      body: const Login(),
+                    );
+                  }
+                },
+                backgroundColor: ColorResources.PRIMARY_COLOR,
+                shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(100)),
+                child: const Icon(
+                  Icons.add,
+                  size: 24,
+                  color: ColorResources.WHITE_COLOR,
+                ),
+              )
+            : const SizedBox();
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(

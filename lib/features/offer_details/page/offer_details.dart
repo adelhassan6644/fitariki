@@ -4,8 +4,11 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:fitariki/features/offer_details/repo/offer_details_repo.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
@@ -31,7 +34,9 @@ class OfferDetails extends StatelessWidget {
       body: SafeArea(
         top: false,
         bottom: true,
-        child: ChangeNotifierProvider(create: (_) => OfferDetailsProvider(repo: sl<OfferDetailsRepo>())..getOfferDetails(offerId: offerId),
+        child: ChangeNotifierProvider(
+          create: (_) => OfferDetailsProvider(repo: sl<OfferDetailsRepo>())
+            ..getOfferDetails(offerId: offerId),
           child: Consumer<OfferDetailsProvider>(builder: (_, provider, child) {
             return Column(
               children: [
@@ -80,11 +85,10 @@ class OfferDetails extends StatelessWidget {
                                       .join(", "),
                                   duration: provider.offerDetails!.duration
                                       .toString(),
-                                  rate:provider.isDriver
-                                      ? provider.offerDetails!.clientModel
-                                      ?.rate
-                                      : provider.offerDetails!.driverModel
-                                      ?.rate ,
+                                  rate: provider.isDriver
+                                      ? provider.offerDetails!.clientModel?.rate
+                                      : provider
+                                          .offerDetails!.driverModel?.rate,
                                   priceRange:
                                       "${provider.offerDetails!.minPrice.toString()} : ${provider.offerDetails!.maxPrice.toString()} ريال",
                                   timeRange: provider
@@ -148,15 +152,29 @@ class OfferDetails extends StatelessWidget {
                                 context),
                         onTap: () async {
                           if (provider.offerDetails?.isSentOffer != true) {
-                            customShowModelBottomSheet(
-                                onClose: () => sl<AddRequestProvider>().reset(),
-                                body: provider.isLogin
-                                    ? AddRequest(
-                                        name: provider.offerDetails?.name ?? "",
-                                        offer: provider.offerDetails!,
-                                        isCaptain: provider.isDriver,
-                                      )
-                                    : const Login());
+                            if (provider.isDriver &&
+                                sl<ProfileProvider>().status != "1") {
+                              CustomSnackBar.showSnackBar(
+                                  notification: AppNotification(
+                                      message: "لم يتم تفعيل حسابك بعد",
+                                      isFloating: true,
+                                      backgroundColor: ColorResources.IN_ACTIVE,
+                                      borderColor: Colors.transparent));
+
+                              // showToast("لم يتم تفعيل حسابك بعد");
+                            } else {
+                              customShowModelBottomSheet(
+                                  onClose: () =>
+                                      sl<AddRequestProvider>().reset(),
+                                  body: provider.isLogin
+                                      ? AddRequest(
+                                          name:
+                                              provider.offerDetails?.name ?? "",
+                                          offer: provider.offerDetails!,
+                                          isCaptain: provider.isDriver,
+                                        )
+                                      : const Login());
+                            }
                           }
                         }),
                   ),
