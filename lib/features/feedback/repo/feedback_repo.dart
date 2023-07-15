@@ -13,6 +13,10 @@ class FeedbackRepo {
 
   FeedbackRepo({required this.dioClient, required this.sharedPreferences});
 
+  bool isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
   Future<Either<ServerFailure, Response>> sendFeedback(
       {required int offerId,
       required int userId,
@@ -31,7 +35,6 @@ class FeedbackRepo {
           queryParameters: {
             "rating": rating,
             "feedback": feedback,
-
             if (!isDriver) "client_id": userId,
             if (isDriver) "driver_id": userId,
           });
@@ -50,6 +53,30 @@ class FeedbackRepo {
       Response response = await dioClient.get(
         uri:
             "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getFeedback}/${sharedPreferences.getString(AppStorageKey.userId)}",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
+  Future<Either<ServerFailure, Response>> getReviews(id, isOffer) async {
+    try {
+      String? type;
+      if (isDriver()) {
+        type = "client";
+      }
+      else {
+        type = "driver";
+      }
+      Response response = await dioClient.get(
+        uri: isOffer
+            ? "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getOfferFeedback}/$id"
+            : "$type/${EndPoints.getFeedback}/$id",
       );
       if (response.statusCode == 200) {
         return Right(response);

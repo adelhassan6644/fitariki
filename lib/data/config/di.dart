@@ -31,7 +31,7 @@ import '../../features/post_offer/provider/post_offer_provider.dart';
 import '../../features/post_offer/repo/post_offer_repo.dart';
 import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
-import '../../features/feedback/provider/feedback_provider.dart';
+import '../../features/feedback/provider/main_feedback_provider.dart';
 import '../../features/feedback/repo/feedback_repo.dart';
 import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
@@ -113,7 +113,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserProfileProvider(userProfileRepo: sl(),));
   sl.registerLazySingleton(() => FollowersProvider(followersRepo: sl(),));
   sl.registerLazySingleton(() => RequestDetailsProvider(requestDetailsRepo: sl(),));
-  sl.registerLazySingleton(() => FeedbackProvider(feedbackRepo: sl(),));
+  sl.registerLazySingleton(() => SendFeedbackProvider(feedbackRepo: sl(),));
   sl.registerLazySingleton(() => PaymentProvider(paymentRepo: sl()));
   sl.registerLazySingleton(() => ReportProvider(reportRepo: sl()));
   sl.registerLazySingleton(() => TermsProvider(termsRepo: sl()));

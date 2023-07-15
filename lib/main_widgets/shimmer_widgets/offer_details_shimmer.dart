@@ -32,10 +32,13 @@ class OfferDetailsShimmer extends StatelessWidget {
               radius: 8,
             ),
           ),
-          const MapWidgetShimmer(),
+          MapWidgetShimmer(
+            withStops: isDriver,
+          ),
           const DistanceWidgetShimmer(),
-          if (!isDriver)
-            Padding(
+          Visibility(
+            visible: !isDriver,
+            child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
               child: Column(
@@ -111,7 +114,13 @@ class OfferDetailsShimmer extends StatelessWidget {
                 ],
               ),
             ),
-          if (!isDriver) const ReviewWidgetShimmer()
+          ),
+          Visibility(
+              visible: isDriver,
+              child: MapWidgetShimmer(
+                withClientName: isDriver,
+              )),
+          Visibility(visible: !isDriver, child: const ReviewWidgetShimmer()),
         ],
       ),
     );

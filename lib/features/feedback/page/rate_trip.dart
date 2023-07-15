@@ -14,7 +14,7 @@ import '../../../components/custom_button.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../data/config/di.dart';
-import '../provider/feedback_provider.dart';
+import '../provider/main_feedback_provider.dart';
 
 class RateTrip extends StatelessWidget {
   const RateTrip({required this.data, Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class RateTrip extends StatelessWidget {
               withBorder: true,
             ),
             Expanded(
-              child: Consumer<FeedbackProvider>(builder: (_, provider, child) {
+              child: Consumer<SendFeedbackProvider>(builder: (_, provider, child) {
                 return SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(

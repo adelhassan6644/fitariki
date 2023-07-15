@@ -24,7 +24,7 @@ import '../../add_request/provider/add_request_provider.dart';
 import '../../auth/pages/login.dart';
 import '../provider/offer_details_provider.dart';
 import '../widgets/car_details.dart';
-import '../widgets/reviews_widget.dart';
+import '../../../main_widgets/reviews_widget.dart';
 
 class OfferDetails extends StatelessWidget {
   final int offerId;
@@ -51,7 +51,6 @@ class OfferDetails extends StatelessWidget {
                     ? Expanded(
                         child: ListAnimator(
                           data: [
-
                             ///user card
                             Container(
                                 color: ColorResources.APP_BAR_BACKGROUND_COLOR,
@@ -103,9 +102,13 @@ class OfferDetails extends StatelessWidget {
                             /// Map View
                             MapWidget(
                               stopPoints: provider.isDriver &&
-                                  provider.offerDetails?.offerFollowers != null &&
-                                  provider.offerDetails!.offerFollowers!.isNotEmpty?
-                              provider.offerDetails!.offerFollowers!.length:null,
+                                      provider.offerDetails?.offerFollowers !=
+                                          null &&
+                                      provider.offerDetails!.offerFollowers!
+                                          .isNotEmpty
+                                  ? provider
+                                      .offerDetails!.offerFollowers!.length
+                                  : null,
                               startPoint: provider.offerDetails!.pickupLocation,
                               endPoint: provider.offerDetails!.dropOffLocation,
                             ),
@@ -130,8 +133,10 @@ class OfferDetails extends StatelessWidget {
                             /// to show stop points for followers of offer details if driver
                             Visibility(
                               visible: provider.isDriver &&
-                                  provider.offerDetails?.offerFollowers != null &&
-                                  provider.offerDetails!.offerFollowers!.isNotEmpty,
+                                  provider.offerDetails?.offerFollowers !=
+                                      null &&
+                                  provider
+                                      .offerDetails!.offerFollowers!.isNotEmpty,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -140,7 +145,7 @@ class OfferDetails extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(
                                         vertical: 8.h,
                                         horizontal:
-                                        Dimensions.PADDING_SIZE_DEFAULT.w),
+                                            Dimensions.PADDING_SIZE_DEFAULT.w),
                                     child: Text(
                                       getTranslated("stop_points", context),
                                       style: AppTextStyles.w600.copyWith(
@@ -149,12 +154,23 @@ class OfferDetails extends StatelessWidget {
                                     ),
                                   ),
                                   ...List.generate(
-                                    provider.offerDetails?.offerFollowers?.length ?? 0,
-                                        (index) => MapWidget(
-                                      clientName:  provider.offerDetails?.offerFollowers?[index].name ?? "",
-                                      gender: provider.offerDetails?.offerFollowers?[index].gender,
-                                      startPoint:  provider.offerDetails?.offerFollowers?[index].pickupLocation,
-                                      endPoint: provider.offerDetails?.offerFollowers?[index].dropOffLocation,
+                                    provider.offerDetails?.offerFollowers
+                                            ?.length ??
+                                        0,
+                                    (index) => MapWidget(
+                                      clientName: provider.offerDetails
+                                              ?.offerFollowers?[index].name ??
+                                          "",
+                                      gender: provider.offerDetails
+                                          ?.offerFollowers?[index].gender,
+                                      startPoint: provider
+                                          .offerDetails
+                                          ?.offerFollowers?[index]
+                                          .pickupLocation,
+                                      endPoint: provider
+                                          .offerDetails
+                                          ?.offerFollowers?[index]
+                                          .dropOffLocation,
                                     ),
                                   ),
                                 ],
@@ -163,13 +179,19 @@ class OfferDetails extends StatelessWidget {
 
                             /// to show car data if client
                             Visibility(
-                                visible: !provider.isDriver,
-                                child: CarDetails(
-                                  carInfo:
-                                      provider.offerDetails?.driverModel?.carInfo,
-                                ),
+                              visible: !provider.isDriver,
+                              child: CarDetails(
+                                carInfo:
+                                    provider.offerDetails?.driverModel?.carInfo,
                               ),
-                            if (!provider.isDriver) const ReviewsWidget()
+                            ),
+                            Visibility(
+                              visible: !provider.isDriver,
+                              child: ReviewsWidget(
+                                id: offerId,
+                                isOffer: true,
+                              ),
+                            )
                           ],
                         ),
                       )
@@ -205,7 +227,8 @@ class OfferDetails extends StatelessWidget {
                                 sl<ProfileProvider>().status != "1") {
                               CustomSnackBar.showSnackBar(
                                   notification: AppNotification(
-                                      message: "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
+                                      message:
+                                          "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                                       isFloating: true,
                                       backgroundColor: ColorResources.IN_ACTIVE,
                                       borderColor: Colors.transparent));

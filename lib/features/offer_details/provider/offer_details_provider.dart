@@ -25,7 +25,6 @@ class OfferDetailsProvider extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      getOfferFeedback(offerId);
       Either<ServerFailure, Response> response = await repo.getOfferDetails(
         offerId: offerId,
       );
@@ -43,38 +42,6 @@ class OfferDetailsProvider extends ChangeNotifier {
               backgroundColor: ColorResources.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  bool isGetting = false;
-  FeedbackModel? offerFeedback;
-  getOfferFeedback(id) async {
-    try {
-      isGetting = true;
-      notifyListeners();
-      Either<ServerFailure, Response> response =
-          await repo.getOfferFeedback(id);
-      response.fold((fail) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: fail.error,
-                isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
-                borderColor: Colors.transparent));
-      }, (res) {
-        offerFeedback = FeedbackModel.fromJson(res.data);
-      });
-      isGetting = false;
-      notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isGetting = false;
       notifyListeners();
     }
   }

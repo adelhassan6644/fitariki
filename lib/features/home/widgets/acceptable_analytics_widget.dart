@@ -32,7 +32,8 @@ class AcceptableAnalytics extends StatelessWidget {
                     customShowModelBottomSheet(body: const Login());
                   },
                   title: "نسبة التوافق",
-                  description: "تظهر نسبة التوافق بعد تسجيل الدخول و اكمال بيانات وجهة العمل/الدوام (الوجهه النهائية)");
+                  description:
+                      "تظهر نسبة التوافق بعد تسجيل الدخول و اكمال بيانات وجهة العمل/الدوام (الوجهه النهائية)");
             }
           },
           child: Stack(

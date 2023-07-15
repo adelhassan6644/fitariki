@@ -13,6 +13,7 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/reviews_widget.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../navigation/routes.dart';
 import '../../maps/provider/location_provider.dart';
@@ -198,11 +199,18 @@ class UserProfile extends StatelessWidget {
                             : provider.userOffers!.offers!.length,
                         (index) => UserOfferCard(
                             offerModel: provider.userOffers!.offers![index])),
+
                   SizedBox(
                     height: 8.h,
-                  )
+                  ),
+
+                  ReviewsWidget(
+                    id: userId,
+                    isOffer: false,
+                  ),
                 ]),
-              )
+              ),
+
             ],
           );
         }),

@@ -270,5 +270,7 @@
   "there_is_no_offers_add_new_offer": "There is no offer \n Add new offer",
   "there_is_no_requests_add_new_request":  "There is no requests \n Add new requests",
   "waiting_for_client_replay": "Waiting for the client's reply",
-  "waiting_for_driver_replay": "Waiting for the captain's reply"
+  "waiting_for_driver_replay": "Waiting for the captain's reply",
+  "there_is_no_feedbacks_for_this_captain": "There is no feedbacks for this captain",
+  "there_is_no_feedbacks_for_this_client": "There is no feedbacks for this client"
 }

@@ -1,6 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
-import 'package:fitariki/features/feedback/provider/feedback_provider.dart';
+import 'package:fitariki/features/feedback/provider/main_feedback_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -26,7 +26,7 @@ class FeedbackView extends StatelessWidget {
                   ? getTranslated("clients_evaluation", context)
                   : getTranslated("captain_evaluation", context),
             ),
-            Consumer<FeedbackProvider>(builder: (_, provider, child) {
+            Consumer<SendFeedbackProvider>(builder: (_, provider, child) {
               return provider.isLoading
                   ? Expanded(
                       child: ListView(
@@ -48,7 +48,7 @@ class FeedbackView extends StatelessWidget {
                       child: RefreshIndicator(
                         color: ColorResources.PRIMARY_COLOR,
                         onRefresh: () async {
-                          sl<FeedbackProvider>().getFeedback();
+                          sl<SendFeedbackProvider>().getFeedback();
                         },
                         child: ListView(
                           padding: EdgeInsets.symmetric(

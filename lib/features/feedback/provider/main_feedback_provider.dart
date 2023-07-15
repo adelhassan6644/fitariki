@@ -9,9 +9,9 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/failures.dart';
 import '../repo/feedback_repo.dart';
 
-class FeedbackProvider extends ChangeNotifier {
+class SendFeedbackProvider extends ChangeNotifier {
   final FeedbackRepo feedbackRepo;
-  FeedbackProvider({
+  SendFeedbackProvider({
     required this.feedbackRepo,
   }) {
     ratting = -1;
