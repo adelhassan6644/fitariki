@@ -117,7 +117,7 @@ class _DashBoardState extends State<DashBoard> {
                     if (provider.isDriver && provider.status != "1") {
                       CustomSnackBar.showSnackBar(
                           notification: AppNotification(
-                              message: "لم يتم تفعيل حسابك بعد",
+                              message: "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                               isFloating: true,
                               backgroundColor: ColorResources.IN_ACTIVE,
                               borderColor: Colors.transparent));
