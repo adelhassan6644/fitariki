@@ -61,8 +61,8 @@ class FirebaseAuthRepo {
   Future<Either<ServerFailure, Response>> sendDeviceToken({required String phone, required String role}) async {
     try {
       Response res = await dioClient.post(
-        // data: {"fcm_token": await getFcmToken(), "phone": phone},
-        data: { "phone": phone},
+        data: {"fcm_token": await getFcmToken(), "phone": phone},
+        // data: { "phone": phone},
         uri: "$role/${EndPoints.logIn}",);
       if (res.statusCode == 200) {
         return Right(res);

@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                                   controller: provider.phoneTEC,
                                   hint: "5xxxxxxxx",
                                   inputType: TextInputType.phone,
-                                  valid: Validations.phone,
+                                  valid:(v)=> Validations.phone(v,provider.countryCode.trim()),
                                 ),
                               ),
                               const SizedBox(

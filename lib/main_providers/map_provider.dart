@@ -37,7 +37,7 @@ bool isLoad=false;
     googleMapController = controller;
     notifyListeners();
 
-    //start listening to user current location
+
 
     setSourceAndDestinationIcons();
   }
@@ -114,7 +114,7 @@ bool isLoad=false;
     await updateCameraLocation(
       pickupLocationLatLng,
       dropoffLocationLatLng,
-      googleMapController!,
+      googleMapController,
     );
     //
     notifyListeners();
@@ -123,7 +123,7 @@ bool isLoad=false;
   Future<void> updateCameraLocation(
     LatLng source,
     LatLng destination,
-    GoogleMapController mapController,
+    GoogleMapController? mapController,
   ) async {
     if (mapController == null) return;
 

@@ -114,7 +114,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                       request: provider.myOfferDetails!
                                           .offerRequests![index],
                                     )),
-                          if (provider.myOfferDetails!.offerRequests == null ||
+                          if (provider.myOfferDetails?.offerRequests == null ||
                               provider.myOfferDetails!.offerRequests!.isEmpty)
                             EmptyState(
                                 txt: sl.get<ProfileProvider>().isDriver

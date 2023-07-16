@@ -44,7 +44,7 @@ class ReviewsWidget extends StatelessWidget {
                                 child: Text(
                                   isOffer
                                       ? getTranslated("display_stats", context)
-                                      : provider.isDriver
+                                      : !provider.isDriver
                                           ? getTranslated(
                                                   "clients_evaluation", context)
                                               .replaceAll("لي", "")
@@ -112,7 +112,7 @@ class ReviewsWidget extends StatelessWidget {
                                 ),
                                 Text(
                                   getTranslated(
-                                      provider.isDriver
+                                      !provider.isDriver
                                           ? "there_is_no_feedbacks_for_this_captain"
                                           : "there_is_no_feedbacks_for_this_client",
                                       context),

@@ -81,7 +81,7 @@ class RequestCard extends StatelessWidget {
                                         child: Text(
                                           sl.get<ProfileProvider>().isDriver
                                               ? request!
-                                                      .clientModel!.firstName ??
+                                                      .clientModel?.firstName ??
                                                   ""
                                               : request!
                                                       .driverModel!.firstName ??

@@ -67,8 +67,10 @@ class FirebaseAuthProvider extends ChangeNotifier {
 
   signInWithMobileNo({bool? fromVerification}) async {
     try {
+
       _isLoading = true;
       notifyListeners();
+
       await FirebaseAuth.instance.verifyPhoneNumber(
           phoneNumber: "$countryPhoneCode${_phoneTEC.text.trim()}",
           timeout: const Duration(seconds: 60),

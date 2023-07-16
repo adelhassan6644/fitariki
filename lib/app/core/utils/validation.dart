@@ -20,13 +20,15 @@ class Validations {
     }
   }
 
-  static String? phone(String? value) {
-    if (value!.isEmpty || value.length < 7) {
+  static String? phone(String? value,String? country) {
+    if (value!.length < 8 ) {
       return getTranslated("please_enter_valid_number",
           CustomNavigator.navigatorState.currentContext!);
-    } else {
-      return null;
+    } else if(country?.trim() == "SA" && (value?[0] != "5" || value?[0] != "0")){
+      return getTranslated("please_enter_valid_number",
+          CustomNavigator.navigatorState.currentContext!);
     }
+    return null;
   }
 
   static String? bankAccount(String? value) {
