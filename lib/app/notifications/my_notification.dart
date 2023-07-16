@@ -19,7 +19,7 @@ abstract class FirebaseNotifications {
     _channel = const AndroidNotificationChannel(
       'high_importance_channel',
       'High Importance Notifications',
-      'This channel is used for important notifications.',
+      // 'This channel is used for important notifications.',
       importance: Importance.high,
     );
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
@@ -58,7 +58,7 @@ abstract class FirebaseNotifications {
           android: AndroidNotificationDetails(
             _channel!.id,
             _channel!.name,
-            _channel!.description,
+            // _channel!.description,
             icon: '@drawable/notification_icon',
           ),
         ),
@@ -84,7 +84,7 @@ abstract class FirebaseNotifications {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         'your channel id',
         'your channel name',
-        'This channel is used for important notifications.',
+        // 'This channel is used for important notifications.',
         importance: Importance.high,
         priority: Priority.high,
         ticker: 'ticker');
