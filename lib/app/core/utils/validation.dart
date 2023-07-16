@@ -24,7 +24,7 @@ class Validations {
     if (value!.length < 8 ) {
       return getTranslated("please_enter_valid_number",
           CustomNavigator.navigatorState.currentContext!);
-    } else if(country?.trim() == "SA" && (value?[0] != "5" || value?[0] != "0")){
+    } else if(country?.trim() == "SA" && (value[0] != "5" && value[0] != "0")){
       return getTranslated("please_enter_valid_number",
           CustomNavigator.navigatorState.currentContext!);
     }

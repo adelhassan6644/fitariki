@@ -19,21 +19,34 @@ abstract class FirebaseNotifications {
     _channel = const AndroidNotificationChannel(
       'high_importance_channel',
       'High Importance Notifications',
+      'This channel is used for important notifications.',
       importance: Importance.high,
-      description: 'This channel is used for important notifications.',
     );
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     _firebaseMessaging = FirebaseMessaging.instance;
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    _flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, badge: true, sound: true);
-    _flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(_channel!);
+    _flutterLocalNotificationsPlugin!
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(alert: true, badge: true, sound: true);
+    _flutterLocalNotificationsPlugin!
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(_channel!);
     _flutterLocalNotificationsPlugin!.initialize(const InitializationSettings(
       android: AndroidInitializationSettings('@drawable/notification_icon'),
-      iOS: IOSInitializationSettings(defaultPresentBadge: true, defaultPresentAlert: true, defaultPresentSound: true),
+      iOS: IOSInitializationSettings(
+          defaultPresentBadge: true,
+          defaultPresentAlert: true,
+          defaultPresentSound: true),
     ));
     _firebaseMessaging!.setAutoInitEnabled(true);
-    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
-    if (Platform.isIOS) _firebaseMessaging!.requestPermission(alert: true, announcement: true, badge: true, sound: true);
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+        alert: true, badge: true, sound: true);
+    if (Platform.isIOS) {
+      _firebaseMessaging!.requestPermission(
+          alert: true, announcement: true, badge: true, sound: true);
+    }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       log('Handling on message ${message.data}');
@@ -45,8 +58,8 @@ abstract class FirebaseNotifications {
           android: AndroidNotificationDetails(
             _channel!.id,
             _channel!.name,
+            _channel!.description,
             icon: '@drawable/notification_icon',
-            channelDescription: _channel!.description,
           ),
         ),
       );
@@ -54,21 +67,24 @@ abstract class FirebaseNotifications {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       log('Handling message open app ${message.data}');
     });
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message){
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
       log('Handling initial message  ${message?.data}');
     });
-    _flutterLocalNotificationsPlugin!.getNotificationAppLaunchDetails().then((value){
+    _flutterLocalNotificationsPlugin!
+        .getNotificationAppLaunchDetails()
+        .then((value) {
       log('Handling if local notification launch app  ${value!.payload}');
     });
-
-
-
-
   }
-  static scheduleNotification(String title, String subtitle) async{
+
+  static scheduleNotification(String title, String subtitle) async {
     var rng = math.Random();
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-        'your channel id', 'your channel name',
+        'your channel id',
+        'your channel name',
+        'This channel is used for important notifications.',
         importance: Importance.high,
         priority: Priority.high,
         ticker: 'ticker');
@@ -81,5 +97,3 @@ abstract class FirebaseNotifications {
         payload: 'item x');
   }
 }
-
-
