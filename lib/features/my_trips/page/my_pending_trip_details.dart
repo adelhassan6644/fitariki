@@ -140,20 +140,16 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                   ? provider.requestModel?.followers?.length ??
                                       0
                                   : null,
-                              startPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
+                              startPoint:  provider.requestModel?.clientModel
                                           ?.pickupLocation ??
                                       provider.requestModel?.offer?.clientModel
                                           ?.pickupLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
-                              endPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
+                                ,
+                              endPoint:  provider.requestModel?.clientModel
                                           ?.dropOffLocation ??
                                       provider.requestModel?.offer?.clientModel
                                           ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.dropOffLocation,
+                              ,
                             ),
 
                             ///distance between client and driver
@@ -190,7 +186,18 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                     : provider.requestModel?.offer
                                             ?.pickupLocation?.longitude ??
                                         "0"),
-
+                            if(provider.requestModel!.offer!.offerFollowers!.isNotEmpty)
+                            ...List.generate(
+                              provider.requestModel?.offer?.offerFollowers?.length??
+                                  0,
+                                  (index) => MapWidget(
+                                clientName:  provider.requestModel?.offer?.offerFollowers?[index].name ??
+                                    "",
+                                gender:   provider.requestModel?.offer?.offerFollowers?[index].gender,
+                                startPoint:   provider.requestModel?.offer?.offerFollowers?[index].pickupLocation,
+                                endPoint:   provider.requestModel?.offer?.offerFollowers?[index].dropOffLocation,
+                              ),
+                            ),
                             /// to show stop points for followers request if driver
                             Visibility(
                               visible: provider.isDriver &&

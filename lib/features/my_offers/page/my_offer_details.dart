@@ -66,6 +66,18 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                             startPoint: provider.myOfferDetails?.pickupLocation,
                             endPoint: provider.myOfferDetails?.dropOffLocation,
                           ),
+                          if(provider.myOfferDetails!.offerFollowers!.isNotEmpty)
+                            ...List.generate(
+                              provider.myOfferDetails?.offerFollowers?.length??
+                                  0,
+                                  (index) => MapWidget(
+                                clientName: provider.myOfferDetails?.offerFollowers?[index].name ??
+                                    "",
+                                gender:   provider.myOfferDetails?.offerFollowers?[index].gender,
+                                startPoint:   provider.myOfferDetails?.offerFollowers?[index].pickupLocation,
+                                endPoint:   provider.myOfferDetails?.offerFollowers?[index].dropOffLocation,
+                              ),
+                            ),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,

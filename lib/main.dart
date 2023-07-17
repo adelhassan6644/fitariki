@@ -25,7 +25,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseNotifications.init();
+ await FirebaseNotifications.init();
   await di.init();
   runApp(
       MultiProvider(providers: ProviderList.providers, child: const MyApp()));

@@ -83,7 +83,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         CustomNavigator.pop();
                       },
                       child: SizedBox(
-                        width: actionWidth ?? 18,
+                        width: actionWidth ?? 30,
                         child:  Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

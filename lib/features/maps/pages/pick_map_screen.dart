@@ -62,7 +62,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                     .currentLocation!.latitude!),
                 double.parse(Provider.of<LocationProvider>(context, listen: false)
                     .currentLocation!.longitude!)),
-            zoom: 10),
+            zoom: 16),
       ));
     }
   }
@@ -221,7 +221,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                                   .currentLocation!.latitude!),
                               double.parse(locationController
                                   .currentLocation!.longitude!)),
-                          zoom: 10),
+                          zoom: 16),
                     ));
                   },
                   child: Icon(
