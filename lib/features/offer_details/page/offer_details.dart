@@ -100,6 +100,7 @@ class OfferDetails extends StatelessWidget {
 
                             /// Map View
                             MapWidget(
+                              launchMap: false,
                               stopPoints: provider.isDriver &&
                                       provider.offerDetails?.offerFollowers !=
                                           null &&
@@ -157,6 +158,7 @@ class OfferDetails extends StatelessWidget {
                                             ?.length ??
                                         0,
                                     (index) => MapWidget(
+                                      launchMap: false,
                                       clientName: provider.offerDetails
                                               ?.offerFollowers?[index].name ??
                                           "",

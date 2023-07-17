@@ -21,12 +21,14 @@ class MapWidget extends StatelessWidget {
       this.endPoint,
       this.stopPoints,
       this.clientName,
+      this.launchMap = true,
       this.gender,
       Key? key})
       : super(key: key);
   final LocationModel? startPoint, endPoint;
   final int? stopPoints, gender;
   final String? clientName;
+  final bool launchMap;
 
   @override
   Widget build(BuildContext context) {
@@ -76,32 +78,38 @@ class MapWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: InkWell(
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           onTap: () async {
-                            bool? isActive =
-                                await mapLunch.MapLauncher.isMapAvailable(
-                                    mapLunch.MapType.google);
-                            bool? isAppleActive =
-                                await mapLunch.MapLauncher.isMapAvailable(
-                                    mapLunch.MapType.apple);
-                            if (isActive!) {
-                              await mapLunch.MapLauncher.showDirections(
-                                mapType: mapLunch.MapType.google,
-                                destination: mapLunch.Coords(
-                                  double.parse(startPoint!.latitude!),
-                                  double.parse(startPoint!.longitude!),
-                                ),
-                                destinationTitle: startPoint!.address,
-                              );
-                            } else if (isAppleActive!) {
-                              await mapLunch.MapLauncher.showDirections(
-                                // mapType: MapType.apple,
-                                destination: mapLunch.Coords(
-                                  double.parse(startPoint!.latitude!),
-                                  double.parse(startPoint!.longitude!),
-                                ),
-                                destinationTitle: startPoint!.address,
-                                mapType: mapLunch.MapType.apple,
-                              );
+                            if (launchMap) {
+                              bool? isActive =
+                                  await mapLunch.MapLauncher.isMapAvailable(
+                                      mapLunch.MapType.google);
+                              bool? isAppleActive =
+                                  await mapLunch.MapLauncher.isMapAvailable(
+                                      mapLunch.MapType.apple);
+                              if (isActive!) {
+                                await mapLunch.MapLauncher.showDirections(
+                                  mapType: mapLunch.MapType.google,
+                                  destination: mapLunch.Coords(
+                                    double.parse(startPoint!.latitude!),
+                                    double.parse(startPoint!.longitude!),
+                                  ),
+                                  destinationTitle: startPoint!.address,
+                                );
+                              } else if (isAppleActive!) {
+                                await mapLunch.MapLauncher.showDirections(
+                                  // mapType: MapType.apple,
+                                  destination: mapLunch.Coords(
+                                    double.parse(startPoint!.latitude!),
+                                    double.parse(startPoint!.longitude!),
+                                  ),
+                                  destinationTitle: startPoint!.address,
+                                  mapType: mapLunch.MapType.apple,
+                                );
+                              }
                             }
                           },
                           child: Column(
@@ -159,32 +167,38 @@ class MapWidget extends StatelessWidget {
                       if (stopPoints != null) SizedBox(width: 15.w),
                       Expanded(
                         child: InkWell(
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           onTap: () async {
-                            bool? isActive =
-                                await mapLunch.MapLauncher.isMapAvailable(
-                                    mapLunch.MapType.google);
-                            bool? isAppleActive =
-                                await mapLunch.MapLauncher.isMapAvailable(
-                                    mapLunch.MapType.apple);
-                            if (isActive!) {
-                              await mapLunch.MapLauncher.showDirections(
-                                mapType: mapLunch.MapType.google,
-                                destination: mapLunch.Coords(
-                                  double.parse(endPoint!.latitude!),
-                                  double.parse(endPoint!.longitude!),
-                                ),
-                                destinationTitle: endPoint!.address,
-                              );
-                            } else if (isAppleActive!) {
-                              await mapLunch.MapLauncher.showDirections(
-                                // mapType: MapType.apple,
-                                destination: mapLunch.Coords(
-                                  double.parse(endPoint!.latitude!),
-                                  double.parse(endPoint!.longitude!),
-                                ),
-                                destinationTitle: endPoint!.address,
-                                mapType: mapLunch.MapType.apple,
-                              );
+                            if (launchMap) {
+                              bool? isActive =
+                                  await mapLunch.MapLauncher.isMapAvailable(
+                                      mapLunch.MapType.google);
+                              bool? isAppleActive =
+                                  await mapLunch.MapLauncher.isMapAvailable(
+                                      mapLunch.MapType.apple);
+                              if (isActive!) {
+                                await mapLunch.MapLauncher.showDirections(
+                                  mapType: mapLunch.MapType.google,
+                                  destination: mapLunch.Coords(
+                                    double.parse(endPoint!.latitude!),
+                                    double.parse(endPoint!.longitude!),
+                                  ),
+                                  destinationTitle: endPoint!.address,
+                                );
+                              } else if (isAppleActive!) {
+                                await mapLunch.MapLauncher.showDirections(
+                                  // mapType: MapType.apple,
+                                  destination: mapLunch.Coords(
+                                    double.parse(endPoint!.latitude!),
+                                    double.parse(endPoint!.longitude!),
+                                  ),
+                                  destinationTitle: endPoint!.address,
+                                  mapType: mapLunch.MapType.apple,
+                                );
+                              }
                             }
                           },
                           child: Column(

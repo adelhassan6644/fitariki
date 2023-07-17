@@ -16,7 +16,7 @@ class ReviewsProvider extends ChangeNotifier {
   bool isGetting = false;
   FeedbackModel? offerFeedback;
   getReviews({required id, required bool ifOffer}) async {
-    // try {
+    try {
       isGetting = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
@@ -33,15 +33,15 @@ class ReviewsProvider extends ChangeNotifier {
       });
       isGetting = false;
       notifyListeners();
-    // } catch (e) {
-    //   // CustomSnackBar.showSnackBar(
-    //   //     notification: AppNotification(
-    //   //         message: e.toString(),
-    //   //         isFloating: true,
-    //   //         backgroundColor: ColorResources.IN_ACTIVE,
-    //   //         borderColor: Colors.transparent));
-    //   isGetting = false;
-    //   // notifyListeners();
-    // }
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isGetting = false;
+      notifyListeners();
+    }
   }
 }

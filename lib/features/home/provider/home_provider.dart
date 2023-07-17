@@ -17,7 +17,9 @@ import 'package:flutter/rendering.dart';
 class HomeProvider extends ChangeNotifier {
   HomeRepo homeRepo;
   HomeProvider({required this.homeRepo}) {
-    getOffers();
+    if(!isLogin) {
+      onSelectRole(0);
+    }
   }
 
   bool goingDown = false;

@@ -113,6 +113,7 @@ class _RequestDetailsState extends State<RequestDetails> {
 
                             /// Map View
                             MapWidget(
+                              launchMap: false,
                               stopPoints: provider.isDriver &&
                                       provider.requestModel?.followers !=
                                           null &&
@@ -181,6 +182,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     provider.requestModel?.followers?.length ??
                                         0,
                                     (index) => MapWidget(
+                                      launchMap: false,
                                       clientName: provider.requestModel
                                               ?.followers?[index].name ??
                                           "",

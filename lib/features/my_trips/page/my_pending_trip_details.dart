@@ -132,6 +132,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
 
                             /// Map View
                             MapWidget(
+                              launchMap: false,
                               stopPoints: provider.isDriver &&
                                       provider.requestModel?.followers !=
                                           null &&
@@ -191,7 +192,8 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               provider.requestModel?.offer?.offerFollowers?.length??
                                   0,
                                   (index) => MapWidget(
-                                clientName:  provider.requestModel?.offer?.offerFollowers?[index].name ??
+                                    launchMap: false,
+                                    clientName:  provider.requestModel?.offer?.offerFollowers?[index].name ??
                                     "",
                                 gender:   provider.requestModel?.offer?.offerFollowers?[index].gender,
                                 startPoint:   provider.requestModel?.offer?.offerFollowers?[index].pickupLocation,

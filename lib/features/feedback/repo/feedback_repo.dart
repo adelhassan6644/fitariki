@@ -67,9 +67,7 @@ class FeedbackRepo {
   Future<Either<ServerFailure, Response>> getReviews(id, isOffer) async {
     try {
       String? type;
-      if (isDriver()) {
-        type = "client";
-      }
+      if (isDriver()) {type = "client";}
       else {
         type = "driver";
       }
