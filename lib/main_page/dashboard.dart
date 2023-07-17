@@ -10,9 +10,11 @@ import '../app/core/utils/app_snack_bar.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../app/notifications/my_notification.dart';
 import '../components/custom_show_model_bottom_sheet.dart';
+import '../data/config/di.dart';
 import '../data/network/netwok_info.dart';
 import '../features/auth/pages/login.dart';
 import '../features/home/page/home.dart';
+import '../features/home/provider/home_provider.dart';
 import '../features/more/page/more.dart';
 import '../features/my_offers/page/my_offers.dart';
 import '../features/post_offer/page/post_offer.dart';
@@ -41,7 +43,11 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _selectedIndex = widget.index ?? 0;
-    NetworkInfo.checkConnectivity();
+    NetworkInfo.checkConnectivity(
+      onVisible: (){
+        sl<HomeProvider>().getOffers();
+      }
+    );
     super.initState();
   }
 
