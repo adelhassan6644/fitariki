@@ -6,7 +6,6 @@ import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:fitariki/features/offer_details/repo/offer_details_repo.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';

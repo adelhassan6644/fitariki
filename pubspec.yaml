@@ -24,7 +24,7 @@ dependencies:
   shared_preferences:
   get_it:
   http:
-  firebase_messaging: ^14.4.1
+  firebase_messaging: ^14.6.5
   firebase_core:
   provider:
   flutter_staggered_animations:

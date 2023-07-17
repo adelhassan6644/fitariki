@@ -306,7 +306,7 @@ SPEC CHECKSUMS:
   firebase_auth: 5984ebaf5463319e304ab1c0966b06994bd1c69a
   firebase_core: 312d0d81b346ec20540822c8498e626d6918ef48
   firebase_dynamic_links: eb6716a5419a7b1ad5ef4860c84290c48a30be91
-  firebase_messaging: 90b11d16c537444a39e50b818ebe1a51ec0e38c2
+  firebase_messaging: 806eb8b72bf6d7a8b08b03ae5d2619b04a382d4c
   FirebaseAnalytics: f8133442ee6f8512e28ff19e62ce15398bfaeace
   FirebaseAuth: dd64c01631df724b09f33e584625775c52f7d71f
   FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
