@@ -8,7 +8,6 @@ import '../../app/core/utils/color_resources.dart';
 import '../../app/core/utils/svg_images.dart';
 import '../app/core/utils/app_snack_bar.dart';
 import '../app/localization/localization/language_constant.dart';
-import '../app/notifications/my_notification.dart';
 import '../components/custom_show_model_bottom_sheet.dart';
 import '../data/config/di.dart';
 import '../data/network/netwok_info.dart';
@@ -17,8 +16,11 @@ import '../features/home/page/home.dart';
 import '../features/home/provider/home_provider.dart';
 import '../features/more/page/more.dart';
 import '../features/my_offers/page/my_offers.dart';
+import '../features/my_offers/provider/my_offers_provider.dart';
+import '../features/my_trips/provider/my_trips_provider.dart';
 import '../features/post_offer/page/post_offer.dart';
 import '../features/post_offer/provider/post_offer_provider.dart';
+import '../features/wishlist/provider/wishlist_provider.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({this.index, Key? key}) : super(key: key);
@@ -46,7 +48,15 @@ class _DashBoardState extends State<DashBoard> {
     NetworkInfo.checkConnectivity(
       onVisible: (){
         sl<HomeProvider>().getOffers();
+        if(Provider.of<ProfileProvider>(context,listen: false).isLogin) {
+          Provider.of<ProfileProvider>(context,listen: false).getProfile();
+          Provider.of<MyOffersProvider>(context,listen: false).getMyOffers();
+          Provider.of<WishlistProvider>(context,listen: false).getWishList();
+          Provider.of<MyTripsProvider>(context,listen: false).getCurrentTrips();
+          Provider.of<MyTripsProvider>(context,listen: false).getPreviousTrips();
+          Provider.of<MyTripsProvider>(context,listen: false).getPendingTrips();
       }
+    }
     );
     super.initState();
   }
