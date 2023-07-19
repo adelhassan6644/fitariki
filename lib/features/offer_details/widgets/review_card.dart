@@ -30,10 +30,11 @@ class ReviewCard extends StatelessWidget {
                     width: 1)),
             child: Column(
               children: [
+                // if(fromProfile)
                 Row(
                   children: [
                     CustomNetworkImage.circleNewWorkImage(
-                        image: feedback.clientModel!.image,
+                        image: feedback.clientModel?.image,
                         radius: 16,
                         color: ColorResources.SECOUND_PRIMARY_COLOR),
                     SizedBox(
@@ -47,7 +48,7 @@ class ReviewCard extends StatelessWidget {
                             SizedBox(
                               width: 50,
                               child: Text(
-                                feedback.clientModel!.firstName ?? "",
+                                feedback.clientModel?.firstName ?? feedback.driverModel?.firstName??"" ,
                                 maxLines: 1,
                                 textAlign: TextAlign.start,
                                 style: AppTextStyles.w600.copyWith(
@@ -60,9 +61,11 @@ class ReviewCard extends StatelessWidget {
                               width: 4.w,
                             ),
                             customImageIconSVG(
-                                imageName: feedback.clientModel!.gender == 0
+                                imageName: feedback.clientModel?.gender == null? feedback.clientModel?.gender == 0
                                     ? SvgImages.maleIcon
-                                    : SvgImages.femaleIcon,
+                                    : SvgImages.femaleIcon :  feedback.driverModel?.gender == 0
+                                    ? SvgImages.maleIcon
+                                    : SvgImages.femaleIcon ,
                                 color: ColorResources.BLUE_COLOR,
                                 width: 11,
                                 height: 11)
@@ -76,6 +79,8 @@ class ReviewCard extends StatelessWidget {
                     ),
                   ],
                 ),
+
+
                 const SizedBox(
                   height: 8,
                 ),

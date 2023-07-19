@@ -26,7 +26,8 @@ class PaymentProvider extends ChangeNotifier {
   String _code = '';
   double? tax;
   double taxPercentage=0.0;
-  double serviceCost = 15;
+  double serviceCost = 0;
+  double servicePercentage = 0;
   double total = 0.0;
   bool _isLoading = false;
   bool isPaymentFeeLoading = false;
@@ -115,7 +116,7 @@ class PaymentProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
     }, (success) {
       taxPercentage=double.parse(success.data['data']['settings'][0]['tax'].toString());
-      serviceCost=double.parse(success.data['data']['settings'][0]['service_fee'].toString());
+      servicePercentage=double.parse(success.data['data']['settings'][0]['service_fee'].toString());
 
       calcTotal();
       isPaymentFeeLoading = false;
@@ -126,8 +127,11 @@ class PaymentProvider extends ChangeNotifier {
   }
   calcTotal() {
     tax=0;
+    serviceCost=0;
     total=0;
     tax = double.parse(((requestModel?.price ?? 0) * taxPercentage/100).toStringAsFixed(2));
+    serviceCost = double.parse(((requestModel?.price ?? 0) * servicePercentage/100).toStringAsFixed(2));
+    print(serviceCost);
     total = (requestModel!.price! - _discount) + tax! + serviceCost;
     print((requestModel!.price! - _discount) + tax!  );
     notifyListeners();

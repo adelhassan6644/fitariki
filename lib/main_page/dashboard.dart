@@ -131,13 +131,16 @@ class _DashBoardState extends State<DashBoard> {
             ? FloatingActionButton(
                 onPressed: () {
                   if (provider.isLogin) {
+
                     if (provider.isDriver && provider.status != "1") {
+                      print(provider.status);
                       CustomSnackBar.showSnackBar(
                           notification: AppNotification(
                               message: "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                               isFloating: true,
                               backgroundColor: ColorResources.IN_ACTIVE,
                               borderColor: Colors.transparent));
+                      return;
                       // showToast("لم يتم تفعيل حسابك بعد");
                     } else {
                       customShowModelBottomSheet(

@@ -88,7 +88,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    "${getTranslated("service_costs", context)} ",
+                    "${getTranslated("service_costs", context)} ${paymentProvider.servicePercentage}%",
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 14,
                     ),
