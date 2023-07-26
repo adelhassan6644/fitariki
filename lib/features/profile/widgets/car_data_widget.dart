@@ -29,11 +29,14 @@ class CarDataWidget extends StatelessWidget {
           hint: getTranslated("name", context),
           read: !fromLogin,
         ),
-        SizedBox(height: 8.h,),
+        SizedBox(
+          height: 8.h,
+        ),
         Row(
           children: [
             Expanded(
-              child: CustomDropDownButton(
+              child:
+              CustomDropDownButton(
                 items: provider.models,
                 name: getTranslated("model", context),
                 onChange: provider.selectedModel,
@@ -79,7 +82,8 @@ class CarDataWidget extends StatelessWidget {
                 canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.carImage,
                 title: getTranslated("car_image", context),
-                onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectCarImage),
+                onTap: () => ImagePickerHelper.showOptionSheet(
+                    onGet: provider.onSelectCarImage),
                 imageFile: provider.carImage,
               ),
             ),
@@ -111,7 +115,8 @@ class CarDataWidget extends StatelessWidget {
                 canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.licenceImage,
                 title: getTranslated("licence_image", context),
-                onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectLicenceImage),
+                onTap: () => ImagePickerHelper.showOptionSheet(
+                    onGet: provider.onSelectLicenceImage),
                 imageFile: provider.licenceImage,
               ),
             ),
@@ -127,7 +132,8 @@ class CarDataWidget extends StatelessWidget {
                 canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.formImage,
                 title: getTranslated("form_image", context),
-                onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectFormImage),
+                onTap: () => ImagePickerHelper.showOptionSheet(
+                    onGet: provider.onSelectFormImage),
                 imageFile: provider.formImage,
               ),
             ),
@@ -137,9 +143,11 @@ class CarDataWidget extends StatelessWidget {
             Expanded(
               child: CustomButtonImagePicker(
                 canEdit: fromLogin,
-                imageUrl: provider.profileModel?.driver?.carInfo?.insuranceImage,
+                imageUrl:
+                    provider.profileModel?.driver?.carInfo?.insuranceImage,
                 title: getTranslated("insurance_image", context),
-                onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectInsuranceImage),
+                onTap: () => ImagePickerHelper.showOptionSheet(
+                    onGet: provider.onSelectInsuranceImage),
                 imageFile: provider.insuranceImage,
               ),
             ),

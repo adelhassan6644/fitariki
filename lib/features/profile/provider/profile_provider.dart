@@ -35,6 +35,7 @@ class ProfileProvider extends ChangeNotifier {
     }
     getBanks();
     getCountries();
+    generateModels();
   }
 
   bool get isLogin => profileRepo.isLoggedIn();
@@ -54,24 +55,18 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime carModel2 = DateTime.now();
+
   String? carModel;
-  List<String> models = [
-    "2010",
-    "2011",
-    "2012",
-    "2013",
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024"
-  ];
+  List<String> models = [];
+
+  generateModels() {
+    for (var i = 0; i < 20; i++) {
+      models.add(((DateTime.now().year + 1) - i).toString());
+    }
+    notifyListeners();
+  }
+
   void selectedModel(value) {
     carModel = value;
     notifyListeners();
