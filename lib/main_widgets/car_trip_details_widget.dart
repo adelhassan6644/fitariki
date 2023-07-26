@@ -13,9 +13,10 @@ import '../components/expansion_tile_widget.dart';
 import '../components/image_pop_up_viewer.dart';
 
 class CarTripDetailsWidget extends StatelessWidget {
-  const CarTripDetailsWidget({this.carInfo,this.isLoading = false, Key? key}) : super(key: key);
+  const CarTripDetailsWidget({this.carInfo,this.isLoading = false,this.showCarPlate = false, Key? key}) : super(key: key);
   final CarInfo? carInfo;
   final bool isLoading;
+  final bool showCarPlate;
 
   @override
   Widget build(BuildContext context) {
@@ -95,27 +96,41 @@ class CarTripDetailsWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              customImageIconSVG(
-                  imageName: SvgImages.carPlate,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
-                  height: 14,
-                  width: 14),
-              SizedBox(
-                width: 4.w,
+              Visibility(
+                visible: showCarPlate,
+                child: customImageIconSVG(
+                    imageName: SvgImages.carPlate,
+                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    height: 14,
+                    width: 14),
               ),
-              Text(
-                carInfo?.palletNumber ?? "",
-                style: AppTextStyles.w400.copyWith(
-                  fontSize: 10,
+              Visibility(
+                visible: showCarPlate,
+
+                child: SizedBox(
+                  width: 4.w,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  height: 10,
-                  width: 1,
-                  color: ColorResources.HINT_COLOR,
-                  child: const SizedBox(),
+              Visibility(
+                visible: showCarPlate,
+                child: Text(
+                  carInfo?.palletNumber ?? "",
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 10,
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: showCarPlate,
+
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    height: 10,
+                    width: 1,
+                    color: ColorResources.HINT_COLOR,
+                    child: const SizedBox(),
+                  ),
                 ),
               ),
               customImageIconSVG(
@@ -155,16 +170,6 @@ class CarTripDetailsWidget extends StatelessWidget {
                             title:  getTranslated("car_image", context),
                           );
                         })),
-
-                // onTap: () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => ImageViewer(
-                //       image: carInfo?.carImage ?? "",
-                //       isFromInternet: true,
-                //     ),
-                //   ),
-                // ),
                 child: Text(
                   getTranslated("show_car_image", context),
                   style: AppTextStyles.w400.copyWith(

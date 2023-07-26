@@ -119,12 +119,14 @@ class MyTripDetails extends StatelessWidget {
                       startPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.pickupLocation ??
                               myTripModel.offer?.clientModel?.pickupLocation ??
-                              myTripModel.myTripRequest?.clientModel?.pickupLocation
+                              myTripModel
+                                  .myTripRequest?.clientModel?.pickupLocation
                           : myTripModel.offer?.pickupLocation,
                       endPoint: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.dropOffLocation ??
                               myTripModel.offer?.clientModel?.dropOffLocation ??
-                              myTripModel.myTripRequest?.clientModel?.dropOffLocation
+                              myTripModel
+                                  .myTripRequest?.clientModel?.dropOffLocation
                           : myTripModel.offer?.dropOffLocation,
                     ),
 
@@ -135,20 +137,26 @@ class MyTripDetails extends StatelessWidget {
                       long1: sl<LocationProvider>().currentLocation!.longitude!,
                       lat2: sl<ProfileProvider>().isDriver
                           ? myTripModel.clientModel?.pickupLocation?.latitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation?.latitude ??
-                          myTripModel.myTripRequest?.clientModel?.pickupLocation?.latitude ?? "0"
+                              myTripModel.offer?.clientModel?.pickupLocation
+                                  ?.latitude ??
+                              myTripModel.myTripRequest?.clientModel
+                                  ?.pickupLocation?.latitude ??
+                              "0"
                           : myTripModel.offer?.pickupLocation?.latitude ?? "0",
                       long2: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.pickupLocation?.longitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation?.longitude ??
-                              myTripModel.myTripRequest?.clientModel?.pickupLocation?.longitude ?? "0"
+                          ? myTripModel
+                                  .clientModel?.pickupLocation?.longitude ??
+                              myTripModel.offer?.clientModel?.pickupLocation
+                                  ?.longitude ??
+                              myTripModel.myTripRequest?.clientModel
+                                  ?.pickupLocation?.longitude ??
+                              "0"
                           : myTripModel.offer?.pickupLocation?.longitude ?? "0",
                     ),
 
                     /// to show stop points for followers request if driver
                     Visibility(
-                      visible:
-                          (myTripModel.myTripRequest?.followers != null &&
+                      visible: (myTripModel.myTripRequest?.followers != null &&
                           myTripModel.myTripRequest!.followers!.isNotEmpty),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,8 +192,7 @@ class MyTripDetails extends StatelessWidget {
                     ),
 
                     Visibility(
-                      visible:
-                          (myTripModel.offer?.offerFollowers != null &&
+                      visible: (myTripModel.offer?.offerFollowers != null &&
                           myTripModel.offer!.offerFollowers!.isNotEmpty),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,11 +212,15 @@ class MyTripDetails extends StatelessWidget {
                           ...List.generate(
                             myTripModel.offer?.offerFollowers?.length ?? 0,
                             (index) => MapWidget(
-                              clientName:myTripModel.offer?.offerFollowers?[index].name ??
+                              clientName: myTripModel
+                                      .offer?.offerFollowers?[index].name ??
                                   "",
-                              gender: myTripModel.offer?.offerFollowers?[index].gender,
-                              startPoint: myTripModel.offer?.offerFollowers?[index].pickupLocation,
-                              endPoint: myTripModel.offer?.offerFollowers?[index].dropOffLocation,
+                              gender: myTripModel
+                                  .offer?.offerFollowers?[index].gender,
+                              startPoint: myTripModel
+                                  .offer?.offerFollowers?[index].pickupLocation,
+                              endPoint: myTripModel.offer
+                                  ?.offerFollowers?[index].dropOffLocation,
                             ),
                           ),
                         ],
@@ -220,21 +231,22 @@ class MyTripDetails extends StatelessWidget {
                     Visibility(
                         visible: !sl<ProfileProvider>().isDriver,
                         child: CarTripDetailsWidget(
+                          showCarPlate: true,
                           carInfo: myTripModel.driverModel?.carInfo ??
-                              myTripModel.offer?.driverModel?.carInfo??
+                              myTripModel.offer?.driverModel?.carInfo ??
                               myTripModel.myTripRequest?.driverModel?.carInfo,
                         )),
 
                     /// to show days on calender
                     TripDaysOnCalenderWidget(
-                        startDate: myTripModel.myTripRequest?.startAt,
-                        endDate: myTripModel.myTripRequest?.endAt,
-                        days: sl<ProfileProvider>().isDriver ?
-                        myTripModel.clientModel?.clientDays ??
-                            myTripModel.offer?.clientModel?.clientDays ??
-                            myTripModel.myTripRequest?.clientModel?.clientDays
-                            :  myTripModel.offer?.offerDays,
-                      ),
+                      startDate: myTripModel.myTripRequest?.startAt,
+                      endDate: myTripModel.myTripRequest?.endAt,
+                      days: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.clientDays ??
+                              myTripModel.offer?.clientModel?.clientDays ??
+                              myTripModel.myTripRequest?.clientModel?.clientDays
+                          : myTripModel.offer?.offerDays,
+                    ),
 
                     SizedBox(
                       height: 24.h,
