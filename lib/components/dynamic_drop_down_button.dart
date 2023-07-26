@@ -68,7 +68,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
         onChanged: widget.onChange,
         onTap: widget.onTap,
         menuMaxHeight: context.height * 0.4,
-        disabledHint:Text( widget.initialValue,
+        disabledHint:Text( widget.initialValue??widget.name,
           style:  widget.initialValue != null
               ? AppTextStyles.w600.copyWith(
               color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)

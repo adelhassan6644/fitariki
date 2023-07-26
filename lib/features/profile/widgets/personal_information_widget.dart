@@ -125,7 +125,7 @@ class PersonalInformationWidget extends StatelessWidget {
             value: provider.nationality,
             isInitial: provider.nationality?.name != null,
             initialValue: provider.nationality?.name,
-            enable: !fromLogin && !provider.isDriver,
+            enable: (fromLogin && provider.isDriver) || !provider.isDriver,
           ),
           const SizedBox(
             height: 8,
@@ -153,6 +153,7 @@ class PersonalInformationWidget extends StatelessWidget {
                       onTap: () => ImagePickerHelper.showOptionSheet(
                           onGet: provider.onSelectIdentityImage),
                       imageFile: provider.identityImage,
+                          canEdit: fromLogin,
                     )),
                   ],
                 ),

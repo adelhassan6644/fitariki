@@ -17,7 +17,7 @@ class CustomButtonImagePicker extends StatelessWidget {
     Key? key,
     this.imageFile,
     this.imageUrl,
-    this.canEdit=true,
+    this.canEdit = true,
     required this.title,
     required this.onTap,
   }) : super(key: key);
@@ -115,7 +115,7 @@ class CustomButtonImagePicker extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10.w),
+                Visibility(visible: canEdit, child: SizedBox(width: 10.w)),
                 Visibility(
                   visible: canEdit,
                   child: Expanded(

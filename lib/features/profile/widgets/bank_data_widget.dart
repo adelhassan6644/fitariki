@@ -89,7 +89,7 @@ class BankDataWidget extends StatelessWidget {
           height: 8.h,
         ),
         CustomButtonImagePicker(
-          canEdit: false,
+          canEdit: fromLogin,
           imageUrl: provider.profileModel?.driver?.bankInfo?.accountImage,
           title: getTranslated("account_number_image", context),
           onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectBankAccountImage),

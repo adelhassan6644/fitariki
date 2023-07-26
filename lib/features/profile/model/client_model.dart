@@ -59,13 +59,19 @@ class ClientModel {
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
         nickname: json["nickname"],
-        gender: json["gender"] == null ? null : int.parse(json["gender"].toString()),
+        gender: json["gender"] == null
+            ? null
+            : int.parse(json["gender"].toString()),
         age: json["age"].toString(),
-        national: json["country"] != null ? Country.fromJson(json["country"],) : null,
+        national: json["country"] != null
+            ? Country.fromJson(
+                json["country"],
+              )
+            : null,
         city: json["city"],
         countryId: json["country_id"].toString(),
         phone: json["phone"].toString(),
-        status: json["status"] != null ?  json["status"].toString():null,
+        status: json["status"] != null ? json["status"].toString() : null,
         rate: double.tryParse(json["rate"].toString()),
         wallet: double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null

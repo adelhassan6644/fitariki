@@ -76,7 +76,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child: CustomButtonImagePicker(
-                canEdit: false,
+                canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.carImage,
                 title: getTranslated("car_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectCarImage),
@@ -108,7 +108,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child: CustomButtonImagePicker(
-                canEdit: false,
+                canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.licenceImage,
                 title: getTranslated("licence_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectLicenceImage),
@@ -124,7 +124,7 @@ class CarDataWidget extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButtonImagePicker(
-                canEdit: false,
+                canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.formImage,
                 title: getTranslated("form_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectFormImage),
@@ -136,7 +136,7 @@ class CarDataWidget extends StatelessWidget {
             ),
             Expanded(
               child: CustomButtonImagePicker(
-                canEdit: false,
+                canEdit: fromLogin,
                 imageUrl: provider.profileModel?.driver?.carInfo?.insuranceImage,
                 title: getTranslated("insurance_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectInsuranceImage),
