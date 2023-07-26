@@ -8,8 +8,8 @@ class SplashProvider extends ChangeNotifier {
   SplashProvider({required this.splashRepo});
 
   startTheApp() {
-    Future.delayed(const Duration(milliseconds: 4500), () {
-
+    Future.delayed(const Duration(milliseconds: 4500), () async {
+      await DefaultCupertinoLocalizations.load(const Locale('en', 'US'));
       if (splashRepo.isFirstTime()) {
         CustomNavigator.push(Routes.ON_BOARDING, clean: true);
       } else if (splashRepo.isLogin() && !splashRepo.isCompleteProfile()) {

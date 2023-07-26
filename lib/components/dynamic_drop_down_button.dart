@@ -16,14 +16,17 @@ class DynamicDropDownButton extends StatefulWidget {
   final String? label;
   final String name;
   final dynamic value;
+  final dynamic initialValue;
   final void Function(dynamic)? onChange;
   final void Function()? onTap;
   final String? Function(Object?)? validation;
   final bool? isInitial;
+  final bool enable;
 
   const DynamicDropDownButton({
     required this.items,
     this.value,
+    this.initialValue,
     this.pAssetIcon,
     this.pSvgIcon,
     this.pIconColor,
@@ -34,6 +37,7 @@ class DynamicDropDownButton extends StatefulWidget {
     required this.name,
     this.onTap,
     this.isInitial = false,
+    this.enable = true,
     this.iconSize = 22,
     Key? key,
   }) : super(key: key);
@@ -48,6 +52,9 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
     return SizedBox(
       width: context.width,
       child: FormBuilderDropdown(
+        iconEnabledColor: ColorResources.SECOUND_PRIMARY_COLOR,
+        iconDisabledColor:  ColorResources.DISABLED,
+
         items: widget.items.map((dynamic item) {
           return DropdownMenuItem(
             value: item,
@@ -61,25 +68,27 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
         onChanged: widget.onChange,
         onTap: widget.onTap,
         menuMaxHeight: context.height * 0.4,
-        initialValue: widget.value,
+        disabledHint:Text( widget.initialValue,
+          style:  widget.initialValue != null
+              ? AppTextStyles.w600.copyWith(
+              color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)
+              : AppTextStyles.w500
+              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        ) ,
         isDense: true,
         validator: widget.validation,
         isExpanded: true,
+        enabled: widget.enable,
         dropdownColor: ColorResources.FILL_COLOR,
         itemHeight: 50,
-        icon: widget.icon ??
-            const Icon(
-              Icons.keyboard_arrow_down_rounded,
-              color: ColorResources.SECOUND_PRIMARY_COLOR,
-            ),
+        icon: widget.icon ?? const Icon(Icons.keyboard_arrow_down_rounded),
         iconSize: widget.iconSize,
-        borderRadius:
-            const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
+        borderRadius: const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
         decoration: InputDecoration(
           hintStyle: widget.isInitial == true
-              ? AppTextStyles.w500.copyWith(
+              ? AppTextStyles.w600.copyWith(
                   color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)
-              : AppTextStyles.w400
+              : AppTextStyles.w500
                   .copyWith(color: ColorResources.DISABLED, fontSize: 14),
           hintText: widget.name,
           prefixIcon: Padding(
@@ -101,6 +110,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
                       )
                     : null,
           ),
+          enabled: widget.enable,
           fillColor: ColorResources.FILL_COLOR,
           filled: true,
           border: const OutlineInputBorder(
@@ -179,8 +189,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
           labelStyle: AppTextStyles.w400
               .copyWith(color: ColorResources.DISABLED, fontSize: 14),
         ),
-        style: AppTextStyles.w500
-            .copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
+        style: AppTextStyles.w600.copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
         name: widget.name,
         elevation: 1,
       ),

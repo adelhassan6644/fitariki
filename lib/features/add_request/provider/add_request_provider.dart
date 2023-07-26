@@ -45,16 +45,13 @@ class AddRequestProvider extends ChangeNotifier {
 
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
-
     endDate = v;
     getDaysCount();
     notifyListeners();
   }
 
   void getDaysCount() {
-    if(days!=null) {
-
-
+    if (days != null) {
       duration = Methods.getWeekdayCount(
               startDate: startDate, endDate: endDate, weekdays: days!)
           .days;
@@ -71,7 +68,8 @@ class AddRequestProvider extends ChangeNotifier {
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
-    sl<CalenderProvider>().getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
+    sl<CalenderProvider>()
+        .getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
     sl.get<FollowersProvider>().selectedFollowers.clear();
   }
 
@@ -122,7 +120,8 @@ class AddRequestProvider extends ChangeNotifier {
           "duration": duration,
           "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
-              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty && !sl<ProfileProvider>().isDriver)
+              sl.get<FollowersProvider>().selectedFollowers.isNotEmpty &&
+              !sl<ProfileProvider>().isDriver)
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers
@@ -144,15 +143,13 @@ class AddRequestProvider extends ChangeNotifier {
         CustomNavigator.push(Routes.SUCCESS,
             replace: true,
             arguments: SuccessModel(
-                routeName: Routes.DASHBOARD,
-                argument: 1,
-                term: name,
-                isClean: true,
-                btnText: getTranslated(
-                    "my_trips", CustomNavigator.navigatorState.currentContext!),
-                description: sl<ProfileProvider>().isDriver
-                    ? "تم ارسال عرضك على الراكب $name  \nفعل التنبيهات ليصلك تنبيه عند قبولها!"
-                    : "تم ارسال عرضك على الكابتن $name  \nفعل التنبيهات ليصلك تنبيه عند قبولها!"));
+              routeName: Routes.DASHBOARD,
+              argument: 1,
+              term: name,
+              isClean: true,
+              btnText: getTranslated(
+                  "my_trips", CustomNavigator.navigatorState.currentContext!),
+            ));
         isLoading = false;
         notifyListeners();
       });

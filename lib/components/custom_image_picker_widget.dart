@@ -17,6 +17,7 @@ class CustomButtonImagePicker extends StatelessWidget {
     Key? key,
     this.imageFile,
     this.imageUrl,
+    this.canEdit=true,
     required this.title,
     required this.onTap,
   }) : super(key: key);
@@ -24,6 +25,7 @@ class CustomButtonImagePicker extends StatelessWidget {
   final String? imageUrl;
   final String title;
   final void Function() onTap;
+  final bool canEdit;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -114,16 +116,19 @@ class CustomButtonImagePicker extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10.w),
-                Expanded(
-                  flex: 2,
-                  child: GestureDetector(
-                    onTap: onTap,
-                    child: Text(getTranslated("edit", context),
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 10,
-                            overflow: TextOverflow.ellipsis,
-                            color: ColorResources.SYSTEM_COLOR)),
+                Visibility(
+                  visible: canEdit,
+                  child: Expanded(
+                    flex: 2,
+                    child: GestureDetector(
+                      onTap: onTap,
+                      child: Text(getTranslated("edit", context),
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.w400.copyWith(
+                              fontSize: 10,
+                              overflow: TextOverflow.ellipsis,
+                              color: ColorResources.SYSTEM_COLOR)),
+                    ),
                   ),
                 ),
               ],

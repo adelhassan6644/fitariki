@@ -65,11 +65,13 @@ class ProfilePage extends StatelessWidget {
                         ),
                         PersonalInformationWidget(
                           provider: provider,
+                          fromLogin: fromLogin,
                         ),
                         Visibility(
                           visible: provider.isDriver,
                           child: CarDataWidget(
                             provider: provider,
+                            fromLogin: fromLogin,
                           ),
                         ),
                         SizedBox(
@@ -77,11 +79,14 @@ class ProfilePage extends StatelessWidget {
                         ),
                         WorkInformationWidget(
                           provider: provider,
+                          fromLogin: fromLogin,
+
                         ),
                         Visibility(
                             visible: provider.isDriver,
                             child: BankDataWidget(
                               provider: provider,
+                              fromLogin: fromLogin,
                             ))
                       ],
                     ),

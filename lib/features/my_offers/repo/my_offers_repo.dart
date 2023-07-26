@@ -22,6 +22,22 @@ class MyOffersRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
+  Future<Either<ServerFailure, Response>> getMyRequests() async {
+    try {
+      Response response = await dioClient.get(
+        uri:
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myRequests}/${sharedPreferences.getString(AppStorageKey.userId)}",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
   Future<Either<ServerFailure, Response>> getMyOffers() async {
     try {
       Response response = await dioClient.get(
@@ -38,15 +54,16 @@ class MyOffersRepo {
     }
   }
 
-  Future<Either<ServerFailure, Response>> getMyOfferDetails({required int id})async {
+  Future<Either<ServerFailure, Response>> getMyOfferDetails(
+      {required int id}) async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
+          uri:
+              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
           queryParameters: {
             "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
-            sharedPreferences.getString(AppStorageKey.userId)
-          }
-      );
+                sharedPreferences.getString(AppStorageKey.userId)
+          });
       if (response.statusCode == 200) {
         return Right(response);
       } else {
@@ -60,7 +77,8 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> deleteMyOffer(id) async {
     try {
       Response response = await dioClient.post(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteOffer}/$id}",
+        uri:
+            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteOffer}/$id}",
       );
       if (response.statusCode == 200) {
         return Right(response);

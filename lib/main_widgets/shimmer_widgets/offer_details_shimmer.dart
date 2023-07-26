@@ -120,7 +120,7 @@ class OfferDetailsShimmer extends StatelessWidget {
               child: MapWidgetShimmer(
                 withClientName: isDriver,
               )),
-          Visibility(visible: !isDriver, child: const ReviewWidgetShimmer()),
+          // Visibility(visible: !isDriver, child: const ReviewWidgetShimmer()),
         ],
       ),
     );

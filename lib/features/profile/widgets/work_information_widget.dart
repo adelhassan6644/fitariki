@@ -12,9 +12,11 @@ import '../../../main_widgets/scchedule_widget.dart';
 import '../provider/profile_provider.dart';
 
 class WorkInformationWidget extends StatelessWidget {
-  const WorkInformationWidget({required this.provider, Key? key})
+  const WorkInformationWidget({required this.provider, Key? key, required this.fromLogin})
       : super(key: key);
   final ProfileProvider provider;
+  final bool fromLogin;
+
 
   @override
   Widget build(BuildContext context) {

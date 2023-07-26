@@ -32,7 +32,7 @@ class Validations {
   }
 
   static String? bankAccount(String? value) {
-    if (value!.isEmpty || value.length < 8) {
+    if (value!.isEmpty || value.length < 22) {
       return getTranslated("please_enter_valid_bank_account",
           CustomNavigator.navigatorState.currentContext!);
     } else {
@@ -58,3 +58,4 @@ class Validations {
     }
   }
 }
+

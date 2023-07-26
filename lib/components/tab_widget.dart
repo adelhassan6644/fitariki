@@ -29,6 +29,10 @@ class TabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
       onTap: onTab,
       child: Container(
         height: height,

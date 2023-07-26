@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
@@ -24,10 +25,31 @@ class PostOfferProvider extends ChangeNotifier {
   bool get isLogin => postOfferRepo.isLoggedIn();
   bool get isDriver => postOfferRepo.isDriver();
 
+  bool sameHomeLocation = false;
+  void onSelect(bool value) {
+    sameHomeLocation = value;
+    if (value) {
+      startLocation = sl<ProfileProvider>().startLocation;
+    } else {
+      startLocation = null;
+    }
+    notifyListeners();
+  }
+
   LocationModel? startLocation;
   onSelectStartLocation(v) {
     startLocation = v;
+    notifyListeners();
+  }
 
+  bool sameDestination = false;
+  void onSelect1(bool value) {
+    sameDestination = value;
+    if (value) {
+      endLocation = sl<ProfileProvider>().endLocation;
+    } else {
+      endLocation = null;
+    }
     notifyListeners();
   }
 
@@ -35,7 +57,6 @@ class PostOfferProvider extends ChangeNotifier {
   LocationModel? endLocation;
   onSelectEndLocation(v) {
     endLocation = v;
-
     notifyListeners();
   }
 
@@ -215,8 +236,10 @@ class PostOfferProvider extends ChangeNotifier {
                 routeName: Routes.DASHBOARD,
                 argument: 0,
                 description: !sl<ProfileProvider>().isDriver
-                    ? "تم الإرسال بنجاح! \nسيتم تنبيه جميع الكباتن القريبين منك لرفع فرصة اتمام الطلب..."
-                    : "تم الإرسال بنجاح! \nسيتم تنبيه جميع الركاب القريبين منك لرفع فرصة اتمام الطلب..."));
+                    ? getTranslated("sent_request_successfully",
+                        CustomNavigator.navigatorState.currentContext!)
+                    : getTranslated("sent_offer_successfully",
+                        CustomNavigator.navigatorState.currentContext!)));
       });
       notifyListeners();
     } catch (e) {

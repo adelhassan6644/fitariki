@@ -6,29 +6,30 @@ import '../app/core/utils/app_strings.dart';
 import '../features/maps/models/location_model.dart';
 
 class MapProvider extends ChangeNotifier {
-  CameraPosition mapCameraPosition = const CameraPosition(target:
-  LatLng(24.280888, 37.987794),zoom:18);
+  CameraPosition mapCameraPosition =
+      const CameraPosition(target: LatLng(24.280888, 37.987794), zoom: 50);
   GoogleMapController? googleMapController;
   EdgeInsets googleMapPadding = const EdgeInsets.all(10);
-  Set<Polyline> gMapPolylines = {};
+  Set<Polyline> gMapPolyLines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
   Set<Marker> gMapMarkers = {};
   PolylinePoints polylinePoints = PolylinePoints();
-  BitmapDescriptor? sourceIcon=BitmapDescriptor.defaultMarker;
-  BitmapDescriptor? destinationIcon=BitmapDescriptor.defaultMarker;
+  BitmapDescriptor? sourceIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor? destinationIcon = BitmapDescriptor.defaultMarker;
   LocationModel? pickupLocation;
   LocationModel? dropOffLocation;
-bool isLoad=false;
-  setLocation({required LocationModel pickup, required LocationModel dropOff}) async {
-    isLoad=true;
+  bool isLoad = false;
+  setLocation(
+      {required LocationModel pickup, required LocationModel dropOff}) async {
+    isLoad = true;
     notifyListeners();
- polylineCoordinates = [];
-   gMapMarkers = {};
+    polylineCoordinates = [];
+    gMapMarkers = {};
     pickupLocation = pickup;
     dropOffLocation = dropOff;
     drawTripPolyLines();
-    isLoad=false;
+    isLoad = false;
 
     notifyListeners();
   }
@@ -37,15 +38,13 @@ bool isLoad=false;
     googleMapController = controller;
     notifyListeners();
 
-
-
     setSourceAndDestinationIcons();
   }
 
   void setSourceAndDestinationIcons() async {
-    sourceIcon =  BitmapDescriptor.defaultMarker;
+    sourceIcon = BitmapDescriptor.defaultMarker;
     //
-    destinationIcon =  BitmapDescriptor.defaultMarker;
+    destinationIcon = BitmapDescriptor.defaultMarker;
     //
   }
 
@@ -64,11 +63,11 @@ bool isLoad=false;
     // destination pin
     gMapMarkers.add(
       Marker(
-        markerId: MarkerId('destPin'),
+        markerId: const MarkerId('destPin'),
         position: LatLng(double.parse(dropOffLocation!.latitude!),
             double.parse(dropOffLocation!.longitude!)),
         icon: destinationIcon!,
-        anchor: Offset(0.5, 0.5),
+        anchor: const Offset(0.5, 0.5),
       ),
     );
     //load the ploylines
@@ -86,22 +85,22 @@ bool isLoad=false;
     if (result.isNotEmpty) {
       // loop through all PointLatLng points and convert them
       // to a list of LatLng, required by the Polyline
-      result.forEach((PointLatLng point) {
+      for (var point in result) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     }
 
     // with an id, an RGB color and the list of LatLng pairs
 
     Polyline polyline = Polyline(
-      polylineId: PolylineId("poly"),
+      polylineId: const PolylineId("poly"),
       color: ColorResources.PRIMARY_COLOR,
       points: polylineCoordinates,
       width: 3,
     );
 //
-    gMapPolylines = {};
-    gMapPolylines.add(polyline);
+    gMapPolyLines = {};
+    gMapPolyLines.add(polyline);
 
     //
     //zoom to latbound

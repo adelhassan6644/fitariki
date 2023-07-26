@@ -10,7 +10,8 @@ import '../../../components/empty_widget.dart';
 import '../provider/terms_provider.dart';
 
 class TermsView extends StatelessWidget {
-  const TermsView({Key? key}) : super(key: key);
+  const TermsView({Key? key, required this.isDriver}) : super(key: key);
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +33,13 @@ class TermsView extends StatelessWidget {
                               vertical: 12.h),
                           child: ListAnimator(
                             data: [
-                              provider.terms != null
-                                  ? HtmlWidget(provider.terms!)
+                              provider.termsForDriver != null
+                                  ? HtmlWidget(isDriver
+                                      ? provider.termsForDriver ?? ""
+                                      : provider.termsForClient ?? "")
                                   : EmptyState(
-                                      txt: getTranslated("something_went_wrong", context))
+                                      txt: getTranslated(
+                                          "something_went_wrong", context))
                             ],
                           ),
                         ),

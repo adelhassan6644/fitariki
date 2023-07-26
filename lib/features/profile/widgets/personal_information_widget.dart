@@ -14,9 +14,12 @@ import '../../../helpers/image_picker_helper.dart';
 import '../provider/profile_provider.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
-  const PersonalInformationWidget({required this.provider, Key? key})
+  const PersonalInformationWidget(
+      {required this.provider, Key? key, required this.fromLogin})
       : super(key: key);
   final ProfileProvider provider;
+  final bool fromLogin;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,6 +33,7 @@ class PersonalInformationWidget extends StatelessWidget {
               valid: Validations.name,
               controller: provider.firstName,
               hint: getTranslated("full_name", context),
+              read: !fromLogin,
             ),
           ),
           Visibility(
@@ -54,8 +58,14 @@ class PersonalInformationWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 8,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            child: CustomTextFormField(
+              valid: Validations.name,
+              controller: provider.nickName,
+              hint: getTranslated("nick_name", context),
+              read: !fromLogin && provider.isDriver,
+            ),
           ),
           Row(
             children: [
@@ -66,6 +76,7 @@ class PersonalInformationWidget extends StatelessWidget {
                 inputType: TextInputType.number,
                 controller: provider.age,
                 hint: getTranslated("age", context),
+                read: !fromLogin && provider.isDriver,
               )),
               const SizedBox(
                 width: 8,
@@ -92,7 +103,11 @@ class PersonalInformationWidget extends StatelessWidget {
                                     iconSize: 11,
                                     isSelected: index == provider.gender,
                                     onTab: () {
-                                      provider.selectedGender(index);
+                                      if (!fromLogin && provider.isDriver) {
+                                        return null;
+                                      } else {
+                                        provider.selectedGender(index);
+                                      }
                                     }),
                               )),
                     )),
@@ -108,7 +123,9 @@ class PersonalInformationWidget extends StatelessWidget {
                 getTranslated("nationality", context),
             onChange: provider.selectedNationality,
             value: provider.nationality,
-            isInitial: provider.nationality != null,
+            isInitial: provider.nationality?.name != null,
+            initialValue: provider.nationality?.name,
+            enable: !fromLogin && !provider.isDriver,
           ),
           const SizedBox(
             height: 8,
@@ -124,6 +141,7 @@ class PersonalInformationWidget extends StatelessWidget {
                       valid: Validations.name,
                       hint: getTranslated("identity_number", context),
                       controller: provider.identityNumber,
+                      read: !fromLogin,
                     )),
                     const SizedBox(
                       width: 8,
@@ -158,6 +176,7 @@ class PersonalInformationWidget extends StatelessWidget {
             controller: provider.email,
             hint: getTranslated("email", context),
             inputType: TextInputType.emailAddress,
+            read: !fromLogin && provider.isDriver,
           ),
           const SizedBox(
             height: 8,

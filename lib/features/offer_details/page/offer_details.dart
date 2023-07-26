@@ -186,13 +186,13 @@ class OfferDetails extends StatelessWidget {
                                     provider.offerDetails?.driverModel?.carInfo,
                               ),
                             ),
-                            Visibility(
-                              visible: !provider.isDriver,
-                              child: ReviewsWidget(
-                                id: offerId,
-                                isOffer: true,
-                              ),
-                            )
+                            // Visibility(
+                            //   visible: !provider.isDriver,
+                            //   child: ReviewsWidget(
+                            //     id: offerId,
+                            //     isOffer: true,
+                            //   ),
+                            // )
                           ],
                         ),
                       )

@@ -10,6 +10,7 @@ import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../navigation/custom_navigation.dart';
+import '../../request_details/model/offer_request_details_model.dart';
 import '../model/my_offer.dart';
 import '../repo/my_offers_repo.dart';
 
@@ -20,9 +21,74 @@ class MyOffersProvider extends ChangeNotifier {
   bool get isLogin => myOffersRepo.isLoggedIn();
   bool get isDriver => myOffersRepo.isDriver();
 
+
+  List<String> taps = [
+    "delivery_offers",
+    "delivery_requests",
+  ];
+  int currentTap = 0;
+
+  onSelectTap(index) {
+    currentTap = index;
+    if (isLogin) {
+      switch (index) {
+        case 0:
+          return getPendingTrips();
+        case 1:
+          return getMyOffers();
+      }
+    }
+    notifyListeners();
+  }
+
+
+  bool isGetPendingTrips = false;
+  List<OfferRequestDetailsModel>? pendingTrips;
+  getPendingTrips() async {
+    try {
+      isGetPendingTrips = true;
+      notifyListeners();
+
+      Either<ServerFailure, Response> response =
+      await myOffersRepo.getMyRequests();
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: ApiErrorHandler.getMessage(l),
+                isFloating: true,
+                backgroundColor: ColorResources.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        pendingTrips = [];
+        isGetPendingTrips = false;
+        notifyListeners();
+      }, (response) {
+        pendingTrips = response.data["data"]["pending"] == null ||
+            response.data["data"]["pending"] == []
+            ? []
+            : List<OfferRequestDetailsModel>.from(response.data["data"]
+        ["pending"]
+            .map((x) => OfferRequestDetailsModel.fromJson(x)));
+
+        isGetPendingTrips = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isGetPendingTrips = false;
+      notifyListeners();
+    }
+  }
+
+
+
+
   MyOffersModel? myOffers;
   bool isLoading = false;
-
   getMyOffers() async {
     try {
       isLoading = true;

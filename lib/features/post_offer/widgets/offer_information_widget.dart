@@ -1,10 +1,12 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
+import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/checkbox_list_tile.dart';
 import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
@@ -220,8 +222,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                 startDateTime: widget.provider.endDate,
                                 minDateTime: DateTime.now(),
                                 valueChanged: widget.provider.onSelectEndDate,
-                                label:
-                                    getTranslated("end_of_duration", context),
+                                label: getTranslated("end_of_duration", context),
                               ),
                             ),
                             child: Container(
@@ -385,7 +386,18 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             context),
                         onPicked: widget.provider.onSelectEndLocation,
                         location: widget.provider.endLocation,
-                      )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12.h,
+                        ),
+                        child: CheckBoxListTile(
+                          title: getTranslated("my_work_study_location", context),
+                          onChange: widget.provider.onSelect1,
+                          check: widget.provider.sameDestination,
+                        ),
+                      ),
+
                     ],
                   ),
                 )

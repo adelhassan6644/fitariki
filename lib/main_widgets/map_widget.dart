@@ -243,7 +243,7 @@ class MapWidget extends StatelessWidget {
                       myLocationButtonEnabled: false,
                       myLocationEnabled: false,
                       markers: vm.gMapMarkers,
-                      polylines: vm.gMapPolylines,
+                      polylines: vm.gMapPolyLines,
                     ),
                   ),
                 ),

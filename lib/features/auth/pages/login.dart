@@ -12,7 +12,6 @@ import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../components/checkbox_list_tile.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/tab_widget.dart';
@@ -127,7 +126,8 @@ class _LoginState extends State<Login> {
                                   controller: provider.phoneTEC,
                                   hint: "5xxxxxxxx",
                                   inputType: TextInputType.phone,
-                                  valid:(v)=> Validations.phone(v,provider.countryCode.trim()),
+                                  valid: (v) => Validations.phone(
+                                      v, provider.countryCode.trim()),
                                 ),
                               ),
                               const SizedBox(
@@ -223,6 +223,7 @@ class _LoginState extends State<Login> {
                         _AgreeToTerms(
                           onChange: provider.onAgree,
                           check: provider.isAgree,
+                          isDriver: provider.userType == 1,
                         )
                       ],
                     ),
@@ -263,10 +264,12 @@ class _AgreeToTerms extends StatelessWidget {
   const _AgreeToTerms({
     Key? key,
     this.check = false,
+    required this.isDriver,
     required this.onChange,
   }) : super(key: key);
   final bool check;
   final Function(bool) onChange;
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
@@ -305,10 +308,8 @@ class _AgreeToTerms extends StatelessWidget {
               fontSize: 14, color: ColorResources.SECOUND_PRIMARY_COLOR),
         ),
         InkWell(
-          onTap: () {
-            Provider.of<TermsProvider>(context, listen: false).getTerms();
-            CustomNavigator.push(Routes.TERMS_AND_CONDITIONS);
-          },
+          onTap: () => CustomNavigator.push(Routes.TERMS_AND_CONDITIONS,
+              arguments: isDriver),
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,

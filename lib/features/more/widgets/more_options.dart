@@ -69,17 +69,17 @@ class MoreOptions extends StatelessWidget {
             //   title: getTranslated("bank_data", context),
             //   icon: SvgImages.card,
             // ),
-            MoreButton(
-              title: sl<ProfileProvider>().isDriver
-                  ? getTranslated("clients_evaluation", context)
-                  : getTranslated("captain_evaluation", context),
-              icon: SvgImages.rate,
-              onTap: () {
-                Provider.of<SendFeedbackProvider>(context,listen: false).getFeedback();
-                    CustomNavigator.push(Routes.FEEDBACK,);
-                // CustomNavigator.push(Routes.RATE_USER,arguments: 20);
-              },
-            ),
+            // MoreButton(
+            //   title: sl<ProfileProvider>().isDriver
+            //       ? getTranslated("clients_evaluation", context)
+            //       : getTranslated("captain_evaluation", context),
+            //   icon: SvgImages.rate,
+            //   onTap: () {
+            //     Provider.of<SendFeedbackProvider>(context,listen: false).getFeedback();
+            //         CustomNavigator.push(Routes.FEEDBACK,);
+            //     // CustomNavigator.push(Routes.RATE_USER,arguments: 20);
+            //   },
+            // ),
             MoreButton(
               title: getTranslated("contact_with_us", context),
               icon: SvgImages.call,

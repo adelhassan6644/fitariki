@@ -10,10 +10,13 @@ import '../../../data/error/failures.dart';
 class TermsProvider extends ChangeNotifier {
   final TermsRepo termsRepo;
 
-  TermsProvider({required this.termsRepo});
+  TermsProvider({required this.termsRepo}) {
+    getTerms();
+  }
 
   bool isLoading = false;
-  String? terms;
+  String? termsForDriver;
+  String? termsForClient;
   getTerms() async {
     try {
       isLoading = true;
@@ -30,7 +33,8 @@ class TermsProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }, (response) {
-        terms = response.data["data"]['settings'][0]['content'];
+        termsForDriver = response.data["data"]['settings'][0]['termsForDriver'];
+        termsForClient = response.data["data"]['settings'][0]['termsForClient'];
         isLoading = false;
         notifyListeners();
       });

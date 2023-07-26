@@ -83,6 +83,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
                       child: CupertinoDatePicker(
                           mode: widget.mode ?? CupertinoDatePickerMode.date,
                           onDateTimeChanged: (value) => date = value,
+                          showDayOfWeek: true,
+
                           initialDateTime:
                               date ?? widget.startDateTime ?? DateTime.now(),
                           minimumDate: widget.minDateTime != null

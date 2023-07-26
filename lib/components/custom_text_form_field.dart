@@ -17,12 +17,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final VoidCallback? onTap;
   final void Function(String)? onChanged;
-  final String? sIcon;
+  final String? sAssetIcon;
   final String? pAssetIcon;
   final String? pSvgIcon;
+  final String? sSvgIcon;
   final Color? pIconColor;
+  final Color? sIconColor;
   final FocusNode? focus;
-  final bool? read;
+  final bool read;
   final VoidCallback? edit;
 
   final List<TextInputFormatter>? formatter;
@@ -53,15 +55,17 @@ class CustomTextFormField extends StatelessWidget {
     this.valid,
     this.controller,
     this.focus,
-    this.sIcon,
+    this.sAssetIcon,
     this.label = false,
-    this.read,
+    this.read =false,
     this.edit,
     this.validationMode,
     this.formatter,
     this.maxLength,
     this.pAssetIcon,
     this.pSvgIcon,
+    this.sSvgIcon,
+    this.sIconColor,
     this.pIconColor,
     this.fieldColor,
     this.textAlign,
@@ -81,7 +85,7 @@ class CustomTextFormField extends StatelessWidget {
       initialValue: initialValue,
       maxLength: maxLength,
       focusNode: focus,
-      readOnly: read == true ? true : false,
+      readOnly: read ,
       maxLines: maxLine,
       minLines: minLine ?? 1,
       keyboardType: inputType,
@@ -113,6 +117,25 @@ class CustomTextFormField extends StatelessWidget {
                         )
                       : null),
         ),
+        suffixIcon: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 8.w,
+          ),
+          child: sufWidget ??
+              (sAssetIcon != null
+                  ? Image.asset(
+                sAssetIcon!,
+                height: 22.h,
+                color: sIconColor ?? ColorResources.DISABLED,
+              )
+                  : sSvgIcon != null
+                  ? customImageIconSVG(
+                imageName: sSvgIcon!,
+                color: sIconColor ?? Colors.black,
+                height: 22.h,
+              )
+                  : null),
+        ),
         focusedBorder: read == true
             ?  OutlineInputBorder(
                 borderRadius: edge??const BorderRadius.all(
@@ -120,7 +143,7 @@ class CustomTextFormField extends StatelessWidget {
                     Dimensions.RADIUS_DEFAULT,
                   ),
                 ),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                     color: ColorResources.LIGHT_BORDER_COLOR,
                     width: 1,
                     style: BorderStyle.solid),
@@ -204,6 +227,7 @@ class CustomTextFormField extends StatelessWidget {
         filled: true,
         errorStyle: AppTextStyles.w400.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
         prefixIconConstraints: BoxConstraints(maxHeight: 25.h),
+        suffixIconConstraints: BoxConstraints(maxHeight: 25.h),
       ),
     );
   }

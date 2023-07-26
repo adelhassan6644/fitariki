@@ -10,6 +10,7 @@
   "browse": "Browse ",
   "don't_get_the_code": "Don't get the code?",
   "as_a_guest": "as a guest",
+  "nick_name": "Nick name",
   "sign_in": "sign in",
   "verify_the_phone": "verify the phone",
   "successfully_login": "Successfully Login",
@@ -272,5 +273,8 @@
   "waiting_for_client_replay": "Waiting for the client's reply",
   "waiting_for_driver_replay": "Waiting for the captain's reply",
   "there_is_no_feedbacks_for_this_captain": "There is no feedbacks for this captain",
-  "there_is_no_feedbacks_for_this_client": "There is no feedbacks for this client"
+  "there_is_no_feedbacks_for_this_client": "There is no feedbacks for this client",
+  "my_final_destination": "My Final Destination",
+  "my_residence_housing_location": "My residence housing location",
+  "my_work_study_location": "My work study location"
 }

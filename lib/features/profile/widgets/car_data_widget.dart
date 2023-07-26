@@ -12,8 +12,12 @@ import '../../../helpers/image_picker_helper.dart';
 import '../provider/profile_provider.dart';
 
 class CarDataWidget extends StatelessWidget {
-  const CarDataWidget({required this.provider, Key? key}) : super(key: key);
+  const CarDataWidget(
+      {required this.provider, Key? key, required this.fromLogin})
+      : super(key: key);
   final ProfileProvider provider;
+  final bool fromLogin;
+
   @override
   Widget build(BuildContext context) {
     return ExpansionTileWidget(
@@ -23,15 +27,14 @@ class CarDataWidget extends StatelessWidget {
           valid: Validations.name,
           controller: provider.carName,
           hint: getTranslated("name", context),
+          read: !fromLogin,
         ),
-        SizedBox(
-          height: 8.h,
-        ),
+        SizedBox(height: 8.h,),
         Row(
           children: [
             Expanded(
               child: CustomDropDownButton(
-                items:provider.models,
+                items: provider.models,
                 name: getTranslated("model", context),
                 onChange: provider.selectedModel,
                 value: provider.carModel,
@@ -39,6 +42,7 @@ class CarDataWidget extends StatelessWidget {
                   Icons.keyboard_arrow_down_rounded,
                   color: ColorResources.SECOUND_PRIMARY_COLOR,
                 ),
+                enable: fromLogin,
               ),
             ),
             SizedBox(
@@ -49,9 +53,9 @@ class CarDataWidget extends StatelessWidget {
                 valid: Validations.name,
                 controller: provider.carColor,
                 hint: getTranslated("color", context),
+                read: !fromLogin,
               ),
             ),
-
           ],
         ),
         SizedBox(
@@ -64,15 +68,17 @@ class CarDataWidget extends StatelessWidget {
                 valid: Validations.name,
                 hint: getTranslated("plate", context),
                 controller: provider.carPlate,
+                read: !fromLogin,
               ),
             ),
             SizedBox(
               width: 8.w,
             ),
             Expanded(
-              child:  CustomButtonImagePicker(
+              child: CustomButtonImagePicker(
+                canEdit: false,
                 imageUrl: provider.profileModel?.driver?.carInfo?.carImage,
-                title:  getTranslated("car_image", context),
+                title: getTranslated("car_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectCarImage),
                 imageFile: provider.carImage,
               ),
@@ -85,8 +91,8 @@ class CarDataWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child:  CustomDropDownButton(
-                items:   provider.seats,
+              child: CustomDropDownButton(
+                items: provider.seats,
                 name: getTranslated("capacity", context),
                 onChange: provider.selectedSeat,
                 value: provider.carSeats,
@@ -94,15 +100,17 @@ class CarDataWidget extends StatelessWidget {
                   Icons.keyboard_arrow_down_rounded,
                   color: ColorResources.SECOUND_PRIMARY_COLOR,
                 ),
+                enable: fromLogin,
               ),
             ),
             SizedBox(
               width: 8.w,
             ),
             Expanded(
-              child:  CustomButtonImagePicker(
+              child: CustomButtonImagePicker(
+                canEdit: false,
                 imageUrl: provider.profileModel?.driver?.carInfo?.licenceImage,
-                title:  getTranslated("licence_image", context),
+                title: getTranslated("licence_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectLicenceImage),
                 imageFile: provider.licenceImage,
               ),
@@ -115,9 +123,10 @@ class CarDataWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child:  CustomButtonImagePicker(
+              child: CustomButtonImagePicker(
+                canEdit: false,
                 imageUrl: provider.profileModel?.driver?.carInfo?.formImage,
-                title:  getTranslated("form_image", context),
+                title: getTranslated("form_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectFormImage),
                 imageFile: provider.formImage,
               ),
@@ -126,9 +135,10 @@ class CarDataWidget extends StatelessWidget {
               width: 8.w,
             ),
             Expanded(
-              child:  CustomButtonImagePicker(
+              child: CustomButtonImagePicker(
+                canEdit: false,
                 imageUrl: provider.profileModel?.driver?.carInfo?.insuranceImage,
-                title:  getTranslated("insurance_image", context),
+                title: getTranslated("insurance_image", context),
                 onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectInsuranceImage),
                 imageFile: provider.insuranceImage,
               ),

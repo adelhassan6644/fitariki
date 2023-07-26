@@ -17,6 +17,7 @@ class CustomDropDownButton extends StatefulWidget {
   final String name;
   final Object? value;
   final dynamic dataType;
+  final bool enable;
 
   final void Function(Object?)? onChange;
   final String? Function(Object?)? validation;
@@ -30,7 +31,7 @@ class CustomDropDownButton extends StatefulWidget {
     this.onChange,
     this.validation,
     this.icon,
-
+    this.enable=true,
     this.label,this.dataType,
     required this.name,
     this.iconSize = 22,
@@ -63,6 +64,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
         initialValue: widget.value,
         isDense: true,
         validator: widget.validation,
+        enabled: widget.enable,
         isExpanded: true,
         dropdownColor: ColorResources.FILL_COLOR,
         itemHeight: 50,

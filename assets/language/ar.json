@@ -12,6 +12,7 @@
   "browse": "تصفح ",
   "as_a_guest": "كضيف",
   "submit": "إرسال",
+  "nick_name": "اسم الشهرة",
   "confirm": "تأكيد",
   "verify_the_phone": "التحقق من الرقم",
   "proceed_to_check_out": "انتقل الي الدفع",
@@ -167,6 +168,7 @@
   "preview": "معاينة",
   "post": "نشر",
   "your_residence_housing_location": "موقع اقامتك/سكنك",
+  "my_residence_housing_location": "موقع اقامتي/سكني",
   "select_your_residence_housing_location": "حدد موقع اقامتك/سكنك بالخريطه",
   "start_time": "بداية الوقت",
   "end_time":"نهاية الوقت",
@@ -273,5 +275,6 @@
   "there_is_no_offers_add_new_offer": "لا يوجد عروض توصيل حاليا \n أضف عرض جديد",
   "there_is_no_requests_add_new_request":"لا يوجد طلبات توصيل حاليا \n أضف طلب جديد",
   "waiting_for_client_replay": "في انتظار رد الراكب",
-  "waiting_for_driver_replay": "في انتظار رد الكابتن"
+  "waiting_for_driver_replay": "في انتظار رد الكابتن",
+  "my_work_study_location": " مكان دوامي/دراستي"
 }

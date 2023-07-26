@@ -84,19 +84,22 @@ class _SuccessPageState extends State<SuccessPage> {
                       color: ColorResources.PRIMARY_COLOR),
                 ),
               ),
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0.h),
-                  child: SubstringHighlight(
-                    textAlign: TextAlign.center,
-                    text: widget.successModel.description??"",
-                    term: widget.successModel.term ?? "",
-                    textStyle: AppTextStyles.w500.copyWith(
-                        fontSize: 16,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR),
-                    textStyleHighlight: AppTextStyles.w700.copyWith(
-                        fontSize: 16,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR),
+              Visibility(
+                visible: widget.successModel.description != null,
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0.h),
+                    child: SubstringHighlight(
+                      textAlign: TextAlign.center,
+                      text: widget.successModel.description??"",
+                      term: widget.successModel.term ?? "",
+                      textStyle: AppTextStyles.w500.copyWith(
+                          fontSize: 16,
+                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                      textStyleHighlight: AppTextStyles.w700.copyWith(
+                          fontSize: 16,
+                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                    ),
                   ),
                 ),
               ),

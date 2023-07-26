@@ -204,10 +204,10 @@ class UserProfile extends StatelessWidget {
                     height: 8.h,
                   ),
 
-                  ReviewsWidget(
-                    id: userId,
-                    isOffer: false,
-                  ),
+                  // ReviewsWidget(
+                  //   id: userId,
+                  //   isOffer: false,
+                  // ),
                 ]),
               ),
 

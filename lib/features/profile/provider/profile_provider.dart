@@ -107,6 +107,16 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController fullName = TextEditingController();
   TextEditingController bankAccount = TextEditingController();
 
+  bool hasData = false;
+  focus() {
+    if (bankAccount.text.isNotEmpty) {
+      hasData = true;
+    } else {
+      hasData = false;
+    }
+    notifyListeners();
+  }
+
   Bank? bank;
   void selectedBank(value) {
     bank = value;
@@ -131,6 +141,7 @@ class ProfileProvider extends ChangeNotifier {
   String? status;
 
   String? image;
+  TextEditingController nickName = TextEditingController();
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController age = TextEditingController();
@@ -211,6 +222,7 @@ class ProfileProvider extends ChangeNotifier {
     ///personal data
     image = null;
     profileImage = null;
+    nickName.clear();
     firstName.clear();
     lastName.clear();
     age.clear();
@@ -242,6 +254,7 @@ class ProfileProvider extends ChangeNotifier {
     bankAccount.clear();
     bankAccountImage = null;
     profileModel = null;
+    focus();
   }
 
   updateTimes() {
@@ -276,6 +289,15 @@ class ProfileProvider extends ChangeNotifier {
       }
     }
 
+    if (nickName.text.isEmpty) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "برجاء ادخال اسم الشهرة!",
+              isFloating: true,
+              backgroundColor: ColorResources.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      return;
+    }
     if (firstName.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -535,6 +557,7 @@ class ProfileProvider extends ChangeNotifier {
         final personalData = {
           isDriver ? "driver" : "client": {
             "fcm_token": await profileRepo.saveDeviceToken(),
+            "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
@@ -631,7 +654,6 @@ class ProfileProvider extends ChangeNotifier {
           isLoadingProfile = false;
           notifyListeners();
         });
-
       } catch (e) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -712,6 +734,7 @@ class ProfileProvider extends ChangeNotifier {
     nationality = profileModel?.client?.national;
 
     image = profileModel?.client?.image;
+    nickName.text = profileModel?.client?.nickname ?? "";
     firstName.text = profileModel?.client?.firstName ?? "";
     lastName.text = profileModel?.client?.lastName ?? "";
     age.text = profileModel?.client?.age ?? "";
@@ -742,6 +765,7 @@ class ProfileProvider extends ChangeNotifier {
     endLocation = profileModel?.driver?.dropOffLocation;
 
     image = profileModel?.driver?.image;
+    nickName.text = profileModel?.driver?.nickname ?? "";
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
     email.text = profileModel?.driver?.email ?? "";
@@ -767,6 +791,7 @@ class ProfileProvider extends ChangeNotifier {
 
     fullName.text = profileModel?.driver?.bankInfo?.fullName ?? "";
     bankAccount.text = profileModel?.driver?.bankInfo?.accountNumber ?? "";
+    focus();
     bank = profileModel?.driver?.bankInfo?.bank;
     notifyListeners();
   }

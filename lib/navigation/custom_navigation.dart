@@ -143,7 +143,7 @@ abstract class CustomNavigator {
         ));
 
       case Routes.TERMS_AND_CONDITIONS:
-        return _pageRoute(const TermsView());
+        return _pageRoute( TermsView(isDriver: settings.arguments as bool,));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());
