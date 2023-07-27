@@ -143,7 +143,7 @@ class MapProvider extends ChangeNotifier {
       bounds = LatLngBounds(southwest: source, northeast: destination);
     }
 
-    CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 20);
+    CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 40);
 
     return checkCameraLocation(cameraUpdate, mapController);
   }
