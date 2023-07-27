@@ -61,7 +61,7 @@ class AcceptableAnalytics extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      !provider.isLogin ? "??" : "$value%",
+                      !provider.isLogin ? "??" : "${value.toStringAsFixed(1)}%",
                       style: AppTextStyles.w700.copyWith(
                           fontSize: 12,
                           height: 1,
