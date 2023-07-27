@@ -147,6 +147,8 @@ class PostOfferProvider extends ChangeNotifier {
     endTime = DateTime.now();
     startDate = DateTime.now();
     selectedFollowers.clear();
+    sameHomeLocation = false;
+    sameDestination = false;
     scheduleProvider.selectedDays.clear();
     onSelectEndDate(DateTime.now());
     sl<ProfileProvider>().getProfile();
