@@ -38,7 +38,7 @@ class RequestCard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
               decoration: BoxDecoration(
-                color: ColorResources.WHITE_COLOR,
+                color: Styles.WHITE_COLOR,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
@@ -64,7 +64,7 @@ class RequestCard extends StatelessWidget {
                                     ? request!.clientModel?.image
                                     : request!.driverModel?.image,
                                 radius: 16,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR),
+                                color: Styles.SECOUND_PRIMARY_COLOR),
                             SizedBox(
                               width: 8.w,
                             ),
@@ -109,7 +109,7 @@ class RequestCard extends StatelessWidget {
                                                       0
                                                   ? SvgImages.maleIcon
                                                   : SvgImages.femaleIcon,
-                                          color: ColorResources.BLUE_COLOR,
+                                          color: Styles.BLUE_COLOR,
                                           width: 11,
                                           height: 11)
                                     ],
@@ -150,7 +150,7 @@ class RequestCard extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8),
                                       child: Container(
-                                        color: ColorResources.HINT_COLOR,
+                                        color: Styles.HINT_COLOR,
                                         height: 10,
                                         width: 1,
                                         child: const SizedBox(),
@@ -181,7 +181,7 @@ class RequestCard extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8),
                                       child: Container(
-                                        color: ColorResources.HINT_COLOR,
+                                        color: Styles.HINT_COLOR,
                                         height: 10,
                                         width: 1,
                                         child: const SizedBox(),
@@ -225,7 +225,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.car,
-                                        color: ColorResources
+                                        color: Styles
                                             .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
@@ -249,7 +249,7 @@ class RequestCard extends StatelessWidget {
                                       child: Container(
                                         height: 10,
                                         width: 1,
-                                        color: ColorResources.HINT_COLOR,
+                                        color: Styles.HINT_COLOR,
                                         child: const SizedBox(),
                                       ),
                                     ),
@@ -262,7 +262,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.carModel,
-                                        color: ColorResources
+                                        color: Styles
                                             .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
@@ -287,7 +287,7 @@ class RequestCard extends StatelessWidget {
                                       child: Container(
                                         height: 10,
                                         width: 1,
-                                        color: ColorResources.HINT_COLOR,
+                                        color: Styles.HINT_COLOR,
                                         child: const SizedBox(),
                                       ),
                                     ),
@@ -300,7 +300,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.seat,
-                                        color: ColorResources
+                                        color: Styles
                                             .SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
@@ -375,7 +375,7 @@ class RequestCard extends StatelessWidget {
                                                     ? SvgImages.maleIcon
                                                     : SvgImages.femaleIcon,
                                                 color:
-                                                    ColorResources.BLUE_COLOR,
+                                                    Styles.BLUE_COLOR,
                                                 width: 11,
                                                 height: 11),
                                             if (index !=
@@ -388,7 +388,7 @@ class RequestCard extends StatelessWidget {
                                                   height: 10,
                                                   width: 1,
                                                   color:
-                                                      ColorResources.HINT_COLOR,
+                                                      Styles.HINT_COLOR,
                                                   child: const SizedBox(),
                                                 ),
                                               ),
@@ -448,14 +448,14 @@ class RequestCard extends StatelessWidget {
                           date: request!.createdAt!,
                         ).toString(),
                         style: AppTextStyles.w400.copyWith(
-                            fontSize: 10, color: ColorResources.DISABLED),
+                            fontSize: 10, color: Styles.DISABLED),
                       ),
                       SizedBox(
                         height: 10.h,
                       ),
                       AcceptableAnalytics(
                         value: request?.matching ?? 0,
-                        color: ColorResources.PRIMARY_COLOR,
+                        color: Styles.PRIMARY_COLOR,
                       ),
                     ],
                   ),

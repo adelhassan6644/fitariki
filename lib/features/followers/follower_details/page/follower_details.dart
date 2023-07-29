@@ -77,7 +77,7 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                     getTranslated("save", context),
                     textAlign: TextAlign.start,
                     style: AppTextStyles.w400.copyWith(
-                        fontSize: 14, color: ColorResources.PRIMARY_COLOR),
+                        fontSize: 14, color: Styles.PRIMARY_COLOR),
                   ),
                 ),
               ),
@@ -116,7 +116,7 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                       Expanded(
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorResources.PRIMARY_COLOR
+                                color: Styles.PRIMARY_COLOR
                                     .withOpacity(0.06),
                                 borderRadius: BorderRadius.circular(6)),
                             padding: const EdgeInsets.all(2),
@@ -128,14 +128,14 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                                             innerVPadding: 6,
                                             innerHPadding: 20,
                                             backGroundColor:
-                                                ColorResources.PRIMARY_COLOR,
+                                                Styles.PRIMARY_COLOR,
                                             title: getTranslated(
                                                 provider.genders[index],
                                                 context),
                                             svgIcon:
                                                 provider.genderIcons[index],
                                             iconColor:
-                                                ColorResources.BLUE_COLOR,
+                                                Styles.BLUE_COLOR,
                                             iconSize: 11,
                                             isSelected:
                                                 index == provider.gender,
@@ -172,7 +172,7 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                         EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                            color: Styles.LIGHT_BORDER_COLOR, width: 1),
                         borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       children: [
@@ -185,8 +185,8 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                                       context),
                               style: AppTextStyles.w400.copyWith(
                                   color: provider.startLocation?.address == null
-                                      ? ColorResources.DISABLED
-                                      : ColorResources.SECOUND_PRIMARY_COLOR,
+                                      ? Styles.DISABLED
+                                      : Styles.SECOUND_PRIMARY_COLOR,
                                   fontSize: 14,
                                   overflow: TextOverflow.ellipsis),
                             ),
@@ -225,7 +225,7 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                         EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                            color: Styles.LIGHT_BORDER_COLOR, width: 1),
                         borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       children: [
@@ -238,8 +238,8 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                                       context),
                               style: AppTextStyles.w400.copyWith(
                                   color: provider.endLocation?.address == null
-                                      ? ColorResources.DISABLED
-                                      : ColorResources.SECOUND_PRIMARY_COLOR,
+                                      ? Styles.DISABLED
+                                      : Styles.SECOUND_PRIMARY_COLOR,
                                   fontSize: 14,
                                   overflow: TextOverflow.ellipsis),
                             ),
@@ -260,9 +260,9 @@ class _FollowerDetailsState extends State<FollowerDetails> {
                   onTap: () =>
                       provider.deleteFollower(id: widget.followerModel.id!),
                   text: getTranslated("delete_the_follower", context),
-                  backgroundColor: ColorResources.WHITE_COLOR,
+                  backgroundColor: Styles.WHITE_COLOR,
                   withBorderColor: true,
-                  textColor: ColorResources.PRIMARY_COLOR,
+                  textColor: Styles.PRIMARY_COLOR,
                 ),
               ],
             )),

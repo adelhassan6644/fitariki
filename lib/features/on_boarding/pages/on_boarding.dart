@@ -83,7 +83,7 @@ class _OnBoardingState extends State<OnBoarding> {
               height: 310,
               width: context.width,
               decoration: const BoxDecoration(
-                  color: ColorResources.WHITE_COLOR,
+                  color: Styles.WHITE_COLOR,
                   borderRadius: BorderRadius.horizontal(
                       left: Radius.circular(25), right: Radius.circular(25))),
               padding: const EdgeInsets.symmetric(
@@ -114,21 +114,21 @@ class _OnBoardingState extends State<OnBoarding> {
                               "توافق مشواركم اليومي",
                               style: AppTextStyles.w500.copyWith(
                                 fontSize: 20,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                             Text(
                               " موضح بالنسب ٪",
                               style: AppTextStyles.w600.copyWith(
                                 fontSize: 35,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                             Text(
                               "لنضمن طريقة توصيل سهلة و سريعة ...",
                               style: AppTextStyles.w500.copyWith(
                                 fontSize: 15,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                           ],
@@ -140,28 +140,28 @@ class _OnBoardingState extends State<OnBoarding> {
                               "الراكب بإمكانه اضافة",
                               style: AppTextStyles.w500.copyWith(
                                 fontSize: 20,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                             Text(
                               "تابعين له",
                               style: AppTextStyles.w600.copyWith(
                                 fontSize: 35,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                             Text(
                               "ابنك/ابنتك/صاحبتك ...",
                               style: AppTextStyles.w500.copyWith(
                                 fontSize: 15,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                             Text(
                               "للبحث لهم عن كابتن مناسب",
                               style: AppTextStyles.w500.copyWith(
                                 fontSize: 15,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                                color: Styles.SECOUND_PRIMARY_COLOR,
                               ),
                             ),
                           ],
@@ -179,7 +179,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           getTranslated("skip", context),
                           style: AppTextStyles.w500.copyWith(
                             fontSize: 13,
-                            color: ColorResources.DISABLED,
+                            color: Styles.DISABLED,
                           ),
                         ),
                       ),
@@ -203,7 +203,7 @@ class _OnBoardingState extends State<OnBoarding> {
                               style: AppTextStyles.w600.copyWith(
                                 height: 1.25,
                                 fontSize: 15,
-                                color: ColorResources.PRIMARY_COLOR,
+                                color: Styles.PRIMARY_COLOR,
                               ),
                             ),
                             RotatedBox(

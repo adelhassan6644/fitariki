@@ -47,7 +47,7 @@ class RequestDetailsShimmer extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
             child: ExpansionTileWidget(
-              iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
+              iconColor: Styles.SECOUND_PRIMARY_COLOR,
               title: getTranslated("trip_details", context),
               children: [
                 Row(
@@ -65,7 +65,7 @@ class RequestDetailsShimmer extends StatelessWidget {
                             vertical: 4, horizontal: 12),
                         decoration: BoxDecoration(
                             color:
-                                ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                                Styles.PRIMARY_COLOR.withOpacity(0.06),
                             borderRadius: BorderRadius.circular(4)),
                         child: CustomShimmerContainer(
                           width: 100.w,

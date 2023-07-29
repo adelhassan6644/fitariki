@@ -52,7 +52,7 @@ class AddFollower extends StatelessWidget {
                           textAlign: TextAlign.start,
                           style: AppTextStyles.w400.copyWith(
                               fontSize: 14,
-                              color: ColorResources.PRIMARY_COLOR),
+                              color: Styles.PRIMARY_COLOR),
                         ),
                       ),
                     ),
@@ -96,7 +96,7 @@ class AddFollower extends StatelessWidget {
                           Expanded(
                             child: Container(
                                 decoration: BoxDecoration(
-                                    color: ColorResources.PRIMARY_COLOR
+                                    color: Styles.PRIMARY_COLOR
                                         .withOpacity(0.06),
                                     borderRadius: BorderRadius.circular(6)),
                                 padding: const EdgeInsets.all(2),
@@ -107,7 +107,7 @@ class AddFollower extends StatelessWidget {
                                             child: TabWidget(
                                                 innerVPadding: 6,
                                                 innerHPadding: 20,
-                                                backGroundColor: ColorResources
+                                                backGroundColor: Styles
                                                     .PRIMARY_COLOR,
                                                 title: getTranslated(
                                                     provider.genders[index],
@@ -115,7 +115,7 @@ class AddFollower extends StatelessWidget {
                                                 svgIcon:
                                                     provider.genderIcons[index],
                                                 iconColor:
-                                                    ColorResources.BLUE_COLOR,
+                                                    Styles.BLUE_COLOR,
                                                 iconSize: 11,
                                                 isSelected:
                                                     index == provider.gender,
@@ -151,7 +151,7 @@ class AddFollower extends StatelessWidget {
                             horizontal: 8.w, vertical: 10.h),
                         decoration: BoxDecoration(
                             border: Border.all(
-                                color: ColorResources.LIGHT_BORDER_COLOR,
+                                color: Styles.LIGHT_BORDER_COLOR,
                                 width: 1),
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
@@ -166,8 +166,8 @@ class AddFollower extends StatelessWidget {
                                   style: AppTextStyles.w400.copyWith(
                                       color: provider.startLocation?.address ==
                                               null
-                                          ? ColorResources.DISABLED
-                                          : ColorResources
+                                          ? Styles.DISABLED
+                                          : Styles
                                               .SECOUND_PRIMARY_COLOR,
                                       fontSize: 14,
                                       overflow: TextOverflow.ellipsis),
@@ -205,7 +205,7 @@ class AddFollower extends StatelessWidget {
                             horizontal: 8.w, vertical: 10.h),
                         decoration: BoxDecoration(
                             border: Border.all(
-                                color: ColorResources.LIGHT_BORDER_COLOR,
+                                color: Styles.LIGHT_BORDER_COLOR,
                                 width: 1),
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
@@ -220,8 +220,8 @@ class AddFollower extends StatelessWidget {
                                   style: AppTextStyles.w400.copyWith(
                                       color:
                                           provider.endLocation?.address == null
-                                              ? ColorResources.DISABLED
-                                              : ColorResources
+                                              ? Styles.DISABLED
+                                              : Styles
                                                   .SECOUND_PRIMARY_COLOR,
                                       fontSize: 14,
                                       overflow: TextOverflow.ellipsis),

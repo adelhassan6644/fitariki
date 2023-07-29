@@ -42,7 +42,7 @@ class _MyOfferCardState extends State<MyOfferCard> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -110,7 +110,7 @@ class _MyOfferCardState extends State<MyOfferCard> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: Container(
-                      color: ColorResources.HINT_COLOR,
+                      color: Styles.HINT_COLOR,
                       height: 30,
                       width: 1,
                       child: const SizedBox(),
@@ -138,7 +138,7 @@ class _MyOfferCardState extends State<MyOfferCard> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Container(
-                      color: ColorResources.HINT_COLOR,
+                      color: Styles.HINT_COLOR,
                       height: 30,
                       width: 1,
                       child: const SizedBox(),
@@ -168,7 +168,7 @@ class _MyOfferCardState extends State<MyOfferCard> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Container(
-                      color: ColorResources.HINT_COLOR,
+                      color: Styles.HINT_COLOR,
                       height: 30,
                       width: 1,
                       child: const SizedBox(),

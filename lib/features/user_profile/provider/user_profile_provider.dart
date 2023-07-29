@@ -41,7 +41,7 @@ class UserProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoadProfile = false;
         isLoadOffers = false;
@@ -64,7 +64,7 @@ final role= sl
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoadProfile = false;
       isLoadOffers = false;
@@ -89,7 +89,7 @@ final role= sl
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoadFollowers = false;
         notifyListeners();
@@ -103,7 +103,7 @@ final role= sl
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoadFollowers = false;
       notifyListeners();

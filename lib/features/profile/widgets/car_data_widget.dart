@@ -43,7 +43,7 @@ class CarDataWidget extends StatelessWidget {
                 value: provider.carModel,
                 icon: const Icon(
                   Icons.keyboard_arrow_down_rounded,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                 ),
                 enable: fromLogin,
               ),
@@ -102,7 +102,7 @@ class CarDataWidget extends StatelessWidget {
                 value: provider.carSeats,
                 icon: const Icon(
                   Icons.keyboard_arrow_down_rounded,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                 ),
                 enable: fromLogin,
               ),

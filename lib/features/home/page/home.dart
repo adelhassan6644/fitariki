@@ -40,7 +40,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
         Consumer<HomeProvider>(builder: (_, homeProvider, child) {
           return Expanded(
             child: RefreshIndicator(
-              color: ColorResources.PRIMARY_COLOR,
+              color: Styles.PRIMARY_COLOR,
               onRefresh: () async {
                 await homeProvider.getOffers();
               },

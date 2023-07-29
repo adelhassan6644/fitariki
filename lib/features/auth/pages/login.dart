@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
             child: Container(
               height: 1,
               width: context.width,
-              color: ColorResources.LIGHT_GREY_BORDER,
+              color: Styles.LIGHT_GREY_BORDER,
               child: const SizedBox(),
             ),
           ),
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                             height: 32,
                             decoration: BoxDecoration(
                                 color:
-                                    ColorResources.CONTAINER_BACKGROUND_COLOR,
+                                    Styles.CONTAINER_BACKGROUND_COLOR,
                                 borderRadius: BorderRadius.circular(6)),
                             child: Row(
                               children: List.generate(
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                                               .copyWith(fontSize: 14),
                                           flagSize: 20,
                                           searchTextStyle: const TextStyle(
-                                            color: ColorResources
+                                            color: Styles
                                                 .SECOUND_PRIMARY_COLOR,
                                             fontSize: 14,
                                           ),
@@ -178,7 +178,7 @@ class _LoginState extends State<Login> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: ColorResources
+                                              color: Styles
                                                   .LIGHT_BORDER_COLOR,
                                               width: 1),
                                           borderRadius: BorderRadius.circular(
@@ -191,7 +191,7 @@ class _LoginState extends State<Login> {
                                               child: Icon(
                                             Icons.keyboard_arrow_down_outlined,
                                             size: 18,
-                                            color: ColorResources.PRIMARY_COLOR,
+                                            color: Styles.PRIMARY_COLOR,
                                           )),
                                           Expanded(
                                             child: Text(
@@ -286,16 +286,16 @@ class _AgreeToTerms extends StatelessWidget {
             height: 18.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2),
-                color: ColorResources.WHITE_COLOR,
+                color: Styles.WHITE_COLOR,
                 border: Border.all(
                     color: check
-                        ? ColorResources.SECOUND_PRIMARY_COLOR
-                        : ColorResources.DISABLED,
+                        ? Styles.SECOUND_PRIMARY_COLOR
+                        : Styles.DISABLED,
                     width: 1)),
             child: check
                 ? const Icon(
                     Icons.check,
-                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    color: Styles.SECOUND_PRIMARY_COLOR,
                     size: 14,
                   )
                 : null,
@@ -305,7 +305,7 @@ class _AgreeToTerms extends StatelessWidget {
         Text(
           getTranslated("agree_to", context),
           style: AppTextStyles.w500.copyWith(
-              fontSize: 14, color: ColorResources.SECOUND_PRIMARY_COLOR),
+              fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
         ),
         InkWell(
           onTap: () => CustomNavigator.push(Routes.TERMS_AND_CONDITIONS,
@@ -319,7 +319,7 @@ class _AgreeToTerms extends StatelessWidget {
             style: AppTextStyles.w500.copyWith(
                 fontSize: 14,
                 decoration: TextDecoration.underline,
-                color: ColorResources.PRIMARY_COLOR),
+                color: Styles.PRIMARY_COLOR),
           ),
         ),
         const Expanded(

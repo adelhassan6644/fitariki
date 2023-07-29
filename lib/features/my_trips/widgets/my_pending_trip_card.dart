@@ -38,7 +38,7 @@ class MyPendingTripCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -63,7 +63,7 @@ class MyPendingTripCard extends StatelessWidget {
                                 ? myTrip.offer?.clientModel?.image ?? ""
                                 : myTrip.offer?.driverModel?.image ?? "",
                             radius: 16,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            color: Styles.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
                           width: 8,
                         ),
@@ -77,10 +77,8 @@ class MyPendingTripCard extends StatelessWidget {
                                   width: 50,
                                   child: Text(
                                     myTrip.offer?.clientModel != null
-                                        ? "${myTrip.offer?.clientModel?.firstName ?? ""} ${myTrip.offer?.clientModel?.lastName ?? ""} "
-                                        : myTrip.offer?.driverModel
-                                                ?.firstName ??
-                                            "",
+                                        ? myTrip.offer?.clientModel?.firstName ?? ""
+                                        : myTrip.offer?.driverModel?.firstName ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(
@@ -100,7 +98,7 @@ class MyPendingTripCard extends StatelessWidget {
                                         : myTrip.offer?.driverModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon,
-                                    color: ColorResources.BLUE_COLOR,
+                                    color: Styles.BLUE_COLOR,
                                     width: 11,
                                     height: 11)
                               ],
@@ -152,7 +150,7 @@ class MyPendingTripCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
-                                  color: ColorResources.HINT_COLOR,
+                                  color: Styles.HINT_COLOR,
                                   height: 10,
                                   width: 1,
                                   child: const SizedBox(),
@@ -182,7 +180,7 @@ class MyPendingTripCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
-                                  color: ColorResources.HINT_COLOR,
+                                  color: Styles.HINT_COLOR,
                                   height: 10,
                                   width: 1,
                                   child: const SizedBox(),
@@ -222,12 +220,12 @@ class MyPendingTripCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                   decoration: BoxDecoration(
-                      color: ColorResources.tripStatus("pending"),
+                      color: Styles.tripStatus("pending"),
                       borderRadius: BorderRadius.circular(100)),
                   child: Text(
                     getTranslated("pending", context),
                     style: AppTextStyles.w600.copyWith(
-                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                        fontSize: 12, color: Styles.WHITE_COLOR),
                   ),
                 ),
               if (sl.get<ProfileProvider>().isDriver)
@@ -235,12 +233,12 @@ class MyPendingTripCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                   decoration: BoxDecoration(
-                      color: ColorResources.tripStatus("pending"),
+                      color: Styles.tripStatus("pending"),
                       borderRadius: BorderRadius.circular(100)),
                   child: Text(
                     getTranslated("pending", context),
                     style: AppTextStyles.w600.copyWith(
-                        fontSize: 12, color: ColorResources.WHITE_COLOR),
+                        fontSize: 12, color: Styles.WHITE_COLOR),
                   ),
                 ),
               if (myTrip.paidAt == null &&
@@ -255,12 +253,12 @@ class MyPendingTripCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                     decoration: BoxDecoration(
-                        color: ColorResources.tripStatus("pay"),
+                        color: Styles.tripStatus("pay"),
                         borderRadius: BorderRadius.circular(100)),
                     child: Text(
                       getTranslated("pay", context),
                       style: AppTextStyles.w600.copyWith(
-                          fontSize: 12, color: ColorResources.WHITE_COLOR),
+                          fontSize: 12, color: Styles.WHITE_COLOR),
                     ),
                   ),
                 ),

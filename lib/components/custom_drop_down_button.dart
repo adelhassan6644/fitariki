@@ -55,7 +55,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
             child: Text(
               item,
               style: AppTextStyles.w500
-                  .copyWith(color: ColorResources.TITLE, fontSize: 13),
+                  .copyWith(color: Styles.TITLE, fontSize: 13),
             ),
           );
         }).toList(),
@@ -66,15 +66,15 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
         validator: widget.validation,
         enabled: widget.enable,
         isExpanded: true,
-        dropdownColor: ColorResources.FILL_COLOR,
+        dropdownColor: Styles.FILL_COLOR,
         itemHeight: 50,
         icon: widget.icon ?? const Icon(
           Icons.keyboard_arrow_down_rounded,
-          color: ColorResources.SECOUND_PRIMARY_COLOR,
+          color: Styles.SECOUND_PRIMARY_COLOR,
         ),
         iconSize: widget.iconSize,
         borderRadius: const BorderRadius.all(Radius.circular(Dimensions.RADIUS_DEFAULT)),
-        decoration: InputDecoration(hintStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        decoration: InputDecoration(hintStyle: AppTextStyles.w400.copyWith(color: Styles.DISABLED, fontSize: 14),
           hintText: widget.name,
           prefixIcon: Padding(
             padding: EdgeInsets.symmetric(
@@ -95,14 +95,14 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
                       )
                     : null,
           ),
-          fillColor: ColorResources.FILL_COLOR,
+          fillColor: Styles.FILL_COLOR,
           filled: true,
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
@@ -111,7 +111,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                color: Styles.SECOUND_PRIMARY_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
@@ -120,7 +120,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
@@ -129,7 +129,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
@@ -138,7 +138,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.FAILED_COLOR,
+                color: Styles.FAILED_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
@@ -147,17 +147,17 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               Radius.circular(Dimensions.RADIUS_DEFAULT,),
             ),
             borderSide: BorderSide(
-                color: ColorResources.FAILED_COLOR,
+                color: Styles.FAILED_COLOR,
                 width: 1 ,
                 style: BorderStyle.solid
             ),),
           contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
           prefixIconConstraints: BoxConstraints(maxHeight: 20.h, ),
           labelText: widget.label,
-          errorStyle: AppTextStyles.w500.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
-          labelStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
+          errorStyle: AppTextStyles.w500.copyWith(color: Styles.FAILED_COLOR, fontSize: 11),
+          labelStyle: AppTextStyles.w400.copyWith(color: Styles.DISABLED, fontSize: 14),
         ),
-        style: AppTextStyles.w500.copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
+        style: AppTextStyles.w500.copyWith(color: Styles.PRIMARY_COLOR, fontSize: 14),
         name: widget.name,
         elevation: 1,
       ),

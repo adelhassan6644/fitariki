@@ -37,7 +37,7 @@ class ProfilePage extends StatelessWidget {
                         child: Text(getTranslated("save", context),
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
-                                color: ColorResources.SYSTEM_COLOR)),
+                                color: Styles.SYSTEM_COLOR)),
                       ),
                 title: fromLogin
                     ? getTranslated(

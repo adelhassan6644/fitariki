@@ -34,7 +34,7 @@ class MoreButton extends StatelessWidget {
                   border: withBorder
                       ? const Border(
                           bottom: BorderSide(
-                              color: ColorResources.HINT_COLOR, width: 0.5))
+                              color: Styles.HINT_COLOR, width: 0.5))
                       : null),
               padding: EdgeInsets.symmetric(vertical: 12.h),
               child: Row(
@@ -44,13 +44,13 @@ class MoreButton extends StatelessWidget {
                         style: AppTextStyles.w400.copyWith(
                             fontSize: 14,
                             color: isLogout
-                                ? ColorResources.FAILED_COLOR
-                                : ColorResources.SECOUND_PRIMARY_COLOR)),
+                                ? Styles.FAILED_COLOR
+                                : Styles.SECOUND_PRIMARY_COLOR)),
                   ),
                   !isLogout
                       ? const Icon(
                           Icons.arrow_forward_ios,
-                          color: ColorResources.DISABLED,
+                          color: Styles.DISABLED,
                           size: 16,
                         )
                       : const SizedBox()

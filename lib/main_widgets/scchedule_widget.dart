@@ -32,8 +32,8 @@ class ScheduleWidget extends StatelessWidget {
                           vertical: 6, horizontal: 12),
                       decoration: BoxDecoration(
                           color: provider.checkSelectDay(AppStrings.days[index])
-                              ? ColorResources.PRIMARY_COLOR
-                              : ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                              ? Styles.PRIMARY_COLOR
+                              : Styles.PRIMARY_COLOR.withOpacity(0.06),
                           borderRadius: BorderRadius.circular(4)),
                       child: Text(
                         AppStrings.days[index].dayName ?? "",
@@ -41,8 +41,8 @@ class ScheduleWidget extends StatelessWidget {
                           fontSize: 13,
                           height: 1.25,
                           color: provider.checkSelectDay(AppStrings.days[index])
-                              ? ColorResources.WHITE_COLOR
-                              : ColorResources.SECOUND_PRIMARY_COLOR,
+                              ? Styles.WHITE_COLOR
+                              : Styles.SECOUND_PRIMARY_COLOR,
                         ),
                       ),
                     ),

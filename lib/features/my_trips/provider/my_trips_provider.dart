@@ -58,7 +58,7 @@ class MyTripsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         currentTrips = [];
         isGetCurrentTrips = false;
@@ -78,7 +78,7 @@ class MyTripsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isGetCurrentTrips = false;
       notifyListeners();
@@ -99,7 +99,7 @@ class MyTripsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         previousTrips = [];
         isGetPreviousTrips = false;
@@ -119,7 +119,7 @@ class MyTripsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isGetPreviousTrips = false;
       notifyListeners();
@@ -140,7 +140,7 @@ class MyTripsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         pendingTrips = [];
         isGetPendingTrips = false;
@@ -161,7 +161,7 @@ class MyTripsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isGetPendingTrips = false;
       notifyListeners();

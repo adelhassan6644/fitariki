@@ -19,7 +19,7 @@ class DistanceWidgetShimmer extends StatelessWidget {
         children: [
           customImageIconSVG(
             imageName: SvgImages.sparkles,
-            color: ColorResources.PRIMARY_COLOR,
+            color: Styles.PRIMARY_COLOR,
           ),
            SizedBox(
             width: 4.w,

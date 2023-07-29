@@ -24,14 +24,14 @@ class CarTripDetailsWidget extends StatelessWidget {
       padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: ExpansionTileWidget(
-        iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
+        iconColor: Styles.SECOUND_PRIMARY_COLOR,
         title: getTranslated("car_data", context),
         children: [
           Row(
             children: [
               customImageIconSVG(
                   imageName: SvgImages.car,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                   height: 14,
                   width: 14),
               SizedBox(
@@ -48,13 +48,13 @@ class CarTripDetailsWidget extends StatelessWidget {
                 child: Container(
                   height: 10,
                   width: 1,
-                  color: ColorResources.HINT_COLOR,
+                  color: Styles.HINT_COLOR,
                   child: const SizedBox(),
                 ),
               ),
               customImageIconSVG(
                   imageName: SvgImages.carModel,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                   height: 14,
                   width: 14),
               SizedBox(
@@ -71,13 +71,13 @@ class CarTripDetailsWidget extends StatelessWidget {
                 child: Container(
                   height: 10,
                   width: 1,
-                  color: ColorResources.HINT_COLOR,
+                  color: Styles.HINT_COLOR,
                   child: const SizedBox(),
                 ),
               ),
               customImageIconSVG(
                   imageName: SvgImages.seat,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                   height: 14,
                   width: 14),
               SizedBox(
@@ -100,7 +100,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 visible: showCarPlate,
                 child: customImageIconSVG(
                     imageName: SvgImages.carPlate,
-                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    color: Styles.SECOUND_PRIMARY_COLOR,
                     height: 14,
                     width: 14),
               ),
@@ -128,14 +128,14 @@ class CarTripDetailsWidget extends StatelessWidget {
                   child: Container(
                     height: 10,
                     width: 1,
-                    color: ColorResources.HINT_COLOR,
+                    color: Styles.HINT_COLOR,
                     child: const SizedBox(),
                   ),
                 ),
               ),
               customImageIconSVG(
                   imageName: SvgImages.carColor,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR,
+                  color: Styles.SECOUND_PRIMARY_COLOR,
                   height: 14,
                   width: 14),
               SizedBox(
@@ -152,7 +152,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                 child: Container(
                   height: 10,
                   width: 1,
-                  color: ColorResources.HINT_COLOR,
+                  color: Styles.HINT_COLOR,
                   child: const SizedBox(),
                 ),
               ),
@@ -174,7 +174,7 @@ class CarTripDetailsWidget extends StatelessWidget {
                   getTranslated("show_car_image", context),
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 10,
-                    color: ColorResources.PRIMARY_COLOR
+                    color: Styles.PRIMARY_COLOR
                   ),
                 ),
               ),

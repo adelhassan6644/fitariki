@@ -63,7 +63,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                         imageName: followers!.data![index].gender == 0
                             ? SvgImages.maleIcon
                             : SvgImages.femaleIcon,
-                        color: ColorResources.BLUE_COLOR,
+                        color: Styles.BLUE_COLOR,
                         width: 11,
                         height: 11),
                     Padding(
@@ -71,7 +71,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                       child: Container(
                         height: 10,
                         width: 1,
-                        color: ColorResources.HINT_COLOR,
+                        color: Styles.HINT_COLOR,
                         child: const SizedBox(),
                       ),
                     ),
@@ -80,7 +80,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                         text: "يبعد عنك ",
                         style: AppTextStyles.w400.copyWith(
                             fontSize: 10,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            color: Styles.SECOUND_PRIMARY_COLOR),
                         children: <TextSpan>[
                           TextSpan(
                             text: "  ${Methods.calcDistance(
@@ -97,7 +97,7 @@ class FollowerDistanceWidget extends StatelessWidget {
                             )} كيلو",
                             style: AppTextStyles.w700.copyWith(
                                 fontSize: 10,
-                                color: ColorResources.PRIMARY_COLOR),
+                                color: Styles.PRIMARY_COLOR),
                           ),
                         ],
                       ),

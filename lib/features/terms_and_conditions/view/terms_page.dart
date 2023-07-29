@@ -45,7 +45,7 @@ class TermsPage extends StatelessWidget {
                     : const Expanded(
                         child: Center(
                           child: CircularProgressIndicator(
-                            color: ColorResources.PRIMARY_COLOR,
+                            color: Styles.PRIMARY_COLOR,
                           ),
                         ),
                       );

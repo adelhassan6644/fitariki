@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withBorder;
   final bool withBackGround;
   final bool isOffer;
-  final double? actionWidth;
+  final double actionWidth;
 
   const CustomAppBar(
       {Key? key,
@@ -26,7 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.withBorder = false,
       this.withBack = true,
       this.isOffer = true,
-      this.actionWidth,
+      this.actionWidth =30,
       this.actionChild})
       : super(key: key);
 
@@ -36,12 +36,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       width: context.width,
       decoration: BoxDecoration(
         color: withBackGround
-            ? ColorResources.APP_BAR_BACKGROUND_COLOR
+            ? Styles.APP_BAR_BACKGROUND_COLOR
             : Colors.transparent,
         border: withBorder
             ? Border(
                 bottom:
-                    BorderSide(color: ColorResources.BORDER_COLOR, width: 1.h))
+                    BorderSide(color: Styles.BORDER_COLOR, width: 1.h))
             : null,
       ),
       padding:
@@ -83,8 +83,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         CustomNavigator.pop();
                       },
                       child: SizedBox(
-                        width: actionWidth ?? 30,
-                        child:  Row(
+                        width: actionWidth ,
+                        child:  const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Icon(
@@ -96,7 +96,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ))
                   : SizedBox(
-                      width: actionWidth ?? 18,
+                      width: actionWidth ,
                     ),
             ],
           ),
@@ -107,5 +107,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(15005, 50);
+  Size get preferredSize => const Size(15005, 50);
 }

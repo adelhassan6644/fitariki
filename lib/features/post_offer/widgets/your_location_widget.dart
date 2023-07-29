@@ -24,7 +24,7 @@ class YourLocationWidget extends StatelessWidget {
           onPicked: provider.onSelectStartLocation,
           location: provider.startLocation,
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(

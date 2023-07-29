@@ -33,7 +33,7 @@ class ReportProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: fail.error,
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }, (response) {
           CustomNavigator.pop();
@@ -52,7 +52,7 @@ class ReportProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: e.toString(),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         notifyListeners();
       }

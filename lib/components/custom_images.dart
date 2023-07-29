@@ -36,7 +36,7 @@ Widget customCircleSvgIcon(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
-          backgroundColor: color ?? ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+          backgroundColor: color ?? Styles.PRIMARY_COLOR.withOpacity(0.1),
           radius: radius ?? 24.w,
           child: SvgPicture.asset(imageName,),
         ),
@@ -50,7 +50,7 @@ Widget customCircleSvgIcon(
               Text(
                 title ?? "",
                 style: AppTextStyles.w500.copyWith(
-                    color: ColorResources.PRIMARY_COLOR,
+                    color: Styles.PRIMARY_COLOR,
                      fontSize: 10),
                 overflow: TextOverflow.ellipsis,
               )

@@ -49,7 +49,7 @@ class AcceptableAnalytics extends StatelessWidget {
                     ChartData(
                       "Failed progress",
                       100 - value.toDouble(),
-                      ColorResources.HINT_COLOR,
+                      Styles.HINT_COLOR,
                     ),
                   ],
                 ),
@@ -65,7 +65,7 @@ class AcceptableAnalytics extends StatelessWidget {
                       style: AppTextStyles.w700.copyWith(
                           fontSize: 12,
                           height: 1,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                          color: Styles.SECOUND_PRIMARY_COLOR),
                     ),
                     Text(
                       "توافق",

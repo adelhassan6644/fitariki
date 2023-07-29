@@ -59,7 +59,7 @@ class UserCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         decoration: BoxDecoration(
-          color: ColorResources.WHITE_COLOR,
+          color: Styles.WHITE_COLOR,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -95,7 +95,7 @@ class UserCard extends StatelessWidget {
                       CustomNetworkImage.circleNewWorkImage(
                           image: image,
                           radius: 28,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                          color: Styles.SECOUND_PRIMARY_COLOR),
                       const SizedBox(
                         width: 8,
                       ),
@@ -123,7 +123,7 @@ class UserCard extends StatelessWidget {
                                   imageName: male
                                       ? SvgImages.maleIcon
                                       : SvgImages.femaleIcon,
-                                  color: ColorResources.BLUE_COLOR,
+                                  color: Styles.BLUE_COLOR,
                                   width: 11,
                                   height: 11)
                             ],
@@ -179,7 +179,7 @@ class UserCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                           height: 30,
                           width: 1,
                           child: const SizedBox(),
@@ -214,7 +214,7 @@ class UserCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
-                        color: ColorResources.HINT_COLOR,
+                        color: Styles.HINT_COLOR,
                         height: 30,
                         width: 1,
                         child: const SizedBox(),
@@ -243,7 +243,7 @@ class UserCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
-                        color: ColorResources.HINT_COLOR,
+                        color: Styles.HINT_COLOR,
                         height: 30,
                         width: 1,
                         child: const SizedBox(),
@@ -274,7 +274,7 @@ class UserCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Container(
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                           height: 30,
                           width: 1,
                           child: const SizedBox(),
@@ -338,7 +338,7 @@ class UserCard extends StatelessWidget {
                       if (withAnalytics)
                          AcceptableAnalytics(
                           value: matching??0,
-                          color: ColorResources.PRIMARY_COLOR,
+                          color: Styles.PRIMARY_COLOR,
                         ),
                     ],
                   )

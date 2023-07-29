@@ -33,7 +33,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -57,7 +57,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -84,7 +84,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
+                                  color: Styles.PRIMARY_COLOR
                                       .withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
@@ -104,7 +104,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -131,7 +131,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
+                                  color: Styles.PRIMARY_COLOR
                                       .withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
@@ -151,7 +151,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -181,7 +181,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
+                                  color: Styles.PRIMARY_COLOR
                                       .withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
@@ -199,7 +199,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -229,7 +229,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: ColorResources.PRIMARY_COLOR
+                                  color: Styles.PRIMARY_COLOR
                                       .withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
@@ -247,7 +247,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -267,7 +267,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 4, horizontal: 12),
                             decoration: BoxDecoration(
-                                color: ColorResources.PRIMARY_COLOR
+                                color: Styles.PRIMARY_COLOR
                                     .withOpacity(0.06),
                                 borderRadius: BorderRadius.circular(4)),
                             alignment: Alignment.center,
@@ -288,7 +288,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -326,7 +326,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
@@ -375,7 +375,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                         child: Container(
                           height: 1,
                           width: context.width,
-                          color: ColorResources.BORDER_COLOR,
+                          color: Styles.BORDER_COLOR,
                           child: const SizedBox(),
                         ),
                       ),

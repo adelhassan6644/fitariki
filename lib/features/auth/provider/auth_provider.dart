@@ -75,7 +75,7 @@ class AuthProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: fail.error,
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           notifyListeners();
         }, (success) {
@@ -97,7 +97,7 @@ class AuthProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
 
       _isLoading = false;
@@ -155,7 +155,7 @@ CustomNavigator.push(Routes.EDIT_PROFILE,replace: true,arguments: true);
         notification: AppNotification(
             message: getTranslated("your_logged_out_successfully", CustomNavigator.navigatorState.currentContext!),
             isFloating: true,
-            backgroundColor: ColorResources.ACTIVE,
+            backgroundColor: Styles.ACTIVE,
             borderColor: Colors.transparent));
     notifyListeners();
   }

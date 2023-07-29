@@ -54,7 +54,7 @@ class Verification extends StatelessWidget {
                             hintCharacter: "*",
                             autoFocus: true,
                             hintStyle: AppTextStyles.w500
-                                .copyWith(color: ColorResources.DISABLED),
+                                .copyWith(color: Styles.DISABLED),
                             appContext: context,
                             keyboardType: TextInputType.phone,
                             animationType: AnimationType.slide,
@@ -62,7 +62,7 @@ class Verification extends StatelessWidget {
                             obscuringCharacter: "*",
                             onCompleted: (v) => provider.sendOTP(code: v),
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            cursorColor: ColorResources.PRIMARY_COLOR,
+                            cursorColor: Styles.PRIMARY_COLOR,
                             errorTextSpace: 30.h,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(RegExp('[0-9]'))
@@ -76,13 +76,13 @@ class Verification extends StatelessWidget {
                               borderRadius: BorderRadius.circular(
                                   Dimensions.RADIUS_DEFAULT),
                               selectedColor:
-                                  ColorResources.SECOUND_PRIMARY_COLOR,
-                              selectedFillColor: ColorResources.FILL_COLOR,
-                              inactiveFillColor: ColorResources.FILL_COLOR,
+                                  Styles.SECOUND_PRIMARY_COLOR,
+                              selectedFillColor: Styles.FILL_COLOR,
+                              inactiveFillColor: Styles.FILL_COLOR,
                               inactiveColor:
-                                  ColorResources.SECOUND_PRIMARY_COLOR,
-                              activeColor: ColorResources.SECOUND_PRIMARY_COLOR,
-                              activeFillColor: ColorResources.FILL_COLOR,
+                                  Styles.SECOUND_PRIMARY_COLOR,
+                              activeColor: Styles.SECOUND_PRIMARY_COLOR,
+                              activeFillColor: Styles.FILL_COLOR,
                             ),
                             animationDuration:
                                 const Duration(milliseconds: 300),

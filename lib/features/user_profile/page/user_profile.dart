@@ -59,7 +59,7 @@ class UserProfile extends StatelessWidget {
                                 : provider.userProfileModel!.client!.image,
                             name: provider.userProfileModel!.driver != null
                                 ? "${provider.userProfileModel!.driver!.firstName}"
-                                : "${provider.userProfileModel!.client!.firstName} ${provider.userProfileModel!.client!.lastName}",
+                                : "${provider.userProfileModel!.client!.firstName}",
                             phone: provider.userProfileModel!.driver != null
                                 ? "${provider.userProfileModel!.driver!.phone}"
                                 : "${provider.userProfileModel!.client!.phone}",
@@ -159,7 +159,7 @@ class UserProfile extends StatelessWidget {
                             child: Text(
                               getTranslated("view_all", context),
                               style: AppTextStyles.w400.copyWith(
-                                  fontSize: 11, color: ColorResources.DISABLED),
+                                  fontSize: 11, color: Styles.DISABLED),
                             ),
                           )
                       ],
@@ -210,7 +210,6 @@ class UserProfile extends StatelessWidget {
                   // ),
                 ]),
               ),
-
             ],
           );
         }),

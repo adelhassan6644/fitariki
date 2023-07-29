@@ -56,7 +56,7 @@ class MyOffersProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         pendingTrips = [];
         isGetPendingTrips = false;
@@ -77,7 +77,7 @@ class MyOffersProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isGetPendingTrips = false;
       notifyListeners();
@@ -106,7 +106,7 @@ class MyOffersProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();
@@ -128,7 +128,7 @@ class MyOffersProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: l.error,
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent)), (response) {
         myOfferDetails = OfferModel.fromJson(response.data["data"]['offer']);
         isOfferDetailsLoading = false;
@@ -139,7 +139,7 @@ class MyOffersProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isOfferDetailsLoading = false;
       notifyListeners();
@@ -161,7 +161,7 @@ class MyOffersProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: l.error,
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isDelete = false;
         notifyListeners();
@@ -176,7 +176,7 @@ class MyOffersProvider extends ChangeNotifier {
                         : "request_deleted_successfully",
                     CustomNavigator.navigatorState.currentContext!),
                 isFloating: true,
-                backgroundColor: ColorResources.ACTIVE,
+                backgroundColor: Styles.ACTIVE,
                 borderColor: Colors.transparent));
         isDelete = false;
         notifyListeners();
@@ -187,7 +187,7 @@ class MyOffersProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isDelete = false;
       notifyListeners();

@@ -7,19 +7,19 @@ import '../core/utils/dimensions.dart';
 ThemeData light = ThemeData(
   fontFamily: AppStrings.fontFamily,
   useMaterial3: true,
-  primaryColor:ColorResources.PRIMARY_COLOR,
+  primaryColor:Styles.PRIMARY_COLOR,
   brightness: Brightness.light,
   // accentColor: Colors.white,
-  colorScheme: ColorScheme.light(primary: ColorResources.PRIMARY_COLOR, secondary: ColorResources.PRIMARY_COLOR),
+  colorScheme: ColorScheme.light(primary: Styles.PRIMARY_COLOR, secondary: Styles.PRIMARY_COLOR),
 
-  scaffoldBackgroundColor: ColorResources.BACKGROUND_COLOR,
+  scaffoldBackgroundColor: Styles.BACKGROUND_COLOR,
   focusColor: const Color(0xFFADC4C8),
-  hintColor: ColorResources.HINT_COLOR,
-  disabledColor:  ColorResources.DISABLED,
+  hintColor: Styles.HINT_COLOR,
+  disabledColor:  Styles.DISABLED,
   textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(
-    primary: ColorResources.PRIMARY_COLOR,
+    primary: Styles.PRIMARY_COLOR,
     textStyle:  AppTextStyles.w400.copyWith(
-      color: ColorResources.WHITE_COLOR,
+      color: Styles.WHITE_COLOR,
     ),
   )),
 
@@ -33,12 +33,12 @@ ThemeData light = ThemeData(
     backgroundColor: Colors.white,
     elevation: 0,
     titleTextStyle: TextStyle(
-        color: ColorResources.PRIMARY_COLOR,
+        color: Styles.PRIMARY_COLOR,
         fontSize: 25,
         fontFamily: AppStrings.fontFamily),
   ),
   textTheme: const TextTheme(
-    button: TextStyle(color: ColorResources.PRIMARY_COLOR),
+    button: TextStyle(color: Styles.PRIMARY_COLOR),
     headline1: TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: Dimensions.FONT_SIZE_DEFAULT,

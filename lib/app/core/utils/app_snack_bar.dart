@@ -89,8 +89,8 @@ showToast(msg, {Color? backGroundColor, Color? textColor, Toast? toastLength}) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
-      backgroundColor: backGroundColor ??  ColorResources.SECOUND_PRIMARY_COLOR.withOpacity(0.5),
-      textColor: textColor ?? ColorResources.WHITE_COLOR,
+      backgroundColor: backGroundColor ??  Styles.SECOUND_PRIMARY_COLOR.withOpacity(0.5),
+      textColor: textColor ?? Styles.WHITE_COLOR,
       fontSize: 16.0);
 }
 
@@ -98,10 +98,10 @@ successMotionToast(msg,{MotionToastPosition? position,AnimationType? animationTy
   return MotionToast.success(
     title: Text(
       getTranslated("success", CustomNavigator.navigatorState.currentContext!),
-      style: AppTextStyles.w600.copyWith(fontSize: 13, color: ColorResources.ACTIVE),
+      style: AppTextStyles.w600.copyWith(fontSize: 13, color: Styles.ACTIVE),
     ),
     description: Text(msg, style: AppTextStyles.w400
-          .copyWith(fontSize: 11, color: ColorResources.ACTIVE),
+          .copyWith(fontSize: 11, color: Styles.ACTIVE),
     ),
     height: 70.h,
     width: CustomNavigator.navigatorState.currentContext!.width-60.w,
@@ -116,12 +116,12 @@ errorMotionToast(msg,{MotionToastPosition? position,AnimationType? animationType
     title: Text(
       getTranslated("error", CustomNavigator.navigatorState.currentContext!),
       style: AppTextStyles.w600
-          .copyWith(fontSize: 13, color: ColorResources.IN_ACTIVE),
+          .copyWith(fontSize: 13, color: Styles.IN_ACTIVE),
     ),
     description: Text(
       msg,
       style: AppTextStyles.w400
-          .copyWith(fontSize: 11, color: ColorResources.IN_ACTIVE),
+          .copyWith(fontSize: 11, color: Styles.IN_ACTIVE),
     ),
     height: 70.h,
     width: CustomNavigator.navigatorState.currentContext!.width-60.w,

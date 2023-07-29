@@ -27,7 +27,7 @@ class ReportButton extends StatelessWidget {
             imageName: SvgImages.report,
             width: 24,
             height: 24,
-            color: ColorResources.SECOUND_PRIMARY_COLOR),
+            color: Styles.SECOUND_PRIMARY_COLOR),
       );
     });
   }

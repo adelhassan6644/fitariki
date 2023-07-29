@@ -21,7 +21,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
       padding:
       EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: ExpansionTileWidget(
-        iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
+        iconColor: Styles.SECOUND_PRIMARY_COLOR,
         title: getTranslated("trip_details", context),
         children: [
           Row(
@@ -38,7 +38,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
-                    color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                    color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
                 child: Text(startDate!.dateFormat(format: "MMM yyyy d"),
                     style: AppTextStyles.w400.copyWith(
@@ -63,7 +63,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
-                    color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                    color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
                 child: Text(endDate!.dateFormat(format: "MMM yyyy d"),
                     style: AppTextStyles.w400.copyWith(

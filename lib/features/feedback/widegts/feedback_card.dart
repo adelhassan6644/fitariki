@@ -28,7 +28,7 @@ class FeedbackCard extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                    color: ColorResources.CONTAINER_BACKGROUND_COLOR,
+                    color: Styles.CONTAINER_BACKGROUND_COLOR,
                     width: 1)),
             child: Row(
               children: [
@@ -42,7 +42,7 @@ class FeedbackCard extends StatelessWidget {
                                   ? feedback.driverModel!.image
                                   : feedback.clientModel!.image,
                               radius: 16,
-                              color: ColorResources.SECOUND_PRIMARY_COLOR),
+                              color: Styles.SECOUND_PRIMARY_COLOR),
                           SizedBox(
                             width: 8.w,
                           ),
@@ -78,7 +78,7 @@ class FeedbackCard extends StatelessWidget {
                                           : feedback.clientModel!.gender == 0
                                               ? SvgImages.maleIcon
                                               : SvgImages.femaleIcon,
-                                      color: ColorResources.BLUE_COLOR,
+                                      color: Styles.BLUE_COLOR,
                                       width: 11,
                                       height: 11)
                                 ],
@@ -137,7 +137,7 @@ class FeedbackCard extends StatelessWidget {
                     ) ??
                     "",
                 style: AppTextStyles.w400
-                    .copyWith(color: ColorResources.HINT_COLOR, fontSize: 10),
+                    .copyWith(color: Styles.HINT_COLOR, fontSize: 10),
               ))
         ],
       ),

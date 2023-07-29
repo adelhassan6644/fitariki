@@ -64,7 +64,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorResources.BACKGROUND_COLOR,
+      backgroundColor: Styles.BACKGROUND_COLOR,
       bottomNavigationBar: SafeArea(
         bottom: true,
         top: false,
@@ -72,7 +72,7 @@ class _DashBoardState extends State<DashBoard> {
             height: 60,
             width: context.width,
             decoration: BoxDecoration(
-                color: ColorResources.WHITE_COLOR,
+                color: Styles.WHITE_COLOR,
                 border: Border(
                     top: BorderSide(
                   color: const Color(0xFF3C3C43).withOpacity(0.36),
@@ -138,7 +138,7 @@ class _DashBoardState extends State<DashBoard> {
                           notification: AppNotification(
                               message: "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                               isFloating: true,
-                              backgroundColor: ColorResources.IN_ACTIVE,
+                              backgroundColor: Styles.IN_ACTIVE,
                               borderColor: Colors.transparent));
                       return;
                       // showToast("لم يتم تفعيل حسابك بعد");
@@ -159,14 +159,14 @@ class _DashBoardState extends State<DashBoard> {
                     );
                   }
                 },
-                backgroundColor: ColorResources.PRIMARY_COLOR,
+                backgroundColor: Styles.PRIMARY_COLOR,
                 shape: RoundedRectangleBorder(
                     side: const BorderSide(color: Colors.transparent),
                     borderRadius: BorderRadius.circular(100)),
                 child: const Icon(
                   Icons.add,
                   size: 24,
-                  color: ColorResources.WHITE_COLOR,
+                  color: Styles.WHITE_COLOR,
                 ),
               )
             : const SizedBox();

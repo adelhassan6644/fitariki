@@ -86,7 +86,7 @@ class CouponWidget extends StatelessWidget {
                         ? !paymentProvider.isLoading
                             ? Theme.of(context).primaryColor
                             : Theme.of(context).primaryColor.withOpacity(0.2)
-                        : ColorResources.ACTIVE,
+                        : Styles.ACTIVE,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(
                         Dimensions.RADIUS_DEFAULT,
@@ -101,11 +101,11 @@ class CouponWidget extends StatelessWidget {
                           ? Text(
                               getTranslated("apply", context),
                               style: AppTextStyles.w500.copyWith(
-                                  color: ColorResources.WHITE_COLOR,
+                                  color: Styles.WHITE_COLOR,
                                   fontSize: 14),
                             )
                           : const SpinKitThreeBounce(
-                              color: ColorResources.PRIMARY_COLOR,
+                              color: Styles.PRIMARY_COLOR,
                               size: 20,
                             )
                       : const Icon(Icons.clear, color: Colors.white),

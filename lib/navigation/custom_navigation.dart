@@ -5,16 +5,18 @@ import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/feedback/page/rate_trip.dart';
 import 'package:fitariki/features/terms_and_conditions/view/terms_view.dart';
+import 'package:fitariki/features/transactions/page/transactions_page.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
 import 'package:fitariki/features/wishlist/page/wishlist.dart';
 import 'package:fitariki/main_models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
+import '../components/custom_pdf.dart';
 import '../features/auth/pages/verification.dart';
 import '../features/contatct_with_us/page/contact_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
-import '../features/maps/pages/pick_map_screen.dart';
+import '../features/maps/page/pick_map_screen.dart';
 import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
 import '../features/my_trips/page/my_trip_details.dart';
@@ -87,6 +89,14 @@ abstract class CustomNavigator {
           data: settings.arguments as RateUserNavigationModel,
         ));
 
+      case Routes.PDF:
+        return _pageRoute(CustomPDF(
+          url: settings.arguments as String,
+        ));
+
+      case Routes.TRANSACTIONS:
+        return _pageRoute(const TransactionsPage());
+
       case Routes.WISHLIST:
         return _pageRoute(const Wishlist());
 
@@ -143,7 +153,9 @@ abstract class CustomNavigator {
         ));
 
       case Routes.TERMS_AND_CONDITIONS:
-        return _pageRoute( TermsView(isDriver: settings.arguments as bool,));
+        return _pageRoute(TermsView(
+          isDriver: settings.arguments as bool,
+        ));
 
       default:
         return MaterialPageRoute(builder: (_) => const MyApp());

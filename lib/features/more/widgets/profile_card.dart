@@ -50,7 +50,7 @@ class ProfileCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-                    color: ColorResources.WHITE_COLOR,
+                    color: Styles.WHITE_COLOR,
                     boxShadow: [
                       BoxShadow(
                           color: Colors.black.withOpacity(0.08),
@@ -69,13 +69,13 @@ class ProfileCard extends StatelessWidget {
                                   style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
                                       color:
-                                          ColorResources.SECOUND_PRIMARY_COLOR),
+                                          Styles.SECOUND_PRIMARY_COLOR),
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: distance,
                                       style: AppTextStyles.w700.copyWith(
                                           fontSize: 10,
-                                          color: ColorResources.PRIMARY_COLOR),
+                                          color: Styles.PRIMARY_COLOR),
                                     ),
                                   ],
                                 ),
@@ -93,12 +93,12 @@ class ProfileCard extends StatelessWidget {
                                 child: Text(getTranslated("edit", context),
                                     style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
-                                        color: ColorResources.SYSTEM_COLOR)),
+                                        color: Styles.SYSTEM_COLOR)),
                               ),
                         const Expanded(child: SizedBox()),
                         Text(lastUpdate ?? "ساعة",
                             style: AppTextStyles.w400.copyWith(
-                                fontSize: 10, color: ColorResources.DISABLED)),
+                                fontSize: 10, color: Styles.DISABLED)),
                       ],
                     ),
                     SizedBox(
@@ -132,7 +132,7 @@ class ProfileCard extends StatelessWidget {
                         Container(
                           width: 0.5.w,
                           height: 48.h,
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                         ),
                         const Expanded(
                           child: SizedBox(),
@@ -162,7 +162,7 @@ class ProfileCard extends StatelessWidget {
                                     imageName: male
                                         ? SvgImages.maleIcon
                                         : SvgImages.femaleIcon,
-                                    color: ColorResources.BLUE_COLOR,
+                                    color: Styles.BLUE_COLOR,
                                     width: 11,
                                     height: 11)
                               ],
@@ -206,7 +206,7 @@ class ProfileCard extends StatelessWidget {
                         Container(
                           width: 0.5.w,
                           height: 48.h,
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                         ),
                         const Expanded(
                           child: SizedBox(),

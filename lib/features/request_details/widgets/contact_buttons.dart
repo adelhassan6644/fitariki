@@ -23,7 +23,7 @@ class ContactButtons extends StatelessWidget {
               imageName: SvgImages.whatsApp,
               width: 24,
               height: 24,
-              color: ColorResources.PRIMARY_COLOR),
+              color: Styles.PRIMARY_COLOR),
         ),
         SizedBox(
           width: 12.w,
@@ -36,7 +36,7 @@ class ContactButtons extends StatelessWidget {
               imageName: SvgImages.phoneCallIcon,
               width: 24,
               height: 24,
-              color: ColorResources.PRIMARY_COLOR),
+              color: Styles.PRIMARY_COLOR),
         )
       ],
     );

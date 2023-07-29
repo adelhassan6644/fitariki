@@ -49,7 +49,7 @@ abstract class CupertinoPopUpHelper {
                   getTranslated(
                       "cancel", CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w400.copyWith(
-                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                      fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
             CupertinoDialogAction(
                 onPressed: onSend,
@@ -57,7 +57,7 @@ abstract class CupertinoPopUpHelper {
                   getTranslated(
                       "send", CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w600.copyWith(
-                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                      fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
           ],
         );
@@ -93,7 +93,7 @@ abstract class CupertinoPopUpHelper {
                   getTranslated(
                       "cancel", CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w400.copyWith(
-                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                      fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
             CupertinoDialogAction(
                 onPressed: onConfirm,
@@ -102,7 +102,7 @@ abstract class CupertinoPopUpHelper {
                       getTranslated("send",
                           CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w600.copyWith(
-                      fontSize: 17, color: ColorResources.SYSTEM_COLOR),
+                      fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
           ],
         );

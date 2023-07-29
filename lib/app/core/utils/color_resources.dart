@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ColorResources {
+abstract class Styles {
   static const Color BORDER_COLOR = Color(0xffCECECE);
   static const Color SECOUND_PRIMARY_COLOR = Color(0xff000000);
   static const Color PRIMARY_COLOR = Color(0xff9A2921);

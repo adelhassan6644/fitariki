@@ -19,7 +19,7 @@ final  MyTripsProvider provider;
       child: Container(
           padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
-              color:ColorResources.CONTAINER_BACKGROUND_COLOR,
+              color:Styles.CONTAINER_BACKGROUND_COLOR,
               borderRadius: BorderRadius.circular(6)),
           child: Row(
             children: List.generate(

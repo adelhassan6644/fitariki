@@ -28,7 +28,7 @@ class TermsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: ApiErrorHandler.getMessage(l),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
@@ -43,7 +43,7 @@ class TermsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();

@@ -106,6 +106,7 @@ abstract class Methods {
             1000)
         .toStringAsFixed(2);
   }
+
 }
 
 class WeekdayCount {
@@ -118,4 +119,5 @@ class WeekdayCount {
   String toString() {
     return "cont: $count -- days:$daysList  ";
   }
+
 }

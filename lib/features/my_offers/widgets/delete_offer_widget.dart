@@ -17,7 +17,7 @@ class DeleteOfferWidget extends StatelessWidget {
       child: Text(
         getTranslated("delete", context),
         style: AppTextStyles.w400
-            .copyWith(fontSize: 14, color: ColorResources.RED_COLOR),
+            .copyWith(fontSize: 14, color: Styles.RED_COLOR),
       ),
     );
   }

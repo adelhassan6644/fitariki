@@ -58,15 +58,15 @@ class PersonalInformationWidget extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: CustomTextFormField(
-              valid: Validations.name,
-              controller: provider.nickName,
-              hint: getTranslated("nick_name", context),
-              read: !fromLogin && provider.isDriver,
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(vertical: 8.h),
+          //   child: CustomTextFormField(
+          //     valid: Validations.name,
+          //     controller: provider.nickName,
+          //     hint: getTranslated("nick_name", context),
+          //     read: !fromLogin && provider.isDriver,
+          //   ),
+          // ),
           Row(
             children: [
               Expanded(
@@ -84,7 +84,7 @@ class PersonalInformationWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                     decoration: BoxDecoration(
-                        color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                        color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                         borderRadius: BorderRadius.circular(6)),
                     padding: const EdgeInsets.all(2),
                     child: Row(
@@ -95,11 +95,11 @@ class PersonalInformationWidget extends StatelessWidget {
                                     innerVPadding: 6,
                                     innerHPadding: 20,
                                     backGroundColor:
-                                        ColorResources.PRIMARY_COLOR,
+                                        Styles.PRIMARY_COLOR,
                                     title: getTranslated(
                                         provider.genders[index], context),
                                     svgIcon: provider.genderIcons[index],
-                                    iconColor: ColorResources.BLUE_COLOR,
+                                    iconColor: Styles.BLUE_COLOR,
                                     iconSize: 11,
                                     isSelected: index == provider.gender,
                                     onTab: () {
@@ -189,7 +189,7 @@ class PersonalInformationWidget extends StatelessWidget {
             location: provider.startLocation,
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                    color: Styles.LIGHT_BORDER_COLOR, width: 1),
                 borderRadius: BorderRadius.circular(8)),
           )
         ],

@@ -35,8 +35,8 @@ final TextEditingController? controller;
       keyboardType: inputType,
       inputFormatters: inputType == TextInputType.phone ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))] : formatter,
       style: AppTextStyles.w400.copyWith(
-              color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 13),
-      cursorColor: ColorResources.SECOUND_PRIMARY_COLOR,
+              color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 13),
+      cursorColor: Styles.SECOUND_PRIMARY_COLOR,
       onChanged: onChanged,
       decoration: InputDecoration(
         suffixIconConstraints:  const BoxConstraints(maxHeight: 22),
@@ -80,7 +80,7 @@ final TextEditingController? controller;
         contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         isDense: true,
         hintText: hint,
-        fillColor: ColorResources.LIGHT_GREY_BORDER,
+        fillColor: Styles.LIGHT_GREY_BORDER,
         filled: true,
       ),
     );

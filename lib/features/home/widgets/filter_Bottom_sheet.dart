@@ -64,7 +64,7 @@ class FilterBottomSheet extends StatelessWidget {
                         getTranslated("filter", context),
                         style: AppTextStyles.w400.copyWith(
                             fontSize: 14,
-                            color: ColorResources.PRIMARY_COLOR),
+                            color: Styles.PRIMARY_COLOR),
                       ),
                     ),
 
@@ -84,7 +84,7 @@ class FilterBottomSheet extends StatelessWidget {
                         getTranslated("reset", context),
                         style: AppTextStyles.w400.copyWith(
                             fontSize: 14,
-                            color: ColorResources.PRIMARY_COLOR),
+                            color: Styles.PRIMARY_COLOR),
                       ),
                     ),
 
@@ -96,7 +96,7 @@ class FilterBottomSheet extends StatelessWidget {
                 child: Container(
                   height: 1,
                   width: context.width,
-                  color: ColorResources.LIGHT_GREY_BORDER,
+                  color: Styles.LIGHT_GREY_BORDER,
                   child: const SizedBox(),
                 ),
               ),
@@ -160,7 +160,7 @@ class FilterBottomSheet extends StatelessWidget {
                             width: 170.w,
                             decoration: BoxDecoration(
                                 color:
-                                    ColorResources.CONTAINER_BACKGROUND_COLOR,
+                                    Styles.CONTAINER_BACKGROUND_COLOR,
                                 borderRadius: BorderRadius.circular(6)),
                             padding: EdgeInsets.all(2.h),
                             child: Row(
@@ -169,7 +169,7 @@ class FilterBottomSheet extends StatelessWidget {
                                   (index) => Expanded(
                                         child: TabWidget(
                                             backGroundColor:
-                                                ColorResources.PRIMARY_COLOR,
+                                                Styles.PRIMARY_COLOR,
                                             innerVPadding: 2.h,
                                             innerHPadding: 20.w,
                                             title: getTranslated(
@@ -178,7 +178,7 @@ class FilterBottomSheet extends StatelessWidget {
                                             svgIcon:
                                                 homeProvider.genderIcons[index],
                                             iconColor:
-                                                ColorResources.BLUE_COLOR,
+                                                Styles.BLUE_COLOR,
                                             iconSize: 11,
                                             isSelected:
                                                 index == homeProvider.gender,
@@ -204,7 +204,7 @@ class FilterBottomSheet extends StatelessWidget {
                       onPicked: homeProvider.onSelectStartLocation,
                       location: homeProvider.startLocation,
                       decoration: BoxDecoration(
-                        color: ColorResources.WHITE_COLOR,
+                        color: Styles.WHITE_COLOR,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow:[
                           BoxShadow(
@@ -235,7 +235,7 @@ class FilterBottomSheet extends StatelessWidget {
                       onPicked: homeProvider.onSelectEndLocation,
                       location: homeProvider.endLocation,
                       decoration: BoxDecoration(
-                        color: ColorResources.WHITE_COLOR,
+                        color: Styles.WHITE_COLOR,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow:[
                           BoxShadow(

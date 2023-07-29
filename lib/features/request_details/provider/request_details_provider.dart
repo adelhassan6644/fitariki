@@ -53,7 +53,7 @@ class RequestDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         if (status == 2) {
           CustomNavigator.pop();
@@ -92,7 +92,7 @@ class RequestDetailsProvider extends ChangeNotifier {
                   message: getTranslated("new_offer_price_sent",
                       CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
-                  backgroundColor: ColorResources.ACTIVE,
+                  backgroundColor: Styles.ACTIVE,
                   borderColor: Colors.transparent));
         } else {
           isRejecting = false;
@@ -115,7 +115,7 @@ class RequestDetailsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       notifyListeners();
     }
@@ -135,7 +135,7 @@ class RequestDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: (l.error),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
       }, (res) {
         if (res.data["data"]["request"] != null) {
@@ -154,7 +154,7 @@ class RequestDetailsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();

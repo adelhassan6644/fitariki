@@ -51,7 +51,7 @@ class _MyOffersState extends State<MyOffers>
                   return !provider.isLoading
                       ? Expanded(
                           child: RefreshIndicator(
-                            color: ColorResources.PRIMARY_COLOR,
+                            color: Styles.PRIMARY_COLOR,
                             onRefresh: () async {
                               sl<MyOffersProvider>().getMyOffers();
                             },

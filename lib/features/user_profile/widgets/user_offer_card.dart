@@ -31,7 +31,7 @@ class UserOfferCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 25.h),
               decoration: BoxDecoration(
-                color: ColorResources.WHITE_COLOR,
+                color: Styles.WHITE_COLOR,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
@@ -67,7 +67,7 @@ class UserOfferCard extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: Container(
-                                color: ColorResources.HINT_COLOR,
+                                color: Styles.HINT_COLOR,
                                 height: 10,
                                 width: 1,
                                 child: const SizedBox(),
@@ -126,7 +126,7 @@ class UserOfferCard extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: Container(
-                                color: ColorResources.HINT_COLOR,
+                                color: Styles.HINT_COLOR,
                                 height: 10,
                                 width: 1,
                                 child: const SizedBox(),
@@ -182,7 +182,7 @@ class UserOfferCard extends StatelessWidget {
                       ),
                       AcceptableAnalytics(
                         value: offerModel.matching ?? 0,
-                        color: ColorResources.PRIMARY_COLOR,
+                        color: Styles.PRIMARY_COLOR,
                       ),
                     ],
                   ),

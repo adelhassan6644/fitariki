@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
-import '../../request_details/provider/request_details_provider.dart';
 
 class NotificationCard extends StatefulWidget {
   const NotificationCard({required this.notificationItem, Key? key})
@@ -28,7 +26,7 @@ class _NotificationCardState extends State<NotificationCard> {
     return Dismissible(
       key: ValueKey(widget.notificationItem.id),
       background: Container(
-        color: ColorResources.SECOUND_PRIMARY_COLOR.withOpacity(0.20),
+        color: Styles.SECOUND_PRIMARY_COLOR.withOpacity(0.20),
         padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_DEFAULT.w),
         alignment: Alignment.centerRight,
         child: const Icon(
@@ -58,10 +56,10 @@ class _NotificationCardState extends State<NotificationCard> {
           decoration: BoxDecoration(
               color: widget.notificationItem.isRead == true
                   ? null
-                  : ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                  : Styles.PRIMARY_COLOR.withOpacity(0.1),
               border: Border(
                   bottom: BorderSide(
-                      color: ColorResources.LIGHT_GREY_BORDER, width: 1.h))),
+                      color: Styles.LIGHT_GREY_BORDER, width: 1.h))),
           child: Row(
             children: [
               Expanded(

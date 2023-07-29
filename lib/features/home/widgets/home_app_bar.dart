@@ -44,7 +44,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     children: [
                       customCircleSvgIcon(
                           imageName: SvgImages.location,
-                          color: ColorResources.WHITE_COLOR,
+                          color: Styles.WHITE_COLOR,
                           width: 40,
                           height: 40),
                       const SizedBox(
@@ -65,7 +65,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                                   style: AppTextStyles.w400.copyWith(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 11,
-                                      color: ColorResources.HINT_COLOR)),
+                                      color: Styles.HINT_COLOR)),
                             ),
                           ],
                         ),
@@ -78,7 +78,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 ),
                 customImageIconSVG(
                   imageName: SvgImages.navLogoIcon,
-                  color:ColorResources.PRIMARY_COLOR ,
+                  color:Styles.PRIMARY_COLOR ,
                     width: 25,
                     height: 25)
 

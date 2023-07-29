@@ -30,7 +30,7 @@ class SendFeedbackProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
       }, (res) {
         feedbackModel = FeedbackModel.fromJson(res.data);
@@ -42,7 +42,7 @@ class SendFeedbackProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();
@@ -80,7 +80,7 @@ class SendFeedbackProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: fail.error,
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }, (response) {
           CustomSnackBar.showSnackBar(
@@ -88,7 +88,7 @@ class SendFeedbackProvider extends ChangeNotifier {
                   message: getTranslated("your_feedback_sent_successfully",
                       CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
-                  backgroundColor: ColorResources.ACTIVE,
+                  backgroundColor: Styles.ACTIVE,
                   borderColor: Colors.transparent));
           clear();
           CustomNavigator.pop();
@@ -101,7 +101,7 @@ class SendFeedbackProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: e.toString(),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isSendFeedback = false;
         notifyListeners();
@@ -110,7 +110,7 @@ class SendFeedbackProvider extends ChangeNotifier {
       showToast(
           getTranslated("please_enter_your_feedback",
               CustomNavigator.navigatorState.currentContext!),
-          backGroundColor: ColorResources.IN_ACTIVE);
+          backGroundColor: Styles.IN_ACTIVE);
     }
   }
 }

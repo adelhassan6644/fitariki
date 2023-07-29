@@ -50,7 +50,7 @@ class MyTripCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -75,7 +75,7 @@ class MyTripCard extends StatelessWidget {
                                 ? myTrip.offer?.clientModel?.image?? myTrip.clientModel?.image  ?? ""
                                 : myTrip.offer?.driverModel?.image ??myTrip.driverModel?.image ?? "",
                             radius: 16,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            color: Styles.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
                           width: 8,
                         ),
@@ -89,7 +89,7 @@ class MyTripCard extends StatelessWidget {
                                   width: 80,
                                   child: Text(
                                     isDriver
-                                        ? "${myTrip.clientModel?.firstName?? myTrip.offer?.clientModel?.firstName  ?? ""} ${myTrip.clientModel?.lastName??myTrip.offer?.clientModel?.lastName ?? ""} "
+                                        ? myTrip.clientModel?.firstName?? myTrip.offer?.clientModel?.firstName ?? ""
                                         : myTrip.driverModel?.firstName??myTrip.offer?.driverModel?.firstName ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
@@ -110,7 +110,7 @@ class MyTripCard extends StatelessWidget {
                                         : myTrip.driverModel?.gender == 0
                                             ? SvgImages.maleIcon
                                             : SvgImages.femaleIcon,
-                                    color: ColorResources.BLUE_COLOR,
+                                    color: Styles.BLUE_COLOR,
                                     width: 11,
                                     height: 11)
                               ],
@@ -163,7 +163,7 @@ class MyTripCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
-                                  color: ColorResources.HINT_COLOR,
+                                  color: Styles.HINT_COLOR,
                                   height: 10,
                                   width: 1,
                                   child: const SizedBox(),
@@ -223,7 +223,7 @@ class MyTripCard extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
                                   child: Container(
-                                    color: ColorResources.HINT_COLOR,
+                                    color: Styles.HINT_COLOR,
                                     height: 10,
                                     width: 1,
                                     child: const SizedBox(),
@@ -297,7 +297,7 @@ class MyTripCard extends StatelessWidget {
                                   context),
                               style: AppTextStyles.w600.copyWith(
                                   fontSize: 12,
-                                  color: ColorResources.PRIMARY_COLOR),
+                                  color: Styles.PRIMARY_COLOR),
                             ),
                           ),
                         ],
@@ -351,12 +351,12 @@ class MyTripCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                     decoration: BoxDecoration(
-                        color: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                        color: Styles.PRIMARY_COLOR.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(100)),
                     child: Text(
                       getTranslated("rate", context),
                       style: AppTextStyles.w600.copyWith(
-                          fontSize: 12, color: ColorResources.PRIMARY_COLOR),
+                          fontSize: 12, color: Styles.PRIMARY_COLOR),
                     ),
                   ),
                 ),

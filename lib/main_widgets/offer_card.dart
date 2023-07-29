@@ -34,7 +34,7 @@ class OfferCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -59,7 +59,7 @@ class OfferCard extends StatelessWidget {
                                 ? offerModel.clientModel?.image ?? ""
                                 : offerModel.driverModel?.image ?? "",
                             radius: 16,
-                            color: ColorResources.SECOUND_PRIMARY_COLOR),
+                            color: Styles.SECOUND_PRIMARY_COLOR),
                         const SizedBox(
                           width: 8,
                         ),
@@ -74,9 +74,8 @@ class OfferCard extends StatelessWidget {
                                     width: 80,
                                     child: Text(
                                       sl<HomeProvider>().isDriver
-                                          ? "${offerModel.clientModel?.firstName ?? ""} ${offerModel.clientModel?.lastName ?? ""} "
-                                          : offerModel.driverModel?.firstName ??
-                                              "",
+                                          ? offerModel.clientModel?.firstName ?? ""
+                                          : offerModel.driverModel?.firstName ?? "",
                                       textAlign: TextAlign.start,
                                       maxLines: 1,
                                       style: AppTextStyles.w600.copyWith(
@@ -96,7 +95,7 @@ class OfferCard extends StatelessWidget {
                                           : offerModel.driverModel?.gender == 0
                                               ? SvgImages.maleIcon
                                               : SvgImages.femaleIcon,
-                                      color: ColorResources.BLUE_COLOR,
+                                      color: Styles.BLUE_COLOR,
                                       width: 11,
                                       height: 11)
                                 ],
@@ -144,7 +143,7 @@ class OfferCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
-                                  color: ColorResources.HINT_COLOR,
+                                  color: Styles.HINT_COLOR,
                                   height: 10,
                                   width: 1,
                                   child: const SizedBox(),
@@ -204,7 +203,7 @@ class OfferCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Container(
-                                  color: ColorResources.HINT_COLOR,
+                                  color: Styles.HINT_COLOR,
                                   height: 10,
                                   width: 1,
                                   child: const SizedBox(),
@@ -254,7 +253,7 @@ class OfferCard extends StatelessWidget {
                     ),
                     AcceptableAnalytics(
                       value: offerModel.matching ?? 0,
-                      color: ColorResources.PRIMARY_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                     ),
                   ],
                 ),

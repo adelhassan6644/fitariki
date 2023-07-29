@@ -52,7 +52,7 @@ class OfferDetails extends StatelessWidget {
                           data: [
                             ///user card
                             Container(
-                                color: ColorResources.APP_BAR_BACKGROUND_COLOR,
+                                color: Styles.APP_BAR_BACKGROUND_COLOR,
                                 child: UserCard(
                                   userId: provider.isDriver
                                       ? provider.offerDetails?.clientId
@@ -207,12 +207,12 @@ class OfferDetails extends StatelessWidget {
                         vertical: 24.h),
                     child: CustomButton(
                         textColor: provider.offerDetails?.isSentOffer == true
-                            ? ColorResources.PRIMARY_COLOR
-                            : ColorResources.WHITE_COLOR,
+                            ? Styles.PRIMARY_COLOR
+                            : Styles.WHITE_COLOR,
                         backgroundColor:
                             provider.offerDetails?.isSentOffer == true
-                                ? ColorResources.PRIMARY_COLOR.withOpacity(0.1)
-                                : ColorResources.PRIMARY_COLOR,
+                                ? Styles.PRIMARY_COLOR.withOpacity(0.1)
+                                : Styles.PRIMARY_COLOR,
                         text: provider.offerDetails?.isSentOffer == true
                             ? getTranslated(
                                 provider.isDriver
@@ -231,7 +231,7 @@ class OfferDetails extends StatelessWidget {
                                       message:
                                           "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                                       isFloating: true,
-                                      backgroundColor: ColorResources.IN_ACTIVE,
+                                      backgroundColor: Styles.IN_ACTIVE,
                                       borderColor: Colors.transparent));
 
                               // showToast("عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد");

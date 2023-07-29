@@ -14,7 +14,7 @@ class ShimmerFavouriteUserCard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(

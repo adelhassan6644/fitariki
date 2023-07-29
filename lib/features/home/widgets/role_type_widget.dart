@@ -25,7 +25,7 @@ class RoleTypeWidget extends StatelessWidget {
                 child: Container(
                     height: 32,
                     decoration: BoxDecoration(
-                        color: ColorResources.CONTAINER_BACKGROUND_COLOR,
+                        color: Styles.CONTAINER_BACKGROUND_COLOR,
                         borderRadius: BorderRadius.circular(6)),
                     child: Row(
                       children: List.generate(

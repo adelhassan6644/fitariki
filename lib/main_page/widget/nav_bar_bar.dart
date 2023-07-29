@@ -31,20 +31,20 @@ Widget build(BuildContext context) {
           svgIcon != null?
           customImageIconSVG(
             imageName:svgIcon!,
-            color:isSelected ? ColorResources.PRIMARY_COLOR :ColorResources.DISABLED ,
+            color:isSelected ? Styles.PRIMARY_COLOR :Styles.DISABLED ,
             width: width,
           ):
           customImageIcon(
             imageName: imageIcon!,
             height:height,
-            color:isSelected ? ColorResources.PRIMARY_COLOR :ColorResources.DISABLED ,
+            color:isSelected ? Styles.PRIMARY_COLOR :Styles.DISABLED ,
             width: width,
           ),
           name != null?
           Text(name!, textAlign: TextAlign.center,style: TextStyle(
             fontWeight:isSelected? FontWeight.w600: FontWeight.w400,
-            color: isSelected? ColorResources.PRIMARY_COLOR
-                :ColorResources.DISABLED,
+            color: isSelected? Styles.PRIMARY_COLOR
+                :Styles.DISABLED,
             overflow: TextOverflow.ellipsis,
             fontSize: 11,
           ),):const SizedBox.shrink()

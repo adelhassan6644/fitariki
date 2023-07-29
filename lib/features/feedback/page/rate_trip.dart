@@ -58,7 +58,7 @@ class RateTrip extends StatelessWidget {
                           getTranslated("congratulations", context),
                           style: AppTextStyles.w600.copyWith(
                               fontSize: 32,
-                              color: ColorResources.PRIMARY_COLOR),
+                              color: Styles.PRIMARY_COLOR),
                         ),
                       ),
                       Center(
@@ -73,10 +73,10 @@ class RateTrip extends StatelessWidget {
                             term: data.name,
                             textStyle: AppTextStyles.w500.copyWith(
                                 fontSize: 16,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR),
+                                color: Styles.SECOUND_PRIMARY_COLOR),
                             textStyleHighlight: AppTextStyles.w700.copyWith(
                                 fontSize: 16,
-                                color: ColorResources.SECOUND_PRIMARY_COLOR),
+                                color: Styles.SECOUND_PRIMARY_COLOR),
                           ),
                         ),
                       ),

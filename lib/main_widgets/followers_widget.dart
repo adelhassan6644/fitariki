@@ -41,7 +41,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                 ),
                 const Spacer(),
                 CupertinoSwitch(
-                  activeColor: ColorResources.GREEN,
+                  activeColor: Styles.GREEN,
                   value: provider.addFollowers,
                   onChanged: provider.onChange,
                 )
@@ -75,7 +75,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                           const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
-                          color: ColorResources.WHITE_COLOR,
+                          color: Styles.WHITE_COLOR,
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.08),

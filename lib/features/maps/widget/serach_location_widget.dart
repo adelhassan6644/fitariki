@@ -31,7 +31,7 @@ class SearchLocationWidget extends StatelessWidget {
       ),
       borderSide: BorderSide(
         style: BorderStyle.solid,
-        color: ColorResources.BORDER_COLOR,
+        color: Styles.BORDER_COLOR,
         width: 0,
       ),
     );
@@ -66,7 +66,7 @@ class SearchLocationWidget extends StatelessWidget {
           hintText: "search location",
           fillColor: Theme.of(context).cardColor,
           hintStyle: AppTextStyles.w400.copyWith(
-              fontSize: Dimensions.FONT_SIZE_DEFAULT, color: ColorResources.DISABLED),
+              fontSize: Dimensions.FONT_SIZE_DEFAULT, color: Styles.DISABLED),
           contentPadding: EdgeInsets.only(
           bottom:   Dimensions.PADDING_SIZE_DEFAULT,
           top:   Dimensions.PADDING_SIZE_DEFAULT,
@@ -88,13 +88,13 @@ class SearchLocationWidget extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               style: BorderStyle.solid,
-              color: ColorResources.BORDER_COLOR,
+              color: Styles.BORDER_COLOR,
               width: 0,
             ),
           ),
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
           child: Row(children: [
-            Icon(Icons.location_on,color: ColorResources.PRIMARY_COLOR,size: 25,),
+            Icon(Icons.location_on,color: Styles.PRIMARY_COLOR,size: 25,),
             SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT,),
             Expanded(
               child: SingleChildScrollView(

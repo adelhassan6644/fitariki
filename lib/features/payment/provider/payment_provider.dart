@@ -63,7 +63,7 @@ class PaymentProvider extends ChangeNotifier {
           notification: AppNotification(
               message: fail.error,
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
     }, (success) {
       _coupon = CouponModel.fromJson(success.data['data']['coupon']);
@@ -112,7 +112,7 @@ class PaymentProvider extends ChangeNotifier {
           notification: AppNotification(
               message: fail.error,
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
     }, (success) {
       taxPercentage=double.parse(success.data['data']['settings'][0]['tax'].toString());
@@ -153,7 +153,7 @@ class PaymentProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
       }, (success) {
         if (success.data["resID"] != null) {
@@ -165,7 +165,7 @@ class PaymentProvider extends ChangeNotifier {
                   message: getTranslated(
                       "fail", CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }
         isCheckOut = false;
@@ -176,7 +176,7 @@ class PaymentProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isCheckOut = false;
       notifyListeners();

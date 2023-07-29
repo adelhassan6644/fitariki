@@ -73,7 +73,7 @@ class WorkInformationWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                   decoration: BoxDecoration(
-                      color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                      color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
                       provider.startTime
@@ -111,7 +111,7 @@ class WorkInformationWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                   decoration: BoxDecoration(
-                      color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                      color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
                       provider.endTime
@@ -135,7 +135,7 @@ class WorkInformationWidget extends StatelessWidget {
             location: provider.endLocation,
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: ColorResources.LIGHT_BORDER_COLOR, width: 1),
+                    color: Styles.LIGHT_BORDER_COLOR, width: 1),
                 borderRadius: BorderRadius.circular(8)),
           ),
           const SizedBox(

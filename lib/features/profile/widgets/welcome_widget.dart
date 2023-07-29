@@ -14,7 +14,7 @@ class WelcomeWidget extends StatelessWidget {
         Center(
           child: Text(getTranslated("welcome", context),
               style: AppTextStyles.w600
-                  .copyWith(fontSize: 32, color: ColorResources.PRIMARY_COLOR)),
+                  .copyWith(fontSize: 32, color: Styles.PRIMARY_COLOR)),
         ),
         Center(
           child: Text(getTranslated("welcome_description", context),

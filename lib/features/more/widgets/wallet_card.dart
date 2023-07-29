@@ -29,7 +29,7 @@ class WalletCard extends StatelessWidget {
                 imageName: SvgImages.medal,
                 height: 24,
                 width: 24,
-                color: ColorResources.WHITE_COLOR),
+                color: Styles.WHITE_COLOR),
           ),
         ),
         SizedBox(width: 8.w,),
@@ -40,7 +40,7 @@ class WalletCard extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
-              color: ColorResources.DISABLED,
+              color: Styles.DISABLED,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
@@ -49,7 +49,7 @@ class WalletCard extends StatelessWidget {
                     imageName: SvgImages.wallet,
                     height: 24,
                     width: 24,
-                    color: ColorResources.WHITE_COLOR),
+                    color: Styles.WHITE_COLOR),
                 
                 Expanded(
                   child: Column(
@@ -63,14 +63,14 @@ class WalletCard extends StatelessWidget {
                             style: AppTextStyles.w700.copyWith(
                                 fontSize: 12,
                                 height: 1,
-                                color: ColorResources.WHITE_COLOR),
+                                color: Styles.WHITE_COLOR),
                             children: <TextSpan>[
                               TextSpan(
                                 text: ' ${getTranslated("sar", context)}',
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 10,
                                     height: 1,
-                                    color: ColorResources.WHITE_COLOR),
+                                    color: Styles.WHITE_COLOR),
                               ),
                             ],
                           ),
@@ -78,7 +78,7 @@ class WalletCard extends StatelessWidget {
                       ),
                       Text(getTranslated("pending", context),
                           style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, color: ColorResources.WHITE_COLOR)),
+                              fontSize: 10, color: Styles.WHITE_COLOR)),
                     ],
                   ),
                 )
@@ -94,7 +94,7 @@ class WalletCard extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
-              color: ColorResources.PRIMARY_COLOR,
+              color: Styles.PRIMARY_COLOR,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
@@ -103,7 +103,7 @@ class WalletCard extends StatelessWidget {
                     imageName: SvgImages.wallet,
                     height: 24,
                     width: 24,
-                    color: ColorResources.WHITE_COLOR),
+                    color: Styles.WHITE_COLOR),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,21 +115,21 @@ class WalletCard extends StatelessWidget {
                           style: AppTextStyles.w700.copyWith(
                               fontSize: 12,
                               height: 1,
-                              color: ColorResources.WHITE_COLOR),
+                              color: Styles.WHITE_COLOR),
                           children: <TextSpan>[
                             TextSpan(
                               text: ' ${getTranslated("sar", context)}',
                               style: AppTextStyles.w400.copyWith(
                                   fontSize: 10,
                                   height: 1,
-                                  color: ColorResources.WHITE_COLOR),
+                                  color: Styles.WHITE_COLOR),
                             ),
                           ],
                         ),
                       ),
                       Text(getTranslated("wallet_available", context),
                           style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, color: ColorResources.WHITE_COLOR)),
+                              fontSize: 10, color: Styles.WHITE_COLOR)),
                     ],
                   ),
                 )

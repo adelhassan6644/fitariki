@@ -93,8 +93,8 @@ class CustomTextFormField extends StatelessWidget {
           ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))]
           : formatter,
       style: AppTextStyles.w500
-          .copyWith(color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14),
-      cursorColor: ColorResources.SECOUND_PRIMARY_COLOR,
+          .copyWith(color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 14),
+      cursorColor: Styles.SECOUND_PRIMARY_COLOR,
       onChanged: onChanged,
       decoration: InputDecoration(
         counterText: "",
@@ -107,7 +107,7 @@ class CustomTextFormField extends StatelessWidget {
                   ? Image.asset(
                       pAssetIcon!,
                       height: 22.h,
-                      color: pIconColor ?? ColorResources.DISABLED,
+                      color: pIconColor ?? Styles.DISABLED,
                     )
                   : pSvgIcon != null
                       ? customImageIconSVG(
@@ -126,7 +126,7 @@ class CustomTextFormField extends StatelessWidget {
                   ? Image.asset(
                 sAssetIcon!,
                 height: 22.h,
-                color: sIconColor ?? ColorResources.DISABLED,
+                color: sIconColor ?? Styles.DISABLED,
               )
                   : sSvgIcon != null
                   ? customImageIconSVG(
@@ -144,7 +144,7 @@ class CustomTextFormField extends StatelessWidget {
                   ),
                 ),
                 borderSide: const BorderSide(
-                    color: ColorResources.LIGHT_BORDER_COLOR,
+                    color: Styles.LIGHT_BORDER_COLOR,
                     width: 1,
                     style: BorderStyle.solid),
               )
@@ -155,7 +155,7 @@ class CustomTextFormField extends StatelessWidget {
                   ),
                 ),
                 borderSide: const BorderSide(
-                    color: ColorResources.SECOUND_PRIMARY_COLOR,
+                    color: Styles.SECOUND_PRIMARY_COLOR,
                     width: 1,
                     style: BorderStyle.solid),
               ),
@@ -166,7 +166,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           borderSide: const BorderSide(
-              color: ColorResources.LIGHT_BORDER_COLOR,
+              color: Styles.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
@@ -177,7 +177,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           borderSide: const BorderSide(
-              color: ColorResources.LIGHT_BORDER_COLOR,
+              color: Styles.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
@@ -188,7 +188,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           borderSide: const BorderSide(
-              color: ColorResources.LIGHT_BORDER_COLOR,
+              color: Styles.LIGHT_BORDER_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
@@ -199,7 +199,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           borderSide: const BorderSide(
-              color: ColorResources.FAILED_COLOR,
+              color: Styles.FAILED_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
@@ -210,7 +210,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
           borderSide: const BorderSide(
-              color: ColorResources.FAILED_COLOR,
+              color: Styles.FAILED_COLOR,
               width: 1,
               style: BorderStyle.solid),
         ),
@@ -219,13 +219,13 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         alignLabelWithHint: true,
         hintText: hint,
-        labelStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
-        hintStyle: AppTextStyles.w400.copyWith(color: ColorResources.DISABLED, fontSize: 14),
+        labelStyle: AppTextStyles.w400.copyWith(color: Styles.DISABLED, fontSize: 14),
+        hintStyle: AppTextStyles.w400.copyWith(color: Styles.DISABLED, fontSize: 14),
         labelText: label ? hint : null,
-        fillColor: ColorResources.FILL_COLOR,
-        floatingLabelStyle: AppTextStyles.w400.copyWith(color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 11),
+        fillColor: Styles.FILL_COLOR,
+        floatingLabelStyle: AppTextStyles.w400.copyWith(color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 11),
         filled: true,
-        errorStyle: AppTextStyles.w400.copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
+        errorStyle: AppTextStyles.w400.copyWith(color: Styles.FAILED_COLOR, fontSize: 11),
         prefixIconConstraints: BoxConstraints(maxHeight: 25.h),
         suffixIconConstraints: BoxConstraints(maxHeight: 25.h),
       ),

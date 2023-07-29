@@ -30,7 +30,7 @@ class DistanceWidget extends StatelessWidget {
         children: [
           customImageIconSVG(
             imageName: SvgImages.sparkles,
-            color: ColorResources.PRIMARY_COLOR,
+            color: Styles.PRIMARY_COLOR,
           ),
           const SizedBox(
             width: 4,
@@ -46,7 +46,7 @@ class DistanceWidget extends StatelessWidget {
             maxLines: 1,
             style: AppTextStyles.w400.copyWith(
                 fontSize: 10,
-                color: ColorResources.HINT_COLOR,
+                color: Styles.HINT_COLOR,
                 overflow: TextOverflow.ellipsis),
           ),
           Text(
@@ -54,7 +54,7 @@ class DistanceWidget extends StatelessWidget {
             maxLines: 1,
             style: AppTextStyles.w600.copyWith(
                 fontSize: 10,
-                color: ColorResources.PRIMARY_COLOR,
+                color: Styles.PRIMARY_COLOR,
                 overflow: TextOverflow.ellipsis),
           ),
         ],

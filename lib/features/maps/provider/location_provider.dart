@@ -54,7 +54,7 @@ class LocationProvider extends ChangeNotifier {
                 message: getTranslated(error.error,
                     CustomNavigator.navigatorState.currentContext!),
                 isFloating: true,
-                backgroundColor: ColorResources.ACTIVE,
+                backgroundColor: Styles.ACTIVE,
                 borderColor: Colors.transparent));
       }, (response) {
         _predictionList = [];
@@ -159,7 +159,7 @@ class LocationProvider extends ChangeNotifier {
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();

@@ -28,7 +28,7 @@ class AcceptableWidget extends StatelessWidget {
                 padding:  EdgeInsets.symmetric(
                     horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                 child: Container(
-                  decoration:  BoxDecoration(color: ColorResources.PRIMARY_COLOR,
+                  decoration:  BoxDecoration(color: Styles.PRIMARY_COLOR,
                    borderRadius: BorderRadius.circular(8)),
                   padding:  const EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
                   width: context.width,
@@ -52,7 +52,7 @@ class AcceptableWidget extends StatelessWidget {
                                       height: 1.25,
                                         fontSize: 14,
                                         fontFamily: AppStrings.fontFamily,
-                                        color: ColorResources.WHITE_COLOR
+                                        color: Styles.WHITE_COLOR
                                     ),
                                     children:[
                                        TextSpan(
@@ -60,24 +60,24 @@ class AcceptableWidget extends StatelessWidget {
                                          style:  AppTextStyles.w600.copyWith(
                                              fontSize: 14,
                                              fontFamily: AppStrings.fontFamily,
-                                             color: ColorResources.SECOUND_PRIMARY_COLOR
+                                             color: Styles.SECOUND_PRIMARY_COLOR
                                          ),),
                                       TextSpan(
                                         text: 'مع',
                                         style:  AppTextStyles.w600.copyWith(
                                             fontSize: 14,
-                                            color: ColorResources.WHITE_COLOR
+                                            color: Styles.WHITE_COLOR
                                         ),),
                                     ],
                                   ),
                                 ),
                                 Text("مشوارك اليوم!",style: AppTextStyles.w600.copyWith(
                                     fontSize: 16,
-                                    color: ColorResources.WHITE_COLOR,
+                                    color: Styles.WHITE_COLOR,
                                 ),),
                                 Text("بنسبة تزيد عن 60%",style: AppTextStyles.w400.copyWith(
                                     fontSize: 10,
-                                    color: ColorResources.WHITE_COLOR
+                                    color: Styles.WHITE_COLOR
                                 ),),
                               ],
                             ),

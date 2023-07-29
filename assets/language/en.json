@@ -276,5 +276,8 @@
   "there_is_no_feedbacks_for_this_client": "There is no feedbacks for this client",
   "my_final_destination": "My Final Destination",
   "my_residence_housing_location": "My residence housing location",
-  "my_work_study_location": "My work study location"
+  "my_work_study_location": "My work study location",
+  "transactions": "Transactions",
+  "there_is_no_transactions": "There is no transactions",
+  "invoice": "Invoice"
 }

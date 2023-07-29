@@ -52,8 +52,8 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
     return SizedBox(
       width: context.width,
       child: FormBuilderDropdown(
-        iconEnabledColor: ColorResources.SECOUND_PRIMARY_COLOR,
-        iconDisabledColor:  ColorResources.DISABLED,
+        iconEnabledColor: Styles.SECOUND_PRIMARY_COLOR,
+        iconDisabledColor:  Styles.DISABLED,
 
         items: widget.items.map((dynamic item) {
           return DropdownMenuItem(
@@ -61,7 +61,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
             child: Text(
               item.name,
               style: AppTextStyles.w500
-                  .copyWith(color: ColorResources.TITLE, fontSize: 13),
+                  .copyWith(color: Styles.TITLE, fontSize: 13),
             ),
           );
         }).toList(),
@@ -71,15 +71,15 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
         disabledHint:Text( widget.initialValue??widget.name,
           style:  widget.initialValue != null
               ? AppTextStyles.w600.copyWith(
-              color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)
+              color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 14)
               : AppTextStyles.w500
-              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+              .copyWith(color: Styles.DISABLED, fontSize: 14),
         ) ,
         isDense: true,
         validator: widget.validation,
         isExpanded: true,
         enabled: widget.enable,
-        dropdownColor: ColorResources.FILL_COLOR,
+        dropdownColor: Styles.FILL_COLOR,
         itemHeight: 50,
         icon: widget.icon ?? const Icon(Icons.keyboard_arrow_down_rounded),
         iconSize: widget.iconSize,
@@ -87,9 +87,9 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
         decoration: InputDecoration(
           hintStyle: widget.isInitial == true
               ? AppTextStyles.w600.copyWith(
-                  color: ColorResources.SECOUND_PRIMARY_COLOR, fontSize: 14)
+                  color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 14)
               : AppTextStyles.w500
-                  .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+                  .copyWith(color: Styles.DISABLED, fontSize: 14),
           hintText: widget.name,
           prefixIcon: Padding(
             padding: EdgeInsets.symmetric(
@@ -111,7 +111,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
                     : null,
           ),
           enabled: widget.enable,
-          fillColor: ColorResources.FILL_COLOR,
+          fillColor: Styles.FILL_COLOR,
           filled: true,
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
@@ -120,7 +120,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -131,7 +131,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.SECOUND_PRIMARY_COLOR,
+                color: Styles.SECOUND_PRIMARY_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -142,7 +142,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -153,7 +153,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.LIGHT_BORDER_COLOR,
+                color: Styles.LIGHT_BORDER_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -164,7 +164,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.FAILED_COLOR,
+                color: Styles.FAILED_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -175,7 +175,7 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
               ),
             ),
             borderSide: BorderSide(
-                color: ColorResources.FAILED_COLOR,
+                color: Styles.FAILED_COLOR,
                 width: 1,
                 style: BorderStyle.solid),
           ),
@@ -185,11 +185,11 @@ class _DynamicDropDownButtonState extends State<DynamicDropDownButton> {
           ),
           labelText: widget.label,
           errorStyle: AppTextStyles.w500
-              .copyWith(color: ColorResources.FAILED_COLOR, fontSize: 11),
+              .copyWith(color: Styles.FAILED_COLOR, fontSize: 11),
           labelStyle: AppTextStyles.w400
-              .copyWith(color: ColorResources.DISABLED, fontSize: 14),
+              .copyWith(color: Styles.DISABLED, fontSize: 14),
         ),
-        style: AppTextStyles.w600.copyWith(color: ColorResources.PRIMARY_COLOR, fontSize: 14),
+        style: AppTextStyles.w600.copyWith(color: Styles.PRIMARY_COLOR, fontSize: 14),
         name: widget.name,
         elevation: 1,
       ),

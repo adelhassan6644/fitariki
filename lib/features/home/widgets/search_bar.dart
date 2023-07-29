@@ -44,7 +44,7 @@ class SearchBarWidget extends StatelessWidget {
                   hint ??
                       getTranslated("search_for_delivery_offers", context),
                   style: AppTextStyles.w400.copyWith(
-                      color: ColorResources.DISABLED,
+                      color: Styles.DISABLED,
                       fontSize: 14,
                       overflow: TextOverflow.ellipsis),
                 ),
@@ -69,12 +69,12 @@ class SearchBarWidget extends StatelessWidget {
                             ? const BorderSide(
                             color: Colors.transparent, width: 0)
                             : const BorderSide(
-                            color: ColorResources.HINT_COLOR, width: 1),
+                            color: Styles.HINT_COLOR, width: 1),
                         left: Provider.of<LocalizationProvider>(context,
                             listen: false)
                             .isLtr
                             ? const BorderSide(
-                            color: ColorResources.HINT_COLOR, width: 1)
+                            color: Styles.HINT_COLOR, width: 1)
                             : const BorderSide(
                             color: Colors.transparent, width: 0),
                       )),

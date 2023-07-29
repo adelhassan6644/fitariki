@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
               width: context.width,
               alignment: Alignment.center,
               decoration: const BoxDecoration(
-                  color: ColorResources.PRIMARY_COLOR
+                  color: Styles.PRIMARY_COLOR
               ),
               child:const SizedBox()),
             Image.asset(

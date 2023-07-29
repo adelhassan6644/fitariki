@@ -215,7 +215,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               progress < 1.0
                   ? LinearProgressIndicator(
                       value: progress,
-                      color: ColorResources.PRIMARY_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                       backgroundColor: Colors.red.shade50,
                     )
                   : const SizedBox.shrink(),

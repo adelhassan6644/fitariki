@@ -67,7 +67,7 @@ class MapWidget extends StatelessWidget {
                           imageName: gender == 0
                               ? SvgImages.maleIcon
                               : SvgImages.femaleIcon,
-                          color: ColorResources.BLUE_COLOR,
+                          color: Styles.BLUE_COLOR,
                           width: 11,
                           height: 11)
                     ],
@@ -129,7 +129,7 @@ class MapWidget extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
-                                      color: ColorResources.HINT_COLOR,
+                                      color: Styles.HINT_COLOR,
                                       overflow: TextOverflow.ellipsis),
                                 ),
                               )
@@ -157,7 +157,7 @@ class MapWidget extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
-                                      color: ColorResources.HINT_COLOR,
+                                      color: Styles.HINT_COLOR,
                                       overflow: TextOverflow.ellipsis),
                                 ),
                               )
@@ -218,7 +218,7 @@ class MapWidget extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
-                                      color: ColorResources.HINT_COLOR,
+                                      color: Styles.HINT_COLOR,
                                       overflow: TextOverflow.ellipsis),
                                 ),
                               )

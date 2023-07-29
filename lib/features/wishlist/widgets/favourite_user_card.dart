@@ -42,7 +42,7 @@ class FavouriteUserCard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           decoration: BoxDecoration(
-            color: ColorResources.WHITE_COLOR,
+            color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -59,7 +59,7 @@ class FavouriteUserCard extends StatelessWidget {
                       ? driver!.image ?? ""
                       : client!.image ?? "",
                   radius: 16,
-                  color: ColorResources.SECOUND_PRIMARY_COLOR),
+                  color: Styles.SECOUND_PRIMARY_COLOR),
               const SizedBox(
                 width: 8,
               ),
@@ -95,7 +95,7 @@ class FavouriteUserCard extends StatelessWidget {
                                 : client!.gender! == 0
                                     ? SvgImages.maleIcon
                                     : SvgImages.femaleIcon,
-                            color: ColorResources.BLUE_COLOR,
+                            color: Styles.BLUE_COLOR,
                             width: 11,
                             height: 11)
                       ],

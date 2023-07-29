@@ -26,11 +26,11 @@ class BankDataWidget extends StatelessWidget {
       ),
       tilePadding: const EdgeInsets.all(0),
       childrenPadding: EdgeInsets.only(bottom: 24.h),
-      collapsedIconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      collapsedTextColor: ColorResources.SECOUND_PRIMARY_COLOR,
+      collapsedIconColor: Styles.SECOUND_PRIMARY_COLOR,
+      collapsedTextColor: Styles.SECOUND_PRIMARY_COLOR,
       initiallyExpanded: true,
-      iconColor: ColorResources.SECOUND_PRIMARY_COLOR,
-      textColor: ColorResources.SECOUND_PRIMARY_COLOR,
+      iconColor: Styles.SECOUND_PRIMARY_COLOR,
+      textColor: Styles.SECOUND_PRIMARY_COLOR,
       shape: Border.all(
           color: Colors.transparent, width: 0, style: BorderStyle.none),
       collapsedShape: Border.all(
@@ -77,8 +77,8 @@ class BankDataWidget extends StatelessWidget {
               child: Text("SA",
                   style: AppTextStyles.w500.copyWith(
                     color: provider.hasData
-                        ? ColorResources.SECOUND_PRIMARY_COLOR
-                        : ColorResources.HINT_COLOR,
+                        ? Styles.SECOUND_PRIMARY_COLOR
+                        : Styles.HINT_COLOR,
                   ))),
           controller: provider.bankAccount,
           inputType: TextInputType.number,

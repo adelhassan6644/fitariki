@@ -68,7 +68,7 @@ class ProfileImageWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               border: Border.all(
-                                  color: ColorResources.PRIMARY_COLOR,
+                                  color: Styles.PRIMARY_COLOR,
                                   width: 1)),
                           child: Image.file(
                             imageFile!,
@@ -88,7 +88,7 @@ class ProfileImageWidget extends StatelessWidget {
                         ),
                       )
                     : CustomNetworkImage.circleNewWorkImage(
-                        color: ColorResources.PRIMARY_COLOR,
+                        color: Styles.PRIMARY_COLOR,
                         image: image,
                         radius: radius),
                 if (fromLogin)
@@ -98,15 +98,15 @@ class ProfileImageWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(47),
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: ColorResources.PRIMARY_COLOR,
+                            color: Styles.PRIMARY_COLOR,
                           ),
-                          color: ColorResources.HINT_COLOR.withOpacity(0.7),
+                          color: Styles.HINT_COLOR.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(100)),
                       child: customImageIconSVG(
                           imageName: SvgImages.editor,
                           height: 24,
                           width: 24,
-                          color: ColorResources.WHITE_COLOR)),
+                          color: Styles.WHITE_COLOR)),
               ],
             ),
           ),
@@ -122,7 +122,7 @@ class ProfileImageWidget extends StatelessWidget {
                   },
                   child: Text(getTranslated("edit", context),
                       style: AppTextStyles.w400.copyWith(
-                          fontSize: 10, color: ColorResources.SYSTEM_COLOR)),
+                          fontSize: 10, color: Styles.SYSTEM_COLOR)),
                 ),
               ],
             ),

@@ -35,7 +35,7 @@ class More extends StatelessWidget {
                               : ProfileCard(
                                   lastUpdate: provider.lastUpdate,
                                   image: provider.image,
-                                  name: "${provider.firstName.text} ${provider.lastName.text}",
+                                  name: provider.firstName.text,
                                   isDriver: provider.isDriver,
                                   male: provider.gender == 0,
                                   nationality: provider.nationality?.name,

@@ -57,9 +57,9 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                   child: CustomButton(
                     text: getTranslated("negotiation", context),
-                    backgroundColor: ColorResources.WHITE_COLOR,
+                    backgroundColor: Styles.WHITE_COLOR,
                     withBorderColor: true,
-                    textColor: ColorResources.PRIMARY_COLOR,
+                    textColor: Styles.PRIMARY_COLOR,
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
@@ -98,9 +98,9 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     text: provider.isDriver
                         ? getTranslated("reject_request", context)
                         : getTranslated("reject_offer", context),
-                    backgroundColor: ColorResources.WHITE_COLOR,
+                    backgroundColor: Styles.WHITE_COLOR,
                     withBorderColor: true,
-                    textColor: ColorResources.PRIMARY_COLOR,
+                    textColor: Styles.PRIMARY_COLOR,
                     onTap: () => provider.updateRequest(
                         fromMyTrip: true,
                         status: 3,
@@ -129,8 +129,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                   vertical: 16.h),
               child: CustomButton(
-                textColor: ColorResources.PRIMARY_COLOR,
-                backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                textColor: Styles.PRIMARY_COLOR,
+                backgroundColor: Styles.PRIMARY_COLOR.withOpacity(0.1),
                 text: getTranslated(
                     provider.isDriver
                         ? "waiting_for_client_replay"
@@ -169,8 +169,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                   vertical: 16.h),
               child: CustomButton(
-                textColor: ColorResources.PRIMARY_COLOR,
-                backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                textColor: Styles.PRIMARY_COLOR,
+                backgroundColor: Styles.PRIMARY_COLOR.withOpacity(0.1),
                 text: getTranslated(
                     "request_accepted_and_waiting_payment", context),
               ),
@@ -187,8 +187,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                   vertical: 16.h),
               child: CustomButton(
-                textColor: ColorResources.PRIMARY_COLOR,
-                backgroundColor: ColorResources.PRIMARY_COLOR.withOpacity(0.1),
+                textColor: Styles.PRIMARY_COLOR,
+                backgroundColor: Styles.PRIMARY_COLOR.withOpacity(0.1),
                 text: getTranslated(
                     provider.isDriver ? "request_rejected" : "offer_rejected",
                     context),

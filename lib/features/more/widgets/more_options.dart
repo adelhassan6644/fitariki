@@ -2,15 +2,14 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
 import 'package:fitariki/features/notifications/provider/notifications_provider.dart';
+import 'package:fitariki/features/transactions/provider/transactions_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
-import '../../feedback/provider/main_feedback_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import 'more_button.dart';
 
@@ -24,19 +23,21 @@ class MoreOptions extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-            color: ColorResources.WHITE_COLOR,
-            boxShadow: [BoxShadow(
+            color: Styles.WHITE_COLOR,
+            boxShadow: [
+              BoxShadow(
                   color: Colors.black.withOpacity(0.08),
                   blurRadius: 5.0,
                   spreadRadius: -1,
-                  offset: const Offset(0, 6))]),
+                  offset: const Offset(0, 6))
+            ]),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
           children: [
             MoreButton(
               title: getTranslated("personal_information", context),
               icon: SvgImages.file,
-              onTap: (){
+              onTap: () {
                 sl<ProfileProvider>().getProfile();
                 CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false);
               },
@@ -47,8 +48,20 @@ class MoreOptions extends StatelessWidget {
                 title: getTranslated("followers", context),
                 icon: SvgImages.addFollower,
                 onTap: () {
-                sl<FollowersProvider>().getFollowers();
+                  sl<FollowersProvider>().getFollowers();
                   CustomNavigator.push(Routes.FOLLOWERS);
+                },
+              ),
+            ),
+
+            Visibility(
+              visible: !sl<ProfileProvider>().isDriver,
+              child: MoreButton(
+                title: getTranslated("transactions", context),
+                icon: SvgImages.wallet,
+                onTap: () {
+                  sl<TransactionsProvider>().getTransactions();
+                  CustomNavigator.push(Routes.TRANSACTIONS);
                 },
               ),
             ),
@@ -85,6 +98,7 @@ class MoreOptions extends StatelessWidget {
               icon: SvgImages.call,
               onTap: () => CustomNavigator.push(Routes.CONTACT_WITH_US),
             ),
+
             MoreButton(
               title: getTranslated("log_out", context),
               icon: SvgImages.logout,

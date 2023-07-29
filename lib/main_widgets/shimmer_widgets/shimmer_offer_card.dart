@@ -20,7 +20,7 @@ class ShimmerOfferCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-          color: ColorResources.WHITE_COLOR,
+          color: Styles.WHITE_COLOR,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -106,7 +106,7 @@ class ShimmerOfferCard extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: Container(
-                                color: ColorResources.HINT_COLOR,
+                                color: Styles.HINT_COLOR,
                                 height: 10,
                                 width: 1,
                                 child: const SizedBox(),
@@ -163,7 +163,7 @@ class ShimmerOfferCard extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: Container(
-                                color: ColorResources.HINT_COLOR,
+                                color: Styles.HINT_COLOR,
                                 height: 10,
                                 width: 1,
                                 child: const SizedBox(),
@@ -210,7 +210,7 @@ class ShimmerOfferCard extends StatelessWidget {
                   ),
                   const AcceptableAnalytics(
                     value: 0,
-                    color: ColorResources.PRIMARY_COLOR,
+                    color: Styles.PRIMARY_COLOR,
                   ),
                 ],
               ),

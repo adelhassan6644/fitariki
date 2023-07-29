@@ -81,7 +81,7 @@ class _SuccessPageState extends State<SuccessPage> {
                           : getTranslated("has_been_sent", context),
                   style: AppTextStyles.w600.copyWith(
                       fontSize: 32,
-                      color: ColorResources.PRIMARY_COLOR),
+                      color: Styles.PRIMARY_COLOR),
                 ),
               ),
               Visibility(
@@ -95,10 +95,10 @@ class _SuccessPageState extends State<SuccessPage> {
                       term: widget.successModel.term ?? "",
                       textStyle: AppTextStyles.w500.copyWith(
                           fontSize: 16,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                          color: Styles.SECOUND_PRIMARY_COLOR),
                       textStyleHighlight: AppTextStyles.w700.copyWith(
                           fontSize: 16,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR),
+                          color: Styles.SECOUND_PRIMARY_COLOR),
                     ),
                   ),
                 ),
@@ -128,9 +128,9 @@ class _SuccessPageState extends State<SuccessPage> {
                     CustomNavigator.pop();
                   },
                   text: getTranslated("close", context),
-                  backgroundColor: ColorResources.WHITE_COLOR,
+                  backgroundColor: Styles.WHITE_COLOR,
                   withBorderColor: true,
-                  textColor: ColorResources.PRIMARY_COLOR,
+                  textColor: Styles.PRIMARY_COLOR,
                 ),
             ],
           ),

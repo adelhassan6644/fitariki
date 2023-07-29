@@ -57,7 +57,7 @@ class OfferDetailsShimmer extends StatelessWidget {
                     children: [
                       customImageIconSVG(
                           imageName: SvgImages.car,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR,
+                          color: Styles.SECOUND_PRIMARY_COLOR,
                           height: 14,
                           width: 14),
                       const SizedBox(
@@ -72,13 +72,13 @@ class OfferDetailsShimmer extends StatelessWidget {
                         child: Container(
                           height: 10,
                           width: 1,
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
                       customImageIconSVG(
                           imageName: SvgImages.carModel,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR,
+                          color: Styles.SECOUND_PRIMARY_COLOR,
                           height: 14,
                           width: 14),
                       const SizedBox(
@@ -93,13 +93,13 @@ class OfferDetailsShimmer extends StatelessWidget {
                         child: Container(
                           height: 10,
                           width: 1,
-                          color: ColorResources.HINT_COLOR,
+                          color: Styles.HINT_COLOR,
                           child: const SizedBox(),
                         ),
                       ),
                       customImageIconSVG(
                           imageName: SvgImages.seat,
-                          color: ColorResources.SECOUND_PRIMARY_COLOR,
+                          color: Styles.SECOUND_PRIMARY_COLOR,
                           height: 14,
                           width: 14),
                       const SizedBox(

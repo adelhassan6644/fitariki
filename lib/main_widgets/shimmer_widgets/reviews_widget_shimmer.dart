@@ -44,7 +44,7 @@ class ReviewWidgetShimmer extends StatelessWidget {
                   children: [
                     customImageIconSVG(
                         imageName: SvgImages.profileIcon,
-                        color: ColorResources.SECOUND_PRIMARY_COLOR,
+                        color: Styles.SECOUND_PRIMARY_COLOR,
                         height: 14,
                         width: 14),
                     const SizedBox(

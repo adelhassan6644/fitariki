@@ -79,7 +79,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
@@ -89,7 +89,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "تم تحديث بياناتك بنجاح !",
                 isFloating: true,
-                backgroundColor: ColorResources.ACTIVE,
+                backgroundColor: Styles.ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
@@ -100,7 +100,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();
@@ -124,7 +124,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: l.toString(),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
@@ -136,7 +136,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: response.data["data"]["message"],
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoading = false;
         notifyListeners();
@@ -146,7 +146,7 @@ class FollowerDetailsProvider extends ChangeNotifier {
           notification: AppNotification(
               message: e.toString(),
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
       notifyListeners();

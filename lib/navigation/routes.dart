@@ -24,5 +24,7 @@ class Routes {
   static const USER_PROFILE = "USER_PROFILE";
   static const ALL_USER_OFFERS = "ALL_USER_OFFERS";
   static const RATE_TRIP = "RATE_TRIP";
+  static const PDF = "PDF";
+  static const TRANSACTIONS = "TRANSACTIONS";
   static const TERMS_AND_CONDITIONS = "TERMS_AND_CONDITIONS";
 }

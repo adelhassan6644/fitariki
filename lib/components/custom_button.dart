@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
         this.textSize,
         this.withBorderColor=false,
       required this.text,
-       this.backgroundColor=ColorResources.PRIMARY_COLOR,  this.isError=false})
+       this.backgroundColor=Styles.PRIMARY_COLOR,  this.isError=false})
       : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         decoration: BoxDecoration(
           color: backgroundColor,
-          border: Border.all(color: withBorderColor?ColorResources.PRIMARY_COLOR: Colors.transparent ),
+          border: Border.all(color: withBorderColor?Styles.PRIMARY_COLOR: Colors.transparent ),
           borderRadius:  BorderRadius.circular(radius??10),
         ),
         duration: const Duration(
@@ -66,7 +66,7 @@ class CustomButton extends StatelessWidget {
               ? const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: CircularProgressIndicator(
-                    color: ColorResources.WHITE_COLOR,
+                    color: Styles.WHITE_COLOR,
                   ),
                 )
               : Row(
@@ -89,7 +89,7 @@ class CustomButton extends StatelessWidget {
                     child: Text(text, textAlign: TextAlign.center,style: AppTextStyles.w500.copyWith(
                           fontSize: textSize??16,
                           overflow: TextOverflow.ellipsis,
-                          color: textColor??   ColorResources.WHITE_COLOR,
+                          color: textColor??   Styles.WHITE_COLOR,
                         ),),
                   ),
                 ],

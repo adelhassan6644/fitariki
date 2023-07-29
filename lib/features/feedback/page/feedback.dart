@@ -46,7 +46,7 @@ class FeedbackView extends StatelessWidget {
                                   ))))
                   : Expanded(
                       child: RefreshIndicator(
-                        color: ColorResources.PRIMARY_COLOR,
+                        color: Styles.PRIMARY_COLOR,
                         onRefresh: () async {
                           sl<SendFeedbackProvider>().getFeedback();
                         },

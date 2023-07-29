@@ -136,7 +136,7 @@ class ProfileProvider extends ChangeNotifier {
   String? status;
 
   String? image;
-  TextEditingController nickName = TextEditingController();
+  // TextEditingController nickName = TextEditingController();
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController age = TextEditingController();
@@ -217,7 +217,7 @@ class ProfileProvider extends ChangeNotifier {
     ///personal data
     image = null;
     profileImage = null;
-    nickName.clear();
+    // nickName.clear();
     firstName.clear();
     lastName.clear();
     age.clear();
@@ -278,27 +278,27 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء اختيار الصورةالشخصية!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
     }
 
-    if (nickName.text.isEmpty) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء ادخال اسم الشهرة!",
-              isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      return;
-    }
+    // if (nickName.text.isEmpty) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: "برجاء ادخال اسم الشهرة!",
+    //           isFloating: true,
+    //           backgroundColor: Styles.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   return;
+    // }
     if (firstName.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "برجاء ادخال الاسم الاول!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -308,7 +308,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال الاسم الثاني!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -318,7 +318,7 @@ class ProfileProvider extends ChangeNotifier {
           notification: AppNotification(
               message: "برجاء اختيار العمر!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -327,7 +327,7 @@ class ProfileProvider extends ChangeNotifier {
           notification: AppNotification(
               message: "برجاء اختيار الحنسية!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -336,7 +336,7 @@ class ProfileProvider extends ChangeNotifier {
           notification: AppNotification(
               message: "برجاء اختيار الايام!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -346,7 +346,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادحال رقم الهوية!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -356,7 +356,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة الهوية!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -366,7 +366,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال الايميل!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -376,7 +376,7 @@ class ProfileProvider extends ChangeNotifier {
           notification: AppNotification(
               message: "برجاء ادخال بداية الطريق!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -385,7 +385,7 @@ class ProfileProvider extends ChangeNotifier {
           notification: AppNotification(
               message: "برجاء ادخال نهاية الطريق!",
               isFloating: true,
-              backgroundColor: ColorResources.IN_ACTIVE,
+              backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       return;
     }
@@ -395,7 +395,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال اسم السيارة!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -404,7 +404,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال موديل السيارة!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -413,7 +413,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال لوحة السيارة!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -422,7 +422,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال لون السيارة!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -432,7 +432,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة السيارة!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -442,7 +442,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء اختيار عدد مقاعد السيارة!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -452,7 +452,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة الرخصة!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -463,7 +463,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة الاستمارة!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -474,7 +474,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة التأمين!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -484,7 +484,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال الاسم الرباعي!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -493,7 +493,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء اختيار اسم البنك!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -502,7 +502,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: "برجاء ادخال رقم الحساب!",
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         return;
       }
@@ -512,7 +512,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: "برجاء اختيار صورة رقم الحساب!",
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           return;
         }
@@ -552,7 +552,7 @@ class ProfileProvider extends ChangeNotifier {
         final personalData = {
           isDriver ? "driver" : "client": {
             "fcm_token": await profileRepo.saveDeviceToken(),
-            "nick_name": nickName.text.trim(),
+            // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
             "email": email.text.trim(),
@@ -628,7 +628,7 @@ class ProfileProvider extends ChangeNotifier {
               notification: AppNotification(
                   message: ApiErrorHandler.getMessage(fail),
                   isFloating: true,
-                  backgroundColor: ColorResources.IN_ACTIVE,
+                  backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
           isLoadingProfile = false;
           notifyListeners();
@@ -644,7 +644,7 @@ class ProfileProvider extends ChangeNotifier {
                   message: getTranslated("successfully_updated",
                       CustomNavigator.navigatorState.currentContext!),
                   isFloating: true,
-                  backgroundColor: ColorResources.ACTIVE,
+                  backgroundColor: Styles.ACTIVE,
                   borderColor: Colors.transparent));
           isLoadingProfile = false;
           notifyListeners();
@@ -655,7 +655,7 @@ class ProfileProvider extends ChangeNotifier {
             notification: AppNotification(
                 message: e.toString(),
                 isFloating: true,
-                backgroundColor: ColorResources.IN_ACTIVE,
+                backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
         isLoadingProfile = false;
         notifyListeners();
@@ -729,7 +729,7 @@ class ProfileProvider extends ChangeNotifier {
     nationality = profileModel?.client?.national;
 
     image = profileModel?.client?.image;
-    nickName.text = profileModel?.client?.nickname ?? "";
+    // nickName.text = profileModel?.client?.nickname ?? "";
     firstName.text = profileModel?.client?.firstName ?? "";
     lastName.text = profileModel?.client?.lastName ?? "";
     age.text = profileModel?.client?.age ?? "";
@@ -760,7 +760,7 @@ class ProfileProvider extends ChangeNotifier {
     endLocation = profileModel?.driver?.dropOffLocation;
 
     image = profileModel?.driver?.image;
-    nickName.text = profileModel?.driver?.nickname ?? "";
+    // nickName.text = profileModel?.driver?.nickname ?? "";
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
     email.text = profileModel?.driver?.email ?? "";

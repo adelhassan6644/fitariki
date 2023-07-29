@@ -13,7 +13,7 @@ class ProfileCardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorResources.APP_BAR_BACKGROUND_COLOR,
+      color: Styles.APP_BAR_BACKGROUND_COLOR,
       child: Column(
         children: [
           SizedBox(height: 15.h + context.toPadding),
@@ -28,7 +28,7 @@ class ProfileCardShimmer extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-                      color: ColorResources.WHITE_COLOR,
+                      color: Styles.WHITE_COLOR,
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black.withOpacity(0.08),
@@ -83,7 +83,7 @@ class ProfileCardShimmer extends StatelessWidget {
                           Container(
                             width: 0.5.w,
                             height: 48.h,
-                            color: ColorResources.HINT_COLOR,
+                            color: Styles.HINT_COLOR,
                           ),
                           const Expanded(
                             child: SizedBox(),
@@ -128,7 +128,7 @@ class ProfileCardShimmer extends StatelessWidget {
                           Container(
                             width: 0.5.w,
                             height: 48.h,
-                            color: ColorResources.HINT_COLOR,
+                            color: Styles.HINT_COLOR,
                           ),
                           const Expanded(
                             child: SizedBox(),

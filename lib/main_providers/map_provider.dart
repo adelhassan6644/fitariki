@@ -94,7 +94,7 @@ class MapProvider extends ChangeNotifier {
 
     Polyline polyline = Polyline(
       polylineId: const PolylineId("poly"),
-      color: ColorResources.PRIMARY_COLOR,
+      color: Styles.PRIMARY_COLOR,
       points: polylineCoordinates,
       width: 3,
     );

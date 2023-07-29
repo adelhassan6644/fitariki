@@ -107,7 +107,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                       getTranslated("view_all", context),
                                       style: AppTextStyles.w400.copyWith(
                                           fontSize: 11,
-                                          color: ColorResources.DISABLED),
+                                          color: Styles.DISABLED),
                                     ),
                                   )
                               ],

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -31,9 +30,10 @@ class DioClient extends ApiClient {
         'X-Api-Key': EndPoints.apiKey
       };
     dio.interceptors.add(PrettyDioLogger(
-      request: true,
-      responseBody: true,requestBody: true,requestHeader: true
-    ));
+        request: true,
+        responseBody: true,
+        requestBody: true,
+        requestHeader: true));
   }
 
   // void updateHeader({required String token}) {
@@ -47,13 +47,13 @@ class DioClient extends ApiClient {
   @override
   Future<Response> get({
     required String uri,
-    bool useGoogleUri=false,
+    bool useGoogleUri = false,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      if(useGoogleUri) {
-        dio.options.baseUrl=EndPoints.googleMapsBaseUrl;
-      }else{
+      if (useGoogleUri) {
+        dio.options.baseUrl = EndPoints.googleMapsBaseUrl;
+      } else {
         dio.options.baseUrl = baseUrl;
       }
       var response = await dio.get(uri, queryParameters: queryParameters);

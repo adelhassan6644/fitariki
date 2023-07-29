@@ -29,7 +29,7 @@ class Notifications extends StatelessWidget {
               return !provider.isLoading
                   ? Expanded(
                       child: RefreshIndicator(
-                        color: ColorResources.PRIMARY_COLOR,
+                        color: Styles.PRIMARY_COLOR,
                         onRefresh: () async {
                           provider.getNotifications();
                         },
@@ -73,7 +73,7 @@ class Notifications extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         border: Border(
                                             bottom: BorderSide(
-                                                color: ColorResources
+                                                color: Styles
                                                     .LIGHT_GREY_BORDER,
                                                 width: 1.h))),
                                     child: CustomShimmerContainer(

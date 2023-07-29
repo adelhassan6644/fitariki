@@ -109,7 +109,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                   ? const Icon(
                       Icons.location_on_rounded,
                       size: 50,
-                      color: ColorResources.PRIMARY_COLOR,
+                      color: Styles.PRIMARY_COLOR,
                     )
                   : const CupertinoActivityIndicator()),
 
@@ -136,7 +136,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                     height: 205.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: ColorResources.WHITE_COLOR,
+                        color: Styles.WHITE_COLOR,
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.08),
@@ -160,7 +160,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                     Dimensions.RADIUS_DEFAULT),
-                                color: ColorResources.BORDER_COLOR,
+                                color: Styles.BORDER_COLOR,
                               ),
                             ),
                           ),
@@ -226,7 +226,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                   },
                   child: Icon(
                     Icons.location_on,
-                    color: ColorResources.PRIMARY_COLOR,
+                    color: Styles.PRIMARY_COLOR,
                   ),
                 ),
               )),

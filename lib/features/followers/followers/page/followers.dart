@@ -41,7 +41,7 @@ class Followers extends StatelessWidget {
                   getTranslated("add", context),
                   textAlign: TextAlign.start,
                   style: AppTextStyles.w400.copyWith(
-                      fontSize: 14, color: ColorResources.SYSTEM_COLOR),
+                      fontSize: 14, color: Styles.SYSTEM_COLOR),
                 ),
               ),
             ),

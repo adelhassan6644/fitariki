@@ -20,7 +20,7 @@ class DurationWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: ColorResources.WHITE_COLOR,
+        color: Styles.WHITE_COLOR,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -56,7 +56,7 @@ class DurationWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                   decoration: BoxDecoration(
-                      color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                      color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
                       provider.startDate
@@ -73,7 +73,7 @@ class DurationWidget extends StatelessWidget {
             child: Container(
               height: 1,
               width: context.width,
-              color: ColorResources.BORDER_COLOR,
+              color: Styles.BORDER_COLOR,
               child: const SizedBox(),
             ),
           ),
@@ -103,7 +103,7 @@ class DurationWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                   decoration: BoxDecoration(
-                      color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                      color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
                       provider.endDate
@@ -120,7 +120,7 @@ class DurationWidget extends StatelessWidget {
             child: Container(
               height: 1,
               width: context.width,
-              color: ColorResources.BORDER_COLOR,
+              color: Styles.BORDER_COLOR,
               child: const SizedBox(),
             ),
           ),
@@ -140,7 +140,7 @@ class DurationWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                 decoration: BoxDecoration(
-                    color: ColorResources.PRIMARY_COLOR.withOpacity(0.06),
+                    color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
                 alignment: Alignment.center,
                 child: Center(
@@ -160,7 +160,7 @@ class DurationWidget extends StatelessWidget {
             child: Container(
               height: 1,
               width: context.width,
-              color: ColorResources.BORDER_COLOR,
+              color: Styles.BORDER_COLOR,
               child: const SizedBox(),
             ),
           ),

@@ -63,5 +63,6 @@ class SvgImages {
   static const String edit = 'assets/svgs/edit.svg';
   static const String login = 'assets/svgs/login.svg';
   static const String send = 'assets/svgs/send.svg';
+  static const String withdraw = 'assets/svgs/withdraw.svg';
   static const String delete = 'assets/svgs/delete.svg';
 }

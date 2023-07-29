@@ -23,7 +23,7 @@ class GuestMode extends StatelessWidget {
           Text(
             getTranslated("register_with_us", context),
             style: AppTextStyles.w600
-                .copyWith(fontSize: 32, color: ColorResources.PRIMARY_COLOR),
+                .copyWith(fontSize: 32, color: Styles.PRIMARY_COLOR),
           ),
           SizedBox(
             height: 16.h,
@@ -33,7 +33,7 @@ class GuestMode extends StatelessWidget {
                 "and_enjoy_all_the_features_available_in_the_application",
                 context),
             style: AppTextStyles.w500.copyWith(
-                fontSize: 12, color: ColorResources.SECOUND_PRIMARY_COLOR),
+                fontSize: 12, color: Styles.SECOUND_PRIMARY_COLOR),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),
