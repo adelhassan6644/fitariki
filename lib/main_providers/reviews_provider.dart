@@ -34,12 +34,12 @@ class ReviewsProvider extends ChangeNotifier {
       isGetting = false;
       notifyListeners();
     } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: e.toString(),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      // CustomSnackBar.showSnackBar(
+      //     notification: AppNotification(
+      //         message: e.toString(),
+      //         isFloating: true,
+      //         backgroundColor: Styles.IN_ACTIVE,
+      //         borderColor: Colors.transparent));
       isGetting = false;
       notifyListeners();
     }
