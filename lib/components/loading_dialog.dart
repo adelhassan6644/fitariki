@@ -47,14 +47,17 @@ spinKitDialog() {
       barrierDismissible: false,
       context: CustomNavigator.navigatorState.currentContext!,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: context.height,
-          width: context.width,
-          child: const Center(
-            child: Center(
-              child: SpinKitFadingCircle(
-                color: Styles.WHITE_COLOR,
-                size: 50,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: SizedBox(
+            height: context.height,
+            width: context.width,
+            child: const Center(
+              child: Center(
+                child: SpinKitFadingCircle(
+                  color: Styles.WHITE_COLOR,
+                  size: 50,
+                ),
               ),
             ),
           ),
