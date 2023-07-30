@@ -74,7 +74,7 @@ class MoreOptions extends StatelessWidget {
               title: getTranslated("notifications", context),
               icon: SvgImages.notifications,
               onTap: () {
-                sl<NotificationsProvider>().getNotifications();
+
                 CustomNavigator.push(Routes.NOTIFICATIONS);
               },
             ),

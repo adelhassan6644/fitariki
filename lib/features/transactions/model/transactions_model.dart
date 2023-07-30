@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class TransactionsModel {
   List<TransactionItem>? transactions;
 
@@ -47,7 +49,7 @@ class TransactionItem {
     createdAt = json['created_at'] != null
         ? DateTime.parse(json['created_at'])
         : DateTime.now();
-    amount = json['amount'];
+    amount = double.parse(json['amount'].toString());
     paymentMethod = json['payment_method'];
     paymentStatus = json['payment_status'];
     paymentId = json['payment_id'];

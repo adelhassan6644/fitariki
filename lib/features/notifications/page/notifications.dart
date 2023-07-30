@@ -11,11 +11,26 @@ import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/notifications_provider.dart';
 import '../widget/notification_card.dart';
 
-class Notifications extends StatelessWidget {
+class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
 
   @override
+  State<Notifications> createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
+  @override
+  void initState() {
+ Future.delayed(Duration.zero,(){
+
+   Provider.of<NotificationsProvider>(context).getNotifications();
+ });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         bottom: true,
