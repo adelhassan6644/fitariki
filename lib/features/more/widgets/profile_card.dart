@@ -68,8 +68,7 @@ class ProfileCard extends StatelessWidget {
                                   text: "يبعد عنك ",
                                   style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
-                                      color:
-                                          Styles.SECOUND_PRIMARY_COLOR),
+                                      color: Styles.SECOUND_PRIMARY_COLOR),
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: distance,
@@ -140,32 +139,36 @@ class ProfileCard extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 80,
-                                  child: Text(
-                                    name ?? "",
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    style: AppTextStyles.w600.copyWith(
-                                      fontSize: 14,
-                                      height: 1.25,
-                                      overflow: TextOverflow.ellipsis,
+                            SizedBox(
+                              width: 80,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      name ?? "",
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      style: AppTextStyles.w600.copyWith(
+                                        fontSize: 14,
+                                        height: 1.25,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                customImageIconSVG(
-                                    imageName: male
-                                        ? SvgImages.maleIcon
-                                        : SvgImages.femaleIcon,
-                                    color: Styles.BLUE_COLOR,
-                                    width: 11,
-                                    height: 11)
-                              ],
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  customImageIconSVG(
+                                      imageName: male
+                                          ? SvgImages.maleIcon
+                                          : SvgImages.femaleIcon,
+                                      color: Styles.BLUE_COLOR,
+                                      width: 11,
+                                      height: 11)
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: 10.h,
@@ -184,7 +187,7 @@ class ProfileCard extends StatelessWidget {
                             ),
                             ShowRate(
                               rate: rate,
-                              size: 6,
+                              size: 10,
                             ),
                             Visibility(
                               visible: !withPhone,

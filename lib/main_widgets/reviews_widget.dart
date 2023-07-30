@@ -23,12 +23,13 @@ class ReviewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ReviewsProvider(repo: sl<FeedbackRepo>())..getReviews(id: id, ifOffer: isOffer),
+      create: (_) => ReviewsProvider(repo: sl<FeedbackRepo>())
+        ..getReviews(id: id, ifOffer: isOffer),
       child: Consumer<ReviewsProvider>(builder: (_, provider, child) {
         return provider.isGetting
             ? const ReviewWidgetShimmer()
             : Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -97,58 +98,58 @@ class ReviewsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Visibility(
-                            visible: !isOffer &&
-                                provider.offerFeedback!.feedbacks!.isEmpty,
-                            child: Row(
-                              children: [
-                                customImageIconSVG(
-                                    imageName: SvgImages.profileIcon,
-                                    color: Styles.SECOUND_PRIMARY_COLOR,
-                                    height: 14,
-                                    width: 14),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  getTranslated(
-                                      !provider.isDriver
-                                          ? "there_is_no_feedbacks_for_this_captain"
-                                          : "there_is_no_feedbacks_for_this_client",
-                                      context),
-                                  style: AppTextStyles.w400.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
+                          // Visibility(
+                          //   visible: !isOffer &&
+                          //       provider.offerFeedback!.feedbacks!.isEmpty,
+                          //   child: Row(
+                          //     children: [
+                          //       customImageIconSVG(
+                          //           imageName: SvgImages.profileIcon,
+                          //           color: Styles.SECOUND_PRIMARY_COLOR,
+                          //           height: 14,
+                          //           width: 14),
+                          //       const SizedBox(
+                          //         width: 4,
+                          //       ),
+                          //       Text(
+                          //         getTranslated(
+                          //             !provider.isDriver
+                          //                 ? "there_is_no_feedbacks_for_this_captain"
+                          //                 : "there_is_no_feedbacks_for_this_client",
+                          //             context),
+                          //         style: AppTextStyles.w400.copyWith(
+                          //           fontSize: 10,
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 8,
+                          // ),
                         ],
                       ),
                     ),
-                    SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          ...List.generate(
-                              provider.offerFeedback?.feedbacks?.length ?? 0,
-                              (index) => ReviewCard(
-                                    feedback: provider
-                                        .offerFeedback!.feedbacks![index],
-                                  )),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                        ],
-                      ),
-                    )
+                    // SingleChildScrollView(
+                    //   physics: const BouncingScrollPhysics(),
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: Row(
+                    //     children: [
+                    //       const SizedBox(
+                    //         width: 8,
+                    //       ),
+                    //       ...List.generate(
+                    //           provider.offerFeedback?.feedbacks?.length ?? 0,
+                    //           (index) => ReviewCard(
+                    //                 feedback: provider
+                    //                     .offerFeedback!.feedbacks![index],
+                    //               )),
+                    //       const SizedBox(
+                    //         width: 8,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               );

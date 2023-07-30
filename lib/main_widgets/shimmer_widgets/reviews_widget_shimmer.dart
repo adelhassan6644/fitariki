@@ -14,7 +14,7 @@ class ReviewWidgetShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 12.h),
+      padding:  EdgeInsets.symmetric(vertical: 0.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,30 +53,30 @@ class ReviewWidgetShimmer extends StatelessWidget {
                     CustomShimmerContainer(width: 150.w,height: 12.h,),
                   ],
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
+                // const SizedBox(
+                //   height: 8,
+                // ),
               ],
             ),
           ),
-          SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 8,
-                ),
-                ...List.generate(5, (index) =>  Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
-                  child: CustomShimmerContainer(width: 145.w,height: 90.h,radius: 8,),
-                )),
-                const SizedBox(
-                  width: 8,
-                ),
-              ],
-            ),
-          )
+          // SingleChildScrollView(
+          //   physics: const BouncingScrollPhysics(),
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [
+          //       const SizedBox(
+          //         width: 8,
+          //       ),
+          //       ...List.generate(5, (index) =>  Padding(
+          //         padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
+          //         child: CustomShimmerContainer(width: 145.w,height: 90.h,radius: 8,),
+          //       )),
+          //       const SizedBox(
+          //         width: 8,
+          //       ),
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );
