@@ -147,7 +147,7 @@ class ProfileCard extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      name ?? "",
+                                      name?.split(" ")[0] ?? "",
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       style: AppTextStyles.w600.copyWith(

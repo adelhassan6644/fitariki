@@ -104,17 +104,14 @@ class UserCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              SizedBox(
-                                width: 85,
-                                child: Text(
-                                  name ?? "",
-                                  textAlign: TextAlign.start,
-                                  maxLines: 1,
-                                  style: AppTextStyles.w600.copyWith(
-                                      fontSize: 14,
-                                      height: 1.25,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
+                              Text(
+                                name ?.split(" ")[0] ?? "",
+                                textAlign: TextAlign.start,
+                                maxLines: 1,
+                                style: AppTextStyles.w600.copyWith(
+                                    fontSize: 14,
+                                    height: 1.25,
+                                    overflow: TextOverflow.ellipsis),
                               ),
                               const SizedBox(
                                 width: 4,

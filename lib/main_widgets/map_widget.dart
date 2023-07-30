@@ -52,7 +52,7 @@ class MapWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        clientName!,
+                        clientName?.split(" ")[0]??"",
                         textAlign: TextAlign.start,
                         maxLines: 1,
                         style: AppTextStyles.w600.copyWith(

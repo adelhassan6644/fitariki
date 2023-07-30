@@ -70,19 +70,16 @@ class OfferCard extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  SizedBox(
-                                    width: 80,
-                                    child: Text(
-                                      sl<HomeProvider>().isDriver
-                                          ?"${ offerModel.clientModel?.firstName ?? ""} ${ offerModel.clientModel?.lastName ?? ""}"
-                                          : offerModel.driverModel?.firstName ?? "",
-                                      textAlign: TextAlign.start,
-                                      maxLines: 1,
-                                      style: AppTextStyles.w600.copyWith(
-                                          fontSize: 14,
-                                          height: 1.25,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
+                                  Text(
+                                    sl<HomeProvider>().isDriver
+                                        ?"${ offerModel.clientModel?.firstName ?? ""} "
+                                        : offerModel.driverModel!.firstName!.split(" ")[0] ?? "",
+                                    textAlign: TextAlign.start,
+                                    maxLines: 1,
+                                    style: AppTextStyles.w600.copyWith(
+                                        fontSize: 14,
+                                        height: 1.25,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                   const SizedBox(
                                     width: 4,

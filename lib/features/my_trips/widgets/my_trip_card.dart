@@ -86,11 +86,11 @@ class MyTripCard extends StatelessWidget {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 80,
+                                  // width: 80,
                                   child: Text(
                                     isDriver
                                         ? myTrip.clientModel?.firstName?? myTrip.offer?.clientModel?.firstName ?? ""
-                                        : myTrip.driverModel?.firstName??myTrip.offer?.driverModel?.firstName ?? "",
+                                        : myTrip.driverModel?.firstName?.split(" ")[0]??myTrip.offer?.driverModel?.firstName?.split(" ")[0] ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(

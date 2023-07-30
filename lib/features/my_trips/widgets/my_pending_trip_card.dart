@@ -73,19 +73,16 @@ class MyPendingTripCard extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                SizedBox(
-                                  width: 50,
-                                  child: Text(
-                                    myTrip.offer?.clientModel != null
-                                        ? myTrip.offer?.clientModel?.firstName ?? ""
-                                        : myTrip.offer?.driverModel?.firstName ?? "",
-                                    textAlign: TextAlign.start,
-                                    maxLines: 1,
-                                    style: AppTextStyles.w600.copyWith(
-                                        fontSize: 14,
-                                        height: 1.25,
-                                        overflow: TextOverflow.ellipsis),
-                                  ),
+                                Text(
+                                  myTrip.offer?.clientModel != null
+                                      ? myTrip.offer?.clientModel?.firstName ?? ""
+                                      : myTrip.offer?.driverModel?.firstName?.split(" ")[0] ?? "",
+                                  textAlign: TextAlign.start,
+                                  maxLines: 1,
+                                  style: AppTextStyles.w600.copyWith(
+                                      fontSize: 14,
+                                      height: 1.25,
+                                      overflow: TextOverflow.ellipsis),
                                 ),
                                 const SizedBox(
                                   width: 4,
