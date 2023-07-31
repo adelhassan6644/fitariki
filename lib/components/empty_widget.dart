@@ -42,7 +42,7 @@ class EmptyState extends StatelessWidget {
                     width: imgWidth ?? 200,
                     height:
                         imgHeight ?? 150) //width: MediaQueryHelper.width*.8,),
-                : customImageIconSVG(
+                :customImageIconSVG(
                     imageName: img ?? SvgImages.navLogoIcon,
                     width: imgWidth ?? 200,
                     height: imgHeight ?? 150),

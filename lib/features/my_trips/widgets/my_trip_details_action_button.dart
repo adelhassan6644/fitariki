@@ -66,6 +66,7 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                             description: getTranslated("negotiation_description", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
+                            maxLength: 4,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'^\d+\.?\d{0,2}')),

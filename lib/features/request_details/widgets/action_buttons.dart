@@ -68,6 +68,7 @@ class ActionButtons extends StatelessWidget {
                             description: getTranslated(
                                 "negotiation_description", context),
                             controller: provider.negotiationPrice,
+                            maxLength: 4,
                             keyboardType: const TextInputType.numberWithOptions(
                                 decimal: true),
                             inputFormatters: [

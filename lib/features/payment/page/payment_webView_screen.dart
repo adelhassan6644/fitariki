@@ -185,16 +185,16 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                             term: sl<RequestDetailsProvider>()
                                     .requestModel
                                     ?.driverModel
-                                    ?.firstName ??
+                                    ?.firstName?.split(" ")[0] ??
                                 sl<RequestDetailsProvider>()
                                     .requestModel
                                     ?.offer
                                     ?.driverModel
-                                    ?.firstName ??
+                                    ?.firstName?.split(" ")[0] ??
                                 "",
                             btnText: getTranslated("my_trips", context),
                             description:
-                                "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName ?? ""}"));
+                                "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName?.split(" ")[0] ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName?.split(" ")[0] ?? ""}"));
                   } else if (isFailed || isCancel) {
                     CustomNavigator.push(Routes.SUCCESS,
                         replace: true,

@@ -67,7 +67,11 @@ class LocationProvider extends ChangeNotifier {
 
   LocationModel? currentLocation;
   getCurrentLocation() async {
-    await Geolocator.requestPermission();
+    LocationPermission value =await Geolocator.checkPermission();
+
+    if(value ==LocationPermission.denied||value == LocationPermission.deniedForever) {
+      await Geolocator.requestPermission();
+    }
     Position newLocalData = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 

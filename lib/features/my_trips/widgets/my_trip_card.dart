@@ -341,8 +341,8 @@ class MyTripCard extends StatelessWidget {
                         arguments: RateUserNavigationModel(
                             isDriver: isDriver,
                             name: isDriver
-                                ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName ?? ""}"
-                                : myTrip.driverModel?.firstName ?? "",
+                                ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName?.split("")[0] ?? ""}"
+                                : myTrip.driverModel?.firstName?.split("")[0] ?? "",
                             userId:
                                 !isDriver ? myTrip.clientId : myTrip.driverId,
                             offerId: myTrip.offerId));

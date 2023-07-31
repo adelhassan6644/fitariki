@@ -12,6 +12,7 @@ abstract class CupertinoPopUpHelper {
       required String title,
       required String description,
       TextInputType? keyboardType,
+        int? maxLength,
       List<TextInputFormatter>? inputFormatters,
       Function()? onSend,
       Function()? onClose}) {
@@ -30,6 +31,7 @@ abstract class CupertinoPopUpHelper {
                 controller: controller,
                 keyboardType: keyboardType,
                 inputFormatters: inputFormatters,
+                maxLength: maxLength,
                 decoration: BoxDecoration(
                     color: const Color(0xFF767680).withOpacity(.12),
                     borderRadius: BorderRadius.circular(10)),
