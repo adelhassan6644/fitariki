@@ -25,7 +25,7 @@ class More extends StatelessWidget {
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh:()async{
-                      await  provider.getProfile();
+                        provider.getProfile();
                       } ,
                       child: ListAnimator(
                         customPadding: EdgeInsets.symmetric(horizontal: 16.w),

@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).requestFocus(FocusNode());
-        if(onTap != null){
+        if(onTap != null && !isLoading){
           onTap!();
 
         }

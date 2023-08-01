@@ -84,8 +84,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: Styles.PRIMARY_COLOR
-                                      .withOpacity(0.06),
+                                  color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.startTime
@@ -131,8 +130,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: Styles.PRIMARY_COLOR
-                                      .withOpacity(0.06),
+                                  color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.endTime
@@ -181,8 +179,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: Styles.PRIMARY_COLOR
-                                      .withOpacity(0.06),
+                                  color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.startDate
@@ -222,15 +219,15 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                 startDateTime: widget.provider.endDate,
                                 minDateTime: DateTime.now(),
                                 valueChanged: widget.provider.onSelectEndDate,
-                                label: getTranslated("end_of_duration", context),
+                                label:
+                                    getTranslated("end_of_duration", context),
                               ),
                             ),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 12),
                               decoration: BoxDecoration(
-                                  color: Styles.PRIMARY_COLOR
-                                      .withOpacity(0.06),
+                                  color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                                   borderRadius: BorderRadius.circular(4)),
                               child: Text(
                                   widget.provider.endDate
@@ -267,8 +264,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 4, horizontal: 12),
                             decoration: BoxDecoration(
-                                color: Styles.PRIMARY_COLOR
-                                    .withOpacity(0.06),
+                                color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                                 borderRadius: BorderRadius.circular(4)),
                             alignment: Alignment.center,
                             child: Center(
@@ -392,12 +388,12 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                           vertical: 12.h,
                         ),
                         child: CheckBoxListTile(
-                          title: getTranslated("my_work_study_location", context),
+                          title:
+                              getTranslated("my_work_study_location", context),
                           onChange: widget.provider.onSelect1,
                           check: widget.provider.sameDestination,
                         ),
                       ),
-
                     ],
                   ),
                 )

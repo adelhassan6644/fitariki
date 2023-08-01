@@ -60,7 +60,7 @@ class DurationWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
                       provider.startDate
-                          .dateFormat(format: "d MMM yyyy", lang: "ar-SA"),
+                          .dateFormat(format: "d MMM yyyy",),
                       style: AppTextStyles.w400.copyWith(
                         fontSize: 13,
                       )),

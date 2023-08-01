@@ -38,24 +38,24 @@ extension StringExtension on String {
 }
 
 extension DateExtention on DateTime {
-  String dateFormat({required String format, String? lang}) {
+  String dateFormat({required String format, String lang ="ar"}) {
     return DateFormat(
-      format,
+      format,lang
     ).format(this);
   }
 
-  String arTimeFormat() {
-    return DateFormat("hh,mm aa").format(this);
+  String arTimeFormat({String lang ="ar"}) {
+    return DateFormat("hh,mm aa",lang).format(this);
   }
 }
 
 extension DefaultFormat on DateTime {
-  String defaultFormat() {
-    return DateFormat("d MMM yyyy").format(this);
+  String defaultFormat({String lang ="ar"}) {
+    return DateFormat("d MMM yyyy",lang).format(this);
   }
 
-  String defaultFormat2() {
-    return DateFormat("d-MM-yyyy").format(this);
+  String defaultFormat2({String lang ="ar"}) {
+    return DateFormat("d-MM-yyyy",lang).format(this);
   }
 }
 
