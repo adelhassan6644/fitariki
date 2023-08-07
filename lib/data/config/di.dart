@@ -103,7 +103,7 @@ Future<void> init() async {
       () => MyOffersRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => RequestDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
-  sl.registerLazySingleton(() => PaymentRepo(dioClient: sl()));
+  sl.registerLazySingleton(() => PaymentRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(
       () => ContactRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
