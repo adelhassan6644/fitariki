@@ -71,7 +71,7 @@ class SendFeedbackProvider extends ChangeNotifier {
         final response = await feedbackRepo.sendFeedback(
           userId: userId,
           offerId: offerId,
-          rating: ratting!,
+          rating: ratting!+1,
           feedback: feedback.text.trim(),
         );
         response.fold((fail) {

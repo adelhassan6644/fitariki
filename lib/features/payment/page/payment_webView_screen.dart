@@ -1,8 +1,6 @@
 import 'dart:collection';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -16,7 +14,6 @@ import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../request_details/provider/request_details_provider.dart';
 import '../../success/model/success_model.dart';
-import 'package:webview_flutter/src/webview.dart';
 
 class PaymentWebViewScreen extends StatefulWidget {
   final int rservationId;
@@ -34,7 +31,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
-
           // //
           // ios: IOSInAppWebViewOptions(applePayAPIEnabled: true),
           // crossPlatform: InAppWebViewOptions(
@@ -59,7 +55,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   double progress = 0;
   bool _isLoading = true;
 
-  WebViewController? controllerGlobal;
   late MyInAppBrowser browser;
   void _initData() async {
     browser = MyInAppBrowser(context);

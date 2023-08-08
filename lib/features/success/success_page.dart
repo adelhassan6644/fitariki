@@ -28,8 +28,9 @@ class _SuccessPageState extends State<SuccessPage> {
     if (widget.successModel.isPopUp) {
       Future.delayed(const Duration(seconds: 2), () {
         if(widget.successModel.routeName!=null) {
-          if( widget.successModel.routeName == Routes.DASHBOARD)
+          if( widget.successModel.routeName == Routes.DASHBOARD) {
             sl.get<MyTripsProvider>().onSelectTap(2);
+          }
 
           CustomNavigator.push(
               widget.successModel.routeName ?? Routes.DASHBOARD,
