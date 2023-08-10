@@ -68,7 +68,7 @@ class RateTrip extends StatelessWidget {
                             textAlign: TextAlign.center,
                             text:
                                 "${getTranslated("your_trip_end_with", context)} ${getTranslated(data.isDriver! ? "passenger" : "captain", context)} ${data.name?.split(" ")[0]}",
-                            term: data.name,
+                            term: data.name!.split(" ")[0],
                             textStyle: AppTextStyles.w500.copyWith(
                                 fontSize: 16,
                                 color: Styles.SECOUND_PRIMARY_COLOR),

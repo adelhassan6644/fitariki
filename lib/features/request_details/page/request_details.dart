@@ -71,10 +71,15 @@ class _RequestDetailsState extends State<RequestDetails> {
                               userId: provider.requestModel?.clientId ??
                                   provider.requestModel?.driverId,
                               name: provider.requestModel?.clientModel != null
-                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? ""}"
+                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} "
                                   : provider.requestModel?.driverModel
                                           ?.firstName ??
                                       "",
+                              rate:provider.requestModel?.clientModel != null
+                                  ? provider.requestModel?.clientModel?.rate
+                                  : provider.requestModel?.driverModel
+                                  ?.rate ??
+                                  0 ,
                               image: provider.requestModel?.clientModel != null
                                   ? provider.requestModel?.clientModel?.image
                                   : provider.requestModel?.driverModel?.image,

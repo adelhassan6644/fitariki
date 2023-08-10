@@ -69,6 +69,13 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                       provider.requestModel?.offer?.driverModel
                                           ?.phone,
                               matching: provider.requestModel?.matching,
+                              rate:provider.isDriver
+                                  ? provider.requestModel?.clientModel?.rate ??
+                                  provider.requestModel?.offer?.clientModel
+                                      ?.rate
+                                  : provider.requestModel?.driverModel?.rate ??
+                                  provider.requestModel?.offer?.driverModel
+                                      ?.rate,
                               userId: provider.isDriver
                                   ? provider.requestModel?.clientModel?.id ??
                                       provider
