@@ -5,7 +5,13 @@ class EndPoints {
   static const String apiKey = 'eGvviZ/npgc2Blb4/PSymh1tyb/UIt3aq82W6f+Wn4=';
   static const String topic = 'fitariki';
   static const String logIn = 'auth/login';
-  static const String verifyPhone = 'auth/verify_phone';
+  static const String register = 'auth/register';
+  static const String resetPassword = '';
+  static const String forgetPassword = '';
+  static const String checkMailForResetPassword = 'resetPassword/checkCode';
+  static changePassword(id) => '/$id';
+  static const String resend = 'email/verification';
+  static const String verifyEmail = 'check/verificationCode';
   static const String getProfile = 'profile/profile';
   static const String getCountries = '/app/countries';
   static const String getBanks = '/app/banks';

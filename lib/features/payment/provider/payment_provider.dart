@@ -11,11 +11,12 @@ import '../repo/payment_repo.dart';
 class PaymentProvider extends ChangeNotifier {
   final PaymentRepo paymentRepo;
 
-  PaymentProvider({required this.paymentRepo}){paymentFees(); }
+  PaymentProvider({required this.paymentRepo}) {
+    paymentFees();
+  }
 
   OfferRequestDetailsModel? requestModel;
   setData(data) {
-
     requestModel = data;
     calcTotal();
     notifyListeners();
@@ -25,7 +26,7 @@ class PaymentProvider extends ChangeNotifier {
   double _discount = 0.0;
   String _code = '';
   double? tax;
-  double taxPercentage=0.0;
+  double taxPercentage = 0.0;
   double serviceCost = 0;
   double servicePercentage = 0;
   double total = 0.0;
@@ -98,13 +99,12 @@ class PaymentProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  Future<double> paymentFees() async
-  {
+
+  Future<double> paymentFees() async {
     isPaymentFeeLoading = true;
     notifyListeners();
 
-    var apiResponse =
-    await paymentRepo.paymentFees();
+    var apiResponse = await paymentRepo.paymentFees();
     apiResponse.fold((fail) {
       isPaymentFeeLoading = false;
       notifyListeners();
@@ -115,8 +115,10 @@ class PaymentProvider extends ChangeNotifier {
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
     }, (success) {
-      taxPercentage=double.parse(success.data['data']['settings'][0]['tax'].toString());
-      servicePercentage=double.parse(success.data['data']['settings'][0]['service_fee'].toString());
+      taxPercentage =
+          double.parse(success.data['data']['settings'][0]['tax'].toString());
+      servicePercentage = double.parse(
+          success.data['data']['settings'][0]['service_fee'].toString());
 
       calcTotal();
       isPaymentFeeLoading = false;
@@ -125,15 +127,19 @@ class PaymentProvider extends ChangeNotifier {
 
     return _discount;
   }
+
   calcTotal() {
-    tax=0;
-    serviceCost=0;
-    total=0;
-    tax = double.parse(((requestModel?.price ?? 0) * taxPercentage/100).toStringAsFixed(2));
-    serviceCost = double.parse(((requestModel?.price ?? 0) * servicePercentage/100).toStringAsFixed(2));
+    tax = 0;
+    serviceCost = 0;
+    total = 0;
+    tax = double.parse(
+        ((requestModel?.price ?? 0) * taxPercentage / 100).toStringAsFixed(2));
+    serviceCost = double.parse(
+        ((requestModel?.price ?? 0) * servicePercentage / 100)
+            .toStringAsFixed(2));
     print(serviceCost);
     total = (requestModel!.price! - _discount) + tax! + serviceCost;
-    print((requestModel!.price! - _discount) + tax!  );
+    print((requestModel!.price! - _discount) + tax!);
     notifyListeners();
   }
 
