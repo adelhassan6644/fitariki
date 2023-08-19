@@ -30,7 +30,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
     with AutomaticKeepAliveClientMixin<MyOfferDetails> {
   @override
   void initState() {
-    Future.delayed(Duration.zero,(){
+    Future.delayed(Duration.zero, () {
       sl<MyOffersProvider>().getMyOfferDetails(id: widget.offerId);
     });
 
@@ -66,16 +66,52 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                             startPoint: provider.myOfferDetails?.pickupLocation,
                             endPoint: provider.myOfferDetails?.dropOffLocation,
                           ),
-                          if(provider.myOfferDetails!.offerFollowers!.isNotEmpty)
+
+                          ///Type of ride
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  getTranslated("ride_type", context),
+                                  textAlign: TextAlign.start,
+                                  style: AppTextStyles.w600.copyWith(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  provider.myOfferDetails?.rideType ??"",
+                                  textAlign: TextAlign.end,
+                                  style: AppTextStyles.w400.copyWith(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          ///Followers Map
+                          if (provider
+                              .myOfferDetails!.offerFollowers!.isNotEmpty)
                             ...List.generate(
-                              provider.myOfferDetails?.offerFollowers?.length??
+                              provider.myOfferDetails?.offerFollowers?.length ??
                                   0,
-                                  (index) => MapWidget(
-                                clientName: provider.myOfferDetails?.offerFollowers?[index].name ??
+                              (index) => MapWidget(
+                                clientName: provider.myOfferDetails
+                                        ?.offerFollowers?[index].name ??
                                     "",
-                                gender:   provider.myOfferDetails?.offerFollowers?[index].gender,
-                                startPoint:   provider.myOfferDetails?.offerFollowers?[index].pickupLocation,
-                                endPoint:   provider.myOfferDetails?.offerFollowers?[index].dropOffLocation,
+                                gender: provider.myOfferDetails
+                                    ?.offerFollowers?[index].gender,
+                                startPoint: provider.myOfferDetails
+                                    ?.offerFollowers?[index].pickupLocation,
+                                endPoint: provider.myOfferDetails
+                                    ?.offerFollowers?[index].dropOffLocation,
                               ),
                             ),
                           Padding(
@@ -106,8 +142,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                     child: Text(
                                       getTranslated("view_all", context),
                                       style: AppTextStyles.w400.copyWith(
-                                          fontSize: 11,
-                                          color: Styles.DISABLED),
+                                          fontSize: 11, color: Styles.DISABLED),
                                     ),
                                   )
                               ],

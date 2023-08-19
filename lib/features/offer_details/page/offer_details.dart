@@ -186,6 +186,36 @@ class OfferDetails extends StatelessWidget {
                                     provider.offerDetails?.driverModel?.carInfo,
                               ),
                             ),
+
+                            ///Type of ride
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                  vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    getTranslated("ride_type", context),
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w600.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    provider.offerDetails?.rideType ?? "",
+                                    textAlign: TextAlign.end,
+                                    style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
                             Visibility(
                               visible: !provider.isDriver,
                               child: ReviewsWidget(

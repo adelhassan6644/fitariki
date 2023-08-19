@@ -17,10 +17,13 @@ class MyTripModel {
   int? driverId;
   int? requestId;
   int? offerPassengers;
+  String? rideType;
   DriverModel? driverModel;
   ClientModel? clientModel;
   OfferModel? offer;
   List<FollowerModel>? offerFollowers;
+
+
   MyTripModel(
       {this.id,
       this.offerId,
@@ -28,6 +31,7 @@ class MyTripModel {
       this.myTripRequest,
       this.paid,
       this.status,
+      this.rideType,
       this.clientId,
       this.driverId,
       this.offerPassengers,
@@ -41,6 +45,7 @@ class MyTripModel {
       offerId: json["offer_id"],
       driverId: json["driver_id"],
       clientId: json["client_id"],
+      rideType: json["ride_type"],
       requestId: json["offer_request_id"],
       paid: json["paid"] == 1 ? true : false,
       status: json["status"],

@@ -12,13 +12,17 @@ import 'marquee_widget.dart';
 
 class CustomAddressPicker extends StatelessWidget {
   const CustomAddressPicker(
-      {required this.hint, this.location, required this.onPicked, this.decoration, Key? key})
+      {required this.hint,
+      this.location,
+      required this.onPicked,
+      this.decoration,
+      Key? key})
       : super(key: key);
 
   final String hint;
   final LocationModel? location;
   final ValueChanged onPicked;
-  final  Decoration? decoration ;
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +33,13 @@ class CustomAddressPicker extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-        decoration:decoration ,
+        decoration: decoration,
         child: Row(
           children: [
+            customImageIconSVG(imageName: SvgImages.map),
+            const SizedBox(
+              width: 16,
+            ),
             Expanded(
               child: MarqueeWidget(
                 child: Text(
@@ -46,9 +54,13 @@ class CustomAddressPicker extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              width: 15,
+              width: 8,
             ),
-            customImageIconSVG(imageName: SvgImages.map)
+            const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Styles.HINT_COLOR,
+              size: 16,
+            ),
           ],
         ),
       ),

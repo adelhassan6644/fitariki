@@ -154,6 +154,35 @@ class MyTripDetails extends StatelessWidget {
                           : myTripModel.offer?.pickupLocation?.longitude ?? "0",
                     ),
 
+                    ///Type of ride
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                          vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            getTranslated("ride_type", context),
+                            textAlign: TextAlign.start,
+                            style: AppTextStyles.w600.copyWith(
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            myTripModel.rideType ??
+                                myTripModel.myTripRequest?.rideType ??
+                                myTripModel.offer?.rideType ?? "",
+                            textAlign: TextAlign.end,
+                            style: AppTextStyles.w400.copyWith(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
                     /// to show stop points for followers request if driver
                     Visibility(
                       visible: (myTripModel.myTripRequest?.followers != null &&

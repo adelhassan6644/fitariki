@@ -279,5 +279,8 @@
   "my_work_study_location": "My work study location",
   "transactions": "Transactions",
   "there_is_no_transactions": "There is no transactions",
-  "invoice": "Invoice"
+  "invoice": "Invoice",
+  "going": "Going",
+  "back": "Back",
+  "ride_type": "Ride type"
 }

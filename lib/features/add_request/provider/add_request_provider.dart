@@ -24,7 +24,18 @@ class AddRequestProvider extends ChangeNotifier {
   AddRequestRepo addRequestRepo;
   AddRequestProvider({required this.addRequestRepo});
 
-  // String?  note;
+  List<String> rideTypes = ["going", "back"];
+  List<String> selectedRideTypes = [];
+  onSelectRideTypes(v) {
+    if (selectedRideTypes.contains(v)) {
+      selectedRideTypes.remove(v);
+    }
+    else {
+      selectedRideTypes.add(v);
+    }
+    notifyListeners();
+  }
+
 
   TextEditingController minPrice = TextEditingController();
 
@@ -65,6 +76,7 @@ class AddRequestProvider extends ChangeNotifier {
 
   reset() {
     minPrice.clear();
+    selectedRideTypes.clear();
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
@@ -74,6 +86,14 @@ class AddRequestProvider extends ChangeNotifier {
   }
 
   checkData({required double minOfferPrice, required double maxOfferPrice}) {
+
+    if (selectedRideTypes.isEmpty) {
+      showToast("برجاء اختيار نوع المشوار!");
+
+      return;
+    }
+
+
     if (endDate.isBefore(startDate)) {
       showToast("تاريخ النهاية لا يجب ان يكون قبل تاريخ البداية!");
       return;
@@ -112,7 +132,8 @@ class AddRequestProvider extends ChangeNotifier {
       final data = {
         "request_offer": {
           sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
-              sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+          sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+          "ride_type": selectedRideTypes.join(" و "),
           "start_date": startDate.defaultFormat2(),
           "start_at": startDate.defaultFormat2(),
           "end_date": endDate.defaultFormat2(),

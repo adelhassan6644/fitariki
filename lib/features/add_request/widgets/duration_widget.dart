@@ -165,6 +165,70 @@ class DurationWidget extends StatelessWidget {
             ),
           ),
 
+          ///Type of ride
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  getTranslated("ride_type", context),
+                  style: AppTextStyles.w400.copyWith(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Row(
+                  children: List.generate(
+                   provider.rideTypes.length,
+                        (index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 4.0),
+                        child: GestureDetector(
+                          onTap: () => provider
+                              .onSelectRideTypes(getTranslated(
+                            provider.rideTypes[index], context)),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 6, horizontal: 12),
+                            decoration: BoxDecoration(
+                                color: provider.selectedRideTypes.contains(getTranslated(
+                                   provider.rideTypes[index], context))
+                                    ? Styles.PRIMARY_COLOR
+                                    : Styles.PRIMARY_COLOR
+                                    .withOpacity(0.06),
+                                borderRadius:
+                                BorderRadius.circular(4)),
+                            child: Text(
+                              getTranslated(provider.rideTypes[index], context),
+                              style: AppTextStyles.w400.copyWith(
+                                fontSize: 13,
+                                height: 1.25,
+                                color:provider.selectedRideTypes.contains(getTranslated(
+                                    provider.rideTypes[index], context))
+                                    ? Styles.WHITE_COLOR
+                                    : Styles.SECOUND_PRIMARY_COLOR,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  )),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Container(
+              height: 1,
+              width: context.width,
+              color: Styles.BORDER_COLOR,
+              child: const SizedBox(),
+            ),
+          ),
+
           ///Minimum price
           Row(
             children: [

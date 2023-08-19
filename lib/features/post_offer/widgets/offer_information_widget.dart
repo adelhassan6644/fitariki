@@ -12,7 +12,7 @@ import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/price_text_field.dart';
 import '../../../helpers/date_time_picker.dart';
-import '../../../main_widgets/scchedule_widget.dart';
+import '../../../main_widgets/schedule_widget.dart';
 import '../provider/post_offer_provider.dart';
 
 class OfferInformationWidget extends StatefulWidget {
@@ -52,6 +52,70 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Container(
+                          height: 1,
+                          width: context.width,
+                          color: Styles.BORDER_COLOR,
+                          child: const SizedBox(),
+                        ),
+                      ),
+
+                      ///Type of ride
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              getTranslated("ride_type", context),
+                              style: AppTextStyles.w400.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Row(
+                              children: List.generate(
+                            widget.provider.rideTypes.length,
+                            (index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: GestureDetector(
+                                  onTap: () => widget.provider
+                                      .onSelectRideTypes(getTranslated(
+                                      widget.provider.rideTypes[index], context)),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6, horizontal: 12),
+                                    decoration: BoxDecoration(
+                                        color:  widget.provider.selectedRideTypes.contains(getTranslated(
+                                            widget.provider.rideTypes[index], context))
+                                            ? Styles.PRIMARY_COLOR
+                                            : Styles.PRIMARY_COLOR
+                                                .withOpacity(0.06),
+                                        borderRadius:
+                                            BorderRadius.circular(4)),
+                                    child: Text(
+                                      getTranslated(widget.provider.rideTypes[index], context),
+                                      style: AppTextStyles.w400.copyWith(
+                                        fontSize: 13,
+                                        height: 1.25,
+                                        color:widget.provider.selectedRideTypes.contains(getTranslated(
+                                            widget.provider.rideTypes[index], context))
+                                            ? Styles.WHITE_COLOR
+                                            : Styles.SECOUND_PRIMARY_COLOR,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          )),
+                        ],
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Container(

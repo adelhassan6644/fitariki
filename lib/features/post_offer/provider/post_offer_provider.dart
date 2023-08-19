@@ -62,18 +62,17 @@ class PostOfferProvider extends ChangeNotifier {
 
   String? minPrice, maxPrice;
 
-  // List<String> timeZones = ["morning", "night"];
-  // String startTimeZone = "morning";
-  // String endTimeZone = "morning";
-  // void selectedStartTimeZone(String value) {
-  //   startTimeZone = value;
-  //   notifyListeners();
-  // }
-  //
-  // void selectedEndTimeZone(String value) {
-  //   endTimeZone = value;
-  //   notifyListeners();
-  // }
+  List<String> rideTypes = ["going", "back"];
+  List<String> selectedRideTypes = [];
+  onSelectRideTypes(v) {
+    if (selectedRideTypes.contains(v)) {
+      selectedRideTypes.remove(v);
+    }
+    else {
+      selectedRideTypes.add(v);
+    }
+    notifyListeners();
+  }
 
   DateTime startTime = DateTime.now();
 
@@ -147,6 +146,7 @@ class PostOfferProvider extends ChangeNotifier {
     endTime = DateTime.now();
     startDate = DateTime.now();
     selectedFollowers.clear();
+    selectedRideTypes.clear();
     sameHomeLocation = false;
     sameDestination = false;
     scheduleProvider.selectedDays.clear();
@@ -160,11 +160,19 @@ class PostOfferProvider extends ChangeNotifier {
 
       return;
     }
+
     if (scheduleProvider.selectedDays.isEmpty) {
       showToast("برجاء اختيار الايام!");
 
       return;
     }
+
+    if (selectedRideTypes.isEmpty) {
+      showToast("برجاء اختيار نوع المشوار!");
+
+      return;
+    }
+
     if (startTime.isAtSameMomentAs(endTime)) {
       showToast(" وقت النهاية لا يجب ان يكون مثل وقت البداية!");
 
@@ -187,16 +195,19 @@ class PostOfferProvider extends ChangeNotifier {
       showToast("برجاء اختيار الحد الادني للسعر!");
       return;
     }
+
     if (maxPrice == null || maxPrice == "") {
       showToast("برجاء اختيار الحد الاعلي للسعر!");
 
       return;
     }
+
     if (double.parse(minPrice!) >= double.parse(maxPrice!)) {
       showToast("الحد الاعلي للسعر يجب ان يكون اعلي من الحد الادني للسعر!");
 
       return;
     }
+
     if (endLocation == null) {
       showToast("برجاء اختيار نقطة النهاية!");
 
@@ -216,9 +227,9 @@ class PostOfferProvider extends ChangeNotifier {
         maxPrice: double.tryParse(maxPrice!),
         offerDays: scheduleProvider.selectedDays,
         duration: counts!.count,
-
-        // duration:
+        rideType: selectedRideTypes.join(" , "),
       );
+
       spinKitDialog();
       notifyListeners();
       final response = await postOfferRepo.postOffer(offerModel: offerModel!);

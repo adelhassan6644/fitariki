@@ -279,5 +279,9 @@
   "waiting_for_driver_replay": "في انتظار رد الكابتن",
   "my_work_study_location": " مكان دوامي/دراستي",
   "transactions": "سجل المعاملات",
-  "invoice": "الفاتورة"
+  "invoice": "الفاتورة",
+  "ride_type": "نوع المشوار",
+  "back": "عودة",
+  "going": "ذهاب"
+
 }

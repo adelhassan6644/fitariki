@@ -8,7 +8,7 @@ import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../helpers/date_time_picker.dart';
-import '../../../main_widgets/scchedule_widget.dart';
+import '../../../main_widgets/schedule_widget.dart';
 import '../provider/profile_provider.dart';
 
 class WorkInformationWidget extends StatelessWidget {
