@@ -35,6 +35,10 @@ extension StringExtension on String {
   String hiddenNumber() {
     return this[length - 2] + this[length - 1] + "*" * (length - 2);
   }
+
+  String hiddenEmail() {
+    return "${this[length - 2]}${this[length - 1]}${"*" * (length - 6)}.com";
+  }
 }
 
 extension DateExtention on DateTime {

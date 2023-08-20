@@ -6,6 +6,7 @@ import 'package:fitariki/data/config/di.dart' as di;
 import '../../app/localization/provider/localization_provider.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
 import '../../features/add_request/provider/add_request_provider.dart';
+import '../../features/auth/provider/auth_provider.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
 import '../../features/contatct_with_us/provider/contact_provider.dart';
 import '../../features/followers/add_follower/provider/add_follower_provider.dart';
@@ -35,7 +36,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<ThemeProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocalizationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<SplashProvider>()),
-    // ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AddRequestProvider>()),

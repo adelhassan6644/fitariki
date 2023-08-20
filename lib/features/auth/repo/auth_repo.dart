@@ -24,10 +24,11 @@ class AuthRepo {
     sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
-  saveUserRole({required String id,required String type})  {
+  saveUserRole({required String id, required String type}) {
     sharedPreferences.setString(AppStorageKey.userId, id);
     sharedPreferences.setString(AppStorageKey.role, type);
   }
+
   getMail() {
     if (sharedPreferences.containsKey(AppStorageKey.mail)) {
       return sharedPreferences.getString(
@@ -59,7 +60,9 @@ class AuthRepo {
   }
 
   Future<Either<ServerFailure, Response>> logIn(
-      {required String mail, required String password,required String userType}) async {
+      {required String mail,
+      required String password,
+      required String userType}) async {
     try {
       Response response = await dioClient.post(uri: EndPoints.logIn, data: {
         "email": mail,
@@ -77,8 +80,11 @@ class AuthRepo {
     }
   }
 
-  Future<Either<ServerFailure, Response>> reset(
-      {required String password, required String email}) async {
+  Future<Either<ServerFailure, Response>> reset({
+    required String password,
+    required String email,
+    required String role,
+  }) async {
     try {
       Response response =
           await dioClient.post(uri: EndPoints.resetPassword, data: {
@@ -118,7 +124,7 @@ class AuthRepo {
   }
 
   Future<Either<ServerFailure, Response>> forgetPassword(
-      {required String mail}) async {
+      {required String mail, required String role}) async {
     try {
       Response response =
           await dioClient.post(uri: EndPoints.forgetPassword, data: {
@@ -136,13 +142,11 @@ class AuthRepo {
   }
 
   Future<Either<ServerFailure, Response>> register(
-      {required String mail, required String password}) async {
+      {required String mail, required String role}) async {
     try {
-      Response response = await dioClient.post(uri: EndPoints.register, data: {
-        "email": mail,
-        "password": password,
-        "fcm_token": await saveDeviceToken()
-      });
+      Response response = await dioClient.post(
+          uri: EndPoints.register,
+          data: {"email": mail, "fcm_token": await saveDeviceToken()});
 
       if (response.statusCode == 200) {
         return Right(response);
@@ -155,7 +159,9 @@ class AuthRepo {
   }
 
   Future<Either<ServerFailure, Response>> resendCode(
-      {required String mail, required bool fromRegister}) async {
+      {required String mail,
+      required String role,
+      required bool fromRegister}) async {
     try {
       Response response = await dioClient.post(
           uri: fromRegister ? EndPoints.resend : EndPoints.forgetPassword,
@@ -174,7 +180,8 @@ class AuthRepo {
   Future<Either<ServerFailure, Response>> verifyMail(
       {required String mail,
       required String code,
-      required bool fromRegister}) async {
+      required bool fromRegister,
+      required String role}) async {
     try {
       Response response = await dioClient.post(
           uri: fromRegister

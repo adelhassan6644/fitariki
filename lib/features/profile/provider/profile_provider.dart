@@ -42,6 +42,18 @@ class ProfileProvider extends ChangeNotifier {
   bool get isCompleteProfile => profileRepo.isCompleteProfile();
   bool get isDriver => profileRepo.isDriver();
 
+  late final TextEditingController _phoneTEC;
+  TextEditingController get phoneTEC => _phoneTEC;
+
+
+  String countryPhoneCode = "+966";
+  String countryCode = "SA";
+  void onSelectCountry({required String code, required String phone}) {
+    countryPhoneCode = "+$phone";
+    countryCode = code;
+    notifyListeners();
+  }
+
   ///Car Data
   TextEditingController carName = TextEditingController();
   TextEditingController carPlate = TextEditingController();

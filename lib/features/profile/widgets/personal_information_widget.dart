@@ -1,8 +1,11 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_address_picker.dart';
 import '../../../components/custom_image_picker_widget.dart';
@@ -27,6 +30,7 @@ class PersonalInformationWidget extends StatelessWidget {
       child: ExpansionTileWidget(
         title: getTranslated("your_personal_information", context),
         children: [
+          ///Full Name
           Visibility(
             visible: provider.isDriver,
             child: CustomTextFormField(
@@ -36,6 +40,8 @@ class PersonalInformationWidget extends StatelessWidget {
               read: !fromLogin,
             ),
           ),
+
+          ///First Name && Second Name
           Visibility(
             visible: !provider.isDriver,
             child: Row(
@@ -58,6 +64,7 @@ class PersonalInformationWidget extends StatelessWidget {
               ],
             ),
           ),
+
           // Padding(
           //   padding: EdgeInsets.symmetric(vertical: 8.h),
           //   child: CustomTextFormField(
@@ -67,6 +74,8 @@ class PersonalInformationWidget extends StatelessWidget {
           //     read: !fromLogin && provider.isDriver,
           //   ),
           // ),
+
+          ///Age && Gender
           Row(
             children: [
               Expanded(
@@ -94,8 +103,7 @@ class PersonalInformationWidget extends StatelessWidget {
                                 child: TabWidget(
                                     innerVPadding: 6,
                                     innerHPadding: 20,
-                                    backGroundColor:
-                                        Styles.PRIMARY_COLOR,
+                                    backGroundColor: Styles.PRIMARY_COLOR,
                                     title: getTranslated(
                                         provider.genders[index], context),
                                     svgIcon: provider.genderIcons[index],
@@ -114,22 +122,23 @@ class PersonalInformationWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 8,
+
+          ///Nationality
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: DynamicDropDownButton(
+              items: provider.countryList,
+              name: provider.nationality?.name ??
+                  getTranslated("nationality", context),
+              onChange: provider.selectedNationality,
+              value: provider.nationality,
+              isInitial: provider.nationality?.name != null,
+              initialValue: provider.nationality?.name,
+              enable: (fromLogin && provider.isDriver) || !provider.isDriver,
+            ),
           ),
-          DynamicDropDownButton(
-            items: provider.countryList,
-            name: provider.nationality?.name ??
-                getTranslated("nationality", context),
-            onChange: provider.selectedNationality,
-            value: provider.nationality,
-            isInitial: provider.nationality?.name != null,
-            initialValue: provider.nationality?.name,
-            enable: (fromLogin && provider.isDriver) || !provider.isDriver,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
+
+          ///Identity
           Visibility(
             visible: provider.isDriver,
             child: Column(
@@ -153,14 +162,13 @@ class PersonalInformationWidget extends StatelessWidget {
                       onTap: () => ImagePickerHelper.showOptionSheet(
                           onGet: provider.onSelectIdentityImage),
                       imageFile: provider.identityImage,
-                          canEdit: fromLogin,
+                      canEdit: fromLogin,
                     )),
                   ],
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-
                 // CustomTextFormField(
                 //   valid: Validations.phone,
                 //   controller: provider.phone,
@@ -172,24 +180,126 @@ class PersonalInformationWidget extends StatelessWidget {
               ],
             ),
           ),
-          CustomTextFormField(
-            valid: Validations.mail,
-            controller: provider.email,
-            hint: getTranslated("email", context),
-            inputType: TextInputType.emailAddress,
-            read: !fromLogin && provider.isDriver,
+
+          ///Phone
+          Text(
+            getTranslated("enter_your_mobile_number", context),
+            style: AppTextStyles.w600.copyWith(fontSize: 16),
           ),
-          const SizedBox(
-            height: 8,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: CustomTextFormField(
+                    controller: provider.phoneTEC,
+                    hint: "5xxxxxxxx",
+                    inputType: TextInputType.phone,
+                    valid: (v) =>
+                        Validations.phone(v, provider.countryCode.trim()),
+                  ),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: true,
+                          showSearch: false,
+                          countryFilter: [
+                            "SA",
+                            "EG",
+                            "AF",
+                            "IN",
+                            "PK",
+                            "UA",
+                            "BH",
+                            "QA",
+                            "UAE",
+                            "USA",
+                            "RA",
+                          ],
+                          onSelect: (Country value) => provider.onSelectCountry(
+                              code: value.countryCode, phone: value.phoneCode),
+                          countryListTheme: CountryListThemeData(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                            bottomSheetHeight: 360.h,
+                            textStyle:
+                                AppTextStyles.w500.copyWith(fontSize: 14),
+                            flagSize: 20,
+                            searchTextStyle: const TextStyle(
+                              color: Styles.SECOUND_PRIMARY_COLOR,
+                              fontSize: 14,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Styles.LIGHT_BORDER_COLOR, width: 1),
+                            borderRadius: BorderRadius.circular(
+                                Dimensions.RADIUS_DEFAULT)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 8),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                                child: Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              size: 18,
+                              color: Styles.PRIMARY_COLOR,
+                            )),
+                            Expanded(
+                              child: Text(
+                                provider.countryPhoneCode,
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 14,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ),
+                            Expanded(
+                              child: Flag.fromString(
+                                provider.countryCode,
+                                width: 16,
+                                height: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ))
+              ],
+            ),
           ),
+
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 8.0),
+          //   child: CustomTextFormField(
+          //     valid: Validations.mail,
+          //     controller: provider.email,
+          //     hint: getTranslated("email", context),
+          //     inputType: TextInputType.emailAddress,
+          //     read: !fromLogin && provider.isDriver,
+          //   ),
+          // ),
+
+          ///select your housing location
           CustomAddressPicker(
             hint: getTranslated(
                 "select_your_residence_housing_location", context),
             onPicked: provider.onSelectStartLocation,
             location: provider.startLocation,
             decoration: BoxDecoration(
-                border: Border.all(
-                    color: Styles.LIGHT_BORDER_COLOR, width: 1),
+                border: Border.all(color: Styles.LIGHT_BORDER_COLOR, width: 1),
                 borderRadius: BorderRadius.circular(8)),
           )
         ],

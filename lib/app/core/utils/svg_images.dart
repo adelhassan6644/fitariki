@@ -11,6 +11,9 @@ class SvgImages {
   static const String seat = 'assets/svgs/seat.svg';
   static const String searchIcon = 'assets/svgs/search_icon.svg';
   static const String filter = 'assets/svgs/filter.svg';
+  static const String lockIcon = 'assets/svgs/lock.svg';
+  static const String eyeIcon = 'assets/svgs/eye.svg';
+  static const String hiddenEyeIcon = 'assets/svgs/hidden_eye.svg';
   static const String bookMark = 'assets/svgs/book_mark.svg';
   static const String location = 'assets/svgs/location.svg';
   static const String calendar = 'assets/svgs/calendar.svg';

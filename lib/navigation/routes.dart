@@ -2,11 +2,14 @@ class Routes {
   static const APP = "APP";
   static const SPLASH = "SPLASH";
   static const ON_BOARDING = "ON_BOARDING";
-  static const RESET_PASSWORD = "DASHBOARD";
   static const DASHBOARD = "DASHBOARD";
   static const OFFER_DETAILS = "OFFER_DETAILS";
   static const EDIT_PROFILE = "EDIT_PROFILE";
   static const VERIFICATION = "VERIFICATION_CODE";
+  static const NEW_PASSWORD = "NEW_PASSWORD";
+  static const FORGET_PASSWORD = "FORGET_PASSWORD";
+  static const RESET_PASSWORD = "RESET_PASSWORD";
+  static const CHANGE_PASSWORD = "CHANGE_PASSWORD";
   static const PICK_LOCATION = "PICK_LOCATION";
   static const SUCCESS = "SUCCESS";
   static const FOLLOWERS = "FOLLOWERS";

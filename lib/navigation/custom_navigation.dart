@@ -1,3 +1,6 @@
+import 'package:fitariki/features/auth/pages/change_password.dart';
+import 'package:fitariki/features/auth/pages/forget_password.dart';
+import 'package:fitariki/features/auth/pages/reset_password.dart';
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
 import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
@@ -50,7 +53,15 @@ abstract class CustomNavigator {
       case Routes.ON_BOARDING:
         return _pageRoute(const OnBoarding());
       case Routes.VERIFICATION:
-        return _pageRoute(const Verification());
+        return _pageRoute(Verification(fromRegister: settings.arguments as bool,));
+      case Routes.FORGET_PASSWORD:
+        return _pageRoute(const ForgetPassword());
+
+      case Routes.CHANGE_PASSWORD:
+        return _pageRoute(const ChangePassword());
+      case Routes.RESET_PASSWORD:
+        return _pageRoute(
+            ResetPassword(fromRegister: settings.arguments as bool));
       case Routes.EDIT_PROFILE:
         return _pageRoute(ProfilePage(
           fromLogin: settings.arguments as bool,

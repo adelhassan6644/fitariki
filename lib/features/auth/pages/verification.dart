@@ -10,15 +10,16 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/count_down.dart';
 import '../../../components/custom_app_bar.dart';
-import '../provider/firebase_auth_provider.dart';
+import '../provider/auth_provider.dart';
 
 class Verification extends StatelessWidget {
-  const Verification({Key? key}) : super(key: key);
+  const Verification({Key? key, required this.fromRegister}) : super(key: key);
+  final bool fromRegister;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<FirebaseAuthProvider>(builder: (child, provider, _) {
+      body: Consumer<AuthProvider>(builder: (child, provider, _) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,7 +43,7 @@ class Verification extends StatelessWidget {
                             style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                             )),
-                        Text(provider.phoneTEC.text.trim().hiddenNumber(),
+                        Text(provider.mailTEC.text.trim().hiddenEmail(),
                             style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                             )),
@@ -60,7 +61,7 @@ class Verification extends StatelessWidget {
                             animationType: AnimationType.slide,
                             obscureText: true,
                             obscuringCharacter: "*",
-                            onCompleted: (v) => provider.sendOTP(code: v),
+                            onCompleted: (v) => provider.verify(fromRegister),
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             cursorColor: Styles.PRIMARY_COLOR,
                             errorTextSpace: 30.h,
@@ -75,12 +76,10 @@ class Verification extends StatelessWidget {
                               fieldOuterPadding: EdgeInsets.zero,
                               borderRadius: BorderRadius.circular(
                                   Dimensions.RADIUS_DEFAULT),
-                              selectedColor:
-                                  Styles.SECOUND_PRIMARY_COLOR,
+                              selectedColor: Styles.SECOUND_PRIMARY_COLOR,
                               selectedFillColor: Styles.FILL_COLOR,
                               inactiveFillColor: Styles.FILL_COLOR,
-                              inactiveColor:
-                                  Styles.SECOUND_PRIMARY_COLOR,
+                              inactiveColor: Styles.SECOUND_PRIMARY_COLOR,
                               activeColor: Styles.SECOUND_PRIMARY_COLOR,
                               activeFillColor: Styles.FILL_COLOR,
                             ),
@@ -93,8 +92,7 @@ class Verification extends StatelessWidget {
                           ),
                         ),
                         CountDown(
-                          onCount: () => provider.signInWithMobileNo(
-                              fromVerification: true),
+                          onCount: () => provider.resend(fromRegister),
                         ),
                       ],
                     ),

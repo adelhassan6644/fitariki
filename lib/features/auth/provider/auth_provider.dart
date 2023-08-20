@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../data/config/di.dart';
@@ -10,6 +8,7 @@ import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../home/provider/home_provider.dart';
 import '../../profile/provider/profile_provider.dart';
+import '../../success/model/success_model.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
 import '../pages/login.dart';
 import '../repo/auth_repo.dart';
@@ -20,25 +19,19 @@ import '../../../app/localization/localization/language_constant.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthRepo authRepo;
-  AuthProvider({
-    required this.authRepo,
-  }) {
-    _mailTEC = TextEditingController(
-        text: kDebugMode ? "adel@gmail.com" : authRepo.getMail());
-  }
+  AuthProvider({required this.authRepo});
 
   bool get isLogin => authRepo.isLoggedIn();
 
-  late TextEditingController _mailTEC;
-  TextEditingController get mailTEC => _mailTEC;
-
+  final TextEditingController mailTEC = TextEditingController();
   final TextEditingController currentPasswordTEC = TextEditingController();
   final TextEditingController passwordTEC = TextEditingController();
   final TextEditingController confirmPasswordTEC = TextEditingController();
   final TextEditingController codeTEC = TextEditingController();
 
   clear() {
-    _mailTEC.clear();
+    mailTEC.clear();
+    currentPasswordTEC.clear();
     passwordTEC.clear();
     confirmPasswordTEC.clear();
     codeTEC.clear();
@@ -69,7 +62,6 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-
   logIn() async {
     try {
       _isLoading = true;
@@ -89,20 +81,31 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       }, (success) {
         if (_isRememberMe) {
-          authRepo.remember(_mailTEC.text.trim());
+          authRepo.remember(mailTEC.text.trim());
         } else {
           authRepo.forget();
         }
+
         authRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
-        if (success.data['data']["email_verified_at"] != null) {
-          authRepo.setLoggedIn();
-          CustomNavigator.pop();
-          clear();
-        } else {
+
+        if (success.data['data'][role[_userType]]["email_verified_at"] ==
+            null) {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.VERIFICATION, arguments: true);
+        } else if (success.data['data'][role[_userType]]["password"] != null) {
+          CustomNavigator.pop();
+          CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
+        } else if (success.data['data'][role[_userType]]["first_name"] !=
+            null) {
+          CustomNavigator.pop();
+          CustomNavigator.push(Routes.EDIT_PROFILE,
+              clean: true, arguments: true);
+        } else {
+          CustomNavigator.pop();
+          clear();
+          authRepo.setLoggedIn();
         }
       });
       _isLoading = false;
@@ -121,13 +124,14 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isReset = false;
   bool get isReset => _isReset;
-
-  resetPassword() async {
+  resetPassword(bool fromRegister) async {
     try {
       _isReset = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.reset(
-          password: passwordTEC.text.trim(), email: mailTEC.text.trim());
+          role: role[_userType],
+          password: passwordTEC.text.trim(),
+          email: mailTEC.text.trim());
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -137,9 +141,25 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         notifyListeners();
       }, (success) {
-        CustomNavigator.push(Routes.DASHBOARD, clean: true);
-        customShowModelBottomSheet(body: const Login());
         clear();
+        if (fromRegister) {
+          authRepo.setLoggedIn();
+          CustomNavigator.push(Routes.EDIT_PROFILE,
+              clean: true, arguments: true);
+        } else {
+          // CustomNavigator.push(Routes.SUCCESS,
+          //     replace: true,
+          //     arguments: SuccessModel(
+          //         routeName: Routes.DASHBOARD,
+          //         argument: 1,
+          //         isClean: true,
+          //         term: name,
+          //         btnText: getTranslated("my_trips",
+          //             CustomNavigator.navigatorState.currentContext!),
+          //         description: "تم قبول طلب من $name بإنتظار الدفع ..."));
+          CustomNavigator.push(Routes.DASHBOARD, clean: true);
+          customShowModelBottomSheet(body: const Login());
+        }
       });
       _isReset = false;
       notifyListeners();
@@ -200,13 +220,13 @@ class AuthProvider extends ChangeNotifier {
   bool _isRegister = false;
   bool get isRegister => _isRegister;
 
-  register() async {
+  signUp() async {
     try {
       _isRegister = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.register(
         mail: mailTEC.text.trim(),
-        password: passwordTEC.text.trim(),
+        role: role[_userType],
       );
       response.fold((fail) {
         CustomNavigator.pop();
@@ -238,19 +258,20 @@ class AuthProvider extends ChangeNotifier {
   resend(fromRegister) async {
     await authRepo.resendCode(
       mail: mailTEC.text.trim(),
+      role: role[_userType],
       fromRegister: fromRegister,
     );
   }
 
   bool _isForget = false;
   bool get isForget => _isForget;
-
   forgetPassword() async {
     try {
       _isForget = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.forgetPassword(
         mail: mailTEC.text.trim(),
+        role: role[_userType],
       );
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
@@ -287,9 +308,9 @@ class AuthProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response = await authRepo.verifyMail(
           mail: mailTEC.text.trim(),
           code: codeTEC.text.trim(),
+          role: role[_userType],
           fromRegister: fromRegister);
       response.fold((fail) {
-        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: fail.error,
@@ -298,24 +319,17 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         notifyListeners();
       }, (success) {
-        if (fromRegister) {
-          authRepo.setLoggedIn();
-          authRepo.saveUserRole(
-              type: role[_userType],
-              id: success.data['data'][role[_userType]]["id"].toString());
-          CustomNavigator.pop();
-          clear();
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: getTranslated("register_successfully",
-                      CustomNavigator.navigatorState.currentContext!),
-                  isFloating: true,
-                  backgroundColor: Styles.ACTIVE,
-                  borderColor: Colors.transparent));
-        } else {
-          CustomNavigator.push(Routes.RESET_PASSWORD, replace: true);
-        }
+        CustomNavigator.push(Routes.RESET_PASSWORD,
+            arguments: fromRegister, clean: true);
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: getTranslated("verified_successfully",
+                    CustomNavigator.navigatorState.currentContext!),
+                isFloating: true,
+                backgroundColor: Styles.ACTIVE,
+                borderColor: Colors.transparent));
       });
+
       _isVerify = false;
       notifyListeners();
     } catch (e) {
@@ -332,6 +346,7 @@ class AuthProvider extends ChangeNotifier {
 
   logOut() async {
     try {
+      clear();
       Future.delayed(Duration.zero, () async {
         await authRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();

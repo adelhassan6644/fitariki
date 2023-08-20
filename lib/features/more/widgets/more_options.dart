@@ -1,7 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
-import 'package:fitariki/features/notifications/provider/notifications_provider.dart';
 import 'package:fitariki/features/transactions/provider/transactions_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
@@ -74,7 +73,6 @@ class MoreOptions extends StatelessWidget {
               title: getTranslated("notifications", context),
               icon: SvgImages.notifications,
               onTap: () {
-
                 CustomNavigator.push(Routes.NOTIFICATIONS);
               },
             ),
@@ -93,6 +91,11 @@ class MoreOptions extends StatelessWidget {
             //     // CustomNavigator.push(Routes.RATE_USER,arguments: 20);
             //   },
             // ),
+            MoreButton(
+              title: getTranslated("change_password", context),
+              icon: SvgImages.lockIcon,
+              onTap: () => CustomNavigator.push(Routes.CHANGE_PASSWORD),
+            ),
             MoreButton(
               title: getTranslated("contact_with_us", context),
               icon: SvgImages.call,

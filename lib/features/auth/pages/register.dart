@@ -1,11 +1,12 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
-import 'package:fitariki/features/auth/pages/register.dart';
 import 'package:fitariki/features/auth/provider/auth_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
@@ -14,20 +15,21 @@ import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/tab_widget.dart';
 import '../../../navigation/routes.dart';
+import 'login.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 540,
+      height: 460,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -57,7 +59,7 @@ class _LoginState extends State<Login> {
           ),
           Center(
             child: Text(
-              getTranslated("login", context),
+              getTranslated("register", context),
               style: AppTextStyles.w600.copyWith(
                 fontSize: 14,
               ),
@@ -102,48 +104,44 @@ class _LoginState extends State<Login> {
                                                 .selectedUserType(index)),
                                       )),
                             )),
-                        const SizedBox(height: 16),
+                        const SizedBox(
+                          height: 24,
+                        ),
+
+                        ///E-mail
                         Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Text(
-                                  getTranslated("enter_your_mail", context),
-                                  style:
-                                      AppTextStyles.w600.copyWith(fontSize: 16),
-                                ),
-                              ),
-                              CustomTextFormField(
-                                valid: Validations.mail,
-                                controller: provider.mailTEC,
-                                hint: "xxxxxxx@xxxx.com",
-                                inputType: TextInputType.emailAddress,
+                              Text(
+                                getTranslated("enter_your_mail", context),
+                                style:
+                                    AppTextStyles.w600.copyWith(fontSize: 16),
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Text(
-                                  getTranslated("password", context),
-                                  style:
-                                      AppTextStyles.w600.copyWith(fontSize: 16),
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: CustomTextFormField(
+                                  valid: Validations.mail,
+                                  controller: provider.mailTEC,
+                                  hint: "xxxxxxx@xxxx.com",
+                                  inputType: TextInputType.emailAddress,
                                 ),
-                              ),
-                              CustomTextFormField(
-                                valid: Validations.password,
-                                controller: provider.currentPasswordTEC,
-                                hint: "***********",
-                                inputType: TextInputType.visiblePassword,
-                                isPassword: true,
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        const _ForgetPassword(),
+
+                        const SizedBox(
+                          height: 12,
+                        ),
+
+                        _AgreeToTerms(
+                          onChange: provider.onAgree,
+                          check: provider.isAgree,
+                          isDriver: provider.userType == 1,
+                        )
                       ],
                     ),
                   ),
@@ -153,14 +151,20 @@ class _LoginState extends State<Login> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT,
-                          vertical: 8),
+                          vertical: 12),
                       child: Column(
                         children: [
                           CustomButton(
-                              text: getTranslated("login", context),
+                              text: getTranslated("follow", context),
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
-                                  provider.logIn();
+                                  if (provider.isAgree) {
+                                    provider.signUp();
+                                  } else {
+                                    showToast(getTranslated(
+                                        "please_agree_to_the_terms_and_conditions",
+                                        context));
+                                  }
                                 }
                               },
                               isLoading: provider.isLoading),
@@ -168,14 +172,13 @@ class _LoginState extends State<Login> {
                             height: 24,
                           ),
                           CustomButton(
-                              text: getTranslated("register", context),
+                              text: getTranslated("login", context),
                               textColor: Styles.PRIMARY_COLOR,
                               backgroundColor: Styles.WHITE_COLOR,
                               withBorderColor: true,
                               onTap: () {
                                 CustomNavigator.pop();
-                                customShowModelBottomSheet(
-                                    body: const Register());
+                                customShowModelBottomSheet(body: const Login());
                               },
                               isLoading: provider.isLoading),
                         ],
@@ -192,39 +195,71 @@ class _LoginState extends State<Login> {
   }
 }
 
-class _ForgetPassword extends StatelessWidget {
-  const _ForgetPassword({Key? key}) : super(key: key);
+class _AgreeToTerms extends StatelessWidget {
+  const _AgreeToTerms({
+    Key? key,
+    this.check = false,
+    required this.isDriver,
+    required this.onChange,
+  }) : super(key: key);
+  final bool check;
+  final Function(bool) onChange;
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        onTap: () {
-          CustomNavigator.pop();
-          CustomNavigator.push(Routes.CHANGE_PASSWORD);
-        },
-        child: RichText(
-          text: TextSpan(
-              text: "هل ",
-              style: AppTextStyles.w500
-                  .copyWith(fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
-              children: [
-                TextSpan(
-                  text: getTranslated("forget_password", context),
-                  style: AppTextStyles.w500.copyWith(
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      color: Styles.SYSTEM_COLOR),
-                ),
-                TextSpan(
-                  text: "؟",
-                  style: AppTextStyles.w500.copyWith(
-                      fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
-                )
-              ]),
-        ));
+    return Row(
+      children: [
+        InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          onTap: () => onChange(!check),
+          child: Container(
+            width: 18.w,
+            height: 18.h,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: Styles.WHITE_COLOR,
+                border: Border.all(
+                    color:
+                        check ? Styles.SECOUND_PRIMARY_COLOR : Styles.DISABLED,
+                    width: 1)),
+            child: check
+                ? const Icon(
+                    Icons.check,
+                    color: Styles.SECOUND_PRIMARY_COLOR,
+                    size: 14,
+                  )
+                : null,
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Text(
+          getTranslated("agree_to", context),
+          style: AppTextStyles.w500
+              .copyWith(fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
+        ),
+        InkWell(
+          onTap: () => CustomNavigator.push(Routes.TERMS_AND_CONDITIONS,
+              arguments: isDriver),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          child: Text(
+            getTranslated("terms_and_conditions", context),
+            style: AppTextStyles.w500.copyWith(
+                fontSize: 14,
+                // decoration: TextDecoration.underline,
+                color: Styles.SYSTEM_COLOR),
+          ),
+        ),
+        const Expanded(
+          child: SizedBox(),
+        ),
+      ],
+    );
   }
 }
