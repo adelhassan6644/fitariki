@@ -69,7 +69,7 @@ class AuthProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response = await authRepo.logIn(
           mail: mailTEC.text.trim(),
           password: passwordTEC.text.trim(),
-          userType: role[_userType]);
+          role: role[_userType]);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(

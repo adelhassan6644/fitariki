@@ -62,13 +62,15 @@ class AuthRepo {
   Future<Either<ServerFailure, Response>> logIn(
       {required String mail,
       required String password,
-      required String userType}) async {
+      required String role}) async {
     try {
-      Response response = await dioClient.post(uri: EndPoints.logIn, data: {
-        "email": mail,
-        "password": password,
-        "fcm_token": await saveDeviceToken()
-      });
+      Response response = await dioClient.post(
+          uri: EndPoints.logIn(role),
+          data: {
+            "email": mail,
+            "password": password,
+            "fcm_token": await saveDeviceToken()
+          });
 
       if (response.statusCode == 200) {
         return Right(response);
@@ -87,7 +89,7 @@ class AuthRepo {
   }) async {
     try {
       Response response =
-          await dioClient.post(uri: EndPoints.resetPassword, data: {
+          await dioClient.post(uri: EndPoints.resetPassword(role), data: {
         "email": email,
         "newPassword": password,
       });
@@ -127,7 +129,7 @@ class AuthRepo {
       {required String mail, required String role}) async {
     try {
       Response response =
-          await dioClient.post(uri: EndPoints.forgetPassword, data: {
+          await dioClient.post(uri: EndPoints.forgetPassword(role), data: {
         "email": mail,
       });
 
@@ -145,7 +147,7 @@ class AuthRepo {
       {required String mail, required String role}) async {
     try {
       Response response = await dioClient.post(
-          uri: EndPoints.register,
+          uri: EndPoints.register(role),
           data: {"email": mail, "fcm_token": await saveDeviceToken()});
 
       if (response.statusCode == 200) {
@@ -164,7 +166,7 @@ class AuthRepo {
       required bool fromRegister}) async {
     try {
       Response response = await dioClient.post(
-          uri: fromRegister ? EndPoints.resend : EndPoints.forgetPassword,
+          uri: fromRegister ? EndPoints.resend : EndPoints.forgetPassword(role),
           data: {"email": mail});
 
       if (response.statusCode == 200) {
@@ -185,8 +187,8 @@ class AuthRepo {
     try {
       Response response = await dioClient.post(
           uri: fromRegister
-              ? EndPoints.verifyEmail
-              : EndPoints.checkMailForResetPassword,
+              ? EndPoints.confirmEmail(role)
+              : EndPoints.confirmResetPassword(role),
           data: {"code": code, "email": mail});
       if (response.statusCode == 200) {
         return Right(response);
