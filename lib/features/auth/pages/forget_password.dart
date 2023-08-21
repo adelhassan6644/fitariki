@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -35,11 +36,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               children: [
                 Expanded(
                   child: Consumer<AuthProvider>(builder: (_, provider, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                    return ListAnimator(
+                      data: [
                         const SizedBox(
                           height: 24,
                         ),

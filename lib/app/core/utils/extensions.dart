@@ -37,29 +37,27 @@ extension StringExtension on String {
   }
 
   String hiddenEmail() {
-    return "${this[length - 2]}${this[length - 1]}${"*" * (length - 6)}.com";
+    return "${this[0]}${this[1]}${"*" * (length - 6)}.com";
   }
 }
 
 extension DateExtention on DateTime {
-  String dateFormat({required String format, String lang ="ar"}) {
-    return DateFormat(
-      format,lang
-    ).format(this);
+  String dateFormat({required String format, String lang = "ar"}) {
+    return DateFormat(format, lang).format(this);
   }
 
-  String arTimeFormat({String lang ="ar"}) {
-    return DateFormat("hh,mm aa",lang).format(this);
+  String arTimeFormat({String lang = "ar"}) {
+    return DateFormat("hh,mm aa", lang).format(this);
   }
 }
 
 extension DefaultFormat on DateTime {
-  String defaultFormat({String lang ="ar"}) {
-    return DateFormat("d MMM yyyy",lang).format(this);
+  String defaultFormat({String lang = "ar"}) {
+    return DateFormat("d MMM yyyy", lang).format(this);
   }
 
-  String defaultFormat2({String lang ="ar"}) {
-    return DateFormat("d-MM-yyyy",lang).format(this);
+  String defaultFormat2({String lang = "ar"}) {
+    return DateFormat("d-MM-yyyy", lang).format(this);
   }
 }
 

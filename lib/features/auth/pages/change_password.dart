@@ -1,3 +1,4 @@
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -25,7 +26,6 @@ class _ChangePasswordState extends State<ChangePassword> {
       bottom: true,
       child: Scaffold(
           appBar: CustomAppBar(
-            withBorder: true,
             title: getTranslated("change_password", context),
           ),
           body: Padding(
@@ -35,11 +35,8 @@ class _ChangePasswordState extends State<ChangePassword> {
               children: [
                 Expanded(
                   child: Consumer<AuthProvider>(builder: (_, provider, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                    return ListAnimator(
+                      data: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 24),
                           child: Text(
@@ -87,7 +84,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               CustomTextFormField(
                                 valid: (v) => Validations.newPassword(
                                     provider.currentPasswordTEC.text.trim(), v),
-                                controller: provider.passwordTEC,
+                                controller: provider.newPasswordTEC,
                                 hint: "***********",
                                 inputType: TextInputType.visiblePassword,
                                 isPassword: true,
@@ -109,7 +106,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                               CustomTextFormField(
                                 valid: (v) => Validations.confirmNewPassword(
-                                    provider.passwordTEC.text.trim(), v),
+                                    provider.newPasswordTEC.text.trim(), v),
                                 controller: provider.confirmPasswordTEC,
                                 hint: "***********",
                                 inputType: TextInputType.visiblePassword,

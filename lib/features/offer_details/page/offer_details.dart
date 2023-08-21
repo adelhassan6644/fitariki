@@ -263,8 +263,6 @@ class OfferDetails extends StatelessWidget {
                                       isFloating: true,
                                       backgroundColor: Styles.IN_ACTIVE,
                                       borderColor: Colors.transparent));
-
-                              // showToast("عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد");
                             } else {
                               customShowModelBottomSheet(
                                   onClose: () =>

@@ -173,21 +173,21 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                         replace: true,
                         arguments: SuccessModel(
                             isPopUp: true,
-                            isCongrats: true,
-                            isClean: true,
-                            routeName: Routes.DASHBOARD,
-                            argument: 1,
+                            title: getTranslated("congratulations", context),
+                            onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                                arguments: 0, clean: true),
                             term: sl<RequestDetailsProvider>()
                                     .requestModel
                                     ?.driverModel
-                                    ?.firstName?.split(" ")[0] ??
+                                    ?.firstName
+                                    ?.split(" ")[0] ??
                                 sl<RequestDetailsProvider>()
                                     .requestModel
                                     ?.offer
                                     ?.driverModel
-                                    ?.firstName?.split(" ")[0] ??
+                                    ?.firstName
+                                    ?.split(" ")[0] ??
                                 "",
-                            btnText: getTranslated("my_trips", context),
                             description:
                                 "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName?.split(" ")[0] ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName?.split(" ")[0] ?? ""}"));
                   } else if (isFailed || isCancel) {
@@ -195,9 +195,11 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                         replace: true,
                         arguments: SuccessModel(
                             isFail: true,
-                            isReplace: true,
                             isPopUp: true,
-                            routeName: Routes.PAYMENT,
+                            title: getTranslated("fail", context),
+                            onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                                arguments: 1, clean: true),
+                            btnText: getTranslated("my_trips", context),
                             description: getTranslated(
                                 "failed_to_pay_for_the_trip", context)));
                   }
@@ -272,20 +274,22 @@ class MyInAppBrowser extends InAppBrowser {
           replace: true,
           arguments: SuccessModel(
               isFail: true,
-              isReplace: true,
               isPopUp: true,
-              // routeName: Routes.PAYMENT,
+              title: getTranslated("fail", context),
+              onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                  arguments: 1, clean: true),
+              btnText: getTranslated("my_trips", context),
               description:
                   getTranslated("failed_to_pay_for_the_trip", context)));
     }
 
-    print("\n\nBrowser closed!\n\n");
+    log("Browser closed!");
   }
 
   @override
   Future<NavigationActionPolicy> shouldOverrideUrlLoading(
       navigationAction) async {
-    print("\n\nOverride ${navigationAction.request.url}\n\n");
+    log("Override ${navigationAction.request.url}");
     return NavigationActionPolicy.ALLOW;
   }
 
@@ -305,8 +309,8 @@ class MyInAppBrowser extends InAppBrowser {
 
   void _pageRedirect(String url) {
     if (_canRedirect) {
-      log("PATH${url}");
-      log("query${url}");
+      log("PATH$url");
+      log("query$url");
       bool isSuccess = url.contains('success');
       bool isFailed = url.contains('fail');
       bool isCancel = url.contains('cancel');
@@ -316,27 +320,33 @@ class MyInAppBrowser extends InAppBrowser {
             replace: true,
             arguments: SuccessModel(
                 isPopUp: true,
-                isCongrats: true,
-                isClean: true,
-                routeName: Routes.DASHBOARD,
-                argument: 1,
+                title: getTranslated("congratulations", context),
+                onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                    arguments: 0, clean: true),
                 term: sl<RequestDetailsProvider>()
                         .requestModel
                         ?.driverModel
-                        ?.firstName ??
+                        ?.firstName
+                        ?.split(" ")[0] ??
+                    sl<RequestDetailsProvider>()
+                        .requestModel
+                        ?.offer
+                        ?.driverModel
+                        ?.firstName
+                        ?.split(" ")[0] ??
                     "",
-                btnText: getTranslated("my_trips", context),
                 description:
-                    "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName}"));
+                    "${getTranslated("trip_was_successfully_paid_for_captain", context)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName?.split(" ")[0] ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName?.split(" ")[0] ?? ""}"));
       } else if (isFailed || isCancel) {
         CustomNavigator.push(Routes.SUCCESS,
             replace: true,
             arguments: SuccessModel(
                 isFail: true,
-                isReplace: true,
                 isPopUp: true,
-                argument: 2,
-                // routeName: Routes.PAYMENT,
+                title: getTranslated("fail", context),
+                onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                    arguments: 1, clean: true),
+                btnText: getTranslated("my_trips", context),
                 description:
                     getTranslated("failed_to_pay_for_the_trip", context)));
       }

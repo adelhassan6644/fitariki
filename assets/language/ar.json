@@ -15,6 +15,7 @@
   "nick_name": "اسم الشهرة",
   "confirm": "تأكيد",
   "verify_the_phone": "التحقق من الرقم",
+  "verify_the_mail": "التحقق من الايميل",
   "proceed_to_check_out": "انتقل الي الدفع",
   "required": "هذا الحقل مطلوب",
   "current": "حالية",
@@ -33,7 +34,7 @@
   "our_dining_table": "سفرتنا",
   "resend_code": " إعادة ارسال رمز التفعيل؟",
   "code_expires_in": "تنتهي صلاحية الرمز في: ",
-  "enter_the_6_digit_code_sent_to": "ادخل الكود المكون من 6 ارقام المرسل إلى",
+  "enter_the_6_digit_code_sent_to_mail": "ادخل الكود المكون من 6 ارقام المرسل إلى ايميلك",
   "edit": "تعديل",
   "delivery_requests": "طلبات التوصيل",
   "delivery_offers": "عروض التوصيل",
@@ -305,7 +306,11 @@
   "change_password": "تغيير كلمة المرور",
   "reset_password": "تعيين كلمة المرور الجديدة",
   "reset_new_password": "تعيين كلمة مرور للحساب",
+  "new_password_header": "كلمة المرور لا يجب ان تقل عن ٨ حروف",
   "change_password_header": "كلمة المرور الجديدة يجب ان تكون مختلفه عن كلمة المرور الحالية",
-  "reset_password_header": "كلمة المرور الجديدة يجب ان تكون مختلفه عن كلمة المرور المستخدمه السابقه"
+  "reset_password_header": "كلمة المرور الجديدة يجب ان تكون مختلفه عن كلمة المرور المستخدمه السابقه",
+  "your_request_has_been_sent_successfully": "تم ارسال طلبك بنجاح",
+  "your_password_has_been_reset_successfully": "تم بنجاح تحديث كلمة المرورالمرتبطة بإيميل",
+  "password_updated": "كلمة المرور تحدثت!"
 
 }

@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 540,
+      height: 500,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -143,7 +143,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        const _ForgetPassword(),
+                        _ForgetPassword(onTap: provider.clear),
                       ],
                     ),
                   ),
@@ -164,9 +164,7 @@ class _LoginState extends State<Login> {
                                 }
                               },
                               isLoading: provider.isLoading),
-                          const SizedBox(
-                            height: 24,
-                          ),
+                          const SizedBox(height: 16),
                           CustomButton(
                               text: getTranslated("register", context),
                               textColor: Styles.PRIMARY_COLOR,
@@ -174,10 +172,11 @@ class _LoginState extends State<Login> {
                               withBorderColor: true,
                               onTap: () {
                                 CustomNavigator.pop();
+                                provider.clear();
                                 customShowModelBottomSheet(
                                     body: const Register());
-                              },
-                              isLoading: provider.isLoading),
+                              }),
+                          const SizedBox(height: 12),
                         ],
                       ),
                     ),
@@ -193,7 +192,8 @@ class _LoginState extends State<Login> {
 }
 
 class _ForgetPassword extends StatelessWidget {
-  const _ForgetPassword({Key? key}) : super(key: key);
+  const _ForgetPassword({Key? key, required this.onTap}) : super(key: key);
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +204,8 @@ class _ForgetPassword extends StatelessWidget {
         focusColor: Colors.transparent,
         onTap: () {
           CustomNavigator.pop();
-          CustomNavigator.push(Routes.CHANGE_PASSWORD);
+          onTap();
+          CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
         },
         child: RichText(
           text: TextSpan(
@@ -216,7 +217,7 @@ class _ForgetPassword extends StatelessWidget {
                   text: getTranslated("forget_password", context),
                   style: AppTextStyles.w500.copyWith(
                       fontSize: 14,
-                      decoration: TextDecoration.underline,
+                      // decoration: TextDecoration.underline,
                       color: Styles.SYSTEM_COLOR),
                 ),
                 TextSpan(

@@ -45,19 +45,17 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _selectedIndex = widget.index ?? 0;
-    NetworkInfo.checkConnectivity(
-      onVisible: (){
-        sl<HomeProvider>().getOffers();
-        if(Provider.of<ProfileProvider>(context,listen: false).isLogin) {
-          Provider.of<ProfileProvider>(context,listen: false).getProfile();
-          Provider.of<MyOffersProvider>(context,listen: false).getMyOffers();
-          Provider.of<WishlistProvider>(context,listen: false).getWishList();
-          Provider.of<MyTripsProvider>(context,listen: false).getCurrentTrips();
-          Provider.of<MyTripsProvider>(context,listen: false).getPreviousTrips();
-          Provider.of<MyTripsProvider>(context,listen: false).getPendingTrips();
+    NetworkInfo.checkConnectivity(onVisible: () {
+      sl<HomeProvider>().getOffers();
+      if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
+        Provider.of<ProfileProvider>(context, listen: false).getProfile();
+        Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
+        Provider.of<WishlistProvider>(context, listen: false).getWishList();
+        Provider.of<MyTripsProvider>(context, listen: false).getCurrentTrips();
+        Provider.of<MyTripsProvider>(context, listen: false).getPreviousTrips();
+        Provider.of<MyTripsProvider>(context, listen: false).getPendingTrips();
       }
-    }
-    );
+    });
     super.initState();
   }
 
@@ -131,17 +129,16 @@ class _DashBoardState extends State<DashBoard> {
             ? FloatingActionButton(
                 onPressed: () {
                   if (provider.isLogin) {
-
                     if (provider.isDriver && provider.status != "1") {
                       print(provider.status);
                       CustomSnackBar.showSnackBar(
                           notification: AppNotification(
-                              message: "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
+                              message:
+                                  "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
                               isFloating: true,
                               backgroundColor: Styles.IN_ACTIVE,
                               borderColor: Colors.transparent));
                       return;
-                      // showToast("لم يتم تفعيل حسابك بعد");
                     } else {
                       customShowModelBottomSheet(
                         onClose: Provider.of<PostOfferProvider>(context,

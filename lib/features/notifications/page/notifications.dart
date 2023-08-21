@@ -21,16 +21,15 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
- Future.delayed(Duration.zero,(){
-
-   Provider.of<NotificationsProvider>(context).getNotifications();
- });
+    Future.delayed(Duration.zero, () {
+      Provider.of<NotificationsProvider>(context, listen: false)
+          .getNotifications();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         bottom: true,
@@ -88,8 +87,7 @@ class _NotificationsState extends State<Notifications> {
                                     decoration: BoxDecoration(
                                         border: Border(
                                             bottom: BorderSide(
-                                                color: Styles
-                                                    .LIGHT_GREY_BORDER,
+                                                color: Styles.LIGHT_GREY_BORDER,
                                                 width: 1.h))),
                                     child: CustomShimmerContainer(
                                       width: context.width,

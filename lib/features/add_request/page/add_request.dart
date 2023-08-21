@@ -32,13 +32,20 @@ class _AddRequestState extends State<AddRequest> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      Provider.of<AddRequestProvider>(context, listen: false).updateOfferDays(
+          sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
+      if (widget.offer.startDate!.isBefore(DateTime.now())) {
+        Provider.of<AddRequestProvider>(context, listen: false)
+            .onSelectStartDate(widget.offer.startDate!);
+      } else {
+        Provider.of<AddRequestProvider>(context, listen: false)
+            .onSelectStartDate(DateTime.now());
+      }
       Provider.of<AddRequestProvider>(context, listen: false)
-          .updateOfferDays(sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
-      Provider.of<AddRequestProvider>(context, listen: false).onSelectStartDate( DateTime.now())
-         ;
-      Provider.of<AddRequestProvider>(context, listen: false).onSelectEndDate(widget.offer.endDate ?? DateTime.now()) ;
-      Provider.of<CalenderProvider>(context, listen: false)   .getEventsList(startDate: DateTime.now(), endDate: widget.offer.endDate ?? DateTime.now());
-
+          .onSelectEndDate(widget.offer.endDate ?? DateTime.now());
+      Provider.of<CalenderProvider>(context, listen: false).getEventsList(
+          startDate: DateTime.now(),
+          endDate: widget.offer.endDate ?? DateTime.now());
     });
     super.initState();
   }

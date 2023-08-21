@@ -39,7 +39,9 @@ class ReportProvider extends ChangeNotifier {
           CustomNavigator.pop();
           CustomNavigator.push(Routes.SUCCESS,
               arguments: SuccessModel(
-                  isCongrats: false,
+                  onTap:()=> CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true),
+                  isFail: true,
+                  title: getTranslated("has_been_sent",CustomNavigator.navigatorState.currentContext!),
                   description: getTranslated("report_success_message",
                       CustomNavigator.navigatorState.currentContext!)));
         });
@@ -57,8 +59,8 @@ class ReportProvider extends ChangeNotifier {
         notifyListeners();
       }
     } else {
-    showToast(getTranslated("report_validation",
-        CustomNavigator.navigatorState.currentContext!));
+      showToast(getTranslated(
+          "report_validation", CustomNavigator.navigatorState.currentContext!));
     }
   }
 }

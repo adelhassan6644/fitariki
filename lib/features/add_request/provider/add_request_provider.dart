@@ -8,16 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
+import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/calender_provider.dart';
 import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
 import '../../followers/followers/provider/followers_provider.dart';
 import '../../my_trips/provider/my_trips_provider.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../../success/model/success_model.dart';
 import '../repo/add_request_repo.dart';
 
 class AddRequestProvider extends ChangeNotifier {
@@ -29,13 +28,11 @@ class AddRequestProvider extends ChangeNotifier {
   onSelectRideTypes(v) {
     if (selectedRideTypes.contains(v)) {
       selectedRideTypes.remove(v);
-    }
-    else {
+    } else {
       selectedRideTypes.add(v);
     }
     notifyListeners();
   }
-
 
   TextEditingController minPrice = TextEditingController();
 
@@ -86,13 +83,11 @@ class AddRequestProvider extends ChangeNotifier {
   }
 
   checkData({required double minOfferPrice, required double maxOfferPrice}) {
-
     if (selectedRideTypes.isEmpty) {
       showToast("برجاء اختيار نوع المشوار!");
 
       return;
     }
-
 
     if (endDate.isBefore(startDate)) {
       showToast("تاريخ النهاية لا يجب ان يكون قبل تاريخ البداية!");
@@ -132,7 +127,7 @@ class AddRequestProvider extends ChangeNotifier {
       final data = {
         "request_offer": {
           sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
-          sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+              sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "ride_type": selectedRideTypes.join(" و "),
           "start_date": startDate.defaultFormat2(),
           "start_at": startDate.defaultFormat2(),
@@ -154,26 +149,23 @@ class AddRequestProvider extends ChangeNotifier {
       response.fold((fail) {
         CustomNavigator.pop();
         showToast(fail.error);
-        isLoading = false;
-        notifyListeners();
       }, (response) async {
-        reset();
         sl<MyTripsProvider>().getPendingTrips();
         CustomNavigator.pop();
         CustomNavigator.pop();
-        CustomNavigator.push(Routes.SUCCESS,
-            replace: true,
-            arguments: SuccessModel(
-              routeName: Routes.DASHBOARD,
-              argument: 1,
-              term: name,
-              isClean: true,
-              btnText: getTranslated(
-                  "my_trips", CustomNavigator.navigatorState.currentContext!),
-            ));
-        isLoading = false;
-        notifyListeners();
+        reset();
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: getTranslated(
+                    "your_request_has_been_sent_successfully",
+                    CustomNavigator.navigatorState.currentContext!),
+                isFloating: true,
+                backgroundColor: Styles.ACTIVE,
+                borderColor: Colors.transparent));
       });
+
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
       CustomNavigator.pop();
       showToast(e);

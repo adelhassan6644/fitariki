@@ -1,22 +1,17 @@
 class SuccessModel {
-  bool isCongrats;
-  bool isFail;
-  bool isPopUp;
-  bool isReplace;
-  bool isClean;
-  String? term, btnText, routeName;
+  String? title;
+  bool isPopUp,isFail;
+  String? term;
   String? description;
-  dynamic argument;
+  String? btnText;
+  Function()? onTap;
   SuccessModel({
-    this.isCongrats = true,
-    this.isFail = false,
-    this.btnText,
+    this.title,
     this.isPopUp = false,
-    this.routeName,
-    this.argument,
-    this.isClean = false,
-    this.isReplace = false,
+    this.isFail = false,
     this.description,
     this.term,
+    this.btnText,
+    this.onTap,
   });
 }

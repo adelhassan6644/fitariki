@@ -24,7 +24,7 @@ class Verification extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-                title: getTranslated("verify_the_phone", context),
+                title: getTranslated("verify_the_mail", context),
                 withBorder: true),
             Expanded(
               child: ListView(
@@ -39,7 +39,7 @@ class Verification extends StatelessWidget {
                       children: [
                         Text(
                             getTranslated(
-                                "enter_the_6_digit_code_sent_to", context),
+                                "enter_the_6_digit_code_sent_to_mail", context),
                             style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                             )),

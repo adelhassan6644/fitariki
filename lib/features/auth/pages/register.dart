@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 460,
+      height: 420,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -159,7 +159,7 @@ class _RegisterState extends State<Register> {
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   if (provider.isAgree) {
-                                    provider.signUp();
+                                    provider.register();
                                   } else {
                                     showToast(getTranslated(
                                         "please_agree_to_the_terms_and_conditions",
@@ -167,10 +167,8 @@ class _RegisterState extends State<Register> {
                                   }
                                 }
                               },
-                              isLoading: provider.isLoading),
-                          const SizedBox(
-                            height: 24,
-                          ),
+                              isLoading: provider.isRegister),
+                          const SizedBox(height: 16),
                           CustomButton(
                               text: getTranslated("login", context),
                               textColor: Styles.PRIMARY_COLOR,
@@ -178,9 +176,10 @@ class _RegisterState extends State<Register> {
                               withBorderColor: true,
                               onTap: () {
                                 CustomNavigator.pop();
+                                provider.clear();
                                 customShowModelBottomSheet(body: const Login());
-                              },
-                              isLoading: provider.isLoading),
+                              }),
+                          const SizedBox(height: 12),
                         ],
                       ),
                     ),
