@@ -36,8 +36,6 @@ class RequestDetailsProvider extends ChangeNotifier {
     String? name,
   }) async {
     try {
-
-
       if (status == 1) {
         isAccepting = true;
       } else if (status == 2) {
@@ -75,9 +73,8 @@ class RequestDetailsProvider extends ChangeNotifier {
             CustomNavigator.push(Routes.SUCCESS,
                 replace: true,
                 arguments: SuccessModel(
-                    routeName: Routes.DASHBOARD,
-                    argument: 1,
-                    isClean: true,
+                    onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                        arguments: 1, clean: true),
                     term: name,
                     btnText: getTranslated("my_trips",
                         CustomNavigator.navigatorState.currentContext!),

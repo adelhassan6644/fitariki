@@ -1,4 +1,6 @@
 import 'package:fitariki/features/maps/provider/location_provider.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -9,6 +11,7 @@ import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:provider/provider.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/marquee_widget.dart';
+import '../../../navigation/routes.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -20,11 +23,13 @@ class HomeAppBar extends StatefulWidget {
 class _HomeAppBarState extends State<HomeAppBar> {
   @override
   void initState() {
-   Future.delayed(Duration.zero,(){
-     Provider.of<LocationProvider>(context,listen: false).getCurrentLocation();
-   });
+    Future.delayed(Duration.zero, () {
+      Provider.of<LocationProvider>(context, listen: false)
+          .getCurrentLocation();
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LocationProvider>(builder: (_, provider, child) {
@@ -76,28 +81,22 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     ],
                   ),
                 ),
-                customImageIconSVG(
-                  imageName: SvgImages.navLogoIcon,
-                  color:Styles.PRIMARY_COLOR ,
-                    width: 25,
-                    height: 25)
-
-                // Consumer<ProfileProvider>(
-                //   builder: (_, provider, child) {
-                //     return InkWell(
-                //       child: const Icon(
-                //         Icons.add,
-                //         size: 24,
-                //       ),
-                //       onTap: () => customShowModelBottomSheet(
-                //         onClose: sl.get<PostOfferProvider>().reset,
-                //         body: provider.isLogin
-                //             ? const PostOffer()
-                //             : const Login(),
-                //       ),
-                //     );
-                //   },
-                // )
+                Consumer<ProfileProvider>(
+                  builder: (_, provider, child) {
+                    return InkWell(
+                      onTap: () {
+                        if (provider.isLogin) {
+                          CustomNavigator.push(Routes.NOTIFICATIONS);
+                        }
+                      },
+                      child: customImageIconSVG(
+                          imageName: SvgImages.notification,
+                          color: Styles.PRIMARY_COLOR,
+                          width: 20,
+                          height: 20),
+                    );
+                  },
+                )
               ],
             ),
             SizedBox(

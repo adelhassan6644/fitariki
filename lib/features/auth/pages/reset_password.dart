@@ -5,6 +5,7 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/core/utils/validation.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_text_form_field.dart';
@@ -38,25 +39,23 @@ class _ResetPasswordState extends State<ResetPassword> {
               children: [
                 Expanded(
                   child: Consumer<AuthProvider>(builder: (_, provider, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                    return ListAnimator(
+                      data: [
                         const SizedBox(
                           height: 24,
                         ),
-                        Visibility(
-                          visible: !widget.fromRegister,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 24),
-                            child: Text(
-                              getTranslated("reset_password_header", context),
-                              textAlign: TextAlign.start,
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 16,
-                                  color: Styles.SECOUND_PRIMARY_COLOR),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 24),
+                          child: Text(
+                            getTranslated(
+                                widget.fromRegister
+                                    ? "new_password_header"
+                                    : "reset_password_header",
+                                context),
+                            textAlign: TextAlign.start,
+                            style: AppTextStyles.w400.copyWith(
+                                fontSize: 16,
+                                color: Styles.SECOUND_PRIMARY_COLOR),
                           ),
                         ),
                         Form(
@@ -79,7 +78,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               ),
                               CustomTextFormField(
                                 valid: Validations.password,
-                                controller: provider.passwordTEC,
+                                controller: provider.newPasswordTEC,
                                 hint: "***********",
                                 inputType: TextInputType.visiblePassword,
                                 isPassword: true,
@@ -102,7 +101,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               ),
                               CustomTextFormField(
                                 valid: (v) => Validations.confirmPassword(
-                                    provider.passwordTEC.text.trim(), v),
+                                    provider.newPasswordTEC.text.trim(), v),
                                 controller: provider.confirmPasswordTEC,
                                 hint: "***********",
                                 inputType: TextInputType.visiblePassword,

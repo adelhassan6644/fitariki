@@ -13,6 +13,7 @@
   "nick_name": "Nick name",
   "sign_in": "sign in",
   "verify_the_phone": "verify the phone",
+  "verify_the_mail": "Verify The Mail",
   "successfully_login": "Successfully Login",
   "invalid_code": "Invalid Code",
   "invalid_phone": "Invalid Phone",
@@ -33,7 +34,7 @@
   "our_dining_table": "Our dining table",
   "resend_code": "Resend the activation code?",
   "code_expires_in": "code expires in: ",
-  "enter_the_6_digit_code_sent_to": "Enter the 6-digit code sent to",
+  "enter_the_6_digit_code_sent_to_mail": "Enter the 6-digit code sent to your mail",
   "edit": "edit",
   "next": "Next",
   "attachment": "attachment",
@@ -302,7 +303,11 @@
   "password": "password",
   "change_password": "Change Password",
   "confirm_password": "confirm password",
+  "new_password_header": "The password must be more than 8 characters",
   "reset_new_password": "Reset New Password",
   "reset_password_header": "The new password must be different from the old password",
-  "change_password_header": "The new password must be different from the current password"
+  "change_password_header": "The new password must be different from the current password",
+  "your_request_has_been_sent_successfully": "Your request has been sent successfully",
+  "your_password_has_been_reset_successfully": "The password has been update which associated with e-mail of",
+  "password_updated": "The Password Updated!"
 }

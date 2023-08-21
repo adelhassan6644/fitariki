@@ -67,8 +67,7 @@ class PostOfferProvider extends ChangeNotifier {
   onSelectRideTypes(v) {
     if (selectedRideTypes.contains(v)) {
       selectedRideTypes.remove(v);
-    }
-    else {
+    } else {
       selectedRideTypes.add(v);
     }
     notifyListeners();
@@ -245,9 +244,10 @@ class PostOfferProvider extends ChangeNotifier {
             replace: true,
             arguments: SuccessModel(
                 isPopUp: true,
-                isClean: true,
-                routeName: Routes.DASHBOARD,
-                argument: 0,
+                title: getTranslated("congratulations",
+                    CustomNavigator.navigatorState.currentContext!),
+                onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                    arguments: 0, clean: true),
                 description: !sl<ProfileProvider>().isDriver
                     ? getTranslated("sent_request_successfully",
                         CustomNavigator.navigatorState.currentContext!)

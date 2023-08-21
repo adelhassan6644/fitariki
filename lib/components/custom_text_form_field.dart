@@ -265,6 +265,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         floatingLabelStyle: AppTextStyles.w400
             .copyWith(color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 11),
         filled: true,
+        errorMaxLines: 2,
         errorStyle: AppTextStyles.w400
             .copyWith(color: Styles.FAILED_COLOR, fontSize: 11),
         prefixIconConstraints: BoxConstraints(maxHeight: 25.h),

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
+import '../../../components/loading_dialog.dart';
 import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
@@ -25,14 +26,14 @@ class AuthProvider extends ChangeNotifier {
 
   final TextEditingController mailTEC = TextEditingController();
   final TextEditingController currentPasswordTEC = TextEditingController();
-  final TextEditingController passwordTEC = TextEditingController();
+  final TextEditingController newPasswordTEC = TextEditingController();
   final TextEditingController confirmPasswordTEC = TextEditingController();
   final TextEditingController codeTEC = TextEditingController();
 
   clear() {
     mailTEC.clear();
     currentPasswordTEC.clear();
-    passwordTEC.clear();
+    newPasswordTEC.clear();
     confirmPasswordTEC.clear();
     codeTEC.clear();
   }
@@ -68,7 +69,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.logIn(
           mail: mailTEC.text.trim(),
-          password: passwordTEC.text.trim(),
+          password: newPasswordTEC.text.trim(),
           userType: role[_userType]);
       response.fold((fail) {
         CustomNavigator.pop();
@@ -85,7 +86,7 @@ class AuthProvider extends ChangeNotifier {
         } else {
           authRepo.forget();
         }
-
+        CustomNavigator.pop();
         authRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
@@ -130,7 +131,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.reset(
           role: role[_userType],
-          password: passwordTEC.text.trim(),
+          password: newPasswordTEC.text.trim(),
           email: mailTEC.text.trim());
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
@@ -141,25 +142,28 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         notifyListeners();
       }, (success) {
-        clear();
         if (fromRegister) {
           authRepo.setLoggedIn();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
-          // CustomNavigator.push(Routes.SUCCESS,
-          //     replace: true,
-          //     arguments: SuccessModel(
-          //         routeName: Routes.DASHBOARD,
-          //         argument: 1,
-          //         isClean: true,
-          //         term: name,
-          //         btnText: getTranslated("my_trips",
-          //             CustomNavigator.navigatorState.currentContext!),
-          //         description: "تم قبول طلب من $name بإنتظار الدفع ..."));
-          CustomNavigator.push(Routes.DASHBOARD, clean: true);
-          customShowModelBottomSheet(body: const Login());
+          CustomNavigator.push(Routes.SUCCESS,
+              clean: true,
+              arguments: SuccessModel(
+                  onTap: () {
+                    CustomNavigator.push(Routes.DASHBOARD,
+                        arguments: 0, clean: true);
+                    customShowModelBottomSheet(body: const Login());
+                  },
+                  title: getTranslated("password_updated",
+                      CustomNavigator.navigatorState.currentContext!),
+                  btnText: getTranslated(
+                      "login", CustomNavigator.navigatorState.currentContext!),
+                  term: mailTEC.text.trim(),
+                  description:
+                      "${getTranslated("your_password_has_been_reset_successfully", CustomNavigator.navigatorState.currentContext!)} ${mailTEC.text.trim()}"));
         }
+        clear();
       });
       _isReset = false;
       notifyListeners();
@@ -183,7 +187,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.change(
           oldPassword: currentPasswordTEC.text.trim(),
-          password: passwordTEC.text.trim());
+          password: newPasswordTEC.text.trim());
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -220,7 +224,7 @@ class AuthProvider extends ChangeNotifier {
   bool _isRegister = false;
   bool get isRegister => _isRegister;
 
-  signUp() async {
+  register() async {
     try {
       _isRegister = true;
       notifyListeners();
@@ -238,7 +242,11 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         notifyListeners();
       }, (success) {
+        authRepo.saveUserRole(
+            type: role[_userType],
+            id: success.data['data'][role[_userType]]["id"].toString());
         CustomNavigator.pop();
+
         CustomNavigator.push(Routes.VERIFICATION, arguments: true);
       });
       _isRegister = false;
@@ -303,6 +311,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isVerify => _isVerify;
   verify(fromRegister) async {
     try {
+      spinKitDialog();
       _isVerify = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.verifyMail(
@@ -310,6 +319,7 @@ class AuthProvider extends ChangeNotifier {
           code: codeTEC.text.trim(),
           role: role[_userType],
           fromRegister: fromRegister);
+      CustomNavigator.pop();
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
