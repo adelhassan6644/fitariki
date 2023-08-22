@@ -5,7 +5,7 @@ import 'package:fitariki/main_providers/map_provider.dart';
 import 'package:fitariki/main_widgets/shimmer_widgets/map_widget_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:map_launcher/map_launcher.dart' as mapLunch;
+import 'package:map_launcher/map_launcher.dart' as mapLaunch;
 import 'package:provider/provider.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/core/utils/dimensions.dart';
@@ -22,6 +22,7 @@ class MapWidget extends StatelessWidget {
       this.stopPoints,
       this.clientName,
       this.launchMap = true,
+      this.showFullAddress = false,
       this.gender,
       Key? key})
       : super(key: key);
@@ -29,6 +30,7 @@ class MapWidget extends StatelessWidget {
   final int? stopPoints, gender;
   final String? clientName;
   final bool launchMap;
+  final bool showFullAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class MapWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        clientName?.split(" ")[0]??"",
+                        clientName?.split(" ")[0] ?? "",
                         textAlign: TextAlign.start,
                         maxLines: 1,
                         style: AppTextStyles.w600.copyWith(
@@ -85,29 +87,29 @@ class MapWidget extends StatelessWidget {
                           onTap: () async {
                             if (launchMap) {
                               bool? isActive =
-                                  await mapLunch.MapLauncher.isMapAvailable(
-                                      mapLunch.MapType.google);
+                                  await mapLaunch.MapLauncher.isMapAvailable(
+                                      mapLaunch.MapType.google);
                               bool? isAppleActive =
-                                  await mapLunch.MapLauncher.isMapAvailable(
-                                      mapLunch.MapType.apple);
+                                  await mapLaunch.MapLauncher.isMapAvailable(
+                                      mapLaunch.MapType.apple);
                               if (isActive!) {
-                                await mapLunch.MapLauncher.showDirections(
-                                  mapType: mapLunch.MapType.google,
-                                  destination: mapLunch.Coords(
+                                await mapLaunch.MapLauncher.showDirections(
+                                  mapType: mapLaunch.MapType.google,
+                                  destination: mapLaunch.Coords(
                                     double.parse(startPoint!.latitude!),
                                     double.parse(startPoint!.longitude!),
                                   ),
                                   destinationTitle: startPoint!.address,
                                 );
                               } else if (isAppleActive!) {
-                                await mapLunch.MapLauncher.showDirections(
+                                await mapLaunch.MapLauncher.showDirections(
                                   // mapType: MapType.apple,
-                                  destination: mapLunch.Coords(
+                                  destination: mapLaunch.Coords(
                                     double.parse(startPoint!.latitude!),
                                     double.parse(startPoint!.longitude!),
                                   ),
                                   destinationTitle: startPoint!.address,
-                                  mapType: mapLunch.MapType.apple,
+                                  mapType: mapLaunch.MapType.apple,
                                 );
                               }
                             }
@@ -124,7 +126,10 @@ class MapWidget extends StatelessWidget {
                               ),
                               MarqueeWidget(
                                 child: Text(
-                                  startPoint?.address ?? "",
+                                  showFullAddress
+                                      ? startPoint?.address ?? ""
+                                      : startPoint?.address?.split(",")[1] ??
+                                          "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
@@ -174,29 +179,29 @@ class MapWidget extends StatelessWidget {
                           onTap: () async {
                             if (launchMap) {
                               bool? isActive =
-                                  await mapLunch.MapLauncher.isMapAvailable(
-                                      mapLunch.MapType.google);
+                                  await mapLaunch.MapLauncher.isMapAvailable(
+                                      mapLaunch.MapType.google);
                               bool? isAppleActive =
-                                  await mapLunch.MapLauncher.isMapAvailable(
-                                      mapLunch.MapType.apple);
+                                  await mapLaunch.MapLauncher.isMapAvailable(
+                                      mapLaunch.MapType.apple);
                               if (isActive!) {
-                                await mapLunch.MapLauncher.showDirections(
-                                  mapType: mapLunch.MapType.google,
-                                  destination: mapLunch.Coords(
+                                await mapLaunch.MapLauncher.showDirections(
+                                  mapType: mapLaunch.MapType.google,
+                                  destination: mapLaunch.Coords(
                                     double.parse(endPoint!.latitude!),
                                     double.parse(endPoint!.longitude!),
                                   ),
                                   destinationTitle: endPoint!.address,
                                 );
                               } else if (isAppleActive!) {
-                                await mapLunch.MapLauncher.showDirections(
+                                await mapLaunch.MapLauncher.showDirections(
                                   // mapType: MapType.apple,
-                                  destination: mapLunch.Coords(
+                                  destination: mapLaunch.Coords(
                                     double.parse(endPoint!.latitude!),
                                     double.parse(endPoint!.longitude!),
                                   ),
                                   destinationTitle: endPoint!.address,
-                                  mapType: mapLunch.MapType.apple,
+                                  mapType: mapLaunch.MapType.apple,
                                 );
                               }
                             }
@@ -213,7 +218,9 @@ class MapWidget extends StatelessWidget {
                               ),
                               MarqueeWidget(
                                 child: Text(
-                                  endPoint?.address ?? "",
+                                  showFullAddress
+                                      ? endPoint?.address ?? ""
+                                      : endPoint?.address?.split(",")[1] ?? "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(
@@ -243,12 +250,10 @@ class MapWidget extends StatelessWidget {
                       myLocationButtonEnabled: false,
                       myLocationEnabled: false,
                       markers: vm.gMapMarkers,
-                      mapToolbarEnabled:false,
+                      mapToolbarEnabled: false,
                       polylines: vm.gMapPolyLines,
                       scrollGesturesEnabled: false,
-                        tiltGesturesEnabled:false,
-
-
+                      tiltGesturesEnabled: false,
                     ),
                   ),
                 ),

@@ -39,9 +39,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
         child: Column(
           children: [
-            SizedBox(
-              height: context.toPadding,
-            ),
+            SizedBox(height: context.toPadding + 8),
             Row(
               children: [
                 Expanded(
@@ -99,9 +97,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 )
               ],
             ),
-            SizedBox(
-              height: 24.h,
-            ),
+            SizedBox(height: 24.h),
           ],
         ),
       );

@@ -12,6 +12,7 @@ class Routes {
   static const CHANGE_PASSWORD = "CHANGE_PASSWORD";
   static const PICK_LOCATION = "PICK_LOCATION";
   static const SUCCESS = "SUCCESS";
+  static const ALL_HOME_OFFERS = "ALL_HOME_OFFERS";
   static const FOLLOWERS = "FOLLOWERS";
   static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
   static const WISHLIST = "WISHLIST";

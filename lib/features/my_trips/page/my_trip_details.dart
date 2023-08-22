@@ -111,6 +111,7 @@ class MyTripDetails extends StatelessWidget {
 
                     /// Map View
                     MapWidget(
+                      showFullAddress: true,
                       stopPoints: sl<ProfileProvider>().isDriver &&
                               myTripModel.myTripRequest?.followers != null &&
                               myTripModel.myTripRequest!.followers!.isNotEmpty
@@ -173,7 +174,8 @@ class MyTripDetails extends StatelessWidget {
                           Text(
                             myTripModel.rideType ??
                                 myTripModel.myTripRequest?.rideType ??
-                                myTripModel.offer?.rideType ?? "",
+                                myTripModel.offer?.rideType ??
+                                "",
                             textAlign: TextAlign.end,
                             style: AppTextStyles.w400.copyWith(
                               fontSize: 10,
@@ -205,6 +207,7 @@ class MyTripDetails extends StatelessWidget {
                           ...List.generate(
                             myTripModel.myTripRequest?.followers?.length ?? 0,
                             (index) => MapWidget(
+                              showFullAddress: true,
                               clientName: myTripModel
                                       .myTripRequest?.followers?[index].name ??
                                   "",
