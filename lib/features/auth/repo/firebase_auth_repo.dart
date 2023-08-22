@@ -24,9 +24,7 @@ class FirebaseAuthRepo {
     sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
-  completedProfile() {
-    sharedPreferences.setBool(AppStorageKey.isCompleteProfile, true);
-  }
+
 
   // getPhone() {
   //   if (sharedPreferences.containsKey(AppStorageKey.phone,)) {
@@ -84,7 +82,6 @@ class FirebaseAuthRepo {
     await sharedPreferences.remove(AppStorageKey.userId);
     await sharedPreferences.remove(AppStorageKey.role);
     await sharedPreferences.remove(AppStorageKey.isLogin);
-    await sharedPreferences.remove(AppStorageKey.isCompleteProfile);
     return true;
   }
 }

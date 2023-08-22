@@ -12,8 +12,6 @@ class SplashProvider extends ChangeNotifier {
       await DefaultCupertinoLocalizations.load(const Locale('en', 'US'));
       if (splashRepo.isFirstTime()) {
         CustomNavigator.push(Routes.ON_BOARDING, clean: true);
-      } else if (splashRepo.isLogin() && !splashRepo.isCompleteProfile()) {
-        CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
       } else {
         CustomNavigator.push(Routes.DASHBOARD, clean: true, arguments: 0);
       }

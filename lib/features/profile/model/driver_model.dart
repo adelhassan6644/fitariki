@@ -19,8 +19,10 @@ class DriverModel {
   String? age;
   Country? national;
   String? city;
-  String? countryId;
   String? phone;
+  String? countryId;
+  String? countryFlag;
+  String? countryCode;
   String? status;
   double? rate;
   double? wallet;
@@ -43,10 +45,12 @@ class DriverModel {
       this.identityNumber,
       this.identityImage,
       this.gender,
+      this.countryId,
+      this.countryFlag,
+      this.countryCode,
       this.age,
       this.national,
       this.city,
-      this.countryId,
       this.phone,
       this.status,
       this.rate,
@@ -67,6 +71,10 @@ class DriverModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
+        phone: json["phone"].toString(),
+        countryId: json["country_id"].toString(),
+        countryFlag: json["country_flag"].toString(),
+        countryCode: json["country_code"].toString(),
         image: json["image"],
         nickname: json["nickname"],
         requestsCount: json["requests_count"] ?? 0,
@@ -81,11 +89,9 @@ class DriverModel {
               )
             : null,
         city: json["city"],
-        countryId: json["country_id"].toString(),
         identityNumber: json["id_number"],
         identityImage: json["id_image"],
-        phone: json["phone"].toString(),
-        status:json["status"] != null ? json["status"].toString() : null,
+        status: json["status"] != null ? json["status"].toString() : null,
         rate: double.tryParse(json["rate"].toString()),
         wallet: json["wallet"] == null
             ? null
@@ -128,8 +134,10 @@ class DriverModel {
         "age": age,
         "country": national?.toJson(),
         "city": city,
-        "country_id": countryId,
         "phone": phone,
+        "country_flag": countryFlag,
+        "country_code": countryCode,
+        "country_id": countryId,
         "status": status,
         "rate": rate,
         "wallet": wallet,

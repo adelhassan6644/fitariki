@@ -1,3 +1,4 @@
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -182,12 +183,8 @@ class PersonalInformationWidget extends StatelessWidget {
           ),
 
           ///Phone
-          Text(
-            getTranslated("enter_your_mobile_number", context),
-            style: AppTextStyles.w600.copyWith(fontSize: 16),
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               children: [
                 Expanded(
@@ -197,7 +194,7 @@ class PersonalInformationWidget extends StatelessWidget {
                     hint: "5xxxxxxxx",
                     inputType: TextInputType.phone,
                     valid: (v) =>
-                        Validations.phone(v, provider.countryCode.trim()),
+                        Validations.phone(v, provider.countryFlag.trim()),
                   ),
                 ),
                 const SizedBox(
@@ -225,7 +222,7 @@ class PersonalInformationWidget extends StatelessWidget {
                             "RA",
                           ],
                           onSelect: (Country value) => provider.onSelectCountry(
-                              code: value.countryCode, phone: value.phoneCode),
+                              id: value.countryCode, code: value.phoneCode),
                           countryListTheme: CountryListThemeData(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(15),
@@ -260,7 +257,8 @@ class PersonalInformationWidget extends StatelessWidget {
                             )),
                             Expanded(
                               child: Text(
-                                provider.countryPhoneCode,
+                                provider.countryCode,
+                                textAlign: TextAlign.center,
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 14,
                                     overflow: TextOverflow.ellipsis),
@@ -268,7 +266,7 @@ class PersonalInformationWidget extends StatelessWidget {
                             ),
                             Expanded(
                               child: Flag.fromString(
-                                provider.countryCode,
+                                provider.countryFlag,
                                 width: 16,
                                 height: 10,
                               ),

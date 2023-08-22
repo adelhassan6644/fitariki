@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
@@ -130,7 +132,7 @@ class _DashBoardState extends State<DashBoard> {
                 onPressed: () {
                   if (provider.isLogin) {
                     if (provider.isDriver && provider.status != "1") {
-                      print(provider.status);
+                      log(provider.status.toString());
                       CustomSnackBar.showSnackBar(
                           notification: AppNotification(
                               message:

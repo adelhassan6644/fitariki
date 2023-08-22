@@ -30,7 +30,7 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
-    if (isLogin && isCompleteProfile) {
+    if (profileRepo.isLoggedIn()) {
       getProfile();
     }
     getBanks();
@@ -39,18 +39,15 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   bool get isLogin => profileRepo.isLoggedIn();
-  bool get isCompleteProfile => profileRepo.isCompleteProfile();
   bool get isDriver => profileRepo.isDriver();
 
-  late final TextEditingController _phoneTEC;
-  TextEditingController get phoneTEC => _phoneTEC;
+  final TextEditingController phoneTEC = TextEditingController();
 
-
-  String countryPhoneCode = "+966";
-  String countryCode = "SA";
-  void onSelectCountry({required String code, required String phone}) {
-    countryPhoneCode = "+$phone";
-    countryCode = code;
+  String countryCode = "+966";
+  String countryFlag = "SA";
+  void onSelectCountry({required String id, required String code}) {
+    countryCode = "+$code";
+    countryFlag = id;
     notifyListeners();
   }
 
@@ -382,6 +379,16 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
+
+      if (phoneTEC.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال رقم الجوال!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
     }
     if (startLocation == null) {
       CustomSnackBar.showSnackBar(
@@ -536,10 +543,10 @@ class ProfileProvider extends ChangeNotifier {
   ///Update Profile
   ///
   bool isLoadingProfile = false;
-  updateProfile({bool fromLogin = false}) async {
+  updateProfile({bool fromRegister = false}) async {
     if (checkData() == true) {
       try {
-        if (!fromLogin) {
+        if (!fromRegister) {
           spinKitDialog();
         }
         isLoadingProfile = true;
@@ -567,7 +574,10 @@ class ProfileProvider extends ChangeNotifier {
             // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
-            "email": email.text.trim(),
+            // "email": email.text.trim(),
+            "phone": phoneTEC.text.trim(),
+            "country_flag": countryFlag.trim(),
+            "country_code": countryCode.trim(),
             "gender": gender,
             "age": age.text.trim(),
             "country_id": nationality?.id,
@@ -633,7 +643,7 @@ class ProfileProvider extends ChangeNotifier {
         Either<ServerFailure, Response> response =
             await profileRepo.updateProfile(body: personalData);
         response.fold((fail) {
-          if (!fromLogin) {
+          if (!fromRegister) {
             CustomNavigator.pop();
           }
           CustomSnackBar.showSnackBar(
@@ -645,8 +655,8 @@ class ProfileProvider extends ChangeNotifier {
           isLoadingProfile = false;
           notifyListeners();
         }, (response) {
-          profileRepo.completedProfile();
-          if (!fromLogin) {
+          if (fromRegister) {
+            profileRepo.setLoggedIn();
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {
             CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
@@ -658,9 +668,9 @@ class ProfileProvider extends ChangeNotifier {
                   isFloating: true,
                   backgroundColor: Styles.ACTIVE,
                   borderColor: Colors.transparent));
-          isLoadingProfile = false;
-          notifyListeners();
         });
+        isLoadingProfile = false;
+        notifyListeners();
       } catch (e) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -746,6 +756,9 @@ class ProfileProvider extends ChangeNotifier {
     lastName.text = profileModel?.client?.lastName ?? "";
     age.text = profileModel?.client?.age ?? "";
     email.text = profileModel?.client?.email ?? "";
+    phoneTEC.text = profileModel?.client?.phone ?? "";
+    countryCode = profileModel?.client?.countryCode ?? "";
+    countryFlag = profileModel?.client?.countryId ?? "";
     _gender = profileModel?.client?.gender ?? 0;
     rate = profileModel?.client?.rate ?? 0.0;
     requestsCount = profileModel?.client?.requestsCount ?? 0;
@@ -776,6 +789,9 @@ class ProfileProvider extends ChangeNotifier {
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
     email.text = profileModel?.driver?.email ?? "";
+    phoneTEC.text = profileModel?.driver?.phone ?? "";
+    countryCode = profileModel?.driver?.countryCode ?? "";
+    countryFlag = profileModel?.driver?.countryFlag ?? "";
     identityNumber.text = profileModel?.driver?.identityNumber ?? "";
     nationality = profileModel?.driver?.national;
     _gender = profileModel?.driver?.gender ?? 0;

@@ -9,10 +9,6 @@ import 'package:fitariki/app/core/utils/app_storage_keys.dart';
     return !sharedPreferences.containsKey(AppStorageKey.notFirstTime);
   }
 
-  bool isCompleteProfile(){
-    return sharedPreferences.getBool(AppStorageKey.isCompleteProfile)??false;
-  }
-
   bool isLogin(){
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }

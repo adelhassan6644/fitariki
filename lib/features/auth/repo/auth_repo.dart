@@ -89,9 +89,9 @@ class AuthRepo {
   }) async {
     try {
       Response response =
-          await dioClient.post(uri: EndPoints.resetPassword(role), data: {
+          await dioClient.post(uri: EndPoints.updatePassword(role), data: {
         "email": email,
-        "newPassword": password,
+        "password": password,
       });
 
       if (response.statusCode == 200) {
@@ -109,6 +109,7 @@ class AuthRepo {
     try {
       Response response = await dioClient.post(
           uri: EndPoints.changePassword(
+              sharedPreferences.getString(AppStorageKey.role),
               sharedPreferences.getString(AppStorageKey.userId)),
           data: {
             "oldPassword": oldPassword,
@@ -129,7 +130,7 @@ class AuthRepo {
       {required String mail, required String role}) async {
     try {
       Response response =
-          await dioClient.post(uri: EndPoints.forgetPassword(role), data: {
+          await dioClient.post(uri: EndPoints.resetPassword(role), data: {
         "email": mail,
       });
 
@@ -166,7 +167,9 @@ class AuthRepo {
       required bool fromRegister}) async {
     try {
       Response response = await dioClient.post(
-          uri: fromRegister ? EndPoints.resend : EndPoints.forgetPassword(role),
+          uri: fromRegister
+              ? EndPoints.resend(role)
+              : EndPoints.resetPassword(role),
           data: {"email": mail});
 
       if (response.statusCode == 200) {

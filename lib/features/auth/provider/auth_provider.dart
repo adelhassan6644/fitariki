@@ -70,7 +70,7 @@ class AuthProvider extends ChangeNotifier {
       Either<ServerFailure, Response> response = await authRepo.logIn(
           mail: mailTEC.text.trim(),
           password: newPasswordTEC.text.trim(),
-          userType: role[_userType]);
+          role: role[_userType]);
       response.fold((fail) {
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
@@ -87,24 +87,26 @@ class AuthProvider extends ChangeNotifier {
           authRepo.forget();
         }
         CustomNavigator.pop();
+
         authRepo.saveUserRole(
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
 
         if (success.data['data'][role[_userType]]["email_verified_at"] ==
-            null) {
-          CustomNavigator.pop();
+                null ||
+            success.data['data'][role[_userType]]["email_verified_at"] == "") {
           CustomNavigator.push(Routes.VERIFICATION, arguments: true);
-        } else if (success.data['data'][role[_userType]]["password"] != null) {
-          CustomNavigator.pop();
-          CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
-        } else if (success.data['data'][role[_userType]]["first_name"] !=
-            null) {
-          CustomNavigator.pop();
+        }
+        // else if (success.data['data'][role[_userType]]["password"] == null ||
+        //     success.data['data'][role[_userType]]["password"] == "") {
+        //   CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
+        // }
+        else if (success.data['data'][role[_userType]]["first_name"] ==
+                null ||
+            success.data['data'][role[_userType]]["first_name"] == "") {
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
-          CustomNavigator.pop();
           clear();
           authRepo.setLoggedIn();
         }
@@ -143,7 +145,6 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
       }, (success) {
         if (fromRegister) {
-          authRepo.setLoggedIn();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
@@ -246,7 +247,6 @@ class AuthProvider extends ChangeNotifier {
             type: role[_userType],
             id: success.data['data'][role[_userType]]["id"].toString());
         CustomNavigator.pop();
-
         CustomNavigator.push(Routes.VERIFICATION, arguments: true);
       });
       _isRegister = false;
@@ -288,7 +288,6 @@ class AuthProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        notifyListeners();
       }, (success) {
         CustomNavigator.push(Routes.VERIFICATION,
             replace: true, arguments: false);
@@ -327,7 +326,6 @@ class AuthProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        notifyListeners();
       }, (success) {
         CustomNavigator.push(Routes.RESET_PASSWORD,
             arguments: fromRegister, clean: true);

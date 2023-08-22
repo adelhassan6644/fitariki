@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/methods.dart';
+import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
@@ -100,6 +101,36 @@ class Payment extends StatelessWidget {
                                       timeRange:
                                           "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                                     ),
+
+                                  ///Type of ride
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                        vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          getTranslated("ride_type", context),
+                                          textAlign: TextAlign.start,
+                                          style: AppTextStyles.w600.copyWith(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
+                                        Text(
+                                          provider.requestModel?.rideType ??
+                                              provider.requestModel?.offer?.rideType ?? "",
+                                          textAlign: TextAlign.end,
+                                          style: AppTextStyles.w400.copyWith(
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
                                   ///Coupon
                                   const CouponWidget(),

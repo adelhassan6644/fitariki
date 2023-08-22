@@ -311,7 +311,6 @@
   "reset_password_header": "كلمة المرور الجديدة يجب ان تكون مختلفه عن كلمة المرور المستخدمه السابقه",
   "your_request_has_been_sent_successfully": "تم ارسال طلبك بنجاح",
   "your_password_has_been_reset_successfully": "تم بنجاح تحديث كلمة المرورالمرتبطة بإيميل",
-  "password_updated": "كلمة المرور تحدثت!",
-  "show_all": "عرض الكل"
+  "password_updated": "كلمة المرور تحدثت!"
 
 }

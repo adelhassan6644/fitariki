@@ -105,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                       child: CustomButton(
                         isLoading: provider.isLoadingProfile,
                         text: getTranslated("save", context),
-                        onTap: () => provider.updateProfile(fromLogin: true),
+                        onTap: () => provider.updateProfile(fromRegister: true),
                       ),
                     ),
                     SizedBox(

@@ -7,6 +7,10 @@ class ClientModel {
   String? firstName;
   String? lastName;
   String? email;
+  String? phone;
+  String? countryFlag;
+  String? countryId;
+  String? countryCode;
   String? image;
   String? nickname;
   int? gender;
@@ -15,8 +19,6 @@ class ClientModel {
   String? age;
   Country? national;
   String? city;
-  String? countryId;
-  String? phone;
   String? status;
   double? rate;
   double? wallet;
@@ -37,8 +39,10 @@ class ClientModel {
       this.age,
       this.national,
       this.city,
-      this.countryId,
       this.phone,
+      this.countryFlag,
+      this.countryId,
+      this.countryCode,
       this.status,
       this.rate,
       this.wallet,
@@ -55,6 +59,10 @@ class ClientModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
+        phone: json["phone"].toString(),
+        countryFlag: json["country_flag"].toString(),
+        countryId: json["country_id"].toString(),
+        countryCode: json["country_code"].toString(),
         image: json["image"],
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
@@ -69,8 +77,6 @@ class ClientModel {
               )
             : null,
         city: json["city"],
-        countryId: json["country_id"].toString(),
-        phone: json["phone"].toString(),
         status: json["status"] != null ? json["status"].toString() : null,
         rate: double.tryParse(json["rate"].toString()),
         wallet: double.tryParse(json["wallet"].toString()),
@@ -103,8 +109,10 @@ class ClientModel {
         "age": age,
         "national": national?.toJson(),
         "city": city,
-        "country_id": countryId,
         "phone": phone,
+        "country_flag": countryFlag,
+        "country_code": countryCode,
+        "country_id": countryId,
         "status": status,
         "rate": rate,
         "wallet": wallet,

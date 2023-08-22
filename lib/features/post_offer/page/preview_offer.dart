@@ -1,12 +1,10 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
-import '../../../data/config/di.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../profile/provider/profile_provider.dart';

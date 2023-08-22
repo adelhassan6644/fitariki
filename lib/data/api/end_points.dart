@@ -7,11 +7,11 @@ class EndPoints {
   static logIn(role) => '$role/auth/login';
   static confirmEmail(role) => '$role/auth/confirmEmail';
   static register(role) => '$role/auth/register';
-  static forgetPassword(role) => '$role/auth/sendEmailConfirmation';
-  static confirmResetPassword(role) => '$role/auth/passwordResetConfirm';
   static resetPassword(role) => '$role/auth/passwordReset';
-  static changePassword(id) => '/$id';
-  static const String resend = 'email/verification';
+  static confirmResetPassword(role) => '$role/auth/passwordResetConfirm';
+  static updatePassword(role) => '$role/auth/updatePassword';
+  static resend(role) => '$role/auth/sendEmailConfirmation';
+  static changePassword(role,id) => '$role/auth/sendEmailConfirmation/$id';
   static const String getProfile = 'profile/profile';
   static const String getCountries = '/app/countries';
   static const String getBanks = '/app/banks';

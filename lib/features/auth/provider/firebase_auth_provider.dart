@@ -235,7 +235,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
-          firebaseAuthRepo.completedProfile();
           CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           sl<ProfileProvider>().getProfile();
         }

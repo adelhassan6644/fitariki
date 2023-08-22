@@ -21,13 +21,12 @@ class ProfileRepo {
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
-  bool isCompleteProfile() {
-    return sharedPreferences.containsKey(AppStorageKey.isCompleteProfile);
+
+
+  setLoggedIn() {
+    sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
-  completedProfile() {
-    sharedPreferences.setBool(AppStorageKey.isCompleteProfile, true);
-  }
   Future<String?> saveDeviceToken() async {
     String? deviceToken;
 
