@@ -50,6 +50,14 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int tab = 0;
+  onSelectTab(int value) {
+    tab = value;
+    notifyListeners();
+  }
+
+
+  ///For Filtration
   List<String> genders = ["male", "female"];
   List<String> genderIcons = [SvgImages.maleIcon, SvgImages.femaleIcon];
   int gender = 0;

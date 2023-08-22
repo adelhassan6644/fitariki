@@ -309,5 +309,6 @@
   "change_password_header": "The new password must be different from the current password",
   "your_request_has_been_sent_successfully": "Your request has been sent successfully",
   "your_password_has_been_reset_successfully": "The password has been update which associated with e-mail of",
-  "password_updated": "The Password Updated!"
+  "password_updated": "The Password Updated!",
+  "show_all": "Show All"
 }

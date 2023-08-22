@@ -19,6 +19,7 @@ import '../features/auth/pages/verification.dart';
 import '../features/contatct_with_us/page/contact_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
+import '../features/home/page/all_home_offers.dart';
 import '../features/maps/page/pick_map_screen.dart';
 import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
@@ -70,6 +71,9 @@ abstract class CustomNavigator {
         return _pageRoute(DashBoard(
           index: settings.arguments as int,
         ));
+
+        case Routes.ALL_HOME_OFFERS:
+        return _pageRoute(const AllHomeOffers());
 
       case Routes.OFFER_DETAILS:
         return _pageRoute(OfferDetails(

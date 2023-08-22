@@ -73,7 +73,7 @@ class OfferCard extends StatelessWidget {
                                   Text(
                                     sl<HomeProvider>().isDriver
                                         ?"${ offerModel.clientModel?.firstName ?? ""} "
-                                        : offerModel.driverModel!.firstName!.split(" ")[0] ?? "",
+                                        : offerModel.driverModel?.firstName?.split(" ")[0] ?? "",
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: AppTextStyles.w600.copyWith(

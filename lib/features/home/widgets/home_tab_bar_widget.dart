@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,15 +12,15 @@ import '../../../components/tab_widget.dart';
 import '../provider/home_provider.dart';
 import 'filter_Bottom_sheet.dart';
 
-class RoleTypeWidget extends StatelessWidget {
-  const RoleTypeWidget({Key? key}) : super(key: key);
+class HomeTabBarWidget extends StatelessWidget {
+  const HomeTabBarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
       builder: (context, provider, child) {
         return Visibility(
-          visible: !provider.isLogin,
+          visible: provider.isLogin,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(Dimensions.PADDING_SIZE_DEFAULT,
                 0, Dimensions.PADDING_SIZE_DEFAULT, 14),
@@ -32,16 +33,23 @@ class RoleTypeWidget extends StatelessWidget {
                           color: Styles.CONTAINER_BACKGROUND_COLOR,
                           borderRadius: BorderRadius.circular(6)),
                       child: Row(
-                        children: List.generate(
-                            provider.titles.length,
-                            (index) => Expanded(
-                                  child: TabWidget(
-                                      title: getTranslated(
-                                          provider.titles[index], context),
-                                      isSelected: index == provider.roleIndex,
-                                      onTab: () =>
-                                          provider.onSelectRole(index)),
-                                )),
+                        children: [
+                          Expanded(
+                            child: TabWidget(
+                                title:
+                                    getTranslated("delivery_offers", context),
+                                isSelected: provider.tab == 0,
+                                onTab: () => provider.onSelectTab(0)),
+                          ),
+                          Expanded(
+                            child: TabWidget(
+                                title: getTranslated(
+                                    provider.isDriver ? "captain" : "passenger",
+                                    context),
+                                isSelected: 1 == provider.tab,
+                                onTab: () => provider.onSelectTab(1)),
+                          )
+                        ],
                       )),
                 ),
                 const SizedBox(
@@ -54,9 +62,7 @@ class RoleTypeWidget extends StatelessWidget {
                   hoverColor: Colors.transparent,
                   onTap: () => customShowModelBottomSheet(
                       body: const FilterBottomSheet(),
-                      onClose: () =>
-                          Provider.of<HomeProvider>(context, listen: false)
-                              .reset()),
+                      onClose: () => Provider.of<HomeProvider>(context, listen: false).reset()),
                   child: Container(
                       height: 32,
                       decoration: BoxDecoration(
