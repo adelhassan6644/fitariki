@@ -176,7 +176,7 @@ class ProfileCard extends StatelessWidget {
                             Visibility(
                               visible: withPhone,
                               child: Text(
-                                "${FirebaseAuth.instance.currentUser?.phoneNumber?.replaceAll("+", "")}+",
+                                "${phone?.replaceAll("+", "")}+",
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
                                 style: AppTextStyles.w400.copyWith(

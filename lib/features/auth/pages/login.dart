@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
+      height: 550,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -205,7 +205,7 @@ class _ForgetPassword extends StatelessWidget {
         onTap: () {
           CustomNavigator.pop();
           onTap();
-          CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
+          CustomNavigator.push(Routes.FORGET_PASSWORD, arguments: true);
         },
         child: RichText(
           text: TextSpan(

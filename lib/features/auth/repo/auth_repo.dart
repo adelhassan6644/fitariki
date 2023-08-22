@@ -20,8 +20,8 @@ class AuthRepo {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }
 
-  setLoggedIn() {
-    sharedPreferences.setBool(AppStorageKey.isLogin, true);
+  setLoggedIn() async {
+  await  sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
   saveUserRole({required String id, required String type}) {

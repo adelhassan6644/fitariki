@@ -28,7 +28,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController currentPasswordTEC = TextEditingController();
   final TextEditingController newPasswordTEC = TextEditingController();
   final TextEditingController confirmPasswordTEC = TextEditingController();
-  final TextEditingController codeTEC = TextEditingController();
+   TextEditingController codeTEC = TextEditingController();
 
   clear() {
     mailTEC.clear();
@@ -69,7 +69,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.logIn(
           mail: mailTEC.text.trim(),
-          password: newPasswordTEC.text.trim(),
+          password: currentPasswordTEC.text.trim(),
           role: role[_userType]);
       response.fold((fail) {
         CustomNavigator.pop();
@@ -308,14 +308,14 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isVerify = false;
   bool get isVerify => _isVerify;
-  verify(fromRegister) async {
+  verify(fromRegister,code) async {
     try {
       spinKitDialog();
       _isVerify = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await authRepo.verifyMail(
           mail: mailTEC.text.trim(),
-          code: codeTEC.text.trim(),
+          code: code,
           role: role[_userType],
           fromRegister: fromRegister);
       CustomNavigator.pop();

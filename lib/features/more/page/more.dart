@@ -36,6 +36,7 @@ class More extends StatelessWidget {
                                   lastUpdate: provider.lastUpdate,
                                   image: provider.image,
                                   name: provider.firstName.text,
+                                  phone:provider.phoneTEC.text ,
                                   isDriver: provider.isDriver,
                                   male: provider.gender == 0,
                                   nationality: provider.nationality?.name,

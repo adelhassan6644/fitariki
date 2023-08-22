@@ -50,45 +50,54 @@ class Verification extends StatelessWidget {
                         SizedBox(height: 8.h),
                         Directionality(
                           textDirection: TextDirection.ltr,
-                          child: PinCodeTextField(
-                            length: 6,
-                            hintCharacter: "*",
-                            autoFocus: true,
-                            hintStyle: AppTextStyles.w500
-                                .copyWith(color: Styles.DISABLED),
-                            appContext: context,
-                            keyboardType: TextInputType.phone,
-                            animationType: AnimationType.slide,
-                            obscureText: true,
-                            obscuringCharacter: "*",
-                            onCompleted: (v) => provider.verify(fromRegister),
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            cursorColor: Styles.PRIMARY_COLOR,
-                            errorTextSpace: 30.h,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                            ],
-                            pinTheme: PinTheme(
-                              shape: PinCodeFieldShape.box,
-                              fieldHeight: 38.h,
-                              fieldWidth: 42.w,
-                              borderWidth: 1.w,
-                              fieldOuterPadding: EdgeInsets.zero,
-                              borderRadius: BorderRadius.circular(
-                                  Dimensions.RADIUS_DEFAULT),
-                              selectedColor: Styles.SECOUND_PRIMARY_COLOR,
-                              selectedFillColor: Styles.FILL_COLOR,
-                              inactiveFillColor: Styles.FILL_COLOR,
-                              inactiveColor: Styles.SECOUND_PRIMARY_COLOR,
-                              activeColor: Styles.SECOUND_PRIMARY_COLOR,
-                              activeFillColor: Styles.FILL_COLOR,
+
+                          child:  Padding(
+                            padding: const EdgeInsets.symmetric(
+
+                              horizontal: 30,
                             ),
-                            animationDuration:
-                                const Duration(milliseconds: 300),
-                            backgroundColor: Colors.transparent,
-                            enableActiveFill: true,
-                            beforeTextPaste: (text) => true,
-                            onChanged: (v) {},
+                            child: PinCodeTextField(
+                              length: 4,
+                              hintCharacter: "*",
+                              autoFocus: true,
+
+                              hintStyle: AppTextStyles.w500
+                                  .copyWith(color: Styles.DISABLED),
+                              appContext: context,
+                              keyboardType: TextInputType.phone,
+                              animationType: AnimationType.slide,
+                              obscureText: true,
+                              obscuringCharacter: "*",
+                              // controller: provider.codeTEC,
+                              onCompleted: (code) => provider.verify(fromRegister,code),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              cursorColor: Styles.PRIMARY_COLOR,
+                              errorTextSpace: 30.h,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                              ],
+                              pinTheme: PinTheme(
+                                shape: PinCodeFieldShape.box,
+                                fieldHeight: 38.h,
+                                fieldWidth: 42.w,
+                                borderWidth: 1.w,
+                                fieldOuterPadding: EdgeInsets.zero,
+                                borderRadius: BorderRadius.circular(
+                                    Dimensions.RADIUS_DEFAULT),
+                                selectedColor: Styles.SECOUND_PRIMARY_COLOR,
+                                selectedFillColor: Styles.FILL_COLOR,
+                                inactiveFillColor: Styles.FILL_COLOR,
+                                inactiveColor: Styles.SECOUND_PRIMARY_COLOR,
+                                activeColor: Styles.SECOUND_PRIMARY_COLOR,
+                                activeFillColor: Styles.FILL_COLOR,
+                              ),
+                              animationDuration:
+                                  const Duration(milliseconds: 300),
+                              backgroundColor: Colors.transparent,
+                              enableActiveFill: true,
+                              beforeTextPaste: (text) => true,
+                              onChanged: (v) {},
+                            ),
                           ),
                         ),
                         CountDown(

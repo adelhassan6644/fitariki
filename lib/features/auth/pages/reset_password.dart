@@ -23,16 +23,16 @@ class _ResetPasswordState extends State<ResetPassword> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: true,
-      child: Scaffold(
-          appBar: CustomAppBar(
-            withBorder: true,
-            title: getTranslated(
-                widget.fromRegister ? "reset_new_password" : "reset_password",
-                context),
-          ),
-          body: Padding(
+    return Scaffold(
+        appBar: CustomAppBar(
+          withBorder: true,
+          title: getTranslated(
+              widget.fromRegister ? "reset_new_password" : "reset_password",
+              context),
+        ),
+        body: SafeArea(
+          bottom: true,
+          child: Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: Dimensions.PADDING_SIZE_DEFAULT),
             child: Column(
@@ -127,7 +127,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
