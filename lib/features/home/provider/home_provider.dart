@@ -2,15 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/main_models/offer_model.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
-import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
-import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../maps/models/location_model.dart';
+import '../model/home_users_model.dart';
 import '../repo/home_repo.dart';
 import 'package:flutter/rendering.dart';
 
@@ -21,6 +19,7 @@ class HomeProvider extends ChangeNotifier {
       onSelectRole(0);
     } else {
       getOffers();
+      getUsers();
     }
   }
 
@@ -47,6 +46,7 @@ class HomeProvider extends ChangeNotifier {
     roleIndex = value;
     homeRepo.saveUserRole(roles[roleIndex]);
     getOffers();
+    getUsers();
     notifyListeners();
   }
 
@@ -55,7 +55,6 @@ class HomeProvider extends ChangeNotifier {
     tab = value;
     notifyListeners();
   }
-
 
   ///For Filtration
   List<String> genders = ["male", "female"];
@@ -95,10 +94,8 @@ class HomeProvider extends ChangeNotifier {
       final filters = {
         "fillters": {
           if (startLocation == null)
-            if (sl.get<SharedPreferences>().getString(AppStorageKey.role) !=
-                null)
-              "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
-                  sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+            if (homeRepo.getUserId() != null)
+              "${homeRepo.getRole()}_id": homeRepo.getUserId(),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,
@@ -110,14 +107,8 @@ class HomeProvider extends ChangeNotifier {
               ? filters
               : {
                   "fillters": {
-                    if (sl
-                            .get<SharedPreferences>()
-                            .getString(AppStorageKey.role) !=
-                        null)
-                      "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
-                          sl
-                              .get<SharedPreferences>()
-                              .getString(AppStorageKey.userId),
+                    if (homeRepo.isLoggedIn())
+                      "${homeRepo.getRole()}_id": homeRepo.getUserId(),
                   },
                 });
       response.fold((l) => null, (response) {
@@ -134,6 +125,38 @@ class HomeProvider extends ChangeNotifier {
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  bool isGetting = false;
+  HomeUsersModel? homeUsersModel;
+  getUsers() async {
+    try {
+      homeUsersModel = null;
+      isGetting = true;
+      notifyListeners();
+      Either<ServerFailure, Response> response = await homeRepo.getUsers();
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: l.error,
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (success) {
+        homeUsersModel = HomeUsersModel.fromJson(success.data["data"]);
+      });
+      isGetting = false;
+      notifyListeners();
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: ApiErrorHandler.getMessage(e),
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isGetting = false;
       notifyListeners();
     }
   }

@@ -47,8 +47,10 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _selectedIndex = widget.index ?? 0;
+
     NetworkInfo.checkConnectivity(onVisible: () {
       sl<HomeProvider>().getOffers();
+      sl<HomeProvider>().getUsers();
       if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
         Provider.of<ProfileProvider>(context, listen: false).getProfile();
         Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
@@ -59,6 +61,19 @@ class _DashBoardState extends State<DashBoard> {
       }
     });
     super.initState();
+  }
+
+  init() {
+    sl<HomeProvider>().getOffers();
+    sl<HomeProvider>().getUsers();
+    if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
+      Provider.of<ProfileProvider>(context, listen: false).getProfile();
+      Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
+      Provider.of<WishlistProvider>(context, listen: false).getWishList();
+      Provider.of<MyTripsProvider>(context, listen: false).getCurrentTrips();
+      Provider.of<MyTripsProvider>(context, listen: false).getPreviousTrips();
+      Provider.of<MyTripsProvider>(context, listen: false).getPendingTrips();
+    }
   }
 
   @override

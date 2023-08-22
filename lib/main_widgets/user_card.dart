@@ -14,7 +14,6 @@ import '../data/config/di.dart';
 import '../features/home/widgets/acceptable_analytics_widget.dart';
 import '../features/request_details/widgets/contact_buttons.dart';
 import '../features/request_details/widgets/report_button.dart';
-import '../features/user_profile/provider/user_profile_provider.dart';
 import '../navigation/custom_navigation.dart';
 import '../navigation/routes.dart';
 
@@ -40,7 +39,7 @@ class UserCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final int? userId, reservationId,  passengers;
+  final int? userId, reservationId, passengers;
   final double? rate;
   final String? image, name, national, phone;
   final bool male;
@@ -76,20 +75,8 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: () {
-                    if (userId != null) {
-                      sl<UserProfileProvider>().getUserProfile(
-                        userId: userId!,
-                      );
-
-                      CustomNavigator.push(Routes.USER_PROFILE,
-                          arguments: userId);
-                    }
-                    if (sl<UserProfileProvider>().isDriver && userId != null) {
-                      sl<UserProfileProvider>().getUserFollowers(id: userId!);
-                    }
-
-                  },
+                  onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
+                      arguments: userId),
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(
@@ -105,7 +92,7 @@ class UserCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                name ?.split(" ")[0] ?? "",
+                                name?.split(" ")[0] ?? "",
                                 textAlign: TextAlign.start,
                                 maxLines: 1,
                                 style: AppTextStyles.w600.copyWith(
@@ -333,8 +320,8 @@ class UserCard extends StatelessWidget {
                         height: 4.h,
                       ),
                       if (withAnalytics)
-                         AcceptableAnalytics(
-                          value: matching??0,
+                        AcceptableAnalytics(
+                          value: matching ?? 0,
                           color: Styles.PRIMARY_COLOR,
                         ),
                     ],

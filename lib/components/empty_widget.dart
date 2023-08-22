@@ -39,17 +39,21 @@ class EmptyState extends StatelessWidget {
             !isSvg
                 ? customImageIcon(
                     imageName: img ?? Images.logo,
+                    color: Styles.DISABLED,
                     width: imgWidth ?? 200,
                     height: imgHeight ?? 150)
                 : customImageIconSVG(
                     imageName: img ?? SvgImages.navLogoIcon,
+                    color: Styles.DISABLED,
                     width: imgWidth ?? 200,
                     height: imgHeight ?? 150),
             SizedBox(height: spaceBtw ?? 35.h),
             Text(txt ?? "لا يوجد بيانات !",
                 textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                style: const TextStyle(
+                    fontSize: 14,
+                    color: Styles.DISABLED,
+                    fontWeight: FontWeight.w600)),
             SizedBox(height: 8.h),
             Text(subText ?? "",
                 textAlign: TextAlign.center,

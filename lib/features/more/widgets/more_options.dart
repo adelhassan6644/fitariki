@@ -1,14 +1,16 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/features/auth/provider/firebase_auth_provider.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
 import 'package:fitariki/features/transactions/provider/transactions_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/svg_images.dart';
+import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../../auth/provider/auth_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import 'more_button.dart';
 
@@ -53,22 +55,13 @@ class MoreOptions extends StatelessWidget {
               ),
             ),
 
-            Visibility(
-              visible: !sl<ProfileProvider>().isDriver,
-              child: MoreButton(
-                title: getTranslated("transactions", context),
-                icon: SvgImages.wallet,
-                onTap: () {
-                  sl<TransactionsProvider>().getTransactions();
-                  CustomNavigator.push(Routes.TRANSACTIONS);
-                },
-              ),
-            ),
             MoreButton(
               title: getTranslated("archives", context),
               icon: SvgImages.bookMark,
               onTap: () => CustomNavigator.push(Routes.WISHLIST),
             ),
+
+            ///Notifications
             MoreButton(
               title: getTranslated("notifications", context),
               icon: SvgImages.notifications,
@@ -91,11 +84,45 @@ class MoreOptions extends StatelessWidget {
             //     // CustomNavigator.push(Routes.RATE_USER,arguments: 20);
             //   },
             // ),
+
+            ///Change Password
             MoreButton(
               title: getTranslated("change_password", context),
               icon: SvgImages.lockIcon,
               onTap: () => CustomNavigator.push(Routes.CHANGE_PASSWORD),
             ),
+
+            ///Transactions
+            Consumer<ProfileProvider>(builder: (_, provider, child) {
+              return Visibility(
+                visible: !provider.isDriver,
+                child: MoreButton(
+                  title: getTranslated("transactions", context),
+                  icon: SvgImages.card,
+                  onTap: () {
+                    sl<TransactionsProvider>().getTransactions();
+                    CustomNavigator.push(Routes.TRANSACTIONS);
+                  },
+                ),
+              );
+            }),
+
+            ///Wallet
+            Consumer<ProfileProvider>(builder: (_, provider, child) {
+              return Visibility(
+                visible: !provider.isDriver,
+                child: MoreButton(
+                  title: getTranslated("wallet", context),
+                  icon: SvgImages.wallet,
+                  leading: Text(
+                      "${provider.profileModel?.client?.wallet?.toString() ?? 0.0}  ${getTranslated("sar", context)}",
+                      style: AppTextStyles.w400
+                          .copyWith(fontSize: 14, color: Styles.DISABLED)),
+                ),
+              );
+            }),
+
+            ///Contact With Us
             MoreButton(
               title: getTranslated("contact_with_us", context),
               icon: SvgImages.call,
@@ -107,7 +134,7 @@ class MoreOptions extends StatelessWidget {
               icon: SvgImages.logout,
               withBorder: false,
               isLogout: true,
-              onTap: sl<FirebaseAuthProvider>().logOut,
+              onTap: sl<AuthProvider>().logOut,
             ),
           ],
         ),

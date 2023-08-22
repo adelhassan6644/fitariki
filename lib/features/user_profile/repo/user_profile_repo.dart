@@ -28,19 +28,14 @@ class UserProfileRepo {
         role = "driver";
       }
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)??"client"}/$role/${EndPoints.userProfile}/$userID",
-        queryParameters: {
-          if (sl
-              .get<SharedPreferences>()
-              .getString(AppStorageKey.role) !=
-              null)
-            "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
-            sl
-                .get<SharedPreferences>()
-                .getString(AppStorageKey.userId),
-        }
-      );
+          uri:
+              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/$role/${EndPoints.userProfile}/$userID",
+          queryParameters: {
+            if (sl.get<SharedPreferences>().getString(AppStorageKey.role) !=
+                null)
+              "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
+                  sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+          });
       if (response.statusCode == 200) {
         return Right(response);
       } else {

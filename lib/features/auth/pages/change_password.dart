@@ -125,7 +125,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 provider.changePassword();
                               }
                             },
-                            isLoading: provider.isForget),
+                            isLoading: provider.isChange),
                       ],
                     );
                   }),

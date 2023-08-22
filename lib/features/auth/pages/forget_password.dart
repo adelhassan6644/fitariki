@@ -43,7 +43,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         ),
                         Text(
                           getTranslated("forget_password_header", context),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.start,
                           style: AppTextStyles.w600.copyWith(
                               fontSize: 16,
                               color: Styles.SECOUND_PRIMARY_COLOR),
@@ -53,7 +53,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           child: Text(
                             getTranslated(
                                 "forget_password_sub_header", context),
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.start,
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 14,
                                 color: Styles.SECOUND_PRIMARY_COLOR),

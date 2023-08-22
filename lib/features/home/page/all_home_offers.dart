@@ -1,3 +1,4 @@
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/components/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,21 +10,8 @@ import '../../../main_widgets/offer_card.dart';
 import '../../../main_widgets/shimmer_widgets/shimmer_offer_card.dart';
 import '../provider/home_provider.dart';
 
-class AllHomeOffers extends StatefulWidget {
+class AllHomeOffers extends StatelessWidget {
   const AllHomeOffers({super.key});
-
-  @override
-  State<AllHomeOffers> createState() => _AllHomeOffersState();
-}
-
-class _AllHomeOffersState extends State<AllHomeOffers> {
-  // ScrollController controller = ScrollController();
-
-  // @override
-  // void initState() {
-  //   Future.delayed(Duration.zero, sl<HomeProvider>().scroll(controller));
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +30,29 @@ class _AllHomeOffersState extends State<AllHomeOffers> {
                 onRefresh: () async {
                   await homeProvider.getOffers();
                 },
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 12),
-                  children: homeProvider.isLoading
-                      ? List.generate(7, (index) => const ShimmerOfferCard())
-                      : homeProvider.offer == null ||
-                              homeProvider.offer!.isEmpty
-                          ? [
-                              EmptyState(
-                                  txt: getTranslated(
-                                      "there_is_no_delivery_requests_or_delivery_offers",
-                                      context))
-                            ]
-                          : List.generate(
-                              homeProvider.offer?.length ?? 0,
-                              (index) => OfferCard(
-                                  offerModel: homeProvider.offer![index])),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListAnimator(
+                        data: homeProvider.isLoading
+                            ? List.generate(
+                                7, (index) => const ShimmerOfferCard())
+                            : homeProvider.offer == null ||
+                                    homeProvider.offer!.isEmpty
+                                ? [
+                                    EmptyState(
+                                        txt: getTranslated(
+                                            "there_is_no_delivery_requests_or_delivery_offers",
+                                            context))
+                                  ]
+                                : List.generate(
+                                    homeProvider.offer?.length ?? 0,
+                                    (index) => OfferCard(
+                                        offerModel:
+                                            homeProvider.offer![index])),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );

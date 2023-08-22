@@ -21,7 +21,7 @@ class AuthRepo {
   }
 
   setLoggedIn() async {
-  await  sharedPreferences.setBool(AppStorageKey.isLogin, true);
+    await sharedPreferences.setBool(AppStorageKey.isLogin, true);
   }
 
   saveUserRole({required String id, required String type}) {
@@ -109,11 +109,11 @@ class AuthRepo {
     try {
       Response response = await dioClient.post(
           uri: EndPoints.changePassword(
-              sharedPreferences.getString(AppStorageKey.role),
-              sharedPreferences.getString(AppStorageKey.userId)),
+              sharedPreferences.getString(AppStorageKey.role)),
           data: {
-            "oldPassword": oldPassword,
-            "newPassword": password,
+            "client_id": sharedPreferences.getString(AppStorageKey.userId),
+            "old_password": oldPassword,
+            "password": password,
           });
 
       if (response.statusCode == 200) {

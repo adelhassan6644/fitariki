@@ -161,6 +161,7 @@
   "email": "الايميل",
   "please_enter_valid_email": " يرجى إدخال البريد الإلكتروني الصحيح",
   "pending": "انتظار",
+  "wallet": "المحفظة",
   "wallet_available": "متاح بالمحفظة",
   "address": "العنوان",
   "confirm_location": "تأكيد الموقع",
@@ -279,7 +280,7 @@
   "waiting_for_client_replay": "في انتظار رد الراكب",
   "waiting_for_driver_replay": "في انتظار رد الكابتن",
   "my_work_study_location": " مكان دوامي/دراستي",
-  "transactions": "سجل المعاملات",
+  "transactions": "المدفوعات",
   "invoice": "الفاتورة",
   "ride_type": "نوع المشوار",
   "back": "عودة",
@@ -311,6 +312,10 @@
   "reset_password_header": "كلمة المرور الجديدة يجب ان تكون مختلفه عن كلمة المرور المستخدمه السابقه",
   "your_request_has_been_sent_successfully": "تم ارسال طلبك بنجاح",
   "your_password_has_been_reset_successfully": "تم بنجاح تحديث كلمة المرورالمرتبطة بإيميل",
-  "password_updated": "كلمة المرور تحدثت!"
+  "password_updated": "كلمة المرور تحدثت!",
+  "show_all": "عرض الكل",
+  "there_is_no_clients": "لا يوجد ركاب حاليا!",
+  "there_is_no_drivers": "لا يوجد كباتن حاليا!",
+  "invalid_credentials": "بيانات الدخول غير صالحة"
 
 }

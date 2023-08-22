@@ -67,7 +67,6 @@ class FirebaseAuthProvider extends ChangeNotifier {
 
   signInWithMobileNo({bool? fromVerification}) async {
     try {
-
       _isLoading = true;
       notifyListeners();
 

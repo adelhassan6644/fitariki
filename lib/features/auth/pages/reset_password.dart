@@ -120,7 +120,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 provider.resetPassword(widget.fromRegister);
                               }
                             },
-                            isLoading: provider.isForget),
+                            isLoading: provider.isReset),
                       ],
                     );
                   }),

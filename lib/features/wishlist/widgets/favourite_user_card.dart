@@ -12,30 +12,20 @@ import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
-import '../../user_profile/provider/user_profile_provider.dart';
 import '../provider/wishlist_provider.dart';
 
 class FavouriteUserCard extends StatelessWidget {
-  const FavouriteUserCard({this.driver, this.client, Key? key})
+  const FavouriteUserCard(
+      {this.driver, this.client, this.withSaveButton = true, Key? key})
       : super(key: key);
   final DriverModel? driver;
   final ClientModel? client;
+  final bool withSaveButton;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        sl<UserProfileProvider>()
-            .getUserProfile(userId: driver != null ? driver!.id! : client!.id!);
-
-
-        if (sl<UserProfileProvider>().isDriver) {
-          sl<UserProfileProvider>()
-              .getUserFollowers(id: driver != null ? driver!.id! : client!.id!);
-        }
-
-        CustomNavigator.push(Routes.USER_PROFILE,
-            arguments: driver != null ? driver!.id : client!.id);
-      },
+      onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
+          arguments: driver != null ? driver!.id : client!.id),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
@@ -106,11 +96,14 @@ class FavouriteUserCard extends StatelessWidget {
                   ],
                 ),
               ),
-              InkWell(
-                onTap: () => sl<WishlistProvider>().postWishList(
-                    id: driver != null ? driver!.id! : client!.id!,
-                    isOffer: false),
-                child: customImageIconSVG(imageName: SvgImages.saved),
+              Visibility(
+                visible: withSaveButton,
+                child: InkWell(
+                  onTap: () => sl<WishlistProvider>().postWishList(
+                      id: driver != null ? driver!.id! : client!.id!,
+                      isOffer: false),
+                  child: customImageIconSVG(imageName: SvgImages.saved),
+                ),
               )
             ],
           ),

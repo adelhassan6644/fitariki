@@ -71,23 +71,25 @@ class DriverModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
-        phone: json["phone"].toString(),
-        countryId: json["country_id"].toString(),
-        countryFlag: json["country_flag"].toString(),
-        countryCode: json["country_code"].toString(),
+        age: json["age"] != null ? json["age"].toString() : null,
+        phone: json["phone"] != null ? json["phone"].toString() : null,
+        countryFlag: json["country_flag"] != null
+            ? json["country_flag"].toString()
+            : null,
+        countryId:
+            json["country_id"] != null ? json["country_id"].toString() : null,
+        countryCode: json["country_code"] != null
+            ? json["country_code"].toString()
+            : null,
         image: json["image"],
         nickname: json["nickname"],
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
         gender: json["gender"] == null
-            ? null
+            ? 0
             : int.parse(json["gender"].toString()),
-        age: json["age"] != null ? json["age"].toString() : null,
-        national: json["country"] != null
-            ? Country.fromJson(
-                json["country"],
-              )
-            : null,
+        national:
+            json["country"] != null ? Country.fromJson(json["country"]) : null,
         city: json["city"],
         identityNumber: json["id_number"],
         identityImage: json["id_image"],

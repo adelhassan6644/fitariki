@@ -59,18 +59,23 @@ class ClientModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
-        phone: json["phone"].toString(),
-        countryFlag: json["country_flag"].toString(),
-        countryId: json["country_id"].toString(),
-        countryCode: json["country_code"].toString(),
+        age: json["age"] != null ? json["age"].toString() : null,
+        phone: json["phone"] != null ? json["phone"].toString() : null,
+        countryFlag: json["country_flag"] != null
+            ? json["country_flag"].toString()
+            : null,
+        countryId:
+            json["country_id"] != null ? json["country_id"].toString() : null,
+        countryCode: json["country_code"] != null
+            ? json["country_code"].toString()
+            : null,
         image: json["image"],
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
         nickname: json["nickname"],
         gender: json["gender"] == null
-            ? null
+            ? 0
             : int.parse(json["gender"].toString()),
-        age: json["age"].toString(),
         national: json["country"] != null
             ? Country.fromJson(
                 json["country"],
@@ -79,7 +84,9 @@ class ClientModel {
         city: json["city"],
         status: json["status"] != null ? json["status"].toString() : null,
         rate: double.tryParse(json["rate"].toString()),
-        wallet: double.tryParse(json["wallet"].toString()),
+        wallet: json["wallet"] == null
+            ? null
+            : double.tryParse(json["wallet"].toString()),
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),

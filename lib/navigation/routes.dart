@@ -13,6 +13,7 @@ class Routes {
   static const PICK_LOCATION = "PICK_LOCATION";
   static const SUCCESS = "SUCCESS";
   static const ALL_HOME_OFFERS = "ALL_HOME_OFFERS";
+  static const ALL_HOME_USERS = "ALL_HOME_USERS";
   static const FOLLOWERS = "FOLLOWERS";
   static const FOLLOWER_DETAILS = "FOLLOWER_DETAILS";
   static const WISHLIST = "WISHLIST";

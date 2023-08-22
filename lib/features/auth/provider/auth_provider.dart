@@ -8,6 +8,8 @@ import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../home/provider/home_provider.dart';
+import '../../my_offers/provider/my_offers_provider.dart';
+import '../../my_trips/provider/my_trips_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
@@ -28,7 +30,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController currentPasswordTEC = TextEditingController();
   final TextEditingController newPasswordTEC = TextEditingController();
   final TextEditingController confirmPasswordTEC = TextEditingController();
-   TextEditingController codeTEC = TextEditingController();
+  TextEditingController codeTEC = TextEditingController();
 
   clear() {
     mailTEC.clear();
@@ -73,6 +75,7 @@ class AuthProvider extends ChangeNotifier {
           role: role[_userType]);
       response.fold((fail) {
         CustomNavigator.pop();
+        clear();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: getTranslated("invalid_credentials",
@@ -101,13 +104,20 @@ class AuthProvider extends ChangeNotifier {
         //     success.data['data'][role[_userType]]["password"] == "") {
         //   CustomNavigator.push(Routes.RESET_PASSWORD, arguments: true);
         // }
-        else if (success.data['data'][role[_userType]]["first_name"] ==
-                null ||
+        else if (success.data['data'][role[_userType]]["first_name"] == null ||
             success.data['data'][role[_userType]]["first_name"] == "") {
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
           clear();
+          sl<HomeProvider>().getOffers();
+          sl<MyOffersProvider>().getMyOffers();
+          sl<WishlistProvider>().getWishList();
+          sl<MyTripsProvider>().getCurrentTrips();
+          sl<MyTripsProvider>().getPreviousTrips();
+          sl<MyTripsProvider>().getPendingTrips();
+          sl<ProfileProvider>().getProfile();
+          CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           authRepo.setLoggedIn();
         }
       });
@@ -234,6 +244,7 @@ class AuthProvider extends ChangeNotifier {
         role: role[_userType],
       );
       response.fold((fail) {
+        clear();
         CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -252,6 +263,7 @@ class AuthProvider extends ChangeNotifier {
       _isRegister = false;
       notifyListeners();
     } catch (e) {
+      clear();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: ApiErrorHandler.getMessage(e),
@@ -308,7 +320,7 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isVerify = false;
   bool get isVerify => _isVerify;
-  verify(fromRegister,code) async {
+  verify(fromRegister, code) async {
     try {
       spinKitDialog();
       _isVerify = true;
@@ -317,7 +329,7 @@ class AuthProvider extends ChangeNotifier {
           mail: mailTEC.text.trim(),
           code: code,
           role: role[_userType],
-          fromRegister: fromRegister);
+          fromRegister: true);
       CustomNavigator.pop();
       response.fold((fail) {
         CustomSnackBar.showSnackBar(
@@ -354,8 +366,8 @@ class AuthProvider extends ChangeNotifier {
 
   logOut() async {
     try {
-      clear();
-      Future.delayed(Duration.zero, () async {
+      Future.delayed(const Duration(milliseconds: 10), () async {
+        clear();
         await authRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();
         sl<ProfileProvider>().clear();

@@ -10,6 +10,7 @@ class MoreButton extends StatelessWidget {
       {required this.title,
       required this.icon,
       this.onTap,
+      this.leading,
       this.withBorder = true,
       this.isLogout = false,
       Key? key})
@@ -18,13 +19,20 @@ class MoreButton extends StatelessWidget {
   final bool isLogout;
   final String title, icon;
   final void Function()? onTap;
+  final Widget? leading;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Row(
         children: [
-          customImageIconSVG(imageName: icon, height: 14, width: 14),
+          customImageIconSVG(
+              imageName: icon,
+              height: 14,
+              width: 14,
+              color: isLogout
+                  ? Styles.FAILED_COLOR
+                  : Styles.SECOUND_PRIMARY_COLOR),
           SizedBox(
             width: 8.w,
           ),
@@ -33,8 +41,8 @@ class MoreButton extends StatelessWidget {
               decoration: BoxDecoration(
                   border: withBorder
                       ? const Border(
-                          bottom: BorderSide(
-                              color: Styles.HINT_COLOR, width: 0.5))
+                          bottom:
+                              BorderSide(color: Styles.HINT_COLOR, width: 0.5))
                       : null),
               padding: EdgeInsets.symmetric(vertical: 12.h),
               child: Row(
@@ -47,13 +55,15 @@ class MoreButton extends StatelessWidget {
                                 ? Styles.FAILED_COLOR
                                 : Styles.SECOUND_PRIMARY_COLOR)),
                   ),
-                  !isLogout
-                      ? const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Styles.DISABLED,
-                          size: 16,
-                        )
-                      : const SizedBox()
+                  leading != null
+                      ? leading!
+                      : !isLogout
+                          ? const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Styles.DISABLED,
+                              size: 16,
+                            )
+                          : const SizedBox()
                 ],
               ),
             ),

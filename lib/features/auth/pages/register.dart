@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 420,
+      height: 460,
       width: context.width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(

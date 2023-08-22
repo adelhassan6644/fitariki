@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +26,6 @@ class UserProfileProvider extends ChangeNotifier {
   MyOffersModel? userOffers;
   getUserProfile({required int userId}) async {
     try {
-
       isLoadProfile = true;
       isLoadOffers = true;
       notifyListeners();
@@ -47,9 +44,11 @@ class UserProfileProvider extends ChangeNotifier {
         isLoadOffers = false;
         notifyListeners();
       }, (response) {
-final role= sl
-    .get<SharedPreferences>()
-    .getString(AppStorageKey.role)=="driver"?"client":"driver";
+        final role =
+            sl.get<SharedPreferences>().getString(AppStorageKey.role) ==
+                    "driver"
+                ? "client"
+                : "driver";
 
         userProfileModel = ProfileModel.fromJson(response.data["data"]);
 
@@ -58,8 +57,7 @@ final role= sl
         isLoadOffers = false;
         notifyListeners();
       });
-    }
-    catch (e) {
+    } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: e.toString(),
@@ -72,8 +70,6 @@ final role= sl
       notifyListeners();
     }
   }
-
-
 
   bool isLoadFollowers = false;
   FollowersModel? userFollowers;

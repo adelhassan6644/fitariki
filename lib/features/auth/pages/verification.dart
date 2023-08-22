@@ -50,10 +50,8 @@ class Verification extends StatelessWidget {
                         SizedBox(height: 8.h),
                         Directionality(
                           textDirection: TextDirection.ltr,
-
-                          child:  Padding(
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(
-
                               horizontal: 30,
                             ),
                             child: PinCodeTextField(
@@ -69,17 +67,19 @@ class Verification extends StatelessWidget {
                               obscureText: true,
                               obscuringCharacter: "*",
                               // controller: provider.codeTEC,
-                              onCompleted: (code) => provider.verify(fromRegister,code),
+                              onCompleted: (code) =>
+                                  provider.verify(fromRegister, code),
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               cursorColor: Styles.PRIMARY_COLOR,
                               errorTextSpace: 30.h,
                               inputFormatters: [
-                                FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9]'))
                               ],
                               pinTheme: PinTheme(
                                 shape: PinCodeFieldShape.box,
-                                fieldHeight: 38.h,
-                                fieldWidth: 42.w,
+                                fieldHeight: 50.h,
+                                fieldWidth: 60.w,
                                 borderWidth: 1.w,
                                 fieldOuterPadding: EdgeInsets.zero,
                                 borderRadius: BorderRadius.circular(

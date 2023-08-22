@@ -162,6 +162,7 @@
   "please_enter_valid_email": "Please enter a valid Email",
   "pending": "Pending",
   "wallet_available": "Wallet available",
+  "wallet": "Wallet",
   "address": "Address",
   "confirm_location": "Confirm Location",
   "add_a_delivery_request": "Add a delivery request",
@@ -309,5 +310,9 @@
   "change_password_header": "The new password must be different from the current password",
   "your_request_has_been_sent_successfully": "Your request has been sent successfully",
   "your_password_has_been_reset_successfully": "The password has been update which associated with e-mail of",
-  "password_updated": "The Password Updated!"
+  "password_updated": "The Password Updated!",
+  "show_all": "Show All",
+  "there_is_no_clients": "There is no clients now!",
+  "there_is_no_drivers": "There is no Drivers now!",
+  "invalid_credentials": "Invalid Credentials"
 }

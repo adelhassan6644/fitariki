@@ -21,9 +21,25 @@ import '../../more/widgets/profile_card.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
   final int userId;
   const UserProfile({required this.userId, Key? key}) : super(key: key);
+
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      sl<UserProfileProvider>().getUserProfile(userId: widget.userId);
+      if (sl<UserProfileProvider>().isDriver) {
+        sl<UserProfileProvider>().getUserFollowers(id: widget.userId);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +54,7 @@ class UserProfile extends StatelessWidget {
                 children: [
                   CustomAppBar(
                     isOffer: false,
-                    savedItemId: userId,
+                    savedItemId: widget.userId,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
