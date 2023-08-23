@@ -21,31 +21,30 @@ class Followers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          CustomAppBar(
-            withBorder: true,
-            title: getTranslated("followers", context),
-            withBack: true,
-            actionWidth: 50,
-            actionChild: GestureDetector(
-              onTap: () => customShowModelBottomSheet(
-                onClose:
-                    Provider.of<AddFollowerProvider>(context, listen: false)
-                        .reset,
-                body: const AddFollower(),
-              ),
-              child: SizedBox(
-                width: 50,
-                child: Text(
-                  getTranslated("add", context),
-                  textAlign: TextAlign.start,
-                  style: AppTextStyles.w400.copyWith(
-                      fontSize: 14, color: Styles.SYSTEM_COLOR),
-                ),
-              ),
+      appBar: CustomAppBar(
+        withBorder: true,
+        title: getTranslated("followers", context),
+        withBack: true,
+        actionWidth: 50,
+        actionChild: GestureDetector(
+          onTap: () => customShowModelBottomSheet(
+            onClose:
+                Provider.of<AddFollowerProvider>(context, listen: false).reset,
+            body: const AddFollower(),
+          ),
+          child: SizedBox(
+            width: 50,
+            child: Text(
+              getTranslated("add", context),
+              textAlign: TextAlign.start,
+              style: AppTextStyles.w400
+                  .copyWith(fontSize: 14, color: Styles.SYSTEM_COLOR),
             ),
           ),
+        ),
+      ),
+      body: Column(
+        children: [
           Expanded(
               child: Consumer<FollowersProvider>(builder: (_, provider, child) {
             return ListAnimator(
@@ -54,7 +53,11 @@ class Followers extends StatelessWidget {
                   ? List.generate(5, (index) => const FollowerButtonShimmer())
                   : provider.model?.data == null ||
                           provider.model!.data!.isEmpty
-                      ? [const EmptyState(txt: "لا يوحد تابعيين",)]
+                      ? [
+                          const EmptyState(
+                            txt: "لا يوحد تابعيين",
+                          )
+                        ]
                       : List.generate(
                           provider.model!.data!.length,
                           (index) => FollowerButton(

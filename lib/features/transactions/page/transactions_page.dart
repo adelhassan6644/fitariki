@@ -11,6 +11,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
+import '../../../components/tab_widget.dart';
 
 class TransactionsPage extends StatelessWidget {
   const TransactionsPage({Key? key}) : super(key: key);
@@ -18,16 +19,36 @@ class TransactionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: getTranslated("transactions", context),
+      ),
       body: SafeArea(
-        bottom: true,
         top: false,
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: getTranslated("transactions", context),
-            ),
-            Consumer<TransactionsProvider>(builder: (_, provider, child) {
-              return !provider.isLoading
+        child: Consumer<TransactionsProvider>(builder: (_, provider, child) {
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                    vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                child: Container(
+                    height: 32,
+                    decoration: BoxDecoration(
+                        color: Styles.CONTAINER_BACKGROUND_COLOR,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Row(
+                      children: List.generate(
+                          provider.tabs.length,
+                          (index) => Expanded(
+                                child: TabWidget(
+                                    title: getTranslated(
+                                        provider.tabs[index], context),
+                                    isSelected: index == provider.tab,
+                                    onTab: () => provider.onSelectTab(index)),
+                              )),
+                    )),
+              ),
+              !provider.isLoading
                   ? Expanded(
                       child: RefreshIndicator(
                         color: Styles.PRIMARY_COLOR,
@@ -45,20 +66,19 @@ class TransactionsPage extends StatelessWidget {
                                 provider.transactionsModel!.transactions!
                                     .isNotEmpty)
                               ...List.generate(
-                                  provider.transactionsModel!
-                                      .transactions!.length,
+                                  provider
+                                      .transactionsModel!.transactions!.length,
                                   (index) => TransactionCard(
                                         transactionItem: provider
                                             .transactionsModel!
                                             .transactions![index],
                                       )),
                             if (provider.transactionsModel == null ||
-                                provider.transactionsModel!.transactions!
-                                    .isEmpty)
+                                provider
+                                    .transactionsModel!.transactions!.isEmpty)
                               EmptyState(
                                   txt: getTranslated(
-                                      "there_is_no_transactions",
-                                      context)),
+                                      "there_is_no_transactions", context)),
                           ],
                         ),
                       ),
@@ -85,10 +105,10 @@ class TransactionsPage extends StatelessWidget {
                                   ))
                         ],
                       ),
-                    );
-            }),
-          ],
-        ),
+                    )
+            ],
+          );
+        }),
       ),
     );
   }

@@ -8,6 +8,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
+import '../../../components/tab_widget.dart';
 import '../provider/notifications_provider.dart';
 import '../widget/notification_card.dart';
 
@@ -31,16 +32,36 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: getTranslated("notifications", context),
+      ),
       body: SafeArea(
-        bottom: true,
         top: false,
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: getTranslated("notifications", context),
-            ),
-            Consumer<NotificationsProvider>(builder: (_, provider, child) {
-              return !provider.isLoading
+        child: Consumer<NotificationsProvider>(builder: (_, provider, child) {
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                    vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                child: Container(
+                    height: 32,
+                    decoration: BoxDecoration(
+                        color: Styles.CONTAINER_BACKGROUND_COLOR,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Row(
+                      children: List.generate(
+                          provider.tabs.length,
+                          (index) => Expanded(
+                                child: TabWidget(
+                                    title: getTranslated(
+                                        provider.tabs[index], context),
+                                    isSelected: index == provider.tab,
+                                    onTab: () => provider.onSelectTab(index)),
+                              )),
+                    )),
+              ),
+              !provider.isLoading
                   ? Expanded(
                       child: RefreshIndicator(
                         color: Styles.PRIMARY_COLOR,
@@ -97,10 +118,10 @@ class _NotificationsState extends State<Notifications> {
                                   ))
                         ],
                       ),
-                    );
-            }),
-          ],
-        ),
+                    )
+            ],
+          );
+        }),
       ),
     );
   }

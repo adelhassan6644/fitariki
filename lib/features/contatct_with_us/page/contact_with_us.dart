@@ -14,11 +14,11 @@ class ContactWithUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: getTranslated("contact_with_us", context),
+      ),
       body: Column(
         children: [
-          CustomAppBar(
-            title: getTranslated("contact_with_us", context),
-          ),
           Expanded(
               child: Consumer<ContactProvider>(builder: (_, provider, child) {
             return provider.isLoading

@@ -17,6 +17,13 @@ class NotificationsProvider extends ChangeNotifier {
     required this.notificationsRepo,
   });
 
+  int tab = 0;
+  List<String> tabs = ["delivery_offers", "delivery_requests"];
+  onSelectTab(v) {
+    tab = v;
+    notifyListeners();
+  }
+
   NotificationsModel? notificationsModel;
   bool isLoading = false;
   getNotifications() async {

@@ -35,14 +35,15 @@ class MoreOptions extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
           children: [
+            ///Profile
             MoreButton(
               title: getTranslated("personal_information", context),
               icon: SvgImages.file,
-              onTap: () {
-                sl<ProfileProvider>().getProfile();
-                CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false);
-              },
+              onTap: () =>
+                  CustomNavigator.push(Routes.EDIT_PROFILE, arguments: false),
             ),
+
+            ///Client Followers
             Visibility(
               visible: !sl<ProfileProvider>().isDriver,
               child: MoreButton(

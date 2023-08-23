@@ -15,6 +15,13 @@ class TransactionsProvider extends ChangeNotifier {
     required this.transactionsRepo,
   });
 
+  int tab = 0;
+  List<String> tabs = ["current", "previous"];
+  onSelectTab(v) {
+    tab = v;
+    notifyListeners();
+  }
+
   TransactionsModel? transactionsModel;
   bool isLoading = false;
   getTransactions() async {

@@ -18,50 +18,42 @@ class Wishlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: getTranslated("archives", context),
+      ),
       body: SafeArea(
-        bottom: true,
         top: false,
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: getTranslated("archives", context),
-            ),
-            Consumer<WishlistProvider>(builder: (_, provider, child) {
-              return Expanded(
-                child: Column(
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                            vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
-                        child: Container(
-                          height: 32,
-                          decoration: BoxDecoration(
-                              color: Styles.CONTAINER_BACKGROUND_COLOR,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Row(
-                              children: List.generate(
-                            provider.clientTabs.length,
-                            (index) => Expanded(
-                                child: TabWidget(
-                                  title: sl.get<ProfileProvider>().isDriver
-                                      ? getTranslated(
-                                      provider.driverTabs[index], context)
-                                      : getTranslated(
-                                      provider.clientTabs[index], context),
-                                  isSelected: index == provider.currentTab,
-                                  onTab: () => provider.selectedTab(index),
-                                )),
-                          )),
-                        )),
-                    if (provider.currentTab == 0) const FavouriteOffersWidgets(),
-                    if (provider.currentTab == 1) const UsersWidgets()
-                  ],
-                ),
-              );
-            }),
-          ],
-        ),
+        child: Consumer<WishlistProvider>(builder: (_, provider, child) {
+          return Column(
+            children: [
+              Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                      vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                  child: Container(
+                    height: 32,
+                    decoration: BoxDecoration(
+                        color: Styles.CONTAINER_BACKGROUND_COLOR,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Row(
+                        children: List.generate(
+                      provider.clientTabs.length,
+                      (index) => Expanded(
+                          child: TabWidget(
+                        title: sl.get<ProfileProvider>().isDriver
+                            ? getTranslated(provider.driverTabs[index], context)
+                            : getTranslated(
+                                provider.clientTabs[index], context),
+                        isSelected: index == provider.currentTab,
+                        onTab: () => provider.selectedTab(index),
+                      )),
+                    )),
+                  )),
+              if (provider.currentTab == 0) const FavouriteOffersWidgets(),
+              if (provider.currentTab == 1) const UsersWidgets()
+            ],
+          );
+        }),
       ),
     );
   }
