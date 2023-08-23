@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
-import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
+import '../../../main_widgets/shimmer_widgets/more_profile_shimmer.dart';
 import '../../guest/guest_mode.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/more_options.dart';
@@ -41,7 +41,7 @@ class More extends StatelessWidget {
                                   EdgeInsets.symmetric(horizontal: 16.w),
                               data: [
                                 provider.isLoading
-                                    ? const ProfileCardShimmer()
+                                    ? const MoreProfileShimmer()
                                     : MoreProfileCard(
                                         lastUpdate: provider.lastUpdate,
                                         image: provider.image,

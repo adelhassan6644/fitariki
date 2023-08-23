@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:fitariki/features/followers/followers/provider/followers_provider.dart';
 import 'package:fitariki/features/transactions/provider/transactions_provider.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
@@ -115,10 +116,16 @@ class MoreOptions extends StatelessWidget {
                 child: MoreButton(
                   title: getTranslated("wallet", context),
                   icon: SvgImages.wallet,
-                  leading: Text(
-                      "${provider.profileModel?.client?.wallet?.toString() ?? 0.00}  ${getTranslated("sar", context)}",
-                      style: AppTextStyles.w400
-                          .copyWith(fontSize: 14, color: Styles.DISABLED)),
+                  leading: provider.isLoading
+                      ? const CustomShimmerContainer(
+                          width: 50,
+                          height: 16,
+                          radius: 10,
+                        )
+                      : Text(
+                          "${provider.profileModel?.client?.wallet?.toString() ?? 0.00}  ${getTranslated("sar", context)}",
+                          style: AppTextStyles.w400
+                              .copyWith(fontSize: 14, color: Styles.DISABLED)),
                 ),
               );
             }),
