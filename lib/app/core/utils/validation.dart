@@ -127,4 +127,16 @@ class Validations {
     }
     return null;
   }
+
+  static String? negotiation(String? value, double maxPrice, double minPrice) {
+    if (value!.isEmpty) {
+      return "لا يمكن ان تكون فارغة";
+    } else if (double.parse(value.toString()) > maxPrice) {
+      return "لا يجب ان يكون السعر الجديد اعلي من $maxPrice";
+    } else if (double.parse(value.toString()) < minPrice) {
+      return "لا يجب ان يكون السعر الجديد اقل من $minPrice";
+    } else {
+      return null;
+    }
+  }
 }

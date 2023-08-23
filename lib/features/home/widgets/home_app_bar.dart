@@ -86,7 +86,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       onTap: () {
                         if (provider.isLogin) {
                           CustomNavigator.push(Routes.NOTIFICATIONS);
-                        }else{
+                        } else {
                           showToast("برجاء التسجيل اولا !");
                         }
                       },

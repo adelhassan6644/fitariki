@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,8 +46,11 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () => provider.updateRequest(
                         fromMyTrip: true,
                         name: provider.isDriver
-                            ? "${provider.requestModel?.clientModel?.firstName??provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName??provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
-                            : provider.requestModel?.offer?.driverModel?.firstName ??provider.requestModel?.driverModel?.firstName ?? "",
+                            ? "${provider.requestModel?.clientModel?.firstName ?? provider.requestModel?.offer?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? provider.requestModel?.offer?.clientModel?.lastName ?? ""}"
+                            : provider.requestModel?.offer?.driverModel
+                                    ?.firstName ??
+                                provider.requestModel?.driverModel?.firstName ??
+                                "",
                         status: 1,
                         id: provider.requestModel!.id!),
                     isLoading: provider.isAccepting,
@@ -63,7 +67,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description: getTranslated("negotiation_description", context),
+                            description:
+                                "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
                             maxLength: 4,
@@ -72,17 +77,41 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                                   RegExp(r'^\d+\.?\d{0,2}')),
                             ],
                             onSend: () {
-                              if(provider.negotiationPrice.text==""){
-                                showToast(
-                                    "لا يمكن ان تكون فارغة");
-
-                                return;
+                              if (Validations.negotiation(
+                                      provider.negotiationPrice.text.trim(),
+                                      provider.requestModel?.offer?.maxPrice ??
+                                          0.0,
+                                      provider.requestModel?.offer?.minPrice ??
+                                          0.0) !=
+                                  null) {
+                                showToast(Validations.negotiation(
+                                        provider.negotiationPrice.text.trim(),
+                                        provider.requestModel?.offer
+                                                ?.maxPrice ??
+                                            0.0,
+                                        provider.requestModel?.offer
+                                                ?.minPrice ??
+                                            0.0) ??
+                                    "");
+                              } else {
+                                provider.updateRequest(
+                                    fromMyTrip: true,
+                                    status: 2,
+                                    id: provider.requestModel!.id!);
+                                CustomNavigator.pop();
                               }
-                              provider.updateRequest(
-                                  fromMyTrip: true,
-                                  status: 2,
-                                  id: provider.requestModel!.id!);
-                              CustomNavigator.pop();
+                              // if (provider.negotiationPrice.text == "") {
+                              //   showToast("لا يمكن ان تكون فارغة");
+                              //
+                              //   return;
+                              // }
+                              // if(){
+                              //   showToast("لا يمكن ان تكون فارغة");
+                              //
+                              //   return;
+                              // }else {
+                              //
+                              // }
                             },
                             onClose: () {
                               CustomNavigator.pop();
