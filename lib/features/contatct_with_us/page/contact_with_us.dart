@@ -26,7 +26,6 @@ class ContactWithUs extends StatelessWidget {
                   vertical: 24.h),
               physics: const BouncingScrollPhysics(),
               children: [
-
                 /// Launch Mail
                 Visibility(
                   visible: provider.contactModel?.email != null,
@@ -87,8 +86,7 @@ class ContactWithUs extends StatelessWidget {
 
                 ///Call Emergency
                 Visibility(
-                  visible: provider.contactModel?.emergency != null &&
-                      !provider.isDriver,
+                  visible: !provider.isDriver,
                   child: Padding(
                     padding: EdgeInsets.only(
                       bottom: 8.h,
