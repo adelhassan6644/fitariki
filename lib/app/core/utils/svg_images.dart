@@ -68,4 +68,5 @@ class SvgImages {
   static const String send = 'assets/svgs/send.svg';
   static const String withdraw = 'assets/svgs/withdraw.svg';
   static const String delete = 'assets/svgs/delete.svg';
+  static const String dayInCalenderIcon = 'assets/svgs/day_in_calender.svg';
 }

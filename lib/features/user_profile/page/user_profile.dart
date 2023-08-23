@@ -11,9 +11,11 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
+import '../../../components/expansion_tile_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
+import '../../../main_widgets/week_days_widget.dart';
 import '../../../navigation/routes.dart';
 import '../../maps/provider/location_provider.dart';
 import '../../../main_widgets/profile_card.dart';
@@ -32,6 +34,10 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      sl<UserProfileProvider>().userProfileModel =null;
+      sl<UserProfileProvider>().userOffers =null;
+      sl<UserProfileProvider>().userFollowers =null;
+
       sl<UserProfileProvider>().getUserProfile(userId: widget.userId);
       if (sl<UserProfileProvider>().isDriver) {
         sl<UserProfileProvider>().getUserFollowers(id: widget.userId);
@@ -58,28 +64,24 @@ class _UserProfileState extends State<UserProfile> {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                    child: provider.isLoadProfile
-                        ? const ProfileCardShimmer()
-                        : ProfileCard(
+                    child: (!provider.isLoadProfile &&
+                            provider.userProfileModel != null)
+                        ? ProfileCard(
                             lastUpdate: Methods.getDayCount(
-                                    date: provider.userProfileModel?.driver !=
-                                            null
-                                        ? provider.userProfileModel!.driver!
-                                            .updatedAt!
-                                        : provider.userProfileModel!.client!
-                                            .updatedAt!)
+                                    date: provider.userProfileModel?.driver
+                                            ?.updatedAt ??
+                                        provider.userProfileModel?.client
+                                            ?.updatedAt ??
+                                        DateTime.now())
                                 .toString(),
-                            image: provider.userProfileModel!.driver != null
-                                ? provider.userProfileModel!.driver!.image
-                                : provider.userProfileModel!.client!.image,
-                            name: provider.userProfileModel!.driver != null
-                                ? "${provider.userProfileModel!.driver!.firstName}"
-                                : "${provider.userProfileModel!.client!.firstName}",
-                            phone: provider.userProfileModel!.driver != null
-                                ? "${provider.userProfileModel!.driver!.phone}"
-                                : "${provider.userProfileModel!.client!.phone}",
-                            withPhone: false,
-                            isDriver: provider.userProfileModel!.driver != null,
+                            image: provider.userProfileModel?.driver?.image ??
+                                provider.userProfileModel?.client?.image ??
+                                "",
+                            name: provider
+                                    .userProfileModel?.driver?.firstName ??
+                                provider.userProfileModel?.client?.firstName ??
+                                "",
+                            isDriver: provider.userProfileModel?.driver != null,
                             male: provider.userProfileModel!.driver != null
                                 ? provider.userProfileModel!.driver!.gender == 0
                                 : provider.userProfileModel!.client!.gender ==
@@ -131,15 +133,47 @@ class _UserProfileState extends State<UserProfile> {
                                           ?.pickupLocation?.longitude ??
                                       "0",
                             )} كيلو",
-                          ),
+                          )
+                        : const ProfileCardShimmer(),
                   )
                 ],
               ),
               Expanded(
                 child: ListAnimator(data: [
-                  SizedBox(
-                    height: 12.h,
+                  ///Work Information
+                  ExpansionTileWidget(
+                    iconColor: Styles.SECOUND_PRIMARY_COLOR,
+                    withTitlePadding: true,
+                    title: getTranslated("work_information", context),
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                        child: SelectedDaysOfWeekWidget(
+                          isLoading: provider.isLoadProfile &&
+                              provider.userProfileModel == null,
+                          days: provider.userProfileModel?.driver != null
+                              ? provider.userProfileModel?.driver?.driverDays
+                                  ?.map((e) => e.dayName ?? "")
+                                  .toList()
+                              : provider.userProfileModel?.client?.clientDays
+                                  ?.map((e) => e.dayName ?? "")
+                                  .toList(),
+                          startTime: provider.userProfileModel?.driver != null
+                              ? provider.userProfileModel!.driver!.driverDays
+                                  ?.first.startTime
+                              : provider.userProfileModel?.client?.clientDays
+                                  ?.first.startTime,
+                          endTime: provider.userProfileModel?.driver != null
+                              ? provider.userProfileModel!.driver!.driverDays
+                                  ?.first.endTime
+                              : provider.userProfileModel?.client?.clientDays
+                                  ?.first.endTime,
+                        ),
+                      ),
+                    ],
                   ),
+
                   if (!provider.isDriver)
                     CarTripDetailsWidget(
                       isLoading: provider.isLoadProfile,
