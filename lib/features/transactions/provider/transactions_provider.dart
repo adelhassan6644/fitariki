@@ -16,7 +16,7 @@ class TransactionsProvider extends ChangeNotifier {
   });
 
   int tab = 0;
-  List<String> tabs = ["current", "previous"];
+  List<String> tabs = ["the_running", "the_previous"];
   onSelectTab(v) {
     tab = v;
     notifyListeners();
