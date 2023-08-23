@@ -316,6 +316,7 @@
   "show_all": "عرض الكل",
   "there_is_no_clients": "لا يوجد ركاب حاليا!",
   "there_is_no_drivers": "لا يوجد كباتن حاليا!",
-  "invalid_credentials": "بيانات الدخول غير صالحة"
+  "invalid_credentials": "بيانات الدخول غير صالحة",
+  "call_emergency": "الاتصال بالطوارئ"
 
 }

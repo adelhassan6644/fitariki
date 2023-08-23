@@ -314,5 +314,6 @@
   "show_all": "Show All",
   "there_is_no_clients": "There is no clients now!",
   "there_is_no_drivers": "There is no Drivers now!",
-  "invalid_credentials": "Invalid Credentials"
+  "invalid_credentials": "Invalid Credentials",
+  "call_emergency": "Call Emergency"
 }

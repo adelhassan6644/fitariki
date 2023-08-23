@@ -26,6 +26,8 @@ class ContactWithUs extends StatelessWidget {
                   vertical: 24.h),
               physics: const BouncingScrollPhysics(),
               children: [
+
+                /// Launch Mail
                 Visibility(
                   visible: provider.contactModel?.email != null,
                   child: Padding(
@@ -39,6 +41,8 @@ class ContactWithUs extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                /// Launch Twitter
                 Visibility(
                   visible: provider.contactModel?.twitter != null,
                   child: Padding(
@@ -52,6 +56,8 @@ class ContactWithUs extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                ///Launch Website
                 Visibility(
                   visible: provider.contactModel?.website != null,
                   child: Padding(
@@ -75,6 +81,22 @@ class ContactWithUs extends StatelessWidget {
                       text: getTranslated("customerـservice", context),
                       radius: 50,
                       onTap: () => provider.launchCustomerService(),
+                    ),
+                  ),
+                ),
+
+                ///Call Emergency
+                Visibility(
+                  visible: provider.contactModel?.emergency != null &&
+                      !provider.isDriver,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 8.h,
+                    ),
+                    child: CustomButton(
+                      text: getTranslated("call_emergency", context),
+                      radius: 50,
+                      onTap: () => provider.launchEmergencyService(),
                     ),
                   ),
                 ),
