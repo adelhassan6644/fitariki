@@ -43,249 +43,227 @@ class _RequestDetailsState extends State<RequestDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          bottom: true,
-          top: false,
-          child:
-              Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
-            return Column(
-              children: [
-                CustomAppBar(
-                  title: getTranslated("trip", context),
-                ),
-                provider.isLoading
-                    ? RequestDetailsShimmer(
-                        isDriver: provider.isDriver,
-                      )
-                    : Expanded(
-                        child: ListAnimator(
-                          data: [
-                            ///user card
-                            UserCard(
-                              withAnalytics: false,
-                              approved:
-                                  provider.requestModel?.approvedAt != null &&
-                                      provider.requestModel?.paidAt != null,
-                              reservationId: provider.requestModel?.id,
-                              phone: provider.requestModel?.clientModel != null
-                                  ? provider.requestModel?.clientModel?.phone
-                                  : provider.requestModel?.driverModel?.phone,
-                              userId: provider.requestModel?.clientId ??
-                                  provider.requestModel?.driverId,
-                              name: provider.requestModel?.clientModel != null
-                                  ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? ""}"
-                                  : provider.requestModel?.driverModel
-                                          ?.firstName ??
-                                      "",
-                              image: provider.requestModel?.clientModel != null
-                                  ? provider.requestModel?.clientModel?.image
-                                  : provider.requestModel?.driverModel?.image,
-                              male: provider.requestModel?.clientModel != null
-                                  ? provider
-                                          .requestModel?.clientModel?.gender ==
-                                      0
-                                  : provider
-                                          .requestModel?.driverModel?.gender ==
-                                      0,
-                              national:
-                                  provider.requestModel?.clientModel != null
-                                      ? provider.requestModel?.clientModel
-                                          ?.national?.niceName
-                                      : provider.requestModel?.driverModel
-                                          ?.national?.niceName,
-                              createdAt: provider.requestModel?.createdAt ??
-                                  DateTime.now(),
-                              days: provider.requestModel?.offer?.offerDays!
-                                  .map((e) => e.dayName)
-                                  .toList()
-                                  .join(", "),
-                              duration:
-                                  provider.requestModel?.duration.toString(),
-                              priceRange:
-                                  "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
-                              passengers: provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel!.followers!.length + 1
-                                  : 1,
-                              timeRange:
-                                  "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
-                            ),
+      appBar: CustomAppBar(
+        title: getTranslated("trip", context),
+      ),
+      body: SafeArea(child:
+          Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
+        return Column(
+          children: [
+            provider.isLoading
+                ? RequestDetailsShimmer(
+                    isDriver: provider.isDriver,
+                  )
+                : Expanded(
+                    child: ListAnimator(
+                      data: [
+                        ///user card
+                        UserCard(
+                          withAnalytics: false,
+                          approved: provider.requestModel?.approvedAt != null &&
+                              provider.requestModel?.paidAt != null,
+                          reservationId: provider.requestModel?.id,
+                          phone: provider.requestModel?.clientModel != null
+                              ? provider.requestModel?.clientModel?.phone
+                              : provider.requestModel?.driverModel?.phone,
+                          userId: provider.requestModel?.clientId ??
+                              provider.requestModel?.driverId,
+                          name: provider.requestModel?.clientModel != null
+                              ? "${provider.requestModel?.clientModel?.firstName ?? ""} ${provider.requestModel?.clientModel?.lastName ?? ""}"
+                              : provider.requestModel?.driverModel?.firstName ??
+                                  "",
+                          image: provider.requestModel?.clientModel != null
+                              ? provider.requestModel?.clientModel?.image
+                              : provider.requestModel?.driverModel?.image,
+                          male: provider.requestModel?.clientModel != null
+                              ? provider.requestModel?.clientModel?.gender == 0
+                              : provider.requestModel?.driverModel?.gender == 0,
+                          national: provider.requestModel?.clientModel != null
+                              ? provider
+                                  .requestModel?.clientModel?.national?.niceName
+                              : provider.requestModel?.driverModel?.national
+                                  ?.niceName,
+                          createdAt: provider.requestModel?.createdAt ??
+                              DateTime.now(),
+                          days: provider.requestModel?.offer?.offerDays!
+                              .map((e) => e.dayName)
+                              .toList()
+                              .join(", "),
+                          duration: provider.requestModel?.duration.toString(),
+                          priceRange:
+                              "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
+                          passengers: provider.requestModel?.followers !=
+                                      null &&
+                                  provider.requestModel!.followers!.isNotEmpty
+                              ? provider.requestModel!.followers!.length + 1
+                              : 1,
+                          timeRange:
+                              "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                        ),
 
-                            ///Request Details
-                            ExpansionTileWidget(
-                              iconColor: Styles.SECOUND_PRIMARY_COLOR,
-                              withTitlePadding: true,
-                              title: getTranslated("details", context),
-                              children: [
-                                /// Map View
-                                MapWidget(
-                                  launchMap: false,
-                                  stopPoints: provider.isDriver &&
-                                          provider.requestModel?.followers !=
-                                              null &&
-                                          provider.requestModel!.followers!
-                                              .isNotEmpty
-                                      ? provider.requestModel?.followers
-                                              ?.length ??
-                                          0
-                                      : null,
-                                  startPoint: provider.isDriver
-                                      ? provider.requestModel?.clientModel
-                                              ?.pickupLocation ??
-                                          provider.requestModel?.offer
-                                              ?.clientModel?.pickupLocation
-                                      : provider
-                                          .requestModel?.offer?.pickupLocation,
-                                  endPoint: provider.isDriver
-                                      ? provider.requestModel?.clientModel
-                                          ?.dropOffLocation
-                                      : provider
-                                          .requestModel?.offer?.dropOffLocation,
-                                ),
-
-                                ///distance between client and driver
-                                DistanceWidget(
-                                    isCaptain: provider.isDriver,
-                                    lat1: sl<LocationProvider>()
-                                        .currentLocation!
-                                        .latitude!,
-                                    long1: sl<LocationProvider>()
-                                        .currentLocation!
-                                        .longitude!,
-                                    lat2: provider.isDriver
-                                        ? provider.requestModel?.clientModel
-                                                ?.pickupLocation?.latitude ??
-                                            "0"
-                                        : provider.requestModel?.offer
-                                                ?.pickupLocation?.latitude ??
-                                            "0",
-                                    long2: provider.isDriver
-                                        ? provider.requestModel?.clientModel
-                                                ?.pickupLocation?.longitude ??
-                                            "1"
-                                        : provider.requestModel?.offer
-                                                ?.pickupLocation?.longitude ??
-                                            "1"),
-
-                                /// to show stop points for followers request if driver
-                                Visibility(
-                                  visible: provider.isDriver &&
+                        ///Request Details
+                        ExpansionTileWidget(
+                          iconColor: Styles.SECOUND_PRIMARY_COLOR,
+                          withTitlePadding: true,
+                          title: getTranslated("details", context),
+                          children: [
+                            /// Map View
+                            MapWidget(
+                              launchMap: false,
+                              stopPoints: provider.isDriver &&
                                       provider.requestModel?.followers !=
                                           null &&
                                       provider
-                                          .requestModel!.followers!.isNotEmpty,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 8.h,
-                                            horizontal: Dimensions
-                                                .PADDING_SIZE_DEFAULT.w),
-                                        child: Text(
-                                          getTranslated("stop_points", context),
-                                          style: AppTextStyles.w600.copyWith(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                      ...List.generate(
-                                        provider.requestModel?.followers
-                                                ?.length ??
-                                            0,
-                                        (index) => MapWidget(
-                                          launchMap: false,
-                                          clientName: provider.requestModel
-                                                  ?.followers?[index].name ??
-                                              "",
-                                          gender: provider.requestModel
-                                              ?.followers?[index].gender,
-                                          startPoint: provider
-                                              .requestModel
-                                              ?.followers?[index]
-                                              .pickupLocation,
-                                          endPoint: provider
-                                              .requestModel
-                                              ?.followers?[index]
-                                              .dropOffLocation,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                ///Type of ride
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          Dimensions.PADDING_SIZE_DEFAULT.w),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        getTranslated("ride_type", context),
-                                        textAlign: TextAlign.start,
-                                        style: AppTextStyles.w600.copyWith(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        Methods.getOfferType(
-                                            provider.requestModel?.offerType ??
-                                                provider.requestModel?.offer
-                                                    ?.offerType ??
-                                                1),
-                                        textAlign: TextAlign.end,
-                                        style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            /// to show car data if client
-                            Visibility(
-                                visible: !provider.isDriver,
-                                child: CarTripDetailsWidget(
-                                  carInfo: provider
-                                          .requestModel?.driverModel?.carInfo ??
-                                      provider.requestModel?.offer?.driverModel
-                                          ?.carInfo,
-                                )),
-
-                            /// to show days on calender
-                            TripDaysOnCalenderWidget(
-                              startDate: provider.requestModel?.startAt,
-                              endDate: provider.requestModel?.endAt,
-                              days: provider.isDriver
+                                          .requestModel!.followers!.isNotEmpty
+                                  ? provider.requestModel?.followers?.length ??
+                                      0
+                                  : null,
+                              startPoint: provider.isDriver
                                   ? provider.requestModel?.clientModel
-                                          ?.clientDays ??
+                                          ?.pickupLocation ??
                                       provider.requestModel?.offer?.clientModel
-                                          ?.clientDays
-                                  : provider.requestModel?.offer?.offerDays,
+                                          ?.pickupLocation
+                                  : provider
+                                      .requestModel?.offer?.pickupLocation,
+                              endPoint: provider.isDriver
+                                  ? provider.requestModel?.clientModel
+                                      ?.dropOffLocation
+                                  : provider
+                                      .requestModel?.offer?.dropOffLocation,
                             ),
 
-                            SizedBox(
-                              height: 24.h,
-                            )
+                            ///distance between client and driver
+                            DistanceWidget(
+                                isCaptain: provider.isDriver,
+                                lat1: sl<LocationProvider>()
+                                    .currentLocation!
+                                    .latitude!,
+                                long1: sl<LocationProvider>()
+                                    .currentLocation!
+                                    .longitude!,
+                                lat2: provider.isDriver
+                                    ? provider.requestModel?.clientModel
+                                            ?.pickupLocation?.latitude ??
+                                        "0"
+                                    : provider.requestModel?.offer
+                                            ?.pickupLocation?.latitude ??
+                                        "0",
+                                long2: provider.isDriver
+                                    ? provider.requestModel?.clientModel
+                                            ?.pickupLocation?.longitude ??
+                                        "1"
+                                    : provider.requestModel?.offer
+                                            ?.pickupLocation?.longitude ??
+                                        "1"),
+
+                            /// to show stop points for followers request if driver
+                            Visibility(
+                              visible: provider.isDriver &&
+                                  provider.requestModel?.followers != null &&
+                                  provider.requestModel!.followers!.isNotEmpty,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8.h,
+                                        horizontal:
+                                            Dimensions.PADDING_SIZE_DEFAULT.w),
+                                    child: Text(
+                                      getTranslated("stop_points", context),
+                                      style: AppTextStyles.w600.copyWith(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  ...List.generate(
+                                    provider.requestModel?.followers?.length ??
+                                        0,
+                                    (index) => MapWidget(
+                                      launchMap: false,
+                                      clientName: provider.requestModel
+                                              ?.followers?[index].name ??
+                                          "",
+                                      gender: provider.requestModel
+                                          ?.followers?[index].gender,
+                                      startPoint: provider.requestModel
+                                          ?.followers?[index].pickupLocation,
+                                      endPoint: provider.requestModel
+                                          ?.followers?[index].dropOffLocation,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            ///Type of ride
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      Dimensions.PADDING_SIZE_DEFAULT.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    getTranslated("ride_type", context),
+                                    textAlign: TextAlign.start,
+                                    style: AppTextStyles.w600.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    Methods.getOfferType(
+                                        provider.requestModel?.offerType ??
+                                            provider.requestModel?.offer
+                                                ?.offerType ??
+                                            1),
+                                    textAlign: TextAlign.end,
+                                    style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      ),
 
-                ///to update request
-                const ActionButtons()
-              ],
-            );
-          })),
+                        /// to show car data if client
+                        Visibility(
+                            visible: !provider.isDriver,
+                            child: CarTripDetailsWidget(
+                              carInfo:
+                                  provider.requestModel?.driverModel?.carInfo ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.carInfo,
+                            )),
+
+                        /// to show days on calender
+                        TripDaysOnCalenderWidget(
+                          startDate: provider.requestModel?.startAt,
+                          endDate: provider.requestModel?.endAt,
+                          days: provider.isDriver
+                              ? provider
+                                      .requestModel?.clientModel?.clientDays ??
+                                  provider.requestModel?.offer?.clientModel
+                                      ?.clientDays
+                              : provider.requestModel?.offer?.offerDays,
+                        ),
+
+                        SizedBox(
+                          height: 24.h,
+                        )
+                      ],
+                    ),
+                  ),
+
+            ///to update request
+            const ActionButtons()
+          ],
+        );
+      })),
     );
   }
 }

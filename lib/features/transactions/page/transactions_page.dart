@@ -27,27 +27,27 @@ class TransactionsPage extends StatelessWidget {
         child: Consumer<TransactionsProvider>(builder: (_, provider, child) {
           return Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                    vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
-                child: Container(
-                    height: 32,
-                    decoration: BoxDecoration(
-                        color: Styles.CONTAINER_BACKGROUND_COLOR,
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Row(
-                      children: List.generate(
-                          provider.tabs.length,
-                          (index) => Expanded(
-                                child: TabWidget(
-                                    title: getTranslated(
-                                        provider.tabs[index], context),
-                                    isSelected: index == provider.tab,
-                                    onTab: () => provider.onSelectTab(index)),
-                              )),
-                    )),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+              //       vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+              //   child: Container(
+              //       height: 32,
+              //       decoration: BoxDecoration(
+              //           color: Styles.CONTAINER_BACKGROUND_COLOR,
+              //           borderRadius: BorderRadius.circular(6)),
+              //       child: Row(
+              //         children: List.generate(
+              //             provider.tabs.length,
+              //             (index) => Expanded(
+              //                   child: TabWidget(
+              //                       title: getTranslated(
+              //                           provider.tabs[index], context),
+              //                       isSelected: index == provider.tab,
+              //                       onTab: () => provider.onSelectTab(index)),
+              //                 )),
+              //       )),
+              // ),
               !provider.isLoading
                   ? Expanded(
                       child: RefreshIndicator(

@@ -209,6 +209,7 @@ class AuthProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         notifyListeners();
       }, (success) {
+        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: getTranslated("your_password_changed_successfully",

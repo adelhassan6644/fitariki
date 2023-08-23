@@ -61,8 +61,7 @@ abstract class Methods {
   }
 
   static convertStringToTime(timeString, {bool withFormat = false}) {
-    List<String> parts =
-        timeString != null ? timeString.split(':') : DateTime.now().toString();
+    List<String> parts = timeString != null ? timeString.split(':') : DateTime.now().toString();
     TimeOfDay timeOfDay =
         TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
     DateTime now = DateTime.now();
