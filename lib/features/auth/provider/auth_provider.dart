@@ -106,8 +106,7 @@ class AuthProvider extends ChangeNotifier {
         // }
         else if (success.data['data'][role[_userType]]["first_name"] == null ||
             success.data['data'][role[_userType]]["first_name"] == "") {
-          CustomNavigator.push(Routes.EDIT_PROFILE,
-              clean: true, arguments: true);
+          CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
         } else {
           clear();
           sl<HomeProvider>().getUsers();

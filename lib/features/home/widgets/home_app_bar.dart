@@ -9,6 +9,7 @@ import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/marquee_widget.dart';
 import '../../../navigation/routes.dart';
@@ -85,6 +86,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       onTap: () {
                         if (provider.isLogin) {
                           CustomNavigator.push(Routes.NOTIFICATIONS);
+                        }else{
+                          showToast("برجاء التسجيل اولا !");
                         }
                       },
                       child: customImageIconSVG(

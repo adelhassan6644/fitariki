@@ -13,11 +13,10 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
-import '../../../main_widgets/reviews_widget.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../navigation/routes.dart';
 import '../../maps/provider/location_provider.dart';
-import '../../more/widgets/profile_card.dart';
+import '../../../main_widgets/profile_card.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 

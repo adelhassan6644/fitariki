@@ -579,7 +579,7 @@ class ProfileProvider extends ChangeNotifier {
             // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
-            // "email": email.text.trim(),
+            "email": email.text.trim(),
             "phone": phoneTEC.text.trim(),
             "country_flag": countryFlag.trim(),
             "country_code": countryCode.trim(),
@@ -588,11 +588,9 @@ class ProfileProvider extends ChangeNotifier {
             "country_id": nationality?.id,
             "id_number": identityNumber.text.trim(),
             if (isDriver)
-              "driver_days": List<dynamic>.from(
-                  scheduleProvider.selectedDays.map((x) => x.toJson())),
+              "driver_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x.toJson())),
             if (!isDriver)
-              "client_days": List<dynamic>.from(
-                  scheduleProvider.selectedDays.map((x) => x.toJson())),
+              "client_days": List<dynamic>.from(scheduleProvider.selectedDays.map((x) => x.toJson())),
             "drop_off_location": endLocation!.toJson(),
             "pickup_location": startLocation!.toJson(),
             if (isDriver) "car_info": carData,

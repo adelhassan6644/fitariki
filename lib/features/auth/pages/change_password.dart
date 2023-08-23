@@ -23,7 +23,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: true,
+      top: false,
       child: Scaffold(
           appBar: CustomAppBar(
             title: getTranslated("change_password", context),

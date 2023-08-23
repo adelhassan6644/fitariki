@@ -1,4 +1,3 @@
-import 'package:country_list_pick/country_list_pick.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
@@ -77,51 +76,56 @@ class PersonalInformationWidget extends StatelessWidget {
           // ),
 
           ///Age && Gender
-          Row(
-            children: [
-              Expanded(
-                  child: CustomTextFormField(
-                valid: Validations.name,
-                formatter: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
-                inputType: TextInputType.number,
-                controller: provider.age,
-                hint: getTranslated("age", context),
-                read: !fromLogin && provider.isDriver,
-              )),
-              const SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: Styles.PRIMARY_COLOR.withOpacity(0.06),
-                        borderRadius: BorderRadius.circular(6)),
-                    padding: const EdgeInsets.all(2),
-                    child: Row(
-                      children: List.generate(
-                          provider.genders.length,
-                          (index) => Expanded(
-                                child: TabWidget(
-                                    innerVPadding: 6,
-                                    innerHPadding: 20,
-                                    backGroundColor: Styles.PRIMARY_COLOR,
-                                    title: getTranslated(
-                                        provider.genders[index], context),
-                                    svgIcon: provider.genderIcons[index],
-                                    iconColor: Styles.BLUE_COLOR,
-                                    iconSize: 11,
-                                    isSelected: index == provider.gender,
-                                    onTab: () {
-                                      if (!fromLogin && provider.isDriver) {
-                                        return null;
-                                      } else {
-                                        provider.selectedGender(index);
-                                      }
-                                    }),
-                              )),
-                    )),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              children: [
+                Expanded(
+                    child: CustomTextFormField(
+                  valid: Validations.name,
+                  formatter: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                  ],
+                  inputType: TextInputType.number,
+                  controller: provider.age,
+                  hint: getTranslated("age", context),
+                  read: !fromLogin && provider.isDriver,
+                )),
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Styles.PRIMARY_COLOR.withOpacity(0.06),
+                          borderRadius: BorderRadius.circular(6)),
+                      padding: const EdgeInsets.all(2),
+                      child: Row(
+                        children: List.generate(
+                            provider.genders.length,
+                            (index) => Expanded(
+                                  child: TabWidget(
+                                      innerVPadding: 6,
+                                      innerHPadding: 20,
+                                      backGroundColor: Styles.PRIMARY_COLOR,
+                                      title: getTranslated(
+                                          provider.genders[index], context),
+                                      svgIcon: provider.genderIcons[index],
+                                      iconColor: Styles.BLUE_COLOR,
+                                      iconSize: 11,
+                                      isSelected: index == provider.gender,
+                                      onTab: () {
+                                        if (!fromLogin && provider.isDriver) {
+                                          return null;
+                                        } else {
+                                          provider.selectedGender(index);
+                                        }
+                                      }),
+                                )),
+                      )),
+                ),
+              ],
+            ),
           ),
 
           ///Nationality
@@ -193,8 +197,8 @@ class PersonalInformationWidget extends StatelessWidget {
                     controller: provider.phoneTEC,
                     hint: "5xxxxxxxx",
                     inputType: TextInputType.phone,
-                    valid: (v) =>
-                        Validations.phone(v, provider.countryFlag.trim()),
+                    // valid: (v) =>
+                    //     Validations.phone(v, provider.countryFlag.trim()),
                   ),
                 ),
                 const SizedBox(
@@ -279,16 +283,17 @@ class PersonalInformationWidget extends StatelessWidget {
             ),
           ),
 
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 8.0),
-          //   child: CustomTextFormField(
-          //     valid: Validations.mail,
-          //     controller: provider.email,
-          //     hint: getTranslated("email", context),
-          //     inputType: TextInputType.emailAddress,
-          //     read: !fromLogin && provider.isDriver,
-          //   ),
-          // ),
+          ///E-mail
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: CustomTextFormField(
+              valid: Validations.mail,
+              controller: provider.email,
+              hint: getTranslated("email", context),
+              inputType: TextInputType.emailAddress,
+              read: true,
+            ),
+          ),
 
           ///select your housing location
           CustomAddressPicker(

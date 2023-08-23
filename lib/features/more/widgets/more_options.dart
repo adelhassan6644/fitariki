@@ -115,7 +115,7 @@ class MoreOptions extends StatelessWidget {
                   title: getTranslated("wallet", context),
                   icon: SvgImages.wallet,
                   leading: Text(
-                      "${provider.profileModel?.client?.wallet?.toString() ?? 0.0}  ${getTranslated("sar", context)}",
+                      "${provider.profileModel?.client?.wallet?.toString() ?? 0.00}  ${getTranslated("sar", context)}",
                       style: AppTextStyles.w400
                           .copyWith(fontSize: 14, color: Styles.DISABLED)),
                 ),

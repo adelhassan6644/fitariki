@@ -44,7 +44,7 @@ class HomeTabBarWidget extends StatelessWidget {
                           Expanded(
                             child: TabWidget(
                                 title: getTranslated(
-                                    provider.isDriver ? "captain" : "passenger",
+                                    provider.isDriver ? "passengers" : "captains",
                                     context),
                                 isSelected: 1 == provider.tab,
                                 onTab: () => provider.onSelectTab(1)),

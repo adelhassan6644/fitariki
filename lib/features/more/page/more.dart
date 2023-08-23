@@ -9,7 +9,7 @@ import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../guest/guest_mode.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/more_options.dart';
-import '../widgets/profile_card.dart';
+import '../widgets/more_profile_card.dart';
 import '../widgets/wallet_card.dart';
 
 class More extends StatelessWidget {
@@ -17,63 +17,72 @@ class More extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProfileProvider>(
-      builder: (context, provider, child) {
-        return provider.isLogin
-            ? Column(
-                children: [
-                  Expanded(
-                    child: RefreshIndicator(
-                      onRefresh:()async{
-                        provider.getProfile();
-                      } ,
-                      child: ListAnimator(
-                        customPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                        data: [
-                          provider.isLoading
-                              ? const ProfileCardShimmer()
-                              : ProfileCard(
-                                  lastUpdate: provider.lastUpdate,
-                                  image: provider.image,
-                                  name: provider.firstName.text,
-                                  phone:provider.phoneTEC.text ,
-                                  isDriver: provider.isDriver,
-                                  male: provider.gender == 0,
-                                  nationality: provider.nationality?.name,
-                                  withPhone:true,
-                                  rate: provider.rate.ceil(),
-                                  reservationCount: provider.reservationCount,
-                                  requestsCount: provider.requestsCount,
+    return Column(
+      children: [
+        CustomAppBar(
+          withBack: false,
+          withBorder: false,
+          title: getTranslated("profile", context),
+        ),
+        SizedBox(height: 12.h),
+        Expanded(
+          child: Consumer<ProfileProvider>(
+            builder: (context, provider, child) {
+              return provider.isLogin
+                  ? Column(
+                      children: [
+                        Expanded(
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              provider.getProfile();
+                            },
+                            child: ListAnimator(
+                              customPadding:
+                                  EdgeInsets.symmetric(horizontal: 16.w),
+                              data: [
+                                provider.isLoading
+                                    ? const ProfileCardShimmer()
+                                    : MoreProfileCard(
+                                        lastUpdate: provider.lastUpdate,
+                                        image: provider.image,
+                                        name: provider.firstName.text,
+                                        isDriver: provider.isDriver,
+                                        male: provider.gender == 0,
+                                        nationality: provider.nationality?.name,
+                                        rate: provider.rate.ceil(),
+                                        reservationCount:
+                                            provider.reservationCount,
+                                      ),
+                                Visibility(
+                                  visible: provider.isDriver,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 24.h,
+                                      ),
+                                      WalletCard(
+                                        availableBalance: provider.wallet,
+                                        pendingBalance: provider.pendingWallet,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                          Visibility(
-                            visible: provider.isDriver,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 24.h,
-                                ),
-                                WalletCard(availableBalance: provider.wallet,pendingBalance:provider.pendingWallet ,),
+                                const MoreOptions(),
                               ],
                             ),
                           ),
-                          const MoreOptions(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            : Column(
-                children: [
-                  CustomAppBar(
-                    title: getTranslated("profile", context),
-                    withBorder: true,
-                    withBack: false,
-                  ),
-                  const Expanded(child: GuestMode()),
-                ],
-              );
-      },
+                        ),
+                      ],
+                    )
+                  : const Column(
+                      children: [
+                        Expanded(child: GuestMode()),
+                      ],
+                    );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
