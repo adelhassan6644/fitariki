@@ -35,6 +35,9 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
+    if (isLogin) {
+      getProfile();
+    }
     getBanks();
     getCountries();
     generateModels();
