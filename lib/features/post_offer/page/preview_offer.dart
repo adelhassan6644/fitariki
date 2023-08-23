@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/app/core/utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/dimensions.dart';
@@ -86,7 +87,7 @@ class PreviewOffer extends StatelessWidget {
                           height: 8,
                         ),
                         Text(
-                          provider.selectedRideTypes.join(" , "),
+                          Methods.getOfferType(provider.selectedRideType??1),
                           textAlign: TextAlign.end,
                           style: AppTextStyles.w400.copyWith(
                             fontSize: 10,

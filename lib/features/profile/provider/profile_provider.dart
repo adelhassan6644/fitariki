@@ -35,9 +35,6 @@ class ProfileProvider extends ChangeNotifier {
     required this.postOfferProvider,
     required this.scheduleProvider,
   }) {
-    if (profileRepo.isLoggedIn()) {
-      getProfile();
-    }
     getBanks();
     getCountries();
     generateModels();
@@ -236,6 +233,9 @@ class ProfileProvider extends ChangeNotifier {
     lastName.clear();
     age.clear();
     _gender = 0;
+    phoneTEC.clear();
+    countryCode = "+966";
+    countryFlag = "SA";
     email.clear();
     nationality = null;
     identityNumber.clear();
@@ -668,7 +668,6 @@ class ProfileProvider extends ChangeNotifier {
             sl<MyTripsProvider>().getCurrentTrips();
             sl<MyTripsProvider>().getPreviousTrips();
             sl<MyTripsProvider>().getPendingTrips();
-            sl<ProfileProvider>().getProfile();
             profileRepo.setLoggedIn();
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {

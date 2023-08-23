@@ -56,7 +56,7 @@ extension DefaultFormat on DateTime {
     return DateFormat("d MMM yyyy", lang).format(this);
   }
 
-  String defaultFormat2({String lang = "ar"}) {
+  String defaultFormat2({String lang = "en"}) {
     return DateFormat("d-MM-yyyy", lang).format(this);
   }
 }

@@ -1,4 +1,6 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -15,7 +17,6 @@ abstract class Methods {
       {required DateTime startDate,
       required DateTime endDate,
       required List weekdays}) {
-
     int count = 0;
     int days = 0;
     List<DateTime> daysList = [];
@@ -44,9 +45,24 @@ abstract class Methods {
     return WeekdayCount(count, days, daysList);
   }
 
-  static convertStringToTime(timeString, {bool withFormat = false}) {
+  static String getOfferType(int v) {
+    switch (v) {
+      case 1:
+        return getTranslated(
+            "go", CustomNavigator.navigatorState.currentContext!);
+      case 2:
+        return getTranslated(
+            "back", CustomNavigator.navigatorState.currentContext!);
+      case 3:
+        return getTranslated(
+            "go_and_back", CustomNavigator.navigatorState.currentContext!);
+    }
+    return getTranslated("go", CustomNavigator.navigatorState.currentContext!);
+  }
 
-    List<String> parts = timeString !=null ?timeString.split(':'):DateTime.now().toString();
+  static convertStringToTime(timeString, {bool withFormat = false}) {
+    List<String> parts =
+        timeString != null ? timeString.split(':') : DateTime.now().toString();
     TimeOfDay timeOfDay =
         TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
     DateTime now = DateTime.now();
@@ -106,7 +122,6 @@ abstract class Methods {
             1000)
         .toStringAsFixed(2);
   }
-
 }
 
 class WeekdayCount {
@@ -119,5 +134,4 @@ class WeekdayCount {
   String toString() {
     return "cont: $count -- days:$daysList  ";
   }
-
 }

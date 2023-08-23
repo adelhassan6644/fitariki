@@ -172,10 +172,10 @@ class MyTripDetails extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            myTripModel.rideType ??
-                                myTripModel.myTripRequest?.rideType ??
-                                myTripModel.offer?.rideType ??
-                                "",
+                            Methods.getOfferType(myTripModel.offerType ??
+                                myTripModel.myTripRequest?.offerType ??
+                                myTripModel.offer?.offerType ??
+                                1),
                             textAlign: TextAlign.end,
                             style: AppTextStyles.w400.copyWith(
                               fontSize: 10,

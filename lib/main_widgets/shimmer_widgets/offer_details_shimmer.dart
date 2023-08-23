@@ -120,6 +120,32 @@ class OfferDetailsShimmer extends StatelessWidget {
               child: MapWidgetShimmer(
                 withClientName: isDriver,
               )),
+
+          ///Type of ride
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  getTranslated("ride_type", context),
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.w600.copyWith(
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                CustomShimmerContainer(
+                  width: 200.w,
+                  height: 16.h,
+                ),
+              ],
+            ),
+          ),
           Visibility(visible: !isDriver, child: const ReviewWidgetShimmer()),
         ],
       ),

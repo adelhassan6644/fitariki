@@ -85,26 +85,26 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                                 padding: const EdgeInsets.only(left: 4.0),
                                 child: GestureDetector(
                                   onTap: () => widget.provider
-                                      .onSelectRideTypes(getTranslated(
-                                      widget.provider.rideTypes[index], context)),
+                                      .onSelectRideTypes((index + 1)),
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 6, horizontal: 12),
                                     decoration: BoxDecoration(
-                                        color:  widget.provider.selectedRideTypes.contains(getTranslated(
-                                            widget.provider.rideTypes[index], context))
+                                        color: widget.provider.selectedRideTypes
+                                                .contains((index + 1))
                                             ? Styles.PRIMARY_COLOR
                                             : Styles.PRIMARY_COLOR
                                                 .withOpacity(0.06),
-                                        borderRadius:
-                                            BorderRadius.circular(4)),
+                                        borderRadius: BorderRadius.circular(4)),
                                     child: Text(
-                                      getTranslated(widget.provider.rideTypes[index], context),
+                                      getTranslated(
+                                          widget.provider.rideTypes[index],
+                                          context),
                                       style: AppTextStyles.w400.copyWith(
                                         fontSize: 13,
                                         height: 1.25,
-                                        color:widget.provider.selectedRideTypes.contains(getTranslated(
-                                            widget.provider.rideTypes[index], context))
+                                        color: widget.provider.selectedRideTypes
+                                                .contains((index + 1))
                                             ? Styles.WHITE_COLOR
                                             : Styles.SECOUND_PRIMARY_COLOR,
                                       ),

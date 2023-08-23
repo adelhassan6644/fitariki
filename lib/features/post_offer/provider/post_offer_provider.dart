@@ -62,14 +62,28 @@ class PostOfferProvider extends ChangeNotifier {
 
   String? minPrice, maxPrice;
 
-  List<String> rideTypes = ["going", "back"];
-  List<String> selectedRideTypes = [];
+  List<String> rideTypes = ["go", "back"];
+  List<int> selectedRideTypes = [];
+  int? selectedRideType;
   onSelectRideTypes(v) {
     if (selectedRideTypes.contains(v)) {
       selectedRideTypes.remove(v);
     } else {
       selectedRideTypes.add(v);
     }
+
+    if (selectedRideTypes.length > 1) {
+      selectedRideType = 3;
+    } else {
+      if (selectedRideTypes.isNotEmpty) {
+        selectedRideType = selectedRideTypes.first;
+      } else {
+        selectedRideType = null;
+      }
+    }
+
+    print(selectedRideTypes);
+    print(selectedRideType);
     notifyListeners();
   }
 
@@ -146,6 +160,7 @@ class PostOfferProvider extends ChangeNotifier {
     startDate = DateTime.now();
     selectedFollowers.clear();
     selectedRideTypes.clear();
+    selectedRideType = null;
     sameHomeLocation = false;
     sameDestination = false;
     scheduleProvider.selectedDays.clear();
@@ -226,7 +241,7 @@ class PostOfferProvider extends ChangeNotifier {
         maxPrice: double.tryParse(maxPrice!),
         offerDays: scheduleProvider.selectedDays,
         duration: counts!.count,
-        rideType: selectedRideTypes.join(" , "),
+        offerType: selectedRideType,
       );
 
       spinKitDialog();

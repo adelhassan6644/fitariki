@@ -11,7 +11,9 @@ import '../../../helpers/date_time_picker.dart';
 import '../provider/add_request_provider.dart';
 
 class DurationWidget extends StatelessWidget {
-  const DurationWidget({required this.provider,required this.offerStartDate, Key? key}) : super(key: key);
+  const DurationWidget(
+      {required this.provider, required this.offerStartDate, Key? key})
+      : super(key: key);
   final AddRequestProvider provider;
   final DateTime offerStartDate;
 
@@ -59,8 +61,9 @@ class DurationWidget extends StatelessWidget {
                       color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
-                      provider.startDate
-                          .dateFormat(format: "d MMM yyyy",),
+                      provider.startDate.dateFormat(
+                        format: "d MMM yyyy",
+                      ),
                       style: AppTextStyles.w400.copyWith(
                         fontSize: 13,
                       )),
@@ -182,41 +185,37 @@ class DurationWidget extends StatelessWidget {
               ),
               Row(
                   children: List.generate(
-                   provider.rideTypes.length,
-                        (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: GestureDetector(
-                          onTap: () => provider
-                              .onSelectRideTypes(getTranslated(
-                            provider.rideTypes[index], context)),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 6, horizontal: 12),
-                            decoration: BoxDecoration(
-                                color: provider.selectedRideTypes.contains(getTranslated(
-                                   provider.rideTypes[index], context))
+                provider.rideTypes.length,
+                (index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: GestureDetector(
+                      onTap: () => provider.onSelectRideTypes((index + 1)),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6, horizontal: 12),
+                        decoration: BoxDecoration(
+                            color:
+                                provider.selectedRideTypes.contains((index + 1))
                                     ? Styles.PRIMARY_COLOR
-                                    : Styles.PRIMARY_COLOR
-                                    .withOpacity(0.06),
-                                borderRadius:
-                                BorderRadius.circular(4)),
-                            child: Text(
-                              getTranslated(provider.rideTypes[index], context),
-                              style: AppTextStyles.w400.copyWith(
-                                fontSize: 13,
-                                height: 1.25,
-                                color:provider.selectedRideTypes.contains(getTranslated(
-                                    provider.rideTypes[index], context))
+                                    : Styles.PRIMARY_COLOR.withOpacity(0.06),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Text(
+                          getTranslated(provider.rideTypes[index], context),
+                          style: AppTextStyles.w400.copyWith(
+                            fontSize: 13,
+                            height: 1.25,
+                            color:
+                                provider.selectedRideTypes.contains((index + 1))
                                     ? Styles.WHITE_COLOR
                                     : Styles.SECOUND_PRIMARY_COLOR,
-                              ),
-                            ),
                           ),
                         ),
-                      );
-                    },
-                  )),
+                      ),
+                    ),
+                  );
+                },
+              )),
             ],
           ),
           Padding(
@@ -250,7 +249,6 @@ class DurationWidget extends StatelessWidget {
                   inputType: TextInputType.number,
                   hint: "00000",
                   controller: provider.minPrice,
-
                 ),
               ),
             ],

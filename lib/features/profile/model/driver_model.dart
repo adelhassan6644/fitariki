@@ -85,9 +85,8 @@ class DriverModel {
         nickname: json["nickname"],
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
-        gender: json["gender"] == null
-            ? 0
-            : int.parse(json["gender"].toString()),
+        gender:
+            json["gender"] == null ? 0 : int.parse(json["gender"].toString()),
         national:
             json["country"] != null ? Country.fromJson(json["country"]) : null,
         city: json["city"],
@@ -203,10 +202,11 @@ class CarInfo {
 
   factory CarInfo.fromJson(Map<String, dynamic> json) => CarInfo(
         name: json["name"],
-        model: json["model"].toString(),
+        model: json["model"] != null ? json["model"].toString() : null,
         palletNumber: json["pallet_number"],
         color: json["color"],
-        seatsCount: json["seats_count"].toString(),
+        seatsCount:
+            json["seats_count"] != null ? json["seats_count"].toString() : null,
         carImage: json["car_image"],
         licenceImage: json["licence_image"],
         insuranceImage: json["insurance_image"],

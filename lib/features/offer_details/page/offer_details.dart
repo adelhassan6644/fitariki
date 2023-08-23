@@ -142,7 +142,7 @@ class OfferDetails extends StatelessWidget {
                                     provider.offerDetails!.offerFollowers!
                                         .isNotEmpty,
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Padding(
@@ -213,7 +213,7 @@ class OfferDetails extends StatelessWidget {
                                       height: 12,
                                     ),
                                     Text(
-                                      provider.offerDetails?.rideType ?? "",
+                                      Methods.getOfferType(provider.offerDetails?.offerType ?? 1),
                                       textAlign: TextAlign.end,
                                       style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -237,7 +237,8 @@ class OfferDetails extends StatelessWidget {
                           isDriver: provider.isDriver,
                         ),
                   Visibility(
-                    visible: !provider.isLoading,
+                    visible:
+                        !provider.isLoading && provider.offerDetails != null,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,

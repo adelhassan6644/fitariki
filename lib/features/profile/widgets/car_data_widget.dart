@@ -35,8 +35,7 @@ class CarDataWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child:
-              CustomDropDownButton(
+              child: CustomDropDownButton(
                 items: provider.models,
                 name: getTranslated("model", context),
                 onChange: provider.selectedModel,

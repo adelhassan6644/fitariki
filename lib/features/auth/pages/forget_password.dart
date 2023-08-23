@@ -75,14 +75,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 ),
                                 Column(
                                   children: [
-                                    CustomButton(
-                                        text: getTranslated("follow", context),
-                                        onTap: () {
-                                          if (_formKey.currentState!.validate()) {
-                                            provider.forgetPassword();
-                                          }
-                                        },
-                                        isLoading: provider.isForget),
+                                    Center(
+                                      child: CustomButton(
+                                          text:
+                                              getTranslated("follow", context),
+                                          onTap: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              provider.forgetPassword();
+                                            }
+                                          },
+                                          isLoading: provider.isForget),
+                                    ),
                                   ],
                                 ),
                               ],

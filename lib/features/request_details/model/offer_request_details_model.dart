@@ -11,7 +11,7 @@ class OfferRequestDetailsModel {
   int? duration;
   double? price;
   double? offerPrice;
-  String? rideType;
+  int? offerType;
   String? message;
   DateTime? approvedAt;
   bool? approvedByClient;
@@ -40,7 +40,7 @@ class OfferRequestDetailsModel {
     this.endAt,
     this.duration,
     this.price,
-    this.rideType,
+    this.offerType,
     this.offerPrice,
     this.message,
     this.approvedAt,
@@ -81,7 +81,7 @@ class OfferRequestDetailsModel {
                 ? double.parse(json["price"].toString())
                 : double.parse(json["offer_price"].toString()),
         offerPrice: double.parse(json["offer_price"].toString()),
-        rideType: json["ride_type"],
+        offerType: json["offer_type"] ?? 1,
         message: json["message"],
         matching: json["matching"] == null
             ? 0.0

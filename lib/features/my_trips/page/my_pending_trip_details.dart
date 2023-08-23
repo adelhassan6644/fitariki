@@ -141,16 +141,14 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                   ? provider.requestModel?.followers?.length ??
                                       0
                                   : null,
-                              startPoint:  provider.requestModel?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.requestModel?.offer?.clientModel
-                                          ?.pickupLocation
-                                ,
-                              endPoint:  provider.requestModel?.clientModel
-                                          ?.dropOffLocation ??
-                                      provider.requestModel?.offer?.clientModel
-                                          ?.dropOffLocation
-                              ,
+                              startPoint: provider.requestModel?.clientModel
+                                      ?.pickupLocation ??
+                                  provider.requestModel?.offer?.clientModel
+                                      ?.pickupLocation,
+                              endPoint: provider.requestModel?.clientModel
+                                      ?.dropOffLocation ??
+                                  provider.requestModel?.offer?.clientModel
+                                      ?.dropOffLocation,
                             ),
 
                             ///distance between client and driver
@@ -205,8 +203,11 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    provider.requestModel?.rideType ??
-                                        provider.requestModel?.offer?.rideType ?? "",
+                                    Methods.getOfferType(
+                                        provider.requestModel?.offerType ??
+                                            provider.requestModel?.offer
+                                                ?.offerType ??
+                                            1),
                                     textAlign: TextAlign.end,
                                     style: AppTextStyles.w400.copyWith(
                                       fontSize: 10,
@@ -216,20 +217,25 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               ),
                             ),
 
-                            if(provider.requestModel!.offer!.offerFollowers!.isNotEmpty)
-                            ...List.generate(
-                              provider.requestModel?.offer?.offerFollowers?.length??
-                                  0,
-                                  (index) => MapWidget(
-                                    launchMap: false,
-                                    clientName:  provider.requestModel?.offer?.offerFollowers?[index].name ??
-                                    "",
-                                gender:   provider.requestModel?.offer?.offerFollowers?[index].gender,
-                                startPoint:   provider.requestModel?.offer?.offerFollowers?[index].pickupLocation,
-                                endPoint:   provider.requestModel?.offer?.offerFollowers?[index].dropOffLocation,
+                            if (provider.requestModel!.offer!.offerFollowers!
+                                .isNotEmpty)
+                              ...List.generate(
+                                provider.requestModel?.offer?.offerFollowers
+                                        ?.length ??
+                                    0,
+                                (index) => MapWidget(
+                                  launchMap: false,
+                                  clientName: provider.requestModel?.offer
+                                          ?.offerFollowers?[index].name ??
+                                      "",
+                                  gender: provider.requestModel?.offer
+                                      ?.offerFollowers?[index].gender,
+                                  startPoint: provider.requestModel?.offer
+                                      ?.offerFollowers?[index].pickupLocation,
+                                  endPoint: provider.requestModel?.offer
+                                      ?.offerFollowers?[index].dropOffLocation,
+                                ),
                               ),
-                            ),
-
 
                             /// to show stop points for followers request if driver
                             Visibility(
@@ -286,8 +292,10 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               startDate: provider.requestModel?.startAt,
                               endDate: provider.requestModel?.endAt,
                               days: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.clientDays ??
-                                      provider.requestModel?.offer?.clientModel?.clientDays
+                                  ? provider.requestModel?.clientModel
+                                          ?.clientDays ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.clientDays
                                   : provider.requestModel?.offer?.offerDays,
                             ),
 

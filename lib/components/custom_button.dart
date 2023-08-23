@@ -63,10 +63,10 @@ class CustomButton extends StatelessWidget {
         curve: Curves.easeInOutSine,
         child: Center(
           child: isLoading
-              ? const Padding(
-                  padding: EdgeInsets.all(8.0),
+              ?  Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: CircularProgressIndicator(
-                    color: Styles.WHITE_COLOR,
+                    color: withBorderColor?Styles.PRIMARY_COLOR: Styles.WHITE_COLOR,
                   ),
                 )
               : Row(

@@ -13,7 +13,7 @@ class OfferModel {
   int? id;
   String? image;
   String? name;
-  String? rideType;
+  int? offerType;
   double? rate;
   int? duration;
   bool? isSentOffer;
@@ -38,7 +38,7 @@ class OfferModel {
   OfferModel(
       {this.id,
       this.image,
-      this.rideType,
+      this.offerType,
       this.offerFollowers,
       this.name,
       this.rate,
@@ -64,7 +64,7 @@ class OfferModel {
       id: json["id"],
       image: json["image"],
       name: json["name"],
-      rideType: json["ride_type"],
+      offerType: json["offer_type"]??1,
       isSentOffer: json["exist"] ?? false,
       isHaveNewRequests: json["is_have_new_requests"] ?? false,
       rate: json["rate"]?.toDouble(),
@@ -113,13 +113,12 @@ class OfferModel {
           "start_date": startDate.toString(),
           "end_date": endDate.toString(),
           "duration": duration,
-          "ride_type": rideType,
+          "offer_type": offerType,
           "min_price": minPrice,
           "max_price": maxPrice,
           "client_id": clientId,
           "driver_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
-          "offer_type": 1,
           "offer_days": offerDays == null
               ? []
               : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
@@ -134,11 +133,11 @@ class OfferModel {
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "start_date": startDate.toString(),
           "end_date": endDate.toString(),
-          "ride_type": rideType,
+          "offer_type": offerType,
           "duration": duration,
           "min_price": minPrice,
           "max_price": maxPrice,
-          "offer_type": 1,
+          // "offer_type": 1,
           "offer_days": offerDays == null
               ? []
               : List<dynamic>.from(offerDays!.map((x) => x.toJson())),

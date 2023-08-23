@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
+import '../../../app/core/utils/validation.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_button.dart';
 import '../../../helpers/cupertino_pop_up_helper.dart';
@@ -65,25 +66,37 @@ class ActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description: getTranslated(
-                                "negotiation_description", context),
+                            description:
+                                "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
                             controller: provider.negotiationPrice,
+                            keyboardType: TextInputType.number,
                             maxLength: 4,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'^\d+\.?\d{0,2}')),
-                              LengthLimitingTextInputFormatter(4)
                             ],
                             onSend: () {
-                              if (provider.negotiationPrice.text.trim() == "" ||
-                                  provider.negotiationPrice.text.isEmpty) {
-                                showToast("من فضلك أدخل سعر");
-                                return;
+                              if (Validations.negotiation(
+                                      provider.negotiationPrice.text.trim(),
+                                      provider.requestModel?.offer?.maxPrice ??
+                                          0.0,
+                                      provider.requestModel?.offer?.minPrice ??
+                                          0.0) !=
+                                  null) {
+                                showToast(Validations.negotiation(
+                                        provider.negotiationPrice.text.trim(),
+                                        provider.requestModel?.offer
+                                                ?.maxPrice ??
+                                            0.0,
+                                        provider.requestModel?.offer
+                                                ?.minPrice ??
+                                            0.0) ??
+                                    "");
                               } else {
                                 provider.updateRequest(
-                                    status: 2, id: provider.requestModel!.id!);
+                                    fromMyTrip: true,
+                                    status: 2,
+                                    id: provider.requestModel!.id!);
                                 CustomNavigator.pop();
                               }
                             },

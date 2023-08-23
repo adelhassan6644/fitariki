@@ -3,11 +3,13 @@ import 'package:fitariki/main_widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../components/expansion_tile_widget.dart';
 import '../../../data/config/di.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
@@ -111,121 +113,143 @@ class _RequestDetailsState extends State<RequestDetails> {
                                   "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                             ),
 
-                            /// Map View
-                            MapWidget(
-                              launchMap: false,
-                              stopPoints: provider.isDriver &&
+                            ///Request Details
+                            ExpansionTileWidget(
+                              iconColor: Styles.SECOUND_PRIMARY_COLOR,
+                              withTitlePadding: true,
+                              title: getTranslated("details", context),
+                              children: [
+                                /// Map View
+                                MapWidget(
+                                  launchMap: false,
+                                  stopPoints: provider.isDriver &&
+                                          provider.requestModel?.followers !=
+                                              null &&
+                                          provider.requestModel!.followers!
+                                              .isNotEmpty
+                                      ? provider.requestModel?.followers
+                                              ?.length ??
+                                          0
+                                      : null,
+                                  startPoint: provider.isDriver
+                                      ? provider.requestModel?.clientModel
+                                              ?.pickupLocation ??
+                                          provider.requestModel?.offer
+                                              ?.clientModel?.pickupLocation
+                                      : provider
+                                          .requestModel?.offer?.pickupLocation,
+                                  endPoint: provider.isDriver
+                                      ? provider.requestModel?.clientModel
+                                          ?.dropOffLocation
+                                      : provider
+                                          .requestModel?.offer?.dropOffLocation,
+                                ),
+
+                                ///distance between client and driver
+                                DistanceWidget(
+                                    isCaptain: provider.isDriver,
+                                    lat1: sl<LocationProvider>()
+                                        .currentLocation!
+                                        .latitude!,
+                                    long1: sl<LocationProvider>()
+                                        .currentLocation!
+                                        .longitude!,
+                                    lat2: provider.isDriver
+                                        ? provider.requestModel?.clientModel
+                                                ?.pickupLocation?.latitude ??
+                                            "0"
+                                        : provider.requestModel?.offer
+                                                ?.pickupLocation?.latitude ??
+                                            "0",
+                                    long2: provider.isDriver
+                                        ? provider.requestModel?.clientModel
+                                                ?.pickupLocation?.longitude ??
+                                            "1"
+                                        : provider.requestModel?.offer
+                                                ?.pickupLocation?.longitude ??
+                                            "1"),
+
+                                /// to show stop points for followers request if driver
+                                Visibility(
+                                  visible: provider.isDriver &&
                                       provider.requestModel?.followers !=
                                           null &&
                                       provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel?.followers?.length ??
-                                      0
-                                  : null,
-                              startPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.pickupLocation??
-                                  provider.requestModel?.offer?.clientModel?.pickupLocation
-                                  : provider.requestModel?.offer?.pickupLocation,
-                              endPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.dropOffLocation,
-                            ),
-
-                            ///distance between client and driver
-                            DistanceWidget(
-                                isCaptain: provider.isDriver,
-                                lat1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .latitude!,
-                                long1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .longitude!,
-                                lat2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.latitude ??
-                                        "0"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.latitude ??
-                                        "0",
-                                long2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.longitude ??
-                                        "1"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.longitude ??
-                                        "1"),
-
-                            ///Type of ride
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                  vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    getTranslated("ride_type", context),
-                                    textAlign: TextAlign.start,
-                                    style: AppTextStyles.w600.copyWith(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8
-                                  ),
-                                  Text(
-                                    provider.requestModel?.rideType ??
-                                        provider.requestModel?.offer?.rideType ??"",
-                                    textAlign: TextAlign.end,
-                                    style: AppTextStyles.w400.copyWith(
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            /// to show stop points for followers request if driver
-                            Visibility(
-                              visible: provider.isDriver &&
-                                  provider.requestModel?.followers != null &&
-                                  provider.requestModel!.followers!.isNotEmpty,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 8.h,
-                                        horizontal:
-                                            Dimensions.PADDING_SIZE_DEFAULT.w),
-                                    child: Text(
-                                      getTranslated("stop_points", context),
-                                      style: AppTextStyles.w600.copyWith(
-                                        fontSize: 14,
+                                          .requestModel!.followers!.isNotEmpty,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 8.h,
+                                            horizontal: Dimensions
+                                                .PADDING_SIZE_DEFAULT.w),
+                                        child: Text(
+                                          getTranslated("stop_points", context),
+                                          style: AppTextStyles.w600.copyWith(
+                                            fontSize: 14,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      ...List.generate(
+                                        provider.requestModel?.followers
+                                                ?.length ??
+                                            0,
+                                        (index) => MapWidget(
+                                          launchMap: false,
+                                          clientName: provider.requestModel
+                                                  ?.followers?[index].name ??
+                                              "",
+                                          gender: provider.requestModel
+                                              ?.followers?[index].gender,
+                                          startPoint: provider
+                                              .requestModel
+                                              ?.followers?[index]
+                                              .pickupLocation,
+                                          endPoint: provider
+                                              .requestModel
+                                              ?.followers?[index]
+                                              .dropOffLocation,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  ...List.generate(
-                                    provider.requestModel?.followers?.length ??
-                                        0,
-                                    (index) => MapWidget(
-                                      launchMap: false,
-                                      clientName: provider.requestModel
-                                              ?.followers?[index].name ??
-                                          "",
-                                      gender: provider.requestModel
-                                          ?.followers?[index].gender,
-                                      startPoint: provider.requestModel
-                                          ?.followers?[index].pickupLocation,
-                                      endPoint: provider.requestModel
-                                          ?.followers?[index].dropOffLocation,
-                                    ),
+                                ),
+
+                                ///Type of ride
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        getTranslated("ride_type", context),
+                                        textAlign: TextAlign.start,
+                                        style: AppTextStyles.w600.copyWith(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        Methods.getOfferType(
+                                            provider.requestModel?.offerType ??
+                                                provider.requestModel?.offer
+                                                    ?.offerType ??
+                                                1),
+                                        textAlign: TextAlign.end,
+                                        style: AppTextStyles.w400.copyWith(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
 
                             /// to show car data if client
@@ -233,18 +257,22 @@ class _RequestDetailsState extends State<RequestDetails> {
                                 visible: !provider.isDriver,
                                 child: CarTripDetailsWidget(
                                   carInfo: provider
-                                      .requestModel?.driverModel?.carInfo??
-                                      provider.requestModel?.offer?.driverModel?.carInfo,
+                                          .requestModel?.driverModel?.carInfo ??
+                                      provider.requestModel?.offer?.driverModel
+                                          ?.carInfo,
                                 )),
 
                             /// to show days on calender
                             TripDaysOnCalenderWidget(
-                                startDate: provider.requestModel?.startAt,
-                                endDate: provider.requestModel?.endAt,
-                                days:  provider.isDriver ?
-                                provider.requestModel?.clientModel?.clientDays??
-                                    provider.requestModel?.offer?.clientModel?.clientDays
-                                    : provider.requestModel?.offer?.offerDays,),
+                              startDate: provider.requestModel?.startAt,
+                              endDate: provider.requestModel?.endAt,
+                              days: provider.isDriver
+                                  ? provider.requestModel?.clientModel
+                                          ?.clientDays ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.clientDays
+                                  : provider.requestModel?.offer?.offerDays,
+                            ),
 
                             SizedBox(
                               height: 24.h,

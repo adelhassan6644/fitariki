@@ -23,14 +23,29 @@ class AddRequestProvider extends ChangeNotifier {
   AddRequestRepo addRequestRepo;
   AddRequestProvider({required this.addRequestRepo});
 
-  List<String> rideTypes = ["going", "back"];
-  List<String> selectedRideTypes = [];
+  List<String> rideTypes = ["go", "back"];
+  List<int> selectedRideTypes = [];
+  int? selectedRideType;
+
   onSelectRideTypes(v) {
     if (selectedRideTypes.contains(v)) {
       selectedRideTypes.remove(v);
     } else {
       selectedRideTypes.add(v);
     }
+
+    if (selectedRideTypes.length > 1) {
+      selectedRideType = 3;
+    } else {
+      if (selectedRideTypes.isNotEmpty) {
+        selectedRideType = selectedRideTypes.first;
+      } else {
+        selectedRideType = null;
+      }
+    }
+
+    print(selectedRideTypes);
+    print(selectedRideType);
     notifyListeners();
   }
 
@@ -74,6 +89,7 @@ class AddRequestProvider extends ChangeNotifier {
   reset() {
     minPrice.clear();
     selectedRideTypes.clear();
+    selectedRideType = null;
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
@@ -128,7 +144,7 @@ class AddRequestProvider extends ChangeNotifier {
         "request_offer": {
           sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
-          "ride_type": selectedRideTypes.join(" و "),
+          "offer_type": selectedRideType,
           "start_date": startDate.defaultFormat2(),
           "start_at": startDate.defaultFormat2(),
           "end_date": endDate.defaultFormat2(),

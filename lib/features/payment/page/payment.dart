@@ -43,14 +43,23 @@ class Payment extends StatelessWidget {
                                   if (isFromMyTrips)
                                     UserCard(
                                       withAnalytics: false,
-                                      userId: provider.requestModel?.driverModel?.id ??
-                                          provider.requestModel?.offer?.driverModel?.id,
-                                      name: provider.requestModel?.driverModel?.firstName ??
-                                          provider.requestModel?.offer?.driverModel?.firstName,
-                                      male: (provider.requestModel?.driverModel?.gender ??
-                                              provider.requestModel?.offer?.driverModel?.gender) == 0,
-                                      image: provider.requestModel?.driverModel?.image ??
-                                          provider.requestModel?.offer?.driverModel?.image,
+                                      userId: provider
+                                              .requestModel?.driverModel?.id ??
+                                          provider.requestModel?.offer
+                                              ?.driverModel?.id,
+                                      name: provider.requestModel?.driverModel
+                                              ?.firstName ??
+                                          provider.requestModel?.offer
+                                              ?.driverModel?.firstName,
+                                      male: (provider.requestModel?.driverModel
+                                                  ?.gender ??
+                                              provider.requestModel?.offer
+                                                  ?.driverModel?.gender) ==
+                                          0,
+                                      image: provider.requestModel?.driverModel
+                                              ?.image ??
+                                          provider.requestModel?.offer
+                                              ?.driverModel?.image,
                                       national: provider
                                               .requestModel
                                               ?.driverModel
@@ -105,10 +114,13 @@ class Payment extends StatelessWidget {
                                   ///Type of ride
                                   Padding(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                        vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                                        horizontal:
+                                            Dimensions.PADDING_SIZE_DEFAULT.w,
+                                        vertical:
+                                            Dimensions.PADDING_SIZE_DEFAULT.h),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           getTranslated("ride_type", context),
@@ -121,8 +133,11 @@ class Payment extends StatelessWidget {
                                           height: 12,
                                         ),
                                         Text(
-                                          provider.requestModel?.rideType ??
-                                              provider.requestModel?.offer?.rideType ?? "",
+                                          Methods.getOfferType(provider
+                                                  .requestModel?.offerType ??
+                                              provider.requestModel?.offer
+                                                  ?.offerType ??
+                                              1),
                                           textAlign: TextAlign.end,
                                           style: AppTextStyles.w400.copyWith(
                                             fontSize: 10,
