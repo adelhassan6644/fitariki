@@ -118,14 +118,18 @@ class _ChangePasswordState extends State<ChangePassword> {
                         const SizedBox(
                           height: 36,
                         ),
-                        CustomButton(
-                            text: getTranslated("save", context),
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                provider.changePassword();
-                              }
-                            },
-                            isLoading: provider.isChange),
+                        Column(
+                          children: [
+                            CustomButton(
+                                text: getTranslated("save", context),
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    provider.changePassword();
+                                  }
+                                },
+                                isLoading: provider.isChange),
+                          ],
+                        ),
                       ],
                     );
                   }),

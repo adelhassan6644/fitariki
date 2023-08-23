@@ -36,8 +36,7 @@ class ProfilePage extends StatelessWidget {
                         onTap: () => provider.updateProfile(),
                         child: Text(getTranslated("save", context),
                             style: AppTextStyles.w400.copyWith(
-                                fontSize: 10,
-                                color: Styles.SYSTEM_COLOR)),
+                                fontSize: 10, color: Styles.SYSTEM_COLOR)),
                       ),
                 title: fromLogin
                     ? getTranslated(
@@ -80,7 +79,6 @@ class ProfilePage extends StatelessWidget {
                         WorkInformationWidget(
                           provider: provider,
                           fromLogin: fromLogin,
-
                         ),
                         Visibility(
                             visible: provider.isDriver,

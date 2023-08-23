@@ -661,12 +661,14 @@ class ProfileProvider extends ChangeNotifier {
           notifyListeners();
         }, (response) {
           if (fromRegister) {
+            sl<HomeProvider>().getUsers();
             sl<HomeProvider>().getOffers();
             sl<MyOffersProvider>().getMyOffers();
             sl<WishlistProvider>().getWishList();
             sl<MyTripsProvider>().getCurrentTrips();
             sl<MyTripsProvider>().getPreviousTrips();
             sl<MyTripsProvider>().getPendingTrips();
+            sl<ProfileProvider>().getProfile();
             profileRepo.setLoggedIn();
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {

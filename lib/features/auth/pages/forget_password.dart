@@ -73,15 +73,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                     inputType: TextInputType.emailAddress,
                                   ),
                                 ),
-                                Center(
-                                  child: CustomButton(
-                                      text: getTranslated("follow", context),
-                                      onTap: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          provider.forgetPassword();
-                                        }
-                                      },
-                                      isLoading: provider.isForget),
+                                Column(
+                                  children: [
+                                    CustomButton(
+                                        text: getTranslated("follow", context),
+                                        onTap: () {
+                                          if (_formKey.currentState!.validate()) {
+                                            provider.forgetPassword();
+                                          }
+                                        },
+                                        isLoading: provider.isForget),
+                                  ],
                                 ),
                               ],
                             )),

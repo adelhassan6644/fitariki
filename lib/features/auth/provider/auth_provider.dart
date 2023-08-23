@@ -110,6 +110,7 @@ class AuthProvider extends ChangeNotifier {
               clean: true, arguments: true);
         } else {
           clear();
+          sl<HomeProvider>().getUsers();
           sl<HomeProvider>().getOffers();
           sl<MyOffersProvider>().getMyOffers();
           sl<WishlistProvider>().getWishList();
@@ -171,8 +172,7 @@ class AuthProvider extends ChangeNotifier {
                   btnText: getTranslated(
                       "login", CustomNavigator.navigatorState.currentContext!),
                   term: mailTEC.text.trim(),
-                  description:
-                      "${getTranslated("your_password_has_been_reset_successfully", CustomNavigator.navigatorState.currentContext!)} ${mailTEC.text.trim()}"));
+                  description: "${getTranslated("your_password_has_been_reset_successfully", CustomNavigator.navigatorState.currentContext!)} ${mailTEC.text.trim()}"));
         }
         clear();
       });

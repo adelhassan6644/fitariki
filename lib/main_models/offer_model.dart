@@ -38,8 +38,8 @@ class OfferModel {
   OfferModel(
       {this.id,
       this.image,
-        this.rideType,
-        this.offerFollowers,
+      this.rideType,
+      this.offerFollowers,
       this.name,
       this.rate,
       this.duration,
@@ -101,13 +101,11 @@ class OfferModel {
       offerRequests: json["offer_requests"] == null
           ? null
           : List<OfferRequestDetailsModel>.from(json["offer_requests"]!
-              .map((x) => OfferRequestDetailsModel.fromJson(x))) ,
+              .map((x) => OfferRequestDetailsModel.fromJson(x))),
       offerFollowers: json["offer_followers"] == null
           ? []
           : List<FollowerModel>.from(json["offer_followers"]!
-              .map((x) => FollowerModel.fromJson(x['follower'])))
-
-  );
+              .map((x) => FollowerModel.fromJson(x['follower']))));
 
   Map<String, dynamic> toPostDriverJson() => {
         "offer": {

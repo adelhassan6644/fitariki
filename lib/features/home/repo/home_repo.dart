@@ -44,7 +44,7 @@ class HomeRepo {
             sharedPreferences.getString(AppStorageKey.role) ?? "client",
             userType),
         queryParameters: {
-          if (sharedPreferences.getString(AppStorageKey.isLogin) != null)
+          if (sharedPreferences.containsKey(AppStorageKey.isLogin))
             "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
                 sharedPreferences.getString(AppStorageKey.userId)
         },

@@ -113,14 +113,18 @@ class _ResetPasswordState extends State<ResetPassword> {
                         const SizedBox(
                           height: 36,
                         ),
-                        CustomButton(
-                            text: getTranslated("save", context),
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                provider.resetPassword(widget.fromRegister);
-                              }
-                            },
-                            isLoading: provider.isReset),
+                        Column(
+                          children: [
+                            CustomButton(
+                                text: getTranslated("save", context),
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    provider.resetPassword(widget.fromRegister);
+                                  }
+                                },
+                                isLoading: provider.isReset),
+                          ],
+                        ),
                       ],
                     );
                   }),

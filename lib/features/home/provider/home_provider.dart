@@ -93,9 +93,8 @@ class HomeProvider extends ChangeNotifier {
 
       final filters = {
         "fillters": {
-          if (startLocation == null)
-            if (homeRepo.getUserId() != null)
-              "${homeRepo.getRole()}_id": homeRepo.getUserId(),
+          if (homeRepo.isLoggedIn())
+            "${homeRepo.getRole()}_id": homeRepo.getUserId(),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
           "gender": gender,

@@ -15,8 +15,6 @@ class HomeUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (_, provider, child) {
-      print(
-          "fff${provider.homeUsersModel?.clients?.length ?? provider.homeUsersModel?.drivers?.length ?? 0}");
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -60,7 +58,7 @@ class HomeUsers extends StatelessWidget {
                         (index) => FavouriteUserCard(
                             withSaveButton: false,
                             client: provider.isDriver
-                                ? provider.homeUsersModel!.clients![index]
+                                ? provider.homeUsersModel?.clients![index]
                                 : null,
                             driver: !provider.isDriver
                                 ? provider.homeUsersModel!.drivers![index]
