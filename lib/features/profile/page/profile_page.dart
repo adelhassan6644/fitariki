@@ -6,7 +6,6 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
-import '../../../data/config/di.dart';
 import '../provider/profile_provider.dart';
 import '../widgets/bank_data_widget.dart';
 import '../widgets/car_data_widget.dart';
@@ -15,20 +14,9 @@ import '../widgets/profile_image_widget.dart';
 import '../widgets/welcome_widget.dart';
 import '../widgets/work_information_widget.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({required this.fromLogin, Key? key}) : super(key: key);
   final bool fromLogin;
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  void initState() {
-    Future.delayed(Duration.zero, () => sl<ProfileProvider>().getProfile());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Consumer<ProfileProvider>(builder: (_, provider, child) {
         return Scaffold(
           appBar: CustomAppBar(
-              withBack: !widget.fromLogin,
-              actionChild: widget.fromLogin
+              withBack: !fromLogin,
+              actionChild: fromLogin
                   ? null
                   : GestureDetector(
                       onTap: () => provider.updateProfile(),
@@ -47,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: AppTextStyles.w400.copyWith(
                               fontSize: 10, color: Styles.SYSTEM_COLOR)),
                     ),
-              title: widget.fromLogin
+              title: fromLogin
                   ? getTranslated(
                       "complete_the_registration_information", context)
                   : getTranslated("modification_of_personal_data", context),
@@ -70,23 +58,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Visibility(
-                              visible: widget.fromLogin,
-                              child: const WelcomeWidget()),
+                              visible: fromLogin, child: const WelcomeWidget()),
                           ProfileImageWidget(
-                            fromLogin: widget.fromLogin,
+                            fromLogin: fromLogin,
                             onSelectImage: provider.onSelectImage,
                             imageFile: provider.profileImage,
                             image: provider.image,
                           ),
                           PersonalInformationWidget(
                             provider: provider,
-                            fromLogin: widget.fromLogin,
+                            fromLogin: fromLogin,
                           ),
                           Visibility(
                             visible: provider.isDriver,
                             child: CarDataWidget(
                               provider: provider,
-                              fromLogin: widget.fromLogin,
+                              fromLogin: fromLogin,
                             ),
                           ),
                           SizedBox(
@@ -94,13 +81,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           WorkInformationWidget(
                             provider: provider,
-                            fromLogin: widget.fromLogin,
+                            fromLogin: fromLogin,
                           ),
                           Visibility(
                               visible: provider.isDriver,
                               child: BankDataWidget(
                                 provider: provider,
-                                fromLogin: widget.fromLogin,
+                                fromLogin: fromLogin,
                               )),
                           SizedBox(
                             height: 24.h,
@@ -112,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Visibility(
-                visible: widget.fromLogin,
+                visible: fromLogin,
                 child: Center(
                   child: Column(
                     children: [

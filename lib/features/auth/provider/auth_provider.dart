@@ -106,6 +106,7 @@ class AuthProvider extends ChangeNotifier {
         // }
         else if (success.data['data'][role[_userType]]["first_name"] == null ||
             success.data['data'][role[_userType]]["first_name"] == "") {
+          sl<ProfileProvider>().getProfile();
           CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
         } else {
           clear();
@@ -155,6 +156,7 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
       }, (success) {
         if (fromRegister) {
+          sl<ProfileProvider>().getProfile();
           CustomNavigator.push(Routes.EDIT_PROFILE,
               clean: true, arguments: true);
         } else {
