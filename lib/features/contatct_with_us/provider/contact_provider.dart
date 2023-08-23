@@ -19,7 +19,6 @@ class ContactProvider extends ChangeNotifier {
 
   bool get isDriver => contactRepo.isDriver();
 
-
   ///Get contact Data
   bool isLoading = false;
   ContactModel? contactModel;
@@ -68,7 +67,7 @@ class ContactProvider extends ChangeNotifier {
     try {
       launchUrl(Uri(
         scheme: 'mailto',
-        path: contactModel?.email ?? 'adelhassan6644@gmail.com',
+        path: contactModel?.email ?? 'SoftwareCloud2@gmail.com',
         query: 'subject=Hello&body=Test',
       ));
     } catch (e) {
