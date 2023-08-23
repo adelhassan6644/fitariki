@@ -70,6 +70,8 @@ class ContactWithUs extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                ///Call Customer Service
                 Visibility(
                   visible: provider.contactModel?.phone != null,
                   child: Padding(
