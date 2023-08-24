@@ -99,7 +99,7 @@ class FavouriteUserCard extends StatelessWidget {
                               height: 11)
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       ShowRate(
