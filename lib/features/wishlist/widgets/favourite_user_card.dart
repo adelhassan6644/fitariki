@@ -120,19 +120,17 @@ class FavouriteUserCard extends StatelessWidget {
               ),
 
               ///Matching
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Visibility(
-                    visible: !withSaveButton,
-                    child: AcceptableAnalytics(
+              Visibility(
+                visible: !withSaveButton,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    AcceptableAnalytics(
                       value: driver != null ? driver!.id! : client!.id!,
                       color: Styles.PRIMARY_COLOR,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
