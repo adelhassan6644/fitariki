@@ -77,10 +77,13 @@ class _UserProfileState extends State<UserProfile> {
                                             ?.updatedAt ??
                                         provider.userProfileModel?.client
                                             ?.updatedAt ??
-                                        DateTime.now()).toString(),
+                                        DateTime.now())
+                                .toString(),
                             image: provider.userProfileModel?.driver?.image ??
-                                provider.userProfileModel?.client?.image ?? "",
-                            name: provider.userProfileModel?.driver?.firstName ??
+                                provider.userProfileModel?.client?.image ??
+                                "",
+                            name: provider
+                                    .userProfileModel?.driver?.firstName ??
                                 provider.userProfileModel?.client?.firstName ??
                                 "",
                             isDriver: provider.userProfileModel?.driver != null,
