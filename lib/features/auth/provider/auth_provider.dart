@@ -107,7 +107,8 @@ class AuthProvider extends ChangeNotifier {
         else if (success.data['data'][role[_userType]]["first_name"] == null ||
             success.data['data'][role[_userType]]["first_name"] == "") {
           sl<ProfileProvider>().getProfile();
-          CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
+          CustomNavigator.push(Routes.EDIT_PROFILE,
+              clean: true, arguments: true);
         } else {
           clear();
           sl<HomeProvider>().getUsers();
@@ -173,7 +174,8 @@ class AuthProvider extends ChangeNotifier {
                   btnText: getTranslated(
                       "login", CustomNavigator.navigatorState.currentContext!),
                   term: mailTEC.text.trim(),
-                  description: "${getTranslated("your_password_has_been_reset_successfully", CustomNavigator.navigatorState.currentContext!)} ${mailTEC.text.trim()}"));
+                  description:
+                      "${getTranslated("your_password_has_been_reset_successfully", CustomNavigator.navigatorState.currentContext!)} ${mailTEC.text.trim()}"));
         }
         clear();
       });
@@ -368,7 +370,7 @@ class AuthProvider extends ChangeNotifier {
 
   logOut() async {
     try {
-      Future.delayed(const Duration(milliseconds: 10), () async {
+      Future.delayed(const Duration(milliseconds: 200), () async {
         clear();
         await authRepo.clearSharedData();
         sl<WishlistProvider>().wishListOfferId.clear();

@@ -78,124 +78,130 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.BACKGROUND_COLOR,
-      bottomNavigationBar: SafeArea(
-        bottom: true,
-        top: false,
-        child: Container(
-            height: 60,
-            width: context.width,
-            decoration: BoxDecoration(
-                color: Styles.WHITE_COLOR,
-                border: Border(
-                    top: BorderSide(
-                  color: const Color(0xFF3C3C43).withOpacity(0.36),
-                  width: 0.5,
-                ))),
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: BottomNavBarItem(
-                      svgIcon: SvgImages.navLogoIcon,
-                      isSelected: _selectedIndex == 0,
-                      onTap: () => _setPage(0),
-                      name: "في طريقي",
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomNavBarItem(
-                      svgIcon: SvgImages.car,
-                      isSelected: _selectedIndex == 1,
-                      onTap: () => _setPage(1),
-                      name: getTranslated("my_trips", context),
-                    ),
-                  ),
-                  Consumer<ProfileProvider>(builder: (_, provider, child) {
-                    return Expanded(
-                      child: BottomNavBarItem(
-                        svgIcon: SvgImages.delivered,
-                        isSelected: _selectedIndex == 2,
-                        onTap: () => _setPage(2),
-                        name: provider.isLogin
-                            ? provider.isDriver
-                                ? getTranslated("delivery_offers", context)
-                                : getTranslated("delivery_requests", context)
-                            : getTranslated("offers_or_requests", context),
-                      ),
-                    );
-                  }),
-                  Expanded(
-                    child: BottomNavBarItem(
-                      svgIcon: SvgImages.profileIcon,
-                      isSelected: _selectedIndex == 3,
-                      onTap: () => _setPage(3),
-                      height: 18,
-                      width: 18,
-                      name: getTranslated("profile", context),
-                    ),
-                  ),
-                ])),
-      ),
-      floatingActionButton:
-          Consumer<ProfileProvider>(builder: (_, provider, child) {
-        return _selectedIndex == 0
-            ? FloatingActionButton(
-                onPressed: () {
-                  if (provider.isLogin) {
-                    if (provider.isDriver && provider.status != "1") {
-                      log(provider.status.toString());
-                      CustomSnackBar.showSnackBar(
-                          notification: AppNotification(
-                              message:
-                                  "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
-                              isFloating: true,
-                              backgroundColor: Styles.IN_ACTIVE,
-                              borderColor: Colors.transparent));
-                      return;
-                    } else {
-                      customShowModelBottomSheet(
-                        onClose: Provider.of<PostOfferProvider>(context,
-                                listen: false)
-                            .reset,
-                        body: const PostOffer(),
-                      );
-                    }
-                  } else {
-                    customShowModelBottomSheet(
-                      onClose:
-                          Provider.of<PostOfferProvider>(context, listen: false)
-                              .reset,
-                      body: const Login(),
-                    );
-                  }
-                },
-                backgroundColor: Styles.PRIMARY_COLOR,
-                shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(100)),
-                child: const Icon(
-                  Icons.add,
-                  size: 24,
+    return Consumer<ProfileProvider>(builder: (_, provider, child) {
+      return Scaffold(
+        backgroundColor: Styles.BACKGROUND_COLOR,
+        bottomNavigationBar: SafeArea(
+          bottom: true,
+          top: false,
+          child: Container(
+              height: 60,
+              width: context.width,
+              decoration: BoxDecoration(
                   color: Styles.WHITE_COLOR,
-                ),
-              )
-            : const SizedBox();
-      }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: const [Home(), MyTrips(), MyOffers(), More()]),
+                  border: Border(
+                      top: BorderSide(
+                    color: const Color(0xFF3C3C43).withOpacity(0.36),
+                    width: 0.5,
+                  ))),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: BottomNavBarItem(
+                        svgIcon: SvgImages.navLogoIcon,
+                        isSelected: _selectedIndex == 0,
+                        onTap: () => _setPage(0),
+                        name: "في طريقي",
+                      ),
+                    ),
+                    Expanded(
+                      child: BottomNavBarItem(
+                        svgIcon: SvgImages.car,
+                        isSelected: _selectedIndex == 1,
+                        onTap: () => _setPage(1),
+                        name: getTranslated("my_trips", context),
+                      ),
+                    ),
+                    Visibility(
+                      visible: provider.isLogin,
+                      child: Expanded(
+                        child: BottomNavBarItem(
+                          svgIcon: SvgImages.delivered,
+                          isSelected: _selectedIndex == 2,
+                          onTap: () => _setPage(2),
+                          name: provider.isLogin
+                              ? provider.isDriver
+                                  ? getTranslated("delivery_offers", context)
+                                  : getTranslated("delivery_requests", context)
+                              : getTranslated("offers_or_requests", context),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: BottomNavBarItem(
+                        svgIcon: SvgImages.profileIcon,
+                        isSelected: _selectedIndex == 3,
+                        onTap: () => _setPage(3),
+                        height: 18,
+                        width: 18,
+                        name: getTranslated("profile", context),
+                      ),
+                    ),
+                  ])),
+        ),
+        floatingActionButton: Visibility(
+          visible: _selectedIndex == 0 && provider.isLogin,
+          child: FloatingActionButton(
+            onPressed: () {
+              if (provider.isLogin) {
+                if (provider.isDriver && provider.status != "1") {
+                  log(provider.status.toString());
+                  CustomSnackBar.showSnackBar(
+                      notification: AppNotification(
+                          message:
+                              "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
+                          isFloating: true,
+                          backgroundColor: Styles.IN_ACTIVE,
+                          borderColor: Colors.transparent));
+                  return;
+                } else {
+                  customShowModelBottomSheet(
+                    onClose:
+                        Provider.of<PostOfferProvider>(context, listen: false)
+                            .reset,
+                    body: const PostOffer(),
+                  );
+                }
+              } else {
+                customShowModelBottomSheet(
+                  onClose:
+                      Provider.of<PostOfferProvider>(context, listen: false)
+                          .reset,
+                  body: const Login(),
+                );
+              }
+            },
+            backgroundColor: Styles.PRIMARY_COLOR,
+            shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(100)),
+            child: const Icon(
+              Icons.add,
+              size: 24,
+              color: Styles.WHITE_COLOR,
+            ),
           ),
-        ],
-      ),
-    );
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        body: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    const Home(),
+                    const MyTrips(),
+                    Visibility(visible: provider.isLogin, child: const MyOffers()),
+                    const More()
+                  ]),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
