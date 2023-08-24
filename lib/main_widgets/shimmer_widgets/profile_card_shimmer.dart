@@ -166,7 +166,7 @@ class ProfileCardShimmer extends StatelessWidget {
               ),
               const Center(
                   child: CustomShimmerCircleImage(
-                diameter: 72,
+                diameter: 65,
               )),
             ],
           ),
