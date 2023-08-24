@@ -8,15 +8,18 @@ import '../../components/custom_images.dart';
 import '../../components/shimmer/custom_shimmer.dart';
 
 class ProfileCardShimmer extends StatelessWidget {
-  const ProfileCardShimmer({Key? key}) : super(key: key);
-
+  const ProfileCardShimmer({this.myProfile = false, Key? key})
+      : super(key: key);
+  final bool myProfile;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Styles.APP_BAR_BACKGROUND_COLOR,
       child: Column(
         children: [
-          SizedBox(height: 15.h + context.toPadding),
+          Visibility(
+              visible: !myProfile,
+              child: SizedBox(height: 15.h + context.toPadding)),
           Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -162,8 +165,9 @@ class ProfileCardShimmer extends StatelessWidget {
                 ),
               ),
               const Center(
-                child:CustomShimmerCircleImage(radius: 45,)
-              ),
+                  child: CustomShimmerCircleImage(
+                diameter: 72,
+              )),
             ],
           ),
         ],

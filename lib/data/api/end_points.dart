@@ -18,15 +18,17 @@ class EndPoints {
   static const String updateProfile = 'profile/update';
   static const String postOffer = 'offer/postOffer';
   static const String listOffers = 'offer/listOffers';
-  static homeUsers(role,userType) => '$role/$userType/${userType}_list';
+  static homeUsers(role, userType) => '$role/$userType/${userType}_list';
   static homeOffers(role) => '$role/offer/list_available';
   static const String availableOffers = '';
-  static const String myOffers = 'offer/listOffers';
+  static myOffers(role, id) => '$role/offer/listOffers/$id';
+
+  // static const String myOffers = 'offer/listOffers';
   static const String deleteOffer = 'offer/deleteOffer';
   static const String viewMyOffers = 'offer/view_my_offer';
   static const String requestDetails = 'offer/view_request_offer';
   static const String offerDetails = 'offer/view_offer';
-  static const String followers = 'profile/followers_list';
+  static followers(id) => 'client/profile/followers_list/$id';
   static const String addFollower = 'profile/add_follower';
   static const String updateFollowerDetails = 'profile/update_follower';
   static const String deleteFollower = 'profile/delete_follower';
@@ -35,7 +37,8 @@ class EndPoints {
   static const String postWishList = 'favorites/addOrDelete';
   static const String addOffer = 'offer/request_offer';
   static const String updateRequest = 'offer/request_update';
-  static const String userProfile = 'profile';
+  static userProfile(role, type, id) => '$role/$type/profile/$id';
+  static myProfile(role, type, id) => '$type/$role/profile/$id';
   static const String getFeedback = 'feedback/list';
   static const String getOfferFeedback = 'offer/feedbacks';
   static const String sendFeedback = 'feedback/feedback';

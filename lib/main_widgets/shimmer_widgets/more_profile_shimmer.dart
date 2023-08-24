@@ -26,7 +26,7 @@ class MoreProfileShimmer extends StatelessWidget {
         child: Row(
           children: [
             const CustomShimmerCircleImage(
-              radius: 72,
+              diameter: 72,
             ),
             const Expanded(child: SizedBox()),
             Column(

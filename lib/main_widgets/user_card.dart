@@ -76,7 +76,7 @@ class UserCard extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
-                      arguments: userId),
+                      arguments: {"id": userId, "my_profile": false}),
                   child: Row(
                     children: [
                       CustomNetworkImage.circleNewWorkImage(

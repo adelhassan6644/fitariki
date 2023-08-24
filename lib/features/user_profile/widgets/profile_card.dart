@@ -1,18 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
-import '../app/core/utils/text_styles.dart';
-import '../app/localization/localization/language_constant.dart';
-import '../components/custom_images.dart';
-import '../components/show_rate.dart';
-import '../data/config/di.dart';
-import '../navigation/routes.dart';
-import '../features/profile/provider/profile_provider.dart';
-import '../features/profile/widgets/profile_image_widget.dart';
+import '../../../app/core/utils/text_styles.dart';
+import '../../../app/localization/localization/language_constant.dart';
+import '../../../components/custom_images.dart';
+import '../../../components/show_rate.dart';
+import '../../../data/config/di.dart';
+import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
+import '../../profile/widgets/profile_image_widget.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard(
@@ -24,6 +23,7 @@ class ProfileCard extends StatelessWidget {
       this.male = true,
       this.isDriver = true,
       this.withPhone = false,
+      this.myProfile = false,
       this.requestsCount,
       this.reservationCount,
       this.rate,
@@ -34,12 +34,15 @@ class ProfileCard extends StatelessWidget {
   final String? nationality, name, lastUpdate, distance, image, phone;
   final bool male, withPhone, isDriver;
   final int? requestsCount, reservationCount, rate;
+  final bool myProfile;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 15.h + context.toPadding),
+        Visibility(
+            visible: !myProfile,
+            child: SizedBox(height: 15.h + context.toPadding)),
         Stack(
           alignment: Alignment.topCenter,
           children: [

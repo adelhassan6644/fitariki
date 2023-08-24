@@ -19,20 +19,28 @@ class UserProfileRepo {
   }
 
   Future<Either<ServerFailure, Response>> getUserProfile(
-      {required int userID}) async {
+      {required int userID, bool myProfile = false}) async {
     try {
-      String role;
+      String type;
       if (isDriver()) {
-        role = "client";
+        type = "client";
       } else {
-        role = "driver";
+        type = "driver";
       }
       Response response = await dioClient.get(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}/$role/${EndPoints.userProfile}/$userID",
+          uri: myProfile
+              ? EndPoints.myProfile(
+                  sharedPreferences.getString(AppStorageKey.role) ?? "client",
+                  type,
+                  userID)
+              : EndPoints.userProfile(
+                  sharedPreferences.getString(AppStorageKey.role) ?? "client",
+                  type,
+                  userID),
           queryParameters: {
             if (sl.get<SharedPreferences>().getString(AppStorageKey.role) !=
-                null)
+                    null &&
+                myProfile != true)
               "${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id":
                   sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           });
@@ -47,7 +55,7 @@ class UserProfileRepo {
   }
 
   Future<Either<ServerFailure, Response>> getUserOffers(
-      {required int id}) async {
+      {required int id, bool myProfile = false}) async {
     try {
       String role;
       if (isDriver()) {
@@ -56,7 +64,10 @@ class UserProfileRepo {
         role = "driver";
       }
       Response response = await dioClient.get(
-        uri: "$role/${EndPoints.myOffers}/$id",
+        uri: myProfile
+            ? EndPoints.myOffers(
+                sharedPreferences.getString(AppStorageKey.role) ?? "client", id)
+            : EndPoints.myOffers(role, id),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -72,7 +83,7 @@ class UserProfileRepo {
       {required int id}) async {
     try {
       Response response = await dioClient.get(
-        uri: "client/${EndPoints.followers}/$id",
+        uri: EndPoints.followers(id),
       );
       if (response.statusCode == 200) {
         return Right(response);

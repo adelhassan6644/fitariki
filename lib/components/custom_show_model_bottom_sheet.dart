@@ -3,7 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../navigation/custom_navigation.dart';
 
 Future<T?> customShowModelBottomSheet<T>(
-    {required Widget? body, bool? isDismissible,Function()? onClose}) {
+    {required Widget? body, bool? isDismissible, Function()? onClose}) {
   return showMaterialModalBottomSheet(
       enableDrag: true,
       clipBehavior: Clip.antiAlias,

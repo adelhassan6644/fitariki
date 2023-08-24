@@ -320,5 +320,7 @@
   "there_is_no_clients": "There is no clients now!",
   "there_is_no_drivers": "There is no Drivers now!",
   "invalid_credentials": "Invalid Credentials",
-  "call_emergency": "Call Emergency"
+  "call_emergency": "Call Emergency",
+  "preview_clients": "Preview what appears to passengers",
+  "preview_drivers": "Preview what appears to drivers"
 }

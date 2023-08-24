@@ -24,8 +24,10 @@ class FavouriteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => CustomNavigator.push(Routes.USER_PROFILE,
-          arguments: driver != null ? driver!.id : client!.id),
+      onTap: () => CustomNavigator.push(Routes.USER_PROFILE, arguments: {
+        "id": driver != null ? driver!.id : client!.id,
+        "my_profile": false
+      }),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),

@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import '../app/core/utils/methods.dart';
 import '../components/marquee_widget.dart';
 
-class SelectedDaysOfWeekWidget extends StatelessWidget {
-  const SelectedDaysOfWeekWidget(
+class WeekDaysWidget extends StatelessWidget {
+  const WeekDaysWidget(
       {Key? key,
       this.days,
       this.isLoading = false,
@@ -25,7 +25,7 @@ class SelectedDaysOfWeekWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const SelectedDaysOfWeekWidgetShimmer()
+        ? const _WeekDaysWidgetShimmer()
         : Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -99,8 +99,8 @@ class SelectedDaysOfWeekWidget extends StatelessWidget {
   }
 }
 
-class SelectedDaysOfWeekWidgetShimmer extends StatelessWidget {
-  const SelectedDaysOfWeekWidgetShimmer({Key? key}) : super(key: key);
+class _WeekDaysWidgetShimmer extends StatelessWidget {
+  const _WeekDaysWidgetShimmer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

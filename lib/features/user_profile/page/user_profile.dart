@@ -18,13 +18,13 @@ import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../main_widgets/week_days_widget.dart';
 import '../../../navigation/routes.dart';
 import '../../maps/provider/location_provider.dart';
-import '../../../main_widgets/profile_card.dart';
+import '../widgets/profile_card.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
 
 class UserProfile extends StatefulWidget {
-  final int userId;
-  const UserProfile({required this.userId, Key? key}) : super(key: key);
+  final Map data;
+  const UserProfile({required this.data, Key? key}) : super(key: key);
 
   @override
   State<UserProfile> createState() => _UserProfileState();
@@ -34,13 +34,12 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      sl<UserProfileProvider>().userProfileModel =null;
-      sl<UserProfileProvider>().userOffers =null;
-      sl<UserProfileProvider>().userFollowers =null;
-
-      sl<UserProfileProvider>().getUserProfile(userId: widget.userId);
-      if (sl<UserProfileProvider>().isDriver) {
-        sl<UserProfileProvider>().getUserFollowers(id: widget.userId);
+      sl<UserProfileProvider>().getUserProfile(
+          userId: widget.data["id"], myProfile: widget.data["my_profile"]);
+      if ((sl<UserProfileProvider>().isDriver && !widget.data["my_profile"]) ||
+          (widget.data["my_profile"] && !sl<UserProfileProvider>().isDriver)) {
+        sl<UserProfileProvider>().getUserFollowers(
+            id: widget.data["id"], myProfile: widget.data["my_profile"]);
       }
     });
     super.initState();
@@ -57,9 +56,12 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               Stack(
                 children: [
-                  CustomAppBar(
-                    isOffer: false,
-                    savedItemId: widget.userId,
+                  Visibility(
+                    visible: widget.data["my_profile"] != true,
+                    child: CustomAppBar(
+                      isOffer: false,
+                      savedItemId: widget.data["id"],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -67,6 +69,7 @@ class _UserProfileState extends State<UserProfile> {
                     child: (!provider.isLoadProfile &&
                             provider.userProfileModel != null)
                         ? ProfileCard(
+                            myProfile: widget.data["my_profile"],
                             lastUpdate: Methods.getDayCount(
                                     date: provider.userProfileModel?.driver
                                             ?.updatedAt ??
@@ -134,7 +137,9 @@ class _UserProfileState extends State<UserProfile> {
                                       "0",
                             )} كيلو",
                           )
-                        : const ProfileCardShimmer(),
+                        : ProfileCardShimmer(
+                            myProfile: widget.data["my_profile"],
+                          ),
                   )
                 ],
               ),
@@ -149,7 +154,7 @@ class _UserProfileState extends State<UserProfile> {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                        child: SelectedDaysOfWeekWidget(
+                        child: WeekDaysWidget(
                           isLoading: provider.isLoadProfile &&
                               provider.userProfileModel == null,
                           days: provider.userProfileModel?.driver != null
@@ -174,12 +179,18 @@ class _UserProfileState extends State<UserProfile> {
                     ],
                   ),
 
-                  if (!provider.isDriver)
-                    CarTripDetailsWidget(
+                  Visibility(
+                    visible: (!provider.isDriver &&
+                            widget.data["my_profile"] == false) ||
+                        (provider.isDriver &&
+                            widget.data["my_profile"] == true),
+                    child: CarTripDetailsWidget(
                       isLoading: provider.isLoadProfile,
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
-                  if (provider.isDriver)
+                  ),
+                  if (provider.isDriver ||
+                      (!provider.isDriver && widget.data["my_profile"]))
                     FollowerDistanceWidget(
                       isLoading: provider.isLoadFollowers,
                       followers: provider.userFollowers,
@@ -192,13 +203,17 @@ class _UserProfileState extends State<UserProfile> {
                       children: [
                         Expanded(
                           child: Text(
-                            provider.isDriver
-                                ? getTranslated("current_requests", context)
-                                : getTranslated("current_offers", context),
+                            (!provider.isDriver &&
+                                        widget.data["my_profile"] == false) ||
+                                    (provider.isDriver &&
+                                        widget.data["my_profile"] == true)
+                                ? getTranslated("current_offers", context)
+                                : getTranslated("current_requests", context),
                             style: AppTextStyles.w600.copyWith(fontSize: 16),
                           ),
                         ),
                         if (!provider.isLoadOffers &&
+                            widget.data["my_profile"] == false &&
                             provider.userOffers != null &&
                             provider.userOffers?.offers != null &&
                             provider.userOffers!.offers!.length > 3)
@@ -247,6 +262,7 @@ class _UserProfileState extends State<UserProfile> {
                             ? 5
                             : provider.userOffers!.offers!.length,
                         (index) => UserOfferCard(
+                            myProfile: widget.data["my_profile"],
                             offerModel: provider.userOffers!.offers![index])),
 
                   SizedBox(

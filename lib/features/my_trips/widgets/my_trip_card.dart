@@ -284,7 +284,12 @@ class MyTripCard extends StatelessWidget {
                           InkWell(
                             onTap: () => CustomNavigator.push(
                                 Routes.USER_PROFILE,
-                                arguments: isDriver ? myTrip.clientId : myTrip.driverId),
+                                arguments: {
+                                  "id": isDriver
+                                      ? myTrip.clientId
+                                      : myTrip.driverId,
+                                  "my_profile": false
+                                }),
                             child: Text(
                               getTranslated(
                                   isDriver

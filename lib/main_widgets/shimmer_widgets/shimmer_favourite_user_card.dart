@@ -27,7 +27,7 @@ class ShimmerFavouriteUserCard extends StatelessWidget {
           child: Row(
             children: [
               const CustomShimmerCircleImage(
-                radius: 45,
+                diameter: 45,
               ),
               const SizedBox(
                 width: 8,

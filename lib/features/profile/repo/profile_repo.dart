@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -108,6 +107,9 @@ class ProfileRepo {
     } else {
       return null;
     }
+  }
+  getId() {
+    return sharedPreferences.getString(AppStorageKey.userId);
   }
 
   isDriver() {

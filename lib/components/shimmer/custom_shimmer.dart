@@ -38,15 +38,15 @@ class CustomShimmerText extends StatelessWidget {
 
 
 class CustomShimmerCircleImage extends StatelessWidget {
-  final double? radius;
-  const CustomShimmerCircleImage({Key? key, this.radius}) : super(key: key);
+  final double? diameter;
+  const CustomShimmerCircleImage({Key? key, this.diameter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomShimmer(
       child: Container(
-        height: radius,
-        width: radius,
+        height: diameter,
+        width: diameter,
         decoration: const BoxDecoration(
             shape: BoxShape.circle, color: Colors.white),
       ),

@@ -55,7 +55,9 @@ abstract class CustomNavigator {
       case Routes.ON_BOARDING:
         return _pageRoute(const OnBoarding());
       case Routes.VERIFICATION:
-        return _pageRoute(Verification(fromRegister: settings.arguments as bool,));
+        return _pageRoute(Verification(
+          fromRegister: settings.arguments as bool,
+        ));
       case Routes.FORGET_PASSWORD:
         return _pageRoute(const ForgetPassword());
 
@@ -73,10 +75,10 @@ abstract class CustomNavigator {
           index: settings.arguments as int,
         ));
 
-        case Routes.ALL_HOME_OFFERS:
+      case Routes.ALL_HOME_OFFERS:
         return _pageRoute(const AllHomeOffers());
 
-        case Routes.ALL_HOME_USERS:
+      case Routes.ALL_HOME_USERS:
         return _pageRoute(const AllHomeUsers());
 
       case Routes.OFFER_DETAILS:
@@ -121,7 +123,7 @@ abstract class CustomNavigator {
 
       case Routes.USER_PROFILE:
         return _pageRoute(UserProfile(
-          userId: settings.arguments as int,
+          data: settings.arguments as Map,
         ));
 
       case Routes.ALL_USER_OFFERS:

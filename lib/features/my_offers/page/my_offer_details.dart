@@ -55,7 +55,8 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
         child: Column(
           children: [
             Consumer<MyOffersProvider>(builder: (context, provider, _) {
-              return !provider.isOfferDetailsLoading
+              return !provider.isOfferDetailsLoading &&
+                      provider.myOfferDetails != null
                   ? Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -97,20 +98,27 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                           "",
                                       gender: provider.myOfferDetails
                                           ?.offerFollowers?[index].gender,
-                                      startPoint: provider.myOfferDetails
-                                          ?.offerFollowers?[index].pickupLocation,
-                                      endPoint: provider.myOfferDetails
-                                          ?.offerFollowers?[index].dropOffLocation,
+                                      startPoint: provider
+                                          .myOfferDetails
+                                          ?.offerFollowers?[index]
+                                          .pickupLocation,
+                                      endPoint: provider
+                                          .myOfferDetails
+                                          ?.offerFollowers?[index]
+                                          .dropOffLocation,
                                     ),
                                   ),
 
                                 ///Type of ride
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                      vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w,
+                                      vertical:
+                                          Dimensions.PADDING_SIZE_DEFAULT.h),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         getTranslated("ride_type", context),
@@ -123,9 +131,9 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                         height: 8,
                                       ),
                                       Text(
-                                        Methods.getOfferType(
-                                            provider.myOfferDetails?.offerType ??
-                                                1),
+                                        Methods.getOfferType(provider
+                                                .myOfferDetails?.offerType ??
+                                            1),
                                         textAlign: TextAlign.end,
                                         style: AppTextStyles.w400.copyWith(
                                           fontSize: 10,
@@ -149,8 +157,8 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                       sl.get<ProfileProvider>().isDriver
                                           ? getTranslated("requests", context)
                                           : getTranslated("offers", context),
-                                      style:
-                                          AppTextStyles.w600.copyWith(fontSize: 16),
+                                      style: AppTextStyles.w600
+                                          .copyWith(fontSize: 16),
                                     ),
                                   ),
                                   if (provider.myOfferDetails != null &&
@@ -166,35 +174,44 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                                       child: Text(
                                         getTranslated("view_all", context),
                                         style: AppTextStyles.w400.copyWith(
-                                            fontSize: 11, color: Styles.DISABLED),
+                                            fontSize: 11,
+                                            color: Styles.DISABLED),
                                       ),
                                     )
                                 ],
                               ),
                             ),
-                              Visibility(
-                                visible: provider.myOfferDetails?.offerRequests != null &&
-                                    provider.myOfferDetails!.offerRequests!.isNotEmpty,
-                                child: Column(children: List.generate(
-                                    provider.myOfferDetails!.offerRequests!.length > 3
+                            Visibility(
+                              visible: provider.myOfferDetails?.offerRequests !=
+                                      null &&
+                                  provider.myOfferDetails!.offerRequests!
+                                      .isNotEmpty,
+                              child: Column(
+                                children: List.generate(
+                                    provider.myOfferDetails!.offerRequests!
+                                                .length >
+                                            3
                                         ? 3
-                                        : provider
-                                        .myOfferDetails!.offerRequests!.length,
-                                        (index) => RequestCard(
-                                      request: provider
-                                          .myOfferDetails!.offerRequests![index],
-                                    )),),
+                                        : provider.myOfferDetails!
+                                            .offerRequests!.length,
+                                    (index) => RequestCard(
+                                          request: provider.myOfferDetails!
+                                              .offerRequests![index],
+                                        )),
                               ),
-                              Visibility(
-                                visible: provider.myOfferDetails?.offerRequests == null ||
-                                    provider.myOfferDetails!.offerRequests!.isEmpty,
-                                child: EmptyState(
-                                    txt: sl.get<ProfileProvider>().isDriver
-                                        ? getTranslated(
-                                            "there_is_no_offers_now", context)
-                                        : getTranslated(
-                                            "there_is_no_requests_now", context)),
-                              )
+                            ),
+                            Visibility(
+                              visible: provider.myOfferDetails?.offerRequests ==
+                                      null ||
+                                  provider
+                                      .myOfferDetails!.offerRequests!.isEmpty,
+                              child: EmptyState(
+                                  txt: sl.get<ProfileProvider>().isDriver
+                                      ? getTranslated(
+                                          "there_is_no_offers_now", context)
+                                      : getTranslated(
+                                          "there_is_no_requests_now", context)),
+                            )
                           ],
                         ),
                       ),

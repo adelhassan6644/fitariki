@@ -19,19 +19,27 @@ class UserProfileProvider extends ChangeNotifier {
 
   bool get isDriver => userProfileRepo.isDriver();
 
+  clear() {
+    userProfileModel = null;
+    userOffers = null;
+    userFollowers = null;
+  }
+
   bool isLoadProfile = false;
   ProfileModel? userProfileModel;
 
   bool isLoadOffers = false;
   MyOffersModel? userOffers;
-  getUserProfile({required int userId}) async {
+  getUserProfile({required int userId, bool myProfile = false}) async {
     try {
+      clear();
       isLoadProfile = true;
       isLoadOffers = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
           await userProfileRepo.getUserProfile(
         userID: userId,
+        myProfile: myProfile,
       );
       response.fold((l) {
         CustomSnackBar.showSnackBar(
@@ -44,14 +52,13 @@ class UserProfileProvider extends ChangeNotifier {
         isLoadOffers = false;
         notifyListeners();
       }, (response) {
-        final role =
-            sl.get<SharedPreferences>().getString(AppStorageKey.role) ==
-                    "driver"
-                ? "client"
-                : "driver";
-
+        final String role;
+        if (myProfile) {
+          role = isDriver ? "driver" : "client";
+        } else {
+          role = isDriver ? "client" : "driver";
+        }
         userProfileModel = ProfileModel.fromJson(response.data["data"]);
-
         userOffers = MyOffersModel.fromJson(response.data["data"][role]);
         isLoadProfile = false;
         isLoadOffers = false;
@@ -73,9 +80,9 @@ class UserProfileProvider extends ChangeNotifier {
 
   bool isLoadFollowers = false;
   FollowersModel? userFollowers;
-  getUserFollowers({required int id}) async {
+  getUserFollowers({required int id, bool myProfile = false}) async {
     try {
-      userFollowers = null;
+      clear();
       isLoadFollowers = true;
       notifyListeners();
       Either<ServerFailure, Response> response =

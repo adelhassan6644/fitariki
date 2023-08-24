@@ -13,14 +13,20 @@ import '../../../navigation/routes.dart';
 import '../../home/widgets/acceptable_analytics_widget.dart';
 
 class UserOfferCard extends StatelessWidget {
-  const UserOfferCard({Key? key, required this.offerModel}) : super(key: key);
+  const UserOfferCard(
+      {Key? key, required this.offerModel, this.myProfile = false})
+      : super(key: key);
   final OfferModel offerModel;
+  final bool myProfile;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          CustomNavigator.push(Routes.OFFER_DETAILS, arguments: offerModel.id),
+      onTap: () {
+        if (!myProfile) {
+          CustomNavigator.push(Routes.OFFER_DETAILS, arguments: offerModel.id);
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),

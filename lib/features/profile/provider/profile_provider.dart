@@ -45,6 +45,7 @@ class ProfileProvider extends ChangeNotifier {
 
   bool get isLogin => profileRepo.isLoggedIn();
   bool get isDriver => profileRepo.isDriver();
+  String get id => profileRepo.getId();
 
   final TextEditingController phoneTEC = TextEditingController();
 

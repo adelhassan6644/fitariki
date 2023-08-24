@@ -41,7 +41,7 @@ class ShimmerOfferCard extends StatelessWidget {
                   Row(
                     children: [
                       const CustomShimmerCircleImage(
-                        radius: 45,
+                        diameter: 45,
                       ),
                       const SizedBox(
                         width: 8,
