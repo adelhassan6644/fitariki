@@ -12,6 +12,7 @@ import '../../../components/custom_network_image.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
+import '../../home/widgets/acceptable_analytics_widget.dart';
 import '../provider/wishlist_provider.dart';
 
 class FavouriteUserCard extends StatelessWidget {
@@ -21,6 +22,7 @@ class FavouriteUserCard extends StatelessWidget {
   final DriverModel? driver;
   final ClientModel? client;
   final bool withSaveButton;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,7 +34,9 @@ class FavouriteUserCard extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+          height: 70,
+          padding: EdgeInsets.symmetric(
+              vertical: withSaveButton ? 16.h : 0, horizontal: 16.w),
           decoration: BoxDecoration(
             color: Styles.WHITE_COLOR,
             borderRadius: BorderRadius.circular(8),
@@ -44,69 +48,92 @@ class FavouriteUserCard extends StatelessWidget {
                   offset: const Offset(0, 2))
             ],
           ),
-          child: Row(
+          child: Stack(
+            alignment: Alignment.centerLeft,
             children: [
-              CustomNetworkImage.circleNewWorkImage(
-                  image: driver != null
-                      ? driver!.image ?? ""
-                      : client!.image ?? "",
-                  radius: 16,
-                  color: Styles.SECOUND_PRIMARY_COLOR),
-              const SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          child: Text(
-                            driver != null
-                                ? driver!.firstName ?? ""
-                                : "${client!.firstName ?? ""} ${client!.lastName ?? ""}",
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            style: AppTextStyles.w600.copyWith(
-                                fontSize: 14,
-                                height: 1.25,
-                                overflow: TextOverflow.ellipsis),
+              Row(
+                children: [
+                  CustomNetworkImage.circleNewWorkImage(
+                      image: driver != null
+                          ? driver!.image ?? ""
+                          : client!.image ?? "",
+                      radius: 16,
+                      color: Styles.SECOUND_PRIMARY_COLOR),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            child: Text(
+                              driver != null
+                                  ? driver!.firstName ?? ""
+                                  : "${client!.firstName ?? ""} ${client!.lastName ?? ""}",
+                              textAlign: TextAlign.start,
+                              maxLines: 1,
+                              style: AppTextStyles.w600.copyWith(
+                                  fontSize: 14,
+                                  height: 1.25,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        customImageIconSVG(
-                            imageName: driver != null
-                                ? driver!.gender! == 0
-                                    ? SvgImages.maleIcon
-                                    : SvgImages.femaleIcon
-                                : client!.gender! == 0
-                                    ? SvgImages.maleIcon
-                                    : SvgImages.femaleIcon,
-                            color: Styles.BLUE_COLOR,
-                            width: 11,
-                            height: 11)
-                      ],
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          customImageIconSVG(
+                              imageName: driver != null
+                                  ? driver!.gender! == 0
+                                      ? SvgImages.maleIcon
+                                      : SvgImages.femaleIcon
+                                  : client!.gender! == 0
+                                      ? SvgImages.maleIcon
+                                      : SvgImages.femaleIcon,
+                              color: Styles.BLUE_COLOR,
+                              width: 11,
+                              height: 11)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      ShowRate(
+                        rate: driver != null ? driver!.rate : client!.rate,
+                      )
+                    ],
+                  )),
+                  Visibility(
+                    visible: withSaveButton,
+                    child: InkWell(
+                      onTap: () => sl<WishlistProvider>().postWishList(
+                          id: driver != null ? driver!.id! : client!.id!,
+                          isOffer: false),
+                      child: customImageIconSVG(imageName: SvgImages.saved),
                     ),
-                    ShowRate(
-                      rate: driver != null ? driver!.rate : client!.rate,
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Visibility(
-                visible: withSaveButton,
-                child: InkWell(
-                  onTap: () => sl<WishlistProvider>().postWishList(
-                      id: driver != null ? driver!.id! : client!.id!,
-                      isOffer: false),
-                  child: customImageIconSVG(imageName: SvgImages.saved),
-                ),
-              )
+
+              ///Matching
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Visibility(
+                    visible: !withSaveButton,
+                    child: AcceptableAnalytics(
+                      value: driver != null ? driver!.id! : client!.id!,
+                      color: Styles.PRIMARY_COLOR,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

@@ -14,6 +14,7 @@ class DriverModel {
   String? identityImage;
   String? nickname;
   int? gender;
+  double? matching;
   int? requestsCount;
   int? reservationsCount;
   String? age;
@@ -49,6 +50,7 @@ class DriverModel {
       this.countryFlag,
       this.countryCode,
       this.age,
+      this.matching,
       this.national,
       this.city,
       this.phone,
@@ -83,6 +85,11 @@ class DriverModel {
             : null,
         image: json["image"],
         nickname: json["nickname"],
+        matching: json["matching"] == null
+            ? 0.0
+            : double.parse(json["matching"].toString()) < 0
+                ? 0
+                : double.parse(json["matching"].toString()),
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
         gender:
