@@ -77,13 +77,10 @@ class _UserProfileState extends State<UserProfile> {
                                             ?.updatedAt ??
                                         provider.userProfileModel?.client
                                             ?.updatedAt ??
-                                        DateTime.now())
-                                .toString(),
+                                        DateTime.now()).toString(),
                             image: provider.userProfileModel?.driver?.image ??
-                                provider.userProfileModel?.client?.image ??
-                                "",
-                            name: provider
-                                    .userProfileModel?.driver?.firstName ??
+                                provider.userProfileModel?.client?.image ?? "",
+                            name: provider.userProfileModel?.driver?.firstName ??
                                 provider.userProfileModel?.client?.firstName ??
                                 "",
                             isDriver: provider.userProfileModel?.driver != null,
@@ -140,8 +137,7 @@ class _UserProfileState extends State<UserProfile> {
                             )} كيلو",
                           )
                         : ProfileCardShimmer(
-                            myProfile: widget.data["my_profile"],
-                          ),
+                            myProfile: widget.data["my_profile"]),
                   )
                 ],
               ),
@@ -208,7 +204,7 @@ class _UserProfileState extends State<UserProfile> {
                     ],
                   ),
 
-                  ///Car Details
+                  ///Offers Head-title
                   Visibility(
                     visible: (!provider.isDriver &&
                             widget.data["my_profile"] == false) ||
@@ -227,29 +223,32 @@ class _UserProfileState extends State<UserProfile> {
                         vertical: 16.h),
                     child: Row(
                       children: [
-                        Expanded(child: Text(
-                            (!provider.isDriver && widget.data["my_profile"] == false) ||
-                                    (provider.isDriver && widget.data["my_profile"] == true)
-                                ? getTranslated("current_offers", context)
-                                : getTranslated("current_requests", context),
-                            style: AppTextStyles.w600.copyWith(fontSize: 16),
-                          )),
-                          Visibility(
-                            visible: (!provider.isLoadOffers &&
-                                widget.data["my_profile"] == false &&
-                                provider.userOffers != null &&
-                                provider.userOffers?.offers != null &&
-                                provider.userOffers!.offers!.length > 3),
-                            child: InkWell(
-                              onTap: () =>
-                                  CustomNavigator.push(Routes.ALL_USER_OFFERS),
-                              child: Text(
-                                getTranslated("view_all", context),
-                                style: AppTextStyles.w400.copyWith(
-                                    fontSize: 11, color: Styles.DISABLED),
-                              ),
+                        Expanded(
+                            child: Text(
+                          (!provider.isDriver &&
+                                      widget.data["my_profile"] == false) ||
+                                  (provider.isDriver &&
+                                      widget.data["my_profile"] == true)
+                              ? getTranslated("current_offers", context)
+                              : getTranslated("current_requests", context),
+                          style: AppTextStyles.w600.copyWith(fontSize: 16),
+                        )),
+                        Visibility(
+                          visible: (!provider.isLoadOffers &&
+                              widget.data["my_profile"] == false &&
+                              provider.userOffers != null &&
+                              provider.userOffers?.offers != null &&
+                              provider.userOffers!.offers!.length > 3),
+                          child: InkWell(
+                            onTap: () =>
+                                CustomNavigator.push(Routes.ALL_USER_OFFERS),
+                            child: Text(
+                              getTranslated("view_all", context),
+                              style: AppTextStyles.w400.copyWith(
+                                  fontSize: 11, color: Styles.DISABLED),
                             ),
-                          )
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -268,17 +267,18 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
 
-                    ///Offers Empty State
-                    Visibility(
-                      visible: !provider.isLoadOffers && (provider.userOffers == null ||
-                          provider.userOffers?.offers == null ||
-                          provider.userOffers!.offers!.isEmpty),
-                      child: EmptyState(
-                          txt: provider.isDriver
-                              ? getTranslated("there_is_no_offers_now", context)
-                              : getTranslated(
-                                  "there_is_no_requests_now", context)),
-                    ),
+                  ///Offers Empty State
+                  Visibility(
+                    visible: !provider.isLoadOffers &&
+                        (provider.userOffers == null ||
+                            provider.userOffers?.offers == null ||
+                            provider.userOffers!.offers!.isEmpty),
+                    child: EmptyState(
+                        txt: provider.isDriver
+                            ? getTranslated("there_is_no_offers_now", context)
+                            : getTranslated(
+                                "there_is_no_requests_now", context)),
+                  ),
 
                   if (!provider.isLoadOffers &&
                       provider.userOffers != null &&
