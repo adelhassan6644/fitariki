@@ -216,7 +216,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                         ),
                       ),
                     )
-                  : const MyOfferDetailsShimmer();
+                  :  MyOfferDetailsShimmer(isDriver: provider.isDriver,);
             }),
           ],
         ),

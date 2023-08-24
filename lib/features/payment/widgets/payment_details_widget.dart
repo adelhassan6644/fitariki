@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/dimensions.dart';
@@ -125,6 +126,28 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
             SizedBox(
               height: 8.h,
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    getTranslated("wallet", context),
+                    style: AppTextStyles.w400.copyWith(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Text(
+                  "- ${paymentProvider.wallet.toStringAsFixed(2)} ${getTranslated("sar", context)}",
+                  style: AppTextStyles.w400
+                      .copyWith(fontSize: 14, color: Styles.RED_COLOR),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Divider(thickness: .2,),
+
             Row(
               children: [
                 Expanded(

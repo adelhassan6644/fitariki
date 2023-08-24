@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../model/coupon_model.dart';
 import '../../request_details/model/offer_request_details_model.dart';
 import '../repo/payment_repo.dart';
@@ -29,6 +31,7 @@ class PaymentProvider extends ChangeNotifier {
   double taxPercentage = 0.0;
   double serviceCost = 0;
   double servicePercentage = 0;
+  double wallet = sl.get<ProfileProvider>().profileModel?.client?.wallet??0.0;
   double total = 0.0;
   bool _isLoading = false;
   bool isPaymentFeeLoading = false;
@@ -138,7 +141,7 @@ class PaymentProvider extends ChangeNotifier {
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
     print(serviceCost);
-    total = (requestModel!.price! - _discount) + tax! + serviceCost;
+    total = (requestModel!.price! - _discount) + tax! + serviceCost-wallet;
     print((requestModel!.price! - _discount) + tax!);
     notifyListeners();
   }

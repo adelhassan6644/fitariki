@@ -14,6 +14,7 @@ class ClientModel {
   String? image;
   String? nickname;
   int? gender;
+  double? matching;
   int? requestsCount;
   int? reservationsCount;
   String? age;
@@ -40,6 +41,7 @@ class ClientModel {
       this.national,
       this.city,
       this.phone,
+      this.matching,
       this.countryFlag,
       this.countryId,
       this.countryCode,
@@ -70,12 +72,16 @@ class ClientModel {
             ? json["country_code"].toString()
             : null,
         image: json["image"],
+        matching: json["matching"] == null
+            ? 0.0
+            : double.parse(json["matching"].toString()) < 0
+                ? 0
+                : double.parse(json["matching"].toString()),
         requestsCount: json["requests_count"] ?? 0,
         reservationsCount: json["reservations_count"] ?? 0,
         nickname: json["nickname"],
-        gender: json["gender"] == null
-            ? 0
-            : int.parse(json["gender"].toString()),
+        gender:
+            json["gender"] == null ? 0 : int.parse(json["gender"].toString()),
         national: json["country"] != null
             ? Country.fromJson(
                 json["country"],

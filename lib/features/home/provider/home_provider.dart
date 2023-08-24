@@ -28,11 +28,10 @@ class HomeProvider extends ChangeNotifier {
     controller.addListener(() {
       if (controller.position.userScrollDirection == ScrollDirection.forward) {
         goingDown = false;
-        notifyListeners();
       } else {
         goingDown = true;
-        notifyListeners();
       }
+      notifyListeners();
     });
   }
 

@@ -54,13 +54,13 @@ class ProfileCard extends StatelessWidget {
                     borderRadius:
                         BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
                     color: Styles.WHITE_COLOR,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
-                          blurRadius: 5.0,
-                          spreadRadius: -1,
-                          offset: const Offset(0, 6))
-                    ]),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black54.withOpacity(0.1),
+                        blurRadius: 7.0,
+                        spreadRadius: -1,
+                        offset: const Offset(0, 6))
+                  ],),
                 child: Column(
                   children: [
                     Row(

@@ -29,7 +29,7 @@ class HomeUsers extends StatelessWidget {
           Column(
             children: provider.isGetting
                 ? List.generate(!provider.isLogin ? 2 : 7,
-                    (index) => const ShimmerFavouriteUserCard())
+                    (index) =>  ShimmerFavouriteUserCard(withSaveButton: false,))
                 : provider.homeUsersModel == null ||
                         (provider.homeUsersModel!.clients!.isEmpty &&
                             provider.homeUsersModel!.drivers!.isEmpty)
@@ -61,7 +61,7 @@ class HomeUsers extends StatelessWidget {
                                 ? provider.homeUsersModel?.clients![index]
                                 : null,
                             driver: !provider.isDriver
-                                ? provider.homeUsersModel!.drivers![index]
+                                ? provider.homeUsersModel?.drivers![index]
                                 : null)),
           ),
         ],

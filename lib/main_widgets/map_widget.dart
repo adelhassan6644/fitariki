@@ -128,7 +128,7 @@ class MapWidget extends StatelessWidget {
                                 child: Text(
                                   showFullAddress
                                       ? startPoint?.address ?? ""
-                                      : startPoint?.address?.split(",")[1] ??
+                                      : startPoint?.address?.split(",")[0] ??
                                           "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
@@ -220,7 +220,7 @@ class MapWidget extends StatelessWidget {
                                 child: Text(
                                   showFullAddress
                                       ? endPoint?.address ?? ""
-                                      : endPoint?.address?.split(",")[1] ?? "",
+                                      : endPoint?.address?.split(",")[0] ?? "",
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.w400.copyWith(

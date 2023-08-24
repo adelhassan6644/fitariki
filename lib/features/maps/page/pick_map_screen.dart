@@ -52,16 +52,20 @@ class _PickMapScreenState extends State<PickMapScreen> {
       _mapController!.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: _initialPosition, zoom: 100),
       ));
-    }else{
-      await Provider.of<LocationProvider>(context, listen: false).getCurrentLocation();
-      _mapController!
-          .animateCamera(CameraUpdate.newCameraPosition(
+    } else {
+      await Provider.of<LocationProvider>(context, listen: false)
+          .getCurrentLocation();
+      _mapController!.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: LatLng(
-                double.parse(Provider.of<LocationProvider>(context, listen: false)
-                    .currentLocation!.latitude!),
-                double.parse(Provider.of<LocationProvider>(context, listen: false)
-                    .currentLocation!.longitude!)),
+                double.parse(
+                    Provider.of<LocationProvider>(context, listen: false)
+                        .currentLocation!
+                        .latitude!),
+                double.parse(
+                    Provider.of<LocationProvider>(context, listen: false)
+                        .currentLocation!
+                        .longitude!)),
             zoom: 16),
       ));
     }

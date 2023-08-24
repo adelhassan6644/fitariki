@@ -30,19 +30,56 @@ class RequestDetailsShimmer extends StatelessWidget {
               radius: 8,
             ),
           ),
-          MapWidgetShimmer(
-            withStops: isDriver,
+
+          ///Request Details
+          ExpansionTileWidget(
+            iconColor: Styles.SECOUND_PRIMARY_COLOR,
+            withTitlePadding: true,
+            title: getTranslated("details", context),
+            children: [
+              MapWidgetShimmer(
+                withStops: isDriver,
+              ),
+              const DistanceWidgetShimmer(),
+              Visibility(
+                visible: !isDriver,
+                child: const CarTripDetailsShimmer(),
+              ),
+              Visibility(
+                  visible: isDriver,
+                  child: MapWidgetShimmer(
+                    withClientName: isDriver,
+                  )),
+
+              ///Type of ride
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                    vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      getTranslated("ride_type", context),
+                      textAlign: TextAlign.start,
+                      style: AppTextStyles.w600.copyWith(
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    CustomShimmerContainer(
+                      width: 200.w,
+                      height: 16.h,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const DistanceWidgetShimmer(),
-          Visibility(
-            visible: !isDriver,
-            child: const CarTripDetailsShimmer(),
-          ),
-          Visibility(
-              visible: isDriver,
-              child: MapWidgetShimmer(
-                withClientName: isDriver,
-              )),
+
+          ///Trip Details
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -64,8 +101,7 @@ class RequestDetailsShimmer extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 12),
                         decoration: BoxDecoration(
-                            color:
-                                Styles.PRIMARY_COLOR.withOpacity(0.06),
+                            color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                             borderRadius: BorderRadius.circular(4)),
                         child: CustomShimmerContainer(
                           width: 100.w,
