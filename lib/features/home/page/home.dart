@@ -36,22 +36,21 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
         const AcceptableWidget(),
         const RoleTypeWidget(),
         const HomeTabBarWidget(),
-        Expanded(
-          child: Consumer<HomeProvider>(builder: (_, provider, child) {
-            return Column(
-              children: [
-                Expanded(
-                  child: RefreshIndicator(
-                    color: Styles.PRIMARY_COLOR,
-                    onRefresh: () async {
-                      provider.getOffers();
-                      provider.getUsers();
-                    },
-                    child: ListView(
+        Consumer<HomeProvider>(builder: (_, provider, child) {
+          return Expanded(
+            child: RefreshIndicator(
+              color: Styles.PRIMARY_COLOR,
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh: () async {
+                provider.getOffers();
+                provider.getUsers();
+              },
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListAnimator(
                       controller: controller,
-                      padding: EdgeInsets.zero,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      children: provider.isLogin
+                      data: provider.isLogin
                           ? [
                               provider.tab == 0
                                   ? const HomeOffers()
@@ -60,11 +59,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                           : [const HomeOffers(), const HomeUsers()],
                     ),
                   ),
-                ),
-              ],
-            );
-          }),
-        )
+                ],
+              ),
+            ),
+          );
+        })
       ],
     );
   }

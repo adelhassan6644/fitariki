@@ -86,7 +86,7 @@ class WeekDaysWidget extends StatelessWidget {
                   MarqueeWidget(
                     child: Text(
                       "${Methods.convertStringToTime(startTime, withFormat: true)}"
-                      " - ${Methods.convertStringToTime(endTime, withFormat: true)}ً",
+                      " - ${Methods.convertStringToTime(endTime, withFormat: true)}",
                       textAlign: TextAlign.start,
                       style: AppTextStyles.w400.copyWith(
                           fontSize: 10, overflow: TextOverflow.ellipsis),

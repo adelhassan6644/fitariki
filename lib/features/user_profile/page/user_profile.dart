@@ -208,6 +208,7 @@ class _UserProfileState extends State<UserProfile> {
                     ],
                   ),
 
+                  ///Car Details
                   Visibility(
                     visible: (!provider.isDriver &&
                             widget.data["my_profile"] == false) ||
@@ -218,40 +219,41 @@ class _UserProfileState extends State<UserProfile> {
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
                   ),
+
+                  ///Offers Head-title
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                         vertical: 16.h),
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Text(
-                            (!provider.isDriver &&
-                                        widget.data["my_profile"] == false) ||
-                                    (provider.isDriver &&
-                                        widget.data["my_profile"] == true)
+                        Expanded(child: Text(
+                            (!provider.isDriver && widget.data["my_profile"] == false) ||
+                                    (provider.isDriver && widget.data["my_profile"] == true)
                                 ? getTranslated("current_offers", context)
                                 : getTranslated("current_requests", context),
                             style: AppTextStyles.w600.copyWith(fontSize: 16),
-                          ),
-                        ),
-                        if (!provider.isLoadOffers &&
-                            widget.data["my_profile"] == false &&
-                            provider.userOffers != null &&
-                            provider.userOffers?.offers != null &&
-                            provider.userOffers!.offers!.length > 3)
-                          InkWell(
-                            onTap: () =>
-                                CustomNavigator.push(Routes.ALL_USER_OFFERS),
-                            child: Text(
-                              getTranslated("view_all", context),
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 11, color: Styles.DISABLED),
+                          )),
+                          Visibility(
+                            visible: (!provider.isLoadOffers &&
+                                widget.data["my_profile"] == false &&
+                                provider.userOffers != null &&
+                                provider.userOffers?.offers != null &&
+                                provider.userOffers!.offers!.length > 3),
+                            child: InkWell(
+                              onTap: () =>
+                                  CustomNavigator.push(Routes.ALL_USER_OFFERS),
+                              child: Text(
+                                getTranslated("view_all", context),
+                                style: AppTextStyles.w400.copyWith(
+                                    fontSize: 11, color: Styles.DISABLED),
+                              ),
                             ),
                           )
                       ],
                     ),
                   ),
+
                   if (provider.isLoadOffers)
                     ...List.generate(
                       4,
@@ -265,17 +267,19 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       ),
                     ),
-                  if (provider.userOffers == null ||
-                      provider.userOffers?.offers == null ||
-                      provider.userOffers!.offers!.isEmpty)
+
+                    ///Offers Empty State
                     Visibility(
-                      visible: !provider.isLoadOffers,
+                      visible: !provider.isLoadOffers && (provider.userOffers == null ||
+                          provider.userOffers?.offers == null ||
+                          provider.userOffers!.offers!.isEmpty),
                       child: EmptyState(
                           txt: provider.isDriver
                               ? getTranslated("there_is_no_offers_now", context)
                               : getTranslated(
                                   "there_is_no_requests_now", context)),
                     ),
+
                   if (!provider.isLoadOffers &&
                       provider.userOffers != null &&
                       provider.userOffers?.offers != null &&
