@@ -61,7 +61,7 @@ class HomeUsers extends StatelessWidget {
                                 ? provider.homeUsersModel?.clients![index]
                                 : null,
                             driver: !provider.isDriver
-                                ? provider.homeUsersModel!.drivers![index]
+                                ? provider.homeUsersModel?.drivers![index]
                                 : null)),
           ),
         ],
