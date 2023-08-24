@@ -14,6 +14,8 @@ import '../../../components/empty_widget.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/map_widget.dart';
+import '../../../main_widgets/shimmer_widgets/map_widget_shimmer.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../main_widgets/week_days_widget.dart';
 import '../../../navigation/routes.dart';
@@ -151,6 +153,7 @@ class _UserProfileState extends State<UserProfile> {
                     withTitlePadding: true,
                     title: getTranslated("work_information", context),
                     children: [
+                      /// Selected Days in Week
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -176,6 +179,32 @@ class _UserProfileState extends State<UserProfile> {
                                   ?.first.endTime,
                         ),
                       ),
+
+                      /// Map View
+                      provider.isLoadProfile
+                          ? const MapWidgetShimmer(withClientName: false)
+                          : MapWidget(
+                              launchMap: false,
+                              showFullAddress: false,
+                              startPoint: provider.userProfileModel?.driver
+                                      ?.pickupLocation ??
+                                  provider
+                                      .userProfileModel?.client?.pickupLocation,
+                              endPoint: provider.userProfileModel?.driver
+                                      ?.dropOffLocation ??
+                                  provider.userProfileModel?.client
+                                      ?.dropOffLocation,
+                            ),
+
+                      ///Car Details
+                      Visibility(
+                        visible: (provider.isDriver ||
+                            (!provider.isDriver && widget.data["my_profile"])),
+                        child: FollowerDistanceWidget(
+                          isLoading: provider.isLoadFollowers,
+                          followers: provider.userFollowers,
+                        ),
+                      ),
                     ],
                   ),
 
@@ -189,12 +218,6 @@ class _UserProfileState extends State<UserProfile> {
                       carInfo: provider.userProfileModel?.driver?.carInfo,
                     ),
                   ),
-                  if (provider.isDriver ||
-                      (!provider.isDriver && widget.data["my_profile"]))
-                    FollowerDistanceWidget(
-                      isLoading: provider.isLoadFollowers,
-                      followers: provider.userFollowers,
-                    ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
