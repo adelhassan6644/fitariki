@@ -324,6 +324,7 @@
   "invalid_credentials": "بيانات الدخول غير صالحة",
   "call_emergency": "الاتصال بالطوارئ",
   "preview_clients": "معاينة ما يظهر للركاب",
-  "preview_drivers": "معاينة ما يظهر للسائقيين"
+  "preview_drivers": "معاينة ما يظهر للسائقيين",
+  "vehicle_arrival_approx": "وصول السيارة التقريبي"
 
 }

@@ -52,7 +52,7 @@ class EndPoints {
   static const String readNotification = 'notification/read';
   static const String deleteNotification = 'notification/delete';
   static const String paymentData = 'app/data';
-  static const String terms = '';
+  static const String runningTrips = "";
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';

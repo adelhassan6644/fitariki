@@ -2,6 +2,7 @@ import 'package:fitariki/features/auth/pages/change_password.dart';
 import 'package:fitariki/features/auth/pages/forget_password.dart';
 import 'package:fitariki/features/auth/pages/reset_password.dart';
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
+import 'package:fitariki/features/my_running_trips/page/my_running_trips_page.dart';
 import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
 import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
@@ -157,6 +158,9 @@ abstract class CustomNavigator {
         return _pageRoute(MyPendingTripDetails(
           id: settings.arguments as int,
         ));
+
+      case Routes.MY_RUNNING_TRIPS:
+        return _pageRoute(const MyRunningTripsPage());
 
       case Routes.PAYMENT:
         {

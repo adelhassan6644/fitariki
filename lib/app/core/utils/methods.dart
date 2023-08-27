@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 abstract class Methods {
+
+  static int getHashCode(DateTime key) {
+    return key.day * 1000000 + key.month * 10000 + key.year;
+  }
+
   static diffBtw2Dates({
     required DateTime startDate,
     required DateTime endDate,
