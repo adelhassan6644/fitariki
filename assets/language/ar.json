@@ -339,6 +339,7 @@
   "missed_a_ride": "تغيب عن مشوار",
   "arrive": "وصلت",
   "start_ride": "بدأ المشوار",
-  "end_ride": "انهاء المشوار"
+  "end_ride": "انهاء المشوار",
+  "there_is_no_rides_on_this_day": "لا يوجد مشاوير في هذا اليوم"
 
 }

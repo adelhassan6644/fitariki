@@ -1,9 +1,8 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/components/custom_images.dart';
+import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
@@ -11,8 +10,8 @@ import '../../../components/address_pointer_widget.dart';
 import 'cancel_ride_pop_up_button.dart';
 
 class RideCard extends StatelessWidget {
-  const RideCard({Key? key, required this.status}) : super(key: key);
-  final String status;
+  const RideCard({Key? key, required this.ride}) : super(key: key);
+  final MyRideModel ride;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,9 @@ class RideCard extends StatelessWidget {
             ],
             gradient: LinearGradient(colors: [
               Styles.WHITE_COLOR,
-              status == "confirmed" ? Styles.ACTIVE : Styles.PENDING
+              (ride.cancelByClient! || ride.cancelByDriver!)
+                  ? Styles.PENDING
+                  : Styles.ACTIVE
             ], stops: const [
               0.98,
               0.98
@@ -51,12 +52,21 @@ class RideCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "#_مشوارـ${4}",
+                          "#_مشوارـ${ride.number}",
                           style: AppTextStyles.w600
                               .copyWith(fontSize: 14, color: Styles.ACTIVE),
                         ),
                       ),
-                      const CancelPopUpButton()
+                      Visibility(
+                        visible:
+                            (!ride.cancelByClient! || !ride.cancelByDriver!),
+                        child: CancelPopUpButton(
+                          id: ride.id ?? 0,
+                          number: ride.number ?? 0,
+                          name: ride.name ?? "name",
+                          startAt: ride.startedAt!,
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -70,7 +80,7 @@ class RideCard extends StatelessWidget {
                         children: [
                           TextSpan(
                             text:
-                                "  ${DateTime.now().dateFormat(format: "hh:mm a")}",
+                                "  ${ride.arrivedAt?.dateFormat(format: "hh:mm a")}",
                             style: AppTextStyles.w700.copyWith(
                                 fontSize: 14, color: Styles.PRIMARY_COLOR),
                           )
@@ -79,11 +89,12 @@ class RideCard extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  const AddressPointerWidget(
-                    address: [
+                  AddressPointerWidget(
+                    address: const [
                       "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
                       "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
                     ],
+                    isCancel: (ride.cancelByClient! || ride.cancelByDriver!),
                   ),
                 ],
               ),

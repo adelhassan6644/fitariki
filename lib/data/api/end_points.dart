@@ -1,3 +1,5 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
+
 class EndPoints {
   static const String baseUrl = 'https://test.fitariki.com/api/v1/';
   static const String googleMapsBaseUrl = 'https://maps.googleapis.com';
@@ -20,7 +22,7 @@ class EndPoints {
   static const String listOffers = 'offer/listOffers';
   static homeUsers(role, userType) => '$role/$userType/${userType}_list';
   static homeOffers(role) => '$role/offer/list_available';
-  static homeRides(role,id) => '$role/home/rides/$id';
+  static homeRides(role, id) => '$role/reservation/hasCurrent/$id';
   static const String availableOffers = '';
   static myOffers(role, id) => '$role/offer/listOffers/$id';
 
@@ -53,7 +55,9 @@ class EndPoints {
   static const String readNotification = 'notification/read';
   static const String deleteNotification = 'notification/delete';
   static const String paymentData = 'app/data';
-  static const String runningTrips = "";
+  static dayRides(role, type, id) => "$role/reservation/day${type}Trips/$id";
+  static cancelTrip(String role, id) =>
+      "$role/reservation/cancelTripBy${role.capitalize()}/$id";
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';

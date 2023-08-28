@@ -59,8 +59,7 @@ class HomeRepo {
     }
   }
 
-
-  Future<Either<ServerFailure, Response>> getHomeRides() async {
+  Future<Either<ServerFailure, Response>> checkRunningTrips() async {
     try {
       Response response = await dioClient.get(
         uri: EndPoints.homeRides(

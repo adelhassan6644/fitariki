@@ -57,15 +57,15 @@ class _DashBoardState extends State<DashBoard> {
   init() {
     sl<HomeProvider>().getOffers();
     sl<HomeProvider>().getUsers();
-    sl<HomeProvider>().getHomeRides();
+    sl<HomeProvider>().checkRunningTrips();
 
-    if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
-      Provider.of<ProfileProvider>(context, listen: false).getProfile();
-      Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
-      Provider.of<WishlistProvider>(context, listen: false).getWishList();
-      Provider.of<MyTripsProvider>(context, listen: false).getCurrentTrips();
-      Provider.of<MyTripsProvider>(context, listen: false).getPreviousTrips();
-      Provider.of<MyTripsProvider>(context, listen: false).getPendingTrips();
+    if (sl<ProfileProvider>().isLogin) {
+      sl<ProfileProvider>().getProfile();
+      sl<MyOffersProvider>().getMyOffers();
+      sl<WishlistProvider>().getWishList();
+      sl<MyTripsProvider>().getCurrentTrips();
+      sl<MyTripsProvider>().getPreviousTrips();
+      sl<MyTripsProvider>().getPendingTrips();
     }
   }
 

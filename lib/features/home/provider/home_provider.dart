@@ -109,12 +109,19 @@ class HomeProvider extends ChangeNotifier {
                       "${homeRepo.getRole()}_id": homeRepo.getUserId(),
                   },
                 });
-      response.fold((l) => null, (response) {
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: l.error,
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (response) {
         offer = List<OfferModel>.from(response.data["data"]["offers"]!
             .map((x) => OfferModel.fromJson(x)));
-        isLoading = false;
-        notifyListeners();
       });
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -159,37 +166,38 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  bool isLoadingRunningRides = false;
+  bool isCheck = false;
   bool hasRides = false;
-  getHomeRides() async {
-    if(isLogin) {
+  checkRunningTrips() async {
+    if (isLogin) {
       try {
-      isLoadingRunningRides = true;
-      notifyListeners();
+        isCheck = true;
+        notifyListeners();
 
-      Either<ServerFailure, Response> response = await homeRepo.getHomeRides();
-      response.fold((l) {
+        Either<ServerFailure, Response> response =
+            await homeRepo.checkRunningTrips();
+        response.fold((l) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: l.error,
+                  isFloating: true,
+                  backgroundColor: Styles.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+        }, (success) {
+          hasRides = success.data["data"];
+        });
+        isCheck = false;
+        notifyListeners();
+      } catch (e) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: l.error,
+                message: ApiErrorHandler.getMessage(e),
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-      }, (success) {
-        hasRides =success.data["data"];
-      });
-      isLoadingRunningRides = false;
-      notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoadingRunningRides = false;
-      notifyListeners();
-    }
+        isCheck = false;
+        notifyListeners();
+      }
     }
   }
 }

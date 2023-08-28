@@ -1,3 +1,4 @@
+import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../app/core/utils/color_resources.dart';
@@ -6,9 +7,9 @@ import '../app/core/utils/text_styles.dart';
 import 'custom_images.dart';
 
 class AddressPointerWidget extends StatelessWidget {
-  const AddressPointerWidget({super.key, required this.address, this.status});
+  const AddressPointerWidget({super.key, required this.address, this.isCancel});
   final List<String> address;
-  final String? status;
+  final bool? isCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class AddressPointerWidget extends StatelessWidget {
       children: List.generate(
           address.length,
           (index) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,20 +37,24 @@ class AddressPointerWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      status != null
+
+                      ///Status
+                      address.length - 1 == index
                           ? Container(
                               padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                color: status == "confirmed"
-                                    ? Styles.ACTIVE.withOpacity(0.1)
-                                    : Styles.PENDING.withOpacity(0.1),
+                                color: isCancel == true
+                                    ? Styles.PENDING.withOpacity(0.1)
+                                    : Styles.ACTIVE.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Text(
-                                status ?? "",
+                                getTranslated(
+                                    isCancel == false ? "confirmed" : "absent",
+                                    context),
                                 style: AppTextStyles.w400.copyWith(
                                     fontSize: 10,
-                                    color: status == "confirmed"
+                                    color: isCancel == true
                                         ? Styles.ACTIVE
                                         : Styles.PENDING),
                               ),

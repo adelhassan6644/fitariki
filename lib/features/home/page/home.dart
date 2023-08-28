@@ -44,7 +44,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
               color: Styles.PRIMARY_COLOR,
               triggerMode: RefreshIndicatorTriggerMode.anywhere,
               onRefresh: () async {
-                provider.getHomeRides();
+                provider.checkRunningTrips();
                 provider.getOffers();
                 provider.getUsers();
               },

@@ -336,5 +336,6 @@
   "arrive": "Arrive",
   "start_ride": "Start Ride",
   "end_ride": "End Ride",
+  "there_is_no_rides_on_this_day": "There is no rides on this day",
   "emergency_header": "Features that help you feel safe on your journey."
 }
