@@ -70,5 +70,6 @@ class SvgImages {
   static const String withdraw = 'assets/svgs/withdraw.svg';
   static const String delete = 'assets/svgs/delete.svg';
   static const String dayInCalenderIcon = 'assets/svgs/day_in_calender.svg';
+  static const String dotIcon = 'assets/svgs/dot.svg';
   static const String runningTrips = 'assets/svgs/running_trips.svg';
 }

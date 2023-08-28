@@ -322,7 +322,8 @@
   "invalid_credentials": "Invalid Credentials",
   "call_emergency": "Call Emergency",
   "preview_clients": "Preview what appears to passengers",
-  "preview_drivers": "Preview what appears to drivers",
   "running_trips": "Running Trips",
   "monitor_your_rides_in_one_place": "Monitor your rides in one place !"
+  "preview_drivers": "Preview what appears to drivers",
+  "vehicle_arrival_approx": "Vehicle arrival approx"
 }

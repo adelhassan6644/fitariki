@@ -8,6 +8,7 @@ import '../features/wishlist/widgets/save_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final String? subTitle;
   final Widget? actionChild;
   final bool withCart;
   final bool withBack;
@@ -16,10 +17,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withBackGround;
   final bool isOffer;
   final double actionWidth;
+  final double appBarHeight;
 
   const CustomAppBar(
       {Key? key,
       this.title,
+      this.subTitle,
       this.withCart = false,
       this.savedItemId,
       this.withBackGround = true,
@@ -27,6 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.withBack = true,
       this.isOffer = true,
       this.actionWidth =30,
+      this.appBarHeight =50,
       this.actionChild})
       : super(key: key);
 
@@ -67,10 +71,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 18,
                       ),
               const Expanded(child: SizedBox()),
-              Text(
-                title ?? "",
-                style: AppTextStyles.w600
-                    .copyWith(color: Colors.black, fontSize: 13),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title ?? "",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.w600
+                        .copyWith(color: Colors.black, fontSize: 13),
+                  ),
+                  Visibility(
+                    visible: subTitle != null,
+                    child: Text(
+                      subTitle ?? "",
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.w400
+                          .copyWith(color:Styles.HINT_COLOR, fontSize: 11),
+                    ),
+                  ),
+                ],
               ),
               const Expanded(child: SizedBox()),
               withBack
@@ -107,5 +127,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size(15005, 50);
+  Size get preferredSize =>  Size(15005, appBarHeight);
 }
