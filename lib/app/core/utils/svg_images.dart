@@ -17,6 +17,7 @@ class SvgImages {
   static const String bookMark = 'assets/svgs/book_mark.svg';
   static const String location = 'assets/svgs/location.svg';
   static const String calendar = 'assets/svgs/calendar.svg';
+  static const String homeCalendar = 'assets/svgs/home_calender.svg';
   static const String wallet = 'assets/svgs/wallet.svg';
   static const String roadLine = 'assets/svgs/road_line.svg';
   static const String carPlate = 'assets/svgs/car_plate.svg';
@@ -69,4 +70,5 @@ class SvgImages {
   static const String withdraw = 'assets/svgs/withdraw.svg';
   static const String delete = 'assets/svgs/delete.svg';
   static const String dayInCalenderIcon = 'assets/svgs/day_in_calender.svg';
+  static const String runningTrips = 'assets/svgs/running_trips.svg';
 }

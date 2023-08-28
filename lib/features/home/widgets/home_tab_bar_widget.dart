@@ -44,7 +44,9 @@ class HomeTabBarWidget extends StatelessWidget {
                           Expanded(
                             child: TabWidget(
                                 title: getTranslated(
-                                    provider.isDriver ? "passengers" : "captains",
+                                    provider.isDriver
+                                        ? "passengers"
+                                        : "captains",
                                     context),
                                 isSelected: 1 == provider.tab,
                                 onTab: () => provider.onSelectTab(1)),
@@ -62,7 +64,9 @@ class HomeTabBarWidget extends StatelessWidget {
                   hoverColor: Colors.transparent,
                   onTap: () => customShowModelBottomSheet(
                       body: const FilterBottomSheet(),
-                      onClose: () => Provider.of<HomeProvider>(context, listen: false).reset()),
+                      onClose: () =>
+                          Provider.of<HomeProvider>(context, listen: false)
+                              .reset()),
                   child: Container(
                       height: 32,
                       decoration: BoxDecoration(

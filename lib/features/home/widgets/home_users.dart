@@ -28,13 +28,17 @@ class HomeUsers extends StatelessWidget {
           ),
           Column(
             children: provider.isGetting
-                ? List.generate(!provider.isLogin ? 2 : 7,
-                    (index) =>  ShimmerFavouriteUserCard(withSaveButton: false,))
+                ? List.generate(
+                    provider.isLogin ? 5 : 2,
+                    (index) =>
+                        const ShimmerFavouriteUserCard(withSaveButton: false))
                 : provider.homeUsersModel == null ||
                         (provider.homeUsersModel!.clients!.isEmpty &&
                             provider.homeUsersModel!.drivers!.isEmpty)
                     ? [
                         EmptyState(
+                          emptyHeight: 250,
+                          spaceBtw: 15,
                           txt: getTranslated(
                               provider.isDriver
                                   ? "there_is_no_clients"

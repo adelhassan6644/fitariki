@@ -27,10 +27,12 @@ class HomeOffers extends StatelessWidget {
           ),
           Column(
             children: homeProvider.isLoading
-                ? List.generate(2, (index) => const ShimmerOfferCard())
+                ? List.generate( homeProvider.isLogin? 5:2, (index) => const ShimmerOfferCard())
                 : homeProvider.offer == null || homeProvider.offer!.isEmpty
                     ? [
                         EmptyState(
+                          emptyHeight: 250,
+                           spaceBtw: 15,
                           txt: getTranslated(
                               "there_is_no_delivery_requests_or_delivery_offers",
                               context),
