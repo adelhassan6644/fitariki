@@ -329,10 +329,16 @@
   "running_trips": "رحلاتك الجارية",
   "monitor_your_rides_in_one_place": "راقب مشاويرك في مكان واحد!",
   "yes": "نعم",
+  "call": "اتصال",
   "the_day": "اليوم",
   "absent": "غياب",
   "confirmed": "مؤكد",
   "cancelled": "ملغي",
-  "missed_a_ride": "تغيب عن مشوار"
+  "emergency": "طوارئ",
+  "emergency_header": "مزايا تساعدك على الشعور بالأمان في مشوارك.",
+  "missed_a_ride": "تغيب عن مشوار",
+  "arrive": "وصلت",
+  "start_ride": "بدأ المشوار",
+  "end_ride": "انهاء المشوار"
 
 }

@@ -328,7 +328,13 @@
   "vehicle_arrival_approx": "Vehicle arrival approx",
   "yes": "yes",
   "confirmed": "Confirmed",
+  "call": "Call",
   "the_day": "Day",
   "absent": "Absent",
-  "missed_a_ride": "Missed a ride"
+  "missed_a_ride": "Missed a ride",
+  "emergency": "Emergency",
+  "arrive": "Arrive",
+  "start_ride": "Start Ride",
+  "end_ride": "End Ride",
+  "emergency_header": "Features that help you feel safe on your journey."
 }

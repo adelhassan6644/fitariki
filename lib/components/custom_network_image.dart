@@ -2,6 +2,8 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../app/core/utils/images.dart';
+import '../app/core/utils/color_resources.dart';
+import '../app/core/utils/text_styles.dart';
 import '../data/api/end_points.dart';
 
 class CustomNetworkImage {
@@ -28,7 +30,7 @@ class CustomNetworkImage {
       Widget? imageWidget,
       bool edges = false}) {
     return CachedNetworkImage(
-      imageUrl: EndPoints.imageUrl+image,
+      imageUrl: EndPoints.imageUrl + image,
       fadeInDuration: const Duration(seconds: 1),
       fadeOutDuration: const Duration(seconds: 1),
       errorWidget: (a, b, c) => Container(
@@ -47,7 +49,6 @@ class CustomNetworkImage {
               fit: fit ?? BoxFit.cover,
             ).image,
           ),
-
         ),
         padding: padding,
         child: imageWidget,
@@ -58,12 +59,12 @@ class CustomNetworkImage {
                 width: width ?? 40,
                 height: height ?? 40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(radius ??15.w),
+                  borderRadius: BorderRadius.circular(radius ?? 15.w),
                   image: DecorationImage(
                     fit: fit ?? BoxFit.cover,
                     image: Image.asset(
                       defaultImage ?? Images.logo,
-                      fit: fit??BoxFit.cover,
+                      fit: fit ?? BoxFit.cover,
                     ).image,
                   ),
                 ),
@@ -93,56 +94,82 @@ class CustomNetworkImage {
   /// Circle Network Image
   static Widget circleNewWorkImage(
       {String? image,
+      String? label,
       double? radius,
       String? defaultImage,
       bool isDefaultSvg = true,
       backGroundColor,
       color}) {
-    return CachedNetworkImage(
-      imageUrl: image == "" || image == null ? "https://" :EndPoints.imageUrl + image,
-      repeat: ImageRepeat.noRepeat,
-      errorWidget: (a, c, b) => Container(
-        height: radius! * 2,
-        width: radius * 2,
-        padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-            border: color != null ? Border.all(color: color, width: 1) : null,
-            shape: BoxShape.circle),
-        child: CircleAvatar(
-          radius: radius,
-          backgroundColor: backGroundColor ?? Colors.white,
-          child: Image.asset(Images.logo),
-        ),
-      ),
-      fadeInDuration: const Duration(seconds: 1),
-      fadeOutDuration: const Duration(seconds: 2),
-      placeholder: (context, url) =>Container(
-        height: radius! * 2,
-        width: radius * 2,
-        padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-            border: color != null ? Border.all(color: color, width: 1) : null,
-            shape: BoxShape.circle),
-        child: CircleAvatar(
-          radius: radius,
-          backgroundColor: backGroundColor ?? Colors.white,
-          child: Image.asset(Images.logo),
-        ),
-      ),
-      imageBuilder: (context, provider) {
-        return Container(
-          height: radius! * 2,
-          width: radius * 2,
-          decoration: BoxDecoration(
-              border: color != null ? Border.all(color: color, width: 1) : null,
-              shape: BoxShape.circle),
-          child: CircleAvatar(
-            backgroundImage: provider,
-            radius: radius,
-            backgroundColor: backGroundColor ?? Colors.white,
+    return Column(
+      children: [
+        CachedNetworkImage(
+          imageUrl: image == "" || image == null
+              ? "https://"
+              : EndPoints.imageUrl + image,
+          repeat: ImageRepeat.noRepeat,
+          errorWidget: (a, c, b) => Container(
+            height: radius! * 2,
+            width: radius * 2,
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+                border:
+                    color != null ? Border.all(color: color, width: 1) : null,
+                shape: BoxShape.circle),
+            child: CircleAvatar(
+              radius: radius,
+              backgroundColor: backGroundColor ?? Colors.white,
+              child: Image.asset(Images.logo),
+            ),
           ),
-        );
-      },
+          fadeInDuration: const Duration(seconds: 1),
+          fadeOutDuration: const Duration(seconds: 2),
+          placeholder: (context, url) => Container(
+            height: radius! * 2,
+            width: radius * 2,
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+                border:
+                    color != null ? Border.all(color: color, width: 1) : null,
+                shape: BoxShape.circle),
+            child: CircleAvatar(
+              radius: radius,
+              backgroundColor: backGroundColor ?? Colors.white,
+              child: Image.asset(Images.logo),
+            ),
+          ),
+          imageBuilder: (context, provider) {
+            return Container(
+              height: radius! * 2,
+              width: radius * 2,
+              decoration: BoxDecoration(
+                  border:
+                      color != null ? Border.all(color: color, width: 1) : null,
+                  shape: BoxShape.circle),
+              child: CircleAvatar(
+                backgroundImage: provider,
+                radius: radius,
+                backgroundColor: backGroundColor ?? Colors.white,
+              ),
+            );
+          },
+        ),
+        Visibility(
+          visible: label != null,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 4.h,
+              ),
+              Text(
+                label ?? "",
+                style: AppTextStyles.w400
+                    .copyWith(color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 10),
+                overflow: TextOverflow.ellipsis,
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 

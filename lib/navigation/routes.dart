@@ -33,5 +33,6 @@ class Routes {
   static const RATE_TRIP = "RATE_TRIP";
   static const PDF = "PDF";
   static const TRANSACTIONS = "TRANSACTIONS";
+  static const RIDE_TRACKING = "RIDE_TRACKING";
   static const TERMS_AND_CONDITIONS = "TERMS_AND_CONDITIONS";
 }

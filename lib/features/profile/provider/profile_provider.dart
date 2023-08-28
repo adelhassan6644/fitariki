@@ -12,16 +12,11 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/svg_images.dart';
 import '../../../components/loading_dialog.dart';
-import '../../../data/config/di.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/routes.dart';
-import '../../home/provider/home_provider.dart';
 import '../../maps/models/location_model.dart';
-import '../../my_offers/provider/my_offers_provider.dart';
-import '../../my_trips/provider/my_trips_provider.dart';
 import '../../post_offer/provider/post_offer_provider.dart';
-import '../../wishlist/provider/wishlist_provider.dart';
 import '../model/country_model.dart';
 import '../model/profile_model.dart';
 import '../repo/profile_repo.dart';
@@ -665,17 +660,10 @@ class ProfileProvider extends ChangeNotifier {
           notifyListeners();
         }, (response) {
           if (fromRegister) {
-            sl<HomeProvider>().getUsers();
-            sl<HomeProvider>().getOffers();
-            sl<MyOffersProvider>().getMyOffers();
-            sl<WishlistProvider>().getWishList();
-            sl<MyTripsProvider>().getCurrentTrips();
-            sl<MyTripsProvider>().getPreviousTrips();
-            sl<MyTripsProvider>().getPendingTrips();
             profileRepo.setLoggedIn();
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {
-            CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
+            CustomNavigator.pop();
           }
           CustomSnackBar.showSnackBar(
               notification: AppNotification(

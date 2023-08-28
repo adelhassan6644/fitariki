@@ -239,4 +239,5 @@ class _PickMapScreenState extends State<PickMapScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
+
 }

@@ -7,6 +7,7 @@ import 'package:fitariki/components/custom_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/color_resources.dart';
+import '../../../components/address_pointer_widget.dart';
 import 'cancel_ride_pop_up_button.dart';
 
 class RideCard extends StatelessWidget {
@@ -50,7 +51,7 @@ class RideCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "#_مشوارـ٤",
+                          "#_مشوارـ${4}",
                           style: AppTextStyles.w600
                               .copyWith(fontSize: 14, color: Styles.ACTIVE),
                         ),
@@ -78,23 +79,11 @@ class RideCard extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  const _AddressWidget(
-                    address:
-                        "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-                    child: Container(
-                      height: 12,
-                      width: 2,
-                      color: Styles.HINT_COLOR,
-                    ),
-                  ),
-                  _AddressWidget(
-                    address:
-                        "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
-                    status: getTranslated(status, context),
+                  const AddressPointerWidget(
+                    address: [
+                      "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
+                      "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
+                    ],
                   ),
                 ],
               ),
@@ -102,56 +91,6 @@ class RideCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _AddressWidget extends StatelessWidget {
-  const _AddressWidget({super.key, required this.address, this.status});
-  final String address;
-  final String? status;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        customImageIconSVG(imageName: SvgImages.dotIcon, width: 10, height: 10),
-        const SizedBox(width: 4),
-        Expanded(
-          child: Text(
-            address,
-            style: AppTextStyles.w400.copyWith(
-                fontSize: 10,
-                overflow: TextOverflow.ellipsis,
-                height: 1.4,
-                color: Styles.DISABLED),
-          ),
-        ),
-        const SizedBox(width: 8),
-        status != null
-            ? Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: status == "confirmed"
-                      ? Styles.ACTIVE.withOpacity(0.1)
-                      : Styles.PENDING.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  status ?? "",
-                  style: AppTextStyles.w400.copyWith(
-                      fontSize: 10,
-                      color: status == "confirmed"
-                          ? Styles.ACTIVE
-                          : Styles.PENDING),
-                ),
-              )
-            : const SizedBox(
-                width: 35,
-              ),
-      ],
     );
   }
 }

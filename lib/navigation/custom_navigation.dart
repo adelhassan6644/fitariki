@@ -2,12 +2,13 @@ import 'package:fitariki/features/auth/pages/change_password.dart';
 import 'package:fitariki/features/auth/pages/forget_password.dart';
 import 'package:fitariki/features/auth/pages/reset_password.dart';
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
-import 'package:fitariki/features/my_running_trips/page/my_running_trips_page.dart';
+import 'package:fitariki/features/my_rides/page/my_rides_page.dart';
 import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
 import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/feedback/page/rate_trip.dart';
+import 'package:fitariki/features/tracking/page/tracking_page.dart';
 import 'package:fitariki/features/terms_and_conditions/view/terms_view.dart';
 import 'package:fitariki/features/transactions/page/transactions_page.dart';
 import 'package:fitariki/features/user_profile/page/all_user_offers.dart';
@@ -160,7 +161,10 @@ abstract class CustomNavigator {
         ));
 
       case Routes.MY_RUNNING_TRIPS:
-        return _pageRoute(const MyRunningTripsPage());
+        return _pageRoute(const MyRidesPage());
+
+      case Routes.RIDE_TRACKING:
+        return _pageRoute(const TrackingPage());
 
       case Routes.PAYMENT:
         {

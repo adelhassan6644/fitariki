@@ -47,10 +47,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   child: Row(
                     children: [
                       customCircleSvgIcon(
-                          imageName: SvgImages.location,
-                          color: Styles.WHITE_COLOR,
-                          width: 40,
-                          height: 40),
+                        imageName: SvgImages.location,
+                        color: Styles.WHITE_COLOR,
+                        radius: 20,
+                      ),
                       const SizedBox(
                         width: 16,
                       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../repo/my_running_trips_repo.dart';
+import '../repo/my_rides_repo.dart';
 
-class MyRunningTripsProvider extends ChangeNotifier {
-  MyRunningTripsRepo repo;
-  MyRunningTripsProvider({required this.repo});
+class MyRidesProvider extends ChangeNotifier {
+  MyRidesRepo repo;
+  MyRidesProvider({required this.repo});
 
   int tab = 0;
   List<String> tabs = ["go", "back"];

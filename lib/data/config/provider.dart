@@ -14,7 +14,7 @@ import '../../features/followers/follower_details/provider/follower_details_prov
 import '../../features/followers/followers/provider/followers_provider.dart';
 import '../../features/home/provider/home_provider.dart';
 import '../../features/my_offers/provider/my_offers_provider.dart';
-import '../../features/my_running_trips/provider/my_running_trips_provider.dart';
+import '../../features/my_rides/provider/my_rides_provider.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/notifications/provider/notifications_provider.dart';
 import '../../features/payment/provider/payment_provider.dart';
@@ -25,6 +25,7 @@ import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/splash/provider/splash_provider.dart';
 import '../../features/terms_and_conditions/provider/terms_provider.dart';
+import '../../features/tracking/provider/tracking_provider.dart';
 import '../../features/transactions/provider/transactions_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
@@ -53,9 +54,10 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<NotificationsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FollowersProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<MyOffersProvider>()),
-    ChangeNotifierProvider(create: (_) => di.sl<MyRunningTripsProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<MyRidesProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<RequestDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<PaymentProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<TrackingProvider>()),
     // ChangeNotifierProvider(create: (_) => di.sl<OfferDetailsProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ContactProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<TransactionsProvider>()),

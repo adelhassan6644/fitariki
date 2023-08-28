@@ -111,16 +111,17 @@ class AuthProvider extends ChangeNotifier {
               clean: true, arguments: true);
         } else {
           clear();
-          sl<HomeProvider>().getUsers();
-          sl<HomeProvider>().getOffers();
-          sl<MyOffersProvider>().getMyOffers();
-          sl<WishlistProvider>().getWishList();
-          sl<MyTripsProvider>().getCurrentTrips();
-          sl<MyTripsProvider>().getPreviousTrips();
-          sl<MyTripsProvider>().getPendingTrips();
-          sl<ProfileProvider>().getProfile();
-          CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
+          // sl<HomeProvider>().getUsers();
+          // sl<HomeProvider>().getOffers();
+          // sl<HomeProvider>().getHomeRides();
+          // sl<MyOffersProvider>().getMyOffers();
+          // sl<WishlistProvider>().getWishList();
+          // sl<MyTripsProvider>().getCurrentTrips();
+          // sl<MyTripsProvider>().getPreviousTrips();
+          // sl<MyTripsProvider>().getPendingTrips();
+          // sl<ProfileProvider>().getProfile();
           authRepo.setLoggedIn();
+          CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
         }
       });
       _isLoading = false;

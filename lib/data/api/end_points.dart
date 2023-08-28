@@ -20,6 +20,7 @@ class EndPoints {
   static const String listOffers = 'offer/listOffers';
   static homeUsers(role, userType) => '$role/$userType/${userType}_list';
   static homeOffers(role) => '$role/offer/list_available';
+  static homeRides(role,id) => '$role/home/rides/$id';
   static const String availableOffers = '';
   static myOffers(role, id) => '$role/offer/listOffers/$id';
 

@@ -158,4 +158,38 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  bool isLoadingRunningRides = false;
+  bool hasRides = false;
+  getHomeRides() async {
+    if(isLogin) {
+      try {
+      isLoadingRunningRides = true;
+      notifyListeners();
+
+      Either<ServerFailure, Response> response = await homeRepo.getHomeRides();
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: l.error,
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (success) {
+        hasRides =success.data["data"];
+      });
+      isLoadingRunningRides = false;
+      notifyListeners();
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: ApiErrorHandler.getMessage(e),
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isLoadingRunningRides = false;
+      notifyListeners();
+    }
+    }
+  }
 }

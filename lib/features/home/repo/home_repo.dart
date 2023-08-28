@@ -59,6 +59,24 @@ class HomeRepo {
     }
   }
 
+
+  Future<Either<ServerFailure, Response>> getHomeRides() async {
+    try {
+      Response response = await dioClient.get(
+        uri: EndPoints.homeRides(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client",
+            sharedPreferences.getString(AppStorageKey.userId)),
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
   bool isLoggedIn() {
     return sharedPreferences.containsKey(AppStorageKey.isLogin);
   }

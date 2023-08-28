@@ -23,8 +23,8 @@ import '../../features/home/provider/home_provider.dart';
 import '../../features/maps/repo/maps_repo.dart';
 import '../../features/my_offers/provider/my_offers_provider.dart';
 import '../../features/my_offers/repo/my_offers_repo.dart';
-import '../../features/my_running_trips/provider/my_running_trips_provider.dart';
-import '../../features/my_running_trips/repo/my_running_trips_repo.dart';
+import '../../features/my_rides/provider/my_rides_provider.dart';
+import '../../features/my_rides/repo/my_rides_repo.dart';
 import '../../features/my_trips/provider/my_trips_provider.dart';
 import '../../features/my_trips/repo/my_trips_repo.dart';
 import '../../features/notifications/provider/notifications_provider.dart';
@@ -43,6 +43,8 @@ import '../../features/request_details/repo/report_repo.dart';
 import '../../features/request_details/repo/request_details_repo.dart';
 import '../../features/terms_and_conditions/provider/terms_provider.dart';
 import '../../features/terms_and_conditions/repo/terms_repo.dart';
+import '../../features/tracking/provider/tracking_provider.dart';
+import '../../features/tracking/repo/tracking_repo.dart';
 import '../../features/transactions/provider/transactions_provider.dart';
 import '../../features/transactions/repo/transactions_repo.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
@@ -123,7 +125,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => TermsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => MyRunningTripsRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => MyRidesRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => TrackingRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));
@@ -143,7 +147,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddRequestProvider(addRequestRepo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
-  sl.registerLazySingleton(() => MyRunningTripsProvider(repo: sl()));
+  sl.registerLazySingleton(() => MyRidesProvider(repo: sl()));
+  sl.registerLazySingleton(() => TrackingProvider(repo: sl()));
   sl.registerLazySingleton(() => FollowerDetailsProvider(
         followerDetailsRepo: sl(),
       ));

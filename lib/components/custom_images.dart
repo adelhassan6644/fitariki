@@ -10,8 +10,7 @@ Widget customImageIcon(
     double? height,
     BoxFit fit = BoxFit.fill,
     color}) {
-  return
-  Image.asset(
+  return Image.asset(
     imageName,
     color: color,
     fit: BoxFit.fill,
@@ -21,13 +20,14 @@ Widget customImageIcon(
 }
 
 Widget customCircleSvgIcon(
-    {String? title,
+    {String? label,
     required String imageName,
     Function? onTap,
     color,
-    width,
-    height,
-    radius}) {
+    iconColor,
+    double? width,
+    double? height,
+    double? radius}) {
   return InkWell(
     onTap: () {
       onTap!();
@@ -36,39 +36,76 @@ Widget customCircleSvgIcon(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
-          backgroundColor: color ?? Styles.PRIMARY_COLOR.withOpacity(0.1),
+          backgroundColor: color ?? Styles.PRIMARY_COLOR.withOpacity(0.08),
           radius: radius ?? 24.w,
-          child: SvgPicture.asset(imageName,),
+          child: SvgPicture.asset(
+            imageName,
+            color: iconColor,
+            height: height,
+            width: width,
+          ),
         ),
         Visibility(
-          visible: title != null,
+          visible: label != null,
           child: Column(
             children: [
-               SizedBox(
+              SizedBox(
                 height: 4.h,
               ),
               Text(
-                title ?? "",
-                style: AppTextStyles.w500.copyWith(
-                    color: Styles.PRIMARY_COLOR,
-                     fontSize: 10),
+                label ?? "",
+                style: AppTextStyles.w400.copyWith(
+                    color: Styles.SECOUND_PRIMARY_COLOR, fontSize: 10),
                 overflow: TextOverflow.ellipsis,
               )
             ],
           ),
         ),
-
       ],
     ),
   );
 }
 
-
-Widget customImageIconSVG({required String imageName,Color? color,double? height,double? width}) {
+Widget customImageIconSVG(
+    {required String imageName, Color? color, double? height, double? width}) {
   return SvgPicture.asset(
     imageName,
     color: color,
-    height:height,
-    width:width ,
+    height: height,
+    width: width,
+  );
+}
+
+Widget customContainerSVG(
+    {required String imageName,
+    String? label,
+    Color? color,
+    double? height,
+    double? width}) {
+  return Column(
+    children: [
+      Container(
+        padding: const EdgeInsets.all(12),
+        decoration: const BoxDecoration(
+            shape: BoxShape.circle, color: Styles.LIGHT_GREY_BORDER),
+        child: SvgPicture.asset(
+          imageName,
+          color: color,
+          height: height,
+          width: width,
+        ),
+      ),
+      Visibility(
+        visible: label != null,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Text(
+            label ?? "",
+            style: AppTextStyles.w400
+                .copyWith(fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
+          ),
+        ),
+      ),
+    ],
   );
 }

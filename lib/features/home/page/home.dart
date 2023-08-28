@@ -7,7 +7,7 @@ import '../../../data/config/di.dart';
 import '../provider/home_provider.dart';
 import '../widgets/acceptable_widget.dart';
 import '../widgets/home_app_bar.dart';
-import '../widgets/home_running_trips_widget.dart';
+import '../widgets/home_running_rides_widget.dart';
 import '../widgets/home_offers.dart';
 import '../widgets/home_tab_bar_widget.dart';
 import '../widgets/home_users.dart';
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
       children: [
         const HomeAppBar(),
         const AcceptableWidget(),
-        const HomeRunningTripsWidget(),
+        const HomeRunningRidesWidget(),
         const RoleTypeWidget(),
         const HomeTabBarWidget(),
         Consumer<HomeProvider>(builder: (_, provider, child) {
@@ -44,6 +44,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
               color: Styles.PRIMARY_COLOR,
               triggerMode: RefreshIndicatorTriggerMode.anywhere,
               onRefresh: () async {
+                provider.getHomeRides();
                 provider.getOffers();
                 provider.getUsers();
               },

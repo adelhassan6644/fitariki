@@ -1,5 +1,4 @@
 import 'package:fitariki/app/core/utils/text_styles.dart';
-import 'package:fitariki/features/my_running_trips/provider/my_running_trips_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -8,13 +7,14 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/tab_widget.dart';
+import '../provider/my_rides_provider.dart';
 
-class MyRunningTripsHeader extends StatelessWidget {
-  const MyRunningTripsHeader({Key? key}) : super(key: key);
+class MyRidesHeader extends StatelessWidget {
+  const MyRidesHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyRunningTripsProvider>(
+    return Consumer<MyRidesProvider>(
         builder: (context, provider, child) {
       return Padding(
         padding:

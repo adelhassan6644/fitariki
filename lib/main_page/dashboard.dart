@@ -47,18 +47,9 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _selectedIndex = widget.index ?? 0;
-
+    init();
     NetworkInfo.checkConnectivity(onVisible: () {
-      sl<HomeProvider>().getOffers();
-      sl<HomeProvider>().getUsers();
-      if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
-        Provider.of<ProfileProvider>(context, listen: false).getProfile();
-        Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
-        Provider.of<WishlistProvider>(context, listen: false).getWishList();
-        Provider.of<MyTripsProvider>(context, listen: false).getCurrentTrips();
-        Provider.of<MyTripsProvider>(context, listen: false).getPreviousTrips();
-        Provider.of<MyTripsProvider>(context, listen: false).getPendingTrips();
-      }
+      init();
     });
     super.initState();
   }
@@ -66,6 +57,8 @@ class _DashBoardState extends State<DashBoard> {
   init() {
     sl<HomeProvider>().getOffers();
     sl<HomeProvider>().getUsers();
+    sl<HomeProvider>().getHomeRides();
+
     if (Provider.of<ProfileProvider>(context, listen: false).isLogin) {
       Provider.of<ProfileProvider>(context, listen: false).getProfile();
       Provider.of<MyOffersProvider>(context, listen: false).getMyOffers();
@@ -195,7 +188,8 @@ class _DashBoardState extends State<DashBoard> {
                   children: [
                     const Home(),
                     const MyTrips(),
-                    Visibility(visible: provider.isLogin, child: const MyOffers()),
+                    Visibility(
+                        visible: provider.isLogin, child: const MyOffers()),
                     const More()
                   ]),
             ),

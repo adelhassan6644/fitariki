@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/custom_app_bar.dart';
-import '../provider/my_running_trips_provider.dart';
-import '../widgets/my_running_trips_header.dart';
+import '../provider/my_rides_provider.dart';
+import '../widgets/my_rides_header.dart';
 import '../widgets/ride_card.dart';
 
-class MyRunningTripsPage extends StatelessWidget {
-  const MyRunningTripsPage({Key? key}) : super(key: key);
+class MyRidesPage extends StatelessWidget {
+  const MyRidesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyRunningTripsProvider>(
+    return Consumer<MyRidesProvider>(
         builder: (context, provider, child) {
       return Scaffold(
         appBar: CustomAppBar(
@@ -26,7 +26,7 @@ class MyRunningTripsPage extends StatelessWidget {
           top: false,
           child: Column(
             children: [
-              MyRunningTripsHeader(),
+              MyRidesHeader(),
               RideCard(
                 status: 'confirmed',
               ),
