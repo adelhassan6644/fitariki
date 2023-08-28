@@ -323,7 +323,12 @@
   "call_emergency": "Call Emergency",
   "preview_clients": "Preview what appears to passengers",
   "running_trips": "Running Trips",
-  "monitor_your_rides_in_one_place": "Monitor your rides in one place !"
+  "monitor_your_rides_in_one_place": "Monitor your rides in one place !",
   "preview_drivers": "Preview what appears to drivers",
-  "vehicle_arrival_approx": "Vehicle arrival approx"
+  "vehicle_arrival_approx": "Vehicle arrival approx",
+  "yes": "yes",
+  "confirmed": "Confirmed",
+  "the_day": "Day",
+  "absent": "Absent",
+  "missed_a_ride": "Missed a ride"
 }

@@ -6,9 +6,11 @@ import 'package:fitariki/components/custom_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/core/utils/dimensions.dart';
+import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 
-class HomeCurrentTripWidget extends StatelessWidget {
-  const HomeCurrentTripWidget({super.key});
+class HomeRunningTripsWidget extends StatelessWidget {
+  const HomeRunningTripsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,9 @@ class HomeCurrentTripWidget extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(Dimensions.PADDING_SIZE_DEFAULT, 0,
           Dimensions.PADDING_SIZE_DEFAULT, 14),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          CustomNavigator.push(Routes.MY_RUNNING_TRIPS);
+        },
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,

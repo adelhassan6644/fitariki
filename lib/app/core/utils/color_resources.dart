@@ -14,7 +14,6 @@ abstract class Styles {
   static const Color ACCENT_PRIMARY_COLOR = Color(0xffF7F1FC);
   static const Color ACTIVE = Color(0xff209370);
   static const Color IN_ACTIVE = Color(0xFFDB5353);
-  static const Color PENDING = Color(0xFFA6840A);
   static const Color PLACE_HOLDER = Color(0xFF7F8B93);
   static const Color FILL_COLOR = Color(0xFFFFFFFF);
   static const Color PROGRASS_BACKGROUND = Color(0xffE7E7E7);
@@ -26,6 +25,7 @@ abstract class Styles {
   static const Color LIGHT_GREY_BORDER = Color(0xffF3F3F3);
   static const Color LIGHT_BORDER_COLOR = Color(0xffE8ECF4);
   static const Color ALERT_COLOR = Color(0xffDBAB02);
+  static const Color PENDING = Color(0xffFFB340);
   static const Color FAILED_COLOR = Color(0xffE61D27);
   static const Color RED_COLOR = Color(0xffFF3B30);
   static const Color TITLE = Color(0xFF000000);

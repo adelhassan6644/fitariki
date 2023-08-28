@@ -60,36 +60,42 @@ class MyRunningTripsHeader extends StatelessWidget {
                   weekendDays: const [],
                   availableGestures: AvailableGestures.horizontalSwipe,
                   calendarStyle: CalendarStyle(
-                      outsideDaysVisible: false,
-                      rangeEndDecoration:BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      rangeStartDecoration:BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      markerDecoration: BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      cellPadding: const EdgeInsets.all(8),
-                      todayDecoration: BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      todayTextStyle: AppTextStyles.w400
-                          .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
-                      selectedDecoration: BoxDecoration(
-                          color: Styles.PRIMARY_COLOR,
-                          borderRadius: BorderRadius.circular(8)),
-                      defaultDecoration: BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      defaultTextStyle: AppTextStyles.w400
-                          .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
-                      disabledDecoration: BoxDecoration(
-                          color: Styles.LIGHT_GREY_BORDER,
-                          borderRadius: BorderRadius.circular(8)),
-                      disabledTextStyle: AppTextStyles.w400
-                          .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
-
+                    outsideDaysVisible: false,
+                    cellAlignment: Alignment.center,
+                    cellMargin: const EdgeInsets.all(4),
+                    rangeEndDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    rangeStartDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    markerDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    cellPadding: const EdgeInsets.all(4),
+                    outsideDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    outsideTextStyle: AppTextStyles.w400
+                        .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
+                    todayDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    todayTextStyle: AppTextStyles.w400
+                        .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
+                    selectedDecoration: BoxDecoration(
+                        color: Styles.PRIMARY_COLOR,
+                        borderRadius: BorderRadius.circular(8)),
+                    defaultDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    defaultTextStyle: AppTextStyles.w400
+                        .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
+                    disabledDecoration: BoxDecoration(
+                        color: Styles.LIGHT_GREY_BORDER,
+                        borderRadius: BorderRadius.circular(8)),
+                    disabledTextStyle: AppTextStyles.w400
+                        .copyWith(fontSize: 12, color: Styles.DETAILS_COLOR),
                   ),
                   onDaySelected: (v1, v2) => provider.onDaySelected(v1, v2),
                   onFormatChanged: provider.onChangeFormat,
