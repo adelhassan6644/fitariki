@@ -52,6 +52,5 @@ class AppStrings {
       id: 5,
       dayName: "الجمعة",
     ),
-
   ];
 }

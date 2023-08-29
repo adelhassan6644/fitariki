@@ -92,6 +92,7 @@ class _MyRidesPageState extends State<MyRidesPage> {
                                         provider.rides.length,
                                         (index) => RideCard(
                                               ride: provider.rides[index],
+                                          isDriver: provider.isDriver,
                                             )),
                           ),
                         ),

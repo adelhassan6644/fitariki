@@ -44,4 +44,17 @@ abstract class Styles {
       return WHITE_COLOR;
     }
   }
+
+  static rideStatus(status) {
+    if (status == 0 || status == 1) {
+      return Styles.ACTIVE;
+    } else if (status == 2) {
+      return Styles.PRIMARY_COLOR;
+    } else if (status == 3) {
+      return Styles.PENDING;
+    } else {
+      return Styles.ACTIVE;
+    }
+  }
+
 }

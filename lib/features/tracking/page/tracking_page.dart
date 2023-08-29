@@ -15,6 +15,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/address_pointer_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
+import '../../my_rides/widgets/ride_locations_widget.dart';
 import '../widget/car_details_widget.dart';
 import '../widget/rider_details_widget.dart';
 
@@ -128,11 +129,11 @@ class _TrackingPageState extends State<TrackingPage> {
                               padding: EdgeInsets.symmetric(
                                   horizontal:
                                       Dimensions.PADDING_SIZE_DEFAULT.w),
-                              child: const AddressPointerWidget(
-                                address: [
-                                  "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
-                                  "طريق بدون اسم، مطار.shgwsgwsgtwsgtwsggewswsgwws..٤",
-                                ],
+                              child:  RideLocationsWidget(
+                                followerAddresses: [],
+                                isDriver:provider.isDriver,
+                                // pickLocation: ride.pickupLocation,
+                                // dropOffLocation: ride.dropOffLocation,
                               ),
                             ),
                             const Expanded(child: SizedBox()),
