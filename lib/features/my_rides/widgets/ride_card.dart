@@ -23,7 +23,7 @@ class RideCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
-        onTap: (){
+        onTap: () {
           CustomNavigator.push(Routes.TRACKING);
         },
         child: Container(
@@ -79,8 +79,8 @@ class RideCard extends StatelessWidget {
                       TextSpan(
                         text:
                             "  ${ride.arrivedAt?.dateFormat(format: "hh:mm a")}",
-                        style: AppTextStyles.w700
-                            .copyWith(fontSize: 14, color: Styles.PRIMARY_COLOR),
+                        style: AppTextStyles.w700.copyWith(
+                            fontSize: 14, color: Styles.PRIMARY_COLOR),
                       )
                     ]),
               ),

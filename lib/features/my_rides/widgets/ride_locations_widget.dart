@@ -98,8 +98,8 @@ class RideLocationsWidget extends StatelessWidget {
         ///Drop off Location
         AddressPointerWidget(
           location: dropOffLocation,
-          trailer: getTranslated(
-              (status == 0 || status == 1) ? "confirmed" : "absent", context),
+          trailer:
+              getTranslated((status == 5) ? "absent" : "confirmed", context),
           trailerColor: Styles.rideStatus(status),
         ),
       ],

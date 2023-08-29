@@ -44,6 +44,7 @@ import '../../features/request_details/repo/request_details_repo.dart';
 import '../../features/terms_and_conditions/provider/terms_provider.dart';
 import '../../features/terms_and_conditions/repo/terms_repo.dart';
 import '../../features/tracking/provider/tracking_provider.dart';
+import '../../features/tracking/repo/ride_details_repo.dart';
 import '../../features/tracking/repo/tracking_repo.dart';
 import '../../features/transactions/provider/transactions_provider.dart';
 import '../../features/transactions/repo/transactions_repo.dart';
@@ -126,6 +127,8 @@ Future<void> init() async {
       () => TermsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => MyRidesRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => RideDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => TrackingRepo(sharedPreferences: sl(), dioClient: sl()));
 

@@ -56,8 +56,9 @@ class EndPoints {
   static const String deleteNotification = 'notification/delete';
   static const String paymentData = 'app/data';
   static dayRides(role, type, id) => "$role/reservation/day${type}Trips/1";
-  static cancelTrip(String role, id) =>
-      "$role/reservation/cancelTripBy${role.capitalize()}/$id";
+  static rideDetails(role, type, id) => "$role/reservation/day${type}Trips/$id";
+  static changeRideStatus(String role, id) => "$role/reservation/changeStatusBy${role.capitalize()}/$id";
+  static cancelTrip(String role, id) => "$role/reservation/cancelTripBy${role.capitalize()}/$id";
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';

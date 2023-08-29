@@ -10,5 +10,4 @@ class TrackingRepo {
   isDriver() {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
-
 }
