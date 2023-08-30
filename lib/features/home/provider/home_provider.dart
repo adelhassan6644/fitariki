@@ -58,9 +58,25 @@ class HomeProvider extends ChangeNotifier {
   ///For Filtration
   List<String> genders = ["male", "female"];
   List<String> genderIcons = [SvgImages.maleIcon, SvgImages.femaleIcon];
-  int gender = 0;
-  selectedGender(int value) {
-    gender = value;
+
+  int? selectedGender;
+  List<int> selectedGenders = [];
+  onSelectedGender(v) {
+    if (selectedGenders.contains(v)) {
+      selectedGenders.remove(v);
+    } else {
+      selectedGenders.add(v);
+    }
+
+    if (selectedGenders.length > 1) {
+      selectedGender = 2;
+    } else {
+      if (selectedGenders.isNotEmpty) {
+        selectedGender = selectedGenders.first;
+      } else {
+        selectedGender = null;
+      }
+    }
     notifyListeners();
   }
 
@@ -78,7 +94,8 @@ class HomeProvider extends ChangeNotifier {
 
   reset() {
     startLocation = endLocation = null;
-    gender = 0;
+    selectedGender = null;
+    selectedGenders.clear();
     notifyListeners();
   }
 
@@ -96,7 +113,7 @@ class HomeProvider extends ChangeNotifier {
             "${homeRepo.getRole()}_id": homeRepo.getUserId(),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
-          "gender": gender,
+          "gender": selectedGender,
         }
       };
 

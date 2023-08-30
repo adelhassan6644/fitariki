@@ -73,7 +73,7 @@ class PostOfferProvider extends ChangeNotifier {
     }
 
     if (selectedRideTypes.length > 1) {
-      selectedRideType = 3;
+      selectedRideType = 2;
     } else {
       if (selectedRideTypes.isNotEmpty) {
         selectedRideType = selectedRideTypes.first;

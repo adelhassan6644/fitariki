@@ -3,11 +3,11 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/components/custom_images.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../components/custom_address_picker.dart';
-import '../../../components/tab_widget.dart';
 import '../provider/home_provider.dart';
 
 class FilterBottomSheet extends StatelessWidget {
@@ -63,17 +63,9 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Text(
                         getTranslated("filter", context),
                         style: AppTextStyles.w400.copyWith(
-                            fontSize: 14,
-                            color: Styles.PRIMARY_COLOR),
+                            fontSize: 14, color: Styles.PRIMARY_COLOR),
                       ),
                     ),
-
-                    // Text(
-                    //   getTranslated("filter", context),
-                    //   style: AppTextStyles.w600.copyWith(
-                    //     fontSize: 14,
-                    //   ),
-                    // ),
                     GestureDetector(
                       onTap: () {
                         homeProvider.getOffers(withFilter: false);
@@ -83,11 +75,9 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Text(
                         getTranslated("reset", context),
                         style: AppTextStyles.w400.copyWith(
-                            fontSize: 14,
-                            color: Styles.PRIMARY_COLOR),
+                            fontSize: 14, color: Styles.PRIMARY_COLOR),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -156,36 +146,59 @@ class FilterBottomSheet extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                            width: 170.w,
-                            decoration: BoxDecoration(
-                                color:
-                                    Styles.CONTAINER_BACKGROUND_COLOR,
-                                borderRadius: BorderRadius.circular(6)),
-                            padding: EdgeInsets.all(2.h),
-                            child: Row(
-                              children: List.generate(
-                                  homeProvider.genders.length,
-                                  (index) => Expanded(
-                                        child: TabWidget(
-                                            backGroundColor:
-                                                Styles.PRIMARY_COLOR,
-                                            innerVPadding: 2.h,
-                                            innerHPadding: 20.w,
-                                            title: getTranslated(
-                                                homeProvider.genders[index],
-                                                context),
-                                            svgIcon:
-                                                homeProvider.genderIcons[index],
-                                            iconColor:
-                                                Styles.BLUE_COLOR,
-                                            iconSize: 11,
-                                            isSelected:
-                                                index == homeProvider.gender,
-                                            onTab: () => homeProvider
-                                                .selectedGender(index)),
-                                      )),
-                            )),
+                        Row(
+                            children: List.generate(
+                          homeProvider.genders.length,
+                          (index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: GestureDetector(
+                                onTap: () =>
+                                    homeProvider.onSelectedGender(index),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 4, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                      color: homeProvider.selectedGenders
+                                              .contains(index)
+                                          ? Styles.PRIMARY_COLOR
+                                          : Styles.PRIMARY_COLOR
+                                              .withOpacity(0.06),
+                                      borderRadius: BorderRadius.circular(4)),
+                                  child: Row(
+                                    children: [
+                                      customImageIconSVG(
+                                          imageName:
+                                              homeProvider.genderIcons[index],
+                                          color: homeProvider.selectedGenders
+                                                  .contains(index)
+                                              ? Styles.WHITE_COLOR
+                                              : Styles.BLUE_COLOR,
+                                          width: 12,
+                                          height: 12),
+                                      SizedBox(
+                                        width: 4.w,
+                                      ),
+                                      Text(
+                                        getTranslated(
+                                            homeProvider.genders[index],
+                                            context),
+                                        style: AppTextStyles.w400.copyWith(
+                                          fontSize: 13,
+                                          height: 1.25,
+                                          color: homeProvider.selectedGenders
+                                                  .contains(index)
+                                              ? Styles.WHITE_COLOR
+                                              : Styles.SECOUND_PRIMARY_COLOR,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        )),
                       ],
                     ),
                     const SizedBox(
@@ -206,7 +219,7 @@ class FilterBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Styles.WHITE_COLOR,
                         borderRadius: BorderRadius.circular(12),
-                        boxShadow:[
+                        boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),
                               blurRadius: 4.0,
@@ -237,7 +250,7 @@ class FilterBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Styles.WHITE_COLOR,
                         borderRadius: BorderRadius.circular(12),
-                        boxShadow:[
+                        boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),
                               blurRadius: 4.0,
