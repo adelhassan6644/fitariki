@@ -39,7 +39,7 @@ class HomeRunningRidesWidget extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               firstChild: SizedBox(width: context.width),
               secondChild: Visibility(
-                visible: provider.hasRides && provider.isLogin,
+                visible: !provider.hasRides && provider.isLogin,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(
                       Dimensions.PADDING_SIZE_DEFAULT,
@@ -49,7 +49,9 @@ class HomeRunningRidesWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       // CustomNavigator.push(Routes.TRACKING,arguments: {"id":1,"date":DateTime.now(),"number":88});
-                      CustomNavigator.push(Routes.MY_RIDES,);
+                      CustomNavigator.push(
+                        Routes.MY_RIDES,
+                      );
                     },
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,

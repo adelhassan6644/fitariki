@@ -47,9 +47,9 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _selectedIndex = widget.index ?? 0;
-    init();
+    Future.delayed(Duration.zero, () => init());
     NetworkInfo.checkConnectivity(onVisible: () {
-      init();
+      Future.delayed(Duration.zero, () => init());
     });
     super.initState();
   }

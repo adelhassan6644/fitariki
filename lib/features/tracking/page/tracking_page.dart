@@ -33,7 +33,8 @@ class _TrackingPageState extends State<TrackingPage> {
     return Scaffold(
       appBar: CustomAppBar(
         title: "#_مشوارـ${widget.data["number"]}",
-        subTitle: (widget.data["date"] as DateTime).dateFormat(format: "dd MMM, yyyy"),
+        subTitle: (widget.data["date"] as DateTime)
+            .dateFormat(format: "dd MMM, yyyy"),
         appBarHeight: 60,
       ),
       body: Consumer<TrackingProvider>(builder: (context, provider, child) {

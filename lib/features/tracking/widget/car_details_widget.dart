@@ -96,12 +96,30 @@ class CarDetailsWidget extends StatelessWidget {
           ///To time or Driver
           Consumer<RideDetailsProvider>(builder: (_, provider, child) {
             return Visibility(
-                visible: isDriver,
+                visible: isDriver && status == null,
                 child: StreamBuilder(
-                  stream: provider.etaStream,
+                  stream: provider.pickUpLocationStream,
                   builder: (ctx, snapshot) {
                     return Text(
-                      "${snapshot.hasData ? snapshot.data : "..."} min",
+                      snapshot.hasData
+                          ? snapshot.data ?? ""
+                          : "... min - ... km",
+                      style: AppTextStyles.w400.copyWith(
+                          fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
+                    );
+                  },
+                ));
+          }),
+
+          ///To time or Driver
+          Consumer<RideDetailsProvider>(builder: (_, provider, child) {
+            return Visibility(
+                visible: isDriver && status != null && status != 0,
+                child: StreamBuilder(
+                  stream: provider.dropLocationStream,
+                  builder: (ctx, snapshot) {
+                    return Text(
+                      snapshot.hasData ? snapshot.data ?? "" : "... min",
                       style: AppTextStyles.w400.copyWith(
                           fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
                     );

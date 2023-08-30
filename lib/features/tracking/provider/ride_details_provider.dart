@@ -22,7 +22,8 @@ class RideDetailsProvider extends ChangeNotifier {
 
   bool get isDriver => repo.isDriver();
   late Timer timer;
-  Timer? _etaTimer;
+  Timer? _dropOffTimer;
+  Timer? _pickUpTimer;
   int count = 0;
 
   countTime() {
@@ -49,7 +50,12 @@ class RideDetailsProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       }, (response) {
         ride = MyRideModel.fromJson(response.data["data"]);
-        startETAListener(LatLng(
+
+        startPickUpLocationListener(LatLng(
+            double.parse(ride?.pickupLocation?.latitude ?? "0"),
+            double.parse(ride?.pickupLocation?.longitude ?? "0")));
+
+        startDropLocationListener(LatLng(
             double.parse(ride?.dropOffLocation?.latitude ?? "0"),
             double.parse(ride?.dropOffLocation?.longitude ?? "0")));
       });
@@ -103,16 +109,16 @@ class RideDetailsProvider extends ChangeNotifier {
     }
   }
 
-  BehaviorSubject<int> etaStream = BehaviorSubject<int>();
+  BehaviorSubject<String> dropLocationStream = BehaviorSubject<String>();
 
-  startETAListener(LatLng latLng) async {
-    _etaTimer?.cancel();
-    _etaTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      calculatedETAToLocation(latLng);
+  startDropLocationListener(LatLng latLng) async {
+    _dropOffTimer?.cancel();
+    _dropOffTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      calculatedETAToDropLocation(latLng);
     });
   }
 
-  calculatedETAToLocation(LatLng dropOffLatLng) async {
+  calculatedETAToDropLocation(LatLng dropOffLatLng) async {
     Position currentLocation = await Geolocator.getCurrentPosition();
     final startPoint = Point(
       latitude: currentLocation.latitude,
@@ -126,6 +132,33 @@ class RideDetailsProvider extends ChangeNotifier {
     double etaInHours = distance / 50;
 
     final eta = (etaInHours * 60).ceil();
-    etaStream.add(eta);
+    dropLocationStream.add("min $eta");
+  }
+
+  BehaviorSubject<String> pickUpLocationStream = BehaviorSubject<String>();
+
+  startPickUpLocationListener(LatLng latLng) async {
+    _pickUpTimer?.cancel();
+    _pickUpTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      calculatedETAToPickUpLocation(latLng);
+    });
+  }
+
+  calculatedETAToPickUpLocation(LatLng pickUpLatLng) async {
+    Position currentLocation = await Geolocator.getCurrentPosition();
+    final startPoint = Point(
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+    );
+    final endPoint = Point(
+      latitude: pickUpLatLng.latitude,
+      longitude: pickUpLatLng.longitude,
+    );
+    final distance = GeoRange().distance(startPoint, endPoint);
+    double timeInHours = distance / 50;
+
+    final timeInMin = (timeInHours * 60).ceil();
+
+    pickUpLocationStream.add("$timeInMin min - $distance km");
   }
 }

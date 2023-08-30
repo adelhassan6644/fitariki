@@ -13,7 +13,7 @@ import 'emergency_bottom_sheet.dart';
 class RiderDetailsWidget extends StatelessWidget {
   const RiderDetailsWidget(
       {super.key,
-       this.onFinish,
+      this.onFinish,
       required this.image,
       required this.name,
       required this.phone,
@@ -40,6 +40,7 @@ class RiderDetailsWidget extends StatelessWidget {
           const Expanded(child: SizedBox()),
           customCircleSvgIcon(
               onTap: () async {
+                print(phone);
                 await launch("tel://$phone");
               },
               imageName: SvgImages.phoneCallIcon,
@@ -54,7 +55,9 @@ class RiderDetailsWidget extends StatelessWidget {
                   await launch("tel://$phone");
                 } else {
                   customShowModelBottomSheet(
-                      body: EmergencyBottomSheet(onFinish:onFinish ,));
+                      body: EmergencyBottomSheet(
+                    onFinish: onFinish,
+                  ));
                 }
               },
               imageName: isDriver ? SvgImages.whatsApp : SvgImages.emergency,
