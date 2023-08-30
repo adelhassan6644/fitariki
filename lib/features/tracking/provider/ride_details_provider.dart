@@ -60,10 +60,7 @@ class RideDetailsProvider extends ChangeNotifier {
   }
 
   bool isChanging = false;
-  changeStatus(
-    id,
-    status,
-  ) async {
+  changeStatus(id, status) async {
     try {
       ///Show Loading dialog
       if (!isDriver) {
