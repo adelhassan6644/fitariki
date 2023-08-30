@@ -76,6 +76,8 @@ class EmergencyBottomSheet extends StatelessWidget {
           InkWell(
             onTap: () async {
               await launch("tel://911");
+              CustomNavigator.pop();
+
             },
             child: Padding(
               padding: EdgeInsets.symmetric(

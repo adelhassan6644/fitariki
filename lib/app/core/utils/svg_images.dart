@@ -24,6 +24,7 @@ class SvgImages {
   static const String carColor = 'assets/svgs/car_color.svg';
   static const String newOffer = 'assets/svgs/new_offer.svg';
   static const String alarm = 'assets/svgs/alarm.svg';
+  static const String time = 'assets/svgs/time.svg';
   static const String emptyStar = 'assets/svgs/empty_star.svg';
   static const String fillStar = 'assets/svgs/fill_star.svg';
   static const String arrowRightAlt = 'assets/svgs/arrow_right_alt.svg';

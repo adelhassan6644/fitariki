@@ -12,8 +12,8 @@ import '../../../components/custom_app_bar.dart';
 import '../widget/ride_details_widget.dart';
 
 class TrackingPage extends StatefulWidget {
-  const TrackingPage({super.key, required this.id});
-  final int id;
+  const TrackingPage({super.key, required this.data});
+  final Map data;
   @override
   State<TrackingPage> createState() => _TrackingPageState();
 }
@@ -32,13 +32,14 @@ class _TrackingPageState extends State<TrackingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "#_مشوارـ${4}",
-        subTitle: DateTime.now().dateFormat(format: "dd MMM, yyyy"),
+        title: "#_مشوارـ${widget.data["number"]}",
+        subTitle: (widget.data["date"] as DateTime).dateFormat(format: "dd MMM, yyyy"),
         appBarHeight: 60,
       ),
       body: Consumer<TrackingProvider>(builder: (context, provider, child) {
         return Center(
           child: SafeArea(
+            bottom: false,
             child: Stack(
               children: [
                 GoogleMap(
@@ -78,12 +79,9 @@ class _TrackingPageState extends State<TrackingPage> {
                             await launch("tel://911");
                           })),
                 ),
-                Positioned(
-                    bottom: -10,
-                    width: context.width,
-                    child: RideDetailsWidget(
-                      id: widget.id,
-                    )),
+                RideDetailsWidget(
+                  id: widget.data["id"],
+                ),
               ],
             ),
           ),

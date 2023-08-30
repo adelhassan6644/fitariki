@@ -337,9 +337,13 @@
   "emergency": "طوارئ",
   "emergency_header": "مزايا تساعدك على الشعور بالأمان في مشوارك.",
   "missed_a_ride": "تغيب عن مشوار",
+  "go_to_client": "الذهاب للراكب",
   "arrive": "وصلت",
   "start_ride": "بدأ المشوار",
   "end_ride": "انهاء المشوار",
-  "there_is_no_rides_on_this_day": "لا يوجد مشاوير في هذا اليوم"
+  "there_is_no_rides_on_this_day": "لا يوجد مشاوير في هذا اليوم",
+  "captain_arrived": "الكابتن وصل",
+  "waiting_the_client": "بإنتظار الراكب",
+  "go_to_destination": "الذهاب للوجهه"
 
 }

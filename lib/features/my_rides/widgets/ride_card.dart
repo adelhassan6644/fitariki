@@ -24,7 +24,11 @@ class RideCard extends StatelessWidget {
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
         onTap: () {
-          CustomNavigator.push(Routes.TRACKING,arguments: ride.id);
+          CustomNavigator.push(Routes.TRACKING, arguments: {
+            "id": ride.id,
+            "date": ride.startedAt,
+            "number": ride.number
+          });
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -55,7 +59,7 @@ class RideCard extends StatelessWidget {
                     ),
                   ),
                   Visibility(
-                    visible: ride.status == 0,
+                    visible: ride.status == null,
                     child: CancelPopUpButton(
                       id: ride.id ?? 0,
                       number: ride.number ?? 0,

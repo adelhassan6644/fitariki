@@ -4,8 +4,9 @@ import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-abstract class Methods {
+import '../../../features/maps/models/location_model.dart';
 
+abstract class Methods {
   static int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
   }
@@ -132,6 +133,15 @@ abstract class Methods {
                 double.parse(lat2), double.parse(long2)) /
             1000)
         .toStringAsFixed(2);
+  }
+
+
+
+  static calcDistanceFromCurrentLocation({LocationModel? location}) async {
+    Position currentPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return (Geolocator.distanceBetween(currentPosition.latitude,currentPosition.longitude,
+        double.parse(location?.latitude??"0"), double.parse(location?.longitude??"0")) / 1000).toStringAsFixed(2);
   }
 }
 

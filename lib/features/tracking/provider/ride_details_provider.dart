@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/components/loading_dialog.dart';
@@ -15,6 +17,16 @@ class RideDetailsProvider extends ChangeNotifier {
   RideDetailsProvider({required this.repo});
 
   bool get isDriver => repo.isDriver();
+  late Timer timer;
+  int count = 0;
+
+  countTime() {
+    count = 0;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      ++count;
+      notifyListeners();
+    });
+  }
 
   MyRideModel? ride;
   bool isLoading = false;
@@ -48,45 +60,39 @@ class RideDetailsProvider extends ChangeNotifier {
   }
 
   bool isChanging = false;
-  changeStatus(id, status) async {
+  changeStatus(
+    id,
+    status,
+  ) async {
     try {
-      if (isDriver) {
-        spinKitDialog();
+      ///Show Loading dialog
+      if (!isDriver) {
+        Future.delayed(Duration.zero, () => spinKitDialog());
       }
+
       isChanging = true;
       notifyListeners();
       Either<ServerFailure, Response> response =
-          await repo.changeRideStatus(id, status);
+          await repo.changeRideStatus(id: id, status: status, count: count);
       response.fold((l) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: l.error,
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
+        showToast(l.error);
       }, (response) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: response.data["message"] ?? "",
-                isFloating: true,
-                backgroundColor: Styles.ACTIVE,
-                borderColor: Colors.transparent));
+        showToast(response.data["message"] ?? "");
+        ride?.status = status;
       });
-      if (isDriver) {
+
+      ///Hide Loading dialog
+      if (!isDriver) {
         CustomNavigator.pop();
       }
       isChanging = false;
       notifyListeners();
     } catch (e) {
-      if (isDriver) {
+      ///Hide Loading dialog
+      if (!isDriver) {
         CustomNavigator.pop();
       }
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast(e);
       isChanging = false;
       notifyListeners();
     }

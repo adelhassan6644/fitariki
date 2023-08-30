@@ -20,7 +20,8 @@ class RideDetailsRepo {
   Future<Either<ServerFailure, Response>> getRideDetails(id) async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.rideDetails(sharedPreferences.getString(AppStorageKey.role),2),
+        uri: EndPoints.rideDetails(
+            sharedPreferences.getString(AppStorageKey.role), 2),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -32,12 +33,17 @@ class RideDetailsRepo {
     }
   }
 
-  Future<Either<ServerFailure, Response>> changeRideStatus(id, status) async {
+  Future<Either<ServerFailure, Response>> changeRideStatus(
+      {required int id, required int status, int? count}) async {
     try {
       Response response = await dioClient.post(
-          uri: EndPoints.changeRideStatus(
-              sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
-          queryParameters: {"status": status});
+        uri: EndPoints.changeRideStatus(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
+        queryParameters: {
+          "status": status,
+          if (status == 2) "time": count,
+        },
+      );
       if (response.statusCode == 200) {
         return Right(response);
       } else {

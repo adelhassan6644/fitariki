@@ -46,9 +46,9 @@ abstract class Styles {
   }
 
   static rideStatus(status) {
-    if (status != 5) {
+    if (status != 4) {
       return Styles.ACTIVE;
-    } else if (status == 5) {
+    } else if (status == 4) {
       return Styles.PENDING;
     } else {
       return Styles.ACTIVE;
