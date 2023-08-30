@@ -257,20 +257,23 @@ class RideDetailsWidget extends StatelessWidget {
                             provider.timer.cancel();
                           }
 
-                          if((provider.ride!.status!.toInt() + 1)==3){
+                          if ((provider.ride!.status!.toInt() + 1) == 3) {
                             CupertinoPopUpHelper.showCupertinoPopUp(
-                                textButton: getTranslated("yes", context),
-                                onConfirm: () {
-                                  CustomNavigator.pop();
-                                  provider.changeStatus(id,3);
-                                  },
-                                title: getTranslated("end_ride_header", context),
-                                description:getTranslated("end_ride_description", context),
+                              textButton: getTranslated("end_ride", context),
+                              onConfirm: () {
+                                CustomNavigator.pop();
+                                provider.changeStatus(id, 3);
+                              },
+                              title: getTranslated("end_ride_header", context),
+                              description: getTranslated(
+                                  "end_ride_description", context),
                             );
-                          }else {
-                            provider.changeStatus(id,
-                              provider.ride!.status == null
-                                  ? 0 : (provider.ride!.status!.toInt() + 1));
+                          } else {
+                            provider.changeStatus(
+                                id,
+                                provider.ride!.status == null
+                                    ? 0
+                                    : (provider.ride!.status!.toInt() + 1));
                           }
                         },
                         isLoading: provider.isChanging,

@@ -16,8 +16,9 @@ class TransactionsRepo {
   Future<Either<ServerFailure, Response>> getTransactions() async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.transactions}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.transactions(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
         return Right(response);
