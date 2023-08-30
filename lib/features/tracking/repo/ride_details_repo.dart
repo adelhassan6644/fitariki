@@ -17,12 +17,10 @@ class RideDetailsRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
-  Future<Either<ServerFailure, Response>> getRideDetails(
-      {required String type, required int id}) async {
+  Future<Either<ServerFailure, Response>> getRideDetails(id) async {
     try {
-      Response response = await dioClient.post(
-        uri: EndPoints.dayRides(
-            sharedPreferences.getString(AppStorageKey.role), type, id),
+      Response response = await dioClient.get(
+        uri: EndPoints.rideDetails(sharedPreferences.getString(AppStorageKey.role),2),
       );
       if (response.statusCode == 200) {
         return Right(response);

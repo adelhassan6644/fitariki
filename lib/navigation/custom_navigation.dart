@@ -164,7 +164,7 @@ abstract class CustomNavigator {
         return _pageRoute(const MyRidesPage());
 
       case Routes.TRACKING:
-        return _pageRoute(const TrackingPage());
+        return _pageRoute(TrackingPage(id:settings.arguments as int,));
 
       case Routes.PAYMENT:
         {

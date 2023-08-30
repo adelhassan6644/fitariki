@@ -13,12 +13,14 @@ import 'emergency_bottom_sheet.dart';
 class RiderDetailsWidget extends StatelessWidget {
   const RiderDetailsWidget(
       {super.key,
+       this.onFinish,
       required this.image,
       required this.name,
       required this.phone,
       required this.whatsApp,
       required this.isDriver});
 
+  final Function()? onFinish;
   final String image, name, phone, whatsApp;
   final bool isDriver;
   @override
@@ -52,7 +54,7 @@ class RiderDetailsWidget extends StatelessWidget {
                   await launch("tel://$phone");
                 } else {
                   customShowModelBottomSheet(
-                      body: const EmergencyBottomSheet());
+                      body: EmergencyBottomSheet(onFinish:onFinish ,));
                 }
               },
               imageName: isDriver ? SvgImages.whatsApp : SvgImages.emergency,

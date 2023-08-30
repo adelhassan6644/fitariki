@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/features/tracking/widget/rider_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class RideDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) =>
-          RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(),
+          RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(id),
       child: Container(
           height: 400.h,
           decoration: BoxDecoration(
@@ -52,31 +53,38 @@ class RideDetailsWidget extends StatelessWidget {
                 ),
                 const CarDetailsWidget(),
                 RiderDetailsWidget(
-                  image: provider.ride?.driver?.image ??
-                      provider.ride?.client?.image ??
-                      "",
-                  name: provider.ride?.driver?.firstName ??
-                      provider.ride?.client?.firstName ??
-                      "",
-                  phone: provider.ride?.driver?.phone ??
-                      provider.ride?.client?.phone ??
-                      "",
-                  whatsApp: provider.ride?.driver?.phone ??
-                      provider.ride?.client?.phone ??
-                      "",
+                  image: provider.isDriver
+                      ? provider.ride?.client?.image ?? ""
+                      : provider.ride?.driver?.image ?? "",
+                  name: provider.isDriver
+                      ? provider.ride?.client?.firstName ?? ""
+                      : provider.ride?.driver?.firstName ?? "",
+                  phone: provider.isDriver
+                      ? provider.ride?.client?.phone ?? ""
+                      : provider.ride?.driver?.phone ?? "",
+                  whatsApp: provider.isDriver
+                      ? provider.ride?.client?.phone ?? ""
+                      : provider.ride?.driver?.phone ?? "",
+                  onFinish:() => provider.changeStatus(id,4),
                   isDriver: provider.isDriver,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-                  child: RideLocationsWidget(
-                    followerAddresses: provider.ride!.followersLocations!,
-                    pickLocation: provider.ride!.pickupLocation,
-                    dropOffLocation: provider.ride!.dropOffLocation,
-                    isDriver: provider.isDriver,
+                Expanded(
+                  child: ListAnimator(
+                    data: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+                        child: RideLocationsWidget(
+                          followerAddresses: provider.ride!.followersLocations!,
+                          pickLocation: provider.ride!.pickupLocation,
+                          dropOffLocation: provider.ride!.dropOffLocation,
+                          status: provider.ride!.status,
+                          isDriver: provider.isDriver,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const Expanded(child: SizedBox()),
                 Visibility(
                   visible: !provider.isDriver,
                   child: Padding(
@@ -86,7 +94,7 @@ class RideDetailsWidget extends StatelessWidget {
                     child: CustomButton(
                       text: getTranslated(
                           _buttonText(provider.ride!.status! + 1), context),
-                      onTap:
+                      onTap: () =>
                           provider.changeStatus(id, provider.ride!.status! + 1),
                       isLoading: provider.isChanging,
                     ),

@@ -12,8 +12,8 @@ import '../../../components/custom_app_bar.dart';
 import '../widget/ride_details_widget.dart';
 
 class TrackingPage extends StatefulWidget {
-  const TrackingPage({super.key});
-
+  const TrackingPage({super.key, required this.id});
+  final int id;
   @override
   State<TrackingPage> createState() => _TrackingPageState();
 }
@@ -68,19 +68,22 @@ class _TrackingPageState extends State<TrackingPage> {
                   child: Positioned(
                       top: 10,
                       right: 10,
-                      child: customCircleSvgIcon(imageName: SvgImages.sos,
-                      width: 45,
-                      height: 45,
-                      radius: 22.5,
-                      color: Colors.transparent,
-                      onTap: () async {
-                        await launch("tel://911");
-                      })),
+                      child: customCircleSvgIcon(
+                          imageName: SvgImages.sos,
+                          width: 45,
+                          height: 45,
+                          radius: 22.5,
+                          color: Colors.transparent,
+                          onTap: () async {
+                            await launch("tel://911");
+                          })),
                 ),
                 Positioned(
                     bottom: -10,
                     width: context.width,
-                    child: const RideDetailsWidget(id: 1,)),
+                    child: RideDetailsWidget(
+                      id: widget.id,
+                    )),
               ],
             ),
           ),

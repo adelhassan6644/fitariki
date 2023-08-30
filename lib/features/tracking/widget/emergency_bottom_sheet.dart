@@ -2,6 +2,7 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/components/custom_images.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,7 +11,8 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 
 class EmergencyBottomSheet extends StatelessWidget {
-  const EmergencyBottomSheet({super.key});
+  const EmergencyBottomSheet({super.key, this.onFinish});
+  final Function()? onFinish;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +108,10 @@ class EmergencyBottomSheet extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: (){
+              onFinish?.call();
+              CustomNavigator.pop();
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
