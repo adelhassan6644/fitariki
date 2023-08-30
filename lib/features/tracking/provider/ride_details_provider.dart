@@ -5,6 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:fitariki/components/loading_dialog.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:georange/georange.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rxdart/rxdart.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/api_error_handler.dart';
@@ -18,6 +22,7 @@ class RideDetailsProvider extends ChangeNotifier {
 
   bool get isDriver => repo.isDriver();
   late Timer timer;
+  Timer? _etaTimer;
   int count = 0;
 
   countTime() {
@@ -44,6 +49,9 @@ class RideDetailsProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       }, (response) {
         ride = MyRideModel.fromJson(response.data["data"]);
+        startETAListener(LatLng(
+            double.parse(ride?.dropOffLocation?.latitude ?? "0"),
+            double.parse(ride?.dropOffLocation?.longitude ?? "0")));
       });
       isLoading = false;
       notifyListeners();
@@ -96,5 +104,31 @@ class RideDetailsProvider extends ChangeNotifier {
       isChanging = false;
       notifyListeners();
     }
+  }
+
+  BehaviorSubject<int> etaStream = BehaviorSubject<int>();
+
+  startETAListener(LatLng latLng) async {
+    _etaTimer?.cancel();
+    _etaTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      calculatedETAToLocation(latLng);
+    });
+  }
+
+  calculatedETAToLocation(LatLng dropOffLatLng) async {
+    Position currentLocation = await Geolocator.getCurrentPosition();
+    final startPoint = Point(
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+    );
+    final endPoint = Point(
+      latitude: dropOffLatLng.latitude,
+      longitude: dropOffLatLng.longitude,
+    );
+    final distance = GeoRange().distance(startPoint, endPoint);
+    double etaInHours = distance / 50;
+
+    final eta = (etaInHours * 60).ceil();
+    etaStream.add(eta);
   }
 }

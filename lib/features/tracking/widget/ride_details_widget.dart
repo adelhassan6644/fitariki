@@ -24,8 +24,8 @@ class RideDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) =>
-          RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(id),
+      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(id),
+
       child: Consumer<RideDetailsProvider>(builder: (_, provider, child) {
         return Stack(
           alignment: Alignment.bottomCenter,

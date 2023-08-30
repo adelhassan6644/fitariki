@@ -1,5 +1,7 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/features/tracking/provider/ride_details_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/dimensions.dart';
@@ -90,6 +92,22 @@ class CarDetailsWidget extends StatelessWidget {
                   ),
                 ],
               )),
+
+          ///To time or Driver
+          Consumer<RideDetailsProvider>(builder: (_, provider, child) {
+            return Visibility(
+                visible: isDriver,
+                child: StreamBuilder(
+                  stream: provider.etaStream,
+                  builder: (ctx, snapshot) {
+                    return Text(
+                      "${snapshot.hasData ? snapshot.data : "..."} min",
+                      style: AppTextStyles.w400.copyWith(
+                          fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
+                    );
+                  },
+                ));
+          }),
         ],
       ),
     );
