@@ -35,7 +35,7 @@ class RideDetailsProvider extends ChangeNotifier {
 
   MyRideModel? ride;
   bool isLoading = false;
-  getRides(id) async {
+  getRideDetails(id) async {
     try {
       isLoading = true;
       notifyListeners();

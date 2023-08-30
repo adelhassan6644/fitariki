@@ -27,7 +27,7 @@ class RideDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return ChangeNotifierProvider(
-      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(id),
+      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRideDetails(id),
 
       child: Consumer<RideDetailsProvider>(builder: (_, provider, child) {
         return Stack(

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class TransactionsModel {
   List<TransactionItem>? transactions;
 
