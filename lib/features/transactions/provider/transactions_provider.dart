@@ -16,21 +16,22 @@ class TransactionsProvider extends ChangeNotifier {
   });
 
   int tab = 0;
-  List<String> tabs = ["the_running", "the_previous"];
+  List<String> tabs = ["current", "finished"];
   onSelectTab(v) {
     tab = v;
     notifyListeners();
   }
 
-  TransactionsModel? transactionsModel;
-  bool isLoading = false;
-  getTransactions() async {
+  TransactionsModel? currentTransactions;
+  bool isGetCurrent = false;
+  getCurrentTransactions() async {
     try {
-      isLoading = true;
+      currentTransactions = null;
+      isGetCurrent = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-          await transactionsRepo.getTransactions();
+          await transactionsRepo.getTransactions(tabs[0]);
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -38,11 +39,11 @@ class TransactionsProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        isLoading = false;
+        isGetCurrent = false;
         notifyListeners();
       }, (response) {
-        transactionsModel = TransactionsModel.fromJson(response.data);
-        isLoading = false;
+        currentTransactions = TransactionsModel.fromJson(response.data);
+        isGetCurrent = false;
         notifyListeners();
       });
     } catch (e) {
@@ -52,7 +53,43 @@ class TransactionsProvider extends ChangeNotifier {
               isFloating: true,
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
-      isLoading = false;
+      isGetCurrent = false;
+      notifyListeners();
+    }
+  }
+
+  TransactionsModel? previousTransactions;
+  bool isGetPrevious = false;
+  getPreviousTransactions() async {
+    try {
+      previousTransactions = null;
+      isGetPrevious = true;
+      notifyListeners();
+
+      Either<ServerFailure, Response> response =
+          await transactionsRepo.getTransactions(tabs[1]);
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: ApiErrorHandler.getMessage(l),
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        isGetPrevious = false;
+        notifyListeners();
+      }, (response) {
+        previousTransactions = TransactionsModel.fromJson(response.data);
+        isGetPrevious = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isGetPrevious = false;
       notifyListeners();
     }
   }

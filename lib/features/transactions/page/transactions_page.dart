@@ -1,22 +1,37 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/components/animated_widget.dart';
-import 'package:fitariki/features/transactions/model/transactions_model.dart';
 import 'package:fitariki/features/transactions/provider/transactions_provider.dart';
-import 'package:fitariki/features/transactions/widget/transacction_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
-import '../../../components/empty_widget.dart';
-import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../components/tab_widget.dart';
+import '../../../data/config/di.dart';
+import '../widget/current_transactions_widget.dart';
+import '../widget/previous_transactions_widget.dart';
 
-class TransactionsPage extends StatelessWidget {
+class TransactionsPage extends StatefulWidget {
   const TransactionsPage({Key? key}) : super(key: key);
 
+  @override
+  State<TransactionsPage> createState() => _TransactionsPageState();
+}
+
+class _TransactionsPageState extends State<TransactionsPage> {
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      sl<TransactionsProvider>().getCurrentTransactions();
+      sl<TransactionsProvider>().getPreviousTransactions();
+    });
+    super.initState();
+  }
+
+  final List<Widget> widgets = [
+    const CurrentTransactionsWidget(),
+    const PreviousTransactionsWidget(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +43,7 @@ class TransactionsPage extends StatelessWidget {
         child: Consumer<TransactionsProvider>(builder: (_, provider, child) {
           return Column(
             children: [
+              ///Header
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
@@ -49,64 +65,9 @@ class TransactionsPage extends StatelessWidget {
                               )),
                     )),
               ),
-              !provider.isLoading
-                  ? Expanded(
-                      child: RefreshIndicator(
-                        color: Styles.PRIMARY_COLOR,
-                        onRefresh: () async {
-                          provider.getTransactions();
-                        },
-                        child: ListView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(0),
-                          children: [
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            if (provider.transactionsModel != null &&
-                                provider.transactionsModel!.transactions!
-                                    .isNotEmpty)
-                              ...List.generate(
-                                  provider
-                                      .transactionsModel!.transactions!.length,
-                                  (index) => TransactionCard(
-                                        transactionItem: provider
-                                            .transactionsModel!
-                                            .transactions![index],
-                                      )),
-                            if (provider.transactionsModel == null ||
-                                provider
-                                    .transactionsModel!.transactions!.isEmpty)
-                              EmptyState(
-                                  txt: getTranslated(
-                                      "there_is_no_transactions", context)),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Expanded(
-                      child: ListAnimator(
-                        data: [
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          ...List.generate(
-                              6,
-                              (index) => Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Styles.LIGHT_GREY_BORDER,
-                                                width: 1.h))),
-                                    child: CustomShimmerContainer(
-                                      width: context.width,
-                                      height: 75.h,
-                                      radius: 0,
-                                    ),
-                                  ))
-                        ],
-                      ),
-                    )
+
+              ///Body
+              Expanded(child: widgets[provider.tab])
             ],
           );
         }),

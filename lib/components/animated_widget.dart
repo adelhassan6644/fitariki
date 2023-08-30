@@ -39,7 +39,7 @@ class ListAnimator extends StatefulWidget {
   final double? horizontalOffset;
   final ScrollController? controller;
   final direction;
-  final addPadding;
+  final bool addPadding;
   final bool scroll;
   final customPadding;
   final Stream<int>? scrollControllerStream;
@@ -52,7 +52,7 @@ class ListAnimator extends StatefulWidget {
     this.verticalOffset,
     this.horizontalOffset,
     this.direction,
-    this.addPadding = true,
+    this.addPadding = false,
     this.customPadding,
     this.scrollControllerStream,
     this.scroll = true,
@@ -70,14 +70,11 @@ class _ListAnimatorState extends State<ListAnimator> {
     return StreamBuilder<int>(
         stream: widget.scrollControllerStream,
         builder: (context, snapshot) {
-          // if(snapshot.hasData){
-          //   autoScroll.scrollToIndex(snapshot.data ,preferPosition: AutoScrollPosition.middle );
-          // }
           return AnimationLimiter(
             child: ListView.builder(
               controller: widget.controller,
                 padding: widget.customPadding ??
-                    EdgeInsets.only(top: widget.addPadding ? 0 : 0),
+                    EdgeInsets.only(top: widget.addPadding ? 8 : 0),
                 physics: widget.scroll
                     ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
                     : const NeverScrollableScrollPhysics(),

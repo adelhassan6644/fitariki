@@ -125,7 +125,6 @@
   "add_a_note":"Add a note (optional)",
   "sar": "sar",
   "current": "Current",
-  "previous": "Previous",
   "start_date": "start date:",
   "end_date": "end date:",
   "replay": "replay",
@@ -284,6 +283,8 @@
   "my_work_study_location": "My work study location",
   "transactions": "Transactions",
   "there_is_no_transactions": "There is no transactions",
+  "there_is_no_current_transactions": "There is no current transactions",
+  "there_is_no_previous_transactions": "There is no previous transactions",
   "invoice": "Invoice",
   "details": "Details",
   "go_and_back": "Go and Back",
@@ -344,5 +345,6 @@
   "waiting_the_client": "Waiting Client",
   "go_to_destination": "Go to destination",
   "end_ride_header": "End Ride here?",
-  "end_ride_description": "Are you sure you have reached your final destination?"
+  "end_ride_description": "Are you sure you have reached your final destination?",
+  "finished": "Finished"
 }

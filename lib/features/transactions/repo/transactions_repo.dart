@@ -13,11 +13,12 @@ class TransactionsRepo {
 
   TransactionsRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> getTransactions() async {
+  Future<Either<ServerFailure, Response>> getTransactions(type) async {
     try {
       Response response = await dioClient.get(
         uri: EndPoints.transactions(
             sharedPreferences.getString(AppStorageKey.role),
+            type,
             sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {

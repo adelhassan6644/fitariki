@@ -52,7 +52,7 @@ class EndPoints {
   static const String myTrips = 'reservation';
   static const String myRequests = 'reservation/pending';
   static const String notifications = 'notification/notification';
-  static transactions(role, id) => '$role/payment/list/$id';
+  static transactions(role,type, id) => '$role/payment/$type/$id';
   static const String readNotification = 'notification/read';
   static const String deleteNotification = 'notification/delete';
   static const String paymentData = 'app/data';

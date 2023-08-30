@@ -1,16 +1,14 @@
 class TransactionsModel {
   List<TransactionItem>? transactions;
 
-  TransactionsModel({
-    this.transactions,
-  });
+  TransactionsModel({this.transactions});
 
   factory TransactionsModel.fromJson(Map<String, dynamic> json) =>
       TransactionsModel(
-        transactions: json["data"] == null || json["data"]["payments"] == null
+        transactions: json["data"] == null
             ? []
-            : List<TransactionItem>.from(json["data"]["payments"]!
-                .map((x) => TransactionItem.fromJson(x))),
+            : List<TransactionItem>.from(
+                json["data"].map((x) => TransactionItem.fromJson(x))),
       );
 }
 

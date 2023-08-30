@@ -20,7 +20,6 @@
   "required": "هذا الحقل مطلوب",
   "current": "حالية",
   "previous": "سابقة",
-  "the_previous": "السابقة",
   "please_enter_valid_number": "من فضلك ادخل رقم هاتف صحيح",
   "please_enter_valid_bank_account": "من فضلك ادخل حساب بنكي صحيح",
   "please_enter_valid_code": "من فضلك ادخل رمز صحيح",
@@ -274,7 +273,9 @@
   "explore_new_offers_with_this_captain": "استكشاف المزيد من العروض مع هذا الكابتن",
   "explore_new_requests_with_this_client": "استكشاف المزيد من الطلبات مع هذا الراكب",
   "there_is_no_notifications": "لا يوجد تنبيهات",
-  "there_is_no_transactions": "لا يوجد معاملات",
+  "there_is_no_transactions": "لا يوجد مدفوعات",
+  "there_is_no_current_transactions": "لا يوجد مدفوعات حالية",
+  "there_is_no_previous_transactions": "لا يوجد مدفوعات سابقة",
   "notification_deleted_successfully": "تم حذف التنبية بنجاح",
   "something_went_wrong": "حدث خطآ ما",
   "added_to_wishlist_successfully":  "تم الاضافة الي المحفوظات بنجاح",
@@ -347,6 +348,7 @@
   "waiting_the_client": "بإنتظار الراكب",
   "go_to_destination": "الذهاب للوجهه",
   "end_ride_header": "انهاء المشوار هنا؟",
-  "end_ride_description": "هل انت متأكد انك وصلت لوجهتك النهائيه؟"
+  "end_ride_description": "هل انت متأكد انك وصلت لوجهتك النهائيه؟",
+  "finished": "السابقة"
 
 }
