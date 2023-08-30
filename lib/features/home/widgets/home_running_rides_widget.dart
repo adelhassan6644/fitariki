@@ -60,9 +60,8 @@ class HomeRunningRidesWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         gradient: const LinearGradient(
-                            colors: [Color(0xFFE8FFEF), Color(0xFFE8FFEF)],
-                            begin: FractionalOffset(0.0, 0.0),
-                            end: FractionalOffset(0.5, 0.0),
+                            colors: [Color(0xFFE8FFEF), Colors.white],
+
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                         boxShadow: [
