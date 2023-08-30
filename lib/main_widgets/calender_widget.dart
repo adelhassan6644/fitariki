@@ -31,7 +31,9 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   void initState() {
     if(!widget.fromAddRequest) {
       Future.delayed(Duration.zero, () {
-      sl<CalenderProvider>().days = widget.days.map((e) => e.id!).toList();
+        print("ffffffffff${widget.days.map((e) => e.id!).toList()}");
+      sl<CalenderProvider>().updateDays(widget.days.map((e) => e.id!).toList());
+
       sl<CalenderProvider>().getEventsList(startDate: widget.startDate, endDate: widget.endDate,);
     });
     }
@@ -43,8 +45,8 @@ class _CalenderWidgetState extends State<CalenderWidget> {
     return Consumer<CalenderProvider>(builder: (context, provider, _) {
       if(provider.isLoad)
         return CircularProgressIndicator();
-            else
-      return Directionality(
+            else {
+        return Directionality(
         textDirection: TextDirection.rtl,
         child: CalendarCarousel<Event>(
           onDayPressed: (date, events) {},
@@ -73,6 +75,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           markedDateMoreShowTotal: true,
         ),
       );
+      }
     });
   }
 }

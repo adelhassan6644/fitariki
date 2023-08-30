@@ -17,11 +17,15 @@ class AddRequest extends StatefulWidget {
   const AddRequest(
       {required this.isCaptain,
       Key? key,
-      required this.offer,
+      this.isSpecialOffer = false,
+      this.offer,
+      this.senderId,
       required this.name})
       : super(key: key);
   final bool isCaptain;
-  final OfferModel offer;
+  final bool isSpecialOffer;
+  final OfferModel? offer;
+  final int? senderId;
   final String name;
 
   @override
@@ -34,18 +38,22 @@ class _AddRequestState extends State<AddRequest> {
     Future.delayed(Duration.zero, () {
       Provider.of<AddRequestProvider>(context, listen: false).updateOfferDays(
           sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
-      if (widget.offer.startDate!.isBefore(DateTime.now())) {
-        Provider.of<AddRequestProvider>(context, listen: false)
-            .onSelectStartDate(widget.offer.startDate!);
-      } else {
-        Provider.of<AddRequestProvider>(context, listen: false)
-            .onSelectStartDate(DateTime.now());
-      }
-      Provider.of<AddRequestProvider>(context, listen: false)
-          .onSelectEndDate(widget.offer.endDate ?? DateTime.now());
       Provider.of<CalenderProvider>(context, listen: false).getEventsList(
-          startDate: DateTime.now(),
-          endDate: widget.offer.endDate ?? DateTime.now());
+        startDate: DateTime.now(),
+        endDate: widget.offer?.endDate ?? DateTime.now(),
+      );
+
+      if (widget.isSpecialOffer && widget.offer != null) {
+        if (widget.offer!.startDate!.isBefore(DateTime.now())) {
+          Provider.of<AddRequestProvider>(context, listen: false)
+              .onSelectStartDate(widget.offer!.startDate!);
+        } else {
+          Provider.of<AddRequestProvider>(context, listen: false)
+              .onSelectStartDate(DateTime.now());
+        }
+        Provider.of<AddRequestProvider>(context, listen: false)
+            .onSelectEndDate(widget.offer!.endDate ?? DateTime.now());
+      }
     });
     super.initState();
   }
@@ -67,17 +75,24 @@ class _AddRequestState extends State<AddRequest> {
           mainAxisSize: MainAxisSize.min,
           children: [
             BottomSheetAppBar(
-              title: widget.isCaptain
-                  ? getTranslated("make_an_offer_to_client", context)
-                  : getTranslated("make_a_request_to_captain", context),
+              title: widget.isSpecialOffer
+                  ? getTranslated("add_special_offer", context)
+                  : widget.isCaptain
+                      ? getTranslated("make_an_offer_to_client", context)
+                      : getTranslated("make_a_request_to_captain", context),
               textBtn: getTranslated("send", context),
               onTap: () {
                 if (provider.checkData(
-                        minOfferPrice: widget.offer.minPrice ?? 0,
-                        maxOfferPrice: widget.offer.maxPrice ?? 0) ==
+                        minOfferPrice: widget.offer?.minPrice ?? 0,
+                        maxOfferPrice: widget.offer?.maxPrice ?? 0,
+                        isSpecialOffer: widget.isSpecialOffer) ==
                     true) {
                   provider.requestOffer(
-                      tripID: widget.offer.id, name: widget.name);
+                      id: widget.isSpecialOffer
+                          ? widget.senderId
+                          : widget.offer?.id,
+                      name: widget.name,
+                      isSpecialOffer: widget.isSpecialOffer);
                 }
               },
             ),
@@ -89,7 +104,7 @@ class _AddRequestState extends State<AddRequest> {
                 children: [
                   DurationWidget(
                     provider: provider,
-                    offerStartDate: widget.offer.startDate ?? DateTime.now(),
+                    offerStartDate: widget.offer?.startDate ?? DateTime.now(),
                   ),
                   const SizedBox(
                     height: 8,

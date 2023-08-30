@@ -17,6 +17,7 @@ class DurationWidget extends StatelessWidget {
   final AddRequestProvider provider;
   final DateTime offerStartDate;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(

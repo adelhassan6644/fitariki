@@ -4,12 +4,14 @@ import 'package:fitariki/features/user_profile/provider/user_profile_provider.da
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
@@ -19,7 +21,11 @@ import '../../../main_widgets/shimmer_widgets/map_widget_shimmer.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
 import '../../../main_widgets/week_days_widget.dart';
 import '../../../navigation/routes.dart';
+import '../../add_request/page/add_request.dart';
+import '../../add_request/provider/add_request_provider.dart';
+import '../../auth/pages/login.dart';
 import '../../maps/provider/location_provider.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/follower_distance_widget.dart';
 import '../widgets/user_offer_card.dart';
@@ -62,7 +68,60 @@ class _UserProfileState extends State<UserProfile> {
                     visible: widget.data["my_profile"] != true,
                     child: CustomAppBar(
                       isOffer: false,
-                      savedItemId: widget.data["id"],
+                      savedItemId:
+                          provider.isLoadProfile ? null : widget.data["id"],
+                      sepcailActionChild: Consumer<ProfileProvider>(
+                          builder: (_, profileProvider, child) {
+                        return Visibility(
+                          visible: profileProvider.isLogin &&
+                              !provider.isLoadProfile,
+                          child: InkWell(
+                            onTap: () {
+                              if (profileProvider.isDriver &&
+                                  profileProvider.status != "1") {
+                                CustomSnackBar.showSnackBar(
+                                    notification: AppNotification(
+                                        message:
+                                            "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
+                                        isFloating: true,
+                                        backgroundColor: Styles.IN_ACTIVE,
+                                        borderColor: Colors.transparent));
+                              } else {
+                                customShowModelBottomSheet(
+                                    onClose: () =>
+                                        sl<AddRequestProvider>().reset(),
+                                    body: profileProvider.isLogin
+                                        ? AddRequest(
+                                            name: provider.userProfileModel
+                                                    ?.driver?.firstName ??
+                                                provider.userProfileModel
+                                                    ?.client?.firstName ??
+                                                "",
+                                            senderId: provider.userProfileModel
+                                                    ?.driver?.id ??
+                                                provider.userProfileModel
+                                                    ?.client?.id,
+                                            isSpecialOffer: true,
+                                            isCaptain: provider.isDriver,
+                                          )
+                                        : const Login());
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 6),
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(6)),
+                              child: Text(
+                                getTranslated("add_special_offer", context),
+                                style: AppTextStyles.w400
+                                    .copyWith(color: Styles.WHITE_COLOR),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
                     ),
                   ),
                   Padding(

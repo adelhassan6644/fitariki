@@ -279,8 +279,7 @@ class OfferDetails extends StatelessWidget {
                                         sl<AddRequestProvider>().reset(),
                                     body: provider.isLogin
                                         ? AddRequest(
-                                            name: provider.offerDetails?.name ??
-                                                "",
+                                            name: provider.offerDetails?.name ?? "",
                                             offer: provider.offerDetails!,
                                             isCaptain: provider.isDriver,
                                           )

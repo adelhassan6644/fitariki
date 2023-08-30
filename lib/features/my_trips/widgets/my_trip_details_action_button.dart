@@ -77,13 +77,16 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                                   RegExp(r'^\d+\.?\d{0,2}')),
                             ],
                             onSend: () {
-                              if (Validations.negotiation(
-                                      provider.negotiationPrice.text.trim(),
-                                      provider.requestModel?.offer?.maxPrice ??
-                                          0.0,
-                                      provider.requestModel?.offer?.minPrice ??
-                                          0.0) !=
-                                  null) {
+                              if (!provider.requestModel!.isSpecialOffer! &&
+                                  Validations.negotiation(
+                                          provider.negotiationPrice.text.trim(),
+                                          provider.requestModel?.offer
+                                                  ?.maxPrice ??
+                                              0.0,
+                                          provider.requestModel?.offer
+                                                  ?.minPrice ??
+                                              0.0) !=
+                                      null) {
                                 showToast(Validations.negotiation(
                                         provider.negotiationPrice.text.trim(),
                                         provider.requestModel?.offer

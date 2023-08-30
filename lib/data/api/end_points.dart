@@ -38,7 +38,8 @@ class EndPoints {
   static const String getContact = 'app/contact';
   static const String getWishList = 'favorites/index';
   static const String postWishList = 'favorites/addOrDelete';
-  static const String addOffer = 'offer/request_offer';
+  static addRequest(role, tripId) => '$role/offer/request_offer/$tripId';
+  static specialOffer(role, type, id) => '$role/$type/special_offer/$id';
   static const String updateRequest = 'offer/request_update';
   static userProfile(role, type, id) => '$role/$type/profile/$id';
   static myProfile(role, type, id) => '$type/$role/profile/$id';

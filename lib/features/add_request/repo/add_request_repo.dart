@@ -8,17 +8,32 @@ import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-class AddRequestRepo{
+class AddRequestRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  AddRequestRepo({required this.dioClient,required this.sharedPreferences});
+  AddRequestRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> requestOffer({var body, tripID}) async {
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
+  Future<Either<ServerFailure, Response>> requestOffer(
+      {body, id, required bool isSpecialOffer}) async {
     try {
+      String type;
+      if (isDriver()) {
+        type = "client";
+      } else {
+        type = "driver";
+      }
+
       Response response = await dioClient.post(
-        uri:
-        "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.addOffer}/$tripID",
+        uri: isSpecialOffer
+            ? EndPoints.specialOffer(
+                sharedPreferences.getString(AppStorageKey.role), type, id)
+            : EndPoints.addRequest(
+                sharedPreferences.getString(AppStorageKey.role), id),
         data: body,
       );
       if (response.statusCode == 200) {
@@ -30,5 +45,4 @@ class AddRequestRepo{
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
-
 }

@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final String? subTitle;
   final Widget? actionChild;
+  final Widget? sepcailActionChild;
   final bool withCart;
   final bool withBack;
   final int? savedItemId;
@@ -23,14 +24,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       {Key? key,
       this.title,
       this.subTitle,
+      this.sepcailActionChild,
       this.withCart = false,
       this.savedItemId,
       this.withBackGround = true,
       this.withBorder = false,
       this.withBack = true,
       this.isOffer = true,
-      this.actionWidth =30,
-      this.appBarHeight =50,
+      this.actionWidth = 30,
+      this.appBarHeight = 50,
       this.actionChild})
       : super(key: key);
 
@@ -43,9 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ? Styles.APP_BAR_BACKGROUND_COLOR
             : Colors.transparent,
         border: withBorder
-            ? Border(
-                bottom:
-                    BorderSide(color: Styles.BORDER_COLOR, width: 1.h))
+            ? Border(bottom: BorderSide(color: Styles.BORDER_COLOR, width: 1.h))
             : null,
       ),
       padding:
@@ -61,15 +61,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              savedItemId != null
-                  ? SaveButton(
-                      id: savedItemId!,
-                      isOffer: isOffer,
-                    )
-                  : actionChild ??
-                      const SizedBox(
-                        width: 18,
-                      ),
+              Row(
+                children: [
+                  savedItemId != null
+                      ? SaveButton(
+                          id: savedItemId!,
+                          isOffer: isOffer,
+                        )
+                      : actionChild ??
+                          const SizedBox(
+                            width: 18,
+                          ),
+                  Visibility(
+                    visible: sepcailActionChild != null,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        sepcailActionChild ?? const SizedBox(),
+                      ],
+                    ),
+                  )
+                ],
+              ),
               const Expanded(child: SizedBox()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,36 +102,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       subTitle ?? "",
                       textAlign: TextAlign.center,
                       style: AppTextStyles.w400
-                          .copyWith(color:Styles.HINT_COLOR, fontSize: 11),
+                          .copyWith(color: Styles.HINT_COLOR, fontSize: 11),
                     ),
                   ),
                 ],
               ),
               const Expanded(child: SizedBox()),
               withBack
-                  ? InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () {
-                        CustomNavigator.pop();
-                      },
-                      child: SizedBox(
-                        width: actionWidth ,
-                        child:  const Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            CustomNavigator.pop();
+                          },
+                          child: SizedBox(
+                            width: actionWidth,
+                            child: const Icon(
                               Icons.arrow_forward_ios,
                               size: 18,
                               color: Colors.black,
                             ),
-                          ],
+                          ),
                         ),
-                      ))
+                      ],
+                    )
                   : SizedBox(
-                      width: actionWidth ,
+                      width: actionWidth,
                     ),
             ],
           ),
@@ -127,5 +143,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>  Size(15005, appBarHeight);
+  Size get preferredSize => Size(15005, appBarHeight);
 }

@@ -20,6 +20,7 @@ class CalenderProvider extends ChangeNotifier {
     days=weakDays;
     notifyListeners();
   }
+
   bool isLoad = false;
   getEventsList({required DateTime startDate,required DateTime endDate}) {
 
@@ -41,7 +42,10 @@ class CalenderProvider extends ChangeNotifier {
 
     eventList = EventList<Event>(events: eventsMAP);
     isLoad = false;
-    print("&&"+eventsMAP.toString());
+    print("&&$startDate");
+    print("&&$endDate");
+    print("&&$days");
+    print("&&$eventsMAP");
     notifyListeners();
   }
 }

@@ -43,9 +43,6 @@ class AddRequestProvider extends ChangeNotifier {
         selectedRideType = null;
       }
     }
-
-    print(selectedRideTypes);
-    print(selectedRideType);
     notifyListeners();
   }
 
@@ -79,6 +76,7 @@ class AddRequestProvider extends ChangeNotifier {
               startDate: startDate, endDate: endDate, weekdays: days!)
           .days;
 
+      sl<CalenderProvider>().updateDays(days);
       sl<CalenderProvider>()
           .getEventsList(startDate: startDate, endDate: endDate);
 
@@ -98,7 +96,10 @@ class AddRequestProvider extends ChangeNotifier {
     sl.get<FollowersProvider>().selectedFollowers.clear();
   }
 
-  checkData({required double minOfferPrice, required double maxOfferPrice}) {
+  checkData(
+      {required double minOfferPrice,
+      required double maxOfferPrice,
+      required bool isSpecialOffer}) {
     if (selectedRideTypes.isEmpty) {
       showToast("برجاء اختيار نوع المشوار!");
 
@@ -115,26 +116,29 @@ class AddRequestProvider extends ChangeNotifier {
       return;
     }
 
-    if (minPrice.text.trim().isEmpty) {
-      showToast("برجاء ادخال الحد الادني للسعر!");
-      return;
-    }
+    if (!isSpecialOffer) {
+      if (minPrice.text.trim().isEmpty) {
+        showToast("برجاء ادخال الحد الادني للسعر!");
+        return;
+      }
 
-    if (minOfferPrice > double.parse(minPrice.text.trim())) {
-      showToast(
-          "برجاء ادخال الحد الادني للسعر اكبر من الحد الادني لسعر العرض!");
-      return;
-    }
+      if (minOfferPrice > double.parse(minPrice.text.trim())) {
+        showToast(
+            "برجاء ادخال الحد الادني للسعر اكبر من الحد الادني لسعر العرض!");
+        return;
+      }
 
-    if (maxOfferPrice < double.parse(minPrice.text.trim())) {
-      showToast("برجاء ادخال الحد الادني للسعر اقل من الحد الاقصي لسعر العرض!");
-      return;
+      if (maxOfferPrice < double.parse(minPrice.text.trim())) {
+        showToast(
+            "برجاء ادخال الحد الادني للسعر اقل من الحد الاقصي لسعر العرض!");
+        return;
+      }
     }
     return true;
   }
 
   bool isLoading = true;
-  requestOffer({tripID, String? name}) async {
+  requestOffer({id, String? name, required bool isSpecialOffer}) async {
     try {
       spinKitDialog();
       isLoading = true;
@@ -142,7 +146,7 @@ class AddRequestProvider extends ChangeNotifier {
 
       final data = {
         "request_offer": {
-          sl<ProfileProvider>().isDriver ? 'driver_id' : "client_id":
+          '${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id':
               sl.get<SharedPreferences>().getString(AppStorageKey.userId),
           "offer_type": selectedRideType,
           "start_date": startDate.defaultFormat2(),
@@ -160,8 +164,8 @@ class AddRequestProvider extends ChangeNotifier {
                 .map((x) => x.toPostJson()))
         }
       };
-      Either<ServerFailure, Response> response =
-          await addRequestRepo.requestOffer(body: data, tripID: tripID);
+      Either<ServerFailure, Response> response = await addRequestRepo
+          .requestOffer(body: data, id: id, isSpecialOffer: isSpecialOffer);
       response.fold((fail) {
         CustomNavigator.pop();
         showToast(fail.error);

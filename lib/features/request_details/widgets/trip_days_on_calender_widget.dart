@@ -19,7 +19,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+          EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       child: ExpansionTileWidget(
         iconColor: Styles.SECOUND_PRIMARY_COLOR,
         title: getTranslated("trip_details", context),
@@ -49,7 +49,8 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
           ),
           SizedBox(
             height: 8.h,
-          ),Row(
+          ),
+          Row(
             children: [
               Expanded(
                 child: Text(
@@ -75,10 +76,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
-          CalenderWidget(
-              startDate: startDate!,
-              endDate: endDate!,
-              days: days!),
+          CalenderWidget(startDate: startDate!, endDate: endDate!, days: days!),
         ],
       ),
     );
