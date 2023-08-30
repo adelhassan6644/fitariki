@@ -25,6 +25,7 @@ class RideDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRides(id),
 
@@ -257,7 +258,7 @@ class RideDetailsWidget extends StatelessWidget {
                             provider.timer.cancel();
                           }
 
-                          if ((provider.ride!.status!.toInt() + 1) == 3) {
+                          if (provider.ride!.status !=null&&(provider.ride!.status!.toInt() + 1) == 3) {
                             CupertinoPopUpHelper.showCupertinoPopUp(
                               textButton: getTranslated("end_ride", context),
                               onConfirm: () {

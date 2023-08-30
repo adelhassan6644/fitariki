@@ -21,7 +21,7 @@ class RideDetailsRepo {
     try {
       Response response = await dioClient.get(
         uri: EndPoints.rideDetails(
-            sharedPreferences.getString(AppStorageKey.role), 2),
+            sharedPreferences.getString(AppStorageKey.role), id),
       );
       if (response.statusCode == 200) {
         return Right(response);
