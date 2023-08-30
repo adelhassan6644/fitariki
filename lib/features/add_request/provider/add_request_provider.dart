@@ -75,8 +75,6 @@ class AddRequestProvider extends ChangeNotifier {
       duration = Methods.getWeekdayCount(
               startDate: startDate, endDate: endDate, weekdays: days!)
           .days;
-
-      sl<CalenderProvider>().updateDays(days);
       sl<CalenderProvider>()
           .getEventsList(startDate: startDate, endDate: endDate);
 

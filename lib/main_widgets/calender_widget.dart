@@ -18,7 +18,7 @@ class CalenderWidget extends StatefulWidget {
       {Key? key,
       required this.startDate,
       required this.endDate,
-        this.fromAddRequest=false,
+      this.fromAddRequest = false,
       required this.days})
       : super(key: key);
 
@@ -29,52 +29,62 @@ class CalenderWidget extends StatefulWidget {
 class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   void initState() {
-    if(!widget.fromAddRequest) {
-      Future.delayed(Duration.zero, () {
-        print("ffffffffff${widget.days.map((e) => e.id!).toList()}");
+    Future.delayed(Duration.zero, () {
       sl<CalenderProvider>().updateDays(widget.days.map((e) => e.id!).toList());
-
-      sl<CalenderProvider>().getEventsList(startDate: widget.startDate, endDate: widget.endDate,);
+      if (!widget.fromAddRequest) {
+        sl<CalenderProvider>().getEventsList(
+          startDate: widget.startDate,
+          endDate: widget.endDate,
+        );
+      }
     });
-    }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CalenderProvider>(builder: (context, provider, _) {
-      if(provider.isLoad)
+      if (provider.isLoad) {
         return CircularProgressIndicator();
-            else {
+      } else {
         return Directionality(
-        textDirection: TextDirection.rtl,
-        child: CalendarCarousel<Event>(
-          onDayPressed: (date, events) {},
-          locale: 'ar',
-          headerMargin: EdgeInsets.symmetric(horizontal: 50.w),
+          textDirection: TextDirection.rtl,
+          child: CalendarCarousel<Event>(
+            onDayPressed: (date, events) {},
+            locale: 'ar',
+            headerMargin: EdgeInsets.symmetric(horizontal: 50.w),
 
-          weekendTextStyle: const TextStyle(color: Styles.PRIMARY_COLOR,),
+            weekendTextStyle: const TextStyle(
+              color: Styles.PRIMARY_COLOR,
+            ),
 
-          thisMonthDayBorderColor: Colors.grey.withOpacity(.1),
-          // headerText: 'days',
-          weekFormat: false,
-          markedDatesMap: provider.eventList,
-          height: 400.h,
-          // selectedDateTime: DateTime(2021,11,11),
-          showIconBehindDayText: true,
-          markedDateShowIcon: true,
-          selectedDayTextStyle: const TextStyle(color: Styles.PRIMARY_COLOR,),
-          selectedDayBorderColor: Colors.black12,
-          selectedDayButtonColor: Colors.transparent,
-          todayTextStyle: const TextStyle(color:  Styles.PRIMARY_COLOR,),
-          markedDateIconBuilder: (event) {return event.icon ?? const Icon(Icons.add_alert_rounded);},
-          minSelectedDate: DateTime.now().subtract(const Duration(days: 360)),
-          maxSelectedDate: DateTime.now().add(const Duration(days: 360)),
-          todayButtonColor: Styles.ACCENT_PRIMARY_COLOR,
-          todayBorderColor: Colors.grey,
-          markedDateMoreShowTotal: true,
-        ),
-      );
+            thisMonthDayBorderColor: Colors.grey.withOpacity(.1),
+            // headerText: 'days',
+            weekFormat: false,
+            markedDatesMap: provider.eventList,
+            height: 400.h,
+            // selectedDateTime: DateTime(2021,11,11),
+            showIconBehindDayText: true,
+            markedDateShowIcon: true,
+            selectedDayTextStyle: const TextStyle(
+              color: Styles.PRIMARY_COLOR,
+            ),
+            selectedDayBorderColor: Colors.black12,
+            selectedDayButtonColor: Colors.transparent,
+            todayTextStyle: const TextStyle(
+              color: Styles.PRIMARY_COLOR,
+            ),
+            markedDateIconBuilder: (event) {
+              return event.icon ?? const Icon(Icons.add_alert_rounded);
+            },
+            minSelectedDate: DateTime.now().subtract(const Duration(days: 360)),
+            maxSelectedDate: DateTime.now().add(const Duration(days: 360)),
+            todayButtonColor: Styles.ACCENT_PRIMARY_COLOR,
+            todayBorderColor: Colors.grey,
+            markedDateMoreShowTotal: true,
+          ),
+        );
       }
     });
   }

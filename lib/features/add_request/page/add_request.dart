@@ -6,7 +6,6 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
-import '../../../main_providers/calender_provider.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
@@ -38,11 +37,6 @@ class _AddRequestState extends State<AddRequest> {
     Future.delayed(Duration.zero, () {
       Provider.of<AddRequestProvider>(context, listen: false).updateOfferDays(
           sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
-      Provider.of<CalenderProvider>(context, listen: false).getEventsList(
-        startDate: DateTime.now(),
-        endDate: widget.offer?.endDate ?? DateTime.now(),
-      );
-
       if (widget.isSpecialOffer && widget.offer != null) {
         if (widget.offer!.startDate!.isBefore(DateTime.now())) {
           Provider.of<AddRequestProvider>(context, listen: false)
@@ -106,18 +100,24 @@ class _AddRequestState extends State<AddRequest> {
                     provider: provider,
                     offerStartDate: widget.offer?.startDate ?? DateTime.now(),
                   ),
-                  const SizedBox(
-                    height: 8,
+
+                  ///Followers Widget
+                  Visibility(
+                    visible: !widget.isCaptain,
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: FollowersWidget(),
+                    ),
                   ),
-                  if (!widget.isCaptain) const FollowersWidget(),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  CalenderWidget(
-                      startDate: provider.startDate,
-                      endDate: provider.endDate,
-                      fromAddRequest: true,
-                      days: sl.get<ScheduleProvider>().selectedDays)
+
+                  Consumer<ScheduleProvider>(
+                      builder: (_, scheduleProvider, child) {
+                    return CalenderWidget(
+                        startDate: provider.startDate,
+                        endDate: provider.endDate,
+                        fromAddRequest: true,
+                        days: scheduleProvider.selectedDays);
+                  })
                 ],
               ),
             ),
