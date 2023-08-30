@@ -13,6 +13,7 @@ import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
+import '../../../navigation/routes.dart';
 import '../../my_rides/model/my_rides_model.dart';
 import '../repo/ride_details_repo.dart';
 
@@ -90,6 +91,9 @@ class RideDetailsProvider extends ChangeNotifier {
       }, (response) {
         showToast(response.data["message"] ?? "");
         ride?.status = status;
+        if(status == 3){
+          CustomNavigator.push(Routes.DASHBOARD,arguments: 0);
+        }
       });
 
       ///Hide Loading dialog
