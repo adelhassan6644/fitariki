@@ -342,5 +342,7 @@
   "emergency_header": "Features that help you feel safe on your journey.",
   "captain_arrived": "Captain Arrived",
   "waiting_the_client": "Waiting Client",
-  "go_to_destination": "Go to destination"
+  "go_to_destination": "Go to destination",
+  "end_ride_header": "End Ride here?",
+  "end_ride_description": "Are you sure you have reached your final destination?"
 }

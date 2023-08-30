@@ -3,6 +3,7 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:fitariki/features/tracking/widget/rider_details_widget.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_images.dart';
 import '../../../data/config/di.dart';
+import '../../../helpers/cupertino_pop_up_helper.dart';
 import '../../my_rides/widgets/ride_locations_widget.dart';
 import '../provider/ride_details_provider.dart';
 import '../repo/ride_details_repo.dart';
@@ -250,15 +252,29 @@ class RideDetailsWidget extends StatelessWidget {
                         onTap: () {
                           if (provider.isDriver && provider.ride?.status == 0) {
                             provider.countTime();
-                          } else if (provider.isDriver && provider.count != 0) {
+                          }
+                          else if (provider.isDriver && provider.count != 0) {
                             provider.timer.cancel();
                           }
 
-                          provider.changeStatus(
-                              id,
-                              provider.ride!.status == null
-                                  ? 0
-                                  : (provider.ride!.status!.toInt() + 1));
+                          if ((provider.ride!.status!.toInt() + 1) == 3) {
+                            CupertinoPopUpHelper.showCupertinoPopUp(
+                              textButton: getTranslated("end_ride", context),
+                              onConfirm: () {
+                                CustomNavigator.pop();
+                                provider.changeStatus(id, 3);
+                              },
+                              title: getTranslated("end_ride_header", context),
+                              description: getTranslated(
+                                  "end_ride_description", context),
+                            );
+                          } else {
+                            provider.changeStatus(
+                                id,
+                                provider.ride!.status == null
+                                    ? 0
+                                    : (provider.ride!.status!.toInt() + 1));
+                          }
                         },
                         isLoading: provider.isChanging,
                       ),

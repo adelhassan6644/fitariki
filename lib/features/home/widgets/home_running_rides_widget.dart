@@ -48,7 +48,7 @@ class HomeRunningRidesWidget extends StatelessWidget {
                       24),
                   child: InkWell(
                     onTap: () {
-                      CustomNavigator.push(Routes.MY_RIDES);
+                      CustomNavigator.push(Routes.TRACKING,arguments: {"id":1,"date":DateTime.now(),"number":88});
                     },
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,

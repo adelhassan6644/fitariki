@@ -345,6 +345,8 @@
   "there_is_no_rides_on_this_day": "لا يوجد مشاوير في هذا اليوم",
   "captain_arrived": "الكابتن وصل",
   "waiting_the_client": "بإنتظار الراكب",
-  "go_to_destination": "الذهاب للوجهه"
+  "go_to_destination": "الذهاب للوجهه",
+  "end_ride_header": "انهاء المشوار هنا؟",
+  "end_ride_description": "هل انت متأكد انك وصلت لوجهتك النهائيه؟"
 
 }
