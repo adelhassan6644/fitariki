@@ -84,7 +84,7 @@ class OfferRequestDetailsModel {
                 : double.parse(json["offer_price"].toString()),
         offerPrice: double.parse(json["offer_price"].toString()),
         offerType: json["offer_type"] ?? 1,
-        isSpecialOffer: json["special_offer"] == 1 ? true : false,
+        isSpecialOffer: json["is_special"] == 1 ? true : false,
         message: json["message"],
         matching: json["matching"] == null
             ? 0.0

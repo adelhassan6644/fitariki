@@ -7,6 +7,7 @@ import 'package:fitariki/components/custom_images.dart';
 import 'package:fitariki/components/shimmer/custom_shimmer.dart';
 import 'package:fitariki/features/home/provider/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/dimensions.dart';
@@ -61,7 +62,6 @@ class HomeRunningRidesWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         gradient: const LinearGradient(
                             colors: [Color(0xFFE8FFEF), Colors.white],
-
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                         boxShadow: [
@@ -108,7 +108,11 @@ class HomeRunningRidesWidget extends StatelessWidget {
                               width: 30,
                               height: 30),
                         ],
-                      ),
+                      )
+                          .animate(
+                            onComplete: (c) => c.repeat(),
+                          )
+                          .shimmer(duration: 1000.ms),
                     ),
                   ),
                 ),
