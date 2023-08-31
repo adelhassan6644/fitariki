@@ -54,8 +54,8 @@ class MapProvider extends ChangeNotifier {
     gMapMarkers.add(
       Marker(
         markerId: const MarkerId('sourcePin'),
-        position: LatLng(double.parse(pickupLocation!.latitude!),
-            double.parse(pickupLocation!.longitude!)),
+        position: LatLng(double.parse(pickupLocation?.latitude??"0"),
+            double.parse(pickupLocation?.longitude??"0")),
         icon: sourceIcon!,
         anchor: const Offset(0.5, 0.5),
       ),
@@ -64,8 +64,8 @@ class MapProvider extends ChangeNotifier {
     gMapMarkers.add(
       Marker(
         markerId: const MarkerId('destPin'),
-        position: LatLng(double.parse(dropOffLocation!.latitude!),
-            double.parse(dropOffLocation!.longitude!)),
+        position: LatLng(double.parse(dropOffLocation?.latitude??"0"),
+            double.parse(dropOffLocation?.longitude??"0")),
         icon: destinationIcon!,
         anchor: const Offset(0.5, 0.5),
       ),
@@ -74,10 +74,10 @@ class MapProvider extends ChangeNotifier {
     PolylineResult polylineResult =
         await polylinePoints.getRouteBetweenCoordinates(
       AppStrings.googleApiKey,
-      PointLatLng(double.parse(pickupLocation!.latitude!),
-          double.parse(pickupLocation!.longitude!)),
-      PointLatLng(double.parse(dropOffLocation!.latitude!),
-          double.parse(dropOffLocation!.longitude!)),
+      PointLatLng(double.parse(pickupLocation?.latitude??"0"),
+          double.parse(pickupLocation?.longitude??"0")),
+      PointLatLng(double.parse(dropOffLocation?.latitude??"0"),
+          double.parse(dropOffLocation?.longitude??"0")),
     );
     //get the points from the result
     List<PointLatLng> result = polylineResult.points;
@@ -104,11 +104,11 @@ class MapProvider extends ChangeNotifier {
 
     //
     //zoom to latbound
-    final pickupLocationLatLng = LatLng(double.parse(pickupLocation!.latitude!),
-        double.parse(pickupLocation!.longitude!));
+    final pickupLocationLatLng = LatLng(double.parse(pickupLocation?.latitude??"0"),
+        double.parse(pickupLocation?.longitude??"0"));
     final dropoffLocationLatLng = LatLng(
-        double.parse(dropOffLocation!.latitude!),
-        double.parse(dropOffLocation!.longitude!));
+        double.parse(dropOffLocation?.latitude??"0"),
+        double.parse(dropOffLocation?.longitude??"0"));
 
     await updateCameraLocation(
       pickupLocationLatLng,

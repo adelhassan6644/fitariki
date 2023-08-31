@@ -13,7 +13,6 @@ import '../../../main_widgets/car_trip_details_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
-import '../../maps/provider/location_provider.dart';
 import '../../request_details/provider/request_details_provider.dart';
 import '../../request_details/widgets/trip_days_on_calender_widget.dart';
 import '../widgets/my_trip_details_action_button.dart';
@@ -195,13 +194,11 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                 .isNotEmpty)
                               ...List.generate(
                                 provider.requestModel?.offer?.offerFollowers
-                                        ?.length ??
-                                    0,
+                                        ?.length ?? 0,
                                 (index) => MapWidget(
                                   launchMap: false,
                                   clientName: provider.requestModel?.offer
-                                          ?.offerFollowers?[index].name ??
-                                      "",
+                                          ?.offerFollowers?[index].name ?? "",
                                   gender: provider.requestModel?.offer
                                       ?.offerFollowers?[index].gender,
                                   startPoint: provider.requestModel?.offer
