@@ -136,7 +136,11 @@ class AddRequestProvider extends ChangeNotifier {
   }
 
   bool isLoading = true;
-  requestOffer({id, String? name, required bool isSpecialOffer}) async {
+  requestOffer(
+      {id,
+      String? name,
+      required bool isSpecialOffer,
+      ValueChanged<bool>? updateOffer}) async {
     try {
       spinKitDialog();
       isLoading = true;
@@ -168,6 +172,10 @@ class AddRequestProvider extends ChangeNotifier {
         CustomNavigator.pop();
         showToast(fail.error);
       }, (response) async {
+        if (updateOffer != null) {
+          updateOffer(true);
+        }
+
         sl<MyTripsProvider>().getPendingTrips();
         CustomNavigator.pop();
         CustomNavigator.pop();

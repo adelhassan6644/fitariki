@@ -77,7 +77,7 @@ class RideDetailsProvider extends ChangeNotifier {
   bool isChanging = false;
   changeStatus(id, status) async {
     try {
-      ///Show Loading dialog
+      ///Show Loading dialog if client want to end ride
       if (!isDriver) {
         Future.delayed(Duration.zero, () => spinKitDialog());
       }
@@ -91,8 +91,8 @@ class RideDetailsProvider extends ChangeNotifier {
       }, (response) {
         showToast(response.data["message"] ?? "");
         ride?.status = status;
-        if(status == 3){
-          CustomNavigator.push(Routes.DASHBOARD,arguments: 0);
+        if (status == 3) {
+          CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
         }
       });
 

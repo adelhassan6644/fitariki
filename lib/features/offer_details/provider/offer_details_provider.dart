@@ -45,4 +45,11 @@ class OfferDetailsProvider extends ChangeNotifier {
     //   notifyListeners();
     // }
   }
+
+  updateModel(v){
+    if(offerDetails != null) {
+      offerDetails?.isSentOffer =true;
+    }
+    notifyListeners();
+  }
 }

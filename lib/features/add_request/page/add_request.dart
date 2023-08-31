@@ -18,12 +18,14 @@ class AddRequest extends StatefulWidget {
       Key? key,
       this.isSpecialOffer = false,
       this.offer,
+      this.updateOfferDetails,
       this.senderId,
       required this.name})
       : super(key: key);
   final bool isCaptain;
   final bool isSpecialOffer;
   final OfferModel? offer;
+  final ValueChanged? updateOfferDetails;
   final int? senderId;
   final String name;
 
@@ -82,6 +84,7 @@ class _AddRequestState extends State<AddRequest> {
                         isSpecialOffer: widget.isSpecialOffer) ==
                     true) {
                   provider.requestOffer(
+                      updateOffer: widget.updateOfferDetails,
                       id: widget.isSpecialOffer
                           ? widget.senderId
                           : widget.offer?.id,

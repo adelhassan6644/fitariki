@@ -213,7 +213,9 @@ class OfferDetails extends StatelessWidget {
                                       height: 12,
                                     ),
                                     Text(
-                                      Methods.getOfferType(provider.offerDetails?.offerType ?? 1),
+                                      Methods.getOfferType(
+                                          provider.offerDetails?.offerType ??
+                                              1),
                                       textAlign: TextAlign.end,
                                       style: AppTextStyles.w400.copyWith(
                                         fontSize: 10,
@@ -282,6 +284,7 @@ class OfferDetails extends StatelessWidget {
                                             name: provider.offerDetails?.name ?? "",
                                             offer: provider.offerDetails!,
                                             isCaptain: provider.isDriver,
+                                            updateOfferDetails: provider.updateModel,
                                           )
                                         : const Login());
                               }
