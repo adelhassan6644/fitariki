@@ -14,7 +14,6 @@ import '../../../data/config/di.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/request_details_shimmer.dart';
-import '../../maps/provider/location_provider.dart';
 import '../provider/request_details_provider.dart';
 import '../../../main_widgets/car_trip_details_widget.dart';
 import '../widgets/action_buttons.dart';
@@ -134,27 +133,13 @@ class _RequestDetailsState extends State<RequestDetails> {
 
                             ///distance between client and driver
                             DistanceWidget(
-                                isCaptain: provider.isDriver,
-                                lat1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .latitude!,
-                                long1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .longitude!,
-                                lat2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.latitude ??
-                                        "0"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.latitude ??
-                                        "0",
-                                long2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.longitude ??
-                                        "1"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.longitude ??
-                                        "1"),
+                              isCaptain: provider.isDriver,
+                              location: provider.isDriver
+                                  ? provider
+                                      .requestModel?.clientModel?.pickupLocation
+                                  : provider
+                                      .requestModel?.offer?.pickupLocation,
+                            ),
 
                             /// to show stop points for followers request if driver
                             Visibility(

@@ -2,7 +2,6 @@ import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/animated_widget.dart';
-import 'package:fitariki/features/maps/provider/location_provider.dart';
 import 'package:fitariki/features/offer_details/repo/offer_details_repo.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -120,18 +119,7 @@ class OfferDetails extends StatelessWidget {
                               ///distance between client and driver
                               DistanceWidget(
                                 isCaptain: provider.isDriver,
-                                lat1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .latitude!,
-                                long1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .longitude!,
-                                lat2: provider.offerDetails?.pickupLocation
-                                        ?.latitude ??
-                                    "0",
-                                long2: provider.offerDetails?.pickupLocation
-                                        ?.longitude ??
-                                    "0",
+                                location: provider.offerDetails?.pickupLocation,
                               ),
 
                               /// to show stop points for followers of offer details if driver
@@ -281,10 +269,12 @@ class OfferDetails extends StatelessWidget {
                                         sl<AddRequestProvider>().reset(),
                                     body: provider.isLogin
                                         ? AddRequest(
-                                            name: provider.offerDetails?.name ?? "",
+                                            name: provider.offerDetails?.name ??
+                                                "",
                                             offer: provider.offerDetails!,
                                             isCaptain: provider.isDriver,
-                                            updateOfferDetails: provider.updateModel,
+                                            updateOfferDetails:
+                                                provider.updateModel,
                                           )
                                         : const Login());
                               }

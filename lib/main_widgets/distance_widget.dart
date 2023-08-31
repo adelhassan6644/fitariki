@@ -7,18 +7,13 @@ import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
 import '../app/localization/localization/language_constant.dart';
 import '../components/custom_images.dart';
+import '../features/maps/models/location_model.dart';
 
 class DistanceWidget extends StatelessWidget {
-  const DistanceWidget(
-      {required this.isCaptain,
-      required this.lat1,
-      required this.long1,
-      required this.lat2,
-      required this.long2,
-      Key? key})
+  const DistanceWidget({required this.isCaptain, this.location, Key? key})
       : super(key: key);
   final bool isCaptain;
-  final String lat1, long1, lat2, long2;
+  final LocationModel? location;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +44,18 @@ class DistanceWidget extends StatelessWidget {
                 color: Styles.HINT_COLOR,
                 overflow: TextOverflow.ellipsis),
           ),
-          Text(
-            "  ${Methods.calcDistance(lat1: lat1, long1: long1, lat2: lat2, long2: long2)} كيلو",
-            maxLines: 1,
-            style: AppTextStyles.w600.copyWith(
-                fontSize: 10,
-                color: Styles.PRIMARY_COLOR,
-                overflow: TextOverflow.ellipsis),
+          FutureBuilder(
+            future: Methods.calcDistanceFromCurrentLocation(location: location),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              return Text(
+                "  ${snapshot.hasData ? snapshot.data ?? "" : "..."} كيلو",
+                maxLines: 1,
+                style: AppTextStyles.w600.copyWith(
+                    fontSize: 10,
+                    color: Styles.PRIMARY_COLOR,
+                    overflow: TextOverflow.ellipsis),
+              );
+            },
           ),
         ],
       ),

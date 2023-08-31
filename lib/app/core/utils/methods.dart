@@ -127,19 +127,12 @@ abstract class Methods {
     }
   }
 
-  static calcDistance(
-      {required lat1, required long1, required lat2, required long2}) {
-    return (Geolocator.distanceBetween(double.parse(lat1), double.parse(long1),
-                double.parse(lat2), double.parse(long2)) /
-            1000)
-        .toStringAsFixed(2);
-  }
+
 
 
 
   static calcDistanceFromCurrentLocation({LocationModel? location}) async {
-    Position currentPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    Position currentPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     return (Geolocator.distanceBetween(currentPosition.latitude,currentPosition.longitude,
         double.parse(location?.latitude??"0"), double.parse(location?.longitude??"0")) / 1000).toStringAsFixed(2);
   }

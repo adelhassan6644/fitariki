@@ -175,28 +175,11 @@ class _UserProfileState extends State<UserProfile> {
                                         .userProfileModel?.driver?.requestsCount
                                     : provider.userProfileModel?.client
                                         ?.requestsCount,
-                            distance: "  ${Methods.calcDistance(
-                              lat1: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .latitude!,
-                              long1: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .longitude!,
-                              lat2: provider.userProfileModel!.driver != null
-                                  ? provider.userProfileModel?.driver
-                                          ?.pickupLocation?.latitude ??
-                                      "0"
-                                  : provider.userProfileModel?.client
-                                          ?.pickupLocation?.latitude ??
-                                      "0",
-                              long2: provider.userProfileModel!.driver != null
-                                  ? provider.userProfileModel?.driver
-                                          ?.pickupLocation?.longitude ??
-                                      "0"
-                                  : provider.userProfileModel?.client
-                                          ?.pickupLocation?.longitude ??
-                                      "0",
-                            )} كيلو",
+                            distance: provider.userProfileModel!.driver != null
+                                ? provider
+                                    .userProfileModel?.driver?.pickupLocation
+                                : provider
+                                    .userProfileModel?.client?.pickupLocation,
                           )
                         : ProfileCardShimmer(
                             myProfile: widget.data["my_profile"]),

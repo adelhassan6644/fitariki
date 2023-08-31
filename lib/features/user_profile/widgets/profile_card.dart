@@ -4,12 +4,14 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/show_rate.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/routes.dart';
+import '../../maps/models/location_model.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../profile/widgets/profile_image_widget.dart';
 
@@ -31,7 +33,8 @@ class ProfileCard extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final String? nationality, name, lastUpdate, distance, image, phone;
+  final LocationModel? distance;
+  final String? nationality, name, lastUpdate, image, phone;
   final bool male, withPhone, isDriver;
   final int? requestsCount, reservationCount, rate;
   final bool myProfile;
@@ -51,36 +54,45 @@ class ProfileCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
-                    color: Styles.WHITE_COLOR,
+                  borderRadius:
+                      BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
+                  color: Styles.WHITE_COLOR,
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black54.withOpacity(0.1),
                         blurRadius: 7.0,
                         spreadRadius: -1,
                         offset: const Offset(0, 6))
-                  ],),
+                  ],
+                ),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         distance != null
-                            ? RichText(
-                                text: TextSpan(
-                                  text: "يبعد عنك ",
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 10,
-                                      color: Styles.SECOUND_PRIMARY_COLOR),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: distance,
-                                      style: AppTextStyles.w700.copyWith(
+                            ? FutureBuilder(
+                                future: Methods.calcDistanceFromCurrentLocation(
+                                    location: distance),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<dynamic> snapshot) {
+                                  return RichText(
+                                    text: TextSpan(
+                                      text: "يبعد عنك ",
+                                      style: AppTextStyles.w400.copyWith(
                                           fontSize: 10,
-                                          color: Styles.PRIMARY_COLOR),
+                                          color: Styles.SECOUND_PRIMARY_COLOR),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              "  ${snapshot.hasData ? snapshot.data ?? "" : "..."} كيلو",
+                                          style: AppTextStyles.w700.copyWith(
+                                              fontSize: 10,
+                                              color: Styles.PRIMARY_COLOR),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  );
+                                },
                               )
                             : InkWell(
                                 splashColor: Colors.transparent,

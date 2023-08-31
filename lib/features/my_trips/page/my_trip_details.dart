@@ -12,7 +12,6 @@ import '../../../data/config/di.dart';
 import '../../../main_widgets/car_trip_details_widget.dart';
 import '../../../main_widgets/distance_widget.dart';
 import '../../../main_widgets/map_widget.dart';
-import '../../maps/provider/location_provider.dart';
 import '../../request_details/widgets/trip_days_on_calender_widget.dart';
 
 class MyTripDetails extends StatelessWidget {
@@ -134,25 +133,12 @@ class MyTripDetails extends StatelessWidget {
                     ///distance between client and driver
                     DistanceWidget(
                       isCaptain: sl<ProfileProvider>().isDriver,
-                      lat1: sl<LocationProvider>().currentLocation!.latitude!,
-                      long1: sl<LocationProvider>().currentLocation!.longitude!,
-                      lat2: sl<ProfileProvider>().isDriver
-                          ? myTripModel.clientModel?.pickupLocation?.latitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation
-                                  ?.latitude ??
-                              myTripModel.myTripRequest?.clientModel
-                                  ?.pickupLocation?.latitude ??
-                              "0"
-                          : myTripModel.offer?.pickupLocation?.latitude ?? "0",
-                      long2: sl<ProfileProvider>().isDriver
-                          ? myTripModel
-                                  .clientModel?.pickupLocation?.longitude ??
-                              myTripModel.offer?.clientModel?.pickupLocation
-                                  ?.longitude ??
-                              myTripModel.myTripRequest?.clientModel
-                                  ?.pickupLocation?.longitude ??
-                              "0"
-                          : myTripModel.offer?.pickupLocation?.longitude ?? "0",
+                      location: sl<ProfileProvider>().isDriver
+                          ? myTripModel.clientModel?.pickupLocation ??
+                              myTripModel.offer?.clientModel?.pickupLocation ??
+                              myTripModel
+                                  .myTripRequest?.clientModel?.pickupLocation
+                          : myTripModel.offer?.pickupLocation,
                     ),
 
                     ///Type of ride

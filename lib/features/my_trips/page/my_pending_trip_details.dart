@@ -153,38 +153,12 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
 
                             ///distance between client and driver
                             DistanceWidget(
-                                isCaptain: provider.isDriver,
-                                lat1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .latitude!,
-                                long1: sl<LocationProvider>()
-                                    .currentLocation!
-                                    .longitude!,
-                                lat2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.latitude ??
-                                        provider
-                                            .requestModel
-                                            ?.offer
-                                            ?.clientModel
-                                            ?.pickupLocation
-                                            ?.latitude ??
-                                        "0"
-                                    : provider.requestModel?.offer?.pickupLocation?.latitude ??
-                                        "0",
-                                long2: provider.isDriver
-                                    ? provider.requestModel?.clientModel
-                                            ?.pickupLocation?.longitude ??
-                                        provider
-                                            .requestModel
-                                            ?.offer
-                                            ?.clientModel
-                                            ?.pickupLocation
-                                            ?.longitude ??
-                                        "0"
-                                    : provider.requestModel?.offer
-                                            ?.pickupLocation?.longitude ??
-                                        "0"),
+                              isCaptain: provider.isDriver,
+                              location: provider.isDriver
+                                  ? provider.requestModel?.clientModel?.pickupLocation ??
+                                      provider.requestModel?.offer?.clientModel?.pickupLocation
+                                  : provider.requestModel?.offer?.pickupLocation,
+                            ),
 
                             ///Type of ride
                             Padding(

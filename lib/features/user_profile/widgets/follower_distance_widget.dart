@@ -21,7 +21,8 @@ class FollowerDistanceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: !isLoading && followers != null &&
+      visible: !isLoading &&
+          followers != null &&
           followers!.data != null &&
           followers!.data!.isNotEmpty,
       child: Padding(
@@ -75,33 +76,29 @@ class FollowerDistanceWidget extends StatelessWidget {
                         child: const SizedBox(),
                       ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        text: "يبعد عنك ",
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 10,
-                            color: Styles.SECOUND_PRIMARY_COLOR),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: "  ${Methods.calcDistance(
-                              lat1: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .latitude!,
-                              long1: sl<LocationProvider>()
-                                  .currentLocation!
-                                  .longitude!,
-                              lat2: followers!
-                                  .data![index].pickupLocation?.latitude,
-                              long2: followers!
-                                  .data![index].pickupLocation?.longitude,
-                            )} كيلو",
-                            style: AppTextStyles.w700.copyWith(
+                    FutureBuilder(
+                      future: Methods.calcDistanceFromCurrentLocation(
+                          location: followers!.data![index].pickupLocation),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        return RichText(
+                          text: TextSpan(
+                            text: "يبعد عنك ",
+                            style: AppTextStyles.w400.copyWith(
                                 fontSize: 10,
-                                color: Styles.PRIMARY_COLOR),
+                                color: Styles.SECOUND_PRIMARY_COLOR),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text:
+                                    "  ${snapshot.hasData ? snapshot.data ?? "" : "..."} كيلو",
+                                style: AppTextStyles.w700.copyWith(
+                                    fontSize: 10, color: Styles.PRIMARY_COLOR),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
