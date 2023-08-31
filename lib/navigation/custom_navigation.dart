@@ -30,6 +30,7 @@ import '../features/my_trips/page/my_trip_details.dart';
 import '../features/notifications/page/notifications.dart';
 import '../features/payment/page/payment.dart';
 import '../features/feedback/page/feedback.dart';
+import '../features/ratting/page/ratting_ride_page.dart';
 import '../features/request_details/page/request_details.dart';
 import '../features/success/model/success_model.dart';
 import '../features/success/success_page.dart';
@@ -112,6 +113,9 @@ abstract class CustomNavigator {
           data: settings.arguments as RateUserNavigationModel,
         ));
 
+      case Routes.RATE_RIDE:
+        return _pageRoute(RattingRidePage(data: settings.arguments as Map));
+
       case Routes.PDF:
         return _pageRoute(CustomPDF(
           url: settings.arguments as String,
@@ -164,7 +168,9 @@ abstract class CustomNavigator {
         return _pageRoute(const MyRidesPage());
 
       case Routes.TRACKING:
-        return _pageRoute(TrackingPage(data:settings.arguments as Map,));
+        return _pageRoute(TrackingPage(
+          data: settings.arguments as Map,
+        ));
 
       case Routes.PAYMENT:
         {

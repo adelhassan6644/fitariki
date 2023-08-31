@@ -346,5 +346,11 @@
   "go_to_destination": "Go to destination",
   "end_ride_header": "End Ride here?",
   "end_ride_description": "Are you sure you have reached your final destination?",
-  "finished": "Finished"
+  "finished": "Finished",
+  "your_ride_is_ended": "Your ride is ended",
+  "the_rate": "The Rate",
+  "you_have": "You have",
+  "ride_remaining_with": "ride remaining with",
+  "the_passenger": "The Passenger",
+  "the_captain": "The Captain"
 }

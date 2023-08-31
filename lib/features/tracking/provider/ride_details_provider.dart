@@ -92,7 +92,15 @@ class RideDetailsProvider extends ChangeNotifier {
         showToast(response.data["message"] ?? "");
         ride?.status = status;
         if (status == 3) {
-          CustomNavigator.push(Routes.DASHBOARD, arguments: 0);
+          CustomNavigator.push(Routes.RATE_RIDE,
+              arguments: {
+                "id": id,
+                "name": isDriver
+                    ? ride?.client?.firstName ?? ""
+                    : ride?.driver?.firstName ?? "",
+                "number": 5
+              },
+              clean: true);
         }
       });
 

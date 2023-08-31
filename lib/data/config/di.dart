@@ -37,6 +37,7 @@ import '../../features/profile/provider/profile_provider.dart';
 import '../../features/profile/repo/profile_repo.dart';
 import '../../features/feedback/provider/main_feedback_provider.dart';
 import '../../features/feedback/repo/feedback_repo.dart';
+import '../../features/ratting/repo/ratting_repo.dart';
 import '../../features/request_details/provider/report_provider.dart';
 import '../../features/request_details/provider/request_details_provider.dart';
 import '../../features/request_details/repo/report_repo.dart';
@@ -131,6 +132,8 @@ Future<void> init() async {
       () => RideDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => TrackingRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => RattingRepo(sharedPreferences: sl(), dioClient: sl()));
 
   //provider
   sl.registerLazySingleton(() => LocalizationProvider(sharedPreferences: sl()));

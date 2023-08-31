@@ -60,12 +60,12 @@ class EndPoints {
   static rideDetails(role, id) => "$role/reservation/show/trip/$id";
   static changeRideStatus(String role, id) =>
       "$role/reservation/changeStatusBy${role.capitalize()}/$id";
-  static cancelTrip(String role, id) =>
-      "$role/reservation/cancelTripBy${role.capitalize()}/$id";
+  static cancelTrip(String role, id) => "$role/reservation/cancelTripBy${role.capitalize()}/$id";
+  static sendRideRate(String role, id) => '$role/reservation/tripRatingBy${role.capitalize()}/$id';
+
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';
-//https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyB_l2x6zgnLTF4MKxX3S4Df9urLN6vLNP0
-//'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=n,&key=AIzaSyB_l2x6zgnLTF4MKxX3S4Df9urLN6vLNP0
+
 }

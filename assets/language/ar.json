@@ -349,6 +349,12 @@
   "go_to_destination": "الذهاب للوجهه",
   "end_ride_header": "انهاء المشوار هنا؟",
   "end_ride_description": "هل انت متأكد انك وصلت لوجهتك النهائيه؟",
-  "finished": "السابقة"
+  "finished": "السابقة",
+  "your_ride_is_ended": "انتهي مشوارك",
+  "the_rate": "التقييم",
+  "you_have": "تبقي",
+  "ride_remaining_with": "مشوار لك مع",
+  "the_passenger": "الراكب",
+  "the_captain": "الكابتن"
 
 }

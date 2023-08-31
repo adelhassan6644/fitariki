@@ -30,7 +30,8 @@ class RateTrip extends StatelessWidget {
               withBorder: true,
             ),
             Expanded(
-              child: Consumer<SendFeedbackProvider>(builder: (_, provider, child) {
+              child:
+                  Consumer<SendFeedbackProvider>(builder: (_, provider, child) {
                 return SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
@@ -55,8 +56,7 @@ class RateTrip extends StatelessWidget {
                         child: Text(
                           getTranslated("congratulations", context),
                           style: AppTextStyles.w600.copyWith(
-                              fontSize: 32,
-                              color: Styles.PRIMARY_COLOR),
+                              fontSize: 32, color: Styles.PRIMARY_COLOR),
                         ),
                       ),
                       Center(

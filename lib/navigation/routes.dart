@@ -31,6 +31,7 @@ class Routes {
   static const MY_RIDES = "MY_RUNNING_TRIPS";
   static const ALL_USER_OFFERS = "ALL_USER_OFFERS";
   static const RATE_TRIP = "RATE_TRIP";
+  static const RATE_RIDE = "RATE_RIDE";
   static const PDF = "PDF";
   static const TRANSACTIONS = "TRANSACTIONS";
   static const TRACKING = "TRACKING";
