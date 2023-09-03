@@ -26,6 +26,7 @@ import '../features/home/page/all_home_users.dart';
 import '../features/maps/page/pick_map_screen.dart';
 import '../features/my_offers/page/all_requests.dart';
 import '../features/my_offers/page/my_offer_details.dart';
+import '../features/my_rides/model/my_rides_model.dart';
 import '../features/my_trips/page/my_trip_details.dart';
 import '../features/notifications/page/notifications.dart';
 import '../features/payment/page/payment.dart';
@@ -169,7 +170,7 @@ abstract class CustomNavigator {
 
       case Routes.TRACKING:
         return _pageRoute(TrackingPage(
-          data: settings.arguments as Map,
+          ride: settings.arguments as MyRideModel,
         ));
 
       case Routes.PAYMENT:

@@ -6,11 +6,8 @@ import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
 import 'package:fitariki/features/my_rides/widgets/ride_locations_widget.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../app/core/utils/color_resources.dart';
 import '../../../navigation/routes.dart';
-import '../../tracking/provider/tracking_provider.dart';
 import 'cancel_ride_pop_up_button.dart';
 
 class RideCard extends StatelessWidget {
@@ -25,14 +22,7 @@ class RideCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
-        onTap: () {
-          Provider.of<TrackingProvider>(context,listen: false).init(rideModel: ride);
-          CustomNavigator.push(Routes.TRACKING, arguments: {
-            "id": ride.id,
-            "date": ride.startedAt,
-            "number": ride.number
-          });
-        },
+        onTap: () => CustomNavigator.push(Routes.TRACKING, arguments: ride),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           decoration: BoxDecoration(
@@ -69,7 +59,7 @@ class RideCard extends StatelessWidget {
                       name: isDriver
                           ? ride.client?.firstName ?? ""
                           : ride.driver?.firstName ?? "",
-                      startAt: ride.startedAt!,
+                      day: ride.day!,
                     ),
                   )
                 ],
@@ -84,8 +74,7 @@ class RideCard extends StatelessWidget {
                         fontSize: 11, color: Styles.SECOUND_PRIMARY_COLOR),
                     children: [
                       TextSpan(
-                        text:
-                            "  ${ride.arrivedAt?.dateFormat(format: "hh:mm a")}",
+                        text: "  ${ride.time?.dateFormat(format: "hh:mm a")}",
                         style: AppTextStyles.w700.copyWith(
                             fontSize: 14, color: Styles.PRIMARY_COLOR),
                       )

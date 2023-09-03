@@ -326,7 +326,5 @@ class TrackingProvider extends ChangeNotifier {
     gMapMarkers.clear();
     polylineCoordinates.clear();
     gMapPolyLines.clear();
-
-    notifyListeners();
   }
 }

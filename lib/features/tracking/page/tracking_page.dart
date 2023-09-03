@@ -7,11 +7,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../components/custom_app_bar.dart';
+import '../../../data/config/di.dart';
+import '../../my_rides/model/my_rides_model.dart';
 import '../widget/ride_details_widget.dart';
 
 class TrackingPage extends StatefulWidget {
-  const TrackingPage({super.key, required this.data});
-  final Map data;
+  const TrackingPage({super.key, required this.ride});
+  final MyRideModel ride;
   @override
   State<TrackingPage> createState() => _TrackingPageState();
 }
@@ -19,22 +21,20 @@ class TrackingPage extends StatefulWidget {
 class _TrackingPageState extends State<TrackingPage> {
   @override
   void initState() {
-    super.initState();
-  }
+    Future.delayed(Duration.zero, () {
+      sl<TrackingProvider>().clearMapData();
+      sl<TrackingProvider>().init(rideModel: widget.ride);
+    });
 
-  @override
-  void dispose() {
-    Provider.of<TrackingProvider>(context, listen: false).clearMapData();
-    super.dispose();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "#_مشوارـ${widget.data["number"]}",
-        subTitle: (widget.data["date"] as DateTime)
-            .dateFormat(format: "dd MMM, yyyy"),
+        title: "#_مشوارـ${widget.ride.number}",
+        subTitle: (widget.ride.day)?.dateFormat(format: "dd MMM, yyyy"),
         appBarHeight: 60,
       ),
       body: Consumer<TrackingProvider>(builder: (context, provider, child) {
@@ -70,7 +70,7 @@ class _TrackingPageState extends State<TrackingPage> {
                           })),
                 ),
                 RideDetailsWidget(
-                  id: widget.data["id"],
+                  id: widget.ride.id ?? 0,
                 ),
               ],
             ),

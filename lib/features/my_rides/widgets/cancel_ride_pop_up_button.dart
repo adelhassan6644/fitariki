@@ -14,10 +14,10 @@ class CancelPopUpButton extends StatelessWidget {
       required this.id,
       required this.number,
       required this.name,
-      required this.startAt});
+      required this.day});
   final int number, id;
   final String name;
-  final DateTime startAt;
+  final DateTime day;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class CancelPopUpButton extends StatelessWidget {
               },
               title: "التغييب عن #مشوار_$number",
               description: provider.isDriver
-                  ? "هل سوف تتغيب عن ارجاع $name في يوم ${startAt.dateFormat(format: "EEEE, dd MM yyyy")}؟"
-                  : "هل سوف تتغيب عن العودة مع الكابتن $name في يوم ${startAt.dateFormat(format: "EEEE , dd MMM yyyy")}؟ ");
+                  ? "هل سوف تتغيب عن ارجاع $name في يوم ${day.dateFormat(format: "EEEE, dd MM yyyy")}؟"
+                  : "هل سوف تتغيب عن العودة مع الكابتن $name في يوم ${day.dateFormat(format: "EEEE , dd MMM yyyy")}؟ ");
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         itemBuilder: (BuildContext context) => [

@@ -8,6 +8,8 @@ class MyRideModel {
   int? number;
   DriverModel? driver;
   ClientModel? client;
+  DateTime? time;
+  DateTime? day;
   DateTime? startedAt;
   DateTime? arrivedAt;
   int? cancelByDriver;
@@ -22,6 +24,8 @@ class MyRideModel {
   MyRideModel({
     this.id,
     this.number,
+    this.time,
+    this.day,
     this.startedAt,
     this.arrivedAt,
     this.cancelByDriver,
@@ -39,6 +43,11 @@ class MyRideModel {
   factory MyRideModel.fromJson(Map<String, dynamic> json) => MyRideModel(
         id: json["id"],
         number: json["number"],
+        time: json["time"] == null
+            ? DateTime.now()
+            : DateTime.parse(json["time"]),
+        day:
+            json["day"] == null ? DateTime.now() : DateTime.parse(json["time"]),
         startedAt: json["started_at"] == null
             ? DateTime.now()
             : DateTime.parse(json["started_at"]),
@@ -64,8 +73,8 @@ class MyRideModel {
             : LocationModel.fromJson(json["pickup_location"]),
         followersLocations: json["followers"] == null
             ? []
-            : List<FollowerRideLocations>.from(
-                json["followers"]!.map((x) => FollowerRideLocations.fromJson(x))),
+            : List<FollowerRideLocations>.from(json["followers"]!
+                .map((x) => FollowerRideLocations.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -95,7 +104,8 @@ class FollowerRideLocations {
     this.pickupLocation,
   });
 
-  factory FollowerRideLocations.fromJson(Map<String, dynamic> json) => FollowerRideLocations(
+  factory FollowerRideLocations.fromJson(Map<String, dynamic> json) =>
+      FollowerRideLocations(
         dropOffLocation: json["drop_off_location"] == null
             ? null
             : LocationModel.fromJson(json["drop_off_location"]),
