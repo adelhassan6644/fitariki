@@ -7,4 +7,7 @@ class Images {
   static const String informCircle = 'assets/images/inform.png';
   static const String whatsApp = 'assets/images/whatsapp.png';
   static const String pronzeBG = 'assets/images/pronze_bg.png';
+  static const String pickupLocation = 'assets/images/location.png';
+  static const String dropoffLocation = 'assets/images/location.png';
+  static const String driverCar = 'assets/images/car.png';
 }

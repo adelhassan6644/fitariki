@@ -55,6 +55,15 @@
     <array>
         <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     </array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Used to collect location data in the background.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Used to collect location data in the background.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>location</string>
+    </array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

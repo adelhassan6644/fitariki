@@ -71,7 +71,7 @@ class ProfileProvider extends ChangeNotifier {
   List<String> models = [];
 
   generateModels() {
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 30; i++) {
       models.add(((DateTime.now().year + 1) - i).toString());
     }
     notifyListeners();

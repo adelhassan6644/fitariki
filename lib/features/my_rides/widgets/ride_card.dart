@@ -6,9 +6,11 @@ import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
 import 'package:fitariki/features/my_rides/widgets/ride_locations_widget.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/core/utils/color_resources.dart';
 import '../../../navigation/routes.dart';
+import '../../tracking/provider/tracking_provider.dart';
 import 'cancel_ride_pop_up_button.dart';
 
 class RideCard extends StatelessWidget {
@@ -24,6 +26,7 @@ class RideCard extends StatelessWidget {
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
         onTap: () {
+          Provider.of<TrackingProvider>(context,listen: false).init(rideModel: ride);
           CustomNavigator.push(Routes.TRACKING, arguments: {
             "id": ride.id,
             "date": ride.startedAt,

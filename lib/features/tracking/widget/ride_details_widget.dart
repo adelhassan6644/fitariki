@@ -17,6 +17,7 @@ import '../../../helpers/cupertino_pop_up_helper.dart';
 import '../../my_rides/widgets/ride_locations_widget.dart';
 import '../provider/ride_details_provider.dart';
 import '../repo/ride_details_repo.dart';
+import '../repo/tracking_repo.dart';
 import 'car_details_widget.dart';
 
 class RideDetailsWidget extends StatelessWidget {
@@ -27,7 +28,7 @@ class RideDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return ChangeNotifierProvider(
-      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>())..getRideDetails(id),
+      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>(), trackingRepo: sl<TrackingRepo>())..getRideDetails(id),
 
       child: Consumer<RideDetailsProvider>(builder: (_, provider, child) {
         return Stack(
@@ -248,7 +249,7 @@ class RideDetailsWidget extends StatelessWidget {
                         text: getTranslated(
                             _buttonText(provider.ride?.status == null
                                 ? 0
-                                : provider.ride!.status! + 1),
+                                : provider.ride!.status! + 1)??"",
                             context),
                         onTap: () {
                           if (provider.isDriver && provider.ride?.status == 0) {

@@ -19,15 +19,17 @@ class TrackingPage extends StatefulWidget {
 }
 
 class _TrackingPageState extends State<TrackingPage> {
-  GoogleMapController? _mapController;
-  late CameraPosition _cameraPosition;
-  late LatLng _initialPosition;
+
 
   @override
   void initState() {
     super.initState();
   }
-
+@override
+  void dispose() {
+  Provider.of<TrackingProvider>(context,listen: false).clearMapData();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,26 +46,15 @@ class _TrackingPageState extends State<TrackingPage> {
             child: Stack(
               children: [
                 GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    bearing: 192,
-                    target: LatLng(
-                      double.parse(AppStrings.defaultLat),
-                      double.parse(AppStrings.defaultLong),
-                    ),
-                    zoom: 14,
-                  ),
-                  minMaxZoomPreference: const MinMaxZoomPreference(0, 100),
-                  myLocationButtonEnabled: false,
-                  trafficEnabled: true,
-                  onMapCreated: (GoogleMapController mapController) {
-                    _mapController = mapController;
-                  },
-                  scrollGesturesEnabled: true,
-                  zoomControlsEnabled: false,
-                  onCameraMove: (CameraPosition cameraPosition) {
-                    _cameraPosition = cameraPosition;
-                  },
-                  onCameraIdle: () {},
+                  initialCameraPosition: provider.mapCameraPosition,
+                  onMapCreated: provider.onMapCreated,
+                  padding: provider.googleMapPadding,
+                  zoomGesturesEnabled: true,
+                  zoomControlsEnabled: true,
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
+                  markers: provider.gMapMarkers,
+                  polylines: provider.gMapPolylines,
                 ),
                 Visibility(
                   visible: provider.isDriver,

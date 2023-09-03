@@ -135,7 +135,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => RideDetailsRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
-      () => TrackingRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => TrackingRepo());
   sl.registerLazySingleton(
       () => RattingRepo(sharedPreferences: sl(), dioClient: sl()));
 
