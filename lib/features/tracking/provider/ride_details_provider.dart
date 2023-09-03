@@ -1,8 +1,7 @@
 import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:fitariki/components/loading_dialog.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,16 +10,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../components/loading_dialog.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/routes.dart';
 import '../../my_rides/model/my_rides_model.dart';
 import '../repo/ride_details_repo.dart';
+import '../repo/tracking_repo.dart';
 
 class RideDetailsProvider extends ChangeNotifier {
   RideDetailsRepo repo;
-  RideDetailsProvider({required this.repo});
+  TrackingRepo trackingRepo;
+  RideDetailsProvider({required this.repo, required this.trackingRepo});
 
+  FirebaseFirestore firebaseFireStore = FirebaseFirestore.instance;
   bool get isDriver => repo.isDriver();
+
   late Timer timer;
   Timer? _dropOffTimer;
   Timer? _pickUpTimer;
@@ -38,29 +42,29 @@ class RideDetailsProvider extends ChangeNotifier {
   bool isLoading = false;
   getRideDetails(id) async {
     // try {
-      isLoading = true;
-      notifyListeners();
-      Either<ServerFailure, Response> response = await repo.getRideDetails(id);
-      response.fold((l) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: l.error,
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-      }, (response) {
-        ride = MyRideModel.fromJson(response.data["data"]);
+    isLoading = true;
+    notifyListeners();
+    Either<ServerFailure, Response> response = await repo.getRideDetails(id);
+    response.fold((l) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: l.error,
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+    }, (response) {
+      ride = MyRideModel.fromJson(response.data["data"]);
 
-        startPickUpLocationListener(LatLng(
-            double.parse(ride?.pickupLocation?.latitude ?? "0"),
-            double.parse(ride?.pickupLocation?.longitude ?? "0")));
+      startPickUpLocationListener(LatLng(
+          double.parse(ride?.pickupLocation?.latitude ?? "0"),
+          double.parse(ride?.pickupLocation?.longitude ?? "0")));
 
-        startDropLocationListener(LatLng(
-            double.parse(ride?.dropOffLocation?.latitude ?? "0"),
-            double.parse(ride?.dropOffLocation?.longitude ?? "0")));
-      });
-      isLoading = false;
-      notifyListeners();
+      startDropLocationListener(LatLng(
+          double.parse(ride?.dropOffLocation?.latitude ?? "0"),
+          double.parse(ride?.dropOffLocation?.longitude ?? "0")));
+    });
+    isLoading = false;
+    notifyListeners();
     // } catch (e) {
     //   CustomSnackBar.showSnackBar(
     //       notification: AppNotification(
@@ -73,6 +77,33 @@ class RideDetailsProvider extends ChangeNotifier {
     // }
   }
 
+  //Start listening to driver location changes
+  void changeStatusTripListener() async {
+
+    firebaseFireStore
+        .collection("Rides")
+        .doc("ride#$id")
+        .snapshots()
+        .listen((event) {
+      if (!isDriver) {
+        ride?.status = event.data()!["status"];
+      }
+    });
+  }
+
+  ///To Add Ride from firebase store DB
+  changeStatusFireBase(id, status) async {
+    await firebaseFireStore
+        .collection("Rides")
+        .doc("ride#$id")
+        .set({"id": id, "status": status});
+  }
+
+  ///To Delete Ride from firebase store DB
+  deleteRideFireBase(id) async {
+    await firebaseFireStore.collection("Rides").doc("ride#$id").delete();
+  }
+
   bool isChanging = false;
   changeStatus(id, status) async {
     try {
@@ -83,6 +114,7 @@ class RideDetailsProvider extends ChangeNotifier {
 
       isChanging = true;
       notifyListeners();
+
       Either<ServerFailure, Response> response =
           await repo.changeRideStatus(id: id, status: status, count: count);
       response.fold((l) {
@@ -90,7 +122,13 @@ class RideDetailsProvider extends ChangeNotifier {
       }, (response) {
         showToast(response.data["message"] ?? "");
         ride?.status = status;
+        changeStatusFireBase(id, status);
+
         if (status == 3) {
+          ///To stop tracking
+          if (isDriver) {
+            trackingRepo.stopPushLocation();
+          }
           CustomNavigator.push(Routes.RATE_RIDE,
               arguments: {
                 "id": id,
@@ -100,6 +138,12 @@ class RideDetailsProvider extends ChangeNotifier {
                 "number": 5
               },
               clean: true);
+          deleteRideFireBase(id);
+        }
+
+        ///To start tracking
+        if (status == 0) {
+          trackingRepo.startPushLocation();
         }
       });
 

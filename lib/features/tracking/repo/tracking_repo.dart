@@ -1,19 +1,23 @@
 import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_location/fl_location.dart';
+import 'package:flutter_background/flutter_background.dart';
 import 'package:georange/georange.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/app_strings.dart';
+import '../../../app/location_services/app_permission_handler.service.dart';
+import '../../../data/config/di.dart';
 import '../../../data/dio/dio_client.dart';
 
 class TrackingRepo {
-  final DioClient dioClient;
-  final SharedPreferences sharedPreferences;
+  SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
 
-  TrackingRepo({required this.dioClient, required this.sharedPreferences});
+  // TrackingRepo({required this.dioClient, required this.sharedPreferences});
   isDriver() {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
@@ -26,9 +30,9 @@ class TrackingRepo {
   bool? serviceEnabled;
   FirebaseFirestore firebaseFireStore = FirebaseFirestore.instance;
   BehaviorSubject<bool> locationDataAvailable =
-  BehaviorSubject<bool>.seeded(false);
+      BehaviorSubject<bool>.seeded(false);
   BehaviorSubject<double> driverLocationEarthDistance =
-  BehaviorSubject<double>.seeded(0.00);
+      BehaviorSubject<double>.seeded(0.00);
   int lastUpdated = 0;
   StreamSubscription? locationUpdateStream;
 
@@ -47,15 +51,13 @@ class TrackingRepo {
     var locationPermission = await FlLocation.checkLocationPermission();
     if (locationPermission == LocationPermission.deniedForever) {
       // Cannot request runtime permission because location permission is denied forever.
-      throw "Location permission denied permanetly. Please check on location permission on app settings"
-       ;
+      throw "Location permission denied permanetly. Please check on location permission on app settings";
     } else if (locationPermission == LocationPermission.denied) {
       // Ask the user for location permission.
       locationPermission = await FlLocation.requestLocationPermission();
       if (locationPermission == LocationPermission.denied ||
           locationPermission == LocationPermission.deniedForever) {
-        throw "Location permission denied. Please check on location permission on app settings"
-            ;
+        throw "Location permission denied. Please check on location permission on app settings";
       }
     }
 
@@ -72,8 +74,8 @@ class TrackingRepo {
 
   Stream getNewLocationStream() {
     return FlLocation.getLocationStream(
-        interval: AppStrings.timePassLocationUpdate,
-      distanceFilter: AppStrings.distanceCoverLocationUpdate ,
+      interval: AppStrings.timePassLocationUpdate,
+      distanceFilter: AppStrings.distanceCoverLocationUpdate,
     ).handleError((error) {
       print("Location listen error => $error");
     });
@@ -99,7 +101,6 @@ class TrackingRepo {
         syncLocationWithFirebase(currentPosition);
       }
     });
-
   }
 
 //
@@ -112,11 +113,9 @@ class TrackingRepo {
   //
   syncLocationWithFirebase(Location currentLocation) async {
     final driverId = sharedPreferences.getString(AppStorageKey.userId);
-
     //
     {
-      print("Send to fcm");
-
+      log("Send to fcm");
       Point driverLocation = Point(
         latitude: currentLocation.latitude ?? 0.00,
         longitude: currentLocation.longitude ?? 0.00,
@@ -127,11 +126,11 @@ class TrackingRepo {
       );
       //
       var earthDistance =
-      georange.distance(earthCenterLocation, driverLocation);
+          georange.distance(earthCenterLocation, driverLocation);
 
       //
       final driverLocationDocs =
-      await firebaseFireStore.collection("drivers").doc(driverId).get();
+          await firebaseFireStore.collection("drivers").doc(driverId).get();
 
       //
       final docRef = driverLocationDocs.reference;
@@ -144,7 +143,6 @@ class TrackingRepo {
             "long": currentLocation.longitude,
             "rotation": currentLocation.heading,
             "earth_distance": earthDistance,
-
           },
         );
       } else {
@@ -155,7 +153,6 @@ class TrackingRepo {
             "long": currentLocation.longitude,
             "rotation": currentLocation.heading,
             "earth_distance": earthDistance,
-
           },
         );
       }
@@ -165,9 +162,48 @@ class TrackingRepo {
     }
   }
 
-  //
-  clearLocationFromFirebase() async {
-    final driverId = sharedPreferences.getString(AppStorageKey.userId);
-    await firebaseFireStore.collection("drivers").doc(driverId).delete();
+  startPushLocation() async {
+    final permitted =
+        await AppPermissionHandlerService().handleLocationRequest();
+    if (!permitted) {
+      return;
+    }
+    await TrackingRepo().prepareLocationListener();
+
+    //
+    if (Platform.isAndroid) {
+      //
+      const androidConfig = FlutterBackgroundAndroidConfig(
+        notificationTitle: "Background service",
+        notificationText: "Background notification to keep app running",
+        notificationImportance: AndroidNotificationImportance.Default,
+        notificationIcon: AndroidResource(
+          name: 'notification_icon',
+          defType: 'drawable',
+        ), // Default is ic_launcher from folder mipmap
+      );
+
+      //check for permission
+      //CALL THE PERMISSION HANDLER
+      final allowed =
+          await AppPermissionHandlerService().handleBackgroundRequest();
+      //
+      if (allowed) {
+        await FlutterBackground.initialize(androidConfig: androidConfig);
+        await FlutterBackground.enableBackgroundExecution();
+      }
+    }
+  }
+
+  void stopPushLocation() {
+    // Platform.isAndroid
+    if (Platform.isAndroid) {
+      bool enabled = FlutterBackground.isBackgroundExecutionEnabled;
+      if (enabled) {
+        FlutterBackground.disableBackgroundExecution();
+      }
+    }
+    locationUpdateStream?.cancel();
+
   }
 }

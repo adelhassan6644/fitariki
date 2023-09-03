@@ -10,24 +10,8 @@ class AppPermissionHandlerService {
   //MANAGE BACKGROUND SERVICE PERMISSION
   Future<bool> handleBackgroundRequest() async {
     //check for permission
-    bool hasPermissions = await FlutterBackground.hasPermissions;
-    if (!hasPermissions) {
-      //background app service permission
-      // final result = await showDialog(
-      //   barrierDismissible: false,
-      //   context:CustomNavigator.navigatorState.currentState!.context,
-      //   builder: (context) {
-      //     return BackgroundPermissionDialog();
-      //   },
-      // );
-      //
-      // if (result != null && (result is bool) && result) {
-      //   hasPermissions = result;
-      // }
-      permissionDeniedAlert();
-    }
 
-    return hasPermissions;
+    return true;
   }
 
   //MANAGE LOCATION PERMISSION
@@ -42,16 +26,19 @@ class AppPermissionHandlerService {
     if (!status.isGranted) {
 
 
+      //
       PermissionStatus status = await Permission.locationWhenInUse.request();
       if (status.isGranted) {
-        //
+
 
         //request for alway in use location
         status = await Permission.locationAlways.request();
         if (!status.isGranted) {
           permissionDeniedAlert();
+          print("permissionDeniedAlert");
         }
       } else {
+        print("permissionDeniedAlert");
         permissionDeniedAlert();
       }
 
@@ -67,6 +54,7 @@ class AppPermissionHandlerService {
       var status = await Permission.locationAlways.status;
       if (!status.isGranted) {
 
+
         //request for alway in use location
         var status = await Permission.locationAlways.request();
         if (status.isGranted) {
@@ -74,6 +62,7 @@ class AppPermissionHandlerService {
         } else {
           var status = await Permission.locationAlways.status;
           if (!status.isGranted) {
+            print("locationAlways");
             permissionDeniedAlert();
           }
         }
@@ -82,7 +71,7 @@ class AppPermissionHandlerService {
         return true;
       }
     }
-      return true;
+    return true;
   }
 
   //

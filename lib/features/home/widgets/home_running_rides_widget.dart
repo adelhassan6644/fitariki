@@ -39,7 +39,7 @@ class HomeRunningRidesWidget extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               firstChild: SizedBox(width: context.width),
               secondChild: Visibility(
-                visible: !provider.hasRides && provider.isLogin,
+                visible: provider.hasRides && provider.isLogin,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(
                       Dimensions.PADDING_SIZE_DEFAULT,
