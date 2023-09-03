@@ -52,11 +52,11 @@ class RideDetailsProvider extends ChangeNotifier {
       }, (response) {
         ride = MyRideModel.fromJson(response.data["data"]);
 
-        startPickUpLocationListener(LatLng(
+        pickUpLocationListener(LatLng(
             double.parse(ride?.pickupLocation?.latitude ?? "0"),
             double.parse(ride?.pickupLocation?.longitude ?? "0")));
 
-        startDropLocationListener(LatLng(
+        dropLocationListener(LatLng(
             double.parse(ride?.dropOffLocation?.latitude ?? "0"),
             double.parse(ride?.dropOffLocation?.longitude ?? "0")));
       });
@@ -122,14 +122,12 @@ class RideDetailsProvider extends ChangeNotifier {
   }
 
   BehaviorSubject<String> dropLocationStream = BehaviorSubject<String>();
-
-  startDropLocationListener(LatLng latLng) async {
+  dropLocationListener(LatLng latLng) async {
     _dropOffTimer?.cancel();
     _dropOffTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       calculatedETAToDropLocation(latLng);
     });
   }
-
   calculatedETAToDropLocation(LatLng dropOffLatLng) async {
     Position currentLocation = await Geolocator.getCurrentPosition();
     final startPoint = Point(
@@ -146,15 +144,15 @@ class RideDetailsProvider extends ChangeNotifier {
     dropLocationStream.add("$timeInMin min - $distance km");
   }
 
-  BehaviorSubject<String> pickUpLocationStream = BehaviorSubject<String>();
 
-  startPickUpLocationListener(LatLng latLng) async {
+
+  BehaviorSubject<String> pickUpLocationStream = BehaviorSubject<String>();
+  pickUpLocationListener(LatLng latLng) async {
     _pickUpTimer?.cancel();
     _pickUpTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       calculatedETAToPickUpLocation(latLng);
     });
   }
-
   calculatedETAToPickUpLocation(LatLng pickUpLatLng) async {
     Position currentLocation = await Geolocator.getCurrentPosition();
     final startPoint = Point(
