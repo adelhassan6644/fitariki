@@ -12,18 +12,16 @@ import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/app_strings.dart';
 import '../../../app/location_services/app_permission_handler.service.dart';
 import '../../../data/config/di.dart';
-import '../../../data/dio/dio_client.dart';
 
 class TrackingRepo {
   SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
 
-  // TrackingRepo({required this.dioClient, required this.sharedPreferences});
   isDriver() {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
   //
-  GeoRange georange = GeoRange();
+  GeoRange geoRange = GeoRange();
 
   Location? currentLocationData;
   Location? currentLocation;
@@ -36,11 +34,10 @@ class TrackingRepo {
   int lastUpdated = 0;
   StreamSubscription? locationUpdateStream;
 
-  //
   Future<void> prepareLocationListener() async {
     //handle missing permission
     await handlePermissionRequest();
-    _startLocationListner();
+    _startLocationListener();
   }
 
   Future<bool> handlePermissionRequest({bool background = false}) async {
@@ -81,15 +78,13 @@ class TrackingRepo {
     });
   }
 
-  void _startLocationListner() async {
-    //
+  void _startLocationListener() async {
 
-    //listen
     locationUpdateStream?.cancel();
     locationUpdateStream = getNewLocationStream().listen((currentPosition) {
-      //
+
       if (currentPosition != null) {
-        print("Location changed ==> $currentPosition");
+        log("Location changed ==> $currentPosition");
         // Use current location
         if (currentLocation == null) {
           currentLocationData = currentPosition;
@@ -97,42 +92,37 @@ class TrackingRepo {
         }
 
         currentLocationData = currentPosition;
-        //
         syncLocationWithFirebase(currentPosition);
       }
     });
   }
 
-//
+
   syncCurrentLocFirebase() {
     if (currentLocationData != null) {
       syncLocationWithFirebase(currentLocationData!);
     }
   }
 
-  //
   syncLocationWithFirebase(Location currentLocation) async {
     final driverId = sharedPreferences.getString(AppStorageKey.userId);
-    //
     {
       log("Send to fcm");
       Point driverLocation = Point(
-        latitude: currentLocation.latitude ?? 0.00,
-        longitude: currentLocation.longitude ?? 0.00,
+        latitude: currentLocation.latitude ,
+        longitude: currentLocation.longitude,
       );
       Point earthCenterLocation = Point(
         latitude: 0.00,
         longitude: 0.00,
       );
-      //
-      var earthDistance =
-          georange.distance(earthCenterLocation, driverLocation);
 
-      //
+      var earthDistance =
+          geoRange.distance(earthCenterLocation, driverLocation);
+
       final driverLocationDocs =
           await firebaseFireStore.collection("drivers").doc(driverId).get();
 
-      //
       final docRef = driverLocationDocs.reference;
 
       if (driverLocationDocs.data() == null) {

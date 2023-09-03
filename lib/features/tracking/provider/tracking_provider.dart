@@ -1,21 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:fitariki/app/core/utils/images.dart';
-import 'package:fitariki/features/maps/models/location_model.dart';
-import 'package:fitariki/features/transactions/repo/transactions_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/app_strings.dart';
-import '../../../app/core/utils/color_resources.dart';
-import '../../../data/error/api_error_handler.dart';
-import '../../../data/error/failures.dart';
 import '../../my_rides/model/my_rides_model.dart';
 import '../repo/tracking_repo.dart';
 
@@ -25,19 +16,22 @@ class TrackingProvider extends ChangeNotifier {
   TrackingProvider({required this.repo});
 
   bool get isDriver => repo.isDriver();
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseFirestore firebaseFireStore = FirebaseFirestore.instance;
   late StreamSubscription tripUpdateStream;
   late StreamSubscription driverLocationStream;
 
   LatLng? driverPosition;
   double driverPositionRotation = 0;
-  //MAp related variables
-  CameraPosition mapCameraPosition = CameraPosition(target: LatLng(0.00, 0.00));
+
+  //Map related variables
+  CameraPosition mapCameraPosition =
+      const CameraPosition(target: LatLng(0.00, 0.00));
   GoogleMapController? googleMapController;
-  EdgeInsets googleMapPadding = EdgeInsets.all(10);
+  EdgeInsets googleMapPadding = const EdgeInsets.all(10);
   StreamSubscription? currentLocationListener;
-  // this will hold the generated polylines
-  Set<Polyline> gMapPolylines = {};
+
+  // this will hold the generated polyLines
+  Set<Polyline> gMapPolyLines = {};
   // this will hold each polyline coordinate as Lat and Lng pairs
   List<LatLng> polylineCoordinates = [];
   Set<Marker> gMapMarkers = {};
@@ -51,7 +45,7 @@ class TrackingProvider extends ChangeNotifier {
 
   init({required MyRideModel rideModel}) {
     ride = rideModel;
-    Future.delayed(Duration(milliseconds: 100), () async {
+    Future.delayed(const Duration(milliseconds: 100), () async {
       await drawTripPolyLines();
       startDriverDetailsListener();
     });
@@ -76,19 +70,17 @@ class TrackingProvider extends ChangeNotifier {
   //
   void setSourceAndDestinationIcons() async {
     sourceIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
+      const ImageConfiguration(devicePixelRatio: 2.5),
       Images.pickupLocation,
     );
     //
     destinationIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
+      const ImageConfiguration(devicePixelRatio: 2.5),
       Images.dropoffLocation,
     );
     //
     driverIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(
-        devicePixelRatio: 2.5,
-      ),
+      const ImageConfiguration(devicePixelRatio: 2.5),
       Images.driverCar,
     );
   }
@@ -113,7 +105,7 @@ class TrackingProvider extends ChangeNotifier {
     gMapMarkers = {};
     gMapMarkers.add(
       Marker(
-        markerId: MarkerId('sourcePin'),
+        markerId: const MarkerId('sourcePin'),
         position: LatLng(
             double.parse(
               ride!.pickupLocation!.latitude!,
@@ -122,13 +114,13 @@ class TrackingProvider extends ChangeNotifier {
               ride!.pickupLocation!.longitude!,
             )),
         icon: sourceIcon!,
-        anchor: Offset(0.5, 0.5),
+        anchor: const Offset(0.5, 0.5),
       ),
     );
     // destination pin
     gMapMarkers.add(
       Marker(
-        markerId: MarkerId('destPin'),
+        markerId: const MarkerId('destPin'),
         position: LatLng(
             double.parse(
               ride!.dropOffLocation!.latitude!,
@@ -137,10 +129,10 @@ class TrackingProvider extends ChangeNotifier {
               ride!.dropOffLocation!.longitude!,
             )),
         icon: destinationIcon!,
-        anchor: Offset(0.5, 0.5),
+        anchor: const Offset(0.5, 0.5),
       ),
     );
-    //load the ploylines
+    //load the ployLines
     PolylineResult polylineResult =
         await polylinePoints.getRouteBetweenCoordinates(
       AppStrings.googleApiKey,
@@ -165,24 +157,24 @@ class TrackingProvider extends ChangeNotifier {
     if (result.isNotEmpty) {
       // loop through all PointLatLng points and convert them
       // to a list of LatLng, required by the Polyline
-      result.forEach((PointLatLng point) {
+      for (var point in result) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     }
 
     // with an id, an RGB color and the list of LatLng pairs
     Polyline polyline = Polyline(
-      polylineId: PolylineId("poly"),
+      polylineId: const PolylineId("poly"),
       color: Colors.red,
       points: polylineCoordinates,
       width: 3,
     );
 //
-    gMapPolylines = {};
-    gMapPolylines.add(polyline);
+    gMapPolyLines = {};
+    gMapPolyLines.add(polyline);
 
     //
-    //zoom to latbound
+    //zoom to latBound
     final pickupLocationLatLng = LatLng(
         double.parse(
           ride!.pickupLocation!.latitude!,
@@ -203,7 +195,7 @@ class TrackingProvider extends ChangeNotifier {
       dropoffLocationLatLng,
       googleMapController!,
     );
-    //
+
     notifyListeners();
   }
 
@@ -259,15 +251,14 @@ class TrackingProvider extends ChangeNotifier {
   }
 
   bool stopListener() {
-
     driverLocationStream.cancel();
     return true;
   }
+
   //Start listening to driver location changes
   void startDriverDetailsListener() async {
     //
-    driverLocationStream =
-        firebaseFirestore
+    driverLocationStream = firebaseFireStore
         .collection("drivers")
         .doc("${ride!.driver!.id}")
         .snapshots()
@@ -287,19 +278,19 @@ class TrackingProvider extends ChangeNotifier {
   }
 
   updateDriverMarkerPosition() {
-    //
+
     Marker driverMarker = gMapMarkers.firstWhere(
       (e) => e.markerId.value == "driverMarker",
-      orElse: () => Marker(markerId: MarkerId("null")),
+      orElse: () => const Marker(markerId: MarkerId("null")),
     );
     //
     if (driverMarker.markerId.value == "null") {
       driverMarker = Marker(
-        markerId: MarkerId('driverMarker'),
+        markerId: const MarkerId('driverMarker'),
         position: driverPosition!,
         rotation: driverPositionRotation,
         icon: driverIcon!,
-        anchor: Offset(0.5, 0.5),
+        anchor: const Offset(0.5, 0.5),
       );
       gMapMarkers.add(driverMarker);
     } else {
@@ -319,8 +310,8 @@ class TrackingProvider extends ChangeNotifier {
     if (driverPosition == null) {
       return;
     }
-    log("driverPosition.latitude${driverPosition}");
-    //zoom to driver and dropoff latbound
+    log("driverPosition.latitude$driverPosition");
+    //zoom to driver and dropoff latBound
     updateCameraLocation(
         driverPosition!,
         LatLng(
@@ -330,13 +321,12 @@ class TrackingProvider extends ChangeNotifier {
         googleMapController);
   }
 
-  //
+
   clearMapData() {
     gMapMarkers.clear();
     polylineCoordinates.clear();
-    gMapPolylines.clear();
+    gMapPolyLines.clear();
 
     notifyListeners();
-    //
   }
 }

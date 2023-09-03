@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../app/core/utils/app_strings.dart';
 import '../../../components/custom_app_bar.dart';
 import '../widget/ride_details_widget.dart';
 
@@ -19,17 +17,17 @@ class TrackingPage extends StatefulWidget {
 }
 
 class _TrackingPageState extends State<TrackingPage> {
-
-
   @override
   void initState() {
     super.initState();
   }
-@override
+
+  @override
   void dispose() {
-  Provider.of<TrackingProvider>(context,listen: false).clearMapData();
+    Provider.of<TrackingProvider>(context, listen: false).clearMapData();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +52,7 @@ class _TrackingPageState extends State<TrackingPage> {
                   myLocationButtonEnabled: true,
                   myLocationEnabled: true,
                   markers: provider.gMapMarkers,
-                  polylines: provider.gMapPolylines,
+                  polylines: provider.gMapPolyLines,
                 ),
                 Visibility(
                   visible: provider.isDriver,
