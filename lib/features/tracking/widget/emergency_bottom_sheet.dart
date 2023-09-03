@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
+import '../../../helpers/cupertino_pop_up_helper.dart';
 
 class EmergencyBottomSheet extends StatelessWidget {
   const EmergencyBottomSheet({super.key, this.onFinish});
@@ -75,9 +76,18 @@ class EmergencyBottomSheet extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              await launch("tel://911");
               CustomNavigator.pop();
-
+              Future.delayed(
+                Duration.zero,
+                () => CupertinoPopUpHelper.showCupertinoPopUp(
+                    textButton: getTranslated("call", context),
+                    onConfirm: () async {
+                      await launch("tel://911");
+                      CustomNavigator.pop();
+                    },
+                    title: "SOS",
+                    description: getTranslated("call_emergency", context)),
+              );
             },
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -110,7 +120,7 @@ class EmergencyBottomSheet extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               onFinish?.call();
               CustomNavigator.pop();
             },
