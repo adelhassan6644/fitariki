@@ -1,27 +1,24 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';
 import '../../../data/dio/dio_client.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 
-class WishlistRepo {
+class DashboardRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
 
-  WishlistRepo({required this.dioClient, required this.sharedPreferences});
+  DashboardRepo({required this.dioClient, required this.sharedPreferences});
 
-  bool isLoggedIn() {
-    return sharedPreferences.containsKey(AppStorageKey.isLogin);
-  }
-
-  Future<Either<ServerFailure, Response>> getWishList() async {
+  Future<Either<ServerFailure, Response>> checkExpiredContracts() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.getWishList(
-            sharedPreferences.getString(AppStorageKey.role),
+        uri: EndPoints.checkExpiredContracts(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client",
             sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
@@ -34,21 +31,19 @@ class WishlistRepo {
     }
   }
 
-  Future<Either<ServerFailure, Response>> postWishList(
-      {required int id, required bool isOffer}) async {
+  Future<Either<ServerFailure, Response>> sendExpiredContractRate(
+      {required int id, required int approve, String? reason}) async {
     try {
       Response response = await dioClient.post(
-          uri: EndPoints.postWishList(
-              sharedPreferences.getString(AppStorageKey.role),
-              sharedPreferences.getString(AppStorageKey.userId)),
+          uri: EndPoints.sendExpiredContractRate(
+              sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
           queryParameters: {
-           if(isOffer) "offer_id": id,
-            if (sharedPreferences.getString(AppStorageKey.role) == "driver" && !isOffer)
-              "client_id": id,
-            if (sharedPreferences.getString(AppStorageKey.role) == "client" && !isOffer)
-              "driver_id": id,
+            "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_approval":
+                "$approve",
+            if (reason != null)
+              "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_disapproval_reason":
+                  reason,
           });
-
       if (response.statusCode == 200) {
         return Right(response);
       } else {
@@ -57,5 +52,21 @@ class WishlistRepo {
     } catch (error) {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
+  }
+
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(AppStorageKey.isLogin);
+  }
+
+  isDriver() {
+    return sharedPreferences.getString(AppStorageKey.role) == "driver";
+  }
+
+  getRole() {
+    return sharedPreferences.getString(AppStorageKey.role);
+  }
+
+  getUserId() {
+    return sharedPreferences.getString(AppStorageKey.userId);
   }
 }

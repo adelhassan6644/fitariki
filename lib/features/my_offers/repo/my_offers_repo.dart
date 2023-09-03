@@ -25,8 +25,10 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> getMyRequests() async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myRequests}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.myRequests(
+          sharedPreferences.getString(AppStorageKey.role),
+          sharedPreferences.getString(AppStorageKey.userId),
+        ),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -58,8 +60,8 @@ class MyOffersRepo {
       {required int id}) async {
     try {
       Response response = await dioClient.get(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.viewMyOffers}/$id",
+          uri: EndPoints.viewMyOffers(
+              sharedPreferences.getString(AppStorageKey.role), id),
           queryParameters: {
             "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
                 sharedPreferences.getString(AppStorageKey.userId)
@@ -77,8 +79,8 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> deleteMyOffer(id) async {
     try {
       Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteOffer}/$id}",
+        uri: EndPoints.deleteOffer(
+            sharedPreferences.getString(AppStorageKey.role), id),
       );
       if (response.statusCode == 200) {
         return Right(response);

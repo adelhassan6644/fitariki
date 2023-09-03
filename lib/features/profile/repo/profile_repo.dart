@@ -28,7 +28,7 @@ class ProfileRepo {
   Future<String?> saveDeviceToken() async {
     String? deviceToken;
 
-      deviceToken = await FirebaseMessaging.instance.getToken();
+    deviceToken = await FirebaseMessaging.instance.getToken();
 
     if (deviceToken != null) {
       log('--------Device Token---------- $deviceToken');
@@ -40,8 +40,9 @@ class ProfileRepo {
       {required dynamic body}) async {
     try {
       Response response = await dioClient.post(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.updateProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+          uri: EndPoints.updateProfile(
+              sharedPreferences.getString(AppStorageKey.role),
+              sharedPreferences.getString(AppStorageKey.userId)),
           data: body);
 
       if (response.statusCode == 200) {
@@ -56,10 +57,10 @@ class ProfileRepo {
 
   Future<Either<ServerFailure, Response>> getProfile() async {
     try {
-
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getProfile}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.getProfile(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -108,6 +109,7 @@ class ProfileRepo {
       return null;
     }
   }
+
   getId() {
     return sharedPreferences.getString(AppStorageKey.userId);
   }

@@ -47,9 +47,11 @@ class _SuccessPageState extends State<SuccessPage> {
             children: [
               Center(
                 child: customImageIcon(
-                    imageName: widget.successModel.isFail
-                        ? Images.cancelCircle
-                        : Images.doneCircle,
+                    imageName: widget.successModel.isInform
+                        ? Images.informCircle
+                        : widget.successModel.isFail
+                            ? Images.cancelCircle
+                            : Images.doneCircle,
                     width: 165,
                     height: 165),
               ),

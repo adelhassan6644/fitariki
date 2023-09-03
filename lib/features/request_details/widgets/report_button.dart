@@ -19,6 +19,7 @@ class ReportButton extends StatelessWidget {
         onTap: () => CupertinoPopUpHelper.showCupertinoTextController(
           title: getTranslated("report", context),
           description: getTranslated("report_description", context),
+          hint: getTranslated("report_hint", context),
           controller: reportProvider.report,
           keyboardType: TextInputType.text,
           onSend: ()=> reportProvider.sendReport(userId: userId, reservationId: reservationId),

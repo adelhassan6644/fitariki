@@ -23,7 +23,8 @@ class RequestDetailsRepo {
   }) async {
     try {
       Response response = await dioClient.get(
-        uri: "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.requestDetails}/$requestId",
+        uri: EndPoints.requestDetails(
+            sharedPreferences.getString(AppStorageKey.role), requestId),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -39,8 +40,8 @@ class RequestDetailsRepo {
       {required int status, required int id, String? offerPrice}) async {
     try {
       Response response = await dioClient.post(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.updateRequest}/$id",
+          uri: EndPoints.updateRequest(
+              sharedPreferences.getString(AppStorageKey.role), id),
           queryParameters: {"status": status, "offer_price": offerPrice});
       if (response.statusCode == 200) {
         return Right(response);

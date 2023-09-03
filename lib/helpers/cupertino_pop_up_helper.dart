@@ -11,10 +11,14 @@ abstract class CupertinoPopUpHelper {
       {required TextEditingController controller,
       required String title,
       required String description,
+      required String hint,
+      String? sendText,
+      String? cancelText,
       TextInputType? keyboardType,
       int? maxLength,
       List<TextInputFormatter>? inputFormatters,
       Function()? onSend,
+      Function()? onCancel,
       Function()? onClose}) {
     showDialog(
       context: CustomNavigator.navigatorState.currentContext!,
@@ -31,8 +35,8 @@ abstract class CupertinoPopUpHelper {
                 controller: controller,
                 keyboardType: keyboardType,
                 inputFormatters: inputFormatters,
-
                 maxLength: maxLength,
+                placeholder: hint,
                 decoration: BoxDecoration(
                     color: const Color(0xFF767680).withOpacity(.12),
                     borderRadius: BorderRadius.circular(10)),
@@ -42,30 +46,32 @@ abstract class CupertinoPopUpHelper {
           actions: [
             CupertinoDialogAction(
                 onPressed: () {
-                  if (onClose != null) {
-                    onClose();
+                  if (onCancel != null) {
+                    onCancel();
                   } else {
                     CustomNavigator.pop();
                   }
                 },
                 child: Text(
-                  getTranslated(
-                      "cancel", CustomNavigator.navigatorState.currentContext!),
+                  cancelText ??
+                      getTranslated("cancel",
+                          CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w400
                       .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
             CupertinoDialogAction(
                 onPressed: onSend,
                 child: Text(
-                  getTranslated(
-                      "send", CustomNavigator.navigatorState.currentContext!),
+                  sendText ??
+                      getTranslated("send",
+                          CustomNavigator.navigatorState.currentContext!),
                   style: AppTextStyles.w600
                       .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
                 )),
           ],
         );
       },
-    ).then((value) => onClose);
+    ).then((value) => onClose?.call());
   }
 
   static showCupertinoPopUp(

@@ -141,10 +141,9 @@ class RideDetailsProvider extends ChangeNotifier {
       longitude: dropOffLatLng.longitude,
     );
     final distance = GeoRange().distance(startPoint, endPoint);
-    double etaInHours = distance / 50;
 
-    final eta = (etaInHours * 60).ceil();
-    dropLocationStream.add("min $eta");
+    dropLocationStream.add(
+        "min ${(currentLocation.speed * 3.6).toStringAsPrecision(2)} - $distance  km");
   }
 
   BehaviorSubject<String> pickUpLocationStream = BehaviorSubject<String>();
@@ -167,10 +166,11 @@ class RideDetailsProvider extends ChangeNotifier {
       longitude: pickUpLatLng.longitude,
     );
     final distance = GeoRange().distance(startPoint, endPoint);
-    double timeInHours = distance / 50;
+    // double timeInHours = distance / 50;
+    // final timeInMin = (timeInHours * 60).ceil();
+    // pickUpLocationStream.add("$timeInMin min - $distance km");
 
-    final timeInMin = (timeInHours * 60).ceil();
-
-    pickUpLocationStream.add("$timeInMin min - $distance km");
+    dropLocationStream.add(
+        "min ${(currentLocation.speed * 3.6).toStringAsPrecision(2)} - $distance  km");
   }
 }

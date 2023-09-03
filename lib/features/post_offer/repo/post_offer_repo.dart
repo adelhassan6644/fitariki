@@ -29,8 +29,8 @@ class PostOfferRepo {
       offerModel.id =
           int.parse(sharedPreferences.getString(AppStorageKey.userId)!);
       Response response = await dioClient.post(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.postOffer}",
+          uri: EndPoints.postOffer(
+              sharedPreferences.getString(AppStorageKey.role)),
           data: sharedPreferences.getString(AppStorageKey.role) == "driver"
               ? offerModel.toPostDriverJson()
               : offerModel.toPostClientJson());

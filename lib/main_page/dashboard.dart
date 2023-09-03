@@ -23,6 +23,7 @@ import '../features/my_trips/provider/my_trips_provider.dart';
 import '../features/post_offer/page/post_offer.dart';
 import '../features/post_offer/provider/post_offer_provider.dart';
 import '../features/wishlist/provider/wishlist_provider.dart';
+import '../main_providers/dashboard_provider.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({this.index, Key? key}) : super(key: key);
@@ -55,6 +56,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   init() {
+    sl<DashboardProvider>().checkFinishedTrips();
     sl<HomeProvider>().getOffers();
     sl<HomeProvider>().getUsers();
     sl<HomeProvider>().checkRunningTrips();

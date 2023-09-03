@@ -14,28 +14,11 @@ class AddFollowersRepo {
 
   AddFollowersRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> updateFollower({var body}) async {
-    try {
-      Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.addFollower}/${sharedPreferences.getString(AppStorageKey.userId)}",
-        data: body,
-      );
-      if (response.statusCode == 200) {
-        return Right(response);
-      } else {
-        return left(ServerFailure(response.data['message']));
-      }
-    } catch (error) {
-      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
-    }
-  }
-
   Future<Either<ServerFailure, Response>> addFollower({var body}) async {
     try {
       Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.addFollower}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.addFollower(
+            sharedPreferences.getString(AppStorageKey.userId)),
         data: body,
       );
       if (response.statusCode == 200) {
