@@ -44,9 +44,9 @@ class EndPoints {
 
   static userProfile(role, type, id) => '$role/$type/profile/$id';
   static myProfile(role, type, id) => '$type/$role/profile/$id';
-  static const String getFeedback = 'feedback/list';
-  static const String getOfferFeedback = 'offer/feedbacks';
-  static const String sendFeedback = 'feedback/feedback';
+  static   getOfferFeedback(role,id) => '$role/offer/feedbacks/$id';
+  static   getFeedback(role,id) => '$role/feedback/list/$id';
+  static   sendFeedback(role,id) => '$role/feedback/feedback/$id';
   static report(role, reportType, id) => '$role/$reportType/report/$id';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
