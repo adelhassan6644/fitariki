@@ -16,7 +16,7 @@ class TermsRepo {
   Future<Either<ServerFailure, Response>> getTerms() async {
     try {
       Response response = await dioClient.get(
-        uri: "${EndPoints.paymentData}",
+        uri: EndPoints.appConfig,
       );
       if (response.statusCode == 200) {
         return Right(response);

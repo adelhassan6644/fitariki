@@ -43,7 +43,7 @@ class PaymentRepo {
   Future<Either<ServerFailure, Response>> paymentFees() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.paymentData,
+        uri: EndPoints.appConfig,
       );
       return Right(response);
     } catch (e) {

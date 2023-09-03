@@ -6,6 +6,8 @@ class EndPoints {
   static const String imageUrl = 'https://test.fitariki.com/';
   static const String apiKey = 'eGvviZ/npgc2Blb4/PSymh1tyb/UIt3aq82W6f+Wn4=';
   static const String topic = 'fitariki';
+
+  ///Authentication
   static logIn(role) => '$role/auth/login';
   static confirmEmail(role) => '$role/auth/confirmEmail';
   static register(role) => '$role/auth/register';
@@ -15,8 +17,11 @@ class EndPoints {
   static resend(role) => '$role/auth/sendEmailConfirmation';
   static changePassword(role) => '$role/profile/changePassword';
 
+  ///Profile
   static getProfile(role, id) => '$role/profile/profile/$id';
   static updateProfile(role, id) => '$role/profile/update/$id';
+
+  ///Offers
   static postOffer(role) => '$role/offer/postOffer';
   static homeUsers(role, userType) => '$role/$userType/${userType}_list';
   static homeOffers(role) => '$role/offer/list_available';
@@ -44,9 +49,9 @@ class EndPoints {
 
   static userProfile(role, type, id) => '$role/$type/profile/$id';
   static myProfile(role, type, id) => '$type/$role/profile/$id';
-  static   getOfferFeedback(role,id) => '$role/offer/feedbacks/$id';
-  static   getFeedback(role,id) => '$role/feedback/list/$id';
-  static   sendFeedback(role,id) => '$role/feedback/feedback/$id';
+  static getOfferFeedback(role, id) => '$role/offer/feedbacks/$id';
+  static getFeedback(role, id) => '$role/feedback/list/$id';
+  static sendFeedback(role, id) => '$role/feedback/feedback/$id';
   static report(role, reportType, id) => '$role/$reportType/report/$id';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
@@ -60,10 +65,6 @@ class EndPoints {
   static deleteNotification(role, userId, notificationId) =>
       '$role/notification/delete/$userId/$notificationId';
 
-  ///Payment
-  static const String paymentData = 'app/data';
-  static transactions(role, type, id) => '$role/payment/$type/$id';
-
   ///Running Trips
   static dayRides(role, type, id) => "$role/reservation/day${type}Trips/$id";
   static rideDetails(role, id) => "$role/reservation/show/trip/$id";
@@ -73,6 +74,12 @@ class EndPoints {
       "$role/reservation/cancelTripBy${role.capitalize()}/$id";
   static sendRideRate(String role, id) =>
       '$role/reservation/tripRatingBy${role.capitalize()}/$id';
+
+  ///Payment
+  static const String appConfig = 'app/data';
+
+  ///Used for term api
+  static transactions(role, type, id) => '$role/payment/$type/$id';
 
   ///App Content
   static const String getContact = 'app/contact';
