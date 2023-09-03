@@ -248,7 +248,7 @@ class RideDetailsWidget extends StatelessWidget {
                         text: getTranslated(
                             _buttonText(provider.ride?.status == null
                                 ? 0
-                                : provider.ride!.status! + 1),
+                                : provider.ride!.status! + 1)??"",
                             context),
                         onTap: () {
                           if (provider.isDriver && provider.ride?.status == 0) {

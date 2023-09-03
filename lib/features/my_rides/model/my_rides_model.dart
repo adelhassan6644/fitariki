@@ -40,7 +40,7 @@ class MyRideModel {
         id: json["id"],
         number: json["number"],
         startedAt: json["started_at"] == null
-            ? null
+            ? DateTime.now()
             : DateTime.parse(json["started_at"]),
         arrivedAt: json["arrived_at"] == null
             ? null

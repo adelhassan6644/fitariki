@@ -121,6 +121,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      sha256: f1a06ad4499ed9ab73703560d44893e6b9e66ce3923c9121f4ef3981c972057f
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.4"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      sha256: "86bd1865abbeb09a7d09da3e70364a09f894937270651fc611a1c6d6a9f7b02c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.15.3"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      sha256: ac2eeb2a7ab1928c3aacc30eed750fa839d6f620e112a5459e321df217be2f47
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.3"
   collection:
     dependency: transitive
     description:
@@ -409,6 +433,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.5.4"
+  fl_location:
+    dependency: "direct main"
+    description:
+      name: fl_location
+      sha256: "437cfa2f2c1a033de0f073e2f28f53abe302d587677591e436f7cd9c8199f7b4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0+1"
+  fl_location_platform_interface:
+    dependency: transitive
+    description:
+      name: fl_location_platform_interface
+      sha256: "2e51523d4ebbee57212891f1d9674a179a2af3500b67e64d4af2ba040b952614"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  fl_location_web:
+    dependency: transitive
+    description:
+      name: fl_location_web
+      sha256: "576e64609517c524fbc6b0f221e0170a9020244cccc40e5b612612a3fb5edded"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flag:
     dependency: "direct main"
     description:
@@ -438,6 +486,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_background:
+    dependency: "direct main"
+    description:
+      name: flutter_background
+      sha256: "035c31a738509d67ee70bbf174e5aa7db462c371e838ec8259700c5c4e7ca17f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_blurhash:
     dependency: transitive
     description:

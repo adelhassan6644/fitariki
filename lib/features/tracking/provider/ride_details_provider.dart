@@ -11,7 +11,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
-import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/routes.dart';
 import '../../my_rides/model/my_rides_model.dart';
@@ -38,7 +37,7 @@ class RideDetailsProvider extends ChangeNotifier {
   MyRideModel? ride;
   bool isLoading = false;
   getRideDetails(id) async {
-    try {
+    // try {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await repo.getRideDetails(id);
@@ -62,16 +61,16 @@ class RideDetailsProvider extends ChangeNotifier {
       });
       isLoading = false;
       notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoading = false;
-      notifyListeners();
-    }
+    // } catch (e) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: ApiErrorHandler.getMessage(e),
+    //           isFloating: true,
+    //           backgroundColor: Styles.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   isLoading = false;
+    //   notifyListeners();
+    // }
   }
 
   bool isChanging = false;
