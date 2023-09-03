@@ -6,7 +6,6 @@ import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../main_models/offer_model.dart';
-import '../../feedback/model/feedback_model.dart';
 import '../repo/offer_details_repo.dart';
 
 class OfferDetailsProvider extends ChangeNotifier {

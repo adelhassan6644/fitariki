@@ -14,58 +14,72 @@ class EndPoints {
   static updatePassword(role) => '$role/auth/updatePassword';
   static resend(role) => '$role/auth/sendEmailConfirmation';
   static changePassword(role) => '$role/profile/changePassword';
-  static const String getProfile = 'profile/profile';
-  static const String getCountries = '/app/countries';
-  static const String getBanks = '/app/banks';
-  static const String updateProfile = 'profile/update';
-  static const String postOffer = 'offer/postOffer';
-  static const String listOffers = 'offer/listOffers';
+
+  static getProfile(role, id) => '$role/profile/profile/$id';
+  static updateProfile(role, id) => '$role/profile/update/$id';
+  static postOffer(role) => '$role/offer/postOffer';
   static homeUsers(role, userType) => '$role/$userType/${userType}_list';
   static homeOffers(role) => '$role/offer/list_available';
   static homeRides(role, id) => '$role/reservation/hasCurrent/$id';
-  static const String availableOffers = '';
+  static checkExpiredContracts(role, id) => '$role/reservation/hasPending/$id';
+  static sendExpiredContractRate(role, id) =>
+      '$role/reservation/${role}Approval/$id';
   static myOffers(role, id) => '$role/offer/listOffers/$id';
+  static deleteOffer(role, id) => '$role/offer/deleteOffer/$id';
+  static viewMyOffers(role, id) => '$role/offer/view_my_offer/$id';
+  static requestDetails(role, id) => '$role/offer/view_request_offer/$id';
+  static offerDetails(role, id) => '$role/offer/view_offer/$id';
 
-  // static const String myOffers = 'offer/listOffers';
-  static const String deleteOffer = 'offer/deleteOffer';
-  static const String viewMyOffers = 'offer/view_my_offer';
-  static const String requestDetails = 'offer/view_request_offer';
-  static const String offerDetails = 'offer/view_offer';
+  ///Followers For client only
   static followers(id) => 'client/profile/followers_list/$id';
-  static const String addFollower = 'profile/add_follower';
-  static const String updateFollowerDetails = 'profile/update_follower';
-  static const String deleteFollower = 'profile/delete_follower';
-  static const String getContact = 'app/contact';
-  static const String getWishList = 'favorites/index';
-  static const String postWishList = 'favorites/addOrDelete';
+  static addFollower(id) => 'client/profile/add_follower/$id';
+  static updateFollower(id) => 'client/profile/update_follower/$id';
+  static deleteFollower(id) => 'client/profile/delete_follower/$id';
+
+  static getWishList(role, id) => '$role/favorites/index/$id';
+  static postWishList(role, id) => '$role/favorites/addOrDelete/$id';
   static addRequest(role, tripId) => '$role/offer/request_offer/$tripId';
   static specialOffer(role, type, id) => '$role/$type/special_offer/$id';
-  static const String updateRequest = 'offer/request_update';
+  static updateRequest(role, id) => '$role/offer/request_update/$id';
+
   static userProfile(role, type, id) => '$role/$type/profile/$id';
   static myProfile(role, type, id) => '$type/$role/profile/$id';
-  static const String getFeedback = 'feedback/list';
-  static const String getOfferFeedback = 'offer/feedbacks';
-  static const String sendFeedback = 'feedback/feedback';
-  static const String report = 'report';
+  static   getOfferFeedback(role,id) => '$role/offer/feedbacks/$id';
+  static   getFeedback(role,id) => '$role/feedback/list/$id';
+  static   sendFeedback(role,id) => '$role/feedback/feedback/$id';
+  static report(role, reportType, id) => '$role/$reportType/report/$id';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
-  static const String myTrips = 'reservation';
-  static const String myRequests = 'reservation/pending';
-  static const String notifications = 'notification/notification';
-  static transactions(role,type, id) => '$role/payment/$type/$id';
-  static const String readNotification = 'notification/read';
-  static const String deleteNotification = 'notification/delete';
+  static myTrips(role, type, id) => '$role/reservation/$type/$id';
+  static myRequests(role, id) => '$role/reservation/pending/$id';
+
+  ///Notifications
+  static notifications(role, id) => '$role/notification/notification/$id';
+  static readNotification(role, userId, notificationId) =>
+      '$role/notification/read/$userId/$notificationId';
+  static deleteNotification(role, userId, notificationId) =>
+      '$role/notification/delete/$userId/$notificationId';
+
+  ///Payment
   static const String paymentData = 'app/data';
-  static dayRides(role, type, id) => "$role/reservation/day${type}Trips/104";
+  static transactions(role, type, id) => '$role/payment/$type/$id';
+
+  ///Running Trips
+  static dayRides(role, type, id) => "$role/reservation/day${type}Trips/$id";
   static rideDetails(role, id) => "$role/reservation/show/trip/$id";
   static changeRideStatus(String role, id) =>
       "$role/reservation/changeStatusBy${role.capitalize()}/$id";
-  static cancelTrip(String role, id) => "$role/reservation/cancelTripBy${role.capitalize()}/$id";
-  static sendRideRate(String role, id) => '$role/reservation/tripRatingBy${role.capitalize()}/$id';
+  static cancelTrip(String role, id) =>
+      "$role/reservation/cancelTripBy${role.capitalize()}/$id";
+  static sendRideRate(String role, id) =>
+      '$role/reservation/tripRatingBy${role.capitalize()}/$id';
 
+  ///App Content
+  static const String getContact = 'app/contact';
+  static const String getCountries = 'app/countries';
+  static const String getBanks = 'app/banks';
 
   /// maps
   static const String GEOCODE_URI = '/maps/api/geocode/';
   static const String Autocomplete = '/maps/api/place/autocomplete/';
-
 }

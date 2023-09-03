@@ -18,7 +18,7 @@ class ShimmerFavouriteUserCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT, vertical: 8),
         child: Container(
-          height: 70,
+          height: 80,
           padding: EdgeInsets.symmetric(
               vertical: withSaveButton ? 16.h : 0, horizontal: 16.w),
           decoration: BoxDecoration(

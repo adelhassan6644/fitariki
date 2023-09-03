@@ -67,8 +67,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description:
-                                "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
+                            description: "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
+                            hint: getTranslated("new_price", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
                             maxLength: 4,

@@ -30,6 +30,7 @@ import '../../features/transactions/provider/transactions_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../main_providers/calender_provider.dart';
+import '../../main_providers/dashboard_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
 abstract class ProviderList {
@@ -37,6 +38,7 @@ abstract class ProviderList {
     ChangeNotifierProvider(create: (_) => di.sl<ThemeProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<LocalizationProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<SplashProvider>()),
+    ChangeNotifierProvider(create: (_) => di.sl<DashboardProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<FirebaseAuthProvider>()),
     ChangeNotifierProvider(create: (_) => di.sl<ProfileProvider>()),

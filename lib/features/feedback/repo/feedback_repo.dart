@@ -23,20 +23,15 @@ class FeedbackRepo {
       required int rating,
       required String feedback}) async {
     try {
-      bool isDriver;
-      if (sharedPreferences.getString(AppStorageKey.role) == "driver") {
-        isDriver = true;
-      } else {
-        isDriver = false;
-      }
       Response response = await dioClient.post(
-          uri:
-              "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.sendFeedback}/$offerId",
+          uri: EndPoints.sendFeedback(
+            sharedPreferences.getString(AppStorageKey.role),
+            offerId,
+          ),
           queryParameters: {
             "rating": rating,
             "feedback": feedback,
-            if (!isDriver) "client_id": userId,
-            if (isDriver) "driver_id": userId,
+            "${sharedPreferences.getString(AppStorageKey.role)}_id": userId,
           });
       if (response.statusCode == 200) {
         return Right(response);
@@ -51,8 +46,9 @@ class FeedbackRepo {
   Future<Either<ServerFailure, Response>> getFeedback() async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getFeedback}/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.getFeedback(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -67,14 +63,17 @@ class FeedbackRepo {
   Future<Either<ServerFailure, Response>> getReviews(id, isOffer) async {
     try {
       String? type;
-      if (isDriver()) {type = "client";}
-      else {
+      if (isDriver()) {
+        type = "client";
+      } else {
         type = "driver";
       }
+
       Response response = await dioClient.get(
         uri: isOffer
-            ? "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.getOfferFeedback}/$id"
-            : "$type/${EndPoints.getFeedback}/$id",
+            ? EndPoints.getOfferFeedback(
+                sharedPreferences.getString(AppStorageKey.role), id)
+            : EndPoints.getFeedback(type, id),
       );
       if (response.statusCode == 200) {
         return Right(response);

@@ -34,7 +34,7 @@ class FavouriteUserCard extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8.h),
         child: Container(
-          height: 70,
+          height: 77,
           padding: EdgeInsets.symmetric(
               vertical: withSaveButton ? 16.h : 0, horizontal: 16.w),
           decoration: BoxDecoration(
@@ -52,15 +52,24 @@ class FavouriteUserCard extends StatelessWidget {
             alignment: Alignment.centerLeft,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomNetworkImage.circleNewWorkImage(
-                      image: driver != null
-                          ? driver!.image ?? ""
-                          : client!.image ?? "",
-                      radius: 16,
-                      color: Styles.SECOUND_PRIMARY_COLOR),
+                  Column(
+                    children: [
+                      Visibility(
+                          visible: !withSaveButton,
+                          child: SizedBox(height: 16.h,)),
+                      CustomNetworkImage.circleNewWorkImage(
+                          image: driver != null
+                              ? driver!.image ?? ""
+                              : client!.image ?? "",
+                          radius: 18,
+                          color: Styles.SECOUND_PRIMARY_COLOR),
+                    ],
+                  ),
                   const SizedBox(
-                    width: 8,
+                    width: 12,
                   ),
                   Expanded(
                       child: Column(
@@ -69,19 +78,16 @@ class FavouriteUserCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          SizedBox(
-                            width: 60,
-                            child: Text(
-                              driver != null
-                                  ? driver!.firstName?.split(" ").first ?? ""
-                                  : "${client!.firstName ?? ""} ",
-                              textAlign: TextAlign.start,
-                              maxLines: 1,
-                              style: AppTextStyles.w600.copyWith(
-                                  fontSize: 14,
-                                  height: 1.25,
-                                  overflow: TextOverflow.ellipsis),
-                            ),
+                          Text(
+                            driver != null
+                                ? driver!.firstName?.split(" ").first ?? ""
+                                : "${client!.firstName ?? ""} ",
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            style: AppTextStyles.w600.copyWith(
+                                fontSize: 14,
+                                height: 1.25,
+                                overflow: TextOverflow.ellipsis),
                           ),
                           const SizedBox(
                             width: 4,

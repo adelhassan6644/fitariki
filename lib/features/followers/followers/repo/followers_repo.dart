@@ -17,8 +17,7 @@ class FollowersRepo {
   Future<Either<ServerFailure, Response>> getFollowers() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.followers(
-            sharedPreferences.getString(AppStorageKey.userId)),
+        uri: EndPoints.followers(sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
         return Right(response);

@@ -22,11 +22,14 @@ class MyTripsRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
-  Future<Either<ServerFailure, Response>> getMyTrips(status) async {
+  Future<Either<ServerFailure, Response>> getMyTrips(type) async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.myTrips}/$status/${sharedPreferences.getString(AppStorageKey.userId)}",
+        uri: EndPoints.myTrips(
+          sharedPreferences.getString(AppStorageKey.role),
+          type,
+          sharedPreferences.getString(AppStorageKey.userId),
+        ),
       );
       if (response.statusCode == 200) {
         return Right(response);

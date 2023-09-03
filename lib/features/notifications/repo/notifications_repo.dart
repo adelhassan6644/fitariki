@@ -16,9 +16,9 @@ class NotificationsRepo {
   Future<Either<ServerFailure, Response>> getNotification() async {
     try {
       Response response = await dioClient.get(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.notifications}/${sharedPreferences.getString(AppStorageKey.userId)}",
-            // "client/${EndPoints.notifications}/29",
+        uri: EndPoints.notifications(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId)),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -33,8 +33,10 @@ class NotificationsRepo {
   Future<Either<ServerFailure, Response>> readNotification(id) async {
     try {
       Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.readNotification}/${sharedPreferences.getString(AppStorageKey.userId)}/$id",
+        uri: EndPoints.readNotification(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId),
+            id),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -49,8 +51,10 @@ class NotificationsRepo {
   Future<Either<ServerFailure, Response>> deleteNotification(id) async {
     try {
       Response response = await dioClient.post(
-        uri:
-            "${sharedPreferences.getString(AppStorageKey.role)}/${EndPoints.deleteNotification}/${sharedPreferences.getString(AppStorageKey.userId)}/$id",
+        uri: EndPoints.deleteNotification(
+            sharedPreferences.getString(AppStorageKey.role),
+            sharedPreferences.getString(AppStorageKey.userId),
+            id),
       );
       if (response.statusCode == 200) {
         return Right(response);

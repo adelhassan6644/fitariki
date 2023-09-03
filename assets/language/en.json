@@ -210,6 +210,7 @@
   "offer_accepted": "Offer Accepted",
   "report": "report",
   "report_description": "Report something bothering you on this trip",
+  "report_hint": "Report description",
   "report_validation": "Please Explain what is bothering you about the trip so we can help you",
   "report_success_message": "You will be contacted within the next 24 hours\nservice representatives.",
   "new_offer_price_sent": "New Offer Price sent",
@@ -352,5 +353,13 @@
   "you_have": "You have",
   "ride_remaining_with": "ride remaining with",
   "the_passenger": "The Passenger",
-  "the_captain": "The Captain"
+  "the_captain": "The Captain",
+  "no": "No",
+  "new_price": "New price",
+  "your_contract_ended": "Your contract has expired",
+  "your_contract_ended_with": "Your contract has expired with",
+  "are_you_generally_satisfied_with_the_trip": "Are you generally satisfied with the trip?",
+  "if_your_answer_is_no_we_would_like_to_know_why": "If your answer is no, we would like to know why.",
+  "we_hope_that_you_always_have_pleasant_trips": "We hope that you always have pleasant trips and experiences",
+  "please_enter_the_reason": "Please, Enter the reason"
 }

@@ -212,6 +212,7 @@
   "offer_accepted": "تم قبول العرض",
   "report": "بلاغ",
   "report_description": "الابلاغ عن شيء يزعجك بهذه الرحلة",
+  "report_hint": "وصف البلاغ",
   "report_validation": "من فضلك اشرح لنا الذي يزعجك من الرحلة لكي نساعدك",
   "report_success_message": "سيتم التواصل معك خلال 24 ساعه القادمة من قِبل ممثلين الخدمة.",
   "new_offer_price_sent": "تم ارسال عرض السعر الجديد",
@@ -355,6 +356,14 @@
   "you_have": "تبقي",
   "ride_remaining_with": "مشوار لك مع",
   "the_passenger": "الراكب",
-  "the_captain": "الكابتن"
+  "the_captain": "الكابتن",
+  "new_price": "سعر جديد",
+  "your_contract_ended": "انتهى عقدك",
+  "your_contract_ended_with": "انتهى عقدك مع",
+  "no": "لا",
+  "are_you_generally_satisfied_with_the_trip": "هل تشعر بالرضا بشكل عام عن الرحله؟",
+  "if_your_answer_is_no_we_would_like_to_know_why": "اذا كانت اجابتك لا، يهمنا معرفة السبب.",
+  "we_hope_that_you_always_have_pleasant_trips": "نرجوا الله لك دائماً رحلات وتجربة ممتعة",
+  "please_enter_the_reason": "من فضلك ، ادخل السبب"
 
 }

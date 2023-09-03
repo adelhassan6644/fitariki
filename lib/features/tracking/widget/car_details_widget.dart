@@ -93,7 +93,7 @@ class CarDetailsWidget extends StatelessWidget {
                 ],
               )),
 
-          ///To time or Driver
+          ///To expected arrive time for Driver
           Consumer<RideDetailsProvider>(builder: (_, provider, child) {
             return Visibility(
                 visible: isDriver && status == null,
@@ -111,7 +111,7 @@ class CarDetailsWidget extends StatelessWidget {
                 ));
           }),
 
-          ///To time or Driver
+          ///To expected drop down time for Driver
           Consumer<RideDetailsProvider>(builder: (_, provider, child) {
             return Visibility(
                 visible: isDriver && status != null && status != 0,

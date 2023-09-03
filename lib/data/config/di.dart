@@ -54,7 +54,9 @@ import '../../features/user_profile/repo/user_profile_repo.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../features/wishlist/repo/wishlist_repo.dart';
 import '../../main_providers/calender_provider.dart';
+import '../../main_providers/dashboard_provider.dart';
 import '../../main_providers/schedule_provider.dart';
+import '../../main_repos/dashboard_repo.dart';
 import '../api/end_points.dart';
 import '../network/netwok_info.dart';
 import '../../features/auth/provider/firebase_auth_provider.dart';
@@ -80,6 +82,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SplashRepo(
         sharedPreferences: sl(),
       ));
+  sl.registerLazySingleton(
+      () => DashboardRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
       () => AuthRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(
@@ -140,6 +144,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LanguageProvider());
   sl.registerLazySingleton(() => ThemeProvider(sharedPreferences: sl()));
   sl.registerLazySingleton(() => SplashProvider(splashRepo: sl()));
+  sl.registerLazySingleton(() => DashboardProvider(repo: sl()));
   sl.registerLazySingleton(() => AuthProvider(authRepo: sl()));
   sl.registerLazySingleton(() => FirebaseAuthProvider(firebaseAuthRepo: sl()));
   sl.registerLazySingleton(() => ProfileProvider(
