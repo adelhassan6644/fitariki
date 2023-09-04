@@ -8,8 +8,6 @@ import '../../../data/config/di.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../home/provider/home_provider.dart';
-import '../../my_offers/provider/my_offers_provider.dart';
-import '../../my_trips/provider/my_trips_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../../success/model/success_model.dart';
 import '../../wishlist/provider/wishlist_provider.dart';
@@ -74,15 +72,8 @@ class AuthProvider extends ChangeNotifier {
           password: currentPasswordTEC.text.trim(),
           role: role[_userType]);
       response.fold((fail) {
-        CustomNavigator.pop();
-        clear();
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: getTranslated("invalid_credentials",
-                    CustomNavigator.navigatorState.currentContext!),
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
+        showToast(getTranslated("invalid_credentials",
+            CustomNavigator.navigatorState.currentContext!));
       }, (success) {
         if (_isRememberMe) {
           authRepo.remember(mailTEC.text.trim());
@@ -127,12 +118,7 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast(e.toString());
       _isLoading = false;
       notifyListeners();
     }
@@ -155,7 +141,6 @@ class AuthProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-        notifyListeners();
       }, (success) {
         if (fromRegister) {
           sl<ProfileProvider>().getProfile();
@@ -249,15 +234,7 @@ class AuthProvider extends ChangeNotifier {
         role: role[_userType],
       );
       response.fold((fail) {
-        clear();
-        CustomNavigator.pop();
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: fail.error,
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        notifyListeners();
+        showToast(ApiErrorHandler.getMessage(fail.error));
       }, (success) {
         authRepo.saveUserRole(
             type: role[_userType],
@@ -268,13 +245,7 @@ class AuthProvider extends ChangeNotifier {
       _isRegister = false;
       notifyListeners();
     } catch (e) {
-      clear();
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
+      showToast(e.toString());
       _isRegister = false;
       notifyListeners();
     }
