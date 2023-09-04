@@ -151,7 +151,7 @@ class RideDetailsWidget extends StatelessWidget {
                                                   ),
                                                   CarDetailsWidget(
                                                     arriveAt: provider
-                                                        .ride!.time!,
+                                                        .ride!.time??"",
                                                     pickLocation: provider
                                                         .ride?.pickupLocation,
                                                     carInfo: provider

@@ -8,8 +8,8 @@ class MyRideModel {
   int? number;
   DriverModel? driver;
   ClientModel? client;
-  DateTime? time;
-  DateTime? day;
+  String? time;
+  String? day;
   DateTime? startedAt;
   DateTime? arrivedAt;
   int? cancelByDriver;
@@ -43,11 +43,8 @@ class MyRideModel {
   factory MyRideModel.fromJson(Map<String, dynamic> json) => MyRideModel(
         id: json["id"],
         number: json["number"],
-        time: json["time"] == null
-            ? DateTime.now()
-            : DateTime.parse(json["time"]),
-        day:
-            json["day"] == null ? DateTime.now() : DateTime.parse(json["time"]),
+        time: json["time"],
+        day: json["day"],
         startedAt: json["started_at"] == null
             ? DateTime.now()
             : DateTime.parse(json["started_at"]),

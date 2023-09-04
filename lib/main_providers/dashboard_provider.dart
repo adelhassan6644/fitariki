@@ -27,7 +27,7 @@ class DashboardProvider extends ChangeNotifier {
           showToast(l.error);
         }, (success) {
           if (success.data["data"] != null) {
-            showRateTripPopUp(success.data["data"],"name");
+            showRateTripPopUp(success.data["data"]["id"],success.data["data"]["name"]);
           }
         });
         notifyListeners();

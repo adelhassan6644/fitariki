@@ -1,5 +1,4 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
-import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
@@ -59,7 +58,7 @@ class RideCard extends StatelessWidget {
                       name: isDriver
                           ? ride.client?.firstName ?? ""
                           : ride.driver?.firstName ?? "",
-                      day: ride.day!,
+                      day: ride.day??"",
                     ),
                   )
                 ],
@@ -74,7 +73,7 @@ class RideCard extends StatelessWidget {
                         fontSize: 11, color: Styles.SECOUND_PRIMARY_COLOR),
                     children: [
                       TextSpan(
-                        text: "  ${ride.time?.dateFormat(format: "hh:mm a")}",
+                        text: "  ${ride.time??""}",
                         style: AppTextStyles.w700.copyWith(
                             fontSize: 14, color: Styles.PRIMARY_COLOR),
                       )

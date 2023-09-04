@@ -1,4 +1,3 @@
-import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/tracking/provider/ride_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +18,7 @@ class CarDetailsWidget extends StatelessWidget {
       required this.isDriver,
       this.carInfo});
 
-  final DateTime arriveAt;
+  final String? arriveAt;
   final LocationModel? pickLocation;
   final int? status;
   final bool isDriver;
@@ -43,8 +42,7 @@ class CarDetailsWidget extends StatelessWidget {
                         fontSize: 14, color: Styles.SECOUND_PRIMARY_COLOR),
                     children: [
                       TextSpan(
-                        text:
-                            "  ${arriveAt.dateFormat(format: "hh:mm a", lang: "en")}",
+                        text: "  $arriveAt",
                         style: AppTextStyles.w700.copyWith(
                             fontSize: 14, color: Styles.PRIMARY_COLOR),
                       )
