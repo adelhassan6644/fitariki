@@ -27,7 +27,8 @@ class DashboardProvider extends ChangeNotifier {
           showToast(l.error);
         }, (success) {
           if (success.data["data"] != null) {
-            showRateTripPopUp(success.data["data"]["id"],success.data["data"]["name"]);
+            showRateTripPopUp(
+                success.data["data"]["id"], success.data["data"]["name"]);
           }
         });
         notifyListeners();
@@ -40,7 +41,7 @@ class DashboardProvider extends ChangeNotifier {
 
   TextEditingController reasonTEC = TextEditingController();
 
-  showRateTripPopUp(id,name) {
+  showRateTripPopUp(id, name) {
     Future.delayed(
         Duration.zero,
         () => CupertinoPopUpHelper.showCupertinoTextController(
