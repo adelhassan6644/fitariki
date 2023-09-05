@@ -40,4 +40,35 @@ class MyTripsRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
+  Future<Either<ServerFailure, Response>> getCurrentTripDetails(id) async {
+    try {
+      Response response = await dioClient.get(
+        uri: "",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
+
+  Future<Either<ServerFailure, Response>> getPreviousTripDetails(id) async {
+    try {
+      Response response = await dioClient.get(
+        uri: "",
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
 }
