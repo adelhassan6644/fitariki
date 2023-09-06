@@ -17,7 +17,7 @@ class PreviousTripDetailsModel {
   String? invoice;
   int? taxPercentage;
   double? tax;
-  int? costPercentage;
+  int? serviceCostPercentage;
   double? serviceCost;
   double? discount;
   double? amount;
@@ -34,7 +34,7 @@ class PreviousTripDetailsModel {
       this.tax,
       this.taxPercentage,
       this.serviceCost,
-      this.costPercentage,
+      this.serviceCostPercentage,
       this.discount,
       this.numOfCancelTrips,
       this.cancelValue,
@@ -60,11 +60,11 @@ class PreviousTripDetailsModel {
         ? LocationModel.fromJson(json['pickup_location'])
         : null;
     tax = json['tax'] != null ? double.parse(json['tax'].toString()) : null;
-    taxPercentage = json['tax_percentage'];
+    taxPercentage = json['taxPercentage'];
     serviceCost = json['service_fee'] != null
-        ? double.parse(json['tax'].toString())
+        ? double.parse(json['service_fee'].toString())
         : null;
-    costPercentage = json['service_cost_percentage'];
+    serviceCostPercentage = json['service_fee_Percentage'];
     discount = json['discount'] != null
         ? double.parse(json['discount'].toString())
         : null;

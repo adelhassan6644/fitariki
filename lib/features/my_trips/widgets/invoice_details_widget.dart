@@ -93,7 +93,7 @@ class InvoiceDetailsWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${getTranslated("service_costs", context)} ${(provider.tripDetails?.costPercentage ?? 0)}%",
+                              "${getTranslated("service_costs", context)} ${(provider.tripDetails?.serviceCostPercentage ?? 0)}%",
                               style: AppTextStyles.w400.copyWith(
                                 fontSize: 14,
                               ),
