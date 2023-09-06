@@ -5,6 +5,7 @@ import 'package:fitariki/features/followers/follower_details/model/follower_mode
 import 'package:fitariki/features/my_rides/page/my_rides_page.dart';
 import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
 import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
+import 'package:fitariki/features/my_trips/page/my_previous_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';
 import 'package:fitariki/features/payment/page/payment_webView_screen.dart';
 import 'package:fitariki/features/feedback/page/rate_trip.dart';
@@ -155,9 +156,14 @@ abstract class CustomNavigator {
           id: settings.arguments as int,
         ));
 
-      case Routes.MY_TRIP_DETAILS:
-        return _pageRoute(MyTripDetails(
-          myTripModel: settings.arguments as MyTripModel,
+      case Routes.MY_PREVIOUS_TRIP_DETAILS:
+        return _pageRoute(MyPreviousTripDetails(
+          id: settings.arguments as int,
+        ));
+
+      case Routes.MY_CURRENT_TRIP_DETAILS:
+        return _pageRoute(MyCurrentTripDetails(
+          id: settings.arguments as int,
         ));
 
       case Routes.MY_PENDING_TRIP_DETAILS:

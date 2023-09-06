@@ -1,6 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
-import 'package:fitariki/features/transactions/widget/transacction_card.dart';
+import 'package:fitariki/features/transactions/widget/transaction_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

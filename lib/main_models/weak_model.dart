@@ -18,9 +18,4 @@ class WeekModel {
         "start_time": startTime,
         "end_time": endTime,
       };
-  // @override
-  // String toString() {
-  //
-  //   return "$id -- $dayName  ";
-  // }
 }

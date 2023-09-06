@@ -22,6 +22,7 @@ class MapWidget extends StatelessWidget {
       this.stopPoints,
       this.clientName,
       this.launchMap = true,
+      this.showAddress = true,
       this.showFullAddress = false,
       this.gender,
       Key? key})
@@ -31,6 +32,7 @@ class MapWidget extends StatelessWidget {
   final String? clientName;
   final bool launchMap;
   final bool showFullAddress;
+  final bool showAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +51,9 @@ class MapWidget extends StatelessWidget {
                 vertical: 8.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
             child: Column(
               children: [
-                if (clientName != null)
-                  Row(
+                Visibility(
+                  visible: clientName != null && showAddress,
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -74,168 +77,183 @@ class MapWidget extends StatelessWidget {
                           height: 11)
                     ],
                   ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          splashColor: Colors.transparent,
-                          onTap: () async {
-                            if (launchMap) {
-                              bool? isActive =
-                                  await mapLaunch.MapLauncher.isMapAvailable(
-                                      mapLaunch.MapType.google);
-                              bool? isAppleActive =
-                                  await mapLaunch.MapLauncher.isMapAvailable(
-                                      mapLaunch.MapType.apple);
-                              if (isActive!) {
-                                await mapLaunch.MapLauncher.showDirections(
-                                  mapType: mapLaunch.MapType.google,
-                                  destination: mapLaunch.Coords(
-                                    double.parse(startPoint!.latitude!),
-                                    double.parse(startPoint!.longitude!),
-                                  ),
-                                  destinationTitle: startPoint!.address,
-                                );
-                              } else if (isAppleActive!) {
-                                await mapLaunch.MapLauncher.showDirections(
-                                  // mapType: MapType.apple,
-                                  destination: mapLaunch.Coords(
-                                    double.parse(startPoint!.latitude!),
-                                    double.parse(startPoint!.longitude!),
-                                  ),
-                                  destinationTitle: startPoint!.address,
-                                  mapType: mapLaunch.MapType.apple,
-                                );
-                              }
-                            }
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                getTranslated("start_point", context),
-                                maxLines: 1,
-                                style: AppTextStyles.w600.copyWith(
-                                    fontSize: 10,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                              MarqueeWidget(
-                                child: Text(
-                                  showFullAddress
-                                      ? startPoint?.address ?? ""
-                                      : startPoint?.address?.split(",")[0] ??
-                                          "",
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 10,
-                                      color: Styles.HINT_COLOR,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15.w),
-                      if (stopPoints != null)
+                ),
+
+                Visibility(
+                  visible: showAddress,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        ///Start Point
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                getTranslated("stop_points", context),
-                                maxLines: 1,
-                                style: AppTextStyles.w600.copyWith(
-                                    fontSize: 10,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                              MarqueeWidget(
-                                child: Text(
-                                  stopPoints.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 10,
-                                      color: Styles.HINT_COLOR,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      if (stopPoints != null) SizedBox(width: 15.w),
-                      Expanded(
-                        child: InkWell(
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          splashColor: Colors.transparent,
-                          onTap: () async {
-                            if (launchMap) {
-                              bool? isActive =
-                                  await mapLaunch.MapLauncher.isMapAvailable(
-                                      mapLaunch.MapType.google);
-                              bool? isAppleActive =
-                                  await mapLaunch.MapLauncher.isMapAvailable(
-                                      mapLaunch.MapType.apple);
-                              if (isActive!) {
-                                await mapLaunch.MapLauncher.showDirections(
-                                  mapType: mapLaunch.MapType.google,
-                                  destination: mapLaunch.Coords(
-                                    double.parse(endPoint!.latitude!),
-                                    double.parse(endPoint!.longitude!),
-                                  ),
-                                  destinationTitle: endPoint!.address,
-                                );
-                              } else if (isAppleActive!) {
-                                await mapLaunch.MapLauncher.showDirections(
-                                  // mapType: MapType.apple,
-                                  destination: mapLaunch.Coords(
-                                    double.parse(endPoint!.latitude!),
-                                    double.parse(endPoint!.longitude!),
-                                  ),
-                                  destinationTitle: endPoint!.address,
-                                  mapType: mapLaunch.MapType.apple,
-                                );
+                          child: InkWell(
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            onTap: () async {
+                              if (launchMap) {
+                                bool? isActive =
+                                    await mapLaunch.MapLauncher.isMapAvailable(
+                                        mapLaunch.MapType.google);
+                                bool? isAppleActive =
+                                    await mapLaunch.MapLauncher.isMapAvailable(
+                                        mapLaunch.MapType.apple);
+                                if (isActive!) {
+                                  await mapLaunch.MapLauncher.showDirections(
+                                    mapType: mapLaunch.MapType.google,
+                                    destination: mapLaunch.Coords(
+                                      double.parse(startPoint!.latitude!),
+                                      double.parse(startPoint!.longitude!),
+                                    ),
+                                    destinationTitle: startPoint!.address,
+                                  );
+                                } else if (isAppleActive!) {
+                                  await mapLaunch.MapLauncher.showDirections(
+                                    // mapType: MapType.apple,
+                                    destination: mapLaunch.Coords(
+                                      double.parse(startPoint!.latitude!),
+                                      double.parse(startPoint!.longitude!),
+                                    ),
+                                    destinationTitle: startPoint!.address,
+                                    mapType: mapLaunch.MapType.apple,
+                                  );
+                                }
                               }
-                            }
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                getTranslated("final_destination", context),
-                                maxLines: 1,
-                                style: AppTextStyles.w600.copyWith(
-                                    fontSize: 10,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                              MarqueeWidget(
-                                child: Text(
-                                  showFullAddress
-                                      ? endPoint?.address ?? ""
-                                      : endPoint?.address?.split(",")[0] ?? "",
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getTranslated("start_point", context),
                                   maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.w400.copyWith(
+                                  style: AppTextStyles.w600.copyWith(
                                       fontSize: 10,
-                                      color: Styles.HINT_COLOR,
                                       overflow: TextOverflow.ellipsis),
                                 ),
-                              )
-                            ],
+                                MarqueeWidget(
+                                  child: Text(
+                                    showFullAddress
+                                        ? startPoint?.address ?? ""
+                                        : startPoint?.address?.split(",")[0] ??
+                                            "",
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        color: Styles.HINT_COLOR,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 15.w),
+
+                        ///Stop points
+                        Visibility(
+                          visible: stopPoints != null,
+                          child: Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getTranslated("stop_points", context),
+                                  maxLines: 1,
+                                  style: AppTextStyles.w600.copyWith(
+                                      fontSize: 10,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                MarqueeWidget(
+                                  child: Text(
+                                    stopPoints.toString(),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        color: Styles.HINT_COLOR,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                            visible: stopPoints != null,
+                            child: SizedBox(width: 15.w)),
+
+                        ///Final Destination
+                        Expanded(
+                          child: InkWell(
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            onTap: () async {
+                              if (launchMap) {
+                                bool? isActive =
+                                    await mapLaunch.MapLauncher.isMapAvailable(
+                                        mapLaunch.MapType.google);
+                                bool? isAppleActive =
+                                    await mapLaunch.MapLauncher.isMapAvailable(
+                                        mapLaunch.MapType.apple);
+                                if (isActive!) {
+                                  await mapLaunch.MapLauncher.showDirections(
+                                    mapType: mapLaunch.MapType.google,
+                                    destination: mapLaunch.Coords(
+                                      double.parse(endPoint!.latitude!),
+                                      double.parse(endPoint!.longitude!),
+                                    ),
+                                    destinationTitle: endPoint!.address,
+                                  );
+                                } else if (isAppleActive!) {
+                                  await mapLaunch.MapLauncher.showDirections(
+                                    // mapType: MapType.apple,
+                                    destination: mapLaunch.Coords(
+                                      double.parse(endPoint!.latitude!),
+                                      double.parse(endPoint!.longitude!),
+                                    ),
+                                    destinationTitle: endPoint!.address,
+                                    mapType: mapLaunch.MapType.apple,
+                                  );
+                                }
+                              }
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getTranslated("final_destination", context),
+                                  maxLines: 1,
+                                  style: AppTextStyles.w600.copyWith(
+                                      fontSize: 10,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                MarqueeWidget(
+                                  child: Text(
+                                    showFullAddress
+                                        ? endPoint?.address ?? ""
+                                        : endPoint?.address?.split(",")[0] ?? "",
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.w400.copyWith(
+                                        fontSize: 10,
+                                        color: Styles.HINT_COLOR,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+
                 SizedBox(
                   width: context.width,
                   height: 120,

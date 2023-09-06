@@ -14,8 +14,8 @@ import 'data/config/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app/core/utils/app_strings.dart';
+import 'features/my_trips/page/my_current_trip_details.dart';
 import 'navigation/custom_navigation.dart';
-import 'navigation/routes.dart';
 import 'package:fitariki/data/config/di.dart' as di;
 
 Future<void> main() async {
@@ -62,9 +62,12 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: UnFocus(child: child!)),
-      initialRoute: Routes.SPLASH,
+      // initialRoute: Routes.SPLASH,
       navigatorKey: CustomNavigator.navigatorState,
-      onGenerateRoute: CustomNavigator.onCreateRoute,
+      // onGenerateRoute: CustomNavigator.onCreateRoute,
+      home: MyCurrentTripDetails(
+        id: 110,
+      ),
       navigatorObservers: [CustomNavigator.routeObserver],
       title: AppStrings.appName,
       scaffoldMessengerKey: CustomNavigator.scaffoldState,

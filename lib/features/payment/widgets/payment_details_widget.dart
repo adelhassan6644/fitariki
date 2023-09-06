@@ -146,7 +146,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
             SizedBox(
               height: 15.h,
             ),
-            Divider(thickness: .2,),
+            const Divider(thickness: .2,),
 
             Row(
               children: [

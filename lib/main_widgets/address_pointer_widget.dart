@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/core/utils/svg_images.dart';
 import '../app/core/utils/text_styles.dart';
+import '../components/custom_images.dart';
 import '../features/maps/models/location_model.dart';
-import 'custom_images.dart';
 import 'package:map_launcher/map_launcher.dart' as mapLaunch;
 
 class AddressPointerWidget extends StatelessWidget {

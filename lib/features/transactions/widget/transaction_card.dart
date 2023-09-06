@@ -35,15 +35,23 @@ class TransactionCard extends StatelessWidget {
             width: 8,
           ),
           CustomButton(
-            onTap: () => CustomNavigator.push(Routes.PDF,
-                arguments: transactionItem.invoice ?? ""),
+            onTap: () {
+              if (isFinished) {
+                CustomNavigator.push(Routes.MY_PREVIOUS_TRIP_DETAILS,
+                    arguments: transactionItem.reservationId ?? "");
+              } else {
+                CustomNavigator.push(Routes.MY_CURRENT_TRIP_DETAILS,
+                    arguments: transactionItem.reservationId ?? "");
+              }
+            },
             text: getTranslated("preview", context),
             radius: 100,
             width: 100,
             textSize: 12,
             height: 30,
-            backgroundColor: isFinished? Styles.WHITE_COLOR:Styles.PRIMARY_COLOR,
-            textColor: isFinished? Styles.PRIMARY_COLOR:Styles.WHITE_COLOR,
+            backgroundColor:
+                isFinished ? Styles.WHITE_COLOR : Styles.PRIMARY_COLOR,
+            textColor: isFinished ? Styles.PRIMARY_COLOR : Styles.WHITE_COLOR,
             withBorderColor: true,
           ),
         ],

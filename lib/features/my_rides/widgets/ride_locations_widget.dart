@@ -3,7 +3,7 @@ import 'package:fitariki/features/maps/models/location_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../app/core/utils/color_resources.dart';
-import '../../../components/address_pointer_widget.dart';
+import '../../../main_widgets/address_pointer_widget.dart';
 import '../model/my_rides_model.dart';
 
 class RideLocationsWidget extends StatelessWidget {
@@ -98,7 +98,8 @@ class RideLocationsWidget extends StatelessWidget {
         ///Drop off Location
         AddressPointerWidget(
           location: dropOffLocation,
-          trailer: getTranslated((status == 4) ? "absent" : "confirmed", context),
+          trailer:
+              getTranslated((status == 4) ? "absent" : "confirmed", context),
           trailerColor: Styles.rideStatus(status),
         ),
       ],

@@ -37,10 +37,8 @@ class CurrentTripsWidget extends StatelessWidget {
                           provider.currentTrips!.isNotEmpty
                       ? List.generate(
                           provider.currentTrips!.length,
-                          (index)
-                          {
-                            print((provider.currentTrips![index].offer!.offerFollowers!.isEmpty));
-                          return  Padding(
+                          (index) {
+                            return Padding(
                               padding: EdgeInsets.symmetric(vertical: 4.0.h),
                               child: MyTripCard(
                                 isCurrent: true,

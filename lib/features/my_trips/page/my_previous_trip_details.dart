@@ -2,22 +2,23 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/core/utils/color_resources.dart';
+import '../../../app/core/utils/methods.dart';
 import '../../../app/localization/localization/language_constant.dart';
-import '../../../components/address_pointer_widget.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../data/config/di.dart';
+import '../../../main_widgets/address_pointer_widget.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../provider/previous_trip_details_provider.dart';
 import '../repo/my_trips_repo.dart';
+import '../widgets/invoice_details_widget.dart';
+import '../widgets/previous_trip_user_widget.dart';
+import '../widgets/shimmer/previous_trip_details_shimmer.dart';
 
-class MyTripDetails extends StatelessWidget {
+class MyPreviousTripDetails extends StatelessWidget {
   final int id;
 
-  const MyTripDetails({
-    required this.id,
-    Key? key,
-  }) : super(key: key);
+  const MyPreviousTripDetails({required this.id, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,139 +36,78 @@ class MyTripDetails extends StatelessWidget {
             return Column(
               children: [
                 Expanded(
-                  child: ListAnimator(
-                    data: [
-                      /// Map View
-                      MapWidget(
-                        startPoint: provider.isDriver
-                            ? provider
-                                    .tripDetails?.clientModel?.pickupLocation ??
-                                provider.tripDetails?.offer?.clientModel
-                                    ?.pickupLocation ??
-                                provider.tripDetails?.myTripRequest?.clientModel
-                                    ?.pickupLocation
-                            : provider.tripDetails?.offer?.pickupLocation,
-                        endPoint: provider.isDriver
-                            ? provider.tripDetails?.clientModel
-                                    ?.dropOffLocation ??
-                                provider.tripDetails?.offer?.clientModel
-                                    ?.dropOffLocation ??
-                                provider.tripDetails?.myTripRequest?.clientModel
-                                    ?.dropOffLocation
-                            : provider.tripDetails?.offer?.dropOffLocation,
-                      ),
+                  child: provider.isLoading
+                      ? PreviousTripDetailsShimmer(
+                          isDriver: provider.isDriver,
+                        )
+                      : ListAnimator(
+                          data: [
+                            PreviousTripUserWidget(
+                              userId: provider.isDriver
+                                  ? provider.tripDetails?.client?.id
+                                  : provider.tripDetails?.driver?.id,
+                              image: provider.isDriver
+                                  ? provider.tripDetails?.client?.image
+                                  : provider.tripDetails?.driver?.image,
+                              name: provider.isDriver
+                                  ? provider.tripDetails?.client?.firstName
+                                  : provider.tripDetails?.driver?.firstName
+                                      ?.split(" ")
+                                      .first,
+                              rideType: provider.tripDetails?.type,
+                              gender: provider.isDriver
+                                  ? provider.tripDetails?.client?.gender == 0
+                                  : provider.tripDetails?.driver?.gender == 0,
+                              timeRange:
+                                  "${Methods.convertStringToTime(provider.tripDetails?.days?[0].startTime, withFormat: true)} : ${Methods.convertStringToTime(provider.tripDetails?.days?[0].endTime, withFormat: true)}",
+                              startDate: provider.tripDetails?.startDate,
+                            ),
 
-                      ///Pick up Location
-                      AddressPointerWidget(
-                        location: provider.isDriver
-                            ? provider
-                                    .tripDetails?.clientModel?.pickupLocation ??
-                                provider.tripDetails?.offer?.clientModel
-                                    ?.pickupLocation ??
-                                provider.tripDetails?.myTripRequest?.clientModel
-                                    ?.pickupLocation
-                            : provider.tripDetails?.offer?.pickupLocation,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 1, horizontal: 4),
-                        child: Container(
-                          height: 12,
-                          width: 2,
-                          color: Styles.HINT_COLOR,
+                            /// Map View
+                            MapWidget(
+                              showAddress: false,
+                              startPoint: provider.tripDetails?.pickupLocation,
+                              endPoint: provider.tripDetails?.dropOffLocation,
+                            ),
+
+                            ///Location
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      Dimensions.PADDING_SIZE_DEFAULT.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ///Pick up Location
+                                  AddressPointerWidget(
+                                    location:
+                                        provider.tripDetails?.pickupLocation,
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 1, horizontal: 4),
+                                    child: Container(
+                                      height: 12,
+                                      width: 2,
+                                      color: Styles.HINT_COLOR,
+                                    ),
+                                  ),
+
+                                  ///Drop off Location
+                                  AddressPointerWidget(
+                                    location:
+                                        provider.tripDetails?.dropOffLocation,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            ///PaymentDetails
+                            const InvoiceDetailsWidget(),
+                          ],
                         ),
-                      ),
-
-                      ///Followers Locations
-                      Visibility(
-                        visible: provider.tripDetails?.myTripRequest?.followers
-                                ?.length !=
-                            0,
-                        child: Column(
-                          children: List.generate(
-                              provider.tripDetails?.myTripRequest?.followers
-                                      ?.length ??
-                                  0,
-                              (index) => Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Visibility(
-                                        visible: index == 1,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 1, horizontal: 4),
-                                          child: Container(
-                                            height: 12,
-                                            width: 2,
-                                            color: Styles.HINT_COLOR,
-                                          ),
-                                        ),
-                                      ),
-
-                                      ///Pick up Location
-                                      AddressPointerWidget(
-                                        location: provider
-                                            .tripDetails
-                                            ?.myTripRequest
-                                            ?.followers?[index]
-                                            .pickupLocation,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 1, horizontal: 4),
-                                        child: Container(
-                                          height: 12,
-                                          width: 2,
-                                          color: Styles.HINT_COLOR,
-                                        ),
-                                      ),
-
-                                      ///Drop off Location
-                                      AddressPointerWidget(
-                                        location: provider
-                                            .tripDetails
-                                            ?.myTripRequest
-                                            ?.followers?[index]
-                                            .dropOffLocation,
-                                      ),
-                                      Visibility(
-                                        visible: index ==
-                                            (provider.tripDetails?.myTripRequest
-                                                        ?.followers?.length ??
-                                                    0) -
-                                                1,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 1, horizontal: 4),
-                                          child: Container(
-                                            height: 12,
-                                            width: 2,
-                                            color: Styles.HINT_COLOR,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                        ),
-                      ),
-
-                      ///Drop off Location
-                      AddressPointerWidget(
-                        location: provider.isDriver
-                            ? provider.tripDetails?.clientModel
-                                    ?.dropOffLocation ??
-                                provider.tripDetails?.offer?.clientModel
-                                    ?.dropOffLocation ??
-                                provider.tripDetails?.myTripRequest?.clientModel
-                                    ?.dropOffLocation
-                            : provider.tripDetails?.offer?.dropOffLocation,
-                      ),
-
-                      SizedBox(height: 24.h)
-                    ],
-                  ),
-                ),
+                )
               ],
             );
           }),

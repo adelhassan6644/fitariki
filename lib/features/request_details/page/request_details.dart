@@ -22,10 +22,7 @@ import '../widgets/trip_days_on_calender_widget.dart';
 class RequestDetails extends StatefulWidget {
   final int id;
 
-  const RequestDetails({
-    required this.id,
-    Key? key,
-  }) : super(key: key);
+  const RequestDetails({required this.id, Key? key}) : super(key: key);
 
   @override
   State<RequestDetails> createState() => _RequestDetailsState();

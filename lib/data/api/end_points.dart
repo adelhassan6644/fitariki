@@ -56,6 +56,8 @@ class EndPoints {
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
   static myTrips(role, type, id) => '$role/reservation/$type/$id';
+  static myPreviousTripDetails(role, id) => '$role/reservation/showDetails/$id';
+  static myCurrentTripDetails(role, id) => '$role/reservation/show/$id';
   static myRequests(role, id) => '$role/reservation/pending/$id';
 
   ///Notifications

@@ -5,7 +5,7 @@ import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
-import '../model/my_trips_model.dart';
+import '../model/previous_trip_details_model.dart';
 import '../repo/my_trips_repo.dart';
 
 class PreviousTripDetailsProvider extends ChangeNotifier {
@@ -15,7 +15,7 @@ class PreviousTripDetailsProvider extends ChangeNotifier {
   bool get isDriver => repo.isDriver();
 
   bool isLoading = false;
-  MyTripModel? tripDetails;
+  PreviousTripDetailsModel? tripDetails;
   getPreviousTripDetails(id) async {
     try {
       tripDetails = null;
@@ -31,8 +31,9 @@ class PreviousTripDetailsProvider extends ChangeNotifier {
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-      }, (response) {
-        tripDetails = MyTripModel.fromJson(response.data["data"]);
+      },
+              (response) {
+        tripDetails = PreviousTripDetailsModel.fromJson(response.data["data"]);
       });
 
       isLoading = false;

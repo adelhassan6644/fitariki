@@ -295,8 +295,8 @@ class UserCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ReportButton(
-                        userId: userId!,
-                        reservationId: reservationId!,
+                        userId: userId,
+                        reservationId: reservationId,
                       ),
                       SizedBox(
                         height: 12.h,

@@ -21,164 +21,166 @@ class Payment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          bottom: true,
-          top: false,
-          child: Column(
-            children: [
-              CustomAppBar(
-                title: getTranslated("payment", context),
-              ),
-              Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
-                return (provider.isLoading)
-                    ? const PaymentShimmerShimmer()
-                    : Expanded(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: ListAnimator(
-                                data: [
-                                  ///user card
-                                  if (isFromMyTrips)
-                                    UserCard(
-                                      withAnalytics: false,
-                                      userId: provider
-                                              .requestModel?.driverModel?.id ??
-                                          provider.requestModel?.offer
-                                              ?.driverModel?.id,
-                                      name: provider.requestModel?.driverModel
-                                              ?.firstName ??
-                                          provider.requestModel?.offer
-                                              ?.driverModel?.firstName,
-                                      male: (provider.requestModel?.driverModel
-                                                  ?.gender ??
-                                              provider.requestModel?.offer
-                                                  ?.driverModel?.gender) ==
-                                          0,
-                                      image: provider.requestModel?.driverModel
-                                              ?.image ??
-                                          provider.requestModel?.offer
-                                              ?.driverModel?.image,
-                                      national: provider
-                                              .requestModel
-                                              ?.driverModel
-                                              ?.national
-                                              ?.niceName ??
-                                          provider.requestModel?.offer
-                                              ?.driverModel?.national?.niceName,
-                                      createdAt:
-                                          provider.requestModel?.createdAt ??
-                                              DateTime.now(),
-                                      days: provider
-                                          .requestModel?.offer?.offerDays!
-                                          .map((e) => e.dayName)
-                                          .toList()
-                                          .join(", "),
-                                      duration: provider.requestModel?.duration
-                                          .toString(),
-                                      priceRange:
-                                          "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
-                                      timeRange:
-                                          "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
-                                    ),
-                                  if (!isFromMyTrips)
-                                    UserCard(
-                                      withAnalytics: false,
-                                      userId: provider.requestModel?.driverId,
-                                      name: provider
-                                          .requestModel?.driverModel?.firstName,
-                                      image: provider
-                                          .requestModel?.driverModel?.image,
-                                      male: provider.requestModel?.driverModel
-                                              ?.gender ==
-                                          0,
-                                      national: provider.requestModel
-                                          ?.driverModel?.national?.niceName,
-                                      createdAt:
-                                          provider.requestModel?.createdAt ??
-                                              DateTime.now(),
-                                      days: provider
-                                          .requestModel?.offer?.offerDays!
-                                          .map((e) => e.dayName)
-                                          .toList()
-                                          .join(", "),
-                                      duration: provider.requestModel?.duration
-                                          .toString(),
-                                      priceRange:
-                                          "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
-                                      timeRange:
-                                          "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
-                                    ),
-
-                                  ///Type of ride
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            Dimensions.PADDING_SIZE_DEFAULT.w,
-                                        vertical:
-                                            Dimensions.PADDING_SIZE_DEFAULT.h),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          getTranslated("ride_type", context),
-                                          textAlign: TextAlign.start,
-                                          style: AppTextStyles.w600.copyWith(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 12,
-                                        ),
-                                        Text(
-                                          Methods.getOfferType(provider
-                                                  .requestModel?.offerType ??
-                                              provider.requestModel?.offer
-                                                  ?.offerType ??
-                                              1),
-                                          textAlign: TextAlign.end,
-                                          style: AppTextStyles.w400.copyWith(
-                                            fontSize: 10,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: getTranslated("payment", context),
+        ),
+        body: Column(
+          children: [
+            Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
+              return (provider.isLoading)
+                  ? const PaymentShimmerShimmer()
+                  : Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListAnimator(
+                              data: [
+                                ///user card
+                                Visibility(
+                                  visible: isFromMyTrips,
+                                  child: UserCard(
+                                    withAnalytics: false,
+                                    userId: provider
+                                            .requestModel?.driverModel?.id ??
+                                        provider.requestModel?.offer
+                                            ?.driverModel?.id,
+                                    name: provider.requestModel?.driverModel
+                                            ?.firstName ??
+                                        provider.requestModel?.offer
+                                            ?.driverModel?.firstName,
+                                    male: (provider.requestModel?.driverModel
+                                                ?.gender ??
+                                            provider.requestModel?.offer
+                                                ?.driverModel?.gender) ==
+                                        0,
+                                    image: provider
+                                            .requestModel?.driverModel?.image ??
+                                        provider.requestModel?.offer
+                                            ?.driverModel?.image,
+                                    national: provider.requestModel?.driverModel
+                                            ?.national?.niceName ??
+                                        provider.requestModel?.offer
+                                            ?.driverModel?.national?.niceName,
+                                    createdAt:
+                                        provider.requestModel?.createdAt ??
+                                            DateTime.now(),
+                                    days: provider
+                                        .requestModel?.offer?.offerDays!
+                                        .map((e) => e.dayName)
+                                        .toList()
+                                        .join(", "),
+                                    duration: provider.requestModel?.duration
+                                        .toString(),
+                                    priceRange:
+                                        "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
+                                    timeRange:
+                                        "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                                   ),
+                                ),
 
-                                  ///Coupon
-                                  const CouponWidget(),
-                                  // PaymentMethodWidget(),
-                                  const PaymentDetailsWidget()
-                                ],
-                              ),
+                                Visibility(
+                                  visible: !isFromMyTrips,
+                                  child: UserCard(
+                                    withAnalytics: false,
+                                    userId: provider.requestModel?.driverId,
+                                    name: provider
+                                        .requestModel?.driverModel?.firstName,
+                                    image: provider
+                                        .requestModel?.driverModel?.image,
+                                    male: provider.requestModel?.driverModel
+                                            ?.gender ==
+                                        0,
+                                    national: provider.requestModel?.driverModel
+                                        ?.national?.niceName,
+                                    createdAt:
+                                        provider.requestModel?.createdAt ??
+                                            DateTime.now(),
+                                    days: provider
+                                        .requestModel?.offer?.offerDays!
+                                        .map((e) => e.dayName)
+                                        .toList()
+                                        .join(", "),
+                                    duration: provider.requestModel?.duration
+                                        .toString(),
+                                    priceRange:
+                                        "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
+                                    timeRange:
+                                        "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                                  ),
+                                ),
+
+                                ///Type of ride
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w,
+                                      vertical:
+                                          Dimensions.PADDING_SIZE_DEFAULT.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        getTranslated("ride_type", context),
+                                        textAlign: TextAlign.start,
+                                        style: AppTextStyles.w600.copyWith(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Text(
+                                        Methods.getOfferType(
+                                            provider.requestModel?.offerType ??
+                                                provider.requestModel?.offer
+                                                    ?.offerType ??
+                                                1),
+                                        textAlign: TextAlign.end,
+                                        style: AppTextStyles.w400.copyWith(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                ///Coupon
+                                const CouponWidget(),
+                                // PaymentMethodWidget(),
+                                const PaymentDetailsWidget()
+                              ],
                             ),
-                            Visibility(
-                              visible: !provider.isLoading,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        Dimensions.PADDING_SIZE_DEFAULT.w),
-                                child: Consumer<PaymentProvider>(
-                                    builder: (_, provider, child) {
-                                  return CustomButton(
-                                    isLoading: provider.isCheckOut,
-                                    text: getTranslated("check_out", context),
-                                    onTap: () => provider.checkOut(),
-                                  );
-                                }),
-                              ),
+                          ),
+                          Visibility(
+                            visible: !provider.isLoading,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      Dimensions.PADDING_SIZE_DEFAULT.w),
+                              child: Consumer<PaymentProvider>(
+                                  builder: (_, provider, child) {
+                                return CustomButton(
+                                  isLoading: provider.isCheckOut,
+                                  text: getTranslated("check_out", context),
+                                  onTap: () => provider.checkOut(),
+                                );
+                              }),
                             ),
-                            SizedBox(
-                              height: 24.h,
-                            )
-                          ],
-                        ),
-                      );
-              }),
-            ],
-          )),
+                          ),
+                          SizedBox(
+                            height: 24.h,
+                          )
+                        ],
+                      ),
+                    );
+            }),
+          ],
+        ),
+      ),
     );
   }
 }

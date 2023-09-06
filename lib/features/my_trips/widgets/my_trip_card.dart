@@ -36,7 +36,12 @@ class MyTripCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (isCurrent) {
-          CustomNavigator.push(Routes.MY_TRIP_DETAILS, arguments: myTrip);
+          CustomNavigator.push(Routes.MY_CURRENT_TRIP_DETAILS,
+              arguments: myTrip.id);
+        }
+        if (isPrevious) {
+          CustomNavigator.push(Routes.MY_PREVIOUS_TRIP_DETAILS,
+              arguments: myTrip.id);
         }
       },
       splashColor: Colors.transparent,

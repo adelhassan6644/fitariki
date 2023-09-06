@@ -44,7 +44,8 @@ class MyTripsRepo {
   Future<Either<ServerFailure, Response>> getCurrentTripDetails(id) async {
     try {
       Response response = await dioClient.get(
-        uri: "",
+        uri: EndPoints.myCurrentTripDetails(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -56,11 +57,11 @@ class MyTripsRepo {
     }
   }
 
-
   Future<Either<ServerFailure, Response>> getPreviousTripDetails(id) async {
     try {
       Response response = await dioClient.get(
-        uri: "",
+        uri: EndPoints.myPreviousTripDetails(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
       );
       if (response.statusCode == 200) {
         return Right(response);

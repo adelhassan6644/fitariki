@@ -9,21 +9,21 @@ import '../model/my_trips_model.dart';
 import '../repo/my_trips_repo.dart';
 
 class CurrentTripDetailsProvider extends ChangeNotifier {
-  MyTripsRepo myTripsRepo;
-  CurrentTripDetailsProvider({required this.myTripsRepo});
+  MyTripsRepo repo;
+  CurrentTripDetailsProvider({required this.repo});
 
-  bool get isDriver => myTripsRepo.isDriver();
+  bool get isDriver => repo.isDriver();
 
   bool isLoading = false;
-  MyTripModel? currentTripDetails;
+  MyTripModel? tripDetails;
   getCurrentTripDetails(id) async {
     try {
-      currentTripDetails = null;
+      tripDetails = null;
       isLoading = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-          await myTripsRepo.getCurrentTripDetails(id);
+          await repo.getCurrentTripDetails(id);
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -32,7 +32,7 @@ class CurrentTripDetailsProvider extends ChangeNotifier {
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
       }, (response) {
-        currentTripDetails = MyTripModel.fromJson(response.data["data"]);
+        tripDetails = MyTripModel.fromJson(response.data["data"]);
       });
 
       isLoading = false;

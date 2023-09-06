@@ -82,17 +82,21 @@ abstract class Methods {
       );
       if (withFormat) {
         return dateTime
-            .dateFormat(format: "mm : hh aa")
+            .dateFormat(format: "m : h aa")
             .replaceAll("AM", "صباحاً")
-            .replaceAll("PM", "مساءً");
+            .replaceAll("PM", "مساءً")
+            .replaceAll("ص", "صباحاً")
+            .replaceAll("م", "مساءً");
       } else {
         return dateTime;
       }
     } else {
       return DateTime.now()
-          .dateFormat(format: "mm : hh aa")
+          .dateFormat(format: "m : h aa")
           .replaceAll("AM", "صباحاً")
-          .replaceAll("PM", "مساءً");
+          .replaceAll("PM", "مساءً")
+          .replaceAll("ص", "صباحاً")
+          .replaceAll("م", "مساءً");
     }
   }
 
@@ -127,14 +131,16 @@ abstract class Methods {
     }
   }
 
-
-
-
-
   static calcDistanceFromCurrentLocation({LocationModel? location}) async {
-    Position currentPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    return (Geolocator.distanceBetween(currentPosition.latitude,currentPosition.longitude,
-        double.parse(location?.latitude??"0"), double.parse(location?.longitude??"0")) / 1000).toStringAsFixed(2);
+    Position currentPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return (Geolocator.distanceBetween(
+                currentPosition.latitude,
+                currentPosition.longitude,
+                double.parse(location?.latitude ?? "0"),
+                double.parse(location?.longitude ?? "0")) /
+            1000)
+        .toStringAsFixed(2);
   }
 }
 

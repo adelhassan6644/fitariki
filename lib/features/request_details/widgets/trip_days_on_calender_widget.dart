@@ -40,7 +40,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(startDate!.dateFormat(format: "MMM yyyy d"),
+                child: Text(startDate!.dateFormat(format: "d MMM yyyy"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
@@ -66,7 +66,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(4)),
-                child: Text(endDate!.dateFormat(format: "MMM yyyy d"),
+                child: Text(endDate!.dateFormat(format: "d MMM yyyy"),
                     style: AppTextStyles.w400.copyWith(
                       fontSize: 13,
                     )),
