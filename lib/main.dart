@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fitariki/features/my_trips/page/my_previous_trip_details.dart';
 import 'package:fitariki/firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -65,8 +66,8 @@ class _MyAppState extends State<MyApp> {
       // initialRoute: Routes.SPLASH,
       navigatorKey: CustomNavigator.navigatorState,
       // onGenerateRoute: CustomNavigator.onCreateRoute,
-      home: MyCurrentTripDetails(
-        id: 110,
+      home: MyPreviousTripDetails(
+        id: 132,
       ),
       navigatorObservers: [CustomNavigator.routeObserver],
       title: AppStrings.appName,

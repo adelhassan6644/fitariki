@@ -72,14 +72,14 @@ class InvoiceDetailsWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${getTranslated("tax", context)} ${(provider.tripDetails?.percentage ?? 0)}%",
+                              "${getTranslated("tax", context)} ${(provider.tripDetails?.taxPercentage ?? 0)}%",
                               style: AppTextStyles.w400.copyWith(
                                 fontSize: 14,
                               ),
                             ),
                           ),
                           Text(
-                            "${((provider.tripDetails?.amount ?? 0) * (provider.tripDetails?.percentage ?? 0)).toStringAsFixed(2)} ${getTranslated("sar", context)}",
+                            "${(provider.tripDetails?.tax ?? 0).toStringAsFixed(2)} ${getTranslated("sar", context)}",
                             style: AppTextStyles.w400.copyWith(
                               fontSize: 14,
                             ),
@@ -93,20 +93,44 @@ class InvoiceDetailsWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${getTranslated("service_costs", context)} ${(provider.tripDetails?.percentage ?? 0)}%",
+                              "${getTranslated("service_costs", context)} ${(provider.tripDetails?.costPercentage ?? 0)}%",
                               style: AppTextStyles.w400.copyWith(
                                 fontSize: 14,
                               ),
                             ),
                           ),
                           Text(
-                            "${((provider.tripDetails?.amount ?? 0) * (provider.tripDetails?.percentage ?? 0)).toStringAsFixed(2)} ${getTranslated("sar", context)}",
+                            "${(provider.tripDetails?.serviceCost ?? 0).toStringAsFixed(2)} ${getTranslated("sar", context)}",
                             style: AppTextStyles.w400.copyWith(
                               fontSize: 14,
                             ),
                           ),
                         ],
                       ),
+                      Visibility(
+                          visible: provider.tripDetails?.discount != null,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8.h,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    getTranslated("discount", context),
+                                    style: AppTextStyles.w400.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  "- ${provider.tripDetails?.discount ?? ""} ${getTranslated("sar", context)}",
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 14, color: Styles.RED_COLOR),
+                                ),
+                              ],
+                            ),
+                          ))
                     ],
                   ),
                 ),

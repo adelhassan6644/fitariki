@@ -15,9 +15,13 @@ class PreviousTripDetailsModel {
   int? cancelValue;
   String? paymentMethod;
   String? invoice;
-  int? percentage;
-  int? amount;
-  int? total;
+  int? taxPercentage;
+  double? tax;
+  int? costPercentage;
+  double? serviceCost;
+  double? discount;
+  double? amount;
+  double? total;
   List<WeekModel>? days;
 
   PreviousTripDetailsModel(
@@ -27,7 +31,11 @@ class PreviousTripDetailsModel {
       this.type,
       this.dropOffLocation,
       this.pickupLocation,
-      this.percentage,
+      this.tax,
+      this.taxPercentage,
+      this.serviceCost,
+      this.costPercentage,
+      this.discount,
       this.numOfCancelTrips,
       this.cancelValue,
       this.paymentMethod,
@@ -51,13 +59,24 @@ class PreviousTripDetailsModel {
     pickupLocation = json['pickup_location'] != null
         ? LocationModel.fromJson(json['pickup_location'])
         : null;
-    percentage = json['percentage'];
+    tax = json['tax'] != null ? double.parse(json['tax'].toString()) : null;
+    taxPercentage = json['tax_percentage'];
+    serviceCost = json['service_fee'] != null
+        ? double.parse(json['tax'].toString())
+        : null;
+    costPercentage = json['service_cost_percentage'];
+    discount = json['discount'] != null
+        ? double.parse(json['discount'].toString())
+        : null;
+
     numOfCancelTrips = json['numOfCancelTrips'];
     cancelValue = json['cancelValue'];
     paymentMethod = json['paymentMethod'];
     invoice = json['invoice'];
-    amount = json['amount'];
-    total = json['total'];
+    amount =
+        json['amount'] != null ? double.parse(json['amount'].toString()) : null;
+    total =
+        json['total'] != null ? double.parse(json['total'].toString()) : null;
     if (json['days'] != null) {
       days = [];
       json['days'].forEach((v) {
