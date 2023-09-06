@@ -42,7 +42,7 @@ class PreviousTripsWidget extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 4.0.h),
                             child: MyTripCard(
                               isDriver: provider.isDriver,
-                              isPrevious: true,
+                              isCurrent: false,
                               myTrip:
                                   provider.previousTrips![index],
                             ),

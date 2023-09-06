@@ -12,16 +12,15 @@ import '../../../components/marquee_widget.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../../request_details/model/offer_request_details_model.dart';
 import '../../request_details/provider/request_details_provider.dart';
 
 class MyPendingTripCard extends StatelessWidget {
   const MyPendingTripCard(
-      {required this.myTrip, this.offerPassengers, Key? key})
+      {required this.myTrip, required this.isDriver, Key? key})
       : super(key: key);
   final OfferRequestDetailsModel myTrip;
-  final int? offerPassengers;
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class MyPendingTripCard extends StatelessWidget {
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
-
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 4.0.h),
         child: Container(
@@ -75,8 +73,11 @@ class MyPendingTripCard extends StatelessWidget {
                               children: [
                                 Text(
                                   myTrip.offer?.clientModel != null
-                                      ? myTrip.offer?.clientModel?.firstName ?? ""
-                                      : myTrip.offer?.driverModel?.firstName?.split(" ")[0] ?? "",
+                                      ? myTrip.offer?.clientModel?.firstName ??
+                                          ""
+                                      : myTrip.offer?.driverModel?.firstName
+                                              ?.split(" ")[0] ??
+                                          "",
                                   textAlign: TextAlign.start,
                                   maxLines: 1,
                                   style: AppTextStyles.w600.copyWith(
@@ -211,9 +212,11 @@ class MyPendingTripCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (myTrip.approvedAt == null &&
-                  !sl.get<ProfileProvider>().isDriver)
-                Container(
+
+              ///Pending Button
+              Visibility(
+                visible: (myTrip.approvedAt == null && !isDriver) || isDriver,
+                child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
                   decoration: BoxDecoration(
@@ -221,29 +224,21 @@ class MyPendingTripCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100)),
                   child: Text(
                     getTranslated("pending", context),
-                    style: AppTextStyles.w600.copyWith(
-                        fontSize: 12, color: Styles.WHITE_COLOR),
+                    style: AppTextStyles.w600
+                        .copyWith(fontSize: 12, color: Styles.WHITE_COLOR),
                   ),
                 ),
-              if (sl.get<ProfileProvider>().isDriver)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-                  decoration: BoxDecoration(
-                      color: Styles.tripStatus("pending"),
-                      borderRadius: BorderRadius.circular(100)),
-                  child: Text(
-                    getTranslated("pending", context),
-                    style: AppTextStyles.w600.copyWith(
-                        fontSize: 12, color: Styles.WHITE_COLOR),
-                  ),
-                ),
-              if (myTrip.paidAt == null &&
-                  myTrip.approvedAt != null &&
-                  !sl.get<ProfileProvider>().isDriver)
-                InkWell(
+              ),
+
+              ///Payment Button
+              Visibility(
+                visible: (myTrip.paidAt == null &&
+                    myTrip.approvedAt != null &&
+                    !isDriver),
+                child: InkWell(
                   onTap: () {
-                    sl<RequestDetailsProvider>().getRequestDetails(id: myTrip.id!);
+                    sl<RequestDetailsProvider>()
+                        .getRequestDetails(id: myTrip.id!);
                     CustomNavigator.push(Routes.PAYMENT, arguments: true);
                   },
                   child: Container(
@@ -254,11 +249,12 @@ class MyPendingTripCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100)),
                     child: Text(
                       getTranslated("pay", context),
-                      style: AppTextStyles.w600.copyWith(
-                          fontSize: 12, color: Styles.WHITE_COLOR),
+                      style: AppTextStyles.w600
+                          .copyWith(fontSize: 12, color: Styles.WHITE_COLOR),
                     ),
                   ),
                 ),
+              ),
             ],
           ),
         ),

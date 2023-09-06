@@ -13,14 +13,12 @@ import '../../../components/marquee_widget.dart';
 import '../../../main_models/weak_model.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
-import '../../feedback/page/rate_trip.dart';
 import '../model/my_trips_model.dart';
 
 class MyTripCard extends StatelessWidget {
   const MyTripCard(
       {required this.myTrip,
-      this.isCurrent = false,
-      this.isPrevious = false,
+      required this.isCurrent,
       required this.isDriver,
       this.offerDays,
       this.offerPassengers,
@@ -28,22 +26,17 @@ class MyTripCard extends StatelessWidget {
       : super(key: key);
   final MyTripModel myTrip;
   final int? offerPassengers;
-  final bool isCurrent, isPrevious, isDriver;
+  final bool isCurrent, isDriver;
   final List<WeekModel>? offerDays;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (isCurrent) {
-          CustomNavigator.push(Routes.MY_CURRENT_TRIP_DETAILS,
-              arguments: myTrip.id);
-        }
-        if (isPrevious) {
-          CustomNavigator.push(Routes.MY_PREVIOUS_TRIP_DETAILS,
-              arguments: myTrip.id);
-        }
-      },
+      onTap: () => CustomNavigator.push(
+          isCurrent
+              ? Routes.MY_CURRENT_TRIP_DETAILS
+              : Routes.MY_PREVIOUS_TRIP_DETAILS,
+          arguments: myTrip),
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -86,15 +79,14 @@ class MyTripCard extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  // width: 80,
-                                  child: Text(
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
                                     isDriver
                                         ? myTrip.clientModel?.firstName ??
                                             myTrip.offer?.clientModel
@@ -112,26 +104,23 @@ class MyTripCard extends StatelessWidget {
                                         height: 1.25,
                                         overflow: TextOverflow.ellipsis),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                customImageIconSVG(
-                                    imageName: isDriver
-                                        ? myTrip.clientModel?.gender == 0
-                                            ? SvgImages.maleIcon
-                                            : SvgImages.femaleIcon
-                                        : myTrip.driverModel?.gender == 0
-                                            ? SvgImages.maleIcon
-                                            : SvgImages.femaleIcon,
-                                    color: Styles.BLUE_COLOR,
-                                    width: 11,
-                                    height: 11)
-                              ],
-                            ),
-                            SizedBox(
-                              width: 50,
-                              child: Text(
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  customImageIconSVG(
+                                      imageName: isDriver
+                                          ? myTrip.clientModel?.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon
+                                          : myTrip.driverModel?.gender == 0
+                                              ? SvgImages.maleIcon
+                                              : SvgImages.femaleIcon,
+                                      color: Styles.BLUE_COLOR,
+                                      width: 11,
+                                      height: 11)
+                                ],
+                              ),
+                              Text(
                                 isDriver
                                     ? myTrip.clientModel?.national?.niceName ??
                                         myTrip.offer?.clientModel?.national
@@ -147,8 +136,8 @@ class MyTripCard extends StatelessWidget {
                                     height: 1.25,
                                     overflow: TextOverflow.ellipsis),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -157,7 +146,7 @@ class MyTripCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        ///to start date of trip
+                        ///to date of trip
                         Expanded(
                           flex: isCurrent ? 12 : 3,
                           child: Row(
@@ -219,7 +208,7 @@ class MyTripCard extends StatelessWidget {
 
                         ///to duration of trip
                         Visibility(
-                          visible: isPrevious,
+                          visible: !isCurrent,
                           child: Expanded(
                             flex: 2,
                             child: Row(
@@ -255,7 +244,7 @@ class MyTripCard extends StatelessWidget {
 
                         ///to price of trip
                         Visibility(
-                          visible: isPrevious,
+                          visible: !isCurrent,
                           child: Expanded(
                             flex: 2,
                             child: Row(
@@ -280,7 +269,7 @@ class MyTripCard extends StatelessWidget {
                       ],
                     ),
                     Visibility(
-                      visible: isPrevious,
+                      visible: !isCurrent,
                       child: Column(
                         children: [
                           SizedBox(
@@ -314,8 +303,10 @@ class MyTripCard extends StatelessWidget {
               SizedBox(
                 width: 8.w,
               ),
-              if (isCurrent)
-                Row(
+
+              Visibility(
+                visible: isCurrent,
+                child: Row(
                   children: [
                     customImageIconSVG(
                       imageName: SvgImages.down,
@@ -327,42 +318,36 @@ class MyTripCard extends StatelessWidget {
                         fontSize: 24,
                       ),
                     ),
-                    // Text(
-                    //   "${myTrip.myTripRequest?.price ?? 0}",
-                    //   textAlign: TextAlign.start,
-                    //   style: AppTextStyles.w700.copyWith(
-                    //     fontSize: 24,
-                    //   ),
-                    // ),
                   ],
                 ),
-              if (isPrevious)
-                GestureDetector(
-                  onTap: () {
-                    CustomNavigator.push(Routes.RATE_TRIP,
-                        arguments: RateUserNavigationModel(
-                            isDriver: isDriver,
-                            name: isDriver
-                                ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName?.split("")[0] ?? ""}"
-                                : myTrip.driverModel?.firstName?.split("")[0] ??
-                                    "",
-                            userId:
-                                !isDriver ? myTrip.clientId : myTrip.driverId,
-                            offerId: myTrip.offerId));
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-                    decoration: BoxDecoration(
-                        color: Styles.PRIMARY_COLOR.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(100)),
-                    child: Text(
-                      getTranslated("rate", context),
-                      style: AppTextStyles.w600
-                          .copyWith(fontSize: 12, color: Styles.PRIMARY_COLOR),
-                    ),
-                  ),
-                ),
+              ),
+              // if (isPrevious)
+              //   GestureDetector(
+              //     onTap: () {
+              //       CustomNavigator.push(Routes.RATE_TRIP,
+              //           arguments: RateUserNavigationModel(
+              //               isDriver: isDriver,
+              //               name: isDriver
+              //                   ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName?.split("")[0] ?? ""}"
+              //                   : myTrip.driverModel?.firstName?.split("")[0] ??
+              //                       "",
+              //               userId:
+              //                   !isDriver ? myTrip.clientId : myTrip.driverId,
+              //               offerId: myTrip.offerId));
+              //     },
+              //     child: Container(
+              //       padding:
+              //           const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+              //       decoration: BoxDecoration(
+              //           color: Styles.PRIMARY_COLOR.withOpacity(0.1),
+              //           borderRadius: BorderRadius.circular(100)),
+              //       child: Text(
+              //         getTranslated("rate", context),
+              //         style: AppTextStyles.w600
+              //             .copyWith(fontSize: 12, color: Styles.PRIMARY_COLOR),
+              //       ),
+              //     ),
+              //   ),
             ],
           ),
         ),

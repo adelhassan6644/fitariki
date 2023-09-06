@@ -39,6 +39,7 @@ class PendingTripsWidget extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 4.0.h),
                             child: MyPendingTripCard(
                               myTrip: provider.pendingTrips![index],
+                              isDriver: provider.isDriver,
                             ),
                           ))
                   : [
