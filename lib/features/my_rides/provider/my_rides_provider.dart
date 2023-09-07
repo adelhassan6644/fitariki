@@ -108,6 +108,11 @@ class MyRidesProvider extends ChangeNotifier {
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
       }, (response) {
+        rides.forEach((e) {
+          if (e.id == id) {
+            e.status = 4;
+          }
+        });
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: response.data["message"] ?? "",

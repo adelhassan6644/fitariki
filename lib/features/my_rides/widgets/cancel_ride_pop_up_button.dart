@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/features/my_rides/provider/my_rides_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class CancelPopUpButton extends StatelessWidget {
       required this.name,
       required this.day});
   final int number, id;
-  final String name,day;
+  final String name;
+  final DateTime day;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,8 @@ class CancelPopUpButton extends StatelessWidget {
               },
               title: "التغييب عن #مشوار_$number",
               description: provider.isDriver
-                  ? "هل سوف تتغيب عن ارجاع $name في يوم ${day}؟"
-                  : "هل سوف تتغيب عن العودة مع الكابتن $name في يوم ${day}؟ ");
+                  ? "هل سوف تتغيب عن ارجاع $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟"
+                  : "هل سوف تتغيب عن العودة مع الكابتن $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟ ");
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         itemBuilder: (BuildContext context) => [

@@ -43,29 +43,33 @@ class RideDetailsProvider extends ChangeNotifier {
   bool isLoading = false;
   getRideDetails(id) async {
     try {
-    isLoading = true;
-    notifyListeners();
-    Either<ServerFailure, Response> response = await repo.getRideDetails(id);
-    response.fold((l) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: l.error,
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
-    }, (response) {
-      ride = MyRideModel.fromJson(response.data["data"]);
+      isLoading = true;
+      notifyListeners();
+      Either<ServerFailure, Response> response = await repo.getRideDetails(id);
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: l.error,
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (response) {
+        ride = MyRideModel.fromJson(response.data["data"]);
 
-      pickUpLocationListener(LatLng(
-          double.parse(ride?.pickupLocation?.latitude ?? "0"),
-          double.parse(ride?.pickupLocation?.longitude ?? "0")));
+        pickUpLocationListener(LatLng(
+            double.parse(ride?.pickupLocation?.latitude ?? "0"),
+            double.parse(ride?.pickupLocation?.longitude ?? "0")));
 
-      dropLocationListener(LatLng(
-          double.parse(ride?.dropOffLocation?.latitude ?? "0"),
-          double.parse(ride?.dropOffLocation?.longitude ?? "0")));
-    });
-    isLoading = false;
-    notifyListeners();
+        dropLocationListener(LatLng(
+            double.parse(ride?.dropOffLocation?.latitude ?? "0"),
+            double.parse(ride?.dropOffLocation?.longitude ?? "0")));
+
+        changeStatusFireBase(id, ride?.status);
+
+        changeStatusTripListener(id);
+      });
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -78,15 +82,36 @@ class RideDetailsProvider extends ChangeNotifier {
     }
   }
 
-  ///Start listening to driver location changes
-  void changeStatusTripListener() async {
+  ///Start listening to Trip status changes
+  void changeStatusTripListener(id) async {
     firebaseFireStore
         .collection("Rides")
         .doc("ride#$id")
         .snapshots()
         .listen((event) {
-      if (!isDriver) {
+      if (!event.exists) {
+        return;
+      }
+
+      if (event.data() != null) {
         ride?.status = event.data()!["status"];
+        if (ride?.status == 3) {
+          ///To stop tracking
+          if (isDriver) {
+            trackingRepo.stopPushLocation();
+          }
+          CustomNavigator.push(Routes.RATE_RIDE,
+              arguments: {
+                "id": id,
+                "name": isDriver
+                    ? ride?.client?.firstName ?? ""
+                    : ride?.driver?.firstName ?? "",
+                "number": ride?.remainingNumber ?? 0
+              },
+              clean: true);
+          deleteRideFireBase(id);
+        }
+        notifyListeners();
       }
     });
   }
@@ -135,7 +160,7 @@ class RideDetailsProvider extends ChangeNotifier {
                 "name": isDriver
                     ? ride?.client?.firstName ?? ""
                     : ride?.driver?.firstName ?? "",
-                "number": 5
+                "number": ride?.remainingNumber ?? 0
               },
               clean: true);
           deleteRideFireBase(id);
@@ -207,8 +232,16 @@ class RideDetailsProvider extends ChangeNotifier {
       longitude: pickUpLatLng.longitude,
     );
     final distance = GeoRange().distance(startPoint, endPoint);
+    print("distance$distance");
     double timeInHours = distance / ((currentLocation.speed * 3.6));
     final timeInMin = (timeInHours * 60).ceil();
     pickUpLocationStream.add("$timeInMin min - $distance km");
+  }
+
+  void disposeTimer() {
+    _pickUpTimer?.cancel();
+    _dropOffTimer?.cancel();
+    timer.cancel();
+    super.dispose();
   }
 }

@@ -36,7 +36,7 @@ class MyTripCard extends StatelessWidget {
           isCurrent
               ? Routes.MY_CURRENT_TRIP_DETAILS
               : Routes.MY_PREVIOUS_TRIP_DETAILS,
-          arguments: myTrip),
+          arguments: myTrip.id),
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,

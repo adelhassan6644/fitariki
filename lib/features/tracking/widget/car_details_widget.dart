@@ -26,6 +26,8 @@ class CarDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("status id $status");
+
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -33,7 +35,7 @@ class CarDetailsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Visibility(
-            visible: status == null || (!isDriver && status == 0),
+            visible: (status == null || status == 0),
             child: Center(
               child: RichText(
                 text: TextSpan(
@@ -53,7 +55,7 @@ class CarDetailsWidget extends StatelessWidget {
 
           Center(
             child: Visibility(
-              visible: status != null && status != 0 && !isDriver,
+              visible: status != null && status != 0,
               child: Text(
                 getTranslated(titleText(status, isDriver), context),
                 style: AppTextStyles.w700.copyWith(
@@ -94,7 +96,7 @@ class CarDetailsWidget extends StatelessWidget {
           ///To expected arrive time for Driver
           Consumer<RideDetailsProvider>(builder: (_, provider, child) {
             return Visibility(
-                visible: isDriver && status == null,
+                visible: isDriver && (status == null || status == 0),
                 child: StreamBuilder(
                   stream: provider.pickUpLocationStream,
                   builder: (ctx, snapshot) {

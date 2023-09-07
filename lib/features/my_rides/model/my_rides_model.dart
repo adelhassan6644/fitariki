@@ -1,6 +1,8 @@
 import 'package:fitariki/features/maps/models/location_model.dart';
 import 'package:fitariki/features/profile/model/driver_model.dart';
+import 'package:flutter/material.dart';
 
+import '../../../app/core/utils/methods.dart';
 import '../../profile/model/client_model.dart';
 
 class MyRideModel {
@@ -9,9 +11,10 @@ class MyRideModel {
   DriverModel? driver;
   ClientModel? client;
   String? time;
-  String? day;
+  DateTime? date;
   DateTime? startedAt;
   DateTime? arrivedAt;
+  String? remainingNumber;
   int? cancelByDriver;
   int? cancelByClient;
   int? type;
@@ -25,13 +28,14 @@ class MyRideModel {
     this.id,
     this.number,
     this.time,
-    this.day,
+    this.date,
     this.startedAt,
     this.arrivedAt,
     this.cancelByDriver,
     this.cancelByClient,
     this.type,
     this.reservationId,
+    this.remainingNumber,
     this.status,
     this.client,
     this.driver,
@@ -43,8 +47,14 @@ class MyRideModel {
   factory MyRideModel.fromJson(Map<String, dynamic> json) => MyRideModel(
         id: json["id"],
         number: json["number"],
-        time: json["time"],
-        day: json["day"],
+        remainingNumber: json["remaining_number"].toString(),
+        time: Methods.convertStringToTime(
+                json["time"] ?? TimeOfDay.now().toString(),
+                withFormat: true)
+            .toString(),
+        date: json["date"] == null
+            ? DateTime.now()
+            : Methods.convertStringToDataTime(json["date"]),
         startedAt: json["started_at"] == null
             ? DateTime.now()
             : DateTime.parse(json["started_at"]),
@@ -77,6 +87,7 @@ class MyRideModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "number": number,
+        "remaining_number": remainingNumber,
         "started_at": startedAt?.toIso8601String(),
         "arrived_at": arrivedAt?.toIso8601String(),
         "cancel_by_driver": cancelByDriver,

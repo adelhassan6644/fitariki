@@ -26,10 +26,10 @@ class RideDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
-      create: (_) => RideDetailsProvider(repo: sl<RideDetailsRepo>(), trackingRepo: sl<TrackingRepo>())..getRideDetails(id),
-
+      create: (_) => RideDetailsProvider(
+          repo: sl<RideDetailsRepo>(), trackingRepo: sl<TrackingRepo>())
+        ..getRideDetails(id),
       child: Consumer<RideDetailsProvider>(builder: (_, provider, child) {
         return Stack(
           alignment: Alignment.bottomCenter,
@@ -150,15 +150,15 @@ class RideDetailsWidget extends StatelessWidget {
                                                     ),
                                                   ),
                                                   CarDetailsWidget(
-                                                    arriveAt: provider
-                                                        .ride!.time??"",
+                                                    arriveAt:
+                                                        provider.ride?.time ??
+                                                            "",
                                                     pickLocation: provider
                                                         .ride?.pickupLocation,
                                                     carInfo: provider
                                                         .ride?.driver?.carInfo,
                                                     isDriver: provider.isDriver,
-                                                    status:
-                                                        provider.ride?.status,
+                                                    status: provider.ride?.status,
                                                   ),
                                                   RiderDetailsWidget(
                                                     image: provider.isDriver
@@ -248,18 +248,19 @@ class RideDetailsWidget extends StatelessWidget {
                       child: CustomButton(
                         text: getTranslated(
                             _buttonText(provider.ride?.status == null
-                                ? 0
-                                : provider.ride!.status! + 1)??"",
+                                    ? 0
+                                    : provider.ride!.status! + 1) ??
+                                "",
                             context),
                         onTap: () {
                           if (provider.isDriver && provider.ride?.status == 0) {
                             provider.countTime();
-                          }
-                          else if (provider.isDriver && provider.count != 0) {
+                          } else if (provider.isDriver && provider.count != 0) {
                             provider.timer.cancel();
                           }
 
-                          if (provider.ride!.status !=null&&(provider.ride!.status!.toInt() + 1) == 3) {
+                          if (provider.ride!.status != null &&
+                              (provider.ride!.status!.toInt() + 1) == 3) {
                             CupertinoPopUpHelper.showCupertinoPopUp(
                               textButton: getTranslated("end_ride", context),
                               onConfirm: () {

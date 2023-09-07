@@ -24,7 +24,7 @@ class PickMapScreen extends StatefulWidget {
 
 class _PickMapScreenState extends State<PickMapScreen> {
   GoogleMapController? _mapController;
-  late CameraPosition _cameraPosition;
+   CameraPosition? _cameraPosition;
   late LatLng _initialPosition;
 
   @override
@@ -103,8 +103,9 @@ class _PickMapScreenState extends State<PickMapScreen> {
               _cameraPosition = cameraPosition;
             },
             onCameraIdle: () {
+              if(_cameraPosition!=null)
               locationController.updatePosition(
-                _cameraPosition,
+                _cameraPosition!,
               );
             },
           ),

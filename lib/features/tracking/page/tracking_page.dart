@@ -1,3 +1,4 @@
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/components/custom_images.dart';
 import 'package:fitariki/features/tracking/provider/tracking_provider.dart';
@@ -29,11 +30,16 @@ class _TrackingPageState extends State<TrackingPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: "#_مشوارـ${widget.ride.number}",
-        subTitle: widget.ride.day,
+        subTitle: widget.ride.date?.dateFormat(format: "dd MMM yyyy"),
         appBarHeight: 60,
       ),
       body: Consumer<TrackingProvider>(builder: (context, provider, child) {

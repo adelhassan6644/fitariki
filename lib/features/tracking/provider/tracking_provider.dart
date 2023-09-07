@@ -80,7 +80,7 @@ class TrackingProvider extends ChangeNotifier {
     );
     //
     driverIcon = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(devicePixelRatio: 2.5),
+      const ImageConfiguration(size: Size(15, 15)),
       Images.driverCar,
     );
   }
@@ -113,7 +113,7 @@ class TrackingProvider extends ChangeNotifier {
             double.parse(
               ride!.pickupLocation!.longitude!,
             )),
-        icon: sourceIcon!,
+        icon: sourceIcon??BitmapDescriptor.defaultMarker,
         anchor: const Offset(0.5, 0.5),
       ),
     );
