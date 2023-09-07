@@ -190,7 +190,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               ),
                             ),
 
-                            if (provider.requestModel!.offer!.offerFollowers!
+                            if ( provider.requestModel?.offer?.offerFollowers != null && provider.requestModel!.offer!.offerFollowers!
                                 .isNotEmpty)
                               ...List.generate(
                                 provider.requestModel?.offer?.offerFollowers

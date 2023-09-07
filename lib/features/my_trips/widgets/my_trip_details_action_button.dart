@@ -67,7 +67,11 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description: "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
+                            description: provider.requestModel!.isSpecialOffer!
+                                ? getTranslated(
+                                    "negotiation_special_offer_description",
+                                    context)
+                                : "${getTranslated("negotiation_special_offer_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}.",
                             hint: getTranslated("new_price", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
@@ -80,21 +84,12 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                               if (!provider.requestModel!.isSpecialOffer! &&
                                   Validations.negotiation(
                                           provider.negotiationPrice.text.trim(),
-                                          provider.requestModel?.offer
-                                                  ?.maxPrice ??
-                                              0.0,
-                                          provider.requestModel?.offer
-                                                  ?.minPrice ??
-                                              0.0) !=
-                                      null) {
+                                          provider.requestModel?.offer?.maxPrice ?? 0.0,
+                                          provider.requestModel?.offer?.minPrice ?? 0.0) != null) {
                                 showToast(Validations.negotiation(
                                         provider.negotiationPrice.text.trim(),
-                                        provider.requestModel?.offer
-                                                ?.maxPrice ??
-                                            0.0,
-                                        provider.requestModel?.offer
-                                                ?.minPrice ??
-                                            0.0) ??
+                                        provider.requestModel?.offer?.maxPrice ?? 0.0,
+                                        provider.requestModel?.offer?.minPrice ?? 0.0) ??
                                     "");
                               } else {
                                 provider.updateRequest(
@@ -103,23 +98,8 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                                     id: provider.requestModel!.id!);
                                 CustomNavigator.pop();
                               }
-                              // if (provider.negotiationPrice.text == "") {
-                              //   showToast("لا يمكن ان تكون فارغة");
-                              //
-                              //   return;
-                              // }
-                              // if(){
-                              //   showToast("لا يمكن ان تكون فارغة");
-                              //
-                              //   return;
-                              // }else {
-                              //
-                              // }
                             },
-                            onClose: () {
-                              CustomNavigator.pop();
-                              provider.negotiationPrice.clear();
-                            }),
+                            onClose: () => provider.negotiationPrice.clear()),
                     isLoading: provider.isNegotiation,
                   ),
                 ),
