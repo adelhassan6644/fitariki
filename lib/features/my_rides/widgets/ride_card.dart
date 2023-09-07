@@ -6,7 +6,6 @@ import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
 import 'package:fitariki/features/my_rides/widgets/ride_locations_widget.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../navigation/routes.dart';
 import 'cancel_ride_pop_up_button.dart';
