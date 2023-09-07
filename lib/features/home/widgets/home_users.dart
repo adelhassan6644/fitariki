@@ -34,6 +34,8 @@ class HomeUsers extends StatelessWidget {
                         const ShimmerFavouriteUserCard(withSaveButton: false))
                 : provider.homeUsersModel == null ||
                         (provider.homeUsersModel!.clients!.isEmpty &&
+                            provider.isDriver) ||
+                        (!provider.isDriver &&
                             provider.homeUsersModel!.drivers!.isEmpty)
                     ? [
                         EmptyState(
