@@ -255,6 +255,7 @@ class OfferDetails extends StatelessWidget {
                           onTap: () async {
                             if (provider.offerDetails?.isSentOffer != true) {
                               if (provider.isDriver &&
+                                  provider.isLogin &&
                                   sl<ProfileProvider>().status != "1") {
                                 CustomSnackBar.showSnackBar(
                                     notification: AppNotification(
