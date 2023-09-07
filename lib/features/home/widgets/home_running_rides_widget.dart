@@ -32,15 +32,15 @@ class HomeRunningRidesWidget extends StatelessWidget {
                 radius: 8,
               ),
             )
-          : AnimatedCrossFade(
-              crossFadeState: provider.goingDown
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              duration: const Duration(milliseconds: 500),
-              firstChild: SizedBox(width: context.width),
-              secondChild: Visibility(
-                visible: provider.hasRides && provider.isLogin,
-                child: Padding(
+          : Visibility(
+              visible: provider.hasRides && provider.isLogin,
+              child: AnimatedCrossFade(
+                crossFadeState: provider.goingDown
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
+                duration: const Duration(milliseconds: 500),
+                firstChild: SizedBox(width: context.width),
+                secondChild: Padding(
                   padding: const EdgeInsets.fromLTRB(
                       Dimensions.PADDING_SIZE_DEFAULT,
                       0,
@@ -114,7 +114,8 @@ class HomeRunningRidesWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              ));
+              ),
+            );
     });
   }
 }
