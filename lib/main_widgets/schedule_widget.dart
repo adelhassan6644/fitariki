@@ -19,7 +19,9 @@ class ScheduleWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             SizedBox(width: startPadding??0,),
+            SizedBox(
+              width: startPadding ?? 0,
+            ),
             ...List.generate(
               AppStrings.days.length,
               (index) {

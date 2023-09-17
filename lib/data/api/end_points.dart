@@ -89,6 +89,6 @@ class EndPoints {
   static const String getBanks = 'app/banks';
 
   /// maps
-  static const String GEOCODE_URI = '/maps/api/geocode/';
-  static const String Autocomplete = '/maps/api/place/autocomplete/';
+  static const String geoCodeUrl = '/maps/api/geocode/';
+  static const String autoComplete = '/maps/api/place/autocomplete/';
 }

@@ -15,15 +15,22 @@ class CalenderProvider extends ChangeNotifier {
   );
   Map<DateTime, List<Event>> eventsMAP = {};
   EventList<Event>? eventList;
-  List<int> days=[];
-  updateDays(weakDays){
-    days=weakDays;
+
+  clear() {
+    days.clear();
+    eventList = null;
+    eventsMAP = {};
+    notifyListeners();
+  }
+
+  List<int> days = [];
+  updateDays(v) {
+    days = v;
     notifyListeners();
   }
 
   bool isLoad = false;
-  getEventsList({required DateTime startDate,required DateTime endDate}) {
-
+  getEventsList({required DateTime startDate, required DateTime endDate}) {
     isLoad = true;
     eventList = null;
     eventsMAP = {};

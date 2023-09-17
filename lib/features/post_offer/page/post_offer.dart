@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
-import '../../../data/config/di.dart';
 import '../../../main_widgets/followers_widget.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../provider/post_offer_provider.dart';
 import '../widgets/offer_information_widget.dart';
 import '../widgets/your_location_widget.dart';
@@ -39,7 +37,7 @@ class PostOffer extends StatelessWidget {
                 textBtn: getTranslated("preview", context),
                 onTap: () {
                   if (provider.checkData() == true) {
-                    sl<ProfileProvider>().getProfile();
+                    // sl<ProfileProvider>().getProfile();
                     customShowModelBottomSheet(
                       body: const PreviewOffer(),
                     );
@@ -52,8 +50,12 @@ class PostOffer extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   YourLocationWidget(provider: provider),
-                  OfferInformationWidget(provider: provider,),
-                  SizedBox(height: 8.h,),
+                  OfferInformationWidget(
+                    provider: provider,
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                   if (!provider.isDriver) const FollowersWidget(),
                   SizedBox(
                     height: 8.h,

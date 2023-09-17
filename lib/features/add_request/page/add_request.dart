@@ -6,6 +6,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
+import '../../../main_models/weak_model.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/calender_widget.dart';
 import '../../../main_widgets/followers_widget.dart';
@@ -20,13 +21,15 @@ class AddRequest extends StatefulWidget {
       this.offer,
       this.updateOfferDetails,
       this.senderId,
-      required this.name})
+      required this.name,
+      required this.days})
       : super(key: key);
   final bool isCaptain;
   final bool isSpecialOffer;
   final OfferModel? offer;
   final ValueChanged? updateOfferDetails;
   final int? senderId;
+  final List<WeekModel> days;
   final String name;
 
   @override
@@ -37,18 +40,17 @@ class _AddRequestState extends State<AddRequest> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      Provider.of<AddRequestProvider>(context, listen: false).updateOfferDays(
-          sl.get<ScheduleProvider>().selectedDays.map((e) => e.id!).toList());
-      if (widget.isSpecialOffer && widget.offer != null) {
+      sl<AddRequestProvider>().updateOfferDays(widget.days);
+
+      if (!widget.isSpecialOffer && widget.offer != null) {
         if (widget.offer!.startDate!.isBefore(DateTime.now())) {
-          Provider.of<AddRequestProvider>(context, listen: false)
-              .onSelectStartDate(widget.offer!.startDate!);
+          sl<AddRequestProvider>()
+              .onSelectStartDate(widget.offer?.startDate ?? DateTime.now());
         } else {
-          Provider.of<AddRequestProvider>(context, listen: false)
-              .onSelectStartDate(DateTime.now());
+          sl<AddRequestProvider>().onSelectStartDate(DateTime.now());
         }
-        Provider.of<AddRequestProvider>(context, listen: false)
-            .onSelectEndDate(widget.offer!.endDate ?? DateTime.now());
+        sl<AddRequestProvider>()
+            .onSelectEndDate(widget.offer?.endDate ?? DateTime.now());
       }
     });
     super.initState();
@@ -119,7 +121,7 @@ class _AddRequestState extends State<AddRequest> {
                         startDate: provider.startDate,
                         endDate: provider.endDate,
                         fromAddRequest: true,
-                        days: scheduleProvider.selectedDays);
+                        days: widget.days);
                   })
                 ],
               ),

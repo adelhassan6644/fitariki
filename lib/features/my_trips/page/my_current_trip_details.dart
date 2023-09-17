@@ -336,24 +336,12 @@ class MyCurrentTripDetails extends StatelessWidget {
 
                             /// to show days on calender
                             TripDaysOnCalenderWidget(
-                              startDate:
-                                  provider.tripDetails?.myTripRequest?.startAt,
-                              endDate:
-                                  provider.tripDetails?.myTripRequest?.endAt,
-                              days:
-                                  provider.isDriver
-                                      ? provider.tripDetails?.clientModel
-                                              ?.clientDays ??
-                                          provider.tripDetails?.offer
-                                              ?.clientModel?.clientDays ??
-                                          provider.tripDetails?.myTripRequest
-                                              ?.clientModel?.clientDays
-                                      : provider.tripDetails?.offer?.offerDays,
+                              startDate: provider.tripDetails?.myTripRequest?.startAt,
+                              endDate: provider.tripDetails?.myTripRequest?.endAt,
+                              days: provider.tripDetails?.offer?.offerDays,
                             ),
 
-                            SizedBox(
-                              height: 24.h,
-                            )
+                            SizedBox(height: 24.h)
                           ],
                         ),
                       ),

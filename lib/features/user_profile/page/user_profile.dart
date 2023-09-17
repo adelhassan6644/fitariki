@@ -16,6 +16,7 @@ import '../../../components/empty_widget.dart';
 import '../../../components/expansion_tile_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/map_widget.dart';
 import '../../../main_widgets/shimmer_widgets/map_widget_shimmer.dart';
 import '../../../main_widgets/shimmer_widgets/profile_card_shimmer.dart';
@@ -24,7 +25,6 @@ import '../../../navigation/routes.dart';
 import '../../add_request/page/add_request.dart';
 import '../../add_request/provider/add_request_provider.dart';
 import '../../auth/pages/login.dart';
-import '../../maps/provider/location_provider.dart';
 import '../../profile/provider/profile_provider.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/follower_distance_widget.dart';
@@ -102,6 +102,13 @@ class _UserProfileState extends State<UserProfile> {
                                                 provider.userProfileModel
                                                     ?.client?.id,
                                             isSpecialOffer: true,
+                                            days: provider.isDriver
+                                                ? provider.userProfileModel
+                                                        ?.client?.clientDays ??
+                                                    []
+                                                : sl
+                                                    .get<ScheduleProvider>()
+                                                    .selectedDays,
                                             isCaptain: provider.isDriver,
                                           )
                                         : const Login());

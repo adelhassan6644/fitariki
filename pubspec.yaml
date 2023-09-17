@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none'
 
-version: 1.0.3+9
+version: 1.1.0+10
 #  flutter build apk  --release --no-tree-shake-icons
 environment:
   sdk: '>=2.19.3 <3.0.0'

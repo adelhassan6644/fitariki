@@ -76,7 +76,7 @@ class TripDaysOnCalenderWidget extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
-          CalenderWidget(startDate: startDate!, endDate: endDate!, days: days!),
+          CalenderWidget(startDate: startDate!, endDate: endDate!, days: days??[]),
         ],
       ),
     );

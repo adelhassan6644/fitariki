@@ -61,17 +61,7 @@ class CurrentTripsWidget extends StatelessWidget {
                                                 .offerFollowers!.length +
                                             1),
                                 myTrip: provider.currentTrips![index],
-                                offerDays: provider.isDriver
-                                    ? provider
-                                            .currentTrips![index]
-                                            .myTripRequest
-                                            ?.clientModel
-                                            ?.clientDays ??
-                                        provider.currentTrips![index].offer
-                                            ?.clientModel?.clientDays ??
-                                        provider.currentTrips![index]
-                                            .clientModel?.clientDays
-                                    : provider
+                                offerDays:  provider
                                         .currentTrips![index].offer?.offerDays,
                               ),
                             );

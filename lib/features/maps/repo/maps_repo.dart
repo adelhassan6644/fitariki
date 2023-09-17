@@ -17,7 +17,7 @@ class MapsRepo {
       Response response = await dioClient.get(
           useGoogleUri: true,
           uri:
-              '${EndPoints.Autocomplete}json?input=$text&key=${AppStrings.googleApiKey}');
+              '${EndPoints.autoComplete}json?input=$text&key=${AppStrings.googleApiKey}');
 
       if (response.statusCode == 200) {
         return Right(response);
@@ -36,7 +36,7 @@ class MapsRepo {
           useGoogleUri: true,
           // uri:  '${EndPoints.GEOCODE_URI}?lat=${latLng.latitude}&lng=${latLng.longitude}');
           uri:
-              '${EndPoints.GEOCODE_URI}json?latlng=${latLng.latitude},${latLng.longitude}&key=${AppStrings.googleApiKey}');
+              '${EndPoints.geoCodeUrl}json?latlng=${latLng.latitude},${latLng.longitude}&key=${AppStrings.googleApiKey}');
 
       if (response.statusCode == 200) {
         return Right(response);

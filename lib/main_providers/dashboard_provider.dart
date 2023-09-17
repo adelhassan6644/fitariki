@@ -63,7 +63,7 @@ class DashboardProvider extends ChangeNotifier {
               onCancel: () {
                 if (reasonTEC.text.trim().isNotEmpty) {
                   sendRateFinishedTrip(
-                      id: id, approve: 0, reason: reasonTEC.text.trim());
+                      id: id, approve: 2, reason: reasonTEC.text.trim());
                 } else {
                   showToast(
                     getTranslated("please_enter_the_reason",

@@ -73,7 +73,7 @@ class PostOfferProvider extends ChangeNotifier {
     }
 
     if (selectedRideTypes.length > 1) {
-      selectedRideType = 2;
+      selectedRideType = 3;
     } else {
       if (selectedRideTypes.isNotEmpty) {
         selectedRideType = selectedRideTypes.first;
@@ -123,8 +123,8 @@ class PostOfferProvider extends ChangeNotifier {
   void getDaysCount() {
     List<int> days = [];
     for (var element in scheduleProvider.selectedDays) {
-      element.startTime = startTime.dateFormat(format: "kk:mm");
-      element.endTime = endTime.dateFormat(format: "kk:mm");
+      element.startTime = startTime.dateFormat(format: "kk:mm", lang: "en");
+      element.endTime = endTime.dateFormat(format: "kk:mm", lang: 'en');
       days.add(element.id!);
     }
 

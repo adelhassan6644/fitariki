@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:fitariki/features/auth/provider/auth_provider.dart';
 import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
@@ -154,17 +155,13 @@ class _DashBoardState extends State<DashBoard> {
                   return;
                 } else {
                   customShowModelBottomSheet(
-                    onClose:
-                        Provider.of<PostOfferProvider>(context, listen: false)
-                            .reset,
+                    onClose: sl<PostOfferProvider>().reset,
                     body: const PostOffer(),
                   );
                 }
               } else {
                 customShowModelBottomSheet(
-                  onClose:
-                      Provider.of<PostOfferProvider>(context, listen: false)
-                          .reset,
+                  onClose: sl<AuthProvider>().clear,
                   body: const Login(),
                 );
               }

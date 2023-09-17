@@ -43,6 +43,7 @@ class PreviousTripsWidget extends StatelessWidget {
                             child: MyTripCard(
                               isDriver: provider.isDriver,
                               isCurrent: false,
+                              offerDays: provider.previousTrips![index].offer?.offerDays??[],
                               myTrip:
                                   provider.previousTrips![index],
                             ),

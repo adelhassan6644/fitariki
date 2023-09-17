@@ -253,33 +253,20 @@ class OfferDetails extends StatelessWidget {
                                       : "add_request",
                                   context),
                           onTap: () async {
-                            if (provider.offerDetails?.isSentOffer != true) {
-                              if (provider.isDriver &&
-                                  provider.isLogin &&
-                                  sl<ProfileProvider>().status != "1") {
-                                CustomSnackBar.showSnackBar(
-                                    notification: AppNotification(
-                                        message:
-                                            "عفواً، لا يمكن اضافة عرض لانه لم يتم تفعيل حسابك بعد",
-                                        isFloating: true,
-                                        backgroundColor: Styles.IN_ACTIVE,
-                                        borderColor: Colors.transparent));
-                              } else {
-                                customShowModelBottomSheet(
-                                    onClose: () =>
-                                        sl<AddRequestProvider>().reset(),
-                                    body: provider.isLogin
-                                        ? AddRequest(
-                                            name: provider.offerDetails?.name ??
-                                                "",
-                                            offer: provider.offerDetails!,
-                                            isCaptain: provider.isDriver,
-                                            updateOfferDetails:
-                                                provider.updateModel,
-                                          )
-                                        : const Login());
-                              }
-                            }
+                            customShowModelBottomSheet(
+                                onClose: () => sl<AddRequestProvider>().reset(),
+                                body: provider.isLogin
+                                    ? AddRequest(
+                                        name: provider.offerDetails?.name ?? "",
+                                        offer: provider.offerDetails!,
+                                        days:
+                                            provider.offerDetails!.offerDays ??
+                                                [],
+                                        isCaptain: provider.isDriver,
+                                        updateOfferDetails:
+                                            provider.updateModel,
+                                      )
+                                    : const Login());
                           }),
                     ),
                   )

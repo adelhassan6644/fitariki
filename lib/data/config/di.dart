@@ -155,7 +155,7 @@ Future<void> init() async {
         scheduleProvider: sl(),
       ));
   sl.registerLazySingleton(() => CalenderProvider());
-  sl.registerLazySingleton(() => AddRequestProvider(addRequestRepo: sl()));
+  sl.registerLazySingleton(() => AddRequestProvider(repo: sl()));
   sl.registerLazySingleton(() => MyTripsProvider(myTripsRepo: sl()));
   sl.registerLazySingleton(() => LocationProvider(locationRepo: sl()));
   sl.registerLazySingleton(() => MyRidesProvider(repo: sl()));

@@ -18,6 +18,14 @@ class AddRequestRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
+  getRole() {
+    return sharedPreferences.getString(AppStorageKey.role);
+  }
+
+  getUserID() {
+    return sharedPreferences.getString(AppStorageKey.userId);
+  }
+
   Future<Either<ServerFailure, Response>> requestOffer(
       {body, id, required bool isSpecialOffer}) async {
     try {

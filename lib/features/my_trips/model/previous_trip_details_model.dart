@@ -12,7 +12,7 @@ class PreviousTripDetailsModel {
   LocationModel? dropOffLocation;
   LocationModel? pickupLocation;
   int? numOfCancelTrips;
-  int? cancelValue;
+  double? cancelValue;
   String? paymentMethod;
   String? invoice;
   int? taxPercentage;
@@ -70,7 +70,7 @@ class PreviousTripDetailsModel {
         : null;
 
     numOfCancelTrips = json['numOfCancelTrips'];
-    cancelValue = json['cancelValue'];
+    cancelValue = double.parse(json['cancelValue'].toString());
     paymentMethod = json['paymentMethod'];
     invoice = json['invoice'];
     amount =

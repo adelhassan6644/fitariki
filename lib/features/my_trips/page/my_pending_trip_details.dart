@@ -154,9 +154,12 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             DistanceWidget(
                               isCaptain: provider.isDriver,
                               location: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.pickupLocation ??
-                                      provider.requestModel?.offer?.clientModel?.pickupLocation
-                                  : provider.requestModel?.offer?.pickupLocation,
+                                  ? provider.requestModel?.clientModel
+                                          ?.pickupLocation ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.pickupLocation
+                                  : provider
+                                      .requestModel?.offer?.pickupLocation,
                             ),
 
                             ///Type of ride
@@ -190,15 +193,19 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               ),
                             ),
 
-                            if ( provider.requestModel?.offer?.offerFollowers != null && provider.requestModel!.offer!.offerFollowers!
-                                .isNotEmpty)
+                            if (provider.requestModel?.offer?.offerFollowers !=
+                                    null &&
+                                provider.requestModel!.offer!.offerFollowers!
+                                    .isNotEmpty)
                               ...List.generate(
                                 provider.requestModel?.offer?.offerFollowers
-                                        ?.length ?? 0,
+                                        ?.length ??
+                                    0,
                                 (index) => MapWidget(
                                   launchMap: false,
                                   clientName: provider.requestModel?.offer
-                                          ?.offerFollowers?[index].name ?? "",
+                                          ?.offerFollowers?[index].name ??
+                                      "",
                                   gender: provider.requestModel?.offer
                                       ?.offerFollowers?[index].gender,
                                   startPoint: provider.requestModel?.offer
@@ -262,17 +269,10 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             TripDaysOnCalenderWidget(
                               startDate: provider.requestModel?.startAt,
                               endDate: provider.requestModel?.endAt,
-                              days: provider.isDriver
-                                  ? provider.requestModel?.clientModel
-                                          ?.clientDays ??
-                                      provider.requestModel?.offer?.clientModel
-                                          ?.clientDays
-                                  : provider.requestModel?.offer?.offerDays,
+                              days: provider.requestModel?.offer?.offerDays,
                             ),
 
-                            SizedBox(
-                              height: 24.h,
-                            )
+                            SizedBox(height: 24.h)
                           ],
                         ),
                       ),

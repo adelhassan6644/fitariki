@@ -102,7 +102,6 @@ class ActionButtons extends StatelessWidget {
                               }
                             },
                             onClose: () {
-                              CustomNavigator.pop();
                               provider.negotiationPrice.clear();
                             }),
                     isLoading: provider.isNegotiation,

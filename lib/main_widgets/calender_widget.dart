@@ -30,6 +30,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      sl<CalenderProvider>().clear();
       sl<CalenderProvider>().updateDays(widget.days.map((e) => e.id!).toList());
       if (!widget.fromAddRequest) {
         sl<CalenderProvider>().getEventsList(
@@ -46,7 +47,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   Widget build(BuildContext context) {
     return Consumer<CalenderProvider>(builder: (context, provider, _) {
       if (provider.isLoad) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       } else {
         return Directionality(
           textDirection: TextDirection.rtl,

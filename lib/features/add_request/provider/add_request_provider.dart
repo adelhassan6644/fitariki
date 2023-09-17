@@ -3,11 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/loading_dialog.dart';
+import 'package:fitariki/main_models/weak_model.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../app/core/utils/app_snack_bar.dart';
-import '../../../app/core/utils/app_storage_keys.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../data/config/di.dart';
@@ -16,12 +14,11 @@ import '../../../main_providers/calender_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../followers/followers/provider/followers_provider.dart';
 import '../../my_trips/provider/my_trips_provider.dart';
-import '../../profile/provider/profile_provider.dart';
 import '../repo/add_request_repo.dart';
 
 class AddRequestProvider extends ChangeNotifier {
-  AddRequestRepo addRequestRepo;
-  AddRequestProvider({required this.addRequestRepo});
+  AddRequestRepo repo;
+  AddRequestProvider({required this.repo});
 
   List<String> rideTypes = ["go", "back"];
   List<int> selectedRideTypes = [];
@@ -51,9 +48,10 @@ class AddRequestProvider extends ChangeNotifier {
   DateTime startDate = DateTime.now();
   int duration = 0;
 
-  List<int>? days;
-  updateOfferDays(v) {
+  List<WeekModel>? days;
+  updateOfferDays(List<WeekModel> v) {
     days = v;
+    sl<CalenderProvider>().updateDays(v.map((e) => e.id!).toList());
     notifyListeners();
   }
 
@@ -73,11 +71,12 @@ class AddRequestProvider extends ChangeNotifier {
   void getDaysCount() {
     if (days != null) {
       duration = Methods.getWeekdayCount(
-              startDate: startDate, endDate: endDate, weekdays: days!)
+              startDate: startDate,
+              endDate: endDate,
+              weekdays: days!.map((e) => e.id!).toList())
           .days;
       sl<CalenderProvider>()
           .getEventsList(startDate: startDate, endDate: endDate);
-
       notifyListeners();
     }
   }
@@ -89,8 +88,8 @@ class AddRequestProvider extends ChangeNotifier {
     startDate = DateTime.now();
     endDate = DateTime.now();
     duration = 0;
-    sl<CalenderProvider>()
-        .getEventsList(startDate: DateTime.now(), endDate: DateTime.now());
+    days = null;
+    sl<CalenderProvider>().clear();
     sl.get<FollowersProvider>().selectedFollowers.clear();
   }
 
@@ -148,8 +147,7 @@ class AddRequestProvider extends ChangeNotifier {
 
       final data = {
         "request_offer": {
-          '${sl.get<SharedPreferences>().getString(AppStorageKey.role)}_id':
-              sl.get<SharedPreferences>().getString(AppStorageKey.userId),
+          '${repo.getRole()}_id': repo.getUserID(),
           "offer_type": selectedRideType,
           "start_date": startDate.defaultFormat2(),
           "start_at": startDate.defaultFormat2(),
@@ -159,15 +157,15 @@ class AddRequestProvider extends ChangeNotifier {
           "price": minPrice.text.trim(),
           if (sl.get<FollowersProvider>().addFollowers &&
               sl.get<FollowersProvider>().selectedFollowers.isNotEmpty &&
-              !sl<ProfileProvider>().isDriver)
+              !repo.isDriver())
             "request_followers": List<dynamic>.from(sl
                 .get<FollowersProvider>()
                 .selectedFollowers
                 .map((x) => x.toPostJson()))
         }
       };
-      Either<ServerFailure, Response> response = await addRequestRepo
-          .requestOffer(body: data, id: id, isSpecialOffer: isSpecialOffer);
+      Either<ServerFailure, Response> response = await repo.requestOffer(
+          body: data, id: id, isSpecialOffer: isSpecialOffer);
       response.fold((fail) {
         CustomNavigator.pop();
         showToast(fail.error);
