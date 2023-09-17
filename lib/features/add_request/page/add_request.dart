@@ -47,7 +47,6 @@ class _AddRequestState extends State<AddRequest> {
           sl<AddRequestProvider>()
               .onSelectStartDate(widget.offer?.startDate ?? DateTime.now());
         } else {
-
           sl<AddRequestProvider>().onSelectStartDate(DateTime.now());
         }
         sl<AddRequestProvider>()
