@@ -17,6 +17,7 @@ class OfferModel {
   double? rate;
   int? duration;
   bool? isSentOffer;
+  bool? isSpecial;
   bool? isHaveNewRequests;
   double? minPrice;
   int? clientId;
@@ -52,6 +53,7 @@ class OfferModel {
       this.offerDays,
       this.clientId,
       this.driverId,
+      this.isSpecial,
       this.dropOffLocation,
       this.pickupLocation,
       this.offerRequests,
@@ -64,6 +66,7 @@ class OfferModel {
       id: json["id"],
       image: json["image"],
       name: json["name"],
+      isSpecial: json['is_special']==1,
       offerType: json["offer_type"]??1,
       isSentOffer: json["exist"] ?? false,
       isHaveNewRequests: json["is_have_new_requests"] ?? false,
