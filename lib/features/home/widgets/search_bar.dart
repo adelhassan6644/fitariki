@@ -24,7 +24,8 @@ class SearchBarWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => customShowModelBottomSheet(
           body: const FilterBottomSheet(),
-          onClose: () => Provider.of<HomeProvider>(context, listen: false).reset()),
+          // onClose: () => Provider.of<HomeProvider>(context, listen: false).reset(),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT),

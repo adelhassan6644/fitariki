@@ -27,6 +27,7 @@ class ActionButtons extends StatelessWidget {
           /// when offer or request is updated
           Visibility(
             visible: !provider.isLoading &&
+                provider.requestModel != null &&
                 provider.requestModel?.approvedAt == null &&
                 provider.requestModel?.rejectedAt == null &&
                 canAnswer(
@@ -55,6 +56,8 @@ class ActionButtons extends StatelessWidget {
                     isLoading: provider.isAccepting,
                   ),
                 ),
+
+                ///Negotiation
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
@@ -66,8 +69,11 @@ class ActionButtons extends StatelessWidget {
                     onTap: () =>
                         CupertinoPopUpHelper.showCupertinoTextController(
                             title: getTranslated("negotiation", context),
-                            description:
-                                "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
+                            description: provider.requestModel!.isSpecialOffer!
+                                ? getTranslated(
+                                    "negotiation_special_offer_description",
+                                    context)
+                                : "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}",
                             hint: getTranslated("new_price", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
@@ -77,13 +83,16 @@ class ActionButtons extends StatelessWidget {
                                   RegExp(r'^\d+\.?\d{0,2}')),
                             ],
                             onSend: () {
-                              if (Validations.negotiation(
-                                      provider.negotiationPrice.text.trim(),
-                                      provider.requestModel?.offer?.maxPrice ??
-                                          0.0,
-                                      provider.requestModel?.offer?.minPrice ??
-                                          0.0) !=
-                                  null) {
+                              if (!provider.requestModel!.isSpecialOffer! &&
+                                  Validations.negotiation(
+                                          provider.negotiationPrice.text.trim(),
+                                          provider.requestModel?.offer
+                                                  ?.maxPrice ??
+                                              0.0,
+                                          provider.requestModel?.offer
+                                                  ?.minPrice ??
+                                              0.0) !=
+                                      null) {
                                 showToast(Validations.negotiation(
                                         provider.negotiationPrice.text.trim(),
                                         provider.requestModel?.offer
@@ -133,6 +142,7 @@ class ActionButtons extends StatelessWidget {
           /// when offer or request sent and waiting replay on your offer
           Visibility(
             visible: !provider.isLoading &&
+                provider.requestModel != null &&
                 provider.requestModel?.approvedAt == null &&
                 provider.requestModel?.rejectedAt == null &&
                 !canAnswer(
@@ -158,6 +168,7 @@ class ActionButtons extends StatelessWidget {
           /// when request accepted but not paid and current type is client
           Visibility(
             visible: !provider.isLoading &&
+                provider.requestModel != null &&
                 provider.requestModel?.approvedAt != null &&
                 provider.requestModel?.paidAt == null &&
                 !provider.isDriver,
@@ -176,6 +187,7 @@ class ActionButtons extends StatelessWidget {
           /// when request accepted but not paid and current type is driver
           Visibility(
             visible: !provider.isLoading &&
+                provider.requestModel != null &&
                 provider.requestModel?.approvedAt != null &&
                 provider.requestModel?.paidAt == null &&
                 provider.isDriver,
@@ -195,6 +207,7 @@ class ActionButtons extends StatelessWidget {
           /// when offer rejected
           Visibility(
             visible: !provider.isLoading &&
+                provider.requestModel != null &&
                 provider.requestModel?.rejectedAt != null &&
                 provider.requestModel?.approvedAt == null,
             child: Padding(

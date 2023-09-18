@@ -63,10 +63,9 @@ class HomeTabBarWidget extends StatelessWidget {
                   splashColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   onTap: () => customShowModelBottomSheet(
-                      body: const FilterBottomSheet(),
-                      onClose: () =>
-                          Provider.of<HomeProvider>(context, listen: false)
-                              .reset()),
+                    body: const FilterBottomSheet(),
+                    // onClose: !provider.isLoading ? provider.reset : null,
+                  ),
                   child: Container(
                       height: 32,
                       decoration: BoxDecoration(

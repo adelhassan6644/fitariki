@@ -71,7 +71,7 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                                 ? getTranslated(
                                     "negotiation_special_offer_description",
                                     context)
-                                : "${getTranslated("negotiation_special_offer_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}.",
+                                : "${getTranslated("negotiation_description", context)}${provider.requestModel?.offer?.minPrice ?? 0} - ${provider.requestModel?.offer?.maxPrice ?? 0} ${getTranslated("sar", context)}.",
                             hint: getTranslated("new_price", context),
                             controller: provider.negotiationPrice,
                             keyboardType: TextInputType.number,
