@@ -192,7 +192,7 @@ class RideDetailsProvider extends ChangeNotifier {
   BehaviorSubject<String> dropLocationStream = BehaviorSubject<String>();
   dropLocationListener(LatLng latLng) async {
     _dropOffTimer?.cancel();
-    _dropOffTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _dropOffTimer = Timer.periodic(const Duration(seconds: 40), (Timer timer) {
       calculatedETAToDropLocation(latLng);
     });
   }
@@ -207,7 +207,7 @@ class RideDetailsProvider extends ChangeNotifier {
       latitude: dropOffLatLng.latitude,
       longitude: dropOffLatLng.longitude,
     );
-    final distance = GeoRange().distance(startPoint, endPoint);
+    final distance = GeoRange().distance(startPoint, endPoint)* 0.001;
     double timeInHours = distance / ((currentLocation.speed * 3.6));
     final timeInMin = (timeInHours * 60).ceil();
     dropLocationStream.add("$timeInMin min - $distance km");
@@ -216,7 +216,7 @@ class RideDetailsProvider extends ChangeNotifier {
   BehaviorSubject<String> pickUpLocationStream = BehaviorSubject<String>();
   pickUpLocationListener(LatLng latLng) async {
     _pickUpTimer?.cancel();
-    _pickUpTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _pickUpTimer = Timer.periodic(const Duration(seconds: 40), (Timer timer) {
       calculatedETAToPickUpLocation(latLng);
     });
   }
@@ -231,7 +231,7 @@ class RideDetailsProvider extends ChangeNotifier {
       latitude: pickUpLatLng.latitude,
       longitude: pickUpLatLng.longitude,
     );
-    final distance = GeoRange().distance(startPoint, endPoint);
+    final distance = GeoRange().distance(startPoint, endPoint)* 0.001;
     print("distance$distance");
     double timeInHours = distance / ((currentLocation.speed * 3.6));
     final timeInMin = (timeInHours * 60).ceil();
