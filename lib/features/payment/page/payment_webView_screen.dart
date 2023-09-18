@@ -207,7 +207,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 onConsoleMessage: (controller, consoleMessage) {
                   log("$consoleMessage");
                 },
-                onCloseWindow: (InAppWebViewController) {},
+                onCloseWindow: (c) {},
               ),
               progress < 1.0
                   ? LinearProgressIndicator(
