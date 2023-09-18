@@ -225,8 +225,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.car,
-                                        color: Styles
-                                            .SECOUND_PRIMARY_COLOR,
+                                        color: Styles.SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -262,8 +261,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.carModel,
-                                        color: Styles
-                                            .SECOUND_PRIMARY_COLOR,
+                                        color: Styles.SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -300,8 +298,7 @@ class RequestCard extends StatelessWidget {
                                   children: [
                                     customImageIconSVG(
                                         imageName: SvgImages.seat,
-                                        color: Styles
-                                            .SECOUND_PRIMARY_COLOR,
+                                        color: Styles.SECOUND_PRIMARY_COLOR,
                                         height: 14,
                                         width: 14),
                                     SizedBox(
@@ -374,8 +371,7 @@ class RequestCard extends StatelessWidget {
                                                         0
                                                     ? SvgImages.maleIcon
                                                     : SvgImages.femaleIcon,
-                                                color:
-                                                    Styles.BLUE_COLOR,
+                                                color: Styles.BLUE_COLOR,
                                                 width: 11,
                                                 height: 11),
                                             if (index !=
@@ -387,8 +383,7 @@ class RequestCard extends StatelessWidget {
                                                 child: Container(
                                                   height: 10,
                                                   width: 1,
-                                                  color:
-                                                      Styles.HINT_COLOR,
+                                                  color: Styles.HINT_COLOR,
                                                   child: const SizedBox(),
                                                 ),
                                               ),
@@ -447,8 +442,8 @@ class RequestCard extends StatelessWidget {
                         Methods.getDayCount(
                           date: request!.createdAt!,
                         ).toString(),
-                        style: AppTextStyles.w400.copyWith(
-                            fontSize: 10, color: Styles.DISABLED),
+                        style: AppTextStyles.w400
+                            .copyWith(fontSize: 10, color: Styles.DISABLED),
                       ),
                       SizedBox(
                         height: 10.h,
@@ -470,9 +465,8 @@ class RequestCard extends StatelessWidget {
                 text: getTranslated("preview", context),
                 width: 75.h,
                 height: 30.h,
-                textSize:14,
+                textSize: 14,
                 radius: 100,
-
                 onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
                     arguments: request!.id!),
               ))

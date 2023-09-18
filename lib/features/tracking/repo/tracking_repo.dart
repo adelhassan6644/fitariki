@@ -74,7 +74,7 @@ class TrackingRepo {
       interval: AppStrings.timePassLocationUpdate,
       distanceFilter: AppStrings.distanceCoverLocationUpdate,
     ).handleError((error) {
-      print("Location listen error => $error");
+
     });
   }
 

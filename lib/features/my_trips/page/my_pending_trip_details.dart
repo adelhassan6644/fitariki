@@ -119,12 +119,15 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                   provider.requestModel?.duration.toString(),
                               priceRange:
                                   "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
-                              passengers: provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel!.followers!.length + 1
-                                  : 1,
+                              passengers:
+                                  (provider.requestModel?.followers?.length != 0
+                                          ? provider.requestModel?.followers
+                                                  ?.length ??
+                                              0
+                                          : provider.requestModel?.offer
+                                                  ?.offerFollowers?.length ??
+                                              0) +
+                                      1,
                               timeRange:
                                   "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
                             ),
