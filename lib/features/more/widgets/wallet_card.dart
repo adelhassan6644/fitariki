@@ -7,10 +7,14 @@ import '../../../app/core/utils/images.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
+import '../../../helpers/cupertino_pop_up_helper.dart';
+import '../../../navigation/custom_navigation.dart';
 
 class WalletCard extends StatelessWidget {
-  const WalletCard({this.availableBalance,Key? key, this.pendingBalance}) : super(key: key);
-  final double? availableBalance;  final double? pendingBalance;
+  const WalletCard({this.availableBalance, Key? key, this.pendingBalance})
+      : super(key: key);
+  final double? availableBalance;
+  final double? pendingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,11 @@ class WalletCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
-                image: const DecorationImage(image: AssetImage(Images.pronzeBG,),fit: BoxFit.fitHeight)),
+                image: const DecorationImage(
+                    image: AssetImage(
+                      Images.pronzeBG,
+                    ),
+                    fit: BoxFit.fitHeight)),
             child: customImageIconSVG(
                 imageName: SvgImages.medal,
                 height: 24,
@@ -32,34 +40,112 @@ class WalletCard extends StatelessWidget {
                 color: Styles.WHITE_COLOR),
           ),
         ),
-        SizedBox(width: 8.w,),
+        SizedBox(
+          width: 8.w,
+        ),
         Expanded(
           flex: 3,
-          child: Container(
-            height: 50.h,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            decoration: BoxDecoration(
-              color: Styles.DISABLED,
-              borderRadius: BorderRadius.circular(4),
+          child: InkWell(
+            onTap: () {
+              CupertinoPopUpHelper.showWaletCupertinoPopUp(
+                  textButton: "حسناً",
+                  onConfirm: () {
+                    CustomNavigator.pop();
+                  },
+                  title: "مبالغ معلقة",
+                  description:
+                  "عند اتمام المشاوير المتعلقه بها تستطيع سحب مبالغك من المتاح بالمحفظة.");
+            },
+            child: Container(
+              height: 50.h,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              decoration: BoxDecoration(
+                color: Styles.DISABLED,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                children: [
+                  customImageIconSVG(
+                      imageName: SvgImages.wallet,
+                      height: 24,
+                      width: 24,
+                      color: Styles.WHITE_COLOR),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                          child: RichText(
+                            text: TextSpan(
+                              text: pendingBalance?.toStringAsFixed(2) ?? "",
+                              style: AppTextStyles.w700.copyWith(
+                                  fontSize: 12,
+                                  height: 1,
+                                  color: Styles.WHITE_COLOR),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: ' ${getTranslated("sar", context)}',
+                                  style: AppTextStyles.w400.copyWith(
+                                      fontSize: 10,
+                                      height: 1,
+                                      color: Styles.WHITE_COLOR),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Text(getTranslated("hold", context),
+                            style: AppTextStyles.w400.copyWith(
+                                fontSize: 10, color: Styles.WHITE_COLOR)),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                customImageIconSVG(
-                    imageName: SvgImages.wallet,
-                    height: 24,
-                    width: 24,
-                    color: Styles.WHITE_COLOR),
-                
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FittedBox(
-                        child: RichText(
+          ),
+        ),
+        SizedBox(
+          width: 8.w,
+        ),
+        Expanded(
+          flex: 4,
+          child: InkWell(
+            onTap: () {
+              CupertinoPopUpHelper.showWaletCupertinoPopUp(
+                  textButton: "حسناً",
+                  onConfirm: () {
+                    CustomNavigator.pop();
+                  },
+                  title: "مبالغ متاحه بالمحفظة",
+                  description:
+                      "تحتاج الى مابين 24 - 48 ساعة، حتى يتم تحويلها لحسابك المضاف بالبيانات البنكية.");
+            },
+            child: Container(
+              height: 50.h,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              decoration: BoxDecoration(
+                color: Styles.PRIMARY_COLOR,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                children: [
+                  customImageIconSVG(
+                      imageName: SvgImages.wallet,
+                      height: 24,
+                      width: 24,
+                      color: Styles.WHITE_COLOR),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RichText(
                           text: TextSpan(
-                            text: pendingBalance?.toStringAsFixed(2)??"",
+                            text: availableBalance?.toStringAsFixed(2),
                             style: AppTextStyles.w700.copyWith(
                                 fontSize: 12,
                                 height: 1,
@@ -75,65 +161,14 @@ class WalletCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
-                      Text(getTranslated("pending", context),
-                          style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, color: Styles.WHITE_COLOR)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        SizedBox(width: 8.w,),
-        Expanded(
-          flex: 4,
-          child: Container(
-            height: 50.h,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            decoration: BoxDecoration(
-              color: Styles.PRIMARY_COLOR,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Row(
-              children: [
-                customImageIconSVG(
-                    imageName: SvgImages.wallet,
-                    height: 24,
-                    width: 24,
-                    color: Styles.WHITE_COLOR),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: availableBalance?.toStringAsFixed(2),
-                          style: AppTextStyles.w700.copyWith(
-                              fontSize: 12,
-                              height: 1,
-                              color: Styles.WHITE_COLOR),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ' ${getTranslated("sar", context)}',
-                              style: AppTextStyles.w400.copyWith(
-                                  fontSize: 10,
-                                  height: 1,
-                                  color: Styles.WHITE_COLOR),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(getTranslated("wallet_available", context),
-                          style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, color: Styles.WHITE_COLOR)),
-                    ],
-                  ),
-                )
-              ],
+                        Text(getTranslated("wallet_available", context),
+                            style: AppTextStyles.w400.copyWith(
+                                fontSize: 10, color: Styles.WHITE_COLOR)),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
