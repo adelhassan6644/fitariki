@@ -58,7 +58,8 @@ abstract class LocationHelper {
                     child: const Text("OK"),
                     onPressed: () async {
                       CustomNavigator.pop();
-                      AppSettings.openLocationSettings(asAnotherTask: true);
+                      // AppSettings.openLocationSettings(asAnotherTask: true);
+                      AppSettings.openAppSettings(type: AppSettingsType.location );
                     }),
                 CupertinoDialogAction(
                     child: const Text("Cancel"),

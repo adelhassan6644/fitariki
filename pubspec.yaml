@@ -66,7 +66,7 @@ dependencies:
   country_picker: ^2.0.20
   flag:
   flutter_spinkit:
-  app_settings: ^4.2.0
+  app_settings: ^5.1.1
   substring_highlight: ^1.0.33
   motion_toast: ^2.6.8
   flutter_inappwebview:

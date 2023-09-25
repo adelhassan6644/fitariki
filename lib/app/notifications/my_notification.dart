@@ -50,7 +50,8 @@ abstract class FirebaseNotifications {
           defaultPresentBadge: true,
           defaultPresentAlert: true,
           defaultPresentSound: true),
-    )
+    ),
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse
     );
     _firebaseMessaging!.setAutoInitEnabled(true);
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -63,6 +64,7 @@ abstract class FirebaseNotifications {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       log('Handling on message ${message.data}');
       if (Platform.isAndroid) {
+
         flutterLocalNotificationsPlugin!.show(
         message.notification.hashCode,
         message.notification!.title,
@@ -85,15 +87,21 @@ abstract class FirebaseNotifications {
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
+      CustomNavigator.push(Routes.NOTIFICATIONS,);
+
       log('Handling initial message  ${message?.data}');
     });
     flutterLocalNotificationsPlugin!
         .getNotificationAppLaunchDetails()
         .then((value) {
+      CustomNavigator.push(Routes.NOTIFICATIONS,);
       log('Handling if local notification launch app  ${value!.notificationResponse}');
     });
   }
+  static onDidReceiveNotificationResponse(NotificationResponse notificationResponse) async {
 
+    CustomNavigator.push(Routes.NOTIFICATIONS,);
+  }
   static scheduleNotification(String title, String subtitle) async {
     var rng = math.Random();
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(

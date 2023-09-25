@@ -79,6 +79,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
                               children: [
                                 ///Offer Map
                                 MapWidget(
+
                                   startPoint:
                                       provider.myOfferDetails?.pickupLocation,
                                   endPoint:
