@@ -118,4 +118,35 @@ abstract class CupertinoPopUpHelper {
       },
     ).then((value) => onClose);
   }
+
+  static showWaletCupertinoPopUp(
+      {required String title,
+      required String description,
+      String? textButton,
+      Function()? onConfirm,
+      Function()? onClose}) {
+    showDialog(
+      context: CustomNavigator.navigatorState.currentContext!,
+      builder: (_) {
+        return CupertinoAlertDialog(
+          title: Center(child: Text(title)),
+          content: Text(
+            description,
+            style: AppTextStyles.w400.copyWith(fontSize: 13),
+          ),
+          actions: [
+            CupertinoDialogAction(
+                onPressed: onConfirm,
+                child: Text(
+                  textButton ??
+                      getTranslated("send",
+                          CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w600
+                      .copyWith(fontSize: 16, color: Styles.SYSTEM_COLOR),
+                )),
+          ],
+        );
+      },
+    ).then((value) => onClose);
+  }
 }

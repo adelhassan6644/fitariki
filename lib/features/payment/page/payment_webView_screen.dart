@@ -85,22 +85,30 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
       ),
       onRefresh: () async {
         if (Platform.isAndroid) {
-          browser.webViewController.reload();
+          browser.webViewController?.reload();
         } else if (Platform.isIOS) {
-          browser.webViewController.loadUrl(
+          browser.webViewController?.loadUrl(
               urlRequest:
-                  URLRequest(url: await browser.webViewController.getUrl()));
+                  URLRequest(url: await browser.webViewController?.getUrl()));
         }
       },
     );
     browser.pullToRefreshController = pullToRefreshController;
 
-    await browser.openUrlRequest(
+/*    await browser.openUrlRequest(
       urlRequest: URLRequest(
         url: (reservationModelProvider!.coupon != null)
             ? Uri.parse(wiselectedUrl +
                 "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
             : Uri.parse(
+                wiselectedUrl + "?reservation_id=${widget.rservationId}"),
+      ), */
+      await browser.openUrlRequest(
+      urlRequest: URLRequest(
+        url: (reservationModelProvider!.coupon != null)
+            ? WebUri(wiselectedUrl +
+                "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
+            : WebUri(
                 wiselectedUrl + "?reservation_id=${widget.rservationId}"),
       ),
       options: InAppBrowserClassOptions(
@@ -140,9 +148,9 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               InAppWebView(
                 initialUrlRequest: URLRequest(
                   url: (reservationModelProvider!.coupon != null)
-                      ? Uri.parse(wiselectedUrl +
+                      ? WebUri(wiselectedUrl +
                           "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
-                      : Uri.parse(wiselectedUrl +
+                      : WebUri(wiselectedUrl +
                           "?reservation_id=${widget.rservationId}"),
                 ),
                 pullToRefreshController: pullToRefreshController,
@@ -207,7 +215,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 onConsoleMessage: (controller, consoleMessage) {
                   log("$consoleMessage");
                 },
-                onCloseWindow: (InAppWebViewController) {},
+                onCloseWindow: (c) {},
               ),
               progress < 1.0
                   ? LinearProgressIndicator(

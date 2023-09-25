@@ -182,7 +182,7 @@ class _MyOfferCardState extends State<MyOfferCard> {
                         const SizedBox(height: 4),
                         MarqueeWidget(
                           child: Text(
-                            "${widget.offer!.minPrice} - ${widget.offer!.maxPrice}",
+                            widget.offer!.isSpecial!?"طلب خاص"    :  "${widget.offer!.minPrice} - ${widget.offer!.maxPrice}",
                             maxLines: 1,
                             style: AppTextStyles.w400.copyWith(
                                 fontSize: 10, overflow: TextOverflow.ellipsis),

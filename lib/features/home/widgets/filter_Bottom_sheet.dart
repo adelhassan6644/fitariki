@@ -26,7 +26,6 @@ class FilterBottomSheet extends StatelessWidget {
       ),
       child: Consumer<HomeProvider>(builder: (context, homeProvider, _) {
         return SafeArea(
-          bottom: true,
           top: false,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
