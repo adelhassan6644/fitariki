@@ -53,14 +53,13 @@ dependencies:
   carousel_slider:
   firebase_auth: ^4.4.0
   whatsapp_unilink: ^2.1.0
-#  flutter_html: ^2.2.1
   firebase_dynamic_links: ^5.1.0
   firebase_analytics: ^10.2.1
   flutter_native_splash: ^2.2.0+1
   syncfusion_flutter_charts: ^21.1.41
   flutter_typeahead:
-  geolocator_platform_interface:
-  geolocator: ^9.0.2
+  geolocator_platform_interface: ^4.1.0
+  geolocator: ^10.1.0
   google_maps_flutter: ^2.2.8
   map_launcher: ^2.5.0+1
   flutter_polyline_points:
@@ -79,6 +78,7 @@ dependencies:
   country_list_pick: ^1.0.1+6
   country_code_picker: ^3.0.0
   table_calendar: ^3.0.9
+  share_plus: ^7.1.0
 
 
 

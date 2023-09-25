@@ -132,7 +132,7 @@ class FavouriteUserCard extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     AcceptableAnalytics(
-                      value: driver != null ? driver!.id! : client!.id!,
+                      value: driver != null ? driver!.matching! : client!.matching!,
                       color: Styles.PRIMARY_COLOR,
                     ),
                   ],

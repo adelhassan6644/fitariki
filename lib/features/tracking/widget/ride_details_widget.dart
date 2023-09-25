@@ -14,6 +14,7 @@ import '../../../components/custom_button.dart';
 import '../../../components/custom_images.dart';
 import '../../../data/config/di.dart';
 import '../../../helpers/cupertino_pop_up_helper.dart';
+import '../../maps/provider/location_provider.dart';
 import '../../my_rides/widgets/ride_locations_widget.dart';
 import '../provider/ride_details_provider.dart';
 import '../repo/ride_details_repo.dart';
@@ -158,7 +159,8 @@ class RideDetailsWidget extends StatelessWidget {
                                                     carInfo: provider
                                                         .ride?.driver?.carInfo,
                                                     isDriver: provider.isDriver,
-                                                    status: provider.ride?.status,
+                                                    status:
+                                                        provider.ride?.status,
                                                   ),
                                                   RiderDetailsWidget(
                                                     image: provider.isDriver
@@ -213,6 +215,61 @@ class RideDetailsWidget extends StatelessWidget {
                                                           provider.isDriver,
                                                     ),
                                                   ),
+
+                                                  ///Share Post
+                                                  Visibility(
+                                                    visible: !provider.isDriver&&
+                                                        provider.ride != null &&
+                                                        provider.ride!.status == 1 &&
+                                                        provider.ride!.status == 2,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.symmetric(
+                                                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                                          vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                                                      child: Consumer<
+                                                              LocationProvider>(
+                                                          builder: (_,
+                                                              locationProvider,
+                                                              child) {
+                                                        return InkWell(
+                                                          onTap: () => locationProvider.shareCurrentLocation(),
+                                                          child: Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              customImageIconSVG(
+                                                                  imageName:
+                                                                      SvgImages
+                                                                          .share,
+                                                                  width: 16,
+                                                                  height: 16),
+                                                              const SizedBox(
+                                                                  width: 4),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  getTranslated(
+                                                                      "share_post",
+                                                                      context),
+                                                                  style: AppTextStyles.w400.copyWith(
+                                                                      fontSize:
+                                                                          14,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      color: Styles
+                                                                          .TITLE),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      }),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                       ),
@@ -234,7 +291,8 @@ class RideDetailsWidget extends StatelessWidget {
             Visibility(
               visible: provider.isDriver &&
                   provider.ride != null &&
-                  provider.ride!.status != 3,
+                  provider.ride!.status != 3 &&
+                  provider.ride!.status != 4,
               child: Container(
                 width: context.width,
                 padding: EdgeInsets.symmetric(

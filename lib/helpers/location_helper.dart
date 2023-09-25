@@ -5,8 +5,7 @@ import 'package:geolocator/geolocator.dart';
 
 import '../navigation/custom_navigation.dart';
 
-abstract class LocationHelper{
-
+abstract class LocationHelper {
   static checkLocation({bool isSplash = true}) async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -30,7 +29,6 @@ abstract class LocationHelper{
         await showCustomDialog(isSplash: isSplash);
         Future.error('Location permissions are denied');
         return false;
-
       }
     }
 
@@ -38,34 +36,41 @@ abstract class LocationHelper{
       // Permissions are denied forever, handle appropriately.
       permission = await Geolocator.requestPermission();
       await showCustomDialog(isSplash: isSplash);
-      Future.error('Location permissions are permanently denied, we cannot request permissions.');
+      Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
       return false;
-
     }
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return true ;
+    return true;
   }
 
   static showCustomDialog({bool isSplash = true}) {
     showDialog(
         context: CustomNavigator.navigatorState.currentContext!,
         builder: (_) => CupertinoAlertDialog(
-          title: const Text("هل تريد السماح لتطبيق “fitariki” باستخدام موقعك؟"),
-          content: const Text("لإجراء رحلة مضمونه، يجمع في طريقي بيانات الموقع بداءاً من وقت فتح التطبيق. ويعمل ذلك على تحسين عمليات الالتقاء بالكباتن، ونسب التوافق، وغير ذلك الكثير."),
-          actions: [
-            CupertinoDialogAction(
-                child: const Text("OK"),
-                onPressed: () async {
-                  CustomNavigator.pop();
-                  AppSettings.openLocationSettings(asAnotherTask: true);
-                }),
-            CupertinoDialogAction(
-                child: const Text("Cancel"),
-                onPressed: () async {
-                  CustomNavigator.pop();
-                }),
-          ],
-        ));
+              title: const Text(
+                  "هل تريد السماح لتطبيق “fitariki” باستخدام موقعك؟"),
+              content: const Text(
+                  "لإجراء رحلة مضمونه، يجمع في طريقي بيانات الموقع بداءاً من وقت فتح التطبيق. ويعمل ذلك على تحسين عمليات الالتقاء بالكباتن، ونسب التوافق، وغير ذلك الكثير."),
+              actions: [
+                CupertinoDialogAction(
+                    child: const Text("OK"),
+                    onPressed: () async {
+                      CustomNavigator.pop();
+                      AppSettings.openLocationSettings(asAnotherTask: true);
+                    }),
+                CupertinoDialogAction(
+                    child: const Text("Cancel"),
+                    onPressed: () async {
+                      CustomNavigator.pop();
+                    }),
+              ],
+            ));
+  }
+
+  static Future<Position> currentLocation() async {
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 }

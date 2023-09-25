@@ -81,10 +81,13 @@ class _RequestDetailsState extends State<RequestDetails> {
                                   ?.niceName,
                           createdAt: provider.requestModel?.createdAt ??
                               DateTime.now(),
-                          days: provider.requestModel?.offer?.offerDays!
-                              .map((e) => e.dayName)
-                              .toList()
-                              .join(", "),
+
+                          days: (provider.isDriver ? provider
+                              .requestModel?.clientModel?.clientDays ??
+                              provider.requestModel?.offer?.clientModel?.clientDays
+                              : provider.requestModel?.offer?.offerDays??[])!
+                              .map((e) => e.dayName).toList().join(", "),
+
                           duration: provider.requestModel?.duration.toString(),
                           priceRange:
                               "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
@@ -226,12 +229,20 @@ class _RequestDetailsState extends State<RequestDetails> {
                         TripDaysOnCalenderWidget(
                           startDate: provider.requestModel?.startAt,
                           endDate: provider.requestModel?.endAt,
-                          days: provider.requestModel?.offer?.offerDays,
+                          days: provider.isDriver
+                              ? provider
+                                      .requestModel?.clientModel?.clientDays ??
+                                  provider.requestModel?.offer?.clientModel
+                                      ?.clientDays
+                              : provider.requestModel?.offer?.offerDays,
                         ),
+                        // TripDaysOnCalenderWidget(
+                        //   startDate: provider.requestModel?.startAt,
+                        //   endDate: provider.requestModel?.endAt,
+                        //   days: provider.requestModel?.offer?.offerDays,
+                        // ),
 
-                        SizedBox(
-                          height: 24.h,
-                        )
+                        SizedBox(height: 24.h)
                       ],
                     ),
                   ),

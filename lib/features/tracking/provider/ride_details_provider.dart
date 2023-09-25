@@ -232,7 +232,6 @@ class RideDetailsProvider extends ChangeNotifier {
       longitude: pickUpLatLng.longitude,
     );
     final distance = GeoRange().distance(startPoint, endPoint);
-    print("distance$distance");
     double timeInHours = distance / ((currentLocation.speed * 3.6));
     final timeInMin = (timeInHours * 60).ceil();
     pickUpLocationStream.add("$timeInMin min - $distance km");

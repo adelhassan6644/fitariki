@@ -7,7 +7,6 @@ import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/my_trips_provider.dart';
 import 'my_trip_card.dart';
-import 'my_pending_trip_card.dart';
 
 class PreviousTripsWidget extends StatelessWidget {
   const PreviousTripsWidget({Key? key}) : super(key: key);

@@ -75,5 +75,6 @@ class SvgImages {
   static const String runningTrips = 'assets/svgs/running_trips.svg';
   static const String sos = 'assets/svgs/SOS.svg';
   static const String emergency = 'assets/svgs/emergency.svg';
+  static const String share = 'assets/svgs/share.svg';
   static const String emergency_call = 'assets/svgs/emergency_call.svg';
 }

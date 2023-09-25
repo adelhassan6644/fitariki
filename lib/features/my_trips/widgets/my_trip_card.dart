@@ -303,7 +303,6 @@ class MyTripCard extends StatelessWidget {
               SizedBox(
                 width: 8.w,
               ),
-
               Visibility(
                 visible: isCurrent,
                 child: Row(
@@ -321,33 +320,6 @@ class MyTripCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // if (isPrevious)
-              //   GestureDetector(
-              //     onTap: () {
-              //       CustomNavigator.push(Routes.RATE_TRIP,
-              //           arguments: RateUserNavigationModel(
-              //               isDriver: isDriver,
-              //               name: isDriver
-              //                   ? "${myTrip.clientModel?.firstName ?? ""} ${myTrip.clientModel?.firstName?.split("")[0] ?? ""}"
-              //                   : myTrip.driverModel?.firstName?.split("")[0] ??
-              //                       "",
-              //               userId:
-              //                   !isDriver ? myTrip.clientId : myTrip.driverId,
-              //               offerId: myTrip.offerId));
-              //     },
-              //     child: Container(
-              //       padding:
-              //           const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-              //       decoration: BoxDecoration(
-              //           color: Styles.PRIMARY_COLOR.withOpacity(0.1),
-              //           borderRadius: BorderRadius.circular(100)),
-              //       child: Text(
-              //         getTranslated("rate", context),
-              //         style: AppTextStyles.w600
-              //             .copyWith(fontSize: 12, color: Styles.PRIMARY_COLOR),
-              //       ),
-              //     ),
-              //   ),
             ],
           ),
         ),

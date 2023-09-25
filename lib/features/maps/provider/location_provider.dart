@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/components/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -33,7 +35,9 @@ class LocationProvider extends ChangeNotifier {
       altitude: 1,
       heading: 1,
       speed: 1,
-      speedAccuracy: 1);
+      speedAccuracy: 1,
+      altitudeAccuracy: 1,
+      headingAccuracy: 1);
   Position pickPosition = Position(
       longitude: 0,
       latitude: 0,
@@ -42,6 +46,8 @@ class LocationProvider extends ChangeNotifier {
       altitude: 1,
       heading: 1,
       speed: 1,
+      altitudeAccuracy: 1,
+      headingAccuracy: 1,
       speedAccuracy: 1);
   Future<List<PredictionModel>> searchLocation(
       BuildContext context, String text) async {
@@ -67,9 +73,10 @@ class LocationProvider extends ChangeNotifier {
 
   LocationModel? currentLocation;
   getCurrentLocation() async {
-    LocationPermission value =await Geolocator.checkPermission();
+    LocationPermission value = await Geolocator.checkPermission();
 
-    if(value ==LocationPermission.denied||value == LocationPermission.deniedForever) {
+    if (value == LocationPermission.denied ||
+        value == LocationPermission.deniedForever) {
       await Geolocator.requestPermission();
     }
     Position newLocalData = await Geolocator.getCurrentPosition(
@@ -90,13 +97,16 @@ class LocationProvider extends ChangeNotifier {
   }
 
   getLocation(
-    bool fromAddress, {required GoogleMapController mapController,}) async {
+    bool fromAddress, {
+    required GoogleMapController mapController,
+  }) async {
     isLoading = true;
     notifyListeners();
-      await Geolocator.requestPermission();
-      Position newLocalData = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,);
-      _myPosition = newLocalData;
+    await Geolocator.requestPermission();
+    Position newLocalData = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    _myPosition = newLocalData;
     if (fromAddress) {
       position = _myPosition!;
     } else {
@@ -144,15 +154,16 @@ class LocationProvider extends ChangeNotifier {
       notifyListeners();
 
       pickPosition = Position(
-        latitude: position.target.latitude,
-        longitude: position.target.longitude,
-        timestamp: DateTime.now(),
-        heading: 1,
-        accuracy: 1,
-        altitude: 1,
-        speedAccuracy: 1,
-        speed: 1,
-      );
+          latitude: position.target.latitude,
+          longitude: position.target.longitude,
+          timestamp: DateTime.now(),
+          heading: 1,
+          accuracy: 1,
+          altitude: 1,
+          speedAccuracy: 1,
+          speed: 1,
+          altitudeAccuracy: 1,
+          headingAccuracy: 1);
       decodeLatLong(
           latitude: position.target.latitude,
           longitude: position.target.longitude);
@@ -168,6 +179,13 @@ class LocationProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
 
+  shareCurrentLocation() {
+    loadingDialog();
+    getCurrentLocation();
+    CustomNavigator.pop();
+    Share.share(
+        'https://www.google.com/maps/search/?api=1&query=${currentLocation?.latitude ?? ""},${currentLocation?.longitude ?? ""}');
   }
 }
