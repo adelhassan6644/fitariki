@@ -87,14 +87,12 @@ abstract class FirebaseNotifications {
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
-      CustomNavigator.push(Routes.NOTIFICATIONS,);
 
       log('Handling initial message  ${message?.data}');
     });
     flutterLocalNotificationsPlugin!
         .getNotificationAppLaunchDetails()
         .then((value) {
-      CustomNavigator.push(Routes.NOTIFICATIONS,);
       log('Handling if local notification launch app  ${value!.notificationResponse}');
     });
   }

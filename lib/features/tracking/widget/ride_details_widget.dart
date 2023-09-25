@@ -220,7 +220,7 @@ class RideDetailsWidget extends StatelessWidget {
                                                   Visibility(
                                                     visible: !provider.isDriver&&
                                                         provider.ride != null &&
-                                                        provider.ride!.status == 1 &&
+                                                        provider.ride!.status == 1 ||
                                                         provider.ride!.status == 2,
                                                     child: Padding(
                                                       padding: EdgeInsets.symmetric(
