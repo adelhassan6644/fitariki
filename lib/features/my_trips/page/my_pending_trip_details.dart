@@ -111,10 +111,15 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                           ?.national?.niceName,
                               createdAt: provider.requestModel?.createdAt ??
                                   DateTime.now(),
-                              days: (provider.isDriver
-                                  ? provider.requestModel?.clientModel?.clientDays ??
-                                  provider.requestModel?.offer?.clientModel?.clientDays
-                                  : provider.requestModel?.offer?.offerDays??[])!
+                              days: (provider.requestModel!.offer!.driverId !=
+                                          null
+                                      ? provider.requestModel?.clientModel
+                                              ?.clientDays ??
+                                          provider.requestModel?.offer
+                                              ?.clientModel?.clientDays
+                                      : provider
+                                              .requestModel!.offer!.offerDays ??
+                                          [])!
                                   .map((e) => e.dayName)
                                   .toList()
                                   .join(", "),
@@ -132,7 +137,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                               0) +
                                       1,
                               timeRange:
-                                  "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                                  "${Methods.convertStringToTime((provider.requestModel!.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel!.offer!.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel!.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel!.offer!.offerDays ?? [])?[0].endTime, withFormat: true)}",
                             ),
 
                             /// Map View
@@ -275,10 +280,17 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             TripDaysOnCalenderWidget(
                               startDate: provider.requestModel?.startAt,
                               endDate: provider.requestModel?.endAt,
-                              days: provider.isDriver
-                                  ? provider.requestModel?.clientModel?.clientDays ??
-                                  provider.requestModel?.offer?.clientModel?.clientDays
-                                  : provider.requestModel?.offer?.offerDays,
+                              days: (provider.requestModel!.offer!.driverId !=
+                                      null
+                                  ? provider.requestModel?.clientModel
+                                          ?.clientDays ??
+                                      provider.requestModel?.offer?.clientModel
+                                          ?.clientDays
+                                  : provider.requestModel!.offer!.offerDays ??
+                                      [])
+                              // provider.requestModel?.clientModel?.clientDays ??
+                              //     provider.requestModel?.offer?.clientModel?.clientDays
+                              ,
                             ),
                             // TripDaysOnCalenderWidget(
                             //   startDate: provider.requestModel?.startAt,

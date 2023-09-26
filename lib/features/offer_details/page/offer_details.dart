@@ -13,6 +13,7 @@ import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../components/custom_show_model_bottom_sheet.dart';
 import '../../../data/config/di.dart';
+import '../../../main_providers/schedule_provider.dart';
 import '../../../main_widgets/shimmer_widgets/offer_details_shimmer.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../../main_widgets/distance_widget.dart';
@@ -259,9 +260,15 @@ class OfferDetails extends StatelessWidget {
                                     ? AddRequest(
                                         name: provider.offerDetails?.name ?? "",
                                         offer: provider.offerDetails!,
-                                        days:
-                                            provider.offerDetails!.offerDays ??
-                                                [],
+                                        days: provider.isDriver
+                                            ? provider
+                                                    .offerDetails!.offerDays ??
+                                                []
+                                            : sl
+                                                .get<ScheduleProvider>()
+                                                .selectedDays,
+                                        // provider.offerDetails!.offerDays ??
+                                        //     [],
                                         isCaptain: provider.isDriver,
                                         updateOfferDetails:
                                             provider.updateModel,

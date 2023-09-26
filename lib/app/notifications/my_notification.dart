@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../firebase_options.dart';
 import '../../navigation/custom_navigation.dart';
 import '../../navigation/routes.dart';
+import '../core/utils/color_resources.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
@@ -33,7 +35,6 @@ abstract class FirebaseNotifications {
       // 'This channel is used for important notifications.',
       importance: Importance.high,
     );
-
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     _firebaseMessaging = FirebaseMessaging.instance;
     flutterLocalNotificationsPlugin!
@@ -69,12 +70,15 @@ abstract class FirebaseNotifications {
         message.notification.hashCode,
         message.notification!.title,
         message.notification!.body,
+
         NotificationDetails(
           android: AndroidNotificationDetails(
             _channel!.id,
             _channel!.name,
             // _channel!.description,
+
             icon: '@drawable/notification_icon',
+
           ),
         ),
       );
@@ -107,6 +111,8 @@ abstract class FirebaseNotifications {
         'your channel name',
         // 'This channel is used for important notifications.',
         importance: Importance.high,
+        icon: '@drawable/notification_icon',
+
         priority: Priority.high,
         ticker: 'ticker');
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();

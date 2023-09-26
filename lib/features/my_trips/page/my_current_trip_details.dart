@@ -119,7 +119,8 @@ class MyCurrentTripDetails extends StatelessWidget {
                                           ?.national?.niceName ??
                                       provider.tripDetails?.myTripRequest
                                           ?.driverModel?.national?.niceName,
-                              days:(provider.isDriver ?
+                              //if client not crate the offer get client days
+                              days:(provider.tripDetails?.offer!.driverId!=null  ?
                               provider.tripDetails?.clientModel?.clientDays ??
                                   provider.tripDetails?.offer?.clientModel?.clientDays ??
                                   provider.tripDetails?.myTripRequest?.clientModel?.clientDays
@@ -140,7 +141,15 @@ class MyCurrentTripDetails extends StatelessWidget {
                                       1
                                   : 1,
                               timeRange:
-                                  "${Methods.convertStringToTime(provider.tripDetails?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.tripDetails?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                                  "${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId!=null  ?
+                                  provider.tripDetails?.clientModel?.clientDays ??
+                                      provider.tripDetails?.offer?.clientModel?.clientDays ??
+                                      provider.tripDetails?.myTripRequest?.clientModel?.clientDays
+                                      : provider.tripDetails?.offer?.offerDays??[])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId!=null  ?
+                                  provider.tripDetails?.clientModel?.clientDays ??
+                                      provider.tripDetails?.offer?.clientModel?.clientDays ??
+                                      provider.tripDetails?.myTripRequest?.clientModel?.clientDays
+                                      : provider.tripDetails?.offer?.offerDays??[])?[0].endTime, withFormat: true)}",
                             ),
 
                             /// Map View
@@ -342,17 +351,15 @@ class MyCurrentTripDetails extends StatelessWidget {
                             TripDaysOnCalenderWidget(
                               startDate: provider.tripDetails?.myTripRequest?.startAt,
                               endDate: provider.tripDetails?.myTripRequest?.endAt,
-                              days: provider.isDriver ?
+                              //if client not crate the offer get client days
+                              days: provider.tripDetails?.offer!.driverId!=null ?
+
                               provider.tripDetails?.clientModel?.clientDays ??
                                   provider.tripDetails?.offer?.clientModel?.clientDays ??
                                   provider.tripDetails?.myTripRequest?.clientModel?.clientDays
                                   : provider.tripDetails?.offer?.offerDays,
                             ),
-                            // TripDaysOnCalenderWidget(
-                            //   startDate: provider.tripDetails?.myTripRequest?.startAt,
-                            //   endDate: provider.tripDetails?.myTripRequest?.endAt,
-                            //   days: provider.tripDetails?.offer?.offerDays,
-                            // ),
+
 
                             SizedBox(height: 24.h)
                           ],

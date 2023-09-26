@@ -82,7 +82,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                           createdAt: provider.requestModel?.createdAt ??
                               DateTime.now(),
 
-                          days: (provider.isDriver ? provider
+                          days: (provider.requestModel?.offer!.driverId!=null ? provider
                               .requestModel?.clientModel?.clientDays ??
                               provider.requestModel?.offer?.clientModel?.clientDays
                               : provider.requestModel?.offer?.offerDays??[])!
@@ -101,7 +101,13 @@ class _RequestDetailsState extends State<RequestDetails> {
                                           0) +
                                   1,
                           timeRange:
-                              "${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime(provider.requestModel?.offer?.offerDays?[0].endTime, withFormat: true)}",
+                              "${Methods.convertStringToTime((provider.requestModel?.offer!.driverId!=null ? provider
+                                  .requestModel?.clientModel?.clientDays ??
+                                  provider.requestModel?.offer?.clientModel?.clientDays
+                                  : provider.requestModel?.offer?.offerDays??[])![0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel?.offer!.driverId!=null ? provider
+                                  .requestModel?.clientModel?.clientDays ??
+                                  provider.requestModel?.offer?.clientModel?.clientDays
+                                  : provider.requestModel?.offer?.offerDays??[])![0].endTime, withFormat: true)}",
                         ),
 
                         ///Request Details
@@ -233,18 +239,14 @@ class _RequestDetailsState extends State<RequestDetails> {
                         TripDaysOnCalenderWidget(
                           startDate: provider.requestModel?.startAt,
                           endDate: provider.requestModel?.endAt,
-                          days: provider.isDriver
+                          days: provider.requestModel?.offer!.driverId!=null
                               ? provider
                                       .requestModel?.clientModel?.clientDays ??
                                   provider.requestModel?.offer?.clientModel
                                       ?.clientDays
                               : provider.requestModel?.offer?.offerDays,
                         ),
-                        // TripDaysOnCalenderWidget(
-                        //   startDate: provider.requestModel?.startAt,
-                        //   endDate: provider.requestModel?.endAt,
-                        //   days: provider.requestModel?.offer?.offerDays,
-                        // ),
+
 
                         SizedBox(height: 24.h)
                       ],

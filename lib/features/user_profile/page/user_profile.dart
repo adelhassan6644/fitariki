@@ -102,12 +102,13 @@ class _UserProfileState extends State<UserProfile> {
                                                 provider.userProfileModel
                                                     ?.client?.id,
                                             isSpecialOffer: true,
-                                            days: provider.userProfileModel
-                                                ?.driver?.driverDays ??
-                                                provider.userProfileModel
-                                                    ?.client?.clientDays ??[],
-
-
+                                            days: provider.isDriver
+                                                ? provider.userProfileModel
+                                                        ?.client?.clientDays ??
+                                                    []
+                                                : sl
+                                                    .get<ScheduleProvider>()
+                                                    .selectedDays,
                                             isCaptain: provider.isDriver,
                                           )
                                         : const Login());

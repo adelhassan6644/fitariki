@@ -42,7 +42,7 @@ class RideDetailsProvider extends ChangeNotifier {
   MyRideModel? ride;
   bool isLoading = false;
   getRideDetails(id) async {
-    try {
+    // try {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await repo.getRideDetails(id);
@@ -70,16 +70,16 @@ class RideDetailsProvider extends ChangeNotifier {
       });
       isLoading = false;
       notifyListeners();
-    } catch (e) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: ApiErrorHandler.getMessage(e),
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
-      isLoading = false;
-      notifyListeners();
-    }
+    // } catch (e) {
+    //   CustomSnackBar.showSnackBar(
+    //       notification: AppNotification(
+    //           message: ApiErrorHandler.getMessage(e),
+    //           isFloating: true,
+    //           backgroundColor: Styles.IN_ACTIVE,
+    //           borderColor: Colors.transparent));
+    //   isLoading = false;
+    //   notifyListeners();
+    // }
   }
 
   ///Start listening to Trip status changes
@@ -88,7 +88,7 @@ class RideDetailsProvider extends ChangeNotifier {
         .collection("Rides")
         .doc("ride#$id")
         .snapshots()
-        .listen((event) {
+        .listen((event) async {
       if (!event.exists) {
         return;
       }
@@ -96,6 +96,7 @@ class RideDetailsProvider extends ChangeNotifier {
       if (event.data() != null) {
         ride?.status = event.data()!["status"];
         if (ride?.status == 3) {
+          await getRideDetails(id);
           ///To stop tracking
           if (isDriver) {
             trackingRepo.stopPushLocation();
@@ -144,12 +145,13 @@ class RideDetailsProvider extends ChangeNotifier {
           await repo.changeRideStatus(id: id, status: status, count: count);
       response.fold((l) {
         showToast(l.error);
-      }, (response) {
+      }, (response) async {
         showToast(response.data["message"] ?? "");
         ride?.status = status;
         changeStatusFireBase(id, status);
 
         if (status == 3) {
+          await getRideDetails(id);
           ///To stop tracking
           if (isDriver) {
             trackingRepo.stopPushLocation();
