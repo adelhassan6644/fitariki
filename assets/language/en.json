@@ -160,6 +160,7 @@
   "identity_image": "Identity Image",
   "email": "email",
   "preview_invoice": "Preview Invoice",
+  "not_invoice": "Invoice not posted",
   "absence_days": "Absence days",
   "absence_cost": "Absence cost",
   "please_enter_valid_email": "Please enter a valid Email",

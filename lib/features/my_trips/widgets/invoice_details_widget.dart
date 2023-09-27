@@ -220,9 +220,9 @@ class InvoiceDetailsWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 vertical: 24.h, horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
             child: CustomButton(
-              onTap: () => CustomNavigator.push(Routes.PDF,
-                  arguments: provider.tripDetails?.invoice ?? ""),
-              text: getTranslated("preview_invoice", context),
+              onTap:provider.tripDetails?.invoice !=null? () => CustomNavigator.push(Routes.PDF,
+                  arguments: provider.tripDetails?.invoice ?? ""):null,
+              text:provider.tripDetails?.invoice==null? getTranslated("not_invoice", context):getTranslated("preview_invoice", context),
               backgroundColor: Styles.WHITE_COLOR,
               textColor: Styles.PRIMARY_COLOR,
               withBorderColor: true,

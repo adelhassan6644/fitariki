@@ -7,6 +7,7 @@ import '../../../app/core/utils/methods.dart';
 import '../../../components/loading_dialog.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/offer_model.dart';
+import '../../../main_providers/calender_provider.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
@@ -113,6 +114,7 @@ class PostOfferProvider extends ChangeNotifier {
   WeekdayCount? counts;
   onSelectEndDate(v) {
     endDate = v;
+    notifyListeners();
 
     /// get days count
     getDaysCount();
@@ -127,9 +129,13 @@ class PostOfferProvider extends ChangeNotifier {
       element.endTime = endTime.dateFormat(format: "kk:mm", lang: 'en');
       days.add(element.id!);
     }
+    notifyListeners();
+    sl<CalenderProvider>().updateDays(days);
+    sl<CalenderProvider>()
+        .getEventsList(startDate: startDate, endDate: endDate);
+    counts =  sl<CalenderProvider>().counts;
 
-    counts = Methods.getWeekdayCount(
-        startDate: startDate, endDate: endDate, weekdays: days);
+    print(counts.toString());
     notifyListeners();
   }
 

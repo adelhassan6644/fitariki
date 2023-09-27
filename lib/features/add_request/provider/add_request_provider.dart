@@ -64,19 +64,16 @@ class AddRequestProvider extends ChangeNotifier {
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
     endDate = v;
+    notifyListeners();
     getDaysCount();
     notifyListeners();
   }
 
   void getDaysCount() {
     if (days != null) {
-      duration = Methods.getWeekdayCount(
-              startDate: startDate,
-              endDate: endDate,
-              weekdays: days!.map((e) => e.id!).toList())
-          .days;
       sl<CalenderProvider>()
           .getEventsList(startDate: startDate, endDate: endDate);
+      duration = sl<CalenderProvider>().eventsMAP.length;
       notifyListeners();
     }
   }

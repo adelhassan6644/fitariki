@@ -46,13 +46,15 @@ class CalenderProvider extends ChangeNotifier {
         ];
       }
     }
-
+    print(eventsMAP.length);
     eventList = EventList<Event>(events: eventsMAP);
     isLoad = false;
-    print("&&$startDate");
-    print("&&$endDate");
-    print("&&$days");
-    print("&&$eventsMAP");
+    print("startDate$startDate");
+    print("endDate$endDate");
+    print("days $days");
+    print("days$eventsMAP");
+    print("days count${eventsMAP.length}");
+    print("days count${counts!.daysList.length}");
     notifyListeners();
   }
 }

@@ -106,17 +106,14 @@ class ContactWithUs extends StatelessWidget {
                       ),
 
                       ///Call Emergency
-                      Visibility(
-                        visible: !provider.isDriver,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            bottom: 8.h,
-                          ),
-                          child: CustomButton(
-                            text: getTranslated("call_emergency", context),
-                            radius: 50,
-                            onTap: () => provider.launchEmergencyService(),
-                          ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 8.h,
+                        ),
+                        child: CustomButton(
+                          text: getTranslated("call_emergency", context),
+                          radius: 50,
+                          onTap: () => provider.launchEmergencyService(),
                         ),
                       ),
                     ],

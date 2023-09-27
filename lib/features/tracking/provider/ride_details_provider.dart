@@ -96,21 +96,24 @@ class RideDetailsProvider extends ChangeNotifier {
       if (event.data() != null) {
         ride?.status = event.data()!["status"];
         if (ride?.status == 3) {
-          await getRideDetails(id);
+
           ///To stop tracking
           if (isDriver) {
             trackingRepo.stopPushLocation();
           }
+
+          deleteRideFireBase(id);
           CustomNavigator.push(Routes.RATE_RIDE,
               arguments: {
                 "id": id,
                 "name": isDriver
                     ? ride?.client?.firstName ?? ""
                     : ride?.driver?.firstName ?? "",
-                "number": ride?.remainingNumber ?? 0
+                "number": int.tryParse(ride!.remainingNumber!)!-1 ?? 0
               },
               clean: true);
-          deleteRideFireBase(id);
+          return;
+
         }
         notifyListeners();
       }
@@ -151,7 +154,7 @@ class RideDetailsProvider extends ChangeNotifier {
         changeStatusFireBase(id, status);
 
         if (status == 3) {
-          await getRideDetails(id);
+
           ///To stop tracking
           if (isDriver) {
             trackingRepo.stopPushLocation();
@@ -162,7 +165,7 @@ class RideDetailsProvider extends ChangeNotifier {
                 "name": isDriver
                     ? ride?.client?.firstName ?? ""
                     : ride?.driver?.firstName ?? "",
-                "number": ride?.remainingNumber ?? 0
+                "number": int.tryParse(ride!.remainingNumber!)!-1 ?? 0
               },
               clean: true);
           deleteRideFireBase(id);

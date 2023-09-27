@@ -38,6 +38,33 @@ class DashboardProvider extends ChangeNotifier {
       }
     }
   }
+  checkFinishedRides() async {
+    if (isLogin) {
+      try {
+        Either<ServerFailure, Response> response =
+            await repo.checkFinishedRides();
+        response.fold((l) {
+          showToast(l.error);
+        }, (success) {
+
+          if (success.data["data"] != null) {
+
+            CustomNavigator.push(Routes.RATE_RIDE,
+                arguments: {
+                  "id": success.data["data"]["id"],
+                  "name": success.data["data"]["name"],
+                  "number": success.data["data"]["remaining_number"]?? 0
+                },
+                clean: true);
+          }
+        });
+        notifyListeners();
+      } catch (e) {
+        showToast(e.toString());
+        notifyListeners();
+      }
+    }
+  }
 
   TextEditingController reasonTEC = TextEditingController();
 

@@ -27,6 +27,7 @@ class EndPoints {
   static homeOffers(role) => '$role/offer/list_available';
   static homeRides(role, id) => '$role/reservation/hasCurrent/$id';
   static checkExpiredContracts(role, id) => '$role/reservation/hasPending/$id';
+  static checkFinishedContracts(role, id) => '$role/reservation/hasNotRating/$id';
   static sendExpiredContractRate(role, id) =>
       '$role/reservation/${role}Approval/$id';
   static myOffers(role, id) => '$role/offer/listOffers/$id';

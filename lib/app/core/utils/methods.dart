@@ -19,37 +19,32 @@ abstract class Methods {
     return dur.inDays.toString();
   }
 
-  static WeekdayCount getWeekdayCount(
-      {required DateTime startDate,
-      required DateTime endDate,
-      required List weekdays}) {
+  static WeekdayCount getWeekdayCount({
+    required DateTime startDate,
+    required DateTime endDate,
+    required List weekdays,
+  }) {
     int count = 0;
     int days = 0;
     List<DateTime> daysList = [];
 
-    for (int weekday in weekdays) {
-      DateTime currentDate = startDate;
-      int daysToWeekday = ((weekday - startDate.weekday) + 7) % 7;
+    DateTime currentDate = startDate;
 
-      if (daysToWeekday == 0) {
-        daysList.add(startDate);
-        count += 1;
-        days += 1;
+    while (currentDate.isBefore(endDate) || currentDate.isAtSameMomentAs(endDate)) {
+      if (weekdays.contains(currentDate.weekday)) {
+        daysList.add(currentDate);
+        count++;
       }
-
-      currentDate = currentDate.add(Duration(days: daysToWeekday));
-
-      while (currentDate.isBefore(endDate)) {
-        if (currentDate.weekday == weekday) {
-          daysList.add(currentDate);
-          count += 1;
-          days += 1;
-        }
-        currentDate = currentDate.add(const Duration(days: 7));
-      }
+      currentDate = currentDate.add(const Duration(days: 1));
     }
+
+    days = daysList.length;
+
     return WeekdayCount(count, days, daysList);
   }
+
+
+
 
   static String getOfferType(int v) {
     switch (v) {
@@ -152,6 +147,6 @@ class WeekdayCount {
   WeekdayCount(this.count, this.days, this.daysList);
   @override
   String toString() {
-    return "cont: $count -- days:$daysList  ";
+    return "cont: $count --days $days  daysList:${daysList}  ";
   }
 }
