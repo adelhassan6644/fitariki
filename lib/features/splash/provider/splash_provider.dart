@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:fitariki/navigation/routes.dart';
-import '../../../data/config/di.dart';
-import '../../../main_providers/dashboard_provider.dart';
 import '../repo/splash_repo.dart';
 
 class SplashProvider extends ChangeNotifier {
@@ -18,10 +16,6 @@ class SplashProvider extends ChangeNotifier {
         CustomNavigator.push(Routes.ON_BOARDING, clean: true);
       } else {
         CustomNavigator.push(Routes.DASHBOARD, clean: true, arguments: 0);
-      }
-      if(isLogin){
-        sl<DashboardProvider>().checkFinishedTrips();
-        sl<DashboardProvider>().checkFinishedRides();
       }
       splashRepo.setFirstTime();
     });
