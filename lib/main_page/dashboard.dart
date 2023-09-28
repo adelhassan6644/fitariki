@@ -122,8 +122,10 @@ class _DashBoardState extends State<DashBoard> {
                           onTap: () => _setPage(2),
                           name: provider.isLogin
                               ? provider.isDriver
-                                  ? getTranslated("delivery_offers", context)
-                                  : getTranslated("delivery_requests", context)
+                                  // ? getTranslated("delivery_offers", context)
+                                  // : getTranslated("delivery_requests", context)
+                              ? getTranslated("my_offers", context)
+                                  : getTranslated("my_requests", context)
                               : getTranslated("offers_or_requests", context),
                         ),
                       ),
