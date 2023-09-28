@@ -57,13 +57,12 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   init() {
-    sl<DashboardProvider>().checkFinishedTrips();
-    sl<DashboardProvider>().checkFinishedRides();
+
     sl<HomeProvider>().getOffers();
     sl<HomeProvider>().getUsers();
-    sl<HomeProvider>().checkRunningTrips();
 
     if (sl<ProfileProvider>().isLogin) {
+      sl<HomeProvider>().checkRunningTrips();
       sl<ProfileProvider>().getProfile();
       sl<MyOffersProvider>().getMyOffers();
       sl<WishlistProvider>().getWishList();
