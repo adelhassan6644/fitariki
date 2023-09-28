@@ -57,7 +57,6 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   init() {
-
     sl<HomeProvider>().getOffers();
     sl<HomeProvider>().getUsers();
 
@@ -124,7 +123,7 @@ class _DashBoardState extends State<DashBoard> {
                               ? provider.isDriver
                                   // ? getTranslated("delivery_offers", context)
                                   // : getTranslated("delivery_requests", context)
-                              ? getTranslated("my_offers", context)
+                                  ? getTranslated("my_offers", context)
                                   : getTranslated("my_requests", context)
                               : getTranslated("offers_or_requests", context),
                         ),
