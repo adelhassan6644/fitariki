@@ -147,6 +147,6 @@ class WeekdayCount {
   WeekdayCount(this.count, this.days, this.daysList);
   @override
   String toString() {
-    return "cont: $count --days $days  daysList:${daysList}  ";
+    return "cont: $count --days $days  daysList:$daysList  ";
   }
 }
