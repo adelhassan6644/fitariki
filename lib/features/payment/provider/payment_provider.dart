@@ -31,7 +31,7 @@ class PaymentProvider extends ChangeNotifier {
   double taxPercentage = 0.0;
   double serviceCost = 0;
   double servicePercentage = 0;
-  double wallet = sl.get<ProfileProvider>().profileModel?.client?.wallet??0.0;
+  double wallet = sl.get<ProfileProvider>().profileModel?.client?.wallet ?? 0.0;
   double total = 0.0;
   bool _isLoading = false;
   bool isPaymentFeeLoading = false;
@@ -140,8 +140,11 @@ class PaymentProvider extends ChangeNotifier {
     serviceCost = double.parse(
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
-    print(serviceCost);
-    total = (requestModel!.price! - _discount) + tax! + serviceCost-wallet;
+    if ((requestModel!.price! - _discount + tax! + serviceCost) > wallet) {
+      total = requestModel!.price! - _discount + tax! + serviceCost - wallet;
+    } else {
+      total = 1.0;
+    }
     print((requestModel!.price! - _discount) + tax!);
     notifyListeners();
   }
