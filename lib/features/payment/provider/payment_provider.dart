@@ -140,8 +140,8 @@ class PaymentProvider extends ChangeNotifier {
     serviceCost = double.parse(
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
-    if ((requestModel!.price! - _discount + tax! + serviceCost) > wallet) {
-      total = requestModel!.price! - _discount + tax! + serviceCost - wallet;
+    if ((requestModel!.price! + tax! + serviceCost - _discount) > wallet) {
+      total = requestModel!.price! + tax! + serviceCost - _discount - wallet;
     } else {
       total = 1.0;
     }
