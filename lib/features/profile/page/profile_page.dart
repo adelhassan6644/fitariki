@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                             fromLogin: fromLogin,
                           ),
                           Visibility(
-                              visible: provider.isDriver,
+                              visible: provider.isDriver&&fromLogin,
                               child: BankDataWidget(
                                 provider: provider,
                                 fromLogin: fromLogin,

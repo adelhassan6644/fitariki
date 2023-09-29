@@ -9,6 +9,8 @@
   "please_agree_to_the_terms_and_conditions": "Please, Agree to the terms and conditions",
   "browse": "Browse ",
   "hold": "hold",
+  "edit_bank_data": "Edit bank Data",
+
   "don't_get_the_code": "Don't get the code?",
   "as_a_guest": "as a guest",
   "nick_name": "Nick name",
@@ -140,6 +142,7 @@
   "notifications": "notifications",
   "bank_data": "Bank data",
   "bank_name": "Bank name",
+  "iban_num": "Iban number",
   "account_number_image": "The Image of account number (indicating the IBAN)",
   "quadruple_name": "Quadruple name",
   "captain_evaluation": "Captain evaluation",

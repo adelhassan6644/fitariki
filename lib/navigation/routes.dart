@@ -5,6 +5,7 @@ class Routes {
   static const DASHBOARD = "DASHBOARD";
   static const OFFER_DETAILS = "OFFER_DETAILS";
   static const EDIT_PROFILE = "EDIT_PROFILE";
+  static const BankInfoPage = "BankInfoPage";
   static const VERIFICATION = "VERIFICATION_CODE";
   static const NEW_PASSWORD = "NEW_PASSWORD";
   static const FORGET_PASSWORD = "FORGET_PASSWORD";
