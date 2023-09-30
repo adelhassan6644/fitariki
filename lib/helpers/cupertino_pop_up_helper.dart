@@ -23,59 +23,54 @@ abstract class CupertinoPopUpHelper {
     showDialog(
       context: CustomNavigator.navigatorState.currentContext!,
       builder: (_) {
-        return CupertinoTheme(
-          data: const CupertinoThemeData(
+        return CupertinoAlertDialog(
 
-          ),
-          child: CupertinoAlertDialog(
-
-            title: Center(child: Text(title)),
-            content: Column(
-              children: [
-                Text(
-                  description,
-                  style: AppTextStyles.w400.copyWith(fontSize: 13,color: Colors.black),
-                ),
-                CupertinoTextField(
-                  controller: controller,
-                  keyboardType: keyboardType,
-                  inputFormatters: inputFormatters,
-                  maxLength: maxLength,
-                  placeholder: hint,
-                  placeholderStyle: AppTextStyles.w400.copyWith(fontSize: 16,color:Styles.DETAILS_COLOR) ,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF767680).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              ],
-            ),
-            actions: [
-              CupertinoDialogAction(
-                  onPressed: () {
-                    if (onCancel != null) {
-                      onCancel();
-                    } else {
-                      CustomNavigator.pop();
-                    }
-                  },
-                  child: Text(
-                    cancelText ??
-                        getTranslated("cancel",
-                            CustomNavigator.navigatorState.currentContext!),
-                    style: AppTextStyles.w400
-                        .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
-                  )),
-              CupertinoDialogAction(
-                  onPressed: onSend,
-                  child: Text(
-                    sendText ??
-                        getTranslated("send",
-                            CustomNavigator.navigatorState.currentContext!),
-                    style: AppTextStyles.w600
-                        .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
-                  )),
+          title: Center(child: Text(title)),
+          content: Column(
+            children: [
+              Text(
+                description,
+                style: AppTextStyles.w400.copyWith(fontSize: 13,color: Colors.black),
+              ),
+              CupertinoTextField(
+                controller: controller,
+                keyboardType: keyboardType,
+                inputFormatters: inputFormatters,
+                maxLength: maxLength,
+                placeholder: hint,
+                placeholderStyle: AppTextStyles.w400.copyWith(fontSize: 16,color:Styles.DETAILS_COLOR) ,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF767680).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
             ],
           ),
+          actions: [
+            CupertinoDialogAction(
+                onPressed: () {
+                  if (onCancel != null) {
+                    onCancel();
+                  } else {
+                    CustomNavigator.pop();
+                  }
+                },
+                child: Text(
+                  cancelText ??
+                      getTranslated("cancel",
+                          CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w400
+                      .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
+                )),
+            CupertinoDialogAction(
+                onPressed: onSend,
+                child: Text(
+                  sendText ??
+                      getTranslated("send",
+                          CustomNavigator.navigatorState.currentContext!),
+                  style: AppTextStyles.w600
+                      .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
+                )),
+          ],
         );
       },
     ).then((value) => onClose?.call());
