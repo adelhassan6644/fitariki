@@ -115,14 +115,19 @@ class MyOffersProvider extends ChangeNotifier {
 
   bool isOfferDetailsLoading = false;
   OfferModel? myOfferDetails;
-  getMyOfferDetails({required int id}) async {
+  int? offerId;
+  updateOfferId(v){
+    offerId = v;
+  }
+
+  getMyOfferDetails() async {
     try {
       myOfferDetails = null;
       isOfferDetailsLoading = true;
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-          await myOffersRepo.getMyOfferDetails(id: id);
+          await myOffersRepo.getMyOfferDetails(id: offerId!);
       response.fold(
           (l) => CustomSnackBar.showSnackBar(
               notification: AppNotification(

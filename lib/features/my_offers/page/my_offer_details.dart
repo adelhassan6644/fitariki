@@ -33,7 +33,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      sl<MyOffersProvider>().getMyOfferDetails(id: widget.offerId);
+      sl<MyOffersProvider>().getMyOfferDetails();
     });
 
     super.initState();
@@ -55,151 +55,196 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
         child: Column(
           children: [
             Consumer<MyOffersProvider>(builder: (context, provider, _) {
-              return !provider.isOfferDetailsLoading && provider.myOfferDetails != null
+              return !provider.isOfferDetailsLoading &&
+                      provider.myOfferDetails != null
                   ? Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: ListAnimator(
-                          data: [
-                            MyOfferCard(
-                              offer: provider.myOfferDetails,
-                              isFromMyOfferDetails: true,
-                            ),
-
-                            ///My Offer Details
-                            ExpansionTileWidget(
-                              iconColor: Styles.SECOUND_PRIMARY_COLOR,
-                              withTitlePadding: true,
-                              title: getTranslated(
-                                  provider.isDriver
-                                      ? "delivery_offer_details"
-                                      : "delivery_request_details",
-                                  context),
-                              children: [
-                                ///Offer Map
-                                MapWidget(
-                                  startPoint:
-                                      provider.myOfferDetails?.pickupLocation,
-                                  endPoint:
-                                      provider.myOfferDetails?.dropOffLocation,
-                                ),
-
-                                ///Followers Map
-                                if (provider
-                                    .myOfferDetails!.offerFollowers!.isNotEmpty)
-                                  ...List.generate(
-                                    provider.myOfferDetails?.offerFollowers
-                                            ?.length ??
-                                        0,
-                                    (index) => MapWidget(
-                                      clientName: provider.myOfferDetails
-                                              ?.offerFollowers?[index].name ??
-                                          "",
-                                      gender: provider.myOfferDetails
-                                          ?.offerFollowers?[index].gender,
-                                      startPoint: provider
-                                          .myOfferDetails
-                                          ?.offerFollowers?[index]
-                                          .pickupLocation,
-                                      endPoint: provider
-                                          .myOfferDetails
-                                          ?.offerFollowers?[index]
-                                          .dropOffLocation,
-                                    ),
+                      child: RefreshIndicator(
+                        color: Styles.PRIMARY_COLOR,
+                        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                        onRefresh: () async {
+                          provider.getMyOfferDetails();
+                        },
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListAnimator(
+                                customPadding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                data: [
+                                  MyOfferCard(
+                                    offer: provider.myOfferDetails,
+                                    isFromMyOfferDetails: true,
                                   ),
 
-                                ///Type of ride
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          Dimensions.PADDING_SIZE_DEFAULT.w,
-                                      vertical:
-                                          Dimensions.PADDING_SIZE_DEFAULT.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  ///My Offer Details
+                                  ExpansionTileWidget(
+                                    iconColor: Styles.SECOUND_PRIMARY_COLOR,
+                                    withTitlePadding: true,
+                                    title: getTranslated(
+                                        provider.isDriver
+                                            ? "delivery_offer_details"
+                                            : "delivery_request_details",
+                                        context),
                                     children: [
-                                      Text(
-                                        getTranslated("ride_type", context),
-                                        textAlign: TextAlign.start,
-                                        style: AppTextStyles.w600.copyWith(
-                                          fontSize: 14,
+                                      ///Offer Map
+                                      MapWidget(
+                                        startPoint: provider
+                                            .myOfferDetails?.pickupLocation,
+                                        endPoint: provider
+                                            .myOfferDetails?.dropOffLocation,
+                                      ),
+
+                                      ///Followers Map
+                                      if (provider.myOfferDetails!
+                                          .offerFollowers!.isNotEmpty)
+                                        ...List.generate(
+                                          provider.myOfferDetails
+                                                  ?.offerFollowers?.length ??
+                                              0,
+                                          (index) => MapWidget(
+                                            clientName: provider
+                                                    .myOfferDetails
+                                                    ?.offerFollowers?[index]
+                                                    .name ??
+                                                "",
+                                            gender: provider.myOfferDetails
+                                                ?.offerFollowers?[index].gender,
+                                            startPoint: provider
+                                                .myOfferDetails
+                                                ?.offerFollowers?[index]
+                                                .pickupLocation,
+                                            endPoint: provider
+                                                .myOfferDetails
+                                                ?.offerFollowers?[index]
+                                                .dropOffLocation,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        Methods.getOfferType(provider
-                                                .myOfferDetails?.offerType ??
-                                            1),
-                                        textAlign: TextAlign.end,
-                                        style: AppTextStyles.w400.copyWith(
-                                          fontSize: 10,
+
+                                      ///Type of ride
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Dimensions
+                                                .PADDING_SIZE_DEFAULT.w,
+                                            vertical: Dimensions
+                                                .PADDING_SIZE_DEFAULT.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              getTranslated(
+                                                  "ride_type", context),
+                                              textAlign: TextAlign.start,
+                                              style:
+                                                  AppTextStyles.w600.copyWith(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              Methods.getOfferType(provider
+                                                      .myOfferDetails
+                                                      ?.offerType ??
+                                                  1),
+                                              textAlign: TextAlign.end,
+                                              style:
+                                                  AppTextStyles.w400.copyWith(
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
 
-                            ///Offers on request
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                  vertical: 16.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      sl.get<ProfileProvider>().isDriver
-                                          ? getTranslated("requests", context)
-                                          : getTranslated("offers", context),
-                                      style: AppTextStyles.w600
-                                          .copyWith(fontSize: 16),
+                                  ///Offers on request
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            Dimensions.PADDING_SIZE_DEFAULT.w,
+                                        vertical: 16.h),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            sl.get<ProfileProvider>().isDriver
+                                                ? getTranslated(
+                                                    "requests", context)
+                                                : getTranslated(
+                                                    "offers", context),
+                                            style: AppTextStyles.w600
+                                                .copyWith(fontSize: 16),
+                                          ),
+                                        ),
+
+                                        ///To Show All Requests
+                                        Visibility(
+                                          visible: (provider.myOfferDetails !=
+                                                  null &&
+                                              provider.myOfferDetails!
+                                                  .offerRequests!.isNotEmpty &&
+                                              provider.myOfferDetails!
+                                                      .offerRequests!.length >
+                                                  3),
+                                          child: InkWell(
+                                            onTap: () => CustomNavigator.push(
+                                                Routes.ALL_REQUESTS),
+                                            child: Text(
+                                              getTranslated(
+                                                  "view_all", context),
+                                              style: AppTextStyles.w400
+                                                  .copyWith(
+                                                      fontSize: 11,
+                                                      color: Styles.DISABLED),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-
-                                  ///To Show All Requests
                                   Visibility(
-                                    visible: (provider.myOfferDetails != null &&
-                                        provider.myOfferDetails!.offerRequests!.isNotEmpty &&
-                                        provider.myOfferDetails!.offerRequests!.length > 3),
-                                    child: InkWell(
-                                      onTap: () => CustomNavigator.push(Routes.ALL_REQUESTS),
-                                      child: Text(
-                                        getTranslated("view_all", context),
-                                        style: AppTextStyles.w400.copyWith(
-                                            fontSize: 11,
-                                            color: Styles.DISABLED),
+                                    visible: provider.myOfferDetails
+                                                ?.offerRequests !=
+                                            null &&
+                                        provider.myOfferDetails!.offerRequests!
+                                            .isNotEmpty,
+                                    child: Column(
+                                      children: List.generate(
+                                        provider.myOfferDetails!.offerRequests!
+                                                    .length >
+                                                3
+                                            ? 3
+                                            : provider.myOfferDetails!
+                                                .offerRequests!.length,
+                                        (index) => RequestCard(
+                                          isDriver: provider.isDriver,
+                                          request: provider.myOfferDetails!
+                                              .offerRequests![index],
+                                        ),
                                       ),
                                     ),
+                                  ),
+                                  Visibility(
+                                    visible: provider.myOfferDetails
+                                                ?.offerRequests ==
+                                            null ||
+                                        provider.myOfferDetails!.offerRequests!
+                                            .isEmpty,
+                                    child: EmptyState(
+                                        txt: provider.isDriver
+                                            ? getTranslated(
+                                                "there_is_no_offers_now",
+                                                context)
+                                            : getTranslated(
+                                                "there_is_no_requests_now",
+                                                context)),
                                   )
                                 ],
                               ),
                             ),
-                            Visibility(
-                              visible: provider.myOfferDetails?.offerRequests != null &&
-                                  provider.myOfferDetails!.offerRequests!.isNotEmpty,
-                              child: Column(
-                                children: List.generate(
-                                    provider.myOfferDetails!.offerRequests!.length > 3
-                                        ? 3 : provider.myOfferDetails!.offerRequests!.length,
-                                    (index) => RequestCard(
-                                          isDriver: provider.isDriver,
-                                          request: provider.myOfferDetails!.offerRequests![index],
-                                        ),),
-                              ),
-                            ),
-                            Visibility(
-                              visible: provider.myOfferDetails?.offerRequests == null ||
-                                  provider.myOfferDetails!.offerRequests!.isEmpty,
-                              child: EmptyState(
-                                  txt: provider.isDriver
-                                      ? getTranslated("there_is_no_offers_now", context)
-                                      : getTranslated("there_is_no_requests_now", context)),
-                            )
                           ],
                         ),
                       ),

@@ -11,6 +11,7 @@ import '../../../data/error/api_error_handler.dart';
 import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../my_offers/provider/my_offers_provider.dart';
 import '../../my_trips/provider/my_trips_provider.dart';
 import '../../success/model/success_model.dart';
 import '../model/offer_request_details_model.dart';
@@ -99,6 +100,7 @@ class RequestDetailsProvider extends ChangeNotifier {
         ///to Reflect in my Trips
         sl<MyTripsProvider>().getPendingTrips();
         sl<MyTripsProvider>().getCurrentTrips();
+        sl<MyOffersProvider>().getMyOfferDetails();
         notifyListeners();
       });
     } catch (e) {

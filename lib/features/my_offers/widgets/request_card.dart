@@ -27,8 +27,7 @@ class RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
       child: Stack(
         children: [
           Padding(
