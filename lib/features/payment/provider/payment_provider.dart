@@ -1,11 +1,8 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
-import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
@@ -141,6 +138,8 @@ class PaymentProvider extends ChangeNotifier {
     return _discount;
   }
 
+  double walletDeduction = 0;
+
   calcTotal() {
     tax = 0;
     serviceCost = 0;
@@ -151,11 +150,17 @@ class PaymentProvider extends ChangeNotifier {
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
 
+    if ((requestModel!.price! + tax! + serviceCost - _discount) <= wallet) {
+      walletDeduction = (requestModel!.price! + tax! + serviceCost - _discount);
+    } else {
+      walletDeduction = wallet;
+    }
+
     total = requestModel!.price! +
         tax! +
         serviceCost -
         _discount -
-        (useWallet ? wallet : 0);
+        (useWallet ? walletDeduction : 0);
 
     if (total < 0) {
       total = 0;

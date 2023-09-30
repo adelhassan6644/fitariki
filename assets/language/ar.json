@@ -378,5 +378,6 @@
   "please_enter_the_reason": "من فضلك ، ادخل السبب",
   "share_post": "مشاركة المشوار",
   "my_requests":"طلباتي",
-  "my_offers": "عروضي"
+  "my_offers": "عروضي",
+  "ride_not_started": "لم يحن موعد الرحلة بعد!"
 }

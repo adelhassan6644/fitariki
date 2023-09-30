@@ -376,5 +376,6 @@
   "please_enter_the_reason": "Please, Enter the reason",
   "share_post": "Share Post",
   "my_requests":"My Requests",
-  "my_offers": "My Offers"
+  "my_offers": "My Offers",
+  "ride_not_started": "It's not time for the ride"
 }

@@ -11,10 +11,15 @@ import '../../../navigation/routes.dart';
 import 'cancel_ride_pop_up_button.dart';
 
 class RideCard extends StatelessWidget {
-  const RideCard({Key? key, required this.ride, required this.isDriver})
+  const RideCard(
+      {Key? key,
+      required this.ride,
+      required this.isDriver,
+      required this.selectedDay})
       : super(key: key);
   final MyRideModel ride;
   final bool isDriver;
+  final DateTime selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +28,14 @@ class RideCard extends StatelessWidget {
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
         onTap: () {
-          if (ride.status != 3 && ride.status != 4) {
-            CustomNavigator.push(Routes.TRACKING, arguments: ride);
+          if (selectedDay.day == DateTime.now().day) {
+            if (ride.status != 3 && ride.status != 4) {
+              CustomNavigator.push(Routes.TRACKING, arguments: ride);
+            } else {
+              showToast(getTranslated("your_ride_is_ended", context));
+            }
           } else {
-            showToast(getTranslated("your_ride_is_ended", context));
+            showToast(getTranslated("ride_not_started", context));
           }
         },
         child: Container(

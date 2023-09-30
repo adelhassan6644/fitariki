@@ -136,7 +136,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "- ${paymentProvider.useWallet ? paymentProvider.wallet.toStringAsFixed(2) : 0.toStringAsFixed(2)} ${getTranslated("sar", context)}",
+                  "- ${paymentProvider.useWallet ? paymentProvider.walletDeduction.toStringAsFixed(2) : 0.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400
                       .copyWith(fontSize: 14, color: Styles.RED_COLOR),
                 ),
