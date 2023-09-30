@@ -1,11 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../../../data/error/failures.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../profile/provider/profile_provider.dart';
+import '../../request_details/provider/request_details_provider.dart';
+import '../../success/model/success_model.dart';
 import '../model/coupon_model.dart';
 import '../../request_details/model/offer_request_details_model.dart';
 import '../repo/payment_repo.dart';
@@ -146,7 +151,11 @@ class PaymentProvider extends ChangeNotifier {
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
 
-    total = requestModel!.price! + tax! + serviceCost - _discount - (useWallet ? wallet : 0);
+    total = requestModel!.price! +
+        tax! +
+        serviceCost -
+        _discount -
+        (useWallet ? wallet : 0);
 
     if (total < 0) {
       total = 0;
@@ -160,24 +169,29 @@ class PaymentProvider extends ChangeNotifier {
     try {
       isCheckOut = true;
       notifyListeners();
+      var apiResponse;
+      //is free
 
-      var apiResponse = await paymentRepo.reserveOffer(
+      apiResponse = await paymentRepo.reserveOffer(
           requestModel: requestModel!,
-          coupon: discountCode.text.trim(),
-          isFree: total == 0,
+          coupon: _coupon!.id,
           useWallet: useWallet);
 
-      apiResponse.fold((fail) {
+      apiResponse!.fold((fail) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: fail.error,
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
-      }, (success) {
+      }, (success) async {
         if (success.data["resID"] != null) {
-          CustomNavigator.push(Routes.PAYMENTWEBVIEW,
-              arguments: success.data["resID"]);
+          if (total != 0) {
+            CustomNavigator.push(Routes.PAYMENTWEBVIEW,
+                arguments: success.data["resID"]);
+          } else {
+            await payFreeOffer(reservationId: success.data["resID"]);
+          }
         } else {
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
@@ -187,6 +201,61 @@ class PaymentProvider extends ChangeNotifier {
                   backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }
+      });
+
+      isCheckOut = false;
+      notifyListeners();
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isCheckOut = false;
+      notifyListeners();
+    }
+  }
+
+  payFreeOffer({required int reservationId}) async {
+    try {
+      var apiResponse = await paymentRepo.reserveFreeOffer(
+          requestModel: requestModel!,
+          couponId: _coupon!.id,
+          isFree: total == 0,
+          useWallet: useWallet,
+          reservationId: reservationId);
+
+      apiResponse.fold((fail) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: fail.error,
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (success) {
+        CustomNavigator.push(Routes.SUCCESS,
+            replace: true,
+            arguments: SuccessModel(
+                isPopUp: true,
+                title: getTranslated("congratulations",
+                    CustomNavigator.navigatorState.currentContext!),
+                onTap: () => CustomNavigator.push(Routes.DASHBOARD,
+                    arguments: 0, clean: true),
+                term: sl<RequestDetailsProvider>()
+                        .requestModel
+                        ?.driverModel
+                        ?.firstName
+                        ?.split(" ")[0] ??
+                    sl<RequestDetailsProvider>()
+                        .requestModel
+                        ?.offer
+                        ?.driverModel
+                        ?.firstName
+                        ?.split(" ")[0] ??
+                    "",
+                description:
+                    "${getTranslated("trip_was_successfully_paid_for_captain", CustomNavigator.navigatorState.currentContext!)} ${sl<RequestDetailsProvider>().requestModel?.driverModel?.firstName?.split(" ")[0] ?? sl<RequestDetailsProvider>().requestModel?.offer?.driverModel?.firstName?.split(" ")[0] ?? ""}"));
       });
 
       isCheckOut = false;

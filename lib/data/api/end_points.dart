@@ -56,7 +56,7 @@ class EndPoints {
   static report(role, reportType, id) => '$role/$reportType/report/$id';
   static const String couponURl = 'client/coupon/check';
   static const String reserve = 'client/reservation/reserve';
-  static const String freeReserve = 'OfferFreePayment';
+  static const String freeReserve = 'client/OfferFreePayment';
   static myTrips(role, type, id) => '$role/reservation/$type/$id';
   static myPreviousTripDetails(role, id) => '$role/reservation/showDetails/$id';
   static myCurrentTripDetails(role, id) => '$role/reservation/show/$id';

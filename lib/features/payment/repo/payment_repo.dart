@@ -14,21 +14,38 @@ class PaymentRepo {
   final SharedPreferences sharedPreferences;
   PaymentRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<Either<ServerFailure, Response>> reserveOffer(
-      {required OfferRequestDetailsModel requestModel,
-      required String coupon,
-      required bool useWallet,
-      required bool isFree}) async {
+  Future<Either<ServerFailure, Response>> reserveOffer({
+    required OfferRequestDetailsModel requestModel,
+    int? coupon,
+    required bool useWallet,
+  }) async {
     try {
-      Response response = await dioClient
-          .post(uri: isFree ? EndPoints.freeReserve : EndPoints.reserve, data: {
+      Response response = await dioClient.post(uri: EndPoints.reserve, data: {
         'client_id': sharedPreferences.getString(AppStorageKey.userId),
         "driver_id":
             requestModel.driverModel?.id ?? requestModel.offer?.driverModel?.id,
         "offer_id": requestModel.offerId,
         "offer_request_id": requestModel.id,
-        "coupon_code": coupon,
         "use_wallet": useWallet ? 1 : 0
+      });
+      return Right(response);
+    } catch (e) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(e)));
+    }
+  }
+
+  Future<Either<ServerFailure, Response>> reserveFreeOffer(
+      {required OfferRequestDetailsModel requestModel,
+      int? couponId,
+      required int reservationId,
+      required bool useWallet,
+      required bool isFree}) async {
+    try {
+      Response response =
+          await dioClient.post(uri: EndPoints.freeReserve, data: {
+        if (couponId != null) "coupon_id": couponId,
+        "use_wallet": useWallet ? 1 : 0,
+        "reservation_id": reservationId
       });
       return Right(response);
     } catch (e) {
