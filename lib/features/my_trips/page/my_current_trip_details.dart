@@ -120,17 +120,30 @@ class MyCurrentTripDetails extends StatelessWidget {
                                       provider.tripDetails?.myTripRequest
                                           ?.driverModel?.national?.niceName,
                               //if client not crate the offer get client days
-                              days:(provider.tripDetails?.offer!.driverId!=null  ?
-                              provider.tripDetails?.clientModel?.clientDays ??
-                                  provider.tripDetails?.offer?.clientModel?.clientDays ??
-                                  provider.tripDetails?.myTripRequest?.clientModel?.clientDays
-                                  : provider.tripDetails?.offer?.offerDays??[])!
-                                  .map((e) => e.dayName)
-                                  .toList()
-                                  .join(", "),
-                              duration: provider
-                                  .tripDetails?.myTripRequest?.duration
-                                  .toString(),
+                              days:
+                                  (provider.tripDetails?.offer!.driverId != null
+                                          ? provider.tripDetails?.clientModel
+                                                  ?.clientDays ??
+                                              provider.tripDetails?.offer
+                                                  ?.clientModel?.clientDays ??
+                                              provider
+                                                  .tripDetails
+                                                  ?.myTripRequest
+                                                  ?.clientModel
+                                                  ?.clientDays
+                                          : provider.tripDetails?.offer
+                                                  ?.offerDays ??
+                                              [])!
+                                      .map((e) => e.dayName)
+                                      .toList()
+                                      .join(", "),
+                              duration:
+                                  provider.tripDetails!.offer!.driverId != null
+                                      ? provider
+                                          .tripDetails?.myTripRequest?.duration
+                                          .toString()
+                                      : provider.tripDetails?.offer?.duration
+                                          .toString(),
                               passengers: provider.tripDetails?.myTripRequest
                                               ?.followers !=
                                           null &&
@@ -141,15 +154,7 @@ class MyCurrentTripDetails extends StatelessWidget {
                                       1
                                   : 1,
                               timeRange:
-                                  "${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId!=null  ?
-                                  provider.tripDetails?.clientModel?.clientDays ??
-                                      provider.tripDetails?.offer?.clientModel?.clientDays ??
-                                      provider.tripDetails?.myTripRequest?.clientModel?.clientDays
-                                      : provider.tripDetails?.offer?.offerDays??[])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId!=null  ?
-                                  provider.tripDetails?.clientModel?.clientDays ??
-                                      provider.tripDetails?.offer?.clientModel?.clientDays ??
-                                      provider.tripDetails?.myTripRequest?.clientModel?.clientDays
-                                      : provider.tripDetails?.offer?.offerDays??[])?[0].endTime, withFormat: true)}",
+                                  "${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].endTime, withFormat: true)}",
                             ),
 
                             /// Map View
@@ -349,17 +354,21 @@ class MyCurrentTripDetails extends StatelessWidget {
 
                             /// to show days on calender
                             TripDaysOnCalenderWidget(
-                              startDate: provider.tripDetails?.myTripRequest?.startAt,
-                              endDate: provider.tripDetails?.myTripRequest?.endAt,
+                              startDate:
+                                  provider.tripDetails?.myTripRequest?.startAt,
+                              endDate:
+                                  provider.tripDetails?.myTripRequest?.endAt,
                               //if client not crate the offer get client days
-                              days: provider.tripDetails?.offer!.driverId!=null ?
-
-                              provider.tripDetails?.clientModel?.clientDays ??
-                                  provider.tripDetails?.offer?.clientModel?.clientDays ??
-                                  provider.tripDetails?.myTripRequest?.clientModel?.clientDays
-                                  : provider.tripDetails?.offer?.offerDays,
+                              days:
+                                  provider.tripDetails?.offer!.driverId != null
+                                      ? provider.tripDetails?.clientModel
+                                              ?.clientDays ??
+                                          provider.tripDetails?.offer
+                                              ?.clientModel?.clientDays ??
+                                          provider.tripDetails?.myTripRequest
+                                              ?.clientModel?.clientDays
+                                      : provider.tripDetails?.offer?.offerDays,
                             ),
-
 
                             SizedBox(height: 24.h)
                           ],

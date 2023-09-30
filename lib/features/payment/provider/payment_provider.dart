@@ -179,7 +179,7 @@ class PaymentProvider extends ChangeNotifier {
 
       apiResponse = await paymentRepo.reserveOffer(
           requestModel: requestModel!,
-          coupon: _coupon!.id,
+          coupon: _coupon?.id,
           useWallet: useWallet);
 
       apiResponse!.fold((fail) {
@@ -193,7 +193,11 @@ class PaymentProvider extends ChangeNotifier {
         if (success.data["resID"] != null) {
           if (total != 0) {
             CustomNavigator.push(Routes.PAYMENTWEBVIEW,
-                arguments: success.data["resID"]);
+                arguments: {
+
+              "id":success.data["resID"],
+                "useWallet":useWallet
+                });
           } else {
             await payFreeOffer(reservationId: success.data["resID"]);
           }

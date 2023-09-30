@@ -23,9 +23,9 @@ abstract class CupertinoPopUpHelper {
     showDialog(
       context: CustomNavigator.navigatorState.currentContext!,
       builder: (_) {
-        return Theme(
-          data: ThemeData(
-            dialogTheme: DialogTheme(backgroundColor: Styles.FILL_COLOR)
+        return CupertinoTheme(
+          data: const CupertinoThemeData(
+
           ),
           child: CupertinoAlertDialog(
 
