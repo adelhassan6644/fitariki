@@ -1,6 +1,7 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../../navigation/custom_navigation.dart';
 import '../app/core/utils/color_resources.dart';
 import '../app/localization/localization/language_constant.dart';
@@ -78,20 +79,34 @@ class _DateTimePickerState extends State<DateTimePicker> {
             ),
           ),
           Expanded(
-            child: CupertinoDatePicker(
-              mode: widget.mode ?? CupertinoDatePickerMode.date,
-              onDateTimeChanged: (v) => date = v,
-              initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
-              minimumDate: widget.minDateTime != null
-                  ? DateTime(widget.minDateTime!.year,
-                      widget.minDateTime!.month, widget.minDateTime!.day)
-                  : widget.startDateTime != null
-                      ? DateTime(
-                          widget.startDateTime!.year,
-                          widget.startDateTime!.month,
-                          widget.startDateTime!.day)
-                      : DateTime(1900),
-              maximumDate: DateTime(2100),
+            child: SizedBox(
+              width: double.infinity,
+              child: CupertinoTheme(
+                data: const CupertinoThemeData(
+
+                  textTheme: CupertinoTextThemeData(
+                    dateTimePickerTextStyle: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
+                child: CupertinoDatePicker(
+                  mode: widget.mode ?? CupertinoDatePickerMode.date,
+                  onDateTimeChanged: (v) => date = v,
+                  initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
+                  minimumDate: widget.minDateTime != null
+                      ? DateTime(widget.minDateTime!.year,
+                          widget.minDateTime!.month, widget.minDateTime!.day)
+                      : widget.startDateTime != null
+                          ? DateTime(
+                              widget.startDateTime!.year,
+                              widget.startDateTime!.month,
+                              widget.startDateTime!.day)
+                          : DateTime(1900),
+                  maximumDate: DateTime(2100),
+                ),
+              ),
             ),
           ),
           SafeArea(
