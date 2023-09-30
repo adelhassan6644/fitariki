@@ -195,7 +195,7 @@ abstract class CustomNavigator {
         }
       case Routes.PAYMENTWEBVIEW:
         return _pageRoute(PaymentWebViewScreen(
-          rservationId: settings.arguments! as int,
+          reservationId: settings.arguments! as int,
         ));
 
       case Routes.TERMS_AND_CONDITIONS:

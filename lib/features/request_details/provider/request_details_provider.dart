@@ -136,7 +136,8 @@ class RequestDetailsProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
       }, (res) {
         if (res.data["data"]["request"] != null) {
-          requestModel = OfferRequestDetailsModel.fromJson(res.data["data"]["request"]);
+          requestModel =
+              OfferRequestDetailsModel.fromJson(res.data["data"]["request"]);
         }
         Provider.of<PaymentProvider>(
                 CustomNavigator.navigatorState.currentContext!,

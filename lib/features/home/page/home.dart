@@ -1,3 +1,4 @@
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/features/home/widgets/role_type_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,11 +51,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView(
+                    child: ListAnimator(
                       controller: controller,
-                      padding: EdgeInsets.zero,
-                      physics: const BouncingScrollPhysics(),
-                      children: provider.isLogin
+                      data: provider.isLogin
                           ? [
                               provider.tab == 0
                                   ? const HomeOffers()

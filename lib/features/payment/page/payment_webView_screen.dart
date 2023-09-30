@@ -12,16 +12,17 @@ import '../../../data/api/end_points.dart';
 import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../profile/provider/profile_provider.dart';
 import '../../request_details/provider/request_details_provider.dart';
 import '../../success/model/success_model.dart';
 
 class PaymentWebViewScreen extends StatefulWidget {
-  final int rservationId;
+  final int reservationId;
 
-  const PaymentWebViewScreen({super.key, required this.rservationId});
+  const PaymentWebViewScreen({super.key, required this.reservationId});
 
   @override
-  _PaymentWebViewScreenState createState() => _PaymentWebViewScreenState();
+  State<PaymentWebViewScreen> createState() => _PaymentWebViewScreenState();
 }
 
 class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
@@ -53,7 +54,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   PaymentProvider? reservationModelProvider;
 
   double progress = 0;
-  bool _isLoading = true;
 
   late MyInAppBrowser browser;
   void _initData() async {
@@ -103,13 +103,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
             : Uri.parse(
                 wiselectedUrl + "?reservation_id=${widget.rservationId}"),
       ), */
-      await browser.openUrlRequest(
+    await browser.openUrlRequest(
       urlRequest: URLRequest(
         url: (reservationModelProvider!.coupon != null)
             ? WebUri(wiselectedUrl +
-                "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
-            : WebUri(
-                wiselectedUrl + "?reservation_id=${widget.rservationId}"),
+                "?reservation_id=${widget.reservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
+            : WebUri(wiselectedUrl + "?reservation_id=${widget.reservationId}"),
       ),
       options: InAppBrowserClassOptions(
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(
@@ -149,9 +148,9 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 initialUrlRequest: URLRequest(
                   url: (reservationModelProvider!.coupon != null)
                       ? WebUri(wiselectedUrl +
-                          "?reservation_id=${widget.rservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
+                          "?reservation_id=${widget.reservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
                       : WebUri(wiselectedUrl +
-                          "?reservation_id=${widget.rservationId}"),
+                          "?reservation_id=${widget.reservationId}"),
                 ),
                 pullToRefreshController: pullToRefreshController,
                 initialOptions: options,
@@ -177,6 +176,9 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                   bool isCancel = url.query.contains('cancel');
 
                   if (isSuccess) {
+                    if (!sl<ProfileProvider>().isDriver) {
+                      sl<ProfileProvider>().getProfile();
+                    }
                     CustomNavigator.push(Routes.SUCCESS,
                         replace: true,
                         arguments: SuccessModel(
