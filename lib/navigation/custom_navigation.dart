@@ -40,7 +40,7 @@ import '../features/profile/page/profile_page.dart';
 import '../features/splash/page/splash.dart';
 import '../features/user_profile/page/user_profile.dart';
 import '../main.dart';
-import '../main_page/dashboard.dart';
+import '../main_page/page/dashboard.dart';
 import 'routes.dart';
 
 abstract class CustomNavigator {

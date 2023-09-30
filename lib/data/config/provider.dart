@@ -30,7 +30,7 @@ import '../../features/transactions/provider/transactions_provider.dart';
 import '../../features/user_profile/provider/user_profile_provider.dart';
 import '../../features/wishlist/provider/wishlist_provider.dart';
 import '../../main_providers/calender_provider.dart';
-import '../../main_providers/dashboard_provider.dart';
+import '../../main_page/provider/dashboard_provider.dart';
 import '../../main_providers/schedule_provider.dart';
 
 abstract class ProviderList {

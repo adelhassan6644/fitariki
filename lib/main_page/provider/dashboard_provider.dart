@@ -2,14 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/components/loading_dialog.dart';
 import 'package:flutter/material.dart';
-import '../../../app/core/utils/app_snack_bar.dart';
-import '../../../app/localization/localization/language_constant.dart';
-import '../../../data/error/failures.dart';
-import '../../../helpers/cupertino_pop_up_helper.dart';
-import '../../../navigation/custom_navigation.dart';
-import '../../../navigation/routes.dart';
-import '../features/success/model/success_model.dart';
-import '../main_repos/dashboard_repo.dart';
+import '../../../../app/core/utils/app_snack_bar.dart';
+import '../../../../app/localization/localization/language_constant.dart';
+import '../../../../data/error/failures.dart';
+import '../../../../helpers/cupertino_pop_up_helper.dart';
+import '../../../../navigation/custom_navigation.dart';
+import '../../../../navigation/routes.dart';
+import '../../features/success/model/success_model.dart';
+import '../repo/dashboard_repo.dart';
 
 class DashboardProvider extends ChangeNotifier {
   DashboardRepo repo;
