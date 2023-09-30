@@ -3,12 +3,10 @@ import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/custom_button.dart';
-import 'package:fitariki/features/my_offers/provider/my_offers_provider.dart';
 import 'package:fitariki/features/notifications/model/notifications_model.dart';
 import 'package:fitariki/features/notifications/provider/notifications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 
@@ -36,19 +34,11 @@ class _NotificationCardState extends State<NotificationCard> {
                 arguments: widget.notificationItem.notificationData!.rideData,
               );
             }
-
-            ///To get My offer details data and update my offer details id when routing from notification
-            if (widget.notificationItem.notificationData!.routName ==
-                "MY_OFFERS_DETAILS") {
-              sl<MyOffersProvider>()
-                  .updateOfferId(widget.notificationItem.notificationData!.id!);
-            }
             CustomNavigator.push(
               widget.notificationItem.notificationData!.routName!,
               arguments: widget.notificationItem.notificationData!.id!,
             );
           }
-
           provider.readNotification(widget.notificationItem.id);
           setState(() => widget.notificationItem.isRead = true);
         },

@@ -33,6 +33,7 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      sl<MyOffersProvider>().updateOfferId(widget.offerId);
       sl<MyOffersProvider>().getMyOfferDetails();
     });
 
