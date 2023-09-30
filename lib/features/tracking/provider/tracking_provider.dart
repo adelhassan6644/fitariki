@@ -25,7 +25,7 @@ class TrackingProvider extends ChangeNotifier {
 
   //Map related variables
   CameraPosition mapCameraPosition =
-      const CameraPosition(target: LatLng(0.00, 0.00));
+      const CameraPosition(target: LatLng(0.00, 0.00),zoom: 16);
   GoogleMapController? googleMapController;
   EdgeInsets googleMapPadding = const EdgeInsets.all(10);
   StreamSubscription? currentLocationListener;
@@ -272,6 +272,7 @@ class TrackingProvider extends ChangeNotifier {
         driverPosition = LatLng(event.data()!["lat"], event.data()!["long"]);
         driverPositionRotation = event.data()!["rotation"] ?? 0;
         updateDriverMarkerPosition();
+
         startZoomFocusDriver();
       }
     });

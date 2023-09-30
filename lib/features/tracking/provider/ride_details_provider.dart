@@ -43,6 +43,7 @@ class RideDetailsProvider extends ChangeNotifier {
   bool isLoading = false;
   getRideDetails(id) async {
     // try {
+    countTime();
     isLoading = true;
     notifyListeners();
     Either<ServerFailure, Response> response = await repo.getRideDetails(id);
