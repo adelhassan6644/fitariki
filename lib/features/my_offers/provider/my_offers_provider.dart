@@ -21,7 +21,6 @@ class MyOffersProvider extends ChangeNotifier {
   bool get isLogin => myOffersRepo.isLoggedIn();
   bool get isDriver => myOffersRepo.isDriver();
 
-
   List<String> taps = [
     "delivery_offers",
     "delivery_requests",
@@ -41,7 +40,6 @@ class MyOffersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   bool isGetPendingTrips = false;
   List<OfferRequestDetailsModel>? pendingTrips;
   getPendingTrips() async {
@@ -50,7 +48,7 @@ class MyOffersProvider extends ChangeNotifier {
       notifyListeners();
 
       Either<ServerFailure, Response> response =
-      await myOffersRepo.getMyRequests();
+          await myOffersRepo.getMyRequests();
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -63,11 +61,11 @@ class MyOffersProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         pendingTrips = response.data["data"]["pending"] == null ||
-            response.data["data"]["pending"] == []
+                response.data["data"]["pending"] == []
             ? []
             : List<OfferRequestDetailsModel>.from(response.data["data"]
-        ["pending"]
-            .map((x) => OfferRequestDetailsModel.fromJson(x)));
+                    ["pending"]
+                .map((x) => OfferRequestDetailsModel.fromJson(x)));
 
         isGetPendingTrips = false;
         notifyListeners();
@@ -83,9 +81,6 @@ class MyOffersProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-
-
 
   MyOffersModel? myOffers;
   bool isLoading = false;
@@ -116,7 +111,7 @@ class MyOffersProvider extends ChangeNotifier {
   bool isOfferDetailsLoading = false;
   OfferModel? myOfferDetails;
   int? offerId;
-  updateOfferId(v){
+  updateOfferId(v) {
     offerId = v;
   }
 

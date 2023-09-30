@@ -46,7 +46,7 @@ class _RequestDetailsState extends State<RequestDetails> {
           Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
         return Column(
           children: [
-            provider.isLoading
+            provider.isLoading && provider.requestModel != null
                 ? RequestDetailsShimmer(
                     isDriver: provider.isDriver,
                   )
@@ -81,13 +81,13 @@ class _RequestDetailsState extends State<RequestDetails> {
                                   ?.niceName,
                           createdAt: provider.requestModel?.createdAt ??
                               DateTime.now(),
-                          days: (provider.requestModel?.offer!.driverId != null
+                          days: (provider.requestModel?.offer?.driverId != null
                                   ? provider.requestModel?.clientModel
                                           ?.clientDays ??
                                       provider.requestModel?.offer?.clientModel
-                                          ?.clientDays
+                                          ?.clientDays??[]
                                   : provider.requestModel?.offer?.offerDays ??
-                                      [])!
+                                      [])
                               .map((e) => e.dayName)
                               .toList()
                               .join(", "),
@@ -104,7 +104,7 @@ class _RequestDetailsState extends State<RequestDetails> {
                                           0) +
                                   1,
                           timeRange:
-                              "${Methods.convertStringToTime((provider.requestModel?.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel?.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].endTime, withFormat: true)}",
+                              "${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].endTime, withFormat: true)}",
                         ),
 
                         ///Request Details
