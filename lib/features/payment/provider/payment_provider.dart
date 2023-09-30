@@ -17,6 +17,13 @@ class PaymentProvider extends ChangeNotifier {
     paymentFees();
   }
 
+  bool useWallet = false;
+  void onUseWallet(v) {
+    useWallet = v;
+    calcTotal();
+    notifyListeners();
+  }
+
   OfferRequestDetailsModel? requestModel;
   setData(data) {
     requestModel = data;
@@ -57,12 +64,10 @@ class PaymentProvider extends ChangeNotifier {
   }) async {
     _isLoading = true;
     notifyListeners();
-    double amount = requestModel!.price!;
+    double price = requestModel!.price!;
     var apiResponse =
         await paymentRepo.applyCoupon(offerId: requestModel!.id!, code: coupon);
     apiResponse.fold((fail) {
-      _isLoading = false;
-      notifyListeners();
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: fail.error,
@@ -74,20 +79,20 @@ class PaymentProvider extends ChangeNotifier {
       _code = _coupon!.code;
       if (_coupon!.type == 'presntage') {
         if (_coupon!.max != 0) {
-          _discount = ((_coupon!.amount * amount / 100) < _coupon!.max!
-              ? (_coupon!.amount * amount / 100)
+          _discount = ((_coupon!.amount * price / 100) < _coupon!.max!
+              ? (_coupon!.amount * price / 100)
               : _coupon!.max)!;
         } else {
-          _discount = _coupon!.amount * amount / 100;
+          _discount = _coupon!.amount * price / 100;
         }
       } else {
         _discount = _coupon!.amount;
       }
       calcTotal();
-      _isLoading = false;
-      notifyListeners();
     });
 
+    _isLoading = false;
+    notifyListeners();
     return _discount;
   }
 
@@ -140,12 +145,12 @@ class PaymentProvider extends ChangeNotifier {
     serviceCost = double.parse(
         ((requestModel?.price ?? 0) * servicePercentage / 100)
             .toStringAsFixed(2));
-    if ((requestModel!.price! + tax! + serviceCost - _discount) > wallet) {
-      total = requestModel!.price! + tax! + serviceCost - _discount - wallet;
-    } else {
-      total = 1.0;
+
+    total = requestModel!.price! + tax! + serviceCost - _discount - (useWallet ? wallet : 0);
+
+    if (total < 0) {
+      total = 0;
     }
-    print((requestModel!.price! - _discount) + tax!);
     notifyListeners();
   }
 
@@ -156,11 +161,13 @@ class PaymentProvider extends ChangeNotifier {
       isCheckOut = true;
       notifyListeners();
 
-      var apiResponse =
-          await paymentRepo.reserveOffer(requestModel: requestModel!);
+      var apiResponse = await paymentRepo.reserveOffer(
+          requestModel: requestModel!,
+          coupon: discountCode.text.trim(),
+          isFree: total == 0,
+          useWallet: useWallet);
+
       apiResponse.fold((fail) {
-        isCheckOut = false;
-        notifyListeners();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: fail.error,
@@ -180,9 +187,10 @@ class PaymentProvider extends ChangeNotifier {
                   backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
         }
-        isCheckOut = false;
-        notifyListeners();
       });
+
+      isCheckOut = false;
+      notifyListeners();
     } catch (e) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(

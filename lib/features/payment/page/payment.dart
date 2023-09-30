@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
+import 'package:fitariki/features/payment/widgets/wallet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
+import '../../../components/checkbox_list_tile.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
 import '../../../main_widgets/shimmer_widgets/payment_shimmer_widget.dart';
@@ -150,6 +152,9 @@ class Payment extends StatelessWidget {
 
                                 ///Coupon
                                 const CouponWidget(),
+
+                                ///Wallet Widget
+                                const WalletWidget(),
                                 // PaymentMethodWidget(),
                                 const PaymentDetailsWidget()
                               ],

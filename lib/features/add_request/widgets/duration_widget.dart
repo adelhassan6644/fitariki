@@ -248,7 +248,7 @@ class DurationWidget extends StatelessWidget {
                         RegExp(r'^\d+\.?\d{0,2}')),
                   ],
                   inputType: TextInputType.number,
-                  hint: "00000",
+                  hint: "0000",
                   controller: provider.minPrice,
                 ),
               ),

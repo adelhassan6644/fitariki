@@ -31,6 +31,7 @@ final TextEditingController? controller;
       textAlign: TextAlign.center,
       controller: controller,
       minLines:1,
+      maxLength: 4,
       validator: validation,
       keyboardType: inputType,
       inputFormatters: inputType == TextInputType.phone ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))] : formatter,
@@ -39,6 +40,7 @@ final TextEditingController? controller;
       cursorColor: Styles.SECOUND_PRIMARY_COLOR,
       onChanged: onChanged,
       decoration: InputDecoration(
+        counterText: "",
         suffixIconConstraints:  const BoxConstraints(maxHeight: 22),
         suffixIcon:  Padding(
          padding: const EdgeInsets.only(top: 4,bottom: 4,left: 10),

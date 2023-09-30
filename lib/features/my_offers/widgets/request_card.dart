@@ -20,10 +20,9 @@ import '../../request_details/model/offer_request_details_model.dart';
 
 class RequestCard extends StatelessWidget {
   final OfferRequestDetailsModel? request;
-  const RequestCard({
-    Key? key,
-    this.request,
-  }) : super(key: key);
+  final bool isDriver;
+
+  const RequestCard({super.key, this.request, required this.isDriver});
 
   @override
   Widget build(BuildContext context) {
@@ -462,16 +461,71 @@ class RequestCard extends StatelessWidget {
               bottom: 20.h,
               left: 30.w,
               child: CustomButton(
-                text: getTranslated("preview", context),
-                width: 75.h,
-                height: 30.h,
-                textSize: 14,
+                text: getTranslated(
+                    buttonTitle(
+                        isDriver: isDriver,
+                        rejected: request?.rejectedAt != null,
+                        approved: request?.approvedAt != null,
+                        paid: request?.paidAt != null,
+                        updateByClient: request?.updatedByClient == true,
+                        updateByDriver: request?.updatedByDriver == true),
+                    context),
+                width: 100,
+                height: 30,
+                textSize: 12,
                 radius: 100,
+                backgroundColor: buttonColor(
+                    isDriver: isDriver,
+                    rejected: request?.rejectedAt != null,
+                    approved: request?.approvedAt != null,
+                    paid: request?.paidAt != null,
+                    updateByClient: request?.updatedByClient == true,
+                    updateByDriver: request?.updatedByDriver == true),
                 onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS,
                     arguments: request!.id!),
               ))
         ],
       ),
     );
+  }
+
+  buttonTitle(
+      {required bool isDriver,
+      required bool approved,
+      required bool rejected,
+      required bool paid,
+      required bool updateByDriver,
+      required bool updateByClient}) {
+    if (rejected) {
+      return "rejected";
+    } else if (approved && paid) {
+      return "paid";
+    } else if (approved && !paid) {
+      return "pay";
+    } else if ((isDriver && updateByDriver) || (!isDriver && updateByClient)) {
+      return "pending";
+    } else {
+      return "preview";
+    }
+  }
+
+  buttonColor(
+      {required bool isDriver,
+      required bool approved,
+      required bool rejected,
+      required bool paid,
+      required bool updateByDriver,
+      required bool updateByClient}) {
+    if (rejected) {
+      return Styles.DISABLED;
+    } else if (approved && paid) {
+      return Styles.DISABLED;
+    } else if (approved && !paid) {
+      return Styles.PRIMARY_COLOR;
+    } else if ((isDriver && updateByDriver) || (!isDriver && updateByClient)) {
+      return Styles.DISABLED;
+    } else {
+      return Styles.PRIMARY_COLOR;
+    }
   }
 }

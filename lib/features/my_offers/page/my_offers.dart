@@ -26,7 +26,9 @@ class _MyOffersState extends State<MyOffers>
   @override
   void initState() {
     if (sl<MyOffersProvider>().isLogin) {
-      Future.delayed(Duration.zero,(){sl<MyOffersProvider>().getMyOffers();});
+      Future.delayed(Duration.zero, () {
+        sl<MyOffersProvider>().getMyOffers();
+      });
     }
     super.initState();
   }
@@ -87,22 +89,21 @@ class _MyOffersState extends State<MyOffers>
                       : Expanded(
                           child: ListAnimator(
                             data: [
-                              SizedBox(
-                                height: 8.h,
-                              ),
+                              SizedBox(height: 8.h),
                               ...List.generate(
-                                  5,
-                                  (index) => Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: Dimensions
-                                                .PADDING_SIZE_DEFAULT.w,
-                                            vertical: 8.h),
-                                        child: CustomShimmerContainer(
-                                          width: context.width,
-                                          height: 80.h,
-                                          radius: 8,
-                                        ),
-                                      ))
+                                10,
+                                (index) => Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w,
+                                      vertical: 8.h),
+                                  child: CustomShimmerContainer(
+                                    width: context.width,
+                                    height: 80.h,
+                                    radius: 8,
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         );

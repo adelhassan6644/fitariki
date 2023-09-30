@@ -6,9 +6,9 @@ import 'package:fitariki/components/custom_button.dart';
 import 'package:fitariki/features/notifications/model/notifications_model.dart';
 import 'package:fitariki/features/notifications/provider/notifications_provider.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/config/di.dart';
+import 'package:provider/provider.dart';
 import '../../../navigation/custom_navigation.dart';
+import '../../../navigation/routes.dart';
 
 class NotificationCard extends StatefulWidget {
   const NotificationCard({required this.notificationItem, Key? key})
@@ -23,31 +23,23 @@ class NotificationCard extends StatefulWidget {
 class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: ValueKey(widget.notificationItem.id),
-      background: Container(
-        color: Styles.SECOUND_PRIMARY_COLOR.withOpacity(0.20),
-        padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_DEFAULT.w),
-        alignment: Alignment.centerRight,
-        child: const Icon(
-          Icons.delete,
-          size: 30,
-          color: Colors.white,
-        ),
-      ),
-      onDismissed: (_) {
-        sl<NotificationsProvider>()
-            .deleteNotification(widget.notificationItem.id);
-      },
-      child: InkWell(
+    return Consumer<NotificationsProvider>(builder: (_, provider, child) {
+      return InkWell(
         onTap: () {
-          if(widget.notificationItem.notificationData!.routName!=null) {
-
-            CustomNavigator.push(widget.notificationItem.notificationData!.routName!,
-                arguments: widget.notificationItem.notificationData!.id! ,);
+          if (widget.notificationItem.notificationData!.routName != null) {
+            if (widget.notificationItem.notificationData!.routName ==
+                "TRACKING") {
+              CustomNavigator.push(
+                Routes.TRACKING,
+                arguments: widget.notificationItem.notificationData!.rideData,
+              );
+            }
+            CustomNavigator.push(
+              widget.notificationItem.notificationData!.routName!,
+              arguments: widget.notificationItem.notificationData!.id!,
+            );
           }
-          sl<NotificationsProvider>()
-              .readNotification(widget.notificationItem.id);
+          provider.readNotification(widget.notificationItem.id);
           setState(() => widget.notificationItem.isRead = true);
         },
         child: Container(
@@ -58,8 +50,8 @@ class _NotificationCardState extends State<NotificationCard> {
                   ? null
                   : Styles.PRIMARY_COLOR.withOpacity(0.1),
               border: Border(
-                  bottom: BorderSide(
-                      color: Styles.LIGHT_GREY_BORDER, width: 1.h))),
+                  bottom:
+                      BorderSide(color: Styles.LIGHT_GREY_BORDER, width: 1.h))),
           child: Row(
             children: [
               Expanded(
@@ -72,30 +64,30 @@ class _NotificationCardState extends State<NotificationCard> {
               ),
               Visibility(
                 visible: widget.notificationItem.notificationData!.status != 3,
-                  child: SizedBox(
-                    width: 40.w,
-                  ),
+                child: SizedBox(
+                  width: 40.w,
                 ),
-
-                Visibility(
-                  visible: widget.notificationItem.notificationData!.status != 3,
-                  child: CustomButton(
-                    onTap: () {
-                      CustomNavigator.push(
-                          widget.notificationItem.notificationData!.routName!,
-                          arguments: widget.notificationItem.notificationData!.id!);
-                    },
-                    text: getTranslated("preview", context),
-                    radius: 100,
-                    width: 70,
-                    textSize: 12,
-                    height: 30,
-                  ),
-                )
+              ),
+              Visibility(
+                visible: widget.notificationItem.notificationData!.status != 3,
+                child: CustomButton(
+                  onTap: () {
+                    CustomNavigator.push(
+                        widget.notificationItem.notificationData!.routName!,
+                        arguments:
+                            widget.notificationItem.notificationData!.id!);
+                  },
+                  text: getTranslated("preview", context),
+                  radius: 100,
+                  width: 70,
+                  textSize: 12,
+                  height: 30,
+                ),
+              )
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -30,7 +30,7 @@ class Routes {
   static const PAYMENT = "PAYMENT";
   static const PAYMENTWEBVIEW = "PAYMENT_web_view";
   static const USER_PROFILE = "USER_PROFILE";
-  static const MY_RIDES = "MY_RUNNING_TRIPS";
+  static const MY_RIDES = "MY_RIDES";
   static const ALL_USER_OFFERS = "ALL_USER_OFFERS";
   static const RATE_TRIP = "RATE_TRIP";
   static const RATE_RIDE = "RATE_RIDE";

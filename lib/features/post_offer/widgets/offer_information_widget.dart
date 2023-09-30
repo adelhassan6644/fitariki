@@ -84,7 +84,8 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               return Padding(
                                 padding: const EdgeInsets.only(left: 4.0),
                                 child: GestureDetector(
-                                  onTap: () => widget.provider.onSelectRideTypes((index + 1)),
+                                  onTap: () => widget.provider
+                                      .onSelectRideTypes((index + 1)),
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 6, horizontal: 12),
@@ -372,7 +373,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               ],
                               initialValue: widget.provider.minPrice,
                               inputType: TextInputType.number,
-                              hint: "00000",
+                              hint: "0000",
                               onChanged: (v) {
                                 widget.provider.minPrice = v;
                               },
@@ -410,7 +411,7 @@ class _OfferInformationWidgetState extends State<OfferInformationWidget> {
                               ],
                               inputType: TextInputType.number,
                               initialValue: widget.provider.maxPrice,
-                              hint: "00000",
+                              hint: "0000",
                               onChanged: (v) {
                                 widget.provider.maxPrice = v;
                               },

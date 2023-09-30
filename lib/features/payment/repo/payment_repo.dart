@@ -15,13 +15,20 @@ class PaymentRepo {
   PaymentRepo({required this.dioClient, required this.sharedPreferences});
 
   Future<Either<ServerFailure, Response>> reserveOffer(
-      {required OfferRequestDetailsModel requestModel}) async {
+      {required OfferRequestDetailsModel requestModel,
+      required String coupon,
+      required bool useWallet,
+      required bool isFree}) async {
     try {
-      Response response = await dioClient.post(uri: EndPoints.reserve, data: {
+      Response response = await dioClient
+          .post(uri: isFree ? EndPoints.freeReserve : EndPoints.reserve, data: {
         'client_id': sharedPreferences.getString(AppStorageKey.userId),
-        "driver_id": requestModel.driverModel?.id ?? requestModel.offer?.driverModel?.id,
+        "driver_id":
+            requestModel.driverModel?.id ?? requestModel.offer?.driverModel?.id,
         "offer_id": requestModel.offerId,
         "offer_request_id": requestModel.id,
+        "coupon_code": coupon,
+        "use_wallet": useWallet ? 1 : 0
       });
       return Right(response);
     } catch (e) {

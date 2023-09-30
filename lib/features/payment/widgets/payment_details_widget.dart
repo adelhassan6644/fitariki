@@ -1,6 +1,5 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/features/payment/provider/payment_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +53,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.requestModel?.price?.toStringAsFixed(3) ?? 0} ${getTranslated("sar", context)}",
+                  "${paymentProvider.requestModel?.price?.toStringAsFixed(2) ?? 0} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),
@@ -137,7 +136,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "- ${paymentProvider.wallet.toStringAsFixed(2)} ${getTranslated("sar", context)}",
+                  "- ${paymentProvider.useWallet ? paymentProvider.wallet.toStringAsFixed(2) : 0.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400
                       .copyWith(fontSize: 14, color: Styles.RED_COLOR),
                 ),
@@ -146,8 +145,9 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
             SizedBox(
               height: 15.h,
             ),
-            const Divider(thickness: .2,),
-
+            const Divider(
+              thickness: .2,
+            ),
             Row(
               children: [
                 Expanded(
@@ -159,7 +159,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                   ),
                 ),
                 Text(
-                  "${paymentProvider.total} ${getTranslated("sar", context)}",
+                  "${paymentProvider.total.toStringAsFixed(2)} ${getTranslated("sar", context)}",
                   style: AppTextStyles.w400.copyWith(
                     fontSize: 14,
                   ),

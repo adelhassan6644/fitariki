@@ -83,8 +83,6 @@ class PostOfferProvider extends ChangeNotifier {
       }
     }
 
-    print(selectedRideTypes);
-    print(selectedRideType);
     notifyListeners();
   }
 
@@ -133,9 +131,7 @@ class PostOfferProvider extends ChangeNotifier {
     sl<CalenderProvider>().updateDays(days);
     sl<CalenderProvider>()
         .getEventsList(startDate: startDate, endDate: endDate);
-    counts =  sl<CalenderProvider>().counts;
-
-    print(counts.toString());
+    counts = sl<CalenderProvider>().counts;
     notifyListeners();
   }
 
@@ -239,8 +235,8 @@ class PostOfferProvider extends ChangeNotifier {
   postOffer() async {
     try {
       offerModel = OfferModel(
-        pickupLocation: endLocation,
-        dropOffLocation: startLocation,
+        pickupLocation: startLocation,
+        dropOffLocation: endLocation,
         startDate: startDate,
         endDate: endDate,
         minPrice: double.tryParse(minPrice!),

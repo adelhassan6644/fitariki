@@ -1,3 +1,5 @@
+import '../../my_rides/model/my_rides_model.dart';
+
 class NotificationsModel {
   List<NotificationItem>? notifications;
 
@@ -30,7 +32,7 @@ class NotificationItem {
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) =>
       NotificationItem(
-          id:(json["id"]) ?? "'",
+          id: json["id"] ?? "'",
           notifiableId: json["notifiable_id"],
           notificationData: json["data"] == null
               ? null
@@ -49,6 +51,7 @@ class NotificationData {
   int? status;
   int? id;
   String? url;
+  MyRideModel? rideData;
 
   NotificationData({
     this.message,
@@ -58,11 +61,15 @@ class NotificationData {
     this.status,
     this.id,
     this.url,
+    this.rideData,
   });
 
   factory NotificationData.fromJson(Map<String, dynamic> json) =>
       NotificationData(
         message: json["message"],
+        rideData: json["ride_data"] != null
+            ? MyRideModel.fromJson(json["ride_data"])
+            : null,
         status: json["status"],
         title: json["title"],
         isMyOffer: json["is_my_offer"] ?? false,

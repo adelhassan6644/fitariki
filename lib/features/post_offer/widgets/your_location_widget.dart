@@ -19,7 +19,8 @@ class YourLocationWidget extends StatelessWidget {
       childrenPadding: 4,
       children: [
         CustomAddressPicker(
-          hint: getTranslated("select_your_residence_housing_location", context),
+          hint:
+              getTranslated("select_your_residence_housing_location", context),
           onPicked: provider.onSelectStartLocation,
           location: provider.startLocation,
           decoration: BoxDecoration(

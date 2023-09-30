@@ -3,7 +3,6 @@ import 'package:fitariki/features/auth/pages/forget_password.dart';
 import 'package:fitariki/features/auth/pages/reset_password.dart';
 import 'package:fitariki/features/followers/follower_details/model/follower_model.dart';
 import 'package:fitariki/features/my_rides/page/my_rides_page.dart';
-import 'package:fitariki/features/my_trips/model/my_trips_model.dart';
 import 'package:fitariki/features/my_trips/page/my_pending_trip_details.dart';
 import 'package:fitariki/features/my_trips/page/my_previous_trip_details.dart';
 import 'package:fitariki/features/offer_details/page/offer_details.dart';

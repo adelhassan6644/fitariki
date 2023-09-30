@@ -1,4 +1,5 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import '../../navigation/custom_navigation.dart';
 import '../app/core/utils/color_resources.dart';
@@ -48,6 +49,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Widget build(BuildContext context) {
     return Container(
       height: 360.h,
+      width: context.width,
       decoration: const BoxDecoration(
           color: Styles.WHITE_COLOR,
           borderRadius: BorderRadius.only(
@@ -67,40 +69,29 @@ class _DateTimePickerState extends State<DateTimePicker> {
               ),
             ),
           ),
-          SizedBox(height: 10.h),
-          Text(
-            widget.label,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            child: Text(
+              widget.label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  SizedBox(height: 16.h),
-                  Expanded(
-                      child: CupertinoDatePicker(
-                          mode: widget.mode ?? CupertinoDatePickerMode.date,
-                          onDateTimeChanged: (value) => date = value,
-                          // showDayOfWeek: true,
-
-                          initialDateTime:
-                              date ?? widget.startDateTime ?? DateTime.now(),
-                          minimumDate: widget.minDateTime != null
-                              ? DateTime(
-                                  widget.minDateTime!.year,
-                                  widget.minDateTime!.month,
-                                  widget.minDateTime!.day)
-                              : widget.startDateTime != null
-                                  ? DateTime(
-                                      widget.startDateTime!.year,
-                                      widget.startDateTime!.month,
-                                      widget.startDateTime!.day)
-                                  : DateTime(1900),
-                          maximumDate: DateTime(2100)))
-                ],
-              ),
+            child: CupertinoDatePicker(
+              mode: widget.mode ?? CupertinoDatePickerMode.date,
+              onDateTimeChanged: (v) => date = v,
+              initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
+              minimumDate: widget.minDateTime != null
+                  ? DateTime(widget.minDateTime!.year,
+                      widget.minDateTime!.month, widget.minDateTime!.day)
+                  : widget.startDateTime != null
+                      ? DateTime(
+                          widget.startDateTime!.year,
+                          widget.startDateTime!.month,
+                          widget.startDateTime!.day)
+                      : DateTime(1900),
+              maximumDate: DateTime(2100),
             ),
           ),
           SafeArea(
