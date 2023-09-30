@@ -50,7 +50,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                 CustomAppBar(
                   title: getTranslated("trip", context),
                 ),
-                provider.isLoading
+                provider.isLoading && provider.requestModel == null
                     ? RequestDetailsShimmer(
                         isDriver: provider.isDriver,
                       )
@@ -111,15 +111,16 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                           ?.national?.niceName,
                               createdAt: provider.requestModel?.createdAt ??
                                   DateTime.now(),
-                              days: (provider.requestModel!.offer!.driverId !=
+                              days: (provider.requestModel?.offer?.driverId !=
                                           null
                                       ? provider.requestModel?.clientModel
                                               ?.clientDays ??
                                           provider.requestModel?.offer
-                                              ?.clientModel?.clientDays
+                                              ?.clientModel?.clientDays ??
+                                          []
                                       : provider
-                                              .requestModel!.offer!.offerDays ??
-                                          [])!
+                                              .requestModel?.offer?.offerDays ??
+                                          [])
                                   .map((e) => e.dayName)
                                   .toList()
                                   .join(", "),
@@ -137,7 +138,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                               0) +
                                       1,
                               timeRange:
-                                  "${Methods.convertStringToTime((provider.requestModel!.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel!.offer!.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel!.offer!.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel!.offer!.offerDays ?? [])?[0].endTime, withFormat: true)}",
+                                  "${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])?[0].endTime, withFormat: true)}",
                             ),
 
                             /// Map View

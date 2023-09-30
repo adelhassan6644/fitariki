@@ -32,7 +32,8 @@ class _MyOfferDetailsState extends State<MyOfferDetails>
     with AutomaticKeepAliveClientMixin<MyOfferDetails> {
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () async {
+      await sl<MyOffersProvider>().updateOfferId(widget.offerId);
       sl<MyOffersProvider>().getMyOfferDetails();
     });
 

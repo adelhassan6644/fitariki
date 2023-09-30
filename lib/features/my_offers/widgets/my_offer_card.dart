@@ -32,7 +32,6 @@ class _MyOfferCardState extends State<MyOfferCard> {
       return InkWell(
         onTap: !widget.isFromMyOfferDetails
             ? () {
-                provider.updateOfferId(widget.offer!.id!);
                 CustomNavigator.push(Routes.MY_OFFERS_DETAILS,
                     arguments: widget.offer!.id!);
                 setState(() {
