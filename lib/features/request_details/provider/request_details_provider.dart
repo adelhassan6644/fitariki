@@ -123,7 +123,7 @@ class RequestDetailsProvider extends ChangeNotifier {
   bool isLoading = false;
   OfferRequestDetailsModel? requestModel;
   getRequestDetails({required int id}) async {
-    try {
+    try {requestModel=null;
       isLoading = true;
       notifyListeners();
 

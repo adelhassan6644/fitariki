@@ -49,9 +49,12 @@ class _PickMapScreenState extends State<PickMapScreen> {
               widget.baseModel.object.latitude ?? AppStrings.defaultLat),
           double.parse(
               widget.baseModel.object.longitude ?? AppStrings.defaultLong));
-      _mapController!.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: _initialPosition, zoom: 100),
-      ));
+      Future.delayed(Duration(seconds: 1),(){
+        _mapController?.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(target: _initialPosition, zoom: 100),
+        ));
+      });
+
     } else {
       await Provider.of<LocationProvider>(context, listen: false)
           .getCurrentLocation();

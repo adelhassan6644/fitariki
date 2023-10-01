@@ -154,52 +154,27 @@ class MyCurrentTripDetails extends StatelessWidget {
                                       1
                                   : 1,
                               timeRange:
-                                  "${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].endTime, withFormat: true)}",
+                                  "${Methods.convertStringToTime((
+                                      provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.tripDetails?.offer!.driverId != null ? provider.tripDetails?.clientModel?.clientDays ?? provider.tripDetails?.offer?.clientModel?.clientDays ?? provider.tripDetails?.myTripRequest?.clientModel?.clientDays : provider.tripDetails?.offer?.offerDays ?? [])?[0].endTime, withFormat: true)}",
                             ),
 
                             /// Map View
                             MapWidget(
                               showFullAddress: true,
-                              stopPoints: provider.isDriver &&
-                                      provider.tripDetails?.myTripRequest
-                                              ?.followers !=
-                                          null &&
-                                      provider.tripDetails!.myTripRequest!
-                                          .followers!.isNotEmpty
-                                  ? provider.tripDetails?.myTripRequest
-                                          ?.followers?.length ??
-                                      0
-                                  : null,
-                              startPoint: provider.isDriver
-                                  ? provider.tripDetails?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.tripDetails?.offer?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.tripDetails?.myTripRequest
-                                          ?.clientModel?.pickupLocation
-                                  : provider.tripDetails?.offer?.pickupLocation,
-                              endPoint: sl<ProfileProvider>().isDriver
-                                  ? provider.tripDetails?.clientModel
-                                          ?.dropOffLocation ??
-                                      provider.tripDetails?.offer?.clientModel
-                                          ?.dropOffLocation ??
-                                      provider.tripDetails?.myTripRequest
-                                          ?.clientModel?.dropOffLocation
-                                  : provider
+                              stopPoints:  (provider.tripDetails?.offer?.driverId !=
+                                  null)
+                                  ? provider.tripDetails?.offerFollowers?.length
+                                  : provider.tripDetails?.offer
+                                  ?.offerFollowers?.length,
+                              startPoint:  provider.tripDetails?.offer?.pickupLocation,
+                              endPoint: provider
                                       .tripDetails?.offer?.dropOffLocation,
                             ),
 
                             ///distance between client and driver
                             DistanceWidget(
                               isCaptain: provider.isDriver,
-                              location: provider.isDriver
-                                  ? provider.tripDetails?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.tripDetails?.offer?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.tripDetails?.myTripRequest
-                                          ?.clientModel?.pickupLocation
-                                  : provider.tripDetails?.offer?.pickupLocation,
+                              location:  provider.tripDetails?.offer?.pickupLocation,
                             ),
 
                             ///Type of ride
@@ -220,10 +195,7 @@ class MyCurrentTripDetails extends StatelessWidget {
                                   const SizedBox(height: 8),
                                   Text(
                                     Methods.getOfferType(
-                                        provider.tripDetails?.offerType ??
                                             provider.tripDetails?.myTripRequest
-                                                ?.offerType ??
-                                            provider.tripDetails?.offer
                                                 ?.offerType ??
                                             1),
                                     textAlign: TextAlign.end,
@@ -235,13 +207,11 @@ class MyCurrentTripDetails extends StatelessWidget {
                               ),
                             ),
 
-                            /// to show stop points for followers request if driver
                             Visibility(
-                              visible: (provider.tripDetails?.myTripRequest
-                                          ?.followers !=
-                                      null &&
+                              visible: (
                                   provider.tripDetails!.myTripRequest!
-                                      .followers!.isNotEmpty),
+                                      .followers!.isNotEmpty||provider.tripDetails!.offer!.offerFollowers!
+                                      .isNotEmpty),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -259,39 +229,33 @@ class MyCurrentTripDetails extends StatelessWidget {
                                     ),
                                   ),
                                   ...List.generate(
-                                    provider.tripDetails?.myTripRequest
-                                            ?.followers?.length ??
-                                        0,
+                                    provider.tripDetails?.offer?.driverId != null
+                                        ? provider.tripDetails!.myTripRequest!.followers!.length
+                                        : provider.tripDetails?.offer!.offerFollowers!
+                                        .length??0 ,
                                     (index) => MapWidget(
                                       showFullAddress: true,
-                                      clientName: provider
-                                              .tripDetails
-                                              ?.myTripRequest
-                                              ?.followers?[index]
-                                              .name ??
+                                      clientName: provider.tripDetails?.offer?.driverId != null
+                                          ? provider.tripDetails!.myTripRequest!.followers![index].name
+                                          : provider.tripDetails?.offer!.offerFollowers?[index].name ??
                                           "",
-                                      gender: provider
-                                          .tripDetails
-                                          ?.myTripRequest
-                                          ?.followers?[index]
-                                          .gender,
-                                      startPoint: provider
-                                          .tripDetails
-                                          ?.myTripRequest
-                                          ?.followers?[index]
-                                          .pickupLocation,
-                                      endPoint: provider
-                                          .tripDetails
-                                          ?.myTripRequest
-                                          ?.followers?[index]
-                                          .dropOffLocation,
+                                      gender:  provider.tripDetails?.offer?.driverId != null
+                                          ? provider.tripDetails!.myTripRequest!.followers![index].gender
+                                          : provider.tripDetails?.offer!.offerFollowers?[index].gender ??
+                                          0,
+                                      startPoint: provider.tripDetails?.offer?.driverId != null
+                                          ? provider.tripDetails!.myTripRequest!.followers![index].pickupLocation
+                                          : provider.tripDetails?.offer!.offerFollowers?[index].pickupLocation,
+                                      endPoint:  provider.tripDetails?.offer?.driverId != null
+                                          ? provider.tripDetails!.myTripRequest!.followers![index].dropOffLocation
+                                          : provider.tripDetails?.offer!.offerFollowers?[index].dropOffLocation,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
 
-                            Visibility(
+                          /*  Visibility(
                               visible: (provider
                                           .tripDetails?.offer?.offerFollowers !=
                                       null &&
@@ -337,7 +301,7 @@ class MyCurrentTripDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),
+                            ),*/
 
                             /// to show car data if client
                             Visibility(

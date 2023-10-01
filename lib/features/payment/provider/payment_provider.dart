@@ -16,6 +16,7 @@ class PaymentProvider extends ChangeNotifier {
   final PaymentRepo paymentRepo;
 
   PaymentProvider({required this.paymentRepo}) {
+    wallet = sl.get<ProfileProvider>().profileModel?.client?.wallet ?? 0.0;
     paymentFees();
   }
 
@@ -29,6 +30,8 @@ class PaymentProvider extends ChangeNotifier {
   OfferRequestDetailsModel? requestModel;
   setData(data) {
     requestModel = data;
+
+
     calcTotal();
     notifyListeners();
   }
@@ -141,6 +144,7 @@ class PaymentProvider extends ChangeNotifier {
   double walletDeduction = 0;
 
   calcTotal() {
+    wallet = sl.get<ProfileProvider>().profileModel?.client?.wallet ?? 0.0;
     tax = 0;
     serviceCost = 0;
     total = 0;
@@ -230,7 +234,7 @@ class PaymentProvider extends ChangeNotifier {
     try {
       var apiResponse = await paymentRepo.reserveFreeOffer(
           requestModel: requestModel!,
-          couponId: _coupon!.id,
+          couponId: _coupon?.id,
           isFree: total == 0,
           useWallet: useWallet,
           reservationId: reservationId);

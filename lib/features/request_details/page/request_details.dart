@@ -46,7 +46,7 @@ class _RequestDetailsState extends State<RequestDetails> {
           Consumer<RequestDetailsProvider>(builder: (_, provider, child) {
         return Column(
           children: [
-            provider.isLoading && provider.requestModel != null
+            provider.isLoading && provider.requestModel == null
                 ? RequestDetailsShimmer(
                     isDriver: provider.isDriver,
                   )
@@ -85,7 +85,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                   ? provider.requestModel?.clientModel
                                           ?.clientDays ??
                                       provider.requestModel?.offer?.clientModel
-                                          ?.clientDays??[]
+                                          ?.clientDays ??
+                                      []
                                   : provider.requestModel?.offer?.offerDays ??
                                       [])
                               .map((e) => e.dayName)
@@ -95,14 +96,11 @@ class _RequestDetailsState extends State<RequestDetails> {
                           priceRange:
                               "${provider.requestModel?.price ?? 0} ${getTranslated("sar", context)}",
                           passengers:
-                              (provider.requestModel?.followers?.length != 0
-                                      ? provider.requestModel?.followers
-                                              ?.length ??
-                                          0
-                                      : provider.requestModel?.offer
-                                              ?.offerFollowers?.length ??
-                                          0) +
-                                  1,
+                              provider.requestModel!.offer?.driverId != null
+                                  ? provider.requestModel!.followers!.length + 1
+                                  : provider.requestModel!.offer!
+                                          .offerFollowers!.length +
+                                      1,
                           timeRange:
                               "${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].startTime, withFormat: true)}: ${Methods.convertStringToTime((provider.requestModel?.offer?.driverId != null ? provider.requestModel?.clientModel?.clientDays ?? provider.requestModel?.offer?.clientModel?.clientDays : provider.requestModel?.offer?.offerDays ?? [])![0].endTime, withFormat: true)}",
                         ),
@@ -116,43 +114,31 @@ class _RequestDetailsState extends State<RequestDetails> {
                             /// Map View
                             MapWidget(
                               launchMap: false,
-                              stopPoints: provider.isDriver &&
-                                      provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel?.followers?.length ??
-                                      0
-                                  : null,
-                              startPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.requestModel?.offer?.clientModel
-                                          ?.pickupLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
-                              endPoint: provider.isDriver
-                                  ? provider.requestModel?.clientModel
-                                      ?.dropOffLocation
-                                  : provider
-                                      .requestModel?.offer?.dropOffLocation,
+                              stopPoints:
+                                  provider.requestModel?.offer?.driverId != null
+                                      ? provider.requestModel?.followers!.length
+                                      : provider.requestModel!.offer!
+                                          .offerFollowers!.length,
+                              startPoint:
+                                  provider.requestModel?.offer?.pickupLocation,
+                              endPoint:
+                                  provider.requestModel?.offer?.dropOffLocation,
                             ),
 
                             ///distance between client and driver
                             DistanceWidget(
                               isCaptain: provider.isDriver,
-                              location: provider.isDriver
-                                  ? provider
-                                      .requestModel?.clientModel?.pickupLocation
-                                  : provider
-                                      .requestModel?.offer?.pickupLocation,
+                              location:
+                                  provider.requestModel?.offer?.pickupLocation,
                             ),
 
                             /// to show stop points for followers request if driver
                             Visibility(
                               visible: provider.isDriver &&
-                                  provider.requestModel?.followers != null &&
-                                  provider.requestModel!.followers!.isNotEmpty,
+                                      provider.requestModel!.followers!
+                                          .isNotEmpty ||
+                                  provider.requestModel!.offer!.offerFollowers!
+                                      .isNotEmpty,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -170,19 +156,49 @@ class _RequestDetailsState extends State<RequestDetails> {
                                     ),
                                   ),
                                   ...List.generate(
-                                    provider.requestModel?.followers?.length ??
-                                        0,
+                                    provider.requestModel!.offer!
+                                                .driverId !=
+                                            null
+                                        ? provider
+                                            .requestModel!.followers!.length
+                                        : provider.requestModel!.offer!
+                                            .offerFollowers!.length,
                                     (index) => MapWidget(
                                       launchMap: false,
-                                      clientName: provider.requestModel
-                                              ?.followers?[index].name ??
-                                          "",
-                                      gender: provider.requestModel
-                                          ?.followers?[index].gender,
-                                      startPoint: provider.requestModel
-                                          ?.followers?[index].pickupLocation,
-                                      endPoint: provider.requestModel
-                                          ?.followers?[index].dropOffLocation,
+                                      clientName: provider.requestModel!.offer!
+                                                  .driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].name
+                                          : provider.requestModel!.offer!
+                                              .offerFollowers![index].name,
+                                      gender: provider.requestModel!.offer!
+                                                  .driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].gender
+                                          : provider.requestModel!.offer!
+                                              .offerFollowers![index].gender,
+                                      startPoint: provider.requestModel!.offer!
+                                                  .driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].pickupLocation
+                                          : provider
+                                              .requestModel!
+                                              .offer!
+                                              .offerFollowers![index]
+                                              .pickupLocation,
+                                      endPoint: provider.requestModel!.offer!
+                                                  .driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].dropOffLocation
+                                          : provider
+                                              .requestModel!
+                                              .offer!
+                                              .offerFollowers![index]
+                                              .dropOffLocation,
                                     ),
                                   ),
                                 ],

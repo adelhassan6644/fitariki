@@ -87,6 +87,7 @@ class AddFollower extends StatelessWidget {
                               FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                             ],
                             inputType: TextInputType.number,
+                            maxLength: 2,
                             hint: getTranslated("age", context),
                             controller: provider.age,
                           )),

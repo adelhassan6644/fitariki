@@ -37,7 +37,7 @@ class HomeTabBarWidget extends StatelessWidget {
                           Expanded(
                             child: TabWidget(
                                 title:
-                                    getTranslated("delivery_offers", context),
+                      provider.isDriver?getTranslated("delivery_requests", context):   getTranslated("delivery_offers", context),
                                 isSelected: provider.tab == 0,
                                 onTab: () => provider.onSelectTab(0)),
                           ),
