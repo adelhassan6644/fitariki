@@ -36,16 +36,17 @@ class ProfileRepo {
     return deviceToken;
   }
 
+  String get userId => sharedPreferences.getString(AppStorageKey.userId) ?? "";
+  String get role => sharedPreferences.getString(AppStorageKey.role) ?? "";
+
   Future<Either<ServerFailure, Response>> updateProfile(
       {required dynamic body}) async {
     try {
-      Response response = await dioClient.post(
-          uri: EndPoints.updateProfile(
-              sharedPreferences.getString(AppStorageKey.role),
-              sharedPreferences.getString(AppStorageKey.userId)),
-          data: body);
+      Response response = await dioClient.post(uri: EndPoints.updateProfile(role, userId), data: body);
 
       if (response.statusCode == 200) {
+        await dioClient.updateHeader(userId);
+        await setLoggedIn();
         return Right(response);
       } else {
         return left(ServerFailure(response.data['message']));
@@ -58,9 +59,7 @@ class ProfileRepo {
   Future<Either<ServerFailure, Response>> getProfile() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.getProfile(
-            sharedPreferences.getString(AppStorageKey.role),
-            sharedPreferences.getString(AppStorageKey.userId)),
+        uri: EndPoints.getProfile(role, userId),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -102,16 +101,8 @@ class ProfileRepo {
     }
   }
 
-  getRoleType() {
-    if (sharedPreferences.containsKey(AppStorageKey.role)) {
-      return sharedPreferences.getString(AppStorageKey.role);
-    } else {
-      return null;
-    }
-  }
-
   getId() {
-    return sharedPreferences.getString(AppStorageKey.userId);
+    return sharedPreferences.getString(AppStorageKey.userId)??"";
   }
 
   isDriver() {

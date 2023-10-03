@@ -657,7 +657,6 @@ class ProfileProvider extends ChangeNotifier {
           notifyListeners();
         }, (response) {
           if (fromRegister) {
-            profileRepo.setLoggedIn();
             CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
           } else {
             CustomNavigator.pop();

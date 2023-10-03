@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -50,7 +48,7 @@ class AuthRepo {
     // if (Platform.isIOS) {
     //   deviceToken = await FirebaseMessaging.instance.getAPNSToken();
     // } else {
-      deviceToken = await FirebaseMessaging.instance.getToken();
+    deviceToken = await FirebaseMessaging.instance.getToken();
     // }
 
     if (deviceToken != null) {
@@ -73,6 +71,8 @@ class AuthRepo {
           });
 
       if (response.statusCode == 200) {
+        await dioClient.updateHeader(response.data['data'][role]["id"].toString());
+        await saveUserRole(type: role, id: response.data['data'][role]["id"].toString());
         return Right(response);
       } else {
         return left(ServerFailure(response.data['message']));
