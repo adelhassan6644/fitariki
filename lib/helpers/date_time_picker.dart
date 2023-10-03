@@ -81,31 +81,20 @@ class _DateTimePickerState extends State<DateTimePicker> {
           Expanded(
             child: SizedBox(
               width: double.infinity,
-              child: CupertinoTheme(
-                data: const CupertinoThemeData(
-
-                  textTheme: CupertinoTextThemeData(
-                    dateTimePickerTextStyle: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-                child: CupertinoDatePicker(
-                  mode: widget.mode ?? CupertinoDatePickerMode.date,
-                  onDateTimeChanged: (v) => date = v,
-                  initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
-                  minimumDate: widget.minDateTime != null
-                      ? DateTime(widget.minDateTime!.year,
-                          widget.minDateTime!.month, widget.minDateTime!.day)
-                      : widget.startDateTime != null
-                          ? DateTime(
-                              widget.startDateTime!.year,
-                              widget.startDateTime!.month,
-                              widget.startDateTime!.day)
-                          : DateTime(1900),
-                  maximumDate: DateTime(2100),
-                ),
+              child: CupertinoDatePicker(
+                mode: widget.mode ?? CupertinoDatePickerMode.date,
+                onDateTimeChanged: (v) => date = v,
+                initialDateTime: date ?? widget.startDateTime ?? DateTime.now(),
+                minimumDate: widget.minDateTime != null
+                    ? DateTime(widget.minDateTime!.year,
+                        widget.minDateTime!.month, widget.minDateTime!.day)
+                    : widget.startDateTime != null
+                        ? DateTime(
+                            widget.startDateTime!.year,
+                            widget.startDateTime!.month,
+                            widget.startDateTime!.day)
+                        : DateTime(1900),
+                maximumDate: DateTime(2100),
               ),
             ),
           ),

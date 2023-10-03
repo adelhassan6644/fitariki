@@ -194,8 +194,9 @@ abstract class CustomNavigator {
           }
         }
       case Routes.PAYMENTWEBVIEW:
+        final  map= settings.arguments as Map<String,dynamic>;
         return _pageRoute(PaymentWebViewScreen(
-          reservationId: settings.arguments! as int,
+          reservationId: map["id"] as int, useWallet: map["useWallet"] as bool ,
         ));
 
       case Routes.TERMS_AND_CONDITIONS:

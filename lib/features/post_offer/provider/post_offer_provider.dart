@@ -11,6 +11,7 @@ import '../../../main_providers/calender_provider.dart';
 import '../../../main_providers/schedule_provider.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
+import '../../followers/followers/provider/followers_provider.dart';
 import '../../maps/models/location_model.dart';
 import '../../success/model/success_model.dart';
 import '../repo/post_offer_repo.dart';
@@ -244,6 +245,9 @@ class PostOfferProvider extends ChangeNotifier {
         offerDays: scheduleProvider.selectedDays,
         duration: counts!.count,
         offerType: selectedRideType,
+        offerFollowers: sl.get<FollowersProvider>().selectedFollowers
+
+
       );
 
       spinKitDialog();

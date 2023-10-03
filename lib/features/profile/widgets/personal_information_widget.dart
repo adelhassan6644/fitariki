@@ -88,6 +88,7 @@ class PersonalInformationWidget extends StatelessWidget {
                   ],
                   inputType: TextInputType.number,
                   controller: provider.age,
+                  maxLength: 2,
                   hint: getTranslated("age", context),
                   read: !fromLogin && provider.isDriver,
                 )),
@@ -155,6 +156,7 @@ class PersonalInformationWidget extends StatelessWidget {
                       valid: Validations.name,
                       hint: getTranslated("identity_number", context),
                       controller: provider.identityNumber,
+                      maxLength: 10,
                       read: !fromLogin,
                     )),
                     const SizedBox(
@@ -196,6 +198,7 @@ class PersonalInformationWidget extends StatelessWidget {
                   child: CustomTextFormField(
                     controller: provider.phoneTEC,
                     hint: "5xxxxxxxx",
+                    maxLength: 10,
                     inputType: TextInputType.phone,
                     // valid: (v) =>
                     //     Validations.phone(v, provider.countryFlag.trim()),

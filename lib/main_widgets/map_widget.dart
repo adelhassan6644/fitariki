@@ -154,7 +154,7 @@ class MapWidget extends StatelessWidget {
 
                         ///Stop points
                         Visibility(
-                          visible: stopPoints != null,
+                          visible: stopPoints != null&&stopPoints!=0,
                           child: Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

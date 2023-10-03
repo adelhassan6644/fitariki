@@ -1,11 +1,13 @@
 import 'package:fitariki/app/core/utils/app_snack_bar.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/features/my_rides/model/my_rides_model.dart';
 import 'package:fitariki/features/my_rides/widgets/ride_locations_widget.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../navigation/routes.dart';
 import 'cancel_ride_pop_up_button.dart';
@@ -28,14 +30,15 @@ class RideCard extends StatelessWidget {
           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 8),
       child: InkWell(
         onTap: () {
-          if (selectedDay.day == DateTime.now().day) {
+
             if (ride.status != 3 && ride.status != 4) {
-              CustomNavigator.push(Routes.TRACKING, arguments: ride);
+              if (selectedDay.day == DateTime.now().day&&selectedDay.month == DateTime.now().month) {
+                CustomNavigator.push(Routes.TRACKING, arguments: ride);
+              } else {
+                showToast(getTranslated("ride_not_started", context).replaceAll("**", selectedDay.dateFormat(format: "d MMM yyyy")));
+              }
             } else {
               showToast(getTranslated("your_ride_is_ended", context));
-            }
-          } else {
-            showToast(getTranslated("ride_not_started", context));
           }
         },
         child: Container(

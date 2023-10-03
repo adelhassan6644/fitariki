@@ -16,10 +16,10 @@ class HomeRepo {
 
   Future<Either<ServerFailure, Response>> getOffer({var body}) async {
     try {
-      Response response = await dioClient.get(
+      Response response = await dioClient.post(
           uri: EndPoints.homeOffers(
               sharedPreferences.getString(AppStorageKey.role) ?? "client"),
-          queryParameters: body);
+          data: body);
       if (response.statusCode == 200) {
         return Right(response);
       } else {

@@ -113,7 +113,9 @@ class HomeProvider extends ChangeNotifier {
             "${homeRepo.getRole()}_id": homeRepo.getUserId(),
           if (endLocation != null) "drop_off_location": endLocation!.toJson(),
           if (startLocation != null) "pickup_location": startLocation!.toJson(),
-          "gender": selectedGender,
+          homeRepo.getRole() == "client" ? "driver" : "client": {
+            "gender": selectedGender,
+          }
         }
       };
 

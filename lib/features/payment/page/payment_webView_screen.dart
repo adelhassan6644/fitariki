@@ -18,8 +18,9 @@ import '../../success/model/success_model.dart';
 
 class PaymentWebViewScreen extends StatefulWidget {
   final int reservationId;
+  final bool useWallet;
 
-  const PaymentWebViewScreen({super.key, required this.reservationId});
+  const PaymentWebViewScreen({super.key, required this.reservationId, required this.useWallet});
 
   @override
   State<PaymentWebViewScreen> createState() => _PaymentWebViewScreenState();
@@ -148,9 +149,9 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 initialUrlRequest: URLRequest(
                   url: (reservationModelProvider!.coupon != null)
                       ? WebUri(wiselectedUrl +
-                          "?reservation_id=${widget.reservationId}&coupon_id=${reservationModelProvider!.coupon!.id}")
+                          "?reservation_id=${widget.reservationId}&coupon_id=${reservationModelProvider!.coupon!.id}&use_wallet=${widget.useWallet ? 1 : 0}")
                       : WebUri(wiselectedUrl +
-                          "?reservation_id=${widget.reservationId}"),
+                          "?reservation_id=${widget.reservationId}&use_wallet=${widget.useWallet ? 1 : 0}"),
                 ),
                 pullToRefreshController: pullToRefreshController,
                 initialOptions: options,

@@ -43,23 +43,10 @@ class CurrentTripsWidget extends StatelessWidget {
                               child: MyTripCard(
                                 isCurrent: true,
                                 isDriver: provider.isDriver,
-                                offerPassengers: (provider.currentTrips![index]
-                                        .offer!.offerFollowers!.isEmpty)
-                                    ? (provider.currentTrips![index]
-                                            .myTripRequest!.followers!.isEmpty
-                                        ? 1
-                                        : provider
-                                                .currentTrips![index]
-                                                .myTripRequest!
-                                                .followers!
-                                                .length +
-                                            1)
-                                    : (provider.currentTrips![index].offer!
-                                            .offerFollowers!.isEmpty
-                                        ? 1
-                                        : provider.currentTrips![index].offer!
-                                                .offerFollowers!.length +
-                                            1),
+                                offerPassengers: provider.currentTrips![index].offer?.driverId != null
+                                    ? provider.currentTrips![index].myTripRequest!.followers!.length+1
+                                    : provider.currentTrips![index].offer!.offerFollowers!
+                                    .length+1??0 ,
                                 myTrip: provider.currentTrips![index],
                                 offerDays:(provider
                                     .currentTrips![index].offer!.driverId!=null  ?

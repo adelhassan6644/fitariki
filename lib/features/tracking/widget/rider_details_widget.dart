@@ -52,7 +52,7 @@ class RiderDetailsWidget extends StatelessWidget {
           customCircleSvgIcon(
               onTap: () async {
                 if (isDriver) {
-                  await launch("tel://$phone");
+                  launch("whatsapp://send?phone=$phone");
                 } else {
                   customShowModelBottomSheet(
                       body: EmergencyBottomSheet(

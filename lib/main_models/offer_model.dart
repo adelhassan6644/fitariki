@@ -146,10 +146,10 @@ class OfferModel {
               : List<dynamic>.from(offerDays!.map((x) => x.toJson())),
           "pickup_location": pickupLocation?.toJson(),
           "drop_off_location": dropOffLocation?.toJson(),
-          if (sl.get<FollowersProvider>().addFollowers)
-            "offer_followers": List<dynamic>.from(sl
-                .get<FollowersProvider>()
-                .selectedFollowers
+
+          if (sl.get<FollowersProvider>().addFollowers&&offerFollowers!.isNotEmpty)
+            "offer_followers":
+            List<dynamic>.from(  offerFollowers!
                 .map((x) => x.toPostJson()))
         }
       };

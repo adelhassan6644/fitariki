@@ -144,33 +144,22 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             /// Map View
                             MapWidget(
                               launchMap: false,
-                              stopPoints: provider.isDriver &&
-                                      provider.requestModel?.followers !=
-                                          null &&
-                                      provider
-                                          .requestModel!.followers!.isNotEmpty
-                                  ? provider.requestModel?.followers?.length ??
-                                      0
-                                  : null,
-                              startPoint: provider.requestModel?.clientModel
-                                      ?.pickupLocation ??
-                                  provider.requestModel?.offer?.clientModel
-                                      ?.pickupLocation,
-                              endPoint: provider.requestModel?.clientModel
-                                      ?.dropOffLocation ??
-                                  provider.requestModel?.offer?.clientModel
-                                      ?.dropOffLocation,
+                              stopPoints:
+                                  (provider.requestModel?.offer?.driverId !=
+                                          null)
+                                      ? provider.requestModel?.followers?.length
+                                      : provider.requestModel?.offer
+                                          ?.offerFollowers?.length,
+                              startPoint:
+                                  provider.requestModel?.offer?.pickupLocation,
+                              endPoint:
+                                  provider.requestModel?.offer?.dropOffLocation,
                             ),
 
                             ///distance between client and driver
                             DistanceWidget(
                               isCaptain: provider.isDriver,
-                              location: provider.isDriver
-                                  ? provider.requestModel?.clientModel
-                                          ?.pickupLocation ??
-                                      provider.requestModel?.offer?.clientModel
-                                          ?.pickupLocation
-                                  : provider
+                              location: provider
                                       .requestModel?.offer?.pickupLocation,
                             ),
 
@@ -205,30 +194,64 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               ),
                             ),
 
-                            if (provider.requestModel?.offer?.offerFollowers !=
-                                    null &&
+                            if (provider.requestModel!.followers!.isNotEmpty ||
                                 provider.requestModel!.offer!.offerFollowers!
                                     .isNotEmpty)
                               ...List.generate(
-                                provider.requestModel?.offer?.offerFollowers
-                                        ?.length ??
-                                    0,
+                                provider.requestModel?.offer?.driverId != null
+                                    ? provider.requestModel!.followers!.length
+                                    : provider.requestModel!.offer!
+                                            .offerFollowers!.length ??
+                                        0,
                                 (index) => MapWidget(
                                   launchMap: false,
-                                  clientName: provider.requestModel?.offer
-                                          ?.offerFollowers?[index].name ??
-                                      "",
-                                  gender: provider.requestModel?.offer
-                                      ?.offerFollowers?[index].gender,
-                                  startPoint: provider.requestModel?.offer
-                                      ?.offerFollowers?[index].pickupLocation,
-                                  endPoint: provider.requestModel?.offer
-                                      ?.offerFollowers?[index].dropOffLocation,
+                                  clientName:
+                                      provider.requestModel?.offer?.driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].name
+                                          : provider
+                                                  .requestModel!
+                                                  .offer!
+                                                  .offerFollowers?[index]
+                                                  .name ??
+                                              "",
+                                  gender:
+                                      provider.requestModel?.offer?.driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].gender
+                                          : provider
+                                                  .requestModel!
+                                                  .offer!
+                                                  .offerFollowers?[index]
+                                                  .gender ??
+                                              0,
+                                  startPoint:
+                                      provider.requestModel?.offer?.driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].pickupLocation
+                                          : provider
+                                              .requestModel!
+                                              .offer!
+                                              .offerFollowers?[index]
+                                              .pickupLocation,
+                                  endPoint:
+                                      provider.requestModel?.offer?.driverId !=
+                                              null
+                                          ? provider.requestModel!
+                                              .followers![index].dropOffLocation
+                                          : provider
+                                              .requestModel!
+                                              .offer!
+                                              .offerFollowers?[index]
+                                              .dropOffLocation,
                                 ),
                               ),
 
                             /// to show stop points for followers request if driver
-                            Visibility(
+                          /*  Visibility(
                               visible: provider.isDriver &&
                                   provider.requestModel?.followers != null &&
                                   provider.requestModel!.followers!.isNotEmpty,
@@ -265,7 +288,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ),*/
 
                             /// to show car data if client
                             Visibility(
