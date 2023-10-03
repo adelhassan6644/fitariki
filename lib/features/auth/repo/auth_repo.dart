@@ -71,8 +71,10 @@ class AuthRepo {
           });
 
       if (response.statusCode == 200) {
-        await dioClient.updateHeader(response.data['data'][role]["id"].toString());
-        await saveUserRole(type: role, id: response.data['data'][role]["id"].toString());
+        await dioClient
+            .updateHeader(response.data['data'][role]["id"].toString());
+        await saveUserRole(
+            type: role, id: response.data['data'][role]["id"].toString());
         return Right(response);
       } else {
         return left(ServerFailure(response.data['message']));
@@ -206,6 +208,7 @@ class AuthRepo {
   Future<bool> clearSharedData() async {
     await sharedPreferences.remove(AppStorageKey.userId);
     await sharedPreferences.remove(AppStorageKey.isLogin);
+    await dioClient.updateHeader("");
     return true;
   }
 }
