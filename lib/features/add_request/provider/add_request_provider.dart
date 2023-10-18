@@ -127,6 +127,11 @@ class AddRequestProvider extends ChangeNotifier {
             "برجاء ادخال الحد الادني للسعر اقل من الحد الاقصي لسعر العرض!");
         return;
       }
+      if (duration==0) {
+        showToast(
+            " لا يمكن ان تكون المدة 0 يوم");
+        return;
+      }
     }
     return true;
   }
