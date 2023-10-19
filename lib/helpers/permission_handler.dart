@@ -11,6 +11,9 @@ abstract class PermissionHandler {
         return false;
       } else {
         PermissionStatus value = await permission.request();
+        if (value.isDenied || value.isRestricted) {
+          return await checkStoragePermission();
+        }
         log(value.name);
         return await _checkPermissionIsGranted(permission);
       }
@@ -29,5 +32,7 @@ abstract class PermissionHandler {
   static Future<bool> checkGalleryPermission() async =>
       await _checkPermission(Permission.photos);
   static Future<bool> checkFilePermission() async =>
+      await _checkPermission(Permission.manageExternalStorage);
+  static Future<bool> checkStoragePermission() async =>
       await _checkPermission(Permission.storage);
 }
