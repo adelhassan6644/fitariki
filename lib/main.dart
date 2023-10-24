@@ -6,7 +6,7 @@ import 'app/core/utils/app_storage_keys.dart';
 import 'app/core/utils/un_focus.dart';
 import 'app/localization/localization/app_localization.dart';
 import 'app/localization/provider/localization_provider.dart';
-import 'app/notifications/my_notification.dart';
+import 'app/notifications/notification_helper.dart';
 import 'app/theme/dark_theme.dart';
 import 'app/theme/light_theme.dart';
 import 'app/theme/theme_provider/theme_provider.dart';
@@ -26,10 +26,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseNotifications.init();
+  await Firebase.initializeApp();
+  FirebaseNotifications.setUpFirebase();
   await di.init();
-  runApp(
-      MultiProvider(providers: ProviderList.providers, child: const MyApp()));
+  runApp(MultiProvider(providers: ProviderList.providers, child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {

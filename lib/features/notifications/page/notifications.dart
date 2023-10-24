@@ -8,6 +8,7 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
+import '../../../data/config/di.dart';
 import '../provider/notifications_provider.dart';
 import '../widget/notification_card.dart';
 
@@ -22,8 +23,7 @@ class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      Provider.of<NotificationsProvider>(context, listen: false)
-          .getNotifications();
+      sl<NotificationsProvider>().getNotifications();
     });
     super.initState();
   }
