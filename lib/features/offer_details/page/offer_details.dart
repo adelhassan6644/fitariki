@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/components/animated_widget.dart';
 import 'package:fitariki/features/offer_details/repo/offer_details_repo.dart';
+import 'package:fitariki/features/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/methods.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_app_bar.dart';
@@ -232,47 +236,61 @@ class OfferDetails extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                           vertical: 24.h),
-                      child: CustomButton(
-                          textColor: provider.offerDetails?.isSentOffer == true
-                              ? Styles.PRIMARY_COLOR
-                              : Styles.WHITE_COLOR,
-                          backgroundColor:
-                              provider.offerDetails?.isSentOffer == true
-                                  ? Styles.PRIMARY_COLOR.withOpacity(0.1)
-                                  : Styles.PRIMARY_COLOR,
-                          text: provider.offerDetails?.isSentOffer == true
-                              ? getTranslated(
-                                  provider.isDriver
-                                      ? "offer_sent"
-                                      : "request_sent",
-                                  context)
-                              : getTranslated(
-                                  provider.isDriver
-                                      ? "add_offer"
-                                      : "add_request",
-                                  context),
-                          onTap: () async {
-                            customShowModelBottomSheet(
-                                onClose: () => sl<AddRequestProvider>().reset(),
-                                body: provider.isLogin
-                                    ? AddRequest(
-                                        name: provider.offerDetails?.name ?? "",
-                                        offer: provider.offerDetails!,
-                                        days: provider.isDriver
-                                            ? provider
-                                                    .offerDetails!.offerDays ??
-                                                []
-                                            : sl
-                                                .get<ScheduleProvider>()
-                                                .selectedDays,
-                                        // provider.offerDetails!.offerDays ??
-                                        //     [],
-                                        isCaptain: provider.isDriver,
-                                        updateOfferDetails:
-                                            provider.updateModel,
-                                      )
-                                    : const Login());
-                          }),
+                      child: Consumer<ProfileProvider>(
+                          builder: (_, profileProvider, child) {
+                        return CustomButton(
+                            textColor:
+                                provider.offerDetails?.isSentOffer == true
+                                    ? Styles.PRIMARY_COLOR
+                                    : Styles.WHITE_COLOR,
+                            backgroundColor:
+                                provider.offerDetails?.isSentOffer == true
+                                    ? Styles.PRIMARY_COLOR.withOpacity(0.1)
+                                    : Styles.PRIMARY_COLOR,
+                            text: provider.offerDetails?.isSentOffer == true
+                                ? getTranslated(
+                                    provider.isDriver
+                                        ? "offer_sent"
+                                        : "request_sent",
+                                    context)
+                                : getTranslated(
+                                    provider.isDriver
+                                        ? "add_offer"
+                                        : "add_request",
+                                    context),
+                            onTap: () async {
+                              if (provider.isDriver &&
+                                  profileProvider.status != "1") {
+                                log(profileProvider.status.toString());
+                                showToast(
+                                    "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
+                                return;
+                              } else {
+                                customShowModelBottomSheet(
+                                    onClose: () =>
+                                        sl<AddRequestProvider>().reset(),
+                                    body: provider.isLogin
+                                        ? AddRequest(
+                                            name: provider.offerDetails?.name ??
+                                                "",
+                                            offer: provider.offerDetails!,
+                                            days: provider.isDriver
+                                                ? provider.offerDetails!
+                                                        .offerDays ??
+                                                    []
+                                                : sl
+                                                    .get<ScheduleProvider>()
+                                                    .selectedDays,
+                                            // provider.offerDetails!.offerDays ??
+                                            //     [],
+                                            isCaptain: provider.isDriver,
+                                            updateOfferDetails:
+                                                provider.updateModel,
+                                          )
+                                        : const Login());
+                              }
+                            });
+                      }),
                     ),
                   )
                 ],
