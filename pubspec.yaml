@@ -15,13 +15,11 @@ dependencies:
     sdk: flutter
   flutter_clean_architecture:
   flutter_calendar_carousel:
-
   ## tracking
   georange:
   fl_location:
-  cloud_firestore: ^4.9.1
+  cloud_firestore: ^4.12.0
   flutter_background:
-
   dio:
   internet_connection_checker:
   fluttertoast: ^8.2.1
