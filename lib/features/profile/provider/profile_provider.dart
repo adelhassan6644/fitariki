@@ -356,6 +356,7 @@ class ProfileProvider extends ChangeNotifier {
         return;
       }
     }
+
     if (age.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -365,7 +366,8 @@ class ProfileProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
       return;
     }
-    if (birthDay == null) {
+
+    if (isDriver && birthDay == null) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "برجاء اختيار تاريخ الميلاد !",
@@ -374,6 +376,7 @@ class ProfileProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
       return;
     }
+
     if (nationality == null) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
@@ -423,7 +426,10 @@ class ProfileProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
       return;
     }
-    if (startLocation == null) {
+    if (startLocation == null ||
+        startLocation?.address == null ||
+        startLocation?.latitude == null ||
+        startLocation?.longitude == null) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "برجاء ادخال بداية الطريق!",
@@ -445,7 +451,10 @@ class ProfileProvider extends ChangeNotifier {
       showToast(" وقت النهاية لا يجب ان يكون مثل وقت البداية!");
       return;
     }
-    if (endLocation == null) {
+    if (endLocation == null ||
+        endLocation?.address == null ||
+        endLocation?.latitude == null ||
+        endLocation?.longitude == null) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
               message: "برجاء ادخال نهاية الطريق!",

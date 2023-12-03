@@ -77,7 +77,7 @@ class DriverModel {
         lastName: json["last_name"],
         email: json["email"],
         birthDay: json["dateOfBirthGregorian"] != null
-            ? Methods.convertStringToDataTime(json["dateOfBirthGregorian"])
+            ? Methods.convertStringToDataTime2(json["dateOfBirthGregorian"])
             : null,
         age: json["age"] != null ? json["age"].toString() : null,
         phone: json["phone"] != null ? json["phone"].toString() : null,
@@ -237,7 +237,9 @@ class CarInfo {
         plateLetterMiddle: json["plateLetterMiddle"],
         plateLetterRight: json["plateLetterRight"],
         palletNumber: json["pallet_number"],
-        sequenceNumber: json["sequenceNumber"],
+        sequenceNumber: json["sequenceNumber"] != null
+            ? json["sequenceNumber"].toString()
+            : null,
         color: json["color"],
         seatsCount:
             json["seats_count"] != null ? json["seats_count"].toString() : null,

@@ -43,9 +43,9 @@ class MyRidesHeader extends StatelessWidget {
                                   child: TabWidget(
                                       title: getTranslated(
                                           provider.tabs[index], context),
-                                      isSelected: index == provider.tabIndex,
+                                      isSelected: index == provider.selectedTab,
                                       onTab: () {
-                                        if (index != provider.tabIndex) {
+                                        if (index != provider.selectedTab) {
                                           provider.onSelectTab(index);
                                           provider.getRides();
                                         }

@@ -31,8 +31,8 @@ class CancelPopUpButton extends StatelessWidget {
               },
               title: "التغييب عن #مشوار_$number",
               description: provider.isDriver
-                  ? "هل سوف تتغيب عن ارجاع $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟"
-                  : "هل سوف تتغيب عن العودة مع الكابتن $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟ ");
+                  ? "هل سوف تتغيب عن ${provider.selectedTab == 0 ? "توصيل" : "ارجاع"} $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟"
+                  : "هل سوف تتغيب عن ${provider.selectedTab == 0 ? "الذهاب" : "العودة"} مع الكابتن $name في يوم ${day.dateFormat(format: "d MMM yyyy")}؟ ");
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         itemBuilder: (BuildContext context) => [

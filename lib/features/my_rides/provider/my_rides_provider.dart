@@ -31,10 +31,10 @@ class MyRidesProvider extends ChangeNotifier {
 
   bool get isDriver => repo.isDriver();
 
-  int tabIndex = 0;
+  int selectedTab = 0;
   List<String> tabs = ["go", "back"];
   onSelectTab(v) {
-    tabIndex = v;
+    selectedTab = v;
     notifyListeners();
   }
 
@@ -66,7 +66,7 @@ class MyRidesProvider extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       Either<ServerFailure, Response> response = await repo.getRides(
-          day: selectedDay, type: tabs[tabIndex].capitalize());
+          day: selectedDay, type: tabs[selectedTab].capitalize());
       response.fold((l) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(

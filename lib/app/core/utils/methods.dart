@@ -30,7 +30,8 @@ abstract class Methods {
 
     DateTime currentDate = startDate;
 
-    while (currentDate.isBefore(endDate) || currentDate.isAtSameMomentAs(endDate)) {
+    while (currentDate.isBefore(endDate) ||
+        currentDate.isAtSameMomentAs(endDate)) {
       if (weekdays.contains(currentDate.weekday)) {
         daysList.add(currentDate);
         count++;
@@ -42,9 +43,6 @@ abstract class Methods {
 
     return WeekdayCount(count, days, daysList);
   }
-
-
-
 
   static String getOfferType(int v) {
     switch (v) {
@@ -101,6 +99,18 @@ abstract class Methods {
       int.parse(parts[0]),
       int.parse(parts[1]),
       int.parse(parts[2]),
+      0,
+      0,
+      0,
+    );
+  }
+
+  static convertStringToDataTime2(timeString) {
+    List<String> parts = timeString.split('-');
+    return DateTime(
+      int.parse(parts[2]),
+      int.parse(parts[1]),
+      int.parse(parts[0]),
       0,
       0,
       0,
