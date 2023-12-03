@@ -1,6 +1,7 @@
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/features/profile/model/country_model.dart';
 
+import '../../../app/core/utils/methods.dart';
 import '../../../main_models/weak_model.dart';
 import '../../maps/models/location_model.dart';
 
@@ -18,6 +19,7 @@ class DriverModel {
   int? requestsCount;
   int? reservationsCount;
   String? age;
+  DateTime? birthDay;
   Country? national;
   String? city;
   String? phone;
@@ -42,6 +44,7 @@ class DriverModel {
       this.lastName,
       this.email,
       this.image,
+      this.birthDay,
       this.nickname,
       this.identityNumber,
       this.identityImage,
@@ -73,6 +76,9 @@ class DriverModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
+        birthDay: json["dateOfBirthGregorian"] != null
+            ? Methods.convertStringToDataTime(json["dateOfBirthGregorian"])
+            : null,
         age: json["age"] != null ? json["age"].toString() : null,
         phone: json["phone"] != null ? json["phone"].toString() : null,
         countryFlag: json["country_flag"] != null
@@ -140,6 +146,7 @@ class DriverModel {
         "nickname": nickname,
         "gender": gender,
         "age": age,
+        "dateOfBirthGregorian": birthDay,
         "country": national?.toJson(),
         "city": city,
         "phone": phone,
@@ -165,6 +172,10 @@ class CarInfo {
   String? name;
   String? model;
   String? palletNumber;
+  String? plateLetterLeft;
+  String? plateLetterMiddle;
+  String? plateLetterRight;
+  String? sequenceNumber;
   String? color;
   String? seatsCount;
   String? carImage;
@@ -175,7 +186,11 @@ class CarInfo {
   CarInfo({
     this.name,
     this.model,
+    this.plateLetterLeft,
+    this.plateLetterMiddle,
+    this.plateLetterRight,
     this.palletNumber,
+    this.sequenceNumber,
     this.color,
     this.seatsCount,
     this.carImage,
@@ -187,7 +202,11 @@ class CarInfo {
   CarInfo copyWith({
     String? name,
     String? model,
+    String? plateLetterLeft,
+    String? plateLetterMiddle,
+    String? plateLetterRight,
     String? palletNumber,
+    String? sequenceNumber,
     String? color,
     String? seatsCount,
     String? carImage,
@@ -198,7 +217,11 @@ class CarInfo {
       CarInfo(
         name: name ?? this.name,
         model: model ?? this.model,
+        plateLetterLeft: plateLetterLeft ?? this.plateLetterLeft,
+        plateLetterMiddle: plateLetterMiddle ?? this.plateLetterMiddle,
+        plateLetterRight: plateLetterRight ?? this.plateLetterRight,
         palletNumber: palletNumber ?? this.palletNumber,
+        sequenceNumber: sequenceNumber ?? this.sequenceNumber,
         color: color ?? this.color,
         seatsCount: seatsCount ?? this.seatsCount,
         carImage: carImage ?? this.carImage,
@@ -210,7 +233,11 @@ class CarInfo {
   factory CarInfo.fromJson(Map<String, dynamic> json) => CarInfo(
         name: json["name"],
         model: json["model"] != null ? json["model"].toString() : null,
+        plateLetterLeft: json["plateLetterLeft"],
+        plateLetterMiddle: json["plateLetterMiddle"],
+        plateLetterRight: json["plateLetterRight"],
         palletNumber: json["pallet_number"],
+        sequenceNumber: json["sequenceNumber"],
         color: json["color"],
         seatsCount:
             json["seats_count"] != null ? json["seats_count"].toString() : null,
@@ -224,6 +251,7 @@ class CarInfo {
         "name": name,
         "model": model,
         "pallet_number": palletNumber,
+        "sequenceNumber": sequenceNumber,
         "color": color,
         "seats_count": seatsCount,
         "car_image": carImage,

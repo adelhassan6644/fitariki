@@ -32,8 +32,35 @@ class Validations {
     return null;
   }
 
+  static String? identityNumber(value) {
+    if (value == null || value!.isEmpty || value.length < 10) {
+      return getTranslated("please_enter_valid_identity_number",
+          CustomNavigator.navigatorState.currentContext!);
+    } else {
+      return null;
+    }
+  }
+
+  static String? sequenceNumber(value) {
+    if (value == null || value!.isEmpty || value.length < 9) {
+      return getTranslated("please_enter_valid_sequence_number",
+          CustomNavigator.navigatorState.currentContext!);
+    } else {
+      return null;
+    }
+  }
+
+  static String? plateNumber(value) {
+    if (value == null || value!.isEmpty || value.length < 4) {
+      return getTranslated("please_enter_valid_plate_number",
+          CustomNavigator.navigatorState.currentContext!);
+    } else {
+      return null;
+    }
+  }
+
   static String? bankAccount(String? value) {
-    if (value!.isEmpty || value.length < 22) {
+    if (value == null || value.isEmpty || value.length < 22) {
       return getTranslated("please_enter_valid_bank_account",
           CustomNavigator.navigatorState.currentContext!);
     } else {
@@ -42,7 +69,7 @@ class Validations {
   }
 
   static String? code(String? value) {
-    if (value!.isEmpty || value.length < 6) {
+    if (value == null || value.isEmpty || value.length < 6) {
       return getTranslated("please_enter_valid_code",
           CustomNavigator.navigatorState.currentContext!);
     } else {

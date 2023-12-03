@@ -26,7 +26,7 @@ class AcceptableAnalytics extends StatelessWidget {
           onTap: () {
             if (!provider.isLogin) {
               CupertinoPopUpHelper.showCupertinoPopUp(
-                  textButton: getTranslated("login", context),
+                  confirmTextButton: getTranslated("login", context),
                   onConfirm: () {
                     CustomNavigator.pop();
                     customShowModelBottomSheet(body: const Login());

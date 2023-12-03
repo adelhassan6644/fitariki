@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
 import 'package:fitariki/data/error/api_error_handler.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
@@ -51,7 +52,11 @@ class ProfileProvider extends ChangeNotifier {
 
   ///Car Data
   TextEditingController carName = TextEditingController();
-  TextEditingController carPlate = TextEditingController();
+  TextEditingController plateNumber = TextEditingController();
+  TextEditingController plateLetterLeft = TextEditingController();
+  TextEditingController plateLetterMiddle = TextEditingController();
+  TextEditingController plateLetterRight = TextEditingController();
+  TextEditingController carSequenceNumber = TextEditingController();
   TextEditingController carColor = TextEditingController();
 
   File? carImage;
@@ -59,6 +64,27 @@ class ProfileProvider extends ChangeNotifier {
     profileModel?.driver?.carInfo?.carImage = file!.path;
 
     carImage = file;
+    notifyListeners();
+  }
+
+  DateTime? birthDay;
+  onSelectBirthDay() async {
+    await showDatePicker(
+      initialDatePickerMode: DatePickerMode.day,
+      context: CustomNavigator.navigatorState.currentContext!,
+      locale: const Locale("ar", "SA"),
+      cancelText: getTranslated(
+          "cancel", CustomNavigator.navigatorState.currentContext!),
+      initialDate: birthDay ?? DateTime.now(),
+      firstDate: DateTime(1950, 1, 1),
+      fieldLabelText: getTranslated(
+          "birthday", CustomNavigator.navigatorState.currentContext!),
+      lastDate: DateTime.now(),
+    ).then((v) {
+      if (v != null) {
+        birthDay = v;
+      }
+    });
     notifyListeners();
   }
 
@@ -79,10 +105,10 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? carSeats;
+  String? carCapacity;
   List<String> seats = ["2", "3", "4", "5", "6", "7", "8"];
   void selectedSeat(value) {
-    carSeats = value;
+    carCapacity = value;
     notifyListeners();
   }
 
@@ -228,6 +254,7 @@ class ProfileProvider extends ChangeNotifier {
     firstName.clear();
     lastName.clear();
     age.clear();
+    birthDay = null;
     _gender = 0;
     phoneTEC.clear();
     countryCode = "+966";
@@ -245,8 +272,12 @@ class ProfileProvider extends ChangeNotifier {
     ///Car data
     carName.clear();
     carColor.clear();
-    carPlate.clear();
-    carSeats = null;
+    plateNumber.clear();
+    plateLetterMiddle.clear();
+    plateLetterLeft.clear();
+    plateLetterRight.clear();
+    carSequenceNumber.clear();
+    carCapacity = null;
     carModel = null;
     carImage = null;
     licenceImage = null;
@@ -306,7 +337,9 @@ class ProfileProvider extends ChangeNotifier {
     if (firstName.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
-              message: "برجاء ادخال الاسم الاول!",
+              message: isDriver
+                  ? "برجاء ادخال اسمك الثلاثي !"
+                  : "برجاء ادخال الاسم الاول !",
               isFloating: true,
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
@@ -316,7 +349,7 @@ class ProfileProvider extends ChangeNotifier {
       if (lastName.text.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: "برجاء ادخال الاسم الثاني!",
+                message: "برجاء ادخال الاسم الثاني !",
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
@@ -326,7 +359,16 @@ class ProfileProvider extends ChangeNotifier {
     if (age.text.isEmpty) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
-              message: "برجاء اختيار العمر!",
+              message: "برجاء اختيار العمر !",
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      return;
+    }
+    if (birthDay == null) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "برجاء اختيار تاريخ الميلاد !",
               isFloating: true,
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
@@ -335,7 +377,56 @@ class ProfileProvider extends ChangeNotifier {
     if (nationality == null) {
       CustomSnackBar.showSnackBar(
           notification: AppNotification(
-              message: "برجاء اختيار الحنسية!",
+              message: "برجاء اختيار الحنسية !",
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      return;
+    }
+    if (isDriver) {
+      if (identityNumber.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادحال رقم الهوية !",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (identityImage == null) {
+        if (profileModel?.driver?.identityImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الهوية !",
+                  isFloating: true,
+                  backgroundColor: Styles.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
+      }
+    }
+    if (email.text.isEmpty) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "برجاء ادخال الايميل!",
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      return;
+    }
+    if (phoneTEC.text.isEmpty) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "برجاء ادخال رقم الجوال!",
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      return;
+    }
+    if (startLocation == null) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: "برجاء ادخال بداية الطريق!",
               isFloating: true,
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
@@ -350,54 +441,8 @@ class ProfileProvider extends ChangeNotifier {
               borderColor: Colors.transparent));
       return;
     }
-    if (isDriver) {
-      if (identityNumber.text.isEmpty) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادحال رقم الهوية!",
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (isDriver && identityImage == null) {
-        if (profileModel?.driver?.identityImage == null) {
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "برجاء اختيار صورة الهوية!",
-                  isFloating: true,
-                  backgroundColor: Styles.IN_ACTIVE,
-                  borderColor: Colors.transparent));
-          return;
-        }
-      }
-      if (email.text.isEmpty) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال الايميل!",
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-
-      if (phoneTEC.text.isEmpty) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء ادخال رقم الجوال!",
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-    }
-    if (startLocation == null) {
-      CustomSnackBar.showSnackBar(
-          notification: AppNotification(
-              message: "برجاء ادخال بداية الطريق!",
-              isFloating: true,
-              backgroundColor: Styles.IN_ACTIVE,
-              borderColor: Colors.transparent));
+    if (startTime.isAtSameMomentAs(endTime)) {
+      showToast(" وقت النهاية لا يجب ان يكون مثل وقت البداية!");
       return;
     }
     if (endLocation == null) {
@@ -410,10 +455,42 @@ class ProfileProvider extends ChangeNotifier {
       return;
     }
     if (isDriver) {
+      ///Car Data
       if (carName.text.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: "برجاء ادخال اسم السيارة!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (carImage == null) {
+        if (profileModel?.driver?.carInfo?.carImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة السيارة!",
+                  isFloating: true,
+                  backgroundColor: Styles.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
+      }
+      if (licenceImage == null) {
+        if (profileModel?.driver?.carInfo?.licenceImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الرخصة!",
+                  isFloating: true,
+                  backgroundColor: Styles.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
+      }
+      if (carCapacity == null) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء اختيار سعة السيارة!",
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
@@ -428,10 +505,57 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (carPlate.text.isEmpty) {
+      if (plateLetterRight.text.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
-                message: "برجاء ادخال لوحة السيارة!",
+                message: "برجاء ادخال الحرف الايمن من لوحة السيارة!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (plateLetterMiddle.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال الحرف الاوسط من لوحة السيارة!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (plateLetterLeft.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال الحرف الايسر من لوحة السيارة!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (plateNumber.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال أرقام لوحة السيارة!",
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+        return;
+      }
+      if (formImage == null) {
+        if (profileModel?.driver?.carInfo?.formImage == null) {
+          CustomSnackBar.showSnackBar(
+              notification: AppNotification(
+                  message: "برجاء اختيار صورة الاستمارة!",
+                  isFloating: true,
+                  backgroundColor: Styles.IN_ACTIVE,
+                  borderColor: Colors.transparent));
+          return;
+        }
+      }
+      if (carSequenceNumber.text.isEmpty) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: "برجاء ادخال الرقم التسلسي للسيارة!",
                 isFloating: true,
                 backgroundColor: Styles.IN_ACTIVE,
                 borderColor: Colors.transparent));
@@ -446,49 +570,7 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (isDriver && carImage == null) {
-        if (profileModel?.driver?.carInfo?.carImage == null) {
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "برجاء اختيار صورة السيارة!",
-                  isFloating: true,
-                  backgroundColor: Styles.IN_ACTIVE,
-                  borderColor: Colors.transparent));
-          return;
-        }
-      }
-      if (carSeats == null) {
-        CustomSnackBar.showSnackBar(
-            notification: AppNotification(
-                message: "برجاء اختيار عدد مقاعد السيارة!",
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.transparent));
-        return;
-      }
-      if (isDriver && licenceImage == null) {
-        if (profileModel?.driver?.carInfo?.licenceImage == null) {
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "برجاء اختيار صورة الرخصة!",
-                  isFloating: true,
-                  backgroundColor: Styles.IN_ACTIVE,
-                  borderColor: Colors.transparent));
-          return;
-        }
-      }
-      if (isDriver && formImage == null) {
-        if (profileModel?.driver?.carInfo?.formImage == null) {
-          CustomSnackBar.showSnackBar(
-              notification: AppNotification(
-                  message: "برجاء اختيار صورة الاستمارة!",
-                  isFloating: true,
-                  backgroundColor: Styles.IN_ACTIVE,
-                  borderColor: Colors.transparent));
-          return;
-        }
-      }
-      if (isDriver && insuranceImage == null) {
+      if (insuranceImage == null) {
         if (profileModel?.driver?.carInfo?.insuranceImage == null) {
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
@@ -499,6 +581,8 @@ class ProfileProvider extends ChangeNotifier {
           return;
         }
       }
+
+      ///Bank Data
       if (fullName.text.isEmpty) {
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
@@ -526,7 +610,7 @@ class ProfileProvider extends ChangeNotifier {
                 borderColor: Colors.transparent));
         return;
       }
-      if (isDriver && bankAccountImage == null) {
+      if (bankAccountImage == null) {
         if (profileModel?.driver?.bankInfo?.accountImage == null) {
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
@@ -556,9 +640,13 @@ class ProfileProvider extends ChangeNotifier {
         final carData = {
           "name": carName.text.trim(),
           "model": carModel,
-          "pallet_number": carPlate.text.trim(),
+          "pallet_number": plateNumber.text.trim(),
+          "plateLetterLeft": plateLetterLeft.text.trim(),
+          "plateLetterMiddle": plateLetterMiddle.text.trim(),
+          "plateLetterRight": plateLetterRight.text.trim(),
+          "sequenceNumber": carSequenceNumber.text.trim(),
           "color": carColor.text.trim(),
-          "seats_count": carSeats,
+          "seats_count": carCapacity,
         };
 
         final bankData = {
@@ -575,6 +663,7 @@ class ProfileProvider extends ChangeNotifier {
             // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
+            "dateOfBirthGregorian": birthDay!.defaultFormat2(),
             "email": email.text.trim(),
             "phone": phoneTEC.text.trim(),
             "country_flag": countryFlag.trim(),
@@ -788,6 +877,7 @@ class ProfileProvider extends ChangeNotifier {
     // nickName.text = profileModel?.driver?.nickname ?? "";
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
+    birthDay = profileModel?.driver?.birthDay;
     email.text = profileModel?.driver?.email ?? "";
     phoneTEC.text = profileModel?.driver?.phone ?? "";
     countryCode = profileModel?.driver?.countryCode ?? "+966";
@@ -807,10 +897,17 @@ class ProfileProvider extends ChangeNotifier {
         .toString();
 
     carName.text = profileModel?.driver?.carInfo?.name ?? "";
-    carPlate.text = profileModel?.driver?.carInfo?.palletNumber ?? "";
+    plateNumber.text = profileModel?.driver?.carInfo?.palletNumber ?? "";
+    plateLetterLeft.text = profileModel?.driver?.carInfo?.plateLetterLeft ?? "";
+    plateLetterMiddle.text =
+        profileModel?.driver?.carInfo?.plateLetterMiddle ?? "";
+    plateLetterRight.text =
+        profileModel?.driver?.carInfo?.plateLetterRight ?? "";
+    carSequenceNumber.text =
+        profileModel?.driver?.carInfo?.sequenceNumber ?? "";
     carColor.text = profileModel?.driver?.carInfo?.color ?? "";
     carModel = profileModel?.driver?.carInfo?.model;
-    carSeats = profileModel?.driver?.carInfo?.seatsCount;
+    carCapacity = profileModel?.driver?.carInfo?.seatsCount;
 
     fullName.text = profileModel?.driver?.bankInfo?.fullName ?? "";
     bankAccount.text = profileModel?.driver?.bankInfo?.accountNumber ?? "";

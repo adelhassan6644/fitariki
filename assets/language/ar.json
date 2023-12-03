@@ -22,6 +22,9 @@
   "previous": "سابقة",
   "please_enter_valid_number": "من فضلك ادخل رقم هاتف صحيح",
   "please_enter_valid_bank_account": "من فضلك ادخل حساب بنكي صحيح",
+  "please_enter_valid_sequence_number": "من فضلك ادخل رقم تسلسلي صحيح",
+  "sequence_number": "الرقم التسلسلي",
+  "sequence_number_description": "رقم مكون من تسعة أرقام موجود اسفل لون السيارة في الزاوية اليمين من الإستمارة",
   "please_enter_valid_code": "من فضلك ادخل رمز صحيح",
   "please_enter_your_name": "من فضلك ادخل اسمك",
   "please_choose_city": "من فضلك اختر مدينة",
@@ -156,6 +159,10 @@
   "model": "الموديل",
   "color": "اللون",
   "plate": "اللوحة",
+  "car_plate": "لوحة السيارة",
+  "please_enter_valid_identity_number": "من فضلك ادخل رقم هوية صحيح",
+  "please_enter_valid_plate_number": "من فضلك ادخل رقم لوحة السيارة الصحيح",
+  "car_plate_description": "رقم و حروف لوحة السيارة باللغة العربية، مع الإنتباه عند ادخال الحروف تكون من اليمين لليسار",
   "car_image": "صورة السيارة",
   "licence_image": "صورة الرخصة",
   "form_image": "صورة الاستمارة",
@@ -379,5 +386,7 @@
   "share_post": "مشاركة المشوار",
   "my_requests":"طلباتي",
   "my_offers": "عروضي",
-  "ride_not_started": "الرحلة متاحة يوم ** فقط"
+  "ride_not_started": "الرحلة متاحة يوم ** فقط",
+  "ok": "حسنًا",
+  "birthday": "تاريخ الميلاد"
 }

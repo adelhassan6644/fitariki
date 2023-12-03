@@ -148,7 +148,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       ? customImageIconSVG(
                           imageName: widget.sSvgIcon!,
                           color: widget.sIconColor ?? Colors.black,
-                          height: 22.h,
+                          height: 20.h,
                         )
                       : widget.isPassword == true
                           ? IconButton(

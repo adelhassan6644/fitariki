@@ -1,6 +1,9 @@
 import 'package:fitariki/app/core/utils/color_resources.dart';
+import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/core/utils/text_styles.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/components/custom_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,13 +27,13 @@ abstract class CupertinoPopUpHelper {
       context: CustomNavigator.navigatorState.currentContext!,
       builder: (_) {
         return CupertinoAlertDialog(
-
           title: Center(child: Text(title)),
           content: Column(
             children: [
               Text(
                 description,
-                style: AppTextStyles.w400.copyWith(fontSize: 13,color: Colors.black),
+                style: AppTextStyles.w400
+                    .copyWith(fontSize: 13, color: Colors.black),
               ),
               CupertinoTextField(
                 controller: controller,
@@ -38,7 +41,8 @@ abstract class CupertinoPopUpHelper {
                 inputFormatters: inputFormatters,
                 maxLength: maxLength,
                 placeholder: hint,
-                placeholderStyle: AppTextStyles.w400.copyWith(fontSize: 16,color:Styles.DETAILS_COLOR) ,
+                placeholderStyle: AppTextStyles.w400
+                    .copyWith(fontSize: 16, color: Styles.DETAILS_COLOR),
                 decoration: BoxDecoration(
                     color: const Color(0xFF767680).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10)),
@@ -79,7 +83,9 @@ abstract class CupertinoPopUpHelper {
   static showCupertinoPopUp(
       {required String title,
       required String description,
-      String? textButton,
+      String? confirmTextButton,
+      String? cancelTextButton,
+      String? image,
       Function()? onConfirm,
       Function()? onClose}) {
     showDialog(
@@ -87,9 +93,22 @@ abstract class CupertinoPopUpHelper {
       builder: (_) {
         return CupertinoAlertDialog(
           title: Center(child: Text(title)),
-          content: Text(
-            description,
-            style: AppTextStyles.w400.copyWith(fontSize: 13),
+          content: Column(
+            children: [
+              Text(
+                description,
+                style: AppTextStyles.w400.copyWith(fontSize: 13),
+              ),
+              if (image != null)
+                SizedBox(
+                  height: 6.h,
+                ),
+              if (image != null)
+                customImageIcon(
+                    imageName: image,
+                    height: 140.h,
+                    width: CustomNavigator.navigatorState.currentContext!.width)
+            ],
           ),
           actions: [
             CupertinoDialogAction(
@@ -101,20 +120,25 @@ abstract class CupertinoPopUpHelper {
                   }
                 },
                 child: Text(
-                  getTranslated(
-                      "cancel", CustomNavigator.navigatorState.currentContext!),
-                  style: AppTextStyles.w400
-                      .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
-                )),
-            CupertinoDialogAction(
-                onPressed: onConfirm,
-                child: Text(
-                  textButton ??
-                      getTranslated("send",
+                  cancelTextButton ??
+                      getTranslated("cancel",
                           CustomNavigator.navigatorState.currentContext!),
-                  style: AppTextStyles.w600
-                      .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
+                  style: AppTextStyles.w400.copyWith(
+                      fontSize: 17,
+                      fontWeight:
+                          onConfirm != null ? FontWeight.w400 : FontWeight.w600,
+                      color: Styles.SYSTEM_COLOR),
                 )),
+            if (onConfirm != null)
+              CupertinoDialogAction(
+                  onPressed: onConfirm,
+                  child: Text(
+                    confirmTextButton ??
+                        getTranslated("send",
+                            CustomNavigator.navigatorState.currentContext!),
+                    style: AppTextStyles.w600
+                        .copyWith(fontSize: 17, color: Styles.SYSTEM_COLOR),
+                  )),
           ],
         );
       },

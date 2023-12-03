@@ -1,6 +1,8 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
+import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/app/core/utils/svg_images.dart';
 import 'package:fitariki/app/core/utils/validation.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
@@ -129,6 +131,33 @@ class PersonalInformationWidget extends StatelessWidget {
             ),
           ),
 
+          ///Identity
+          Visibility(
+            visible: provider.isDriver,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomTextFormField(
+                  valid: Validations.name,
+                  controller: TextEditingController(
+                      text: provider.birthDay != null
+                          ? provider.birthDay!.dateFormat(format: 'dd-MM-yyyy')
+                          : ""),
+                  onTap: () async {
+                    if (fromLogin && provider.isDriver) {
+                      provider.onSelectBirthDay();
+                    }
+                  },
+                  sSvgIcon: SvgImages.calendar,
+                  hint: getTranslated("birthday", context),
+                  read: true,
+                )
+              ],
+            ),
+          ),
+
           ///Nationality
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -153,10 +182,14 @@ class PersonalInformationWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: CustomTextFormField(
-                      valid: Validations.name,
+                      valid: Validations.identityNumber,
                       hint: getTranslated("identity_number", context),
                       controller: provider.identityNumber,
                       maxLength: 10,
+                      inputType: TextInputType.number,
+                      formatter: [
+                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                      ],
                       read: !fromLogin,
                     )),
                     const SizedBox(

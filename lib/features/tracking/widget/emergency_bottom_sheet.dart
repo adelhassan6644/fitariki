@@ -80,7 +80,7 @@ class EmergencyBottomSheet extends StatelessWidget {
               Future.delayed(
                 Duration.zero,
                 () => CupertinoPopUpHelper.showCupertinoPopUp(
-                    textButton: getTranslated("call", context),
+                    confirmTextButton: getTranslated("call", context),
                     onConfirm: () async {
                       await launch("tel://911");
                       CustomNavigator.pop();

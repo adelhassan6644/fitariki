@@ -81,6 +81,7 @@ dependencies:
   country_code_picker: ^3.0.0
   table_calendar: ^3.0.9
   share_plus: ^7.1.0
+  jhijri: ^1.0.0
 
 
 

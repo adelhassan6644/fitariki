@@ -319,7 +319,7 @@ class RideDetailsWidget extends StatelessWidget {
                           if (provider.ride!.status != null &&
                               (provider.ride!.status!.toInt() + 1) == 3) {
                             CupertinoPopUpHelper.showCupertinoPopUp(
-                              textButton: getTranslated("end_ride", context),
+                              confirmTextButton: getTranslated("end_ride", context),
                               onConfirm: () {
                                 CustomNavigator.pop();
                                 provider.changeStatus(id, 3);

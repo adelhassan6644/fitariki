@@ -25,7 +25,7 @@ class CancelPopUpButton extends StatelessWidget {
       return PopupMenuButton(
         onSelected: (v) {
           CupertinoPopUpHelper.showCupertinoPopUp(
-              textButton: getTranslated("yes", context),
+              confirmTextButton: getTranslated("yes", context),
               onConfirm: () {
                 provider.cancelRide(id);
               },

@@ -3,7 +3,7 @@ import 'package:fitariki/app/core/utils/extensions.dart';
 class EndPoints {
   static const String baseUrl = 'https://fitariki.com/api/v1/';
   static const String googleMapsBaseUrl = 'https://maps.googleapis.com';
-  static const String imageUrl = 'https://fitariki.com/';
+  static const String imageUrl = 'https://fitariki.com/storage/image/anVathJvsCV6EfIpGMlhwsUZXaBR0Y1UXdxuye4w.jpg';
   static const String apiKey = 'eGvviZ/npgc2Blb4/PSymh1tyb/UIt3aq82W6f+Wn4=';
   static const String topic = 'fitariki';
 
