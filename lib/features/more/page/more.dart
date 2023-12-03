@@ -36,38 +36,47 @@ class More extends StatelessWidget {
                             onRefresh: () async {
                               provider.getProfile();
                             },
-                            child: ListAnimator(
-                              customPadding:
-                                  EdgeInsets.symmetric(horizontal: 16.w),
-                              data: [
-                                provider.isLoading
-                                    ? const MoreProfileShimmer()
-                                    : MoreProfileCard(
-                                        lastUpdate: provider.lastUpdate,
-                                        image: provider.image,
-                                        name: provider.firstName.text,
-                                        isDriver: provider.isDriver,
-                                        male: provider.gender == 0,
-                                        nationality: provider.nationality?.name,
-                                        rate: provider.rate.ceil(),
-                                        reservationCount: provider.reservationCount,
-                                        id: provider.id,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ListAnimator(
+                                    customPadding:
+                                        EdgeInsets.symmetric(horizontal: 16.w),
+                                    data: [
+                                      provider.isLoading
+                                          ? const MoreProfileShimmer()
+                                          : MoreProfileCard(
+                                              lastUpdate: provider.lastUpdate,
+                                              image: provider.image,
+                                              name: provider.firstName.text,
+                                              isDriver: provider.isDriver,
+                                              male: provider.gender == 0,
+                                              nationality:
+                                                  provider.nationality?.name,
+                                              rate: provider.rate.ceil(),
+                                              reservationCount:
+                                                  provider.reservationCount,
+                                              id: provider.id,
+                                            ),
+                                      Visibility(
+                                        visible: provider.isDriver,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 24.h,
+                                            ),
+                                            WalletCard(
+                                              availableBalance: provider.wallet,
+                                              pendingBalance:
+                                                  provider.pendingWallet,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                Visibility(
-                                  visible: provider.isDriver,
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 24.h,
-                                      ),
-                                      WalletCard(
-                                        availableBalance: provider.wallet,
-                                        pendingBalance: provider.pendingWallet,
-                                      ),
+                                      const MoreOptions(),
                                     ],
                                   ),
                                 ),
-                                const MoreOptions(),
                               ],
                             ),
                           ),

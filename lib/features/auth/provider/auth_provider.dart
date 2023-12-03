@@ -82,7 +82,8 @@ class AuthProvider extends ChangeNotifier {
         }
         CustomNavigator.pop();
 
-        if (success.data['data'][role[_userType]]["email_verified_at"] == null ||
+        if (success.data['data'][role[_userType]]["email_verified_at"] ==
+                null ||
             success.data['data'][role[_userType]]["email_verified_at"] == "") {
           CustomNavigator.push(Routes.VERIFICATION, arguments: true);
         }
@@ -93,18 +94,10 @@ class AuthProvider extends ChangeNotifier {
         else if (success.data['data'][role[_userType]]["first_name"] == null ||
             success.data['data'][role[_userType]]["first_name"] == "") {
           sl<ProfileProvider>().getProfile();
-          CustomNavigator.push(Routes.EDIT_PROFILE, clean: true, arguments: true);
+          CustomNavigator.push(Routes.EDIT_PROFILE,
+              clean: true, arguments: true);
         } else {
           clear();
-          // sl<HomeProvider>().getUsers();
-          // sl<HomeProvider>().getOffers();
-          // sl<HomeProvider>().getHomeRides();
-          // sl<MyOffersProvider>().getMyOffers();
-          // sl<WishlistProvider>().getWishList();
-          // sl<MyTripsProvider>().getCurrentTrips();
-          // sl<MyTripsProvider>().getPreviousTrips();
-          // sl<MyTripsProvider>().getPendingTrips();
-          // sl<ProfileProvider>().getProfile();
           authRepo.setLoggedIn();
           CustomNavigator.push(Routes.DASHBOARD, arguments: 0, clean: true);
         }
