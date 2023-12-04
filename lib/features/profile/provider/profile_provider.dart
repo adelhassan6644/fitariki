@@ -8,6 +8,8 @@ import 'package:fitariki/data/error/api_error_handler.dart';
 import 'package:fitariki/features/profile/model/bank_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:jhijri/_src/_jHijri.dart';
+import 'package:jhijri_picker/_src/_jWidgets.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
 import '../../../app/core/utils/methods.dart';
@@ -68,6 +70,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   DateTime? birthDay;
+  String? hijriBirthDay;
   onSelectBirthDay() async {
     await showDatePicker(
       initialDatePickerMode: DatePickerMode.day,
@@ -75,7 +78,7 @@ class ProfileProvider extends ChangeNotifier {
       locale: const Locale("ar", "SA"),
       cancelText: getTranslated(
           "cancel", CustomNavigator.navigatorState.currentContext!),
-      initialDate: birthDay ?? DateTime.now(),
+      initialDate: birthDay ?? DateTime(2001, 1, 13),
       firstDate: DateTime(1950, 1, 1),
       fieldLabelText: getTranslated(
           "birthday", CustomNavigator.navigatorState.currentContext!),
@@ -83,8 +86,56 @@ class ProfileProvider extends ChangeNotifier {
     ).then((v) {
       if (v != null) {
         birthDay = v;
+        hijriBirthDay =
+            "${JHijri(fDate: birthDay ?? DateTime.now()).year}/${JHijri(fDate: birthDay ?? DateTime.now()).month}/${JHijri(fDate: birthDay ?? DateTime.now()).day}";
+        notifyListeners();
+        debugPrint(hijriBirthDay.toString());
       }
     });
+    notifyListeners();
+  }
+
+  onSelectHijriBirthDay() async {
+    showGlobalDatePicker(
+      context: CustomNavigator.navigatorState.currentContext!,
+      selectedDate:
+          JDateModel(jhijri: JHijri(fDate: birthDay ?? DateTime.now())),
+      pickerMode: DatePickerMode.day,
+      pickerTheme: Theme.of(
+        CustomNavigator.navigatorState.currentContext!,
+      ),
+      textDirection: TextDirection.rtl,
+      locale: const Locale("ar", "SA"),
+      okButtonText: "حسناً",
+      cancelButtonText: "الغاء",
+      onChange: (value) {
+        debugPrint(value.toString());
+        hijriBirthDay =
+            "${value.jhijri.year}/${value.jhijri.month}/${value.jhijri.day}";
+        notifyListeners();
+      },
+      onOk: (value) {
+        notifyListeners();
+        CustomNavigator.pop();
+      },
+      onCancel: () {
+        CustomNavigator.pop();
+      },
+      primaryColor: Styles.PRIMARY_COLOR,
+      borderRadius: const Radius.circular(10),
+      headerTitle: const Center(
+        child: Text(
+          "التقويم الهجري",
+        ),
+      ),
+    ).then((value) {
+      if (value != null) {
+        hijriBirthDay =
+            "${value.jhijri.year}/${value.jhijri.month}/${value.jhijri.day}";
+        notifyListeners();
+      }
+    });
+
     notifyListeners();
   }
 
@@ -255,6 +306,7 @@ class ProfileProvider extends ChangeNotifier {
     lastName.clear();
     age.clear();
     birthDay = null;
+    hijriBirthDay = null;
     _gender = 0;
     phoneTEC.clear();
     countryCode = "+966";
@@ -649,7 +701,7 @@ class ProfileProvider extends ChangeNotifier {
         final carData = {
           "name": carName.text.trim(),
           "model": carModel,
-          "pallet_number": plateNumber.text.trim(),
+          "plateNumber": plateNumber.text.trim(),
           "plateLetterLeft": plateLetterLeft.text.trim(),
           "plateLetterMiddle": plateLetterMiddle.text.trim(),
           "plateLetterRight": plateLetterRight.text.trim(),
@@ -672,7 +724,8 @@ class ProfileProvider extends ChangeNotifier {
             // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
-            "dateOfBirthGregorian": birthDay!.defaultFormat2(),
+            "dateOfBirthGregorian": birthDay!.gregorianFormat(),
+            "dateOfBirthHijri": hijriBirthDay!,
             "email": email.text.trim(),
             "phone": phoneTEC.text.trim(),
             "country_flag": countryFlag.trim(),
@@ -887,6 +940,7 @@ class ProfileProvider extends ChangeNotifier {
     firstName.text = profileModel?.driver?.firstName ?? "";
     age.text = profileModel?.driver?.age ?? "";
     birthDay = profileModel?.driver?.birthDay;
+    hijriBirthDay = profileModel?.driver?.hijriBirthDay;
     email.text = profileModel?.driver?.email ?? "";
     phoneTEC.text = profileModel?.driver?.phone ?? "";
     countryCode = profileModel?.driver?.countryCode ?? "+966";

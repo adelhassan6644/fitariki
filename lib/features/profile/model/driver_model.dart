@@ -19,6 +19,7 @@ class DriverModel {
   int? requestsCount;
   int? reservationsCount;
   String? age;
+  String? hijriBirthDay;
   DateTime? birthDay;
   Country? national;
   String? city;
@@ -45,6 +46,7 @@ class DriverModel {
       this.email,
       this.image,
       this.birthDay,
+      this.hijriBirthDay,
       this.nickname,
       this.identityNumber,
       this.identityImage,
@@ -76,6 +78,7 @@ class DriverModel {
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
+    hijriBirthDay: json["dateOfBirthHijri"]??"",
         birthDay: json["dateOfBirthGregorian"] != null
             ? Methods.convertStringToDataTime2(json["dateOfBirthGregorian"])
             : null,
@@ -236,7 +239,7 @@ class CarInfo {
         plateLetterLeft: json["plateLetterLeft"],
         plateLetterMiddle: json["plateLetterMiddle"],
         plateLetterRight: json["plateLetterRight"],
-        palletNumber: json["pallet_number"],
+        palletNumber: json["plateNumber"],
         sequenceNumber: json["sequenceNumber"] != null
             ? json["sequenceNumber"].toString()
             : null,

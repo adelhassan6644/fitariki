@@ -43,7 +43,8 @@ class _PickMapScreenState extends State<PickMapScreen> {
   }
 
   getInitialPosition() async {
-    if (widget.baseModel.object != null) {
+
+    if (widget.baseModel.object.latitude != null) {
       _initialPosition = LatLng(
           double.parse(
               widget.baseModel.object.latitude ?? AppStrings.defaultLat),
@@ -51,7 +52,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
               widget.baseModel.object.longitude ?? AppStrings.defaultLong));
       Future.delayed(Duration(seconds: 1),(){
         _mapController?.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: _initialPosition, zoom: 100),
+          CameraPosition(target: _initialPosition, zoom: 16),
         ));
       });
 

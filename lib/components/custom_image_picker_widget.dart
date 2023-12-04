@@ -37,8 +37,8 @@ class CustomButtonImagePicker extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 9),
               decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Styles.LIGHT_BORDER_COLOR, width: 1),
+                  border:
+                      Border.all(color: Styles.LIGHT_BORDER_COLOR, width: 1),
                   borderRadius: BorderRadius.circular(8)),
               child: Row(
                 children: [
@@ -64,8 +64,7 @@ class CustomButtonImagePicker extends StatelessWidget {
         if (imageFile != null || imageUrl != null)
           Container(
             decoration: BoxDecoration(
-                border: Border.all(
-                    color: Styles.LIGHT_BORDER_COLOR, width: 1),
+                border: Border.all(color: Styles.LIGHT_BORDER_COLOR, width: 1),
                 borderRadius: BorderRadius.circular(8)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

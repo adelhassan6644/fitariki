@@ -139,20 +139,44 @@ class PersonalInformationWidget extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                CustomTextFormField(
-                  valid: Validations.name,
-                  controller: TextEditingController(
-                      text: provider.birthDay != null
-                          ? provider.birthDay!.dateFormat(format: 'dd-MM-yyyy')
-                          : ""),
-                  onTap: () async {
-                    if (fromLogin && provider.isDriver) {
-                      provider.onSelectBirthDay();
-                    }
-                  },
-                  sSvgIcon: SvgImages.calendar,
-                  hint: getTranslated("birthday", context),
-                  read: true,
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormField(
+                        valid: Validations.name,
+                        controller: TextEditingController(
+                            text: provider.birthDay != null
+                                ? provider.birthDay!.dateFormat(format: 'dd-MM-yyyy',lang: "en")
+                                : ""),
+                        onTap: () async {
+                          if (fromLogin && provider.isDriver) {
+                            provider.onSelectBirthDay();
+                          }
+                        },
+                        sSvgIcon: SvgImages.calendar,
+                        hint: getTranslated("birthday", context),
+                        read: true,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: CustomTextFormField(
+                        valid: Validations.name,
+                        controller: TextEditingController(
+                            text: provider.hijriBirthDay != null
+                                ? provider.hijriBirthDay!
+                                : ""),
+                        onTap: () async {
+                          if (fromLogin && provider.isDriver) {
+                            provider.onSelectHijriBirthDay();
+                          }
+                        },
+                        sSvgIcon: SvgImages.calendar,
+                        hint: getTranslated("hijri_birthday", context),
+                        read: true,
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

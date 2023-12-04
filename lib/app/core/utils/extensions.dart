@@ -59,6 +59,10 @@ extension DefaultFormat on DateTime {
   String defaultFormat2({String lang = "en"}) {
     return DateFormat("d-MM-yyyy", lang).format(this);
   }
+
+  String gregorianFormat({String lang = "en"}) {
+    return DateFormat("yyyy-MM-d", lang).format(this);
+  }
 }
 
 String localeCode = Provider.of<LocalizationProvider>(

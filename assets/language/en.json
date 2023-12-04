@@ -386,5 +386,7 @@
   "my_offers": "My Offers",
   "ride_not_started": "It's not time for the ride",
   "ok": "Ok",
-  "birthday": "Birthday"
+  "birthday": "Birthday",
+
+  "hijri_birthday": "date Of Birth Hijri"
 }
