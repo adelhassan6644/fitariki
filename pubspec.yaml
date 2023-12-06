@@ -42,7 +42,7 @@ dependencies:
   url_launcher: ^6.1.11
   readmore:
   flutter_svg:
-  flutter_local_notifications: ^15.1.0+1
+  flutter_local_notifications: ^16.1.0
   flutter_form_builder:
   equatable:
   pin_code_fields:
