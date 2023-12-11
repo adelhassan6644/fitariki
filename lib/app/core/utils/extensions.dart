@@ -57,11 +57,11 @@ extension DefaultFormat on DateTime {
   }
 
   String defaultFormat2({String lang = "en"}) {
-    return DateFormat("d-MM-yyyy", lang).format(this);
+    return DateFormat("dd-MM-yyyy", lang).format(this);
   }
 
   String gregorianFormat({String lang = "en"}) {
-    return DateFormat("yyyy-MM-d", lang).format(this);
+    return DateFormat("yyyy-MM-dd", lang).format(this);
   }
 }
 

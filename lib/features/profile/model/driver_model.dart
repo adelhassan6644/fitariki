@@ -239,7 +239,7 @@ class CarInfo {
         plateLetterLeft: json["plateLetterLeft"],
         plateLetterMiddle: json["plateLetterMiddle"],
         plateLetterRight: json["plateLetterRight"],
-        palletNumber: json["plateNumber"],
+        palletNumber: json["plateNumber"].toString(),
         sequenceNumber: json["sequenceNumber"] != null
             ? json["sequenceNumber"].toString()
             : null,

@@ -7,26 +7,29 @@ class ApiErrorHandler {
     dynamic errorDescription = "";
     if (error is Exception) {
       try {
-        if (error is DioError) {
+
+        if (error is DioException) {
           switch (error.type) {
-            case DioErrorType.cancel:
+            case DioExceptionType.cancel:
               errorDescription = "Request to API server was cancelled";
               break;
-            case DioErrorType.connectionTimeout:
+            case DioExceptionType.connectionTimeout:
               errorDescription = "Connection timeout with API server";
               break;
-            case DioErrorType.unknown:
+            case DioExceptionType.unknown:
               errorDescription =
                   "Connection to API server failed due to internet connection";
               break;
-            case DioErrorType.receiveTimeout:
+            case DioExceptionType.receiveTimeout:
               errorDescription =
                   "Receive timeout in connection with API server";
               break;
-            case DioErrorType.badResponse:
+            case DioExceptionType.badResponse:
+              print(error.response!.statusCode);
               switch (error.response!.statusCode) {
                 case 404:
                 case 500:
+                print(error.response!.data['message']);
                 errorDescription = error.response!.data["message"];
                 break;
                 case 503:
@@ -60,7 +63,7 @@ class ApiErrorHandler {
         errorDescription = e.toString();
       }
     } else {
-      errorDescription = "Some thing went wrong";
+      errorDescription = error.response?.data["message"]??"Some thing went wrong";
     }
     return errorDescription;
   }

@@ -724,8 +724,8 @@ class ProfileProvider extends ChangeNotifier {
             // "nick_name": nickName.text.trim(),
             "first_name": firstName.text.trim(),
             "last_name": lastName.text.trim(),
-            "dateOfBirthGregorian": birthDay!.gregorianFormat(),
-            "dateOfBirthHijri": hijriBirthDay!,
+            "dateOfBirthGregorian": birthDay?.gregorianFormat(),
+            "dateOfBirthHijri": hijriBirthDay??"",
             "email": email.text.trim(),
             "phone": phoneTEC.text.trim(),
             "country_flag": countryFlag.trim(),
@@ -800,7 +800,7 @@ class ProfileProvider extends ChangeNotifier {
           }
           CustomSnackBar.showSnackBar(
               notification: AppNotification(
-                  message: ApiErrorHandler.getMessage(fail),
+                  message: (fail.error),
                   isFloating: true,
                   backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
