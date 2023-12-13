@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fitariki/app/core/utils/color_resources.dart';
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
@@ -261,11 +259,10 @@ class OfferDetails extends StatelessWidget {
                             onTap: () async {
                               if (provider.isDriver &&
                                   profileProvider.status != "1") {
-                                log(profileProvider.status.toString());
-                                showToast(
+                                return showToast(
                                     "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
-                                return;
-                              } else {
+                              } else if (provider.offerDetails?.isSentOffer !=
+                                  true) {
                                 customShowModelBottomSheet(
                                     onClose: () =>
                                         sl<AddRequestProvider>().reset(),

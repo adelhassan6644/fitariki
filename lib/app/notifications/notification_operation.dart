@@ -49,58 +49,31 @@ updateUserFunctions({@required notify}) async {
 }
 
 Future<void> handlePathByRoute(Map notify) async {
-  log("startHandlePathByRoute ${notify}");
+  log("startHandlePathByRoute $notify");
   notify as Map<String, dynamic>;
 
   PayloadData data =
       PayloadData.fromJson(json.decode(notify["data"]) as Map<String, dynamic>);
 
-
   if (data.url != null) {
-    if (data.url == "TRACKING") {
+    if (data.url == Routes.TRACKING &&
+        CustomNavigator.lastRoute != Routes.TRACKING) {
       CustomNavigator.push(
         Routes.TRACKING,
         arguments: data.myRideModel,
       );
-    }
-    if (data.url == Routes.PAYMENT) {
-      CustomNavigator.push(Routes.PAYMENT, arguments: {
-        'isFromMyTrips':true
+    } else if (data.url == Routes.PAYMENT &&
+        CustomNavigator.lastRoute != Routes.PAYMENT) {
+      CustomNavigator.push(Routes.PAYMENT,
+          arguments: {'isFromMyTrips': !data.isMyOffer!, 'id': data.id});
+    } else {
+      if (CustomNavigator.lastRoute != data.url) {
+        CustomNavigator.push(data.url!,
+            arguments: data.url == Routes.DASHBOARD ? 0 : data.id,
+            clean: data.url == Routes.DASHBOARD);
       }
-      );
     }
-    CustomNavigator.push(
-      data.url!,
-      arguments: data.id,
-    );
   } else {
     CustomNavigator.push(Routes.NOTIFICATIONS);
   }
-}
-
-class PayloadData {
-  int? id;
-  String? url;
-  int? status;
-  MyRideModel? myRideModel;
-
-  PayloadData({
-    required this.id,
-    required this.url,
-    required this.status,
-    this.myRideModel,
-  });
-
-  factory PayloadData.fromJson(Map<String, dynamic> json) => PayloadData(
-      id: json["id"],
-      url: json["url"],
-      status: json["status"],
-      myRideModel:
-          json["ride_data"] != null ? MyRideModel.fromJson(json["ride_data"]) : null);
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "url": url,
-        "status": status,
-      };
 }

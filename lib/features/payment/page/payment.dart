@@ -20,7 +20,7 @@ import '../widgets/payment_details_widget.dart';
 class Payment extends StatefulWidget {
   final bool isFromMyTrips;
   final int? id;
-  const Payment({Key? key, this.isFromMyTrips = false,  this.id}) : super(key: key);
+  const Payment({super.key, this.isFromMyTrips = false, this.id});
 
   @override
   State<Payment> createState() => _PaymentState();
@@ -29,15 +29,16 @@ class Payment extends StatefulWidget {
 class _PaymentState extends State<Payment> {
   @override
   void initState() {
-    if(widget.id!=null) {
-      sl<RequestDetailsProvider>()
-        .getRequestDetails(id: widget.id!);
-    }
+    Future.delayed(Duration.zero, () {
+      if (widget.id != null) {
+        sl<RequestDetailsProvider>().getRequestDetails(id: widget.id!);
+      }
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       top: false,
       child: Scaffold(

@@ -50,8 +50,12 @@ abstract class CustomNavigator {
       RouteObserver<PageRoute>();
   static final GlobalKey<ScaffoldMessengerState> scaffoldState =
       GlobalKey<ScaffoldMessengerState>();
+  static String? lastRoute;
 
   static Route<dynamic> onCreateRoute(RouteSettings settings) {
+    ///Assign Route
+    lastRoute = settings.name;
+
     switch (settings.name) {
       case Routes.APP:
         return _pageRoute(const MyApp());
@@ -75,10 +79,8 @@ abstract class CustomNavigator {
         return _pageRoute(ProfilePage(
           fromLogin: settings.arguments as bool,
         ));
-        case Routes.BankInfoPage:
-        return _pageRoute(const BankInfoPage(
-
-        ));
+      case Routes.BankInfoPage:
+        return _pageRoute(const BankInfoPage());
       case Routes.DASHBOARD:
         return _pageRoute(DashBoard(
           index: settings.arguments as int,
@@ -184,20 +186,16 @@ abstract class CustomNavigator {
         ));
 
       case Routes.PAYMENT:
-        {
-          if (settings.arguments != null) {
-            final data = settings.arguments! as Map;
-            return _pageRoute(Payment(
-              isFromMyTrips: data['isFromMyTrips'] as bool, id: data['id'],
-            ));
-          } else {
-            return _pageRoute(const Payment());
-          }
-        }
+        return _pageRoute(Payment(
+          isFromMyTrips: (settings.arguments as Map)['isFromMyTrips'] as bool,
+          id: (settings.arguments as Map)['id'],
+        ));
+
       case Routes.PAYMENTWEBVIEW:
-        final  map= settings.arguments as Map<String,dynamic>;
+        final map = settings.arguments as Map<String, dynamic>;
         return _pageRoute(PaymentWebViewScreen(
-          reservationId: map["id"] as int, useWallet: map["useWallet"] as bool ,
+          reservationId: map["id"] as int,
+          useWallet: map["useWallet"] as bool,
         ));
 
       case Routes.TERMS_AND_CONDITIONS:

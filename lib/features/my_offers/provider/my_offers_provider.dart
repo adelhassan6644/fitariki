@@ -167,7 +167,7 @@ class MyOffersProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         getMyOffers();
-        CustomNavigator.push(Routes.DASHBOARD, arguments: 3, clean: true);
+        CustomNavigator.push(Routes.DASHBOARD, arguments: 2, clean: true);
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: getTranslated(

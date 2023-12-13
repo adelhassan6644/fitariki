@@ -21,3 +21,4 @@ import '../../navigation/routes.dart';
 part 'firebase_notification_helper.dart';
 part 'notification_operation.dart';
 part 'local_notification.dart';
+part 'payload_data_model.dart';

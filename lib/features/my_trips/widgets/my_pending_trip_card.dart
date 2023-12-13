@@ -237,7 +237,6 @@ class MyPendingTripCard extends StatelessWidget {
                     !isDriver),
                 child: InkWell(
                   onTap: () {
-
                     CustomNavigator.push(Routes.PAYMENT, arguments: {
                       'isFromMyTrips':true,
                       'id':myTrip.id!

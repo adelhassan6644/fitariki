@@ -5,31 +5,26 @@ import '../../../app/core/utils/dimensions.dart';
 import '../../../app/core/utils/text_styles.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/custom_app_bar.dart';
-import '../../../components/custom_button.dart';
 import '../../profile/provider/profile_provider.dart';
-import '../../profile/widgets/bank_data_widget.dart';
 import '../widget/edit_bank_data_widget.dart';
 
 class BankInfoPage extends StatelessWidget {
-  const BankInfoPage({ Key? key}) : super(key: key);
-
+  const BankInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
       bottom: true,
       top: false,
       child: Consumer<ProfileProvider>(builder: (_, provider, child) {
         return Scaffold(
           appBar: CustomAppBar(
-
               actionChild: GestureDetector(
-                      onTap: () => provider.updateProfile(),
-                      child: Text(getTranslated("save", context),
-                          style: AppTextStyles.w400.copyWith(
-                              fontSize: 10, color: Styles.SYSTEM_COLOR)),
-                    ),
+                onTap: () => provider.updateProfile(),
+                child: Text(getTranslated("save", context),
+                    style: AppTextStyles.w400
+                        .copyWith(fontSize: 10, color: Styles.SYSTEM_COLOR)),
+              ),
               title: getTranslated("edit_bank_data", context),
               withBorder: true),
           body: Column(
@@ -49,7 +44,6 @@ class BankInfoPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
                           Visibility(
                               visible: provider.isDriver,
                               child: EditBankDataWidget(
@@ -65,7 +59,6 @@ class BankInfoPage extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
           ),
         );

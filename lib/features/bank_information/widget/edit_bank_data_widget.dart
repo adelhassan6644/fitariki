@@ -12,15 +12,15 @@ import '../../../helpers/image_picker_helper.dart';
 import '../../profile/provider/profile_provider.dart';
 
 class EditBankDataWidget extends StatelessWidget {
-  const EditBankDataWidget({required this.provider, Key? key, required this.fromLogin}) : super(key: key);
+  const EditBankDataWidget(
+      {required this.provider, required this.fromLogin, super.key});
   final ProfileProvider provider;
   final bool fromLogin;
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
-mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(getTranslated("quadruple_name", context)),
@@ -46,7 +46,7 @@ mainAxisAlignment: MainAxisAlignment.start,
           onChange: provider.selectedBank,
           value: provider.bank,
           isInitial: provider.bank != null,
-          initialValue: provider.bank?.name ,
+          initialValue: provider.bank?.name,
           enable: fromLogin,
         ),
         SizedBox(
@@ -66,12 +66,10 @@ mainAxisAlignment: MainAxisAlignment.start,
             FilteringTextInputFormatter.digitsOnly,
             // CardNumberFormatter(),
             LengthLimitingTextInputFormatter(22),
-
           ],
           sufWidget: Padding(
               padding: const EdgeInsets.only(
                 left: 8,
-
               ),
               child: Text("SA",
                   style: AppTextStyles.w500.copyWith(
@@ -95,7 +93,8 @@ mainAxisAlignment: MainAxisAlignment.start,
           canEdit: fromLogin,
           imageUrl: provider.profileModel?.driver?.bankInfo?.accountImage,
           title: getTranslated("account_number_image", context),
-          onTap: () => ImagePickerHelper.showOptionSheet(onGet: provider.onSelectBankAccountImage),
+          onTap: () => ImagePickerHelper.showOptionSheet(
+              onGet: provider.onSelectBankAccountImage),
           imageFile: provider.bankAccountImage,
         ),
       ],

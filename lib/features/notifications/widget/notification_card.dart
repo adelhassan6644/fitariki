@@ -27,16 +27,25 @@ class _NotificationCardState extends State<NotificationCard> {
       return InkWell(
         onTap: () {
           if (widget.notificationItem.notificationData!.routName != null) {
-            if (widget.notificationItem.notificationData!.routName == "TRACKING") {
+            if (widget.notificationItem.notificationData!.routName ==
+                Routes.TRACKING) {
               CustomNavigator.push(
                 Routes.TRACKING,
                 arguments: widget.notificationItem.notificationData!.rideData,
               );
+            } else if (widget.notificationItem.notificationData!.routName ==
+                Routes.PAYMENT) {
+              CustomNavigator.push(Routes.PAYMENT, arguments: {
+                'isFromMyTrips':
+                    !widget.notificationItem.notificationData!.isMyOffer!,
+                'id': widget.notificationItem.notificationData!.id
+              });
+            } else {
+              CustomNavigator.push(
+                widget.notificationItem.notificationData!.routName!,
+                arguments: widget.notificationItem.notificationData!.id!,
+              );
             }
-            CustomNavigator.push(
-              widget.notificationItem.notificationData!.routName!,
-              arguments: widget.notificationItem.notificationData!.id!,
-            );
           }
           provider.readNotification(widget.notificationItem.id);
           setState(() => widget.notificationItem.isRead = true);
