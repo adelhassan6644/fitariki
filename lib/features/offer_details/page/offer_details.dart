@@ -264,8 +264,7 @@ class OfferDetails extends StatelessWidget {
                                     profileProvider.status != "1") {
                                   showToast(
                                       "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
-                                }
-                                else if (provider.offerDetails?.isSentOffer !=
+                                } else if (provider.offerDetails?.isSentOffer !=
                                     true) {
                                   customShowModelBottomSheet(
                                       onClose: () =>
