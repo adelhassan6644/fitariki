@@ -17,6 +17,7 @@ class BankInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
       bottom: true,
       top: false,
       child: Consumer<ProfileProvider>(builder: (_, provider, child) {
