@@ -257,34 +257,36 @@ class OfferDetails extends StatelessWidget {
                                         : "add_request",
                                     context),
                             onTap: () async {
-                              if (provider.isDriver &&
-                                  profileProvider.status != "1") {
-                                return showToast(
-                                    "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
-                              } else if (provider.offerDetails?.isSentOffer !=
-                                  true) {
-                                customShowModelBottomSheet(
-                                    onClose: () =>
-                                        sl<AddRequestProvider>().reset(),
-                                    body: provider.isLogin
-                                        ? AddRequest(
-                                            name: provider.offerDetails?.name ??
-                                                "",
-                                            offer: provider.offerDetails!,
-                                            days: provider.isDriver
-                                                ? provider.offerDetails!
-                                                        .offerDays ??
-                                                    []
-                                                : sl
-                                                    .get<ScheduleProvider>()
-                                                    .selectedDays,
-                                            // provider.offerDetails!.offerDays ??
-                                            //     [],
-                                            isCaptain: provider.isDriver,
-                                            updateOfferDetails:
-                                                provider.updateModel,
-                                          )
-                                        : const Login());
+                              if (!provider.isLogin) {
+                                customShowModelBottomSheet(body: const Login());
+                              } else {
+                                if (provider.isDriver &&
+                                    profileProvider.status != "1") {
+                                  showToast(
+                                      "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
+                                }
+                                else if (provider.offerDetails?.isSentOffer !=
+                                    true) {
+                                  customShowModelBottomSheet(
+                                      onClose: () =>
+                                          sl<AddRequestProvider>().reset(),
+                                      body: AddRequest(
+                                        name: provider.offerDetails?.name ?? "",
+                                        offer: provider.offerDetails!,
+                                        days: provider.isDriver
+                                            ? provider
+                                                    .offerDetails!.offerDays ??
+                                                []
+                                            : sl
+                                                .get<ScheduleProvider>()
+                                                .selectedDays,
+                                        // provider.offerDetails!.offerDays ??
+                                        //     [],
+                                        isCaptain: provider.isDriver,
+                                        updateOfferDetails:
+                                            provider.updateModel,
+                                      ));
+                                }
                               }
                             });
                       }),
