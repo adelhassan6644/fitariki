@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
-import 'package:fitariki/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -167,7 +166,7 @@ class MyOffersProvider extends ChangeNotifier {
         notifyListeners();
       }, (response) {
         getMyOffers();
-        CustomNavigator.push(Routes.DASHBOARD, arguments: 2, clean: true);
+        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: getTranslated(

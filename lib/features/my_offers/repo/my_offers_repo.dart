@@ -22,13 +22,13 @@ class MyOffersRepo {
     return sharedPreferences.getString(AppStorageKey.role) == "driver";
   }
 
+  String? get userId => sharedPreferences.getString(AppStorageKey.userId);
+  String? get userRole => sharedPreferences.getString(AppStorageKey.role);
+
   Future<Either<ServerFailure, Response>> getMyRequests() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.myRequests(
-          sharedPreferences.getString(AppStorageKey.role),
-          sharedPreferences.getString(AppStorageKey.userId),
-        ),
+        uri: EndPoints.myRequests(userRole, userId),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -43,8 +43,7 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> getMyOffers() async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.myOffers(sharedPreferences.getString(AppStorageKey.role),
-            sharedPreferences.getString(AppStorageKey.userId)),
+        uri: EndPoints.myOffers(userRole, userId),
       );
       if (response.statusCode == 200) {
         return Right(response);
@@ -60,12 +59,8 @@ class MyOffersRepo {
       {required int id}) async {
     try {
       Response response = await dioClient.get(
-          uri: EndPoints.viewMyOffers(
-              sharedPreferences.getString(AppStorageKey.role), id),
-          queryParameters: {
-            "${sharedPreferences.getString(AppStorageKey.role) ?? "client"}_id":
-                sharedPreferences.getString(AppStorageKey.userId)
-          });
+          uri: EndPoints.viewMyOffers(userRole, id),
+          queryParameters: {"${userRole ?? "client"}_id": userId});
       if (response.statusCode == 200) {
         return Right(response);
       } else {
@@ -79,8 +74,7 @@ class MyOffersRepo {
   Future<Either<ServerFailure, Response>> deleteMyOffer(id) async {
     try {
       Response response = await dioClient.post(
-        uri: EndPoints.deleteOffer(
-            sharedPreferences.getString(AppStorageKey.role), id),
+        uri: EndPoints.deleteOffer(userRole, id),
       );
       if (response.statusCode == 200) {
         return Right(response);
