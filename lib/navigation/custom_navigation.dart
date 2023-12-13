@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:fitariki/features/on_boarding/pages/on_boarding.dart';
 import '../components/custom_pdf.dart';
 import '../features/auth/pages/verification.dart';
-import '../features/bank_information /page/bank_info_page.dart';
+import '../features/bank_information/page/bank_info_page.dart';
 import '../features/contatct_with_us/page/contact_with_us.dart';
 import '../features/followers/follower_details/page/follower_details.dart';
 import '../features/followers/followers/page/followers.dart';
