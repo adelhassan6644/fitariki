@@ -10,18 +10,34 @@ import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
 import '../../../components/custom_button.dart';
+import '../../../data/config/di.dart';
 import '../../../main_widgets/shimmer_widgets/payment_shimmer_widget.dart';
 import '../../../main_widgets/user_card.dart';
 import '../../request_details/provider/request_details_provider.dart';
 import '../widgets/coupon_widget.dart';
 import '../widgets/payment_details_widget.dart';
 
-class Payment extends StatelessWidget {
+class Payment extends StatefulWidget {
   final bool isFromMyTrips;
-  const Payment({Key? key, this.isFromMyTrips = false}) : super(key: key);
+  final int? id;
+  const Payment({Key? key, this.isFromMyTrips = false,  this.id}) : super(key: key);
 
   @override
+  State<Payment> createState() => _PaymentState();
+}
+
+class _PaymentState extends State<Payment> {
+  @override
+  void initState() {
+    if(widget.id!=null) {
+      sl<RequestDetailsProvider>()
+        .getRequestDetails(id: widget.id!);
+    }
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -41,7 +57,7 @@ class Payment extends StatelessWidget {
                               data: [
                                 ///user card
                                 Visibility(
-                                  visible: isFromMyTrips,
+                                  visible: widget.isFromMyTrips,
                                   child: UserCard(
                                     withAnalytics: false,
                                     userId: provider
@@ -83,7 +99,7 @@ class Payment extends StatelessWidget {
                                 ),
 
                                 Visibility(
-                                  visible: !isFromMyTrips,
+                                  visible: !widget.isFromMyTrips,
                                   child: UserCard(
                                     withAnalytics: false,
                                     userId: provider.requestModel?.driverId,

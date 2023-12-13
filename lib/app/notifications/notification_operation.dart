@@ -64,7 +64,10 @@ Future<void> handlePathByRoute(Map notify) async {
       );
     }
     if (data.url == Routes.PAYMENT) {
-      CustomNavigator.push(Routes.PAYMENT, arguments: true);
+      CustomNavigator.push(Routes.PAYMENT, arguments: {
+        'isFromMyTrips':true
+      }
+      );
     }
     CustomNavigator.push(
       data.url!,

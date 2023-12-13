@@ -67,7 +67,9 @@ class RequestDetailsProvider extends ChangeNotifier {
           if (!isDriver) {
             CustomNavigator.push(
               Routes.PAYMENT,
-              arguments: fromMyTrip,
+             arguments: {
+            'isFromMyTrips':fromMyTrip
+            },
               replace: true,
             );
           } else {

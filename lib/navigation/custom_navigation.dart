@@ -186,8 +186,9 @@ abstract class CustomNavigator {
       case Routes.PAYMENT:
         {
           if (settings.arguments != null) {
+            final data = settings.arguments! as Map;
             return _pageRoute(Payment(
-              isFromMyTrips: settings.arguments! as bool,
+              isFromMyTrips: data['isFromMyTrips'] as bool, id: data['id'],
             ));
           } else {
             return _pageRoute(const Payment());
