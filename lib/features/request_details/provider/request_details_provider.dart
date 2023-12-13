@@ -65,13 +65,14 @@ class RequestDetailsProvider extends ChangeNotifier {
         if (status == 1) {
           isAccepting = false;
           if (!isDriver) {
-            CustomNavigator.push(
-              Routes.PAYMENT,
-             arguments: {
-            'isFromMyTrips':fromMyTrip
-            },
-              replace: true,
-            );
+            CustomNavigator.push(Routes.PAYMENT, replace: true);
+            // CustomNavigator.push(
+            //   Routes.PAYMENT,
+            //  arguments: {
+            // 'isFromMyTrips':fromMyTrip
+            // },
+            //   replace: true,
+            // );
           } else {
             CustomNavigator.push(Routes.SUCCESS,
                 replace: true,
@@ -125,7 +126,8 @@ class RequestDetailsProvider extends ChangeNotifier {
   bool isLoading = false;
   OfferRequestDetailsModel? requestModel;
   getRequestDetails({required int id}) async {
-    try {requestModel=null;
+    try {
+      requestModel = null;
       isLoading = true;
       notifyListeners();
 

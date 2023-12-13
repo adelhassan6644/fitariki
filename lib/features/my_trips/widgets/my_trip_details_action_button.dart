@@ -173,8 +173,10 @@ class MyTripDetailsActionButtons extends StatelessWidget {
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                   vertical: 16.h),
               child: CustomButton(
-                onTap: () => CustomNavigator.push(Routes.PAYMENT,
-                    arguments: {'isFromMyTrips': true}),
+                // onTap: () => CustomNavigator.push(Routes.PAYMENT,
+                //     arguments: {'isFromMyTrips': true}),
+                onTap: () => CustomNavigator.push(Routes.PAYMENT),
+
                 text: getTranslated("payment", context),
               ),
             ),

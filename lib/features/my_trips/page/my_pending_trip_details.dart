@@ -159,8 +159,8 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                             ///distance between client and driver
                             DistanceWidget(
                               isCaptain: provider.isDriver,
-                              location: provider
-                                      .requestModel?.offer?.pickupLocation,
+                              location:
+                                  provider.requestModel?.offer?.pickupLocation,
                             ),
 
                             ///Type of ride
@@ -201,8 +201,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                                 provider.requestModel?.offer?.driverId != null
                                     ? provider.requestModel!.followers!.length
                                     : provider.requestModel!.offer!
-                                            .offerFollowers!.length ??
-                                        0,
+                                        .offerFollowers!.length,
                                 (index) => MapWidget(
                                   launchMap: false,
                                   clientName:
@@ -251,7 +250,7 @@ class _MyPendingTripDetailsState extends State<MyPendingTripDetails> {
                               ),
 
                             /// to show stop points for followers request if driver
-                          /*  Visibility(
+                            /*  Visibility(
                               visible: provider.isDriver &&
                                   provider.requestModel?.followers != null &&
                                   provider.requestModel!.followers!.isNotEmpty,

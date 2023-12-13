@@ -154,8 +154,9 @@ class MyOffersProvider extends ChangeNotifier {
 
       Either<ServerFailure, Response> response =
           await myOffersRepo.deleteMyOffer(id);
+      CustomNavigator.pop();
+
       response.fold((l) {
-        CustomNavigator.pop();
         CustomSnackBar.showSnackBar(
             notification: AppNotification(
                 message: l.error,

@@ -1,5 +1,6 @@
 library notification_helper;
 
+@pragma('vm:entry-point')
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';

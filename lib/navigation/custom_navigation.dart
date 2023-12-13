@@ -187,9 +187,14 @@ abstract class CustomNavigator {
 
       case Routes.PAYMENT:
         return _pageRoute(Payment(
-          isFromMyTrips: (settings.arguments as Map)['isFromMyTrips'] as bool,
-          id: (settings.arguments as Map)['id'],
+          id: settings.arguments != null ? (settings.arguments as int) : null,
         ));
+
+      // case Routes.PAYMENT:
+      //   return _pageRoute(Payment(
+      //     isFromMyTrips: (settings.arguments as Map)['isFromMyTrips'] as bool,
+      //     id: (settings.arguments as Map)['id'],
+      //   ));
 
       case Routes.PAYMENTWEBVIEW:
         final map = settings.arguments as Map<String, dynamic>;
@@ -227,6 +232,7 @@ abstract class CustomNavigator {
 
   static pop({dynamic result}) {
     if (navigatorState.currentState!.canPop()) {
+      lastRoute = null;
       navigatorState.currentState!.pop(result);
     }
   }

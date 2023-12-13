@@ -9,11 +9,9 @@ import '../../../app/core/utils/text_styles.dart';
 import '../../../components/custom_images.dart';
 import '../../../components/custom_network_image.dart';
 import '../../../components/marquee_widget.dart';
-import '../../../data/config/di.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../../request_details/model/offer_request_details_model.dart';
-import '../../request_details/provider/request_details_provider.dart';
 
 class MyPendingTripCard extends StatelessWidget {
   const MyPendingTripCard(
@@ -237,10 +235,12 @@ class MyPendingTripCard extends StatelessWidget {
                     !isDriver),
                 child: InkWell(
                   onTap: () {
-                    CustomNavigator.push(Routes.PAYMENT, arguments: {
-                      'isFromMyTrips':true,
-                      'id':myTrip.id!
-                    });
+                    // CustomNavigator.push(Routes.PAYMENT, arguments: {
+                    //   'isFromMyTrips':true,
+                    //   'id':myTrip.id!
+                    // });
+
+                    CustomNavigator.push(Routes.PAYMENT, arguments: myTrip.id);
                   },
                   child: Container(
                     padding:

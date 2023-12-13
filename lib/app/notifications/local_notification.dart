@@ -5,6 +5,7 @@ FlutterLocalNotificationsPlugin? _notificationsPlugin =
 
 localNotification() {
   _notificationsPlugin = FlutterLocalNotificationsPlugin();
+
   _notificationsPlugin
       ?.resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
@@ -33,7 +34,7 @@ localNotification() {
   _notificationsPlugin!.initialize(
     initSetting,
     onDidReceiveNotificationResponse: (not) {
-      log("onSelect Message ${not.payload}");
+      print("onSelect Message ${not.payload}");
       handlePath(json.decode(not.payload ?? ""));
     },
   );

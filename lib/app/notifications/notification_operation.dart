@@ -54,24 +54,26 @@ Future<void> handlePathByRoute(Map notify) async {
 
   PayloadData data =
       PayloadData.fromJson(json.decode(notify["data"]) as Map<String, dynamic>);
+  print("===>Path Route is ${data.toJson()}");
+  print("===>CustomNavigator.lastRoute is ${CustomNavigator.lastRoute}");
+  print("===>Path Route is ${data.url}");
 
   if (data.url != null) {
-    if (data.url == Routes.TRACKING &&
+    if (data.url?.trim() == Routes.TRACKING &&
         CustomNavigator.lastRoute != Routes.TRACKING) {
       CustomNavigator.push(
         Routes.TRACKING,
         arguments: data.myRideModel,
       );
-    } else if (data.url == Routes.PAYMENT &&
+    } else if (data.url?.trim() == Routes.PAYMENT &&
         CustomNavigator.lastRoute != Routes.PAYMENT) {
-      CustomNavigator.push(Routes.PAYMENT,
-          arguments: {'isFromMyTrips': !data.isMyOffer!, 'id': data.id});
+      // CustomNavigator.push(Routes.PAYMENT,
+      //     arguments: {'isFromMyTrips': !data.isMyOffer!, 'id': data.id});
+      CustomNavigator.push(Routes.PAYMENT, arguments: data.id);
     } else {
-      if (CustomNavigator.lastRoute != data.url) {
-        CustomNavigator.push(data.url!,
-            arguments: data.url == Routes.DASHBOARD ? 0 : data.id,
-            clean: data.url == Routes.DASHBOARD);
-      }
+      CustomNavigator.push(data.url!.trim(),
+          arguments: data.url!.trim() == Routes.DASHBOARD ? 0 : data.id,
+          clean: data.url == Routes.DASHBOARD);
     }
   } else {
     CustomNavigator.push(Routes.NOTIFICATIONS);

@@ -35,11 +35,13 @@ class _NotificationCardState extends State<NotificationCard> {
               );
             } else if (widget.notificationItem.notificationData!.routName ==
                 Routes.PAYMENT) {
-              CustomNavigator.push(Routes.PAYMENT, arguments: {
-                'isFromMyTrips':
-                    !widget.notificationItem.notificationData!.isMyOffer!,
-                'id': widget.notificationItem.notificationData!.id
-              });
+              CustomNavigator.push(Routes.PAYMENT,
+                  arguments: widget.notificationItem.notificationData!.id);
+              // CustomNavigator.push(Routes.PAYMENT, arguments: {
+              //   'isFromMyTrips':
+              //       !widget.notificationItem.notificationData!.isMyOffer!,
+              //   'id': widget.notificationItem.notificationData!.id
+              // });
             } else {
               CustomNavigator.push(
                 widget.notificationItem.notificationData!.routName!,
