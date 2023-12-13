@@ -49,5 +49,55 @@ updateUserFunctions({@required notify}) async {
 }
 
 Future<void> handlePathByRoute(Map notify) async {
-  CustomNavigator.push(Routes.NOTIFICATIONS);
+  log("startHandlePathByRoute ${notify}");
+  notify as Map<String, dynamic>;
+
+  PayloadData data =
+      PayloadData.fromJson(json.decode(notify["data"]) as Map<String, dynamic>);
+
+
+  if (data.url != null) {
+    if (data.url == "TRACKING") {
+      CustomNavigator.push(
+        Routes.TRACKING,
+        arguments: data.myRideModel,
+      );
+    }
+    if (data.url == Routes.PAYMENT) {
+      CustomNavigator.push(Routes.PAYMENT, arguments: true);
+    }
+    CustomNavigator.push(
+      data.url!,
+      arguments: data.id,
+    );
+  } else {
+    CustomNavigator.push(Routes.NOTIFICATIONS);
+  }
+}
+
+class PayloadData {
+  int? id;
+  String? url;
+  int? status;
+  MyRideModel? myRideModel;
+
+  PayloadData({
+    required this.id,
+    required this.url,
+    required this.status,
+    this.myRideModel,
+  });
+
+  factory PayloadData.fromJson(Map<String, dynamic> json) => PayloadData(
+      id: json["id"],
+      url: json["url"],
+      status: json["status"],
+      myRideModel:
+          json["ride_data"] != null ? MyRideModel.fromJson(json["ride_data"]) : null);
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "url": url,
+        "status": status,
+      };
 }

@@ -27,8 +27,7 @@ class _NotificationCardState extends State<NotificationCard> {
       return InkWell(
         onTap: () {
           if (widget.notificationItem.notificationData!.routName != null) {
-            if (widget.notificationItem.notificationData!.routName ==
-                "TRACKING") {
+            if (widget.notificationItem.notificationData!.routName == "TRACKING") {
               CustomNavigator.push(
                 Routes.TRACKING,
                 arguments: widget.notificationItem.notificationData!.rideData,
