@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">105813324547-1nbn1cagb12t59q8njgtnhor47col4j0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">105813324547</string>
+    <string name="google_api_key" translatable="false">AIzaSyAOzDx7xIAd_Hdf0GRosngBPeJj3MpUXoI</string>
+    <string name="google_app_id" translatable="false">1:105813324547:android:5b6b00aaf8b2cc3e90af36</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAOzDx7xIAd_Hdf0GRosngBPeJj3MpUXoI</string>
+    <string name="google_storage_bucket" translatable="false">fitariki-46646.appspot.com</string>
+    <string name="project_id" translatable="false">fitariki-46646</string>
+</resources>

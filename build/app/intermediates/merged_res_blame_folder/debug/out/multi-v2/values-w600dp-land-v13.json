@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.softwareFitariki.fitariki.app-mergeDebugResources-49:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-3/12816c9c48ccbdf7b27e90dce8cc5a25/transformed/material-1.8.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        }
+    ]
+}

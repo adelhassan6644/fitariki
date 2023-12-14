@@ -1,0 +1,14 @@
+com.pravera.fl_location-jetified-window-java-1.0.0-beta04-0 /Users/user/.gradle/caches/transforms-3/0b167ccf2dfe4520942a5d1358aa4c55/transformed/jetified-window-java-1.0.0-beta04/res
+com.pravera.fl_location-jetified-play-services-basement-18.1.0-1 /Users/user/.gradle/caches/transforms-3/0b33b9ac78960311d4eae1c27dbfb896/transformed/jetified-play-services-basement-18.1.0/res
+com.pravera.fl_location-core-1.6.0-2 /Users/user/.gradle/caches/transforms-3/5fe4eb19b22fdf9a6e722b7b5503b246/transformed/core-1.6.0/res
+com.pravera.fl_location-jetified-play-services-base-18.1.0-3 /Users/user/.gradle/caches/transforms-3/63bd13afe37f6bf877b09f2eba860d6e/transformed/jetified-play-services-base-18.1.0/res
+com.pravera.fl_location-jetified-annotation-experimental-1.1.0-4 /Users/user/.gradle/caches/transforms-3/8f4d50b85ee600e8ab5a63571c4aa36d/transformed/jetified-annotation-experimental-1.1.0/res
+com.pravera.fl_location-jetified-window-1.0.0-beta04-5 /Users/user/.gradle/caches/transforms-3/da67141fa8358794370d7d93a715aba1/transformed/jetified-window-1.0.0-beta04/res
+com.pravera.fl_location-main-6 /Users/user/.pub-cache/hosted/pub.dev/fl_location-3.0.0/android/src/main/res
+com.pravera.fl_location-release-7 /Users/user/.pub-cache/hosted/pub.dev/fl_location-3.0.0/android/src/release/res
+com.pravera.fl_location-pngs-8 /Users/user/SoftweareCloud2/fitariki/build/fl_location/generated/res/pngs/release
+com.pravera.fl_location-resValues-9 /Users/user/SoftweareCloud2/fitariki/build/fl_location/generated/res/resValues/release
+com.pravera.fl_location-rs-10 /Users/user/SoftweareCloud2/fitariki/build/fl_location/generated/res/rs/release
+com.pravera.fl_location-mergeReleaseResources-11 /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.pravera.fl_location-mergeReleaseResources-12 /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.pravera.fl_location-merged_res-13 /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_res/release
