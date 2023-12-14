@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4992bd61-4bed-4dd4-8fd7-71160c39a4c1" name="Changes" comment="update build gradle" />
+    <list default="true" id="4992bd61-4bed-4dd4-8fd7-71160c39a4c1" name="Changes" comment="update branch" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -236,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702581076299</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update branch">
+      <created>1702582880021</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702582880021</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +267,7 @@
     <MESSAGE value="update Offer Details page" />
     <MESSAGE value="update local notification" />
     <MESSAGE value="update build gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="update build gradle" />
+    <MESSAGE value="update branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="update branch" />
   </component>
 </project>
