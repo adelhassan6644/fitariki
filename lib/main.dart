@@ -16,7 +16,6 @@ import 'package:flutter/services.dart';
 import 'app/core/utils/app_strings.dart';
 import 'navigation/custom_navigation.dart';
 import 'package:fitariki/data/config/di.dart' as di;
-
 import 'navigation/routes.dart';
 
 Future<void> main() async {
