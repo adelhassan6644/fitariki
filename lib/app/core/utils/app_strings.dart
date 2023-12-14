@@ -2,7 +2,7 @@ import '../../../features/maps/models/location_model.dart';
 import '../../../main_models/weak_model.dart';
 
 class AppStrings {
-  static const String appName = 'fitariki';
+  static const String appName = 'في طريقي';
   // static const String googleApiKey = 'AIzaSyBxi2NcKA8JE90J07U9M2D90tHgaSg3Xjg';
   static const String googleApiKey = 'AIzaSyCb1FtVezafyLREu6Hrv5hciMKlqRk6W40';
   static const String defaultAddress = 'المملكة العربية السعودية ، الرياض';
