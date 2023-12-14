@@ -49,22 +49,21 @@ class Wishlist extends StatelessWidget {
                       )),
                     )),
                   )),
-              Expanded(child: Column(
-                children: [
-                  Expanded(
-                    child: RefreshIndicator(
-                        onRefresh: ()async{
-                          provider.getWishList();
-                        },
-                      color: Styles.PRIMARY_COLOR,
-                        child: Column(children: [
-                          if (provider.currentTab == 0) const FavouriteOffersWidgets(),
-                          if (provider.currentTab == 1) const UsersWidgets()
-                        ],),
-                      ),
-                  )
-                ],
-              ))
+              Expanded(
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    provider.getWishList();
+                  },
+                  color: Styles.PRIMARY_COLOR,
+                  child: Column(
+                    children: [
+                      if (provider.currentTab == 0)
+                        const FavouriteOffersWidgets(),
+                      if (provider.currentTab == 1) const UsersWidgets()
+                    ],
+                  ),
+                ),
+              )
             ],
           );
         }),

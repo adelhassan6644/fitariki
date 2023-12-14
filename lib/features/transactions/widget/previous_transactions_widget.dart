@@ -12,7 +12,7 @@ import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/transactions_provider.dart';
 
 class PreviousTransactionsWidget extends StatelessWidget {
-  const PreviousTransactionsWidget({Key? key}) : super(key: key);
+  const PreviousTransactionsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +26,34 @@ class PreviousTransactionsWidget extends StatelessWidget {
                     onRefresh: () async {
                       provider.getPreviousTransactions();
                     },
-                    child: ListView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(0),
+                    child: Column(
                       children: [
-                        SizedBox(
-                          height: 8.h,
+                        Expanded(
+                          child: ListAnimator(
+                            addPadding: true,
+                            data: [
+                              if (provider.previousTransactions != null &&
+                                  provider.previousTransactions!.transactions!
+                                      .isNotEmpty)
+                                ...List.generate(
+                                    provider.previousTransactions!.transactions!
+                                        .length,
+                                    (index) => TransactionCard(
+                                          transactionItem: provider
+                                              .previousTransactions!
+                                              .transactions![index],
+                                          isFinished: true,
+                                        )),
+                              if (provider.previousTransactions == null ||
+                                  provider.previousTransactions!.transactions!
+                                      .isEmpty)
+                                EmptyState(
+                                    txt: getTranslated(
+                                        "there_is_no_previous_transactions",
+                                        context)),
+                            ],
+                          ),
                         ),
-                        if (provider.previousTransactions != null &&
-                            provider
-                                .previousTransactions!.transactions!.isNotEmpty)
-                          ...List.generate(
-                              provider
-                                  .previousTransactions!.transactions!.length,
-                              (index) => TransactionCard(
-                                    transactionItem: provider
-                                        .previousTransactions!
-                                        .transactions![index],
-                                    isFinished: true,
-                                  )),
-                        if (provider.previousTransactions == null ||
-                            provider
-                                .previousTransactions!.transactions!.isEmpty)
-                          EmptyState(
-                              txt: getTranslated(
-                                  "there_is_no_previous_transactions",
-                                  context)),
                       ],
                     ),
                   ),

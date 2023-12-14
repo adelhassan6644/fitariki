@@ -12,7 +12,7 @@ import '../../../components/shimmer/custom_shimmer.dart';
 import '../provider/transactions_provider.dart';
 
 class CurrentTransactionsWidget extends StatelessWidget {
-  const CurrentTransactionsWidget({Key? key}) : super(key: key);
+  const CurrentTransactionsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,33 +27,39 @@ class CurrentTransactionsWidget extends StatelessWidget {
                       provider.getCurrentTransactions();
                       provider.getPreviousTransactions();
                     },
-                    child: ListView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.only(top: 8.h),
-                      children: (provider.currentTransactions != null &&
-                              provider.currentTransactions!.transactions!
-                                  .isNotEmpty)
-                          ? List.generate(
-                              provider
-                                  .currentTransactions!.transactions!.length,
-                              (index) => TransactionCard(
-                                    transactionItem: provider
-                                        .currentTransactions!
-                                        .transactions![index],
-                                    isFinished: false,
-                                  ))
-                          : [
-                              ///Empty State if there is no transactions
-                              Visibility(
-                                visible:
-                                    (provider.currentTransactions == null ||
-                                        provider.currentTransactions!
-                                            .transactions!.isEmpty),
-                                child: EmptyState(
-                                    txt: getTranslated(
-                                        "there_is_no_current_transactions", context)),
-                              ),
-                            ],
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListAnimator(
+                            addPadding: true,
+                            data: (provider.currentTransactions != null &&
+                                    provider.currentTransactions!.transactions!
+                                        .isNotEmpty)
+                                ? List.generate(
+                                    provider.currentTransactions!.transactions!
+                                        .length,
+                                    (index) => TransactionCard(
+                                          transactionItem: provider
+                                              .currentTransactions!
+                                              .transactions![index],
+                                          isFinished: false,
+                                        ))
+                                : [
+                                    ///Empty State if there is no transactions
+                                    Visibility(
+                                      visible: (provider.currentTransactions ==
+                                              null ||
+                                          provider.currentTransactions!
+                                              .transactions!.isEmpty),
+                                      child: EmptyState(
+                                          txt: getTranslated(
+                                              "there_is_no_current_transactions",
+                                              context)),
+                                    ),
+                                  ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 )

@@ -48,46 +48,48 @@ class _MyOffersState extends State<MyOffers>
             withBorder: true,
             withBack: false,
           ),
-          profileProvider.isLogin
-              ? Consumer<MyOffersProvider>(builder: (_, provider, child) {
-                  return !provider.isLoading
-                      ? Expanded(
-                          child: RefreshIndicator(
+          Expanded(
+            child: profileProvider.isLogin
+                ? Consumer<MyOffersProvider>(builder: (_, provider, child) {
+                    return !provider.isLoading
+                        ? RefreshIndicator(
                             color: Styles.PRIMARY_COLOR,
                             onRefresh: () async {
                               sl<MyOffersProvider>().getMyOffers();
                             },
-                            child: ListView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: const EdgeInsets.all(0),
+                            child: Column(
                               children: [
-                                SizedBox(
-                                  height: 8.h,
+                                Expanded(
+                                  child: ListAnimator(
+                                    data: [
+                                      SizedBox(
+                                        height: 8.h,
+                                      ),
+                                      if (provider.myOffers?.offers != null &&
+                                          provider.myOffers!.offers!.isNotEmpty)
+                                        ...List.generate(
+                                            provider.myOffers!.offers!.length,
+                                            (index) => MyOfferCard(
+                                                  offer: provider
+                                                      .myOffers!.offers![index],
+                                                )),
+                                      if (provider.myOffers?.offers == null ||
+                                          provider.myOffers!.offers!.isEmpty)
+                                        EmptyState(
+                                            txt: profileProvider.isDriver
+                                                ? getTranslated(
+                                                    "there_is_no_offers_add_new_offer",
+                                                    context)
+                                                : getTranslated(
+                                                    "there_is_no_requests_add_new_request",
+                                                    context)),
+                                    ],
+                                  ),
                                 ),
-                                if (provider.myOffers?.offers != null &&
-                                    provider.myOffers!.offers!.isNotEmpty)
-                                  ...List.generate(
-                                      provider.myOffers!.offers!.length,
-                                      (index) => MyOfferCard(
-                                            offer: provider
-                                                .myOffers!.offers![index],
-                                          )),
-                                if (provider.myOffers?.offers == null ||
-                                    provider.myOffers!.offers!.isEmpty)
-                                  EmptyState(
-                                      txt: profileProvider.isDriver
-                                          ? getTranslated(
-                                              "there_is_no_offers_add_new_offer",
-                                              context)
-                                          : getTranslated(
-                                              "there_is_no_requests_add_new_request",
-                                              context)),
                               ],
                             ),
-                          ),
-                        )
-                      : Expanded(
-                          child: ListAnimator(
+                          )
+                        : ListAnimator(
                             data: [
                               SizedBox(height: 8.h),
                               ...List.generate(
@@ -105,10 +107,10 @@ class _MyOffersState extends State<MyOffers>
                                 ),
                               )
                             ],
-                          ),
-                        );
-                })
-              : const Expanded(child: GuestMode()),
+                          );
+                  })
+                : const GuestMode(),
+          ),
         ],
       );
     });

@@ -1,3 +1,4 @@
+import 'package:fitariki/components/animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,45 +15,53 @@ class PreviousTripsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MyTripsProvider>(builder: (_, provider, child) {
-      return Expanded(
-          child: RefreshIndicator(
+      return RefreshIndicator(
         onRefresh: () async {
           await provider.getPreviousTrips();
         },
-        child: ListView(
-          padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w, vertical: 4.h),
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: provider.isGetPreviousTrips
-              ? List.generate(
-                  6,
-                  (index) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                        child: CustomShimmerContainer(
-                          height: 95.h,
-                          radius: 8,
-                        ),
-                      ))
-              : !provider.isGetPreviousTrips &&
-                      provider.previousTrips!.isNotEmpty
-                  ? List.generate(
-                      provider.previousTrips!.length,
-                      (index) => Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                            child: MyTripCard(
-                              isDriver: provider.isDriver,
-                              isCurrent: false,
-                              offerDays: provider.previousTrips![index].offer?.offerDays??[],
-                              myTrip:
-                                  provider.previousTrips![index],
-                            ),
-                          ))
-                  : [
-                      EmptyState(
-                          txt: getTranslated("there_is_no_trips", context))
-                    ],
+        child: Column(
+          children: [
+            Expanded(
+              child: ListAnimator(
+                customPadding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                    vertical: 4.h),
+                data: provider.isGetPreviousTrips
+                    ? List.generate(
+                        6,
+                        (index) => Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                              child: CustomShimmerContainer(
+                                height: 95.h,
+                                radius: 8,
+                              ),
+                            ))
+                    : !provider.isGetPreviousTrips &&
+                            provider.previousTrips!.isNotEmpty
+                        ? List.generate(
+                            provider.previousTrips!.length,
+                            (index) => Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 4.0.h),
+                                  child: MyTripCard(
+                                    isDriver: provider.isDriver,
+                                    isCurrent: false,
+                                    offerDays: provider.previousTrips![index]
+                                            .offer?.offerDays ??
+                                        [],
+                                    myTrip: provider.previousTrips![index],
+                                  ),
+                                ))
+                        : [
+                            EmptyState(
+                                txt:
+                                    getTranslated("there_is_no_trips", context))
+                          ],
+              ),
+            ),
+          ],
         ),
-      ));
+      );
     });
   }
 }

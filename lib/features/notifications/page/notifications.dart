@@ -67,10 +67,8 @@ class _NotificationsState extends State<Notifications> {
                         onRefresh: () async {
                           provider.getNotifications();
                         },
-                        child: ListView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(0),
-                          children: [
+                        child: ListAnimator(
+                          data: [
                             SizedBox(
                               height: 8.h,
                             ),

@@ -35,11 +35,11 @@ class MyTrips extends StatelessWidget {
             TabBarWidget(
               provider: myTripProvider,
             ),
-            myTripProvider.isLogin
-                ? currentWidget[myTripProvider.currentTap]
-                : const Expanded(
-                    child: GuestMode(),
-                  )
+            Expanded(
+              child: myTripProvider.isLogin
+                  ? currentWidget[myTripProvider.currentTap]
+                  : const GuestMode(),
+            )
           ],
         );
       },
