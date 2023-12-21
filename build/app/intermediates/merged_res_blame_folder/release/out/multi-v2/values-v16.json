@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.softwareFitariki.fitariki.app-mergeReleaseResources-49:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-3/d8626550dd420626abc4b63d01b0a8a4/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}

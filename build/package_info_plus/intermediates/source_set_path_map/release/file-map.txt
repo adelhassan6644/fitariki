@@ -1,0 +1,12 @@
+dev.fluttercommunity.plus.packageinfo.package_info_plus-jetified-window-java-1.0.0-beta04-0 /Users/user/.gradle/caches/transforms-3/0b167ccf2dfe4520942a5d1358aa4c55/transformed/jetified-window-java-1.0.0-beta04/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-core-1.6.0-1 /Users/user/.gradle/caches/transforms-3/5fe4eb19b22fdf9a6e722b7b5503b246/transformed/core-1.6.0/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-jetified-annotation-experimental-1.1.0-2 /Users/user/.gradle/caches/transforms-3/8f4d50b85ee600e8ab5a63571c4aa36d/transformed/jetified-annotation-experimental-1.1.0/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-jetified-window-1.0.0-beta04-3 /Users/user/.gradle/caches/transforms-3/da67141fa8358794370d7d93a715aba1/transformed/jetified-window-1.0.0-beta04/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-main-4 /Users/user/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0/android/src/main/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-release-5 /Users/user/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0/android/src/release/res
+dev.fluttercommunity.plus.packageinfo.package_info_plus-pngs-6 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/generated/res/pngs/release
+dev.fluttercommunity.plus.packageinfo.package_info_plus-resValues-7 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/generated/res/resValues/release
+dev.fluttercommunity.plus.packageinfo.package_info_plus-rs-8 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/generated/res/rs/release
+dev.fluttercommunity.plus.packageinfo.package_info_plus-mergeReleaseResources-9 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/intermediates/incremental/release/mergeReleaseResources/merged.dir
+dev.fluttercommunity.plus.packageinfo.package_info_plus-mergeReleaseResources-10 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+dev.fluttercommunity.plus.packageinfo.package_info_plus-merged_res-11 /Users/user/SoftweareCloud2/fitariki/build/package_info_plus/intermediates/merged_res/release

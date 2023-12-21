@@ -1,0 +1,14 @@
+io.flutter.plugins.videoplayer.video_player_android-jetified-window-java-1.0.0-beta04-0 /Users/user/.gradle/caches/transforms-3/0b167ccf2dfe4520942a5d1358aa4c55/transformed/jetified-window-java-1.0.0-beta04/res
+io.flutter.plugins.videoplayer.video_player_android-jetified-exoplayer-core-2.18.7-1 /Users/user/.gradle/caches/transforms-3/4b3e30024d1a0eddbd438cde94dba1e2/transformed/jetified-exoplayer-core-2.18.7/res
+io.flutter.plugins.videoplayer.video_player_android-core-1.7.0-2 /Users/user/.gradle/caches/transforms-3/7b14748392dd8dc098c53415bd98277c/transformed/core-1.7.0/res
+io.flutter.plugins.videoplayer.video_player_android-jetified-annotation-experimental-1.1.0-3 /Users/user/.gradle/caches/transforms-3/8f4d50b85ee600e8ab5a63571c4aa36d/transformed/jetified-annotation-experimental-1.1.0/res
+io.flutter.plugins.videoplayer.video_player_android-lifecycle-runtime-2.3.1-4 /Users/user/.gradle/caches/transforms-3/b413a66a378ed766759cc7c549e66ebc/transformed/lifecycle-runtime-2.3.1/res
+io.flutter.plugins.videoplayer.video_player_android-jetified-window-1.0.0-beta04-5 /Users/user/.gradle/caches/transforms-3/da67141fa8358794370d7d93a715aba1/transformed/jetified-window-1.0.0-beta04/res
+io.flutter.plugins.videoplayer.video_player_android-main-6 /Users/user/.pub-cache/hosted/pub.dev/video_player_android-2.4.10/android/src/main/res
+io.flutter.plugins.videoplayer.video_player_android-release-7 /Users/user/.pub-cache/hosted/pub.dev/video_player_android-2.4.10/android/src/release/res
+io.flutter.plugins.videoplayer.video_player_android-pngs-8 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/generated/res/pngs/release
+io.flutter.plugins.videoplayer.video_player_android-resValues-9 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/generated/res/resValues/release
+io.flutter.plugins.videoplayer.video_player_android-rs-10 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/generated/res/rs/release
+io.flutter.plugins.videoplayer.video_player_android-mergeReleaseResources-11 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/intermediates/incremental/release/mergeReleaseResources/merged.dir
+io.flutter.plugins.videoplayer.video_player_android-mergeReleaseResources-12 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+io.flutter.plugins.videoplayer.video_player_android-merged_res-13 /Users/user/SoftweareCloud2/fitariki/build/video_player_android/intermediates/merged_res/release

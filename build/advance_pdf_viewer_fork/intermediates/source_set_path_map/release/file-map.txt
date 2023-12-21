@@ -1,0 +1,12 @@
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-jetified-window-java-1.0.0-beta04-0 /Users/user/.gradle/caches/transforms-3/0b167ccf2dfe4520942a5d1358aa4c55/transformed/jetified-window-java-1.0.0-beta04/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-core-1.6.0-1 /Users/user/.gradle/caches/transforms-3/5fe4eb19b22fdf9a6e722b7b5503b246/transformed/core-1.6.0/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-jetified-annotation-experimental-1.1.0-2 /Users/user/.gradle/caches/transforms-3/8f4d50b85ee600e8ab5a63571c4aa36d/transformed/jetified-annotation-experimental-1.1.0/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-jetified-window-1.0.0-beta04-3 /Users/user/.gradle/caches/transforms-3/da67141fa8358794370d7d93a715aba1/transformed/jetified-window-1.0.0-beta04/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-main-4 /Users/user/.pub-cache/hosted/pub.dev/advance_pdf_viewer_fork-2.0.0/android/src/main/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-release-5 /Users/user/.pub-cache/hosted/pub.dev/advance_pdf_viewer_fork-2.0.0/android/src/release/res
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-pngs-6 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/generated/res/pngs/release
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-resValues-7 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/generated/res/resValues/release
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-rs-8 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/generated/res/rs/release
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-mergeReleaseResources-9 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/intermediates/incremental/release/mergeReleaseResources/merged.dir
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-mergeReleaseResources-10 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+pt.tribeiro.flutter_plugin_pdf_viewer.advance_pdf_viewer_fork-merged_res-11 /Users/user/SoftweareCloud2/fitariki/build/advance_pdf_viewer_fork/intermediates/merged_res/release

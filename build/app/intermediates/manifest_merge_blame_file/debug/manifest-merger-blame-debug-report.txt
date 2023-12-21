@@ -1,0 +1,856 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.softwareFitariki.fitariki"
+4    android:versionCode="16"
+5    android:versionName="1.1.4" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:17:5-66
+15-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:17:22-64
+16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+16-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:3:5-81
+16-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:3:22-78
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+17-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:4:5-79
+17-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:4:22-76
+18    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+18-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:5:5-77
+18-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:5:22-74
+19    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+19-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:6:5-95
+19-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:6:22-92
+20    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+20-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:7:5-84
+20-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:7:22-82
+21    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+21-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:5:5-77
+21-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:5:22-74
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+22-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:10:5-80
+22-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:10:22-78
+23    <uses-permission
+23-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:11:5-12:38
+24        android:name="android.permission.READ_EXTERNAL_STORAGE"
+24-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:11:22-77
+25        android:maxSdkVersion="32" />
+25-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:12:9-35
+26    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+26-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:13:5-75
+26-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:13:22-73
+27    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+27-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:14:5-74
+27-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:14:22-72
+28    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+28-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:15:5-74
+28-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:15:22-72
+29    <uses-permission android:name="android.permission.WAKE_LOCK" />
+29-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:18:5-68
+29-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:18:22-65
+30
+31    <queries>
+31-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:20:5-37:15
+32        <intent>
+32-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:21:9-24:18
+33            <action android:name="android.intent.action.VIEW" />
+33-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:13-65
+33-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:21-62
+34
+35            <data android:scheme="https" />
+35-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+35-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:19-41
+36        </intent>
+37        <intent>
+37-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:25:9-28:18
+38            <action android:name="android.intent.action.DIAL" />
+38-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:26:13-65
+38-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:26:21-62
+39
+40            <data android:scheme="tel" />
+40-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+40-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:19-41
+41        </intent>
+42        <intent>
+42-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:29:9-32:18
+43            <action android:name="android.intent.action.SEND" />
+43-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:30:13-65
+43-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:30:21-62
+44
+45            <data android:mimeType="*/*" />
+45-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+46        </intent>
+47        <intent>
+47-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:33:9-36:18
+48            <action android:name="android.intent.action.INSERT" />
+48-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:34:13-67
+48-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:34:21-64
+49
+50            <data android:mimeType="vnd.android.cursor.item/event" />
+50-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+51        </intent>
+52        <intent>
+52-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:18
+53            <action android:name="android.support.customtabs.action.CustomTabsService" />
+53-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-90
+53-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-87
+54        </intent>
+55
+56        <package android:name="com.google.android.apps.maps" />
+56-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-64
+56-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-61
+57        <package android:name="com.google.android.apps.mapslite" />
+57-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-68
+57-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:11:18-65
+58        <package android:name="com.autonavi.minimap" />
+58-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-56
+58-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:12:18-53
+59        <package android:name="com.baidu.BaiduMap" />
+59-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-54
+59-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:13:18-51
+60        <package android:name="com.waze" />
+60-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-44
+60-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:14:18-41
+61        <package android:name="ru.yandex.yandexnavi" />
+61-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-56
+61-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:15:18-53
+62        <package android:name="ru.yandex.yandexmaps" />
+62-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-56
+62-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:16:18-53
+63        <package android:name="com.citymapper.app.release" />
+63-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-62
+63-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:17:18-59
+64        <package android:name="com.mapswithme.maps.pro" />
+64-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-59
+64-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:18:18-56
+65        <package android:name="net.osmand" />
+65-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-46
+65-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:19:18-43
+66        <package android:name="net.osmand.plus" />
+66-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-51
+66-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:20:18-48
+67        <package android:name="ru.dublgis.dgismobile" />
+67-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-57
+67-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:21:18-54
+68        <package android:name="com.tencent.map" />
+68-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:22:9-51
+68-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:22:18-48
+69        <package android:name="com.here.app.maps" />
+69-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-53
+69-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:23:18-50
+70        <package android:name="com.huawei.maps.app" />
+70-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:24:9-55
+70-->[:map_launcher] /Users/user/SoftweareCloud2/fitariki/build/map_launcher/intermediates/merged_manifest/debug/AndroidManifest.xml:24:18-52
+71
+72        <intent>
+72-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:25:9-27:18
+73            <action android:name="android.media.browse.MediaBrowserService" />
+73-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:13-79
+73-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:21-76
+74        </intent>
+75        <intent>
+75-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:28:9-30:18
+76            <action android:name="androidx.media2.session.MediaSessionService" />
+76-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:13-82
+76-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:21-79
+77        </intent>
+78        <intent>
+78-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:31:9-33:18
+79            <action android:name="androidx.media2.session.MediaLibraryService" />
+79-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:13-82
+79-->[androidx.media2:media2-session:1.2.1] /Users/user/.gradle/caches/transforms-3/35de5af64d33742912f0be9372f8c786/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:21-79
+80        </intent>
+81    </queries>
+82
+83    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+83-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-79
+83-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-76
+84    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+84-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-77
+84-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-74
+85    <uses-permission android:name="android.permission.VIBRATE" />
+85-->[:flutter_local_notifications] /Users/user/SoftweareCloud2/fitariki/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-66
+85-->[:flutter_local_notifications] /Users/user/SoftweareCloud2/fitariki/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-63
+86
+87    <uses-feature
+87-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:26:5-28:35
+88        android:glEsVersion="0x00020000"
+88-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:27:9-41
+89        android:required="true" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+89-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:28:9-32
+90    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+90-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:26:5-82
+90-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:26:22-79
+91    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+91-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/user/.gradle/caches/transforms-3/33478a31fceee97e242858f1496a6a29/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:5-79
+91-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/user/.gradle/caches/transforms-3/33478a31fceee97e242858f1496a6a29/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:22-76
+92    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+92-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:26:5-110
+92-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:26:22-107
+93
+94    <permission
+94-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+95        android:name="com.softwareFitariki.fitariki.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+95-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+96        android:protectionLevel="signature" />
+96-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+97
+98    <uses-permission android:name="com.softwareFitariki.fitariki.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+98-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+98-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+99
+100    <application
+101        android:name="android.app.Application"
+102        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+102-->[androidx.core:core:1.10.1] /Users/user/.gradle/caches/transforms-3/77e2ea0d5d9e6ebf83bb58f6e89cda3c/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+103        android:debuggable="true"
+104        android:icon="@mipmap/ic_launcher"
+105        android:label="في طريقي"
+106        android:requestLegacyExternalStorage="true" >
+107        <activity
+108            android:name="com.softwareFitariki.fitariki.MainActivity"
+109            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+110            android:exported="true"
+111            android:hardwareAccelerated="true"
+112            android:launchMode="singleTop"
+113            android:theme="@style/LaunchTheme"
+114            android:usesCleartextTraffic="true"
+115            android:windowSoftInputMode="adjustResize" >
+116            <meta-data
+117                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+118                android:resource="@drawable/launch_background" />
+119
+120            <!-- Firebase notification -->
+121
+122            <meta-data
+123                android:name="com.google.firebase.messaging.default_notification_channel_id"
+124                android:value="high_importance_channel" />
+125            <meta-data
+126                android:name="com.google.firebase.messaging.default_notification_icon"
+127                android:resource="@drawable/notification_icon" />
+128            <meta-data
+129                android:name="io.flutter.embedding.android.NormalTheme"
+130                android:resource="@style/NormalTheme" />
+131
+132            <intent-filter>
+133                <action android:name="android.intent.action.MAIN" />
+134
+135                <category android:name="android.intent.category.LAUNCHER" />
+136            </intent-filter>
+137            <intent-filter>
+138                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+139
+140                <category android:name="android.intent.category.DEFAULT" />
+140-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+140-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+141            </intent-filter>
+142            <intent-filter>
+142-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+143                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+143-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+143-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+144            </intent-filter>
+145            <intent-filter>
+146                <action android:name="android.intent.action.VIEW" />
+146-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:13-65
+146-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:21-62
+147
+148                <category android:name="android.intent.category.DEFAULT" />
+148-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+148-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+149                <category android:name="android.intent.category.BROWSABLE" />
+149-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
+149-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
+150
+151                <data
+151-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+152                    android:host="example.com"
+153                    android:scheme="https" />
+153-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:19-41
+154            </intent-filter>
+155        </activity>
+156        <!--
+157             Don't delete the meta-data below.
+158             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+159        -->
+160        <meta-data
+161            android:name="flutterEmbedding"
+162            android:value="2" />
+163        <meta-data
+164            android:name="com.google.android.geo.API_KEY"
+165            android:value="AIzaSyCb1FtVezafyLREu6Hrv5hciMKlqRk6W40" />
+166
+167        <service
+167-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-19:72
+168            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+168-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-107
+169            android:exported="false"
+169-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+170            android:permission="android.permission.BIND_JOB_SERVICE" />
+170-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-69
+171        <service
+171-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-26:19
+172            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+172-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-97
+173            android:exported="false" >
+173-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
+174            <intent-filter>
+174-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+175                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+175-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+175-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+176            </intent-filter>
+177        </service>
+178
+179        <receiver
+179-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-35:20
+180            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+180-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-98
+181            android:exported="true"
+181-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-36
+182            android:permission="com.google.android.c2dm.permission.SEND" >
+182-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-73
+183            <intent-filter>
+183-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+184                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+184-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+184-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+185            </intent-filter>
+186        </receiver>
+187
+188        <service
+188-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:37:9-41:19
+189            android:name="com.google.firebase.components.ComponentDiscoveryService"
+189-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:37:18-89
+190            android:directBootAware="true"
+190-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:34:13-43
+191            android:exported="false" >
+191-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:68:13-37
+192            <meta-data
+192-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-40:85
+193                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+193-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:39:17-128
+194                android:value="com.google.firebase.components.ComponentRegistrar" />
+194-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:40:17-82
+195            <meta-data
+195-->[:cloud_firestore] /Users/user/SoftweareCloud2/fitariki/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+196                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+196-->[:cloud_firestore] /Users/user/SoftweareCloud2/fitariki/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+197                android:value="com.google.firebase.components.ComponentRegistrar" />
+197-->[:cloud_firestore] /Users/user/SoftweareCloud2/fitariki/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+198            <meta-data
+198-->[:firebase_dynamic_links] /Users/user/SoftweareCloud2/fitariki/build/firebase_dynamic_links/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-15:85
+199                android:name="com.google.firebase.components:io.flutter.plugins.firebase.dynamiclinks.FlutterFirebaseAppRegistrar"
+199-->[:firebase_dynamic_links] /Users/user/SoftweareCloud2/fitariki/build/firebase_dynamic_links/intermediates/merged_manifest/debug/AndroidManifest.xml:14:17-131
+200                android:value="com.google.firebase.components.ComponentRegistrar" />
+200-->[:firebase_dynamic_links] /Users/user/SoftweareCloud2/fitariki/build/firebase_dynamic_links/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-82
+201            <meta-data
+201-->[:firebase_analytics] /Users/user/SoftweareCloud2/fitariki/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:85
+202                android:name="com.google.firebase.components:io.flutter.plugins.firebase.analytics.FlutterFirebaseAppRegistrar"
+202-->[:firebase_analytics] /Users/user/SoftweareCloud2/fitariki/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-128
+203                android:value="com.google.firebase.components.ComponentRegistrar" />
+203-->[:firebase_analytics] /Users/user/SoftweareCloud2/fitariki/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-82
+204            <meta-data
+204-->[:firebase_auth] /Users/user/SoftweareCloud2/fitariki/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+205                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+205-->[:firebase_auth] /Users/user/SoftweareCloud2/fitariki/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+206                android:value="com.google.firebase.components.ComponentRegistrar" />
+206-->[:firebase_auth] /Users/user/SoftweareCloud2/fitariki/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+207            <meta-data
+207-->[:firebase_core] /Users/user/SoftweareCloud2/fitariki/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+208                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+208-->[:firebase_core] /Users/user/SoftweareCloud2/fitariki/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+209                android:value="com.google.firebase.components.ComponentRegistrar" />
+209-->[:firebase_core] /Users/user/SoftweareCloud2/fitariki/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+210            <meta-data
+210-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:69:13-71:85
+211                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+211-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:70:17-109
+212                android:value="com.google.firebase.components.ComponentRegistrar" />
+212-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:71:17-82
+213            <meta-data
+213-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:53:13-55:85
+214                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+214-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:54:17-119
+215                android:value="com.google.firebase.components.ComponentRegistrar" />
+215-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:55:17-82
+216            <meta-data
+216-->[com.google.firebase:firebase-firestore:24.8.1] /Users/user/.gradle/caches/transforms-3/e5829e570b21f904de84ebc5955d28e5/transformed/jetified-firebase-firestore-24.8.1/AndroidManifest.xml:17:13-19:85
+217                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+217-->[com.google.firebase:firebase-firestore:24.8.1] /Users/user/.gradle/caches/transforms-3/e5829e570b21f904de84ebc5955d28e5/transformed/jetified-firebase-firestore-24.8.1/AndroidManifest.xml:18:17-111
+218                android:value="com.google.firebase.components.ComponentRegistrar" />
+218-->[com.google.firebase:firebase-firestore:24.8.1] /Users/user/.gradle/caches/transforms-3/e5829e570b21f904de84ebc5955d28e5/transformed/jetified-firebase-firestore-24.8.1/AndroidManifest.xml:19:17-82
+219            <meta-data
+219-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/user/.gradle/caches/transforms-3/af6cc00a6fd23a9bff7d3fe4f58d0c9f/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:26:13-28:85
+220                android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar"
+220-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/user/.gradle/caches/transforms-3/af6cc00a6fd23a9bff7d3fe4f58d0c9f/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:27:17-133
+221                android:value="com.google.firebase.components.ComponentRegistrar" />
+221-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/user/.gradle/caches/transforms-3/af6cc00a6fd23a9bff7d3fe4f58d0c9f/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:28:17-82
+222            <meta-data
+222-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/user/.gradle/caches/transforms-3/c6ccc9b1044b95f380da59c7df330df6/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+223                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+223-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/user/.gradle/caches/transforms-3/c6ccc9b1044b95f380da59c7df330df6/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+224                android:value="com.google.firebase.components.ComponentRegistrar" />
+224-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/user/.gradle/caches/transforms-3/c6ccc9b1044b95f380da59c7df330df6/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+225            <meta-data
+225-->[com.google.firebase:firebase-iid:21.1.0] /Users/user/.gradle/caches/transforms-3/0ca1f763900e0b2977a5b3443613e76b/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+226                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+226-->[com.google.firebase:firebase-iid:21.1.0] /Users/user/.gradle/caches/transforms-3/0ca1f763900e0b2977a5b3443613e76b/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+227                android:value="com.google.firebase.components.ComponentRegistrar" />
+227-->[com.google.firebase:firebase-iid:21.1.0] /Users/user/.gradle/caches/transforms-3/0ca1f763900e0b2977a5b3443613e76b/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+228            <meta-data
+228-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/user/.gradle/caches/transforms-3/33478a31fceee97e242858f1496a6a29/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:31:13-33:85
+229                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+229-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/user/.gradle/caches/transforms-3/33478a31fceee97e242858f1496a6a29/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:32:17-139
+230                android:value="com.google.firebase.components.ComponentRegistrar" />
+230-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/user/.gradle/caches/transforms-3/33478a31fceee97e242858f1496a6a29/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:33:17-82
+231            <meta-data
+231-->[com.google.firebase:firebase-installations:17.1.4] /Users/user/.gradle/caches/transforms-3/b28e9bd3916872a8aff2e1ac542ca476/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:15:13-17:85
+232                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+232-->[com.google.firebase:firebase-installations:17.1.4] /Users/user/.gradle/caches/transforms-3/b28e9bd3916872a8aff2e1ac542ca476/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:16:17-127
+233                android:value="com.google.firebase.components.ComponentRegistrar" />
+233-->[com.google.firebase:firebase-installations:17.1.4] /Users/user/.gradle/caches/transforms-3/b28e9bd3916872a8aff2e1ac542ca476/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:17:17-82
+234        </service>
+235
+236        <provider
+236-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-47:38
+237            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+237-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-102
+238            android:authorities="com.softwareFitariki.fitariki.flutterfirebasemessaginginitprovider"
+238-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-88
+239            android:exported="false"
+239-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:46:13-37
+240            android:initOrder="99" />
+240-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:47:13-35
+241
+242        <service
+242-->[:fl_location] /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-17:72
+243            android:name="com.pravera.fl_location.service.LocationServicesStatusIntentService"
+243-->[:fl_location] /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-95
+244            android:enabled="true"
+244-->[:fl_location] /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-35
+245            android:exported="false"
+245-->[:fl_location] /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+246            android:permission="android.permission.BIND_JOB_SERVICE" />
+246-->[:fl_location] /Users/user/SoftweareCloud2/fitariki/build/fl_location/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-69
+247        <service
+247-->[:geolocator_android] /Users/user/SoftweareCloud2/fitariki/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:56
+248            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+248-->[:geolocator_android] /Users/user/SoftweareCloud2/fitariki/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-77
+249            android:enabled="true"
+249-->[:geolocator_android] /Users/user/SoftweareCloud2/fitariki/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-35
+250            android:exported="false"
+250-->[:geolocator_android] /Users/user/SoftweareCloud2/fitariki/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+251            android:foregroundServiceType="location" />
+251-->[:geolocator_android] /Users/user/SoftweareCloud2/fitariki/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-53
+252
+253        <activity
+253-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-20:47
+254            android:name="com.pichillilorenzo.flutter_inappwebview.in_app_browser.InAppBrowserActivity"
+254-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-104
+255            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+255-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-137
+256            android:exported="false"
+256-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
+257            android:theme="@style/AppTheme" />
+257-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-44
+258        <activity
+258-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-24:55
+259            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivity"
+259-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-112
+260            android:exported="false"
+260-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-37
+261            android:theme="@style/ThemeTransparent" />
+261-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-52
+262        <activity
+262-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-28:55
+263            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivity"
+263-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-106
+264            android:exported="false"
+264-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-37
+265            android:theme="@style/ThemeTransparent" />
+265-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-52
+266        <activity
+266-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:29:9-33:55
+267            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance"
+267-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-126
+268            android:exported="false"
+268-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-37
+269            android:launchMode="singleInstance"
+269-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-48
+270            android:theme="@style/ThemeTransparent" />
+270-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-52
+271        <activity
+271-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-38:55
+272            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivitySingleInstance"
+272-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-120
+273            android:exported="false"
+273-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-37
+274            android:launchMode="singleInstance"
+274-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-48
+275            android:theme="@style/ThemeTransparent" />
+275-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-52
+276
+277        <receiver
+277-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:40:9-43:40
+278            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ActionBroadcastReceiver"
+278-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-111
+279            android:enabled="true"
+279-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-35
+280            android:exported="false" />
+280-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:43:13-37
+281
+282        <meta-data
+282-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:45:9-47:36
+283            android:name="io.flutter.embedded_views_preview"
+283-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:46:13-61
+284            android:value="true" />
+284-->[:flutter_inappwebview] /Users/user/SoftweareCloud2/fitariki/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:47:13-33
+285        <!--
+286           Declares a provider which allows us to store files to share in
+287           '.../caches/share_plus' and grant the receiving action access
+288        -->
+289        <provider
+289-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-23:20
+290            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+290-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-77
+291            android:authorities="com.softwareFitariki.fitariki.flutter.share_provider"
+291-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-74
+292            android:exported="false"
+292-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+293            android:grantUriPermissions="true" >
+293-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-47
+294            <meta-data
+294-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-22:68
+295                android:name="android.support.FILE_PROVIDER_PATHS"
+295-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-67
+296                android:resource="@xml/flutter_share_file_paths" />
+296-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-65
+297        </provider>
+298        <!--
+299           This manifest declared broadcast receiver allows us to use an explicit
+300           Intent when creating a PendingItent to be informed of the user's choice
+301        -->
+302        <receiver
+302-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-34:20
+303            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+303-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-82
+304            android:exported="false" >
+304-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-37
+305            <intent-filter>
+305-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-33:29
+306                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+306-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:17-65
+306-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:25-62
+307            </intent-filter>
+308        </receiver>
+309
+310        <provider
+310-->[:image_picker_android] /Users/user/SoftweareCloud2/fitariki/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+311            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+311-->[:image_picker_android] /Users/user/SoftweareCloud2/fitariki/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+312            android:authorities="com.softwareFitariki.fitariki.flutter.image_provider"
+312-->[:image_picker_android] /Users/user/SoftweareCloud2/fitariki/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+313            android:exported="false"
+313-->[:image_picker_android] /Users/user/SoftweareCloud2/fitariki/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+314            android:grantUriPermissions="true" >
+314-->[:image_picker_android] /Users/user/SoftweareCloud2/fitariki/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+315            <meta-data
+315-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-22:68
+316                android:name="android.support.FILE_PROVIDER_PATHS"
+316-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-67
+317                android:resource="@xml/flutter_image_picker_file_paths" />
+317-->[:share_plus] /Users/user/SoftweareCloud2/fitariki/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-65
+318        </provider>
+319
+320        <activity
+320-->[:url_launcher_android] /Users/user/SoftweareCloud2/fitariki/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+321            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+321-->[:url_launcher_android] /Users/user/SoftweareCloud2/fitariki/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+322            android:exported="false"
+322-->[:url_launcher_android] /Users/user/SoftweareCloud2/fitariki/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+323            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+323-->[:url_launcher_android] /Users/user/SoftweareCloud2/fitariki/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+324
+325        <uses-library
+325-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:25:9-27:40
+326            android:name="androidx.window.extensions"
+326-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:26:13-54
+327            android:required="false" />
+327-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:27:13-37
+328        <uses-library
+328-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:28:9-30:40
+329            android:name="androidx.window.sidecar"
+329-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:29:13-51
+330            android:required="false" />
+330-->[androidx.window:window:1.0.0] /Users/user/.gradle/caches/transforms-3/15733e81ffc4ebbaf5e8fb9df8679a89/transformed/jetified-window-1.0.0/AndroidManifest.xml:30:13-37
+331
+332        <activity
+332-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:29:9-46:20
+333            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+333-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:30:13-80
+334            android:excludeFromRecents="true"
+334-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:31:13-46
+335            android:exported="true"
+335-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:32:13-36
+336            android:launchMode="singleTask"
+336-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:33:13-44
+337            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+337-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:34:13-72
+338            <intent-filter>
+338-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:35:13-45:29
+339                <action android:name="android.intent.action.VIEW" />
+339-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:13-65
+339-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:21-62
+340
+341                <category android:name="android.intent.category.DEFAULT" />
+341-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+341-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+342                <category android:name="android.intent.category.BROWSABLE" />
+342-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
+342-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
+343
+344                <data
+344-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+345                    android:host="firebase.auth"
+346                    android:path="/"
+347                    android:scheme="genericidp" />
+347-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:19-41
+348            </intent-filter>
+349        </activity>
+350        <activity
+350-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:47:9-64:20
+351            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+351-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:48:13-79
+352            android:excludeFromRecents="true"
+352-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:49:13-46
+353            android:exported="true"
+353-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:50:13-36
+354            android:launchMode="singleTask"
+354-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:51:13-44
+355            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+355-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:52:13-72
+356            <intent-filter>
+356-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:53:13-63:29
+357                <action android:name="android.intent.action.VIEW" />
+357-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:13-65
+357-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:22:21-62
+358
+359                <category android:name="android.intent.category.DEFAULT" />
+359-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+359-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+360                <category android:name="android.intent.category.BROWSABLE" />
+360-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
+360-->[com.google.firebase:firebase-auth:22.1.2] /Users/user/.gradle/caches/transforms-3/9412f2842efd98aeb7ca1fea1576138b/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
+361
+362                <data
+362-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:13-44
+363                    android:host="firebase.auth"
+364                    android:path="/"
+365                    android:scheme="recaptcha" />
+365-->/Users/user/SoftweareCloud2/fitariki/android/app/src/main/AndroidManifest.xml:23:19-41
+366            </intent-filter>
+367        </activity> <!-- Needs to be explicitly declared on P+ -->
+368        <uses-library
+368-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:39:9-41:40
+369            android:name="org.apache.http.legacy"
+369-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:40:13-50
+370            android:required="false" />
+370-->[com.google.android.gms:play-services-maps:18.1.0] /Users/user/.gradle/caches/transforms-3/e5ce38d50a6b24ae3cdd6acbc2cda202/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:41:13-37
+371
+372        <receiver
+372-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:29:9-36:20
+373            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+373-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:30:13-78
+374            android:exported="true"
+374-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:31:13-36
+375            android:permission="com.google.android.c2dm.permission.SEND" >
+375-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:32:13-73
+376            <intent-filter>
+376-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+377                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+377-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+377-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+378            </intent-filter>
+379        </receiver>
+380        <!--
+381             FirebaseMessagingService performs security checks at runtime,
+382             but set to not exported to explicitly avoid allowing another app to call it.
+383        -->
+384        <service
+384-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:42:9-49:19
+385            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+385-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:43:13-82
+386            android:directBootAware="true"
+386-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:44:13-43
+387            android:exported="false" >
+387-->[com.google.firebase:firebase-messaging:23.2.1] /Users/user/.gradle/caches/transforms-3/e76be41dfdf5531c4d75c8583a5a394f/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:45:13-37
+388            <intent-filter android:priority="-500" >
+388-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+389                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+389-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+389-->[:firebase_messaging] /Users/user/SoftweareCloud2/fitariki/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+390            </intent-filter>
+391        </service>
+392
+393        <provider
+393-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:25:9-30:39
+394            android:name="com.google.firebase.provider.FirebaseInitProvider"
+394-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:26:13-77
+395            android:authorities="com.softwareFitariki.fitariki.firebaseinitprovider"
+395-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:27:13-72
+396            android:directBootAware="true"
+396-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:28:13-43
+397            android:exported="false"
+397-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:29:13-37
+398            android:initOrder="100" />
+398-->[com.google.firebase:firebase-common:20.3.3] /Users/user/.gradle/caches/transforms-3/7d26ce90d75cb24ca2aee031bc687b94/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:30:13-36
+399
+400        <activity
+400-->[com.google.android.gms:play-services-base:18.1.0] /Users/user/.gradle/caches/transforms-3/63bd13afe37f6bf877b09f2eba860d6e/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+401            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+401-->[com.google.android.gms:play-services-base:18.1.0] /Users/user/.gradle/caches/transforms-3/63bd13afe37f6bf877b09f2eba860d6e/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+402            android:exported="false"
+402-->[com.google.android.gms:play-services-base:18.1.0] /Users/user/.gradle/caches/transforms-3/63bd13afe37f6bf877b09f2eba860d6e/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+403            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+403-->[com.google.android.gms:play-services-base:18.1.0] /Users/user/.gradle/caches/transforms-3/63bd13afe37f6bf877b09f2eba860d6e/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+404
+405        <receiver
+405-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:29:9-33:20
+406            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+406-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:30:13-85
+407            android:enabled="true"
+407-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:31:13-35
+408            android:exported="false" >
+408-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:32:13-37
+409        </receiver>
+410
+411        <service
+411-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:35:9-38:40
+412            android:name="com.google.android.gms.measurement.AppMeasurementService"
+412-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:36:13-84
+413            android:enabled="true"
+413-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:37:13-35
+414            android:exported="false" />
+414-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:38:13-37
+415        <service
+415-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:39:9-43:72
+416            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+416-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:40:13-87
+417            android:enabled="true"
+417-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:41:13-35
+418            android:exported="false"
+418-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:42:13-37
+419            android:permission="android.permission.BIND_JOB_SERVICE" />
+419-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/user/.gradle/caches/transforms-3/c159d8a215198e4e09371c2c114a63fd/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:43:13-69
+420
+421        <provider
+421-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+422            android:name="androidx.startup.InitializationProvider"
+422-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+423            android:authorities="com.softwareFitariki.fitariki.androidx-startup"
+423-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+424            android:exported="false" >
+424-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+425            <meta-data
+425-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+426                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+426-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+427                android:value="androidx.startup" />
+427-->[androidx.emoji2:emoji2:1.2.0] /Users/user/.gradle/caches/transforms-3/58255c498e331681688f3ea5540007a4/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+428            <meta-data
+428-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/user/.gradle/caches/transforms-3/9bf510eb69fc31caf79762ca8d736e05/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+429                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+429-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/user/.gradle/caches/transforms-3/9bf510eb69fc31caf79762ca8d736e05/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+430                android:value="androidx.startup" />
+430-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/user/.gradle/caches/transforms-3/9bf510eb69fc31caf79762ca8d736e05/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+431            <meta-data
+431-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+432                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+432-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+433                android:value="androidx.startup" />
+433-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+434        </provider>
+435
+436        <meta-data
+436-->[com.google.android.gms:play-services-basement:18.1.0] /Users/user/.gradle/caches/transforms-3/0b33b9ac78960311d4eae1c27dbfb896/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+437            android:name="com.google.android.gms.version"
+437-->[com.google.android.gms:play-services-basement:18.1.0] /Users/user/.gradle/caches/transforms-3/0b33b9ac78960311d4eae1c27dbfb896/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+438            android:value="@integer/google_play_services_version" />
+438-->[com.google.android.gms:play-services-basement:18.1.0] /Users/user/.gradle/caches/transforms-3/0b33b9ac78960311d4eae1c27dbfb896/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+439
+440        <service
+440-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+441            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+441-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+442            android:exported="false" >
+442-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+443            <meta-data
+443-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+444                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+444-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+445                android:value="cct" />
+445-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/user/.gradle/caches/transforms-3/88c2686d330296d16cc3f4cbb2ddc826/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+446        </service>
+447        <service
+447-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+448            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+448-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+449            android:exported="false"
+449-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+450            android:permission="android.permission.BIND_JOB_SERVICE" >
+450-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+451        </service>
+452
+453        <receiver
+453-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+454            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+454-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+455            android:exported="false" />
+455-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/user/.gradle/caches/transforms-3/959f3694ce13965fef1de7da5d278143/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+456        <receiver
+456-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+457            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+457-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+458            android:directBootAware="false"
+458-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+459            android:enabled="true"
+459-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+460            android:exported="true"
+460-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+461            android:permission="android.permission.DUMP" >
+461-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+462            <intent-filter>
+462-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+463                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+463-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+463-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+464            </intent-filter>
+465            <intent-filter>
+465-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+466                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+466-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+466-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+467            </intent-filter>
+468            <intent-filter>
+468-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+469                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+469-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+469-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+470            </intent-filter>
+471            <intent-filter>
+471-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+472                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+472-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+472-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/user/.gradle/caches/transforms-3/00a3b977a0cce8fd93bd50b0739b436c/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+473            </intent-filter>
+474        </receiver>
+475    </application>
+476
+477</manifest>
