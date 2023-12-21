@@ -167,8 +167,7 @@ class MyCurrentTripDetails extends StatelessWidget {
                                   : provider.tripDetails?.offer
                                   ?.offerFollowers?.length,
                               startPoint:  provider.tripDetails?.offer?.pickupLocation,
-                              endPoint: provider
-                                      .tripDetails?.offer?.dropOffLocation,
+                              endPoint: provider.tripDetails?.offer?.dropOffLocation,
                             ),
 
                             ///distance between client and driver

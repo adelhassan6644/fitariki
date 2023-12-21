@@ -161,8 +161,8 @@ class RideDetailsProvider extends ChangeNotifier {
               arguments: {
                 "id": id,
                 "name": isDriver
-                    ? ride?.client?.firstName?.split(" ")[0]  ?? ""
-                    : ride?.driver?.firstName?.split(" ")[0]  ?? "",
+                    ? ride?.client?.firstName?.split(" ")[0] ?? ""
+                    : ride?.driver?.firstName?.split(" ")[0] ?? "",
                 "number": int.tryParse(ride!.remainingNumber!)! - 1 ?? 0
               },
               clean: true);

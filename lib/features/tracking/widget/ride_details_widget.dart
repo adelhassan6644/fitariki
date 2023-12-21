@@ -218,21 +218,32 @@ class RideDetailsWidget extends StatelessWidget {
 
                                                   ///Share Post
                                                   Visibility(
-                                                    visible: !provider.isDriver&&
-                                                        provider.ride != null &&
-                                                        provider.ride!.status == 1 ||
-                                                        provider.ride!.status == 2,
+                                                    visible: !provider
+                                                                .isDriver &&
+                                                            provider.ride !=
+                                                                null &&
+                                                            provider.ride!
+                                                                    .status ==
+                                                                1 ||
+                                                        provider.ride!.status ==
+                                                            2,
                                                     child: Padding(
                                                       padding: EdgeInsets.symmetric(
-                                                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                                          vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                                                          horizontal: Dimensions
+                                                              .PADDING_SIZE_DEFAULT
+                                                              .w,
+                                                          vertical: Dimensions
+                                                              .PADDING_SIZE_DEFAULT
+                                                              .h),
                                                       child: Consumer<
                                                               LocationProvider>(
                                                           builder: (_,
                                                               locationProvider,
                                                               child) {
                                                         return InkWell(
-                                                          onTap: () => locationProvider.shareCurrentLocation(),
+                                                          onTap: () =>
+                                                              locationProvider
+                                                                  .shareCurrentLocation(),
                                                           child: Row(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -306,8 +317,8 @@ class RideDetailsWidget extends StatelessWidget {
                       child: CustomButton(
                         text: getTranslated(
                             _buttonText(provider.ride?.status == null
-                                    ? 0
-                                    : provider.ride!.status! + 1) ,
+                                ? 0
+                                : provider.ride!.status! + 1),
                             context),
                         onTap: () {
                           if (provider.isDriver && provider.ride?.status == 0) {
@@ -319,7 +330,8 @@ class RideDetailsWidget extends StatelessWidget {
                           if (provider.ride!.status != null &&
                               (provider.ride!.status!.toInt() + 1) == 3) {
                             CupertinoPopUpHelper.showCupertinoPopUp(
-                              confirmTextButton: getTranslated("end_ride", context),
+                              confirmTextButton:
+                                  getTranslated("end_ride", context),
                               onConfirm: () {
                                 CustomNavigator.pop();
                                 provider.changeStatus(id, 3);
