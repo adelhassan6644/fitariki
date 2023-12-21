@@ -27,7 +27,8 @@ class RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
+      onTap: () =>
+          CustomNavigator.push(Routes.REQUEST_DETAILS, arguments: request!.id!),
       child: Stack(
         children: [
           Padding(
@@ -499,8 +500,10 @@ class RequestCard extends StatelessWidget {
       return "rejected";
     } else if (approved && paid) {
       return "paid";
-    } else if (approved && !paid) {
+    } else if (approved && !paid && !isDriver) {
       return "pay";
+    } else if (approved && !paid && isDriver) {
+      return "pending";
     } else if ((isDriver && updateByDriver) || (!isDriver && updateByClient)) {
       return "pending";
     } else {
