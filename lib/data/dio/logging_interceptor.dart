@@ -18,8 +18,7 @@ class LoggingInterceptor extends InterceptorsWrapper {
   @override
   Future onResponse(
       Response response, ResponseInterceptorHandler handler) async {
-    log(
-        "<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
+    log("<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
 
     String responseAsString = response.data.toString();
 
@@ -30,8 +29,7 @@ class LoggingInterceptor extends InterceptorsWrapper {
         if (endingIndex > responseAsString.length) {
           endingIndex = responseAsString.length;
         }
-        log(
-            responseAsString.substring(i * maxCharactersPerLine, endingIndex));
+        log(responseAsString.substring(i * maxCharactersPerLine, endingIndex));
       }
     } else {
       log(response.data.toString());
@@ -43,9 +41,8 @@ class LoggingInterceptor extends InterceptorsWrapper {
   }
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    log(
-        "ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}");
+  Future onError(DioException err, ErrorInterceptorHandler handler) async {
+    log("ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}");
     return super.onError(err, handler);
   }
 }
