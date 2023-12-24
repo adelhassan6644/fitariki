@@ -25,7 +25,7 @@ jobs:
 
       - name: upload
         id: upload_apk
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
@@ -33,10 +33,8 @@ jobs:
       - name: Upload Artifact to Transfer.sh
         id: upload_artifact
         run: |
-          UPLOAD_URL=$(curl --upload-file ${{ github.workspace }}/build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
-          echo "UPLOAD_URL=${UPLOAD_URL}" >> $GITHUB_ENV
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          UPLOAD_URL=$(curl --upload-file build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
+          echo "upload_url=$UPLOAD_URL" >>$GITHUB_OUTPUT
 
       - name: Send APK URL via Telegram
         env:
