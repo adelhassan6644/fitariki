@@ -42,5 +42,5 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
         run: |
-          MESSAGE="Here's the في طريقي Out APK : ${{ steps.upload_artifact.outputs.upload_url }}"
+          MESSAGE="Here's the في طريقي APK : ${{ steps.upload_artifact.outputs.upload_url }}"
           curl -s "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d "chat_id=$TELEGRAM_CHAT_ID" -d "text=$MESSAGE"
