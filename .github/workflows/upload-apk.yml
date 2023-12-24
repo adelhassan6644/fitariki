@@ -34,7 +34,7 @@ jobs:
         id: upload_artifact
         run: |
           UPLOAD_URL=$(curl --upload-file ${{ github.workspace }}/build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
-          echo "upload_url=$UPLOAD_URL" >> $GITHUB_ENV
+          echo "UPLOAD_URL=${UPLOAD_URL}" >> $GITHUB_ENV
 
       - name: Send APK URL via Telegram
         env:
