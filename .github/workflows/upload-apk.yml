@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v3
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.6' # Adjust to your Flutter version
+          flutter-version: '3.16.5' # Adjust to your Flutter version
 
       - name: Build APK
         run: |
@@ -25,7 +25,7 @@ jobs:
 
       - name: upload
         id: upload_apk
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
