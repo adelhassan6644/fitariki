@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fitariki/components/loading_dialog.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../../app/core/utils/app_snack_bar.dart';
 import '../../../app/core/utils/color_resources.dart';
@@ -164,6 +166,57 @@ class MyTripsProvider extends ChangeNotifier {
               backgroundColor: Styles.IN_ACTIVE,
               borderColor: Colors.transparent));
       isGetPendingTrips = false;
+      notifyListeners();
+    }
+  }
+
+  bool isDelete = false;
+  deleteReservation({required int id, required String type}) async {
+    try {
+      spinKitDialog();
+      notifyListeners();
+
+      Either<ServerFailure, Response> response =
+          await myTripsRepo.deleteReservation(id);
+      CustomNavigator.pop();
+
+      response.fold((l) {
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: ApiErrorHandler.getMessage(l),
+                isFloating: true,
+                backgroundColor: Styles.IN_ACTIVE,
+                borderColor: Colors.transparent));
+      }, (response) {
+        if (type == "pending") {
+          pendingTrips?.removeWhere((e) => e.id == id);
+        }
+
+        if (type == "current") {
+          currentTrips?.removeWhere((e) => e.id == id);
+        }
+
+        if (type == "past") {
+          previousTrips?.removeWhere((e) => e.id == id);
+        }
+
+        CustomSnackBar.showSnackBar(
+            notification: AppNotification(
+                message: response.data["message"],
+                isFloating: true,
+                backgroundColor: Styles.ACTIVE,
+                borderColor: Colors.transparent));
+      });
+      isDelete = true;
+      notifyListeners();
+    } catch (e) {
+      CustomSnackBar.showSnackBar(
+          notification: AppNotification(
+              message: e.toString(),
+              isFloating: true,
+              backgroundColor: Styles.IN_ACTIVE,
+              borderColor: Colors.transparent));
+      isDelete = false;
       notifyListeners();
     }
   }

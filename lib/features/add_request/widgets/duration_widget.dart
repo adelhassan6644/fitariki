@@ -17,7 +17,6 @@ class DurationWidget extends StatelessWidget {
   final AddRequestProvider provider;
   final DateTime offerStartDate;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,13 +60,11 @@ class DurationWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Styles.PRIMARY_COLOR.withOpacity(0.06),
                       borderRadius: BorderRadius.circular(4)),
-                  child: Text(
-                      provider.startDate.dateFormat(
-                        format: "d MMM yyyy",
-                      ),
-                      style: AppTextStyles.w400.copyWith(
-                        fontSize: 13,
-                      )),
+                  child:
+                      Text(provider.startDate.dateFormat(format: "d MMM yyyy"),
+                          style: AppTextStyles.w400.copyWith(
+                            fontSize: 13,
+                          )),
                 ),
               )
             ],

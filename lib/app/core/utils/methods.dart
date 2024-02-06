@@ -1,5 +1,6 @@
 import 'package:fitariki/app/core/utils/extensions.dart';
 import 'package:fitariki/app/localization/localization/language_constant.dart';
+import 'package:fitariki/main_models/weak_model.dart';
 import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -146,6 +147,16 @@ abstract class Methods {
                 double.parse(location?.longitude ?? "0")) /
             1000)
         .toStringAsFixed(2);
+  }
+
+  static bool listEquals(
+      {required List<WeekModel> a, required List<WeekModel> b}) {
+    if (identical(a, b)) return true;
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].id != b[i].id) return false;
+    }
+    return true;
   }
 }
 
