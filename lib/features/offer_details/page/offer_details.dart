@@ -262,8 +262,9 @@ class OfferDetails extends StatelessWidget {
                               } else {
                                 if (provider.isDriver &&
                                     profileProvider.status != "1") {
-                                  showToast(
-                                      "عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد");
+                                  showToast(getTranslated(
+                                      "provide_an_offer_because_your_account_has_not_been_activated_yet",
+                                      context));
                                 } else if (provider.offerDetails?.isSentOffer !=
                                     true) {
                                   customShowModelBottomSheet(

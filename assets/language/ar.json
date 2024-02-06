@@ -373,6 +373,7 @@
   "the_rate": "التقييم",
   "you_have": "تبقي",
   "ride_remaining_with": "مشوار لك مع",
+  "client": "الراكب",
   "the_passenger": "الراكب",
   "the_captain": "الكابتن",
   "new_price": "سعر جديد",
@@ -389,5 +390,12 @@
   "ride_not_started": "الرحلة متاحة يوم ** فقط",
   "ok": "حسنًا",
   "birthday": "تاريخ الميلاد الميلادي",
-  "hijri_birthday": "تاريخ الميلاد الهجري"
+  "hijri_birthday": "تاريخ الميلاد الهجري",
+  "days_don't_match": "عدم توافق الايام",
+  "table_don't_match": "توافق الجدول غير متطابق 100% ",
+  "working_days_do_not_match": "ايام دوامك لا تتوافق مع ايام ",
+  "working_days_different_partially": "ايام دوامك تختلف جزئيا مع ايام ",
+  "are_you_sure_to_submit_the_request": "هل انت متاكد من تقديم الطلب ؟",
+  "are_you_sure_to_provide_the_service": "هل انت متاكد من تقديم الخدمة ؟",
+  "provide_an_offer_because_your_account_has_not_been_activated_yet":"عفواً، لا يمكن تقديم عرض لانه لم يتم تفعيل حسابك بعد"
 }

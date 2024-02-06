@@ -1,10 +1,13 @@
 import 'package:fitariki/app/core/utils/dimensions.dart';
 import 'package:fitariki/app/core/utils/extensions.dart';
+import 'package:fitariki/app/core/utils/methods.dart';
+import 'package:fitariki/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../app/localization/localization/language_constant.dart';
 import '../../../components/bottom_sheet_app_bar.dart';
 import '../../../data/config/di.dart';
+import '../../../helpers/cupertino_pop_up_helper.dart';
 import '../../../main_models/offer_model.dart';
 import '../../../main_models/weak_model.dart';
 import '../../../main_providers/schedule_provider.dart';
@@ -41,7 +44,6 @@ class _AddRequestState extends State<AddRequest> {
   void initState() {
     Future.delayed(Duration.zero, () {
       sl<AddRequestProvider>().updateOfferDays(widget.days);
-
       if (!widget.isSpecialOffer && widget.offer != null) {
         if (widget.offer!.startDate!.isBefore(DateTime.now())) {
           sl<AddRequestProvider>()
@@ -85,13 +87,40 @@ class _AddRequestState extends State<AddRequest> {
                         maxOfferPrice: widget.offer?.maxPrice ?? 0,
                         isSpecialOffer: widget.isSpecialOffer) ==
                     true) {
-                  provider.requestOffer(
-                      updateOffer: widget.updateOfferDetails,
-                      id: widget.isSpecialOffer
-                          ? widget.senderId
-                          : widget.offer?.id,
-                      name: widget.name,
-                      isSpecialOffer: widget.isSpecialOffer);
+                  if (!Methods.listEquals(
+                    a: widget.offer?.offerDays ?? [],
+                    b: sl.get<ScheduleProvider>().selectedDays,
+                  )) {
+                    CupertinoPopUpHelper.showCupertinoPopUp(
+                        confirmTextButton: getTranslated("confirm", context),
+                        onConfirm: () {
+                          CustomNavigator.pop();
+                          provider.requestOffer(
+                              updateOffer: widget.updateOfferDetails,
+                              id: widget.isSpecialOffer
+                                  ? widget.senderId
+                                  : widget.offer?.id,
+                              name: widget.name,
+                              isSpecialOffer: widget.isSpecialOffer);
+                        },
+                        title: getTranslated(
+                            widget.isCaptain
+                                ? "table_don't_match"
+                                : "days_don't_match",
+                            context),
+                        description:
+                            "${getTranslated(widget.isCaptain ? "working_days_different_partially" : "working_days_do_not_match", context)}"
+                            "${getTranslated(widget.isCaptain ? "client" : "captain", context)} ${widget.offer?.driverModel?.firstName ?? widget.offer?.clientModel?.firstName},"
+                            " ${getTranslated(widget.isCaptain ? "are_you_sure_to_provide_the_service" : "are_you_sure_to_submit_the_request", context)}");
+                  } else {
+                    provider.requestOffer(
+                        updateOffer: widget.updateOfferDetails,
+                        id: widget.isSpecialOffer
+                            ? widget.senderId
+                            : widget.offer?.id,
+                        name: widget.name,
+                        isSpecialOffer: widget.isSpecialOffer);
+                  }
                 }
               },
             ),
@@ -115,9 +144,9 @@ class _AddRequestState extends State<AddRequest> {
                     ),
                   ),
 
+                  ///Calender
                   Consumer<ScheduleProvider>(
                       builder: (_, scheduleProvider, child) {
-
                     return CalenderWidget(
                         startDate: provider.startDate,
                         endDate: provider.endDate,

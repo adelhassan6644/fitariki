@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -25,7 +25,7 @@ jobs:
 
       - name: upload
         id: upload_apk
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
@@ -34,7 +34,7 @@ jobs:
         id: upload_artifact
         run: |
           UPLOAD_URL=$(curl --upload-file build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
-          echo "::set-output name=upload_url::$UPLOAD_URL"
+          echo "upload_url=$UPLOAD_URL" >>GITHUB_ENV
 
       - name: Send APK URL via Telegram
         env:
@@ -42,5 +42,5 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
         run: |
-          MESSAGE="Here's the في طريقي Out APK : ${{ steps.upload_artifact.outputs.upload_url }}"
+          MESSAGE="Here's the في طريقي APK : ${{ steps.upload_artifact.outputs.upload_url }}"
           curl -s "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d "chat_id=$TELEGRAM_CHAT_ID" -d "text=$MESSAGE"

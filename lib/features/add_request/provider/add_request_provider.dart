@@ -63,7 +63,6 @@ class AddRequestProvider extends ChangeNotifier {
   DateTime endDate = DateTime.now();
   onSelectEndDate(v) {
     endDate = v;
-    notifyListeners();
     getDaysCount();
     notifyListeners();
   }

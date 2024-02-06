@@ -61,6 +61,7 @@ class EndPoints {
   static myPreviousTripDetails(role, id) => '$role/reservation/showDetails/$id';
   static myCurrentTripDetails(role, id) => '$role/reservation/show/$id';
   static myRequests(role, id) => '$role/reservation/pending/$id';
+  static deleteReservation(role, id) => '$role/reservation/delete/$id';
 
   ///Notifications
   static notifications(role, id) => '$role/notification/notification/$id';

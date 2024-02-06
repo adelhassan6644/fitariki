@@ -372,6 +372,7 @@
   "ride_remaining_with": "ride remaining with",
   "the_passenger": "The Passenger",
   "the_captain": "The Captain",
+  "client": "Client",
   "no": "No",
   "paid": "Paid",
   "new_price": "New price",
@@ -387,6 +388,12 @@
   "ride_not_started": "It's not time for the ride",
   "ok": "Ok",
   "birthday": "Birthday",
-
-  "hijri_birthday": "date Of Birth Hijri"
+  "hijri_birthday": "date Of Birth Hijri",
+  "days_don't_match": "Days do not match",
+  "table_don't_match": "Table compatibility does not match 100%.",
+  "working_days_do_not_match": "Your working days do not match the days of ",
+  "working_days_different_partially": "Your working days different partially the days of ",
+  "are_you_sure_to_submit_the_request": "Are you sure to submit the request?",
+  "are_you_sure_to_provide_the_service": "Are you sure to provide the service?",
+  "provide_an_offer_because_your_account_has_not_been_activated_yet": "Oops, You can't provide an offer because your account has not been activated yet"
 }

@@ -72,4 +72,21 @@ class MyTripsRepo {
       return left(ServerFailure(ApiErrorHandler.getMessage(error)));
     }
   }
+
+  Future<Either<ServerFailure, Response>> deleteReservation(id) async {
+    try {
+      Response response = await dioClient.post(
+        uri: EndPoints.deleteReservation(
+            sharedPreferences.getString(AppStorageKey.role) ?? "client", id),
+      );
+      if (response.statusCode == 200) {
+        return Right(response);
+      } else {
+        return left(ServerFailure(response.data['message']));
+      }
+    } catch (error) {
+      return left(ServerFailure(ApiErrorHandler.getMessage(error)));
+    }
+  }
+
 }
